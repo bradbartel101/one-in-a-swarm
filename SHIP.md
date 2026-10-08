@@ -76,7 +76,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: Site files total 168 KB uncompressed (245 KB with the preview image and 404 page); unit `F3`. e2e on slow 3G (400ms latency, 400 kbps, cache off): home screen ready in 4.5s uncompressed. GitHub Pages gzips, so expect faster.
 - [x] F4 Nothing external (or HTTPS only)
   - Evidence: unit `F4 / G1` and e2e: zero requests leave the site's own path. No fonts, scripts, analytics or tracking.
-- [ ] F5 Dead code, debug logs and TODOs removed
+- [x] F5 Dead code, debug logs and TODOs removed
+  - Evidence: units `F5` x3: no console calls, debugger or TODO/FIXME in shipped files; every app function and core export is used. Removed a duplicated CSS rule and stale VERIFY wording.
 - [ ] F6 Full test suite passes in one command, documented
 
 ## G. Deployment (GitHub Pages)
