@@ -48,7 +48,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: Same e2e: every button, input and summary is at least 44x44, inputs are 18px. On the longest prompt the answer box ends at 241px (320x568) and 247px (375x667), above the keyboard line; the header is hidden during play on phones. Real-device check listed in HUMAN-TODO section 4.
 - [x] D3 Keyboard-only play start to finish; focus visible and logical
   - Evidence: e2e `daily run, keyboard only, desktop` uses only Tab and Enter from the first-visit dialog to the copy button, asserting where focus lands at each step and a `solid 3px` focus ring.
-- [ ] D4 Screen reader: timer, feedback and score announced without every tick
+- [x] D4 Screen reader: timer, feedback and score announced without every tick
+  - Evidence: e2e `screen reader`: the clock region changed exactly twice in a round ('10 seconds left', '5 seconds left'); feedback, round result ('Round 1: Deep Cut, ..., plus 85 points. Total 85 points.') and final score go to aria-live regions. Real VoiceOver/TalkBack check in HUMAN-TODO section 4.
 - [ ] D5 Contrast meets WCAG AA in light and dark; tier results not shown by colour alone
 - [ ] D6 prefers-reduced-motion respected
 
