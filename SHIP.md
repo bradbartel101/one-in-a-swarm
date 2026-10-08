@@ -68,7 +68,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: 404.html is self-contained (inline CSS and icon). e2e loads a missing path, sees 'Wrong turn', and checks the home link resolves to /repo/ on github.io and / elsewhere.
 
 ## F. Code quality and performance
-- [ ] F1 No console errors or warnings in a full daily run and a full infinite run (headless browser)
+- [x] F1 No console errors or warnings in a full daily run and a full infinite run (headless browser)
+  - Evidence: Every one of the 20 e2e scenarios asserts an empty list of console errors, warnings and uncaught exceptions, including a 7-round daily run at 1440px and 375px and an infinite run through all 31 prompts.
 - [ ] F2 All user-entered text inserted with textContent, never innerHTML
 - [ ] F3 Page weight under 500 KB; loads fast on throttled 3G
 - [ ] F4 Nothing external (or HTTPS only)
