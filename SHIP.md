@@ -20,7 +20,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: Rotation rebuilt as a chain from a fixed epoch that excludes the previous days' prompts. The bank covers **4 days** (31 prompts / 7 per day): unit `A7` checks 3,660 consecutive days, each with 7 prompts, no prompt repeated in any 4-day window, every prompt used.
 - [x] A8 Answer matching edge cases (accents, plurals, aliases, punctuation, spaces, curly quotes, "the", empty, very long, emoji, HTML)
   - Evidence: units `A8: matching on the real bank`, `A8: empty, enormous, emoji and markup input` (500,000-character guess rejected in under 2s) and tests/matching.test.js; e2e `hostile input is shown as text and never runs` (script/img/svg payloads become text chips, `window.__xss` stays undefined, also after reload).
-- [ ] A9 Duplicate guesses in a round are rejected without a penalty
+- [x] A9 Duplicate guesses in a round are rejected without a penalty
+  - Evidence: unit `A9: a repeated wrong guess costs nothing` (six spellings of one guess, one penalty, both modes); e2e keyboard run asserts 'Already tried' and under 0.03 of the bar lost.
 
 ## B. Storage and failure modes
 - [ ] B1 Game plays with localStorage blocked, full or throwing
