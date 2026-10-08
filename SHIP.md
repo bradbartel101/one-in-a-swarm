@@ -58,7 +58,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
 ## E. Sharing and polish
 - [x] E1 Share text copies (Clipboard API with fallback), confirms "Copied!", no spoilers, includes the game URL
   - Evidence: e2e keyboard run presses Copy, sees 'Copied!', reads the clipboard back and matches it to the share box; line 5 is the game URL and no played answer appears in it. e2e `copy falls back` covers a missing Clipboard API and a refusing one at phone size. unit `share text`.
-- [ ] E2 "How to play" modal, shown automatically on first visit only
+- [x] E2 "How to play" modal, shown automatically on first visit only
+  - Evidence: e2e `first visit: how-to dialog opens once, never again`: open on first load with focus on its button, closed after reload, still available from the header.
 - [ ] E3 Title, meta description, favicon, Open Graph/Twitter tags, original 1200x630 preview image
 - [ ] E4 Footer disclaimer; no official GT logos, wordmarks or Buzz
 - [ ] E5 A simple 404.html
