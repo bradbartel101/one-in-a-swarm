@@ -42,7 +42,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: Script scan of every name and alias: no double spaces, no stray whitespace, all start with a capital or digit except three intentional ones (eduroam, github.gatech.edu, u[sic]GA). CS course titles replaced with the catalog's wording. Proper-noun spelling beyond that is in HUMAN-TODO section 5.
 
 ## D. Cross-device and accessibility
-- [ ] D1 Works at 320, 375, 768 and 1440px; no horizontal scroll, nothing cut off
+- [x] D1 Works at 320, 375, 768 and 1440px; no horizontal scroll, nothing cut off
+  - Evidence: e2e `layout at 320, 375, 768 and 1440` audits 9 screens per width: no horizontal scroll, nothing outside the viewport or its card, no clipped text. Screenshots at 320 and 375 reviewed by eye, which is how the clipped results numbers and cut-off share box were found and fixed.
 - [ ] D2 Mobile: keyboard doesn't cover input or timer; inputs 16px+; tap targets 44px+
 - [ ] D3 Keyboard-only play start to finish; focus visible and logical
 - [ ] D4 Screen reader: timer, feedback and score announced without every tick

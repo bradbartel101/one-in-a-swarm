@@ -15,7 +15,7 @@
   --focus: #003057;
   --primary-bg: #003057;
   --primary-ink: #ffffff;
-  --hex: rgba(0, 48, 87, 0.05);
+  --comb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0v16L0 32.5v32L28 81v16M28 16l28 16.5v32L28 81' fill='none' stroke='%23003057' stroke-opacity='.07' stroke-width='1.5'/%3E%3C/svg%3E");
 
   --t-common-bg: #e3e6ea; --t-common-ink: #1f2933;
   --t-clever-bg: #f7dc6f; --t-clever-ink: #3d2f00;
@@ -43,7 +43,7 @@
     --focus: #ffd75e;
     --primary-bg: #b3a369;
     --primary-ink: #003057;
-    --hex: rgba(179, 163, 105, 0.07);
+    --comb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0v16L0 32.5v32L28 81v16M28 16l28 16.5v32L28 81' fill='none' stroke='%23b3a369' stroke-opacity='.11' stroke-width='1.5'/%3E%3C/svg%3E");
   }
 }
 
@@ -59,11 +59,8 @@ body {
   line-height: 1.5;
   color: var(--ink);
   background-color: var(--bg);
-  background-image:
-    linear-gradient(60deg, var(--hex) 1px, transparent 1px),
-    linear-gradient(-60deg, var(--hex) 1px, transparent 1px),
-    linear-gradient(0deg, var(--hex) 1px, transparent 1px);
-  background-size: 36px 62px, 36px 62px, 36px 31px;
+  background-image: var(--comb);
+  background-size: 56px 97px;
 }
 
 h1, h2 { line-height: 1.12; margin: 0 0 0.5rem; letter-spacing: -0.015em; text-wrap: balance; }
@@ -154,6 +151,7 @@ main { max-width: 960px; margin: 0 auto; padding: 0.25rem 1rem 2.5rem; }
 .modes { display: grid; gap: 1rem; margin-bottom: 1rem; }
 .mode { margin: 0; display: flex; flex-direction: column; }
 .mode .btn { margin-top: auto; }
+.mode .btn + .btn { margin-top: 0.6rem; }
 .mode .small { margin: 0.6rem 0 0; }
 
 .tiers { list-style: none; margin: 0 0 0.75rem; padding: 0; display: grid; gap: 0.45rem; }
@@ -179,9 +177,11 @@ main { max-width: 960px; margin: 0 auto; padding: 0.25rem 1rem 2.5rem; }
 .hud-text { margin: 0; font-weight: 800; }
 .pips { list-style: none; display: flex; gap: 5px; margin: 0 0 0.3rem; padding: 0; }
 .pips li {
-  width: 20px; height: 22px;
+  width: 28px; height: 31px;
+  display: flex; align-items: center; justify-content: center;
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   background: var(--line);
+  font-size: 0.66rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
 }
 .pips li.now { background: var(--ink); }
 
@@ -236,8 +236,8 @@ main { max-width: 960px; margin: 0 auto; padding: 0.25rem 1rem 2.5rem; }
 /* ----- results ----- */
 
 .summit h1 { text-transform: uppercase; }
-.summit-grid { display: flex; gap: 1.25rem; align-items: stretch; margin-top: 1rem; }
-.altimeter { display: flex; gap: 0.5rem; flex: none; }
+.summit-grid { display: flex; flex-direction: column-reverse; gap: 1.5rem; margin-top: 1rem; }
+.altimeter { display: flex; gap: 0.6rem; padding: 0.6rem 0; }
 .alt-track {
   position: relative; width: 22px; height: 200px; border-radius: 999px;
   background: var(--line); border: 1px solid var(--edge);
@@ -248,17 +248,18 @@ main { max-width: 960px; margin: 0 auto; padding: 0.25rem 1rem 2.5rem; }
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   background: repeating-linear-gradient(0deg, var(--navy) 0 6px, var(--gold) 6px 12px);
 }
-.alt-ticks { list-style: none; margin: 0; padding: 0; position: relative; width: 9.5rem; font-size: 0.72rem; font-weight: 700; color: var(--muted); }
-.alt-ticks li { position: absolute; left: 0; transform: translateY(50%); white-space: nowrap; }
+.alt-ticks { list-style: none; margin: 0; padding: 0; position: relative; flex: 1 1 auto; min-width: 0; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+.alt-ticks li { position: absolute; left: 0; right: 0; transform: translateY(50%); line-height: 1.15; }
 .alt-ticks li.on { color: var(--ink); }
 
-.numbers { margin: 0; display: grid; gap: 0.9rem; align-content: center; }
+.numbers { margin: 0; display: grid; gap: 0.9rem; align-content: center; min-width: 0; }
+.numbers dd { overflow-wrap: anywhere; }
 .numbers dt { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
 .numbers dd { margin: 0; font-size: clamp(1.8rem, 8vw, 2.8rem); font-weight: 900; line-height: 1.05; font-variant-numeric: tabular-nums; }
 .numbers-row { grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); margin: 1rem 0 1.25rem; }
 
 .share {
-  display: block; width: 100%; resize: none; padding: 0.75rem;
+  display: block; width: 100%; resize: none; overflow: hidden; padding: 0.75rem;
   font: inherit; font-size: 1rem; line-height: 1.5;
   color: var(--ink); background: var(--bg);
   border: 2px solid var(--edge); border-radius: 12px; margin-bottom: 0.75rem;
@@ -290,6 +291,28 @@ dialog::backdrop { background: rgba(0, 20, 40, 0.6); }
 .rules { padding-left: 1.2rem; margin: 0 0 1rem; }
 .rules li { margin-bottom: 0.55rem; }
 
+/* ----- small screens: keep the clock, prompt and answer box above the on-screen keyboard ----- */
+
+@media (max-width: 719px) {
+  body.playing .top, body.playing .foot { display: none; }
+  body.playing main { padding-top: 0.5rem; }
+  body.playing .hud { margin-bottom: 0.35rem; }
+  body.playing .pips { margin-bottom: 0.15rem; }
+  body.playing .pips li { width: 24px; height: 27px; font-size: 0.6rem; }
+  body.playing .clock { font-size: 2rem; }
+  body.playing .bar { height: 10px; margin-bottom: 0.5rem; }
+  body.playing .prompt-card { padding: 0.75rem; }
+  body.playing .prompt-card h1 { font-size: 1.2rem; line-height: 1.2; margin-bottom: 0.6rem; }
+  body.playing .eyebrow { margin-bottom: 0.2rem; }
+  body.playing .entry input, body.playing .entry .btn { min-height: 48px; }
+}
+
+@media (max-width: 359px) {
+  /* The pips already show the round on the narrowest phones; the text stays for screen readers. */
+  body.playing .hud.is-daily .hud-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  body.playing .prompt-card h1 { font-size: 1.1rem; }
+}
+
 /* ----- wider screens ----- */
 
 @media (min-width: 720px) {
@@ -300,6 +323,8 @@ dialog::backdrop { background: rgba(0, 20, 40, 0.6); }
   .btn-big { width: auto; min-width: 16rem; }
   .mode .btn-big { width: 100%; }
   section[data-view="play"], section[data-view="between"] { max-width: 720px; margin: 0 auto; }
+  .summit-grid { flex-direction: row; align-items: stretch; gap: 2rem; }
+  .altimeter { flex: 0 0 20rem; }
   .alt-track { height: 240px; }
 }
 
