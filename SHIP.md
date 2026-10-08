@@ -60,7 +60,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e keyboard run presses Copy, sees 'Copied!', reads the clipboard back and matches it to the share box; line 5 is the game URL and no played answer appears in it. e2e `copy falls back` covers a missing Clipboard API and a refusing one at phone size. unit `share text`.
 - [x] E2 "How to play" modal, shown automatically on first visit only
   - Evidence: e2e `first visit: how-to dialog opens once, never again`: open on first load with focus on its button, closed after reload, still available from the header.
-- [ ] E3 Title, meta description, favicon, Open Graph/Twitter tags, original 1200x630 preview image
+- [x] E3 Title, meta description, favicon, Open Graph/Twitter tags, original 1200x630 preview image
+  - Evidence: unit `E3` (title, description, inline SVG favicon, og:* and twitter:* tags, assets/og.png is a 1200x630 PNG, 74 KB) and e2e metadata check. Image is original (hexagons and stripes), rendered by tools/make-og.js. The absolute URL is a guess: HUMAN-TODO section 3.
 - [ ] E4 Footer disclaimer; no official GT logos, wordmarks or Buzz
 - [ ] E5 A simple 404.html
 
