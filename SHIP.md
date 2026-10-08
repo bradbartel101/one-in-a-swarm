@@ -78,7 +78,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: unit `F4 / G1` and e2e: zero requests leave the site's own path. No fonts, scripts, analytics or tracking.
 - [x] F5 Dead code, debug logs and TODOs removed
   - Evidence: units `F5` x3: no console calls, debugger or TODO/FIXME in shipped files; every app function and core export is used. Removed a duplicated CSS rule and stale VERIFY wording.
-- [ ] F6 Full test suite passes in one command, documented
+- [x] F6 Full test suite passes in one command, documented
+  - Evidence: `npm run test:all` -> 86 unit tests pass, validator OK, 20 of 20 browser scenarios pass, exit 0. Documented in README.md under Tests.
 
 ## G. Deployment (GitHub Pages)
 - [ ] G1 All asset and data paths relative; works from a subpath
