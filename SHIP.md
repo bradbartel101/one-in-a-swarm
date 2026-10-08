@@ -43,7 +43,7 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
 
 ## D. Cross-device and accessibility
 - [x] D1 Works at 320, 375, 768 and 1440px; no horizontal scroll, nothing cut off
-  - Evidence: e2e `layout at 320, 375, 768 and 1440` audits 9 screens per width: no horizontal scroll, nothing outside the viewport or its card, no clipped text. Screenshots at 320 and 375 reviewed by eye, which is how the clipped results numbers and cut-off share box were found and fixed.
+  - Evidence: e2e `layout at 320, 375, 768 and 1440` audits 8 screens per width: no horizontal scroll, nothing outside the viewport or its card, no clipped text. Screenshots at 320 and 375 reviewed by eye, which is how the clipped results numbers and cut-off share box were found and fixed.
 - [x] D2 Mobile: keyboard doesn't cover input or timer; inputs 16px+; tap targets 44px+
   - Evidence: Same e2e: every button, input and summary is at least 44x44, inputs are 18px. On the longest prompt the answer box ends at 241px (320x568) and 247px (375x667), above the keyboard line; the header is hidden during play on phones. Real-device check listed in HUMAN-TODO section 4.
 - [x] D3 Keyboard-only play start to finish; focus visible and logical
@@ -92,5 +92,7 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: HUMAN-TODO.md section 2 has the click-by-click Pages steps; section 1 has the exact commands to create the repository, push and open the pull request.
 
 ## Final pass
-- [ ] All tests, plus a full daily and infinite run in headless Chrome at mobile and desktop sizes
+- [x] All tests, plus a full daily and infinite run in headless Chrome at mobile and desktop sizes
+  - Evidence: final `npm run test:all` exited 0: 86 unit tests, validator OK, 20 of 20 browser scenarios, including daily runs at 1440x900 and 375x667 and infinite runs at 1280x800 and 390x844. The pass before it caught one more defect (a favicon request from the 404 page), now fixed.
 - [ ] Commit, push, open pull request "Release v1.0"
+  - Committed on `release/v1.0`. Push and pull request are blocked: there is no GitHub repository or remote yet. Commands are in HUMAN-TODO.md section 1.
