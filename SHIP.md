@@ -82,7 +82,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: `npm run test:all` -> 86 unit tests pass, validator OK, 20 of 20 browser scenarios pass, exit 0. Documented in README.md under Tests.
 
 ## G. Deployment (GitHub Pages)
-- [ ] G1 All asset and data paths relative; works from a subpath
+- [x] G1 All asset and data paths relative; works from a subpath
+  - Evidence: The e2e server serves the site only under /some-user-repo/ and records any request outside it: none. unit `F4 / G1` rejects root-relative paths.
 - [ ] G2 .nojekyll and README (what, how to play, tests, adding prompts, deploying)
 - [ ] G3 GitHub Actions workflow runs tests and the content validator on every push
 - [ ] G4 Exact steps to turn on GitHub Pages written in HUMAN-TODO.md
