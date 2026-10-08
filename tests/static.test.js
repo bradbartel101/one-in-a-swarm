@@ -7,11 +7,11 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const SITE = ['index.html', '404.html', 'css/style.css', 'js/core.js', 'js/app.js', 'data/prompts.json'];
+const SITE = ['index.html', '404.html', 'css/style.css', 'js/core.js', 'js/sfx.js', 'js/app.js', 'data/prompts.json'];
 const DISCLAIMER = 'Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.';
 
 test('F2: no HTML-string sinks or dynamic code anywhere in the scripts', () => {
-  for (const f of ['js/core.js', 'js/app.js', 'index.html', '404.html']) {
+  for (const f of ['js/core.js', 'js/sfx.js', 'js/app.js', 'index.html', '404.html']) {
     const src = read(f);
     for (const bad of [/\binnerHTML\b/, /\bouterHTML\b/, /insertAdjacentHTML/, /document\.write/, /\beval\s*\(/, /new Function/, /\bsetTimeout\s*\(\s*['"`]/, /\son\w+\s*=\s*["']/]) {
       assert.ok(!bad.test(src), f + ' contains ' + bad);
@@ -43,7 +43,8 @@ test('F4 / G1: nothing is loaded from another origin, and every path is relative
   assert.ok(!/@import/.test(css));
   const fetches = [...read('js/app.js').matchAll(/fetch\(\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
   assert.deepEqual(fetches, ['data/prompts.json']);
-  assert.ok(!/https?:\/\//.test(read('js/app.js') + read('js/core.js')), 'scripts mention no URLs');
+  assert.ok(!/https?:\/\//.test(read('js/app.js') + read('js/core.js') + read('js/sfx.js')), 'scripts mention no URLs');
+  assert.ok(!/\.(mp3|ogg|wav|m4a)\b/.test(read('js/sfx.js') + read('index.html')), 'sound is synthesised, not downloaded');
   assert.ok(!/google|analytics|gtag|sentry|facebook|pixel/i.test(read('index.html') + read('js/app.js')), 'no analytics or tracking');
 });
 

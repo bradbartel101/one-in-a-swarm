@@ -24,6 +24,7 @@
   --t-deep-bg: #6b3fa0;   --t-deep-ink: #ffffff;
   --t-swarm-bg: #b3a369;  --t-swarm-ink: #003057;
   --t-miss-bg: #2b2f36;   --t-miss-ink: #ffffff;
+  --chip-ink: #ffffff;
 
   --radius: 14px;
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -236,22 +237,10 @@ main { max-width: 960px; margin: 0 auto; padding: 0.25rem 1rem 2.5rem; }
 /* ----- results ----- */
 
 .summit h1 { text-transform: uppercase; }
-.summit-grid { display: flex; flex-direction: column-reverse; gap: 1.5rem; margin-top: 1rem; }
-.altimeter { display: flex; gap: 0.6rem; padding: 0.6rem 0; }
-.alt-track {
-  position: relative; width: 22px; height: 200px; border-radius: 999px;
-  background: var(--line); border: 1px solid var(--edge);
-}
-.alt-fill { position: absolute; left: 0; right: 0; bottom: 0; border-radius: 999px; background: var(--gold); }
-.alt-bee {
-  position: absolute; left: 50%; width: 30px; height: 34px; margin: 0 0 -17px -15px;
-  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  background: repeating-linear-gradient(0deg, var(--navy) 0 6px, var(--gold) 6px 12px);
-}
-.alt-ticks { list-style: none; margin: 0; padding: 0; position: relative; flex: 1 1 auto; min-width: 0; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
-.alt-ticks li { position: absolute; left: 0; right: 0; transform: translateY(50%); line-height: 1.15; }
-.alt-ticks li.on { color: var(--ink); }
-
+.summit-grid { display: grid; gap: 1.25rem; margin-top: 1rem; }
+.ladder { list-style: none; margin: 1rem 0 0; padding: 0; font-size: 0.85rem; font-weight: 700; color: var(--muted); display: flex; flex-direction: column-reverse; gap: 0.2rem; }
+.ladder li.on { color: var(--ink); }
+.ladder li.on::before { content: "▸ "; }
 .numbers { margin: 0; display: grid; gap: 0.9rem; align-content: center; min-width: 0; }
 .numbers dd { overflow-wrap: anywhere; }
 .numbers dt { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
@@ -280,6 +269,74 @@ main { max-width: 960px; margin: 0 auto; padding: 0.25rem 1rem 2.5rem; }
 .spoilers[open] summary::before { content: "▾"; }
 .spoilers summary::-webkit-details-marker { display: none; }
 
+/* ----- the flight scene: a tall strip of sky that scrolls down as the bee climbs -----
+   Decorative (aria-hidden). Its colours are fixed, so it looks the same in light and dark mode,
+   and its labels sit on solid navy chips so they stay readable over any part of the sky. */
+
+.flight-slot:empty { display: none; }
+.flight-slot { margin-bottom: 1rem; }
+.hero .flight-slot { margin: 1.1rem 0 0; }
+.summit .flight-slot { margin: 0; }
+.flight {
+  position: relative; height: 200px; overflow: hidden; isolation: isolate;
+  border: 2px solid var(--edge); border-radius: var(--radius); background: #5aa9e6;
+}
+.flight-world {
+  position: absolute; left: 0; right: 0; bottom: calc(26% - 60px); height: 2700px;
+  transform: translateY(0); transition: transform 1.8s cubic-bezier(0.22, 0.8, 0.3, 1); will-change: transform;
+  background: linear-gradient(to top, #cfeeff 0, #a5dbff 9%, #6db6ee 24%, #3f86cf 40%, #1f5596 55%, #0c3466 68%, #051d3d 80%, #020a17 100%);
+}
+.flight-world .campus { position: absolute; left: 0; bottom: 0; width: 100%; height: 160px; }
+.flight-world .skyline { position: absolute; left: 0; bottom: 44px; width: 100%; height: 330px; }
+.flight-world .stars {
+  position: absolute; left: 0; right: 0; top: 0; height: 1100px; opacity: 0.9;
+  background-image: radial-gradient(#fff 1.2px, transparent 1.9px), radial-gradient(#fff 1.8px, transparent 2.5px), radial-gradient(#ffe9a8 1.3px, transparent 2px), radial-gradient(#cfe4ff 0.9px, transparent 1.5px);
+  background-size: 83px 97px, 151px 173px, 211px 131px, 57px 139px; background-position: 12px 20px, 70px 95px, 130px 40px, 33px 61px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent); mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+.flight-world .moon {
+  position: absolute; top: 150px; right: 14%; width: 64px; height: 64px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffbe6, #e9dfb4 70%); box-shadow: 0 0 40px rgba(255, 245, 200, 0.5);
+}
+.flight-world .prop { position: absolute; }
+.flight-world .satellite { top: 520px; left: 14%; width: 60px; animation: drift 26s linear infinite alternate; }
+.flight-world .plane { bottom: 1560px; left: 20%; width: 84px; animation: drift 18s linear infinite alternate; }
+.flight-world .balloon { bottom: 690px; left: 74%; width: 38px; animation: bob 5s ease-in-out infinite; }
+.cloud {
+  position: absolute; width: 120px; height: 34px; border-radius: 999px; background: #fff; opacity: 0.92;
+  box-shadow: 28px -15px 0 5px #fff, 62px -7px 0 0 #fff; animation: drift 34s ease-in-out infinite alternate;
+}
+.cloud.small { transform: scale(0.65); animation-duration: 46s; opacity: 0.8; }
+.mark { position: absolute; left: 0; right: 0; border-top: 2px dashed rgba(255, 255, 255, 0.75); }
+.mark span, .flight-zone, .flight-alt {
+  background: var(--navy); color: var(--chip-ink); font-weight: 800; border-radius: 999px; white-space: nowrap;
+}
+.mark span { position: absolute; right: 8px; top: -11px; padding: 0.05rem 0.5rem; font-size: 0.68rem; }
+.flight-bee { position: absolute; left: 50%; bottom: 26%; width: 56px; height: 56px; margin-left: -28px; animation: bob 2.6s ease-in-out infinite; }
+.flight-bee .body { fill: var(--gold); stroke: #fff; stroke-width: 2.5; stroke-linejoin: round; }
+.flight-bee .band { stroke: var(--navy); stroke-width: 5; fill: none; }
+.flight-bee .wings { fill: rgba(255, 255, 255, 0.92); stroke: var(--navy); stroke-width: 1.5; transform-origin: 24px 12px; animation: flap 0.16s linear infinite alternate; }
+.flight.climbing .flight-bee { animation: surge 0.5s ease-in-out infinite alternate; }
+.flight.climbing .wings { animation-duration: 0.07s; }
+.flight.stalled .flight-bee { animation: stall 0.5s ease-in-out 2; }
+.flight-zone { position: absolute; left: 10px; bottom: 50px; margin: 0; padding: 0.15rem 0.65rem; font-size: 0.78rem; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; }
+.flight-alt { position: absolute; left: 10px; bottom: 10px; margin: 0; padding: 0.1rem 0.75rem; font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+@keyframes bob { 50% { transform: translateY(-7px); } }
+@keyframes surge { from { transform: translateY(0) rotate(-5deg); } to { transform: translateY(-10px) rotate(5deg); } }
+@keyframes stall { 25% { transform: translateY(8px) rotate(-14deg); } 75% { transform: translateY(8px) rotate(14deg); } }
+@keyframes flap { from { transform: scaleY(1); } to { transform: scaleY(0.35); } }
+@keyframes drift { from { margin-left: -26px; } to { margin-left: 26px; } }
+
+/* ----- sound toggle ----- */
+
+.top-actions { display: flex; align-items: center; gap: 0.5rem; }
+.btn-icon { width: 48px; padding: 0; flex: none; }
+.btn-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.btn-icon .spk { fill: currentColor; }
+.btn-icon .mute { display: none; }
+.btn-icon[aria-pressed="false"] .waves { display: none; }
+.btn-icon[aria-pressed="false"] .mute { display: inline; }
+
 /* ----- dialog ----- */
 
 dialog {
@@ -307,6 +364,23 @@ dialog::backdrop { background: rgba(0, 20, 40, 0.6); }
   body.playing .entry input, body.playing .entry .btn { min-height: 48px; }
 }
 
+@media (max-width: 719px) {
+  .flight-slot-play { margin-bottom: 0.4rem; }
+  .flight-slot-play .flight { height: 46px; border-width: 1px; }
+  .flight-slot-play .flight-zone, .flight-slot-play .mark span { display: none; }
+  .flight-slot-play .flight-bee { width: 30px; height: 30px; margin-left: -15px; bottom: 6px; }
+  .flight-slot-play .flight-alt { font-size: 0.85rem; bottom: 8px; padding: 0 0.5rem; }
+  .brand-text { font-size: 0.8rem; white-space: nowrap; }
+  .top { padding: 0.5rem 1rem; gap: 0.4rem; }
+  .top .btn { white-space: nowrap; padding: 0.4rem 0.7rem; font-size: 0.9rem; }
+  .top .btn-icon { padding: 0; }
+}
+
+@media (max-width: 379px) {
+  .flight-slot-play { display: none; }
+  .brand-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+}
+
 @media (max-width: 359px) {
   /* The pips already show the round on the narrowest phones; the text stays for screen readers. */
   body.playing .hud.is-daily .hud-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
@@ -323,9 +397,9 @@ dialog::backdrop { background: rgba(0, 20, 40, 0.6); }
   .btn-big { width: auto; min-width: 16rem; }
   .mode .btn-big { width: 100%; }
   section[data-view="play"], section[data-view="between"] { max-width: 720px; margin: 0 auto; }
-  .summit-grid { flex-direction: row; align-items: stretch; gap: 2rem; }
-  .altimeter { flex: 0 0 20rem; }
-  .alt-track { height: 240px; }
+  .summit-grid { grid-template-columns: 1.2fr 1fr; align-items: center; gap: 2rem; }
+  .flight { height: 250px; }
+  .flight-slot-play .flight { height: 150px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

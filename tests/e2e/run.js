@@ -285,6 +285,7 @@ async function main() {
 
   await scenario('timer cannot be gamed: clock set back, clock set forward, frozen tab', async () => {
     const page = await fresh({ width: 1280, height: 800, initScript: fakeClock(new Date().toISOString()) });
+    await click(page, 'soundBtn'); // Chrome will not freeze a tab that is playing audio
     await click(page, 'dailyBtn');
     await startNextRound(page);
     await sleep(1000);
@@ -557,6 +558,7 @@ async function main() {
       const scope = document.querySelector('dialog[open]') || document.body;
       scope.querySelectorAll('*').forEach((n) => {
         if (n.closest('.sr-only, .skip, [hidden], script, style') || !n.getClientRects().length) return;
+        if (n.closest('.flight') && !n.matches('.flight, .flight-alt, .flight-zone')) return; // scenery, clipped by the flight window
         if (getComputedStyle(n).clip === 'rect(0px, 0px, 0px, 0px)') return; // visually hidden, still read aloud
         if (!document.querySelector('dialog[open]') && n.closest('dialog')) return;
         const r = n.getBoundingClientRect();
@@ -665,6 +667,75 @@ async function main() {
     assert.equal(await light.eval('getComputedStyle(document.getElementById("entry")).animationName'), 'shake', 'shake plays by default');
     noProblems(light);
     await light.close();
+  });
+
+  await scenario('flight scene climbs with the score, and sounds play unless muted', async () => {
+    const fakeAudio = `window.__audio = { notes: 0, wind: 0 };
+      const param = () => ({ value: 0, setValueAtTime() {}, exponentialRampToValueAtTime() {} });
+      window.AudioContext = class {
+        constructor() { this.state = 'running'; this.currentTime = 0; this.sampleRate = 8000; this.destination = {}; }
+        createOscillator() { window.__audio.notes++; return { type: '', frequency: param(), connect() {}, start() {}, stop() {} }; }
+        createGain() { return { gain: param(), connect() {} }; }
+        createBuffer(c, n) { return { getChannelData() { return new Float32Array(n); } }; }
+        createBufferSource() { window.__audio.wind++; return { connect() {}, start() {}, stop() {} }; }
+        createBiquadFilter() { return { type: '', frequency: param(), Q: param(), connect() {} }; }
+        resume() { return Promise.resolve(); }
+        suspend() { return Promise.resolve(); }
+      };`;
+    const scene = (page) => page.eval('({ alt: document.getElementById("flightAlt").textContent, zone: document.getElementById("flightZone").textContent, y: document.getElementById("flightWorld").style.transform, slot: document.getElementById("flight").parentNode.dataset.slot, climbing: document.getElementById("flight").classList.contains("climbing") })');
+    const audio = (page) => page.eval('window.__audio');
+    const page = await fresh({ width: 1280, height: 800, initScript: fakeAudio });
+    assert.deepEqual(await scene(page), { alt: '0', zone: 'Still in the Hive', y: 'translateY(0px)', slot: 'home', climbing: false });
+    assert.equal(await page.eval('document.getElementById("flight").getAttribute("aria-hidden")'), 'true');
+    await click(page, 'dailyBtn');
+    await startNextRound(page);
+    const atStart = await audio(page);
+    assert.ok(atStart.notes >= 2, 'round start chime');
+    await guess(page, 'not a real answer');
+    assert.equal((await audio(page)).notes, atStart.notes + 2, 'wrong-guess buzz');
+    await guess(page, answerOf(await text(page, 'promptText'), 'rare'));
+    await page.waitFor('!document.querySelector("[data-view=between]").hidden');
+    await sleep(120);
+    const mid = await scene(page);
+    assert.equal(mid.slot, 'between');
+    assert.equal(mid.climbing, true, 'the bee is climbing');
+    const afterRare = await audio(page);
+    assert.equal(afterRare.notes, atStart.notes + 2 + 5 + 1, 'rare answer: five notes plus the climb hum');
+    assert.equal(afterRare.wind, 1, 'wind on the climb');
+    await sleep(2100);
+    assert.deepEqual(await scene(page), { alt: '240', zone: 'Still in the Hive', y: 'translateY(187px)', slot: 'between', climbing: false });
+    // a reload between rounds shows the altitude without replaying the climb
+    await page.reload();
+    await ready(page);
+    assert.deepEqual(await scene(page), { alt: '240', zone: 'Still in the Hive', y: 'translateY(187px)', slot: 'between', climbing: false });
+    // muted: no sound at all, and the choice survives a reload
+    await click(page, 'soundBtn');
+    assert.equal(await page.eval('document.getElementById("soundBtn").getAttribute("aria-pressed")'), 'false');
+    assert.match(await page.eval('document.getElementById("soundBtn").getAttribute("aria-label")'), /Sound is off/);
+    await page.reload();
+    await ready(page);
+    assert.equal(await page.eval('document.getElementById("soundBtn").getAttribute("aria-pressed")'), 'false', 'mute persists');
+    await startNextRound(page);
+    await guess(page, 'still not an answer');
+    await guess(page, answerOf(await text(page, 'promptText'), 'swarm'));
+    await page.waitFor('!document.querySelector("[data-view=between]").hidden');
+    await sleep(2100);
+    assert.deepEqual(await audio(page), { notes: 0, wind: 0 }, 'nothing plays while muted');
+    assert.deepEqual(await scene(page), { alt: '640', zone: 'Skimming Tech Green', y: 'translateY(499px)', slot: 'between', climbing: false });
+    noProblems(page);
+    await page.close();
+
+    const calm = await fresh({ width: 1280, height: 800, reducedMotion: true, initScript: fakeAudio });
+    await click(calm, 'dailyBtn');
+    await startNextRound(calm);
+    await guess(calm, answerOf(await text(calm, 'promptText'), 'deep'));
+    await calm.waitFor('!document.querySelector("[data-view=between]").hidden');
+    await sleep(120);
+    assert.deepEqual(await scene(calm), { alt: '340', zone: 'Still in the Hive', y: 'translateY(265px)', slot: 'between', climbing: false }, 'reduced motion: the scene jumps, no animation');
+    assert.equal(await calm.eval('getComputedStyle(document.getElementById("flightBee")).animationName'), 'none');
+    assert.equal((await audio(calm)).wind, 0, 'no climb sound without a climb');
+    noProblems(calm);
+    await calm.close();
   });
 
   await scenario('copy falls back when the Clipboard API is missing or refuses', async () => {

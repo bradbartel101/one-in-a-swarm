@@ -3,12 +3,17 @@
   'use strict';
 
   const C = window.SwarmCore;
+  const Sfx = window.SwarmSfx;
   const $ = (id) => document.getElementById(id);
 
   // Storage keys are stable; the payloads carry their own version (C.SAVE_VERSION).
   const K_DAILY = 'swarm.daily';
   const K_BEST = 'swarm.infinite.best';
   const K_SEEN = 'swarm.seenHowTo';
+  const K_SOUND = 'swarm.sound';
+  const PX_PER_FOOT = 0.78; // how far the sky scrolls per foot climbed (matches the marks in index.html)
+  const SKY_TOP_FEET = 3050; // the painted sky ends here; the altitude readout keeps counting
+  const CLIMB_MS = 1800;
   const TICK_MS = 100;
   const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from starting the next round
 
@@ -59,6 +64,10 @@
   let lastAnnounced = 0;
   let betweenShownAt = 0;
   let view = 'loading';
+  let sceneFeet = 0;
+  let sceneAnim = 0;
+  let lastTickSecond = 0;
+  let justEnded = false; // a round ended in this page session (as opposed to a reload)
 
   /* ---------- small helpers ---------- */
 
@@ -75,6 +84,8 @@
       s.hidden = s.getAttribute('data-view') !== name;
     });
     document.body.classList.toggle('playing', name === 'play');
+    const slot = document.querySelector('[data-view="' + name + '"] .flight-slot');
+    if (slot && $('flight').parentNode !== slot) slot.appendChild($('flight'));
     window.scrollTo(0, 0);
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
@@ -104,6 +115,59 @@
     e.classList.remove('shake');
     void e.offsetWidth; // restart the animation
     e.classList.add('shake');
+  }
+
+  /* ---------- the flight scene ---------- */
+
+  function reducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function paintScene(feet) {
+    $('flightAlt').textContent = C.formatNumber(Math.round(feet));
+    $('flightZone').textContent = C.bandFor(feet / C.FEET_PER_POINT).name;
+  }
+
+  // Puts the bee at `feet`. With `animate`, the sky scrolls and the readout counts up to it.
+  function setScene(feet, animate) {
+    const flight = $('flight');
+    const world = $('flightWorld');
+    const from = sceneFeet;
+    const moving = animate && feet !== from && !reducedMotion();
+    window.cancelAnimationFrame(sceneAnim);
+    sceneFeet = feet;
+    world.style.transition = moving ? '' : 'none';
+    world.style.transform = 'translateY(' + Math.round(Math.min(feet, SKY_TOP_FEET) * PX_PER_FOOT) + 'px)';
+    flight.classList.remove('stalled');
+    flight.classList.toggle('climbing', moving);
+    if (!moving) {
+      paintScene(feet);
+      return;
+    }
+    Sfx.rise(CLIMB_MS / 1000);
+    const started = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - started) / CLIMB_MS);
+      const eased = 1 - Math.pow(1 - t, 3);
+      paintScene(from + (feet - from) * eased);
+      if (t < 1) sceneAnim = window.requestAnimationFrame(step);
+      else flight.classList.remove('climbing');
+    };
+    sceneAnim = window.requestAnimationFrame(step);
+  }
+
+  function stallScene() {
+    const flight = $('flight');
+    flight.classList.remove('stalled');
+    void flight.offsetWidth; // restart the animation
+    flight.classList.add('stalled');
+  }
+
+  function applySound(on) {
+    Sfx.setEnabled(on);
+    const btn = $('soundBtn');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Sound is on. Turn sound off' : 'Sound is off. Turn sound on');
   }
 
   function announce(text) {
@@ -148,6 +212,10 @@
     bar.classList.toggle('paused', !!paused);
     $('barFill').style.transform = 'scaleX(' + Math.max(0, Math.min(1, ms / fullMs)).toFixed(4) + ')';
     // Screen readers get the clock at 10 and 5 seconds, not every tick.
+    if (mode === 'daily' && secs <= 5 && secs > 0 && secs !== lastTickSecond) {
+      lastTickSecond = secs;
+      Sfx.tick();
+    }
     if ((secs === 10 || secs === 5) && lastAnnounced !== secs) {
       lastAnnounced = secs;
       $('clockLive').textContent = secs + ' seconds left';
@@ -207,6 +275,7 @@
     mode = null;
     renderHome();
     show('home', $('homeTitle'));
+    setScene(daily && !stale ? C.altitudeFeet(C.totalScore(daily.results)) : 0, false);
   }
 
   function renderLegend() {
@@ -277,6 +346,12 @@
     $('runningScore').textContent = done ? C.formatNumber(score) + ' pts · ' + C.formatNumber(C.altitudeFeet(score)) + ' ft so far' : '';
     betweenShownAt = Date.now();
     show('between', btn);
+    // Start from where the bee was before this round, then climb to the new total.
+    const climbed = justEnded && last ? last.points : 0;
+    setScene(C.altitudeFeet(score - climbed), false);
+    if (climbed) window.requestAnimationFrame(() => setScene(C.altitudeFeet(score), true));
+    else if (justEnded) stallScene();
+    justEnded = false;
   }
 
   function onNext() {
@@ -285,6 +360,7 @@
     C.startRound(daily, Date.now());
     monoAt = performance.now();
     saveDaily();
+    Sfx.start();
     enterDailyRound();
   }
 
@@ -325,8 +401,10 @@
     renderPips();
     renderTried(daily.round.tried.map((t) => t.text));
     lastSavedSecond = -1;
+    lastTickSecond = 0;
     renderClock(C.remainingMs(daily, Date.now()), C.ROUND_MS);
     show('play', $('guess'));
+    setScene(C.altitudeFeet(C.totalScore(daily.results)), false);
     startLoop();
   }
 
@@ -347,10 +425,14 @@
       renderTried(daily.round.tried.map((t) => t.text));
       $('guess').value = '';
       shake();
+      Sfx.wrong();
       return;
     }
     // correct or timeout: the round is over either way
     saveDaily();
+    if (r.status === 'correct') Sfx.correct(C.TIER_ORDER.indexOf(r.result.tier));
+    else Sfx.timeout();
+    justEnded = true;
     showBetween();
   }
 
@@ -380,15 +462,10 @@
     $('resScore').textContent = C.formatNumber(score) + ' pts';
     $('resAlt').textContent = C.formatNumber(C.altitudeFeet(score)) + ' ft';
 
-    const pct = Math.min(100, (score / C.MAX_DAILY_SCORE) * 100);
-    $('altFill').style.height = pct + '%';
-    $('altBee').style.bottom = pct + '%';
-    const ticks = $('altTicks');
-    ticks.textContent = '';
+    const ladder = $('ladder');
+    ladder.textContent = '';
     C.BANDS.forEach((b) => {
-      const li = el('li', b === band ? 'on' : '', C.formatNumber(C.altitudeFeet(b.min)) + ' ft · ' + b.name);
-      li.style.bottom = (b.min / C.MAX_DAILY_SCORE) * 100 + '%';
-      ticks.appendChild(li);
+      ladder.appendChild(el('li', b === band ? 'on' : '', C.formatNumber(C.altitudeFeet(b.min)) + ' ft · ' + b.name));
     });
 
     const list = $('breakdown');
@@ -415,6 +492,10 @@
     const box = $('shareBox'); // grow the box to its text so no line is cut off on narrow screens
     box.style.height = 'auto';
     box.style.height = box.scrollHeight + 4 + 'px';
+    // Replay the whole climb from the lawn.
+    setScene(0, false);
+    if (score) window.requestAnimationFrame(() => setScene(C.altitudeFeet(score), true));
+    Sfx.fanfare(C.BANDS.indexOf(band));
   }
 
   function copyShare() {
@@ -474,6 +555,8 @@
     renderInfinite();
     renderClock(inf.clockMs, C.INFINITE_START_MS, false);
     show('play', $('guess'));
+    setScene(0, false);
+    Sfx.start();
     startLoop();
   }
 
@@ -494,9 +577,12 @@
       setFeedback('Not on the list. −3 seconds.', 'bad');
       $('guess').value = '';
       shake();
+      Sfx.wrong();
       if (inf.over) endInfinite();
       return;
     }
+    Sfx.correct(C.TIER_ORDER.indexOf(r.answer.tier));
+    setScene(C.altitudeFeet(inf.score), true);
     $('guess').value = '';
     lastAnnounced = 0;
     setFeedback(r.answer.name + ': ' + C.TIERS[r.answer.tier].label + ', +' + r.points + ' pts, +' + r.bonusMs / 1000 + 's', 'good');
@@ -527,6 +613,9 @@
     inf.log.forEach((r, i) => list.appendChild(resultRow(i + 1, byId[r.promptId].text, r.answer, r.tier, r.points)));
     $('infLogCard').hidden = inf.log.length === 0;
     show('infover', $('infTitle'));
+    setScene(C.altitudeFeet(inf.score), false);
+    if (inf.cleared) Sfx.fanfare(4);
+    else Sfx.timeout();
   }
 
   /* ---------- clock ---------- */
@@ -535,6 +624,8 @@
     if (mode === 'daily') {
       if (tickDaily()) {
         saveDaily();
+        Sfx.timeout();
+        justEnded = true;
         showBetween();
         return;
       }
@@ -601,6 +692,7 @@
       C.infiniteSkip(inf);
       $('guess').value = '';
       setFeedback('Skipped. −5 seconds.', 'bad');
+      Sfx.skip();
       if (inf.over) return endInfinite();
       renderInfinite();
       $('guess').focus();
@@ -613,6 +705,12 @@
       if (view === 'play') $('guess').focus();
     });
     $('howBtn').addEventListener('click', openHowTo);
+    $('soundBtn').addEventListener('click', () => {
+      const on = !Sfx.isEnabled();
+      applySound(on);
+      store.set(K_SOUND, { v: C.SAVE_VERSION, on });
+      if (on) Sfx.start();
+    });
     $('howClose').addEventListener('click', () => {
       const dlg = $('howDlg');
       if (typeof dlg.close !== 'function') dlg.removeAttribute('open');
@@ -629,6 +727,8 @@
   function boot() {
     wire();
     renderLegend();
+    const sound = store.get(K_SOUND, null);
+    applySound(!(sound && sound.on === false));
     fetch('data/prompts.json')
       .then((res) => {
         if (!res.ok) throw new Error('HTTP ' + res.status);

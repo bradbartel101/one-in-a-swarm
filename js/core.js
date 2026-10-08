@@ -23,7 +23,6 @@
   const INFINITE_START_MS = 45000;
   const SKIP_MS = 5000;
   const FEET_PER_POINT = 4;
-  const MAX_DAILY_SCORE = ROUNDS * TIERS.swarm.points;
   const MIN_ANSWERS = 25;
 
   const BANDS = [
@@ -520,7 +519,7 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, FEET_PER_POINT, MAX_DAILY_SCORE, MIN_ANSWERS,
+    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, FEET_PER_POINT, MIN_ANSWERS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
     tierPoints, totalScore, altitudeFeet, bandFor, formatNumber, shareGrid, shareText,

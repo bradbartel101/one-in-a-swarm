@@ -33,6 +33,12 @@ Headless Chrome cannot show a real on-screen keyboard, VoiceOver or TalkBack. Pl
       the top at 320x568 and 247px at 375x667, which should clear the keyboard.)
 - [ ] **iPhone:** tapping the answer box does not zoom the page.
 - [ ] **Copy result** shows "Copied!" on iPhone Safari and Android Chrome, and the paste is right.
+- [ ] **Sound:** on a real phone and a laptop, listen to a wrong guess, each rarity of correct answer,
+      the climb, the last-five-seconds ticks and the end fanfare. Volume and taste are yours to judge;
+      the tests only prove the sounds fire and that mute silences them. (iPhones stay silent while
+      the ring switch is off.)
+- [ ] **The flight scene:** check the artwork reads well on a phone, and that the slim sky strip
+      during a round (shown on screens 380px and wider) does not push the answer box under the keyboard.
 - [ ] **VoiceOver or TalkBack:** a wrong guess, "10 seconds left", "5 seconds left", the round
       result and the final score are each read out once, and the clock is not read every second.
 

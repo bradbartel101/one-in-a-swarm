@@ -27,6 +27,11 @@ mid-run when the day rolls over, you finish yesterday's flight first.
 **Swarm mode.** One 45-second clock for the whole run, draining only while the answer box is active
 or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs 3, a skip costs 5.
 
+**The flight.** Your score is drawn as a climb: the bee lifts off the campus lawn, passes the skyline
+and the clouds, and ends among the stars on a great day. Sound effects are synthesised in the
+browser (no audio files) and the speaker button in the header turns them off. With
+`prefers-reduced-motion` the scene jumps to the new altitude without animating.
+
 Spelling is forgiving: case, accents, punctuation, plurals and a one-letter typo on longer answers
 don't matter, and short names count ("CULC" is the Clough Undergraduate Learning Commons).
 
@@ -54,7 +59,7 @@ That one command runs all three of these:
 |---|---|
 | `npm test` | Unit tests: matching, daily seed and rotation, timers, scoring, saved data, colour contrast, file checks |
 | `npm run validate` | Content validator for `data/prompts.json` |
-| `npm run test:e2e` | 20 scenarios in headless Chrome: full daily and infinite runs, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths, keyboard-only play, screen-reader announcements, sharing |
+| `npm run test:e2e` | 21 scenarios in headless Chrome: full daily and infinite runs, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths, keyboard-only play, screen-reader announcements, sharing |
 
 ## Adding or changing prompts
 
@@ -104,6 +109,7 @@ assumes a project site (`/<repo>/`) on `github.io` and a domain root everywhere 
 index.html, 404.html     the pages
 css/style.css            styles; colour pairs are contrast-tested
 js/core.js               game rules, pure functions, shared by the browser and the tests
+js/sfx.js                sound effects, synthesised with Web Audio
 js/app.js                the DOM layer
 data/prompts.json        the prompt bank (generated)
 tools/                   prompt source and build, validator, preview-image generator

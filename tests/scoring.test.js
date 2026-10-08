@@ -22,8 +22,7 @@ test('total score and altitude (1 pt = 4 ft)', () => {
   assert.equal(C.totalScore(results), 200);
   assert.equal(C.altitudeFeet(200), 800);
   assert.equal(C.altitudeFeet(0), 0);
-  assert.equal(C.MAX_DAILY_SCORE, 700);
-  assert.equal(C.altitudeFeet(C.MAX_DAILY_SCORE), 2800);
+  assert.equal(C.altitudeFeet(C.ROUNDS * C.TIERS.swarm.points), 2800);
 });
 
 test('there are five bands and each boundary lands in the right one', () => {

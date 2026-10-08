@@ -39,6 +39,7 @@ const TEXT = [
   ['--good', '--bg'], ['--good', '--surface'],
   ['--primary-ink', '--primary-bg'],
   ['--navy', '--gold'], // gold button, swarm badge
+  ['--chip-ink', '--navy'], // altitude and zone labels over the sky
   ['--t-common-ink', '--t-common-bg'], ['--t-clever-ink', '--t-clever-bg'], ['--t-solid-ink', '--t-solid-bg'],
   ['--t-rare-ink', '--t-rare-bg'], ['--t-deep-ink', '--t-deep-bg'], ['--t-swarm-ink', '--t-swarm-bg'], ['--t-miss-ink', '--t-miss-bg'],
 ];
