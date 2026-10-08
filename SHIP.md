@@ -50,7 +50,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e `daily run, keyboard only, desktop` uses only Tab and Enter from the first-visit dialog to the copy button, asserting where focus lands at each step and a `solid 3px` focus ring.
 - [x] D4 Screen reader: timer, feedback and score announced without every tick
   - Evidence: e2e `screen reader`: the clock region changed exactly twice in a round ('10 seconds left', '5 seconds left'); feedback, round result ('Round 1: Deep Cut, ..., plus 85 points. Total 85 points.') and final score go to aria-live regions. Real VoiceOver/TalkBack check in HUMAN-TODO section 4.
-- [ ] D5 Contrast meets WCAG AA in light and dark; tier results not shown by colour alone
+- [x] D5 Contrast meets WCAG AA in light and dark; tier results not shown by colour alone
+  - Evidence: tests/contrast.test.js computes WCAG ratios for 19 text pairs (4.5:1) and 6 edge pairs (3:1) in both themes from the CSS tokens. Round pips now print their points, and every tier badge carries its name (e2e asserts pip text '85' and badge 'Deep Cut').
 - [ ] D6 prefers-reduced-motion respected
 
 ## E. Sharing and polish
