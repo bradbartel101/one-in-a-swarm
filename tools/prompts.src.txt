@@ -1,0 +1,1369 @@
+# One in a Swarm prompt bank (source). Compile with: node tools/build-prompts.js
+# Tier letters: C common 10 · T too clever 15 · S solid 30 · R rare 60 · D deep cut 85 · X one in a swarm 100
+# "?" before the tier letter = needs a human to verify.  " :: " = note shown to the player.  " ?? " = why it is flagged.
+
+@majors | Academics | Name an undergraduate major (a B.S. degree) at Georgia Tech
+C Computer Science | CS | Comp Sci | CompSci
+C Mechanical Engineering | ME | MechE | Mechanical
+C Industrial Engineering | IE | ISyE | Industrial and Systems Engineering | Industrial
+T Nuclear and Radiological Engineering | Nuclear Engineering | NRE | Nuclear
+T Literature, Media, and Communication | LMC
+S Aerospace Engineering | AE | Aero | Aerospace
+S Electrical Engineering | EE | Electrical
+S Computer Engineering | CompE | CmpE
+S Biomedical Engineering | BME | BMED | Biomedical
+S Chemical and Biomolecular Engineering | Chemical Engineering | ChBE | ChemE
+S Civil Engineering | CE | Civil | CivE
+S Business Administration | Business | BSBA | Management | MGT
+S Mathematics | Math | Applied Mathematics
+S Physics
+S Biology
+S Architecture | Arch
+R Materials Science and Engineering | MSE | Materials Science | Materials Engineering
+R Environmental Engineering | EnvE
+R Chemistry | Chem
+R Biochemistry | Biochem
+R Neuroscience | Neuro
+R Psychology | Psych
+R Industrial Design | ID
+R Economics | Econ
+R Computational Media | CM
+R International Affairs | INTA
+R Public Policy | PUBP
+D Earth and Atmospheric Sciences | EAS
+D History, Technology, and Society | HTS
+D Music Technology | Music Tech
+D Applied Languages and Intercultural Studies | ALIS
+D Economics and International Affairs | EIA
+D International Affairs and Modern Languages | International Affairs and Modern Language | IAML
+X Global Economics and Modern Languages | GEML
+?D Building Construction | BC ?? Confirm the B.S. in Building Construction is still offered.
+?D Applied Physics ?? Confirm Applied Physics is a separate B.S. and not a track within Physics.
+?R Environmental Science ?? Believed to be a newer B.S. (around 2023); confirm it exists.
+?D Atmospheric and Oceanic Sciences | AOS ?? Believed to be a newer B.S. split from EAS; confirm.
+
+@buildings | Campus | Name an academic or research building on Tech's campus | strip=building,hall,bldg
+C Tech Tower | Lettie Pate Whitehead Evans Administration Building | Administration Building | Evans Administration Building
+C Clough Undergraduate Learning Commons | CULC | Clough | Clough Commons
+C Klaus Advanced Computing Building | Klaus
+T Kendeda Building for Innovative Sustainable Design | Kendeda | Kendeda Building | Living Building
+T Marcus Nanotechnology Building | Marcus Nanotechnology | Marcus Nano | Marcus | MNB
+S Skiles Classroom Building | Skiles
+S College of Computing Building | CoC | College of Computing | CCB
+S Howey Physics Building | Howey | Howey Physics | Physics Building
+S Van Leer Building
+S Boggs Building | Boggs Chemistry Building
+S Price Gilbert Memorial Library | Price Gilbert | Library | Price Gilbert Library | Georgia Tech Library
+S Scheller College of Business | Scheller | College of Business
+S Instructional Center | IC
+S Mason Building | Jesse W. Mason Building
+S Manufacturing Related Disciplines Complex | MRDC
+S Ford Environmental Science and Technology Building | Ford ES&T | ES&T | EST | Ford EST | Ford
+R Crosland Tower | Crosland
+R Guggenheim Building | Guggenheim Aerospace Building
+R Engineered Biosystems Building | EBB
+R Whitaker Building | U.A. Whitaker Biomedical Engineering Building | Whitaker Biomedical Engineering Building
+R Petit Institute for Bioengineering and Bioscience | IBB | Petit Institute | Petit Biotechnology Building | Parker H. Petit Institute | Petit
+R Molecular Science and Engineering Building | MoSE
+R Bunger-Henry Building
+R Groseclose Building | ISyE Main | ISyE Building | ISyE
+R Weber Space Science and Technology Building | Weber | Weber SST | SST
+R Love Manufacturing Building | Love | J. Erskine Love Building | MRDC II | MRDC 2
+R Technology Square Research Building | TSRB
+R Coda
+R East Architecture Building | Architecture East | Architecture
+D D.M. Smith Building | Smith
+D Swann Building | Janie Austell Swann Building
+D Cherry Emerson Building | Emerson
+D Montgomery Knight Building | Knight
+D Pettit Microelectronics Building | Pettit | MiRC | Microelectronics Research Center | Pettit Microelectronics Research Center
+D Savant Building
+D Paper Tricentennial Building | IPST | Institute of Paper Science and Technology | Renewable Bioproducts Institute
+D Carnegie Building
+D J.S. Coon Building | Coon
+D Callaway Manufacturing Research Center | MaRC | Callaway | Manufacturing Research Center
+D Hinman Research Building | Hinman
+D Lyman Hall
+D Stephen C. Hall Building
+D Old Civil Engineering Building | Old CE | Old Civil Engineering
+D Centennial Research Building | CRB
+D Baker Building
+D Engineering Science and Mechanics Building | ESM
+D Rich Building | Rich Computer Center
+D French Building | A. French Building
+X Daniel Laboratory | Daniel Lab | J.L. Daniel Laboratory | Daniel
+
+@dorms | Campus | Name a Georgia Tech residence hall or campus apartment complex | strip=hall,residence,apartments,apartment,dorm,building
+C Glenn Hall
+C Towers Hall
+C North Avenue Apartments | North Ave | NAA | North Avenue East | North Avenue South | North Avenue West | North Avenue North
+T Woodruff Residence Hall | Woody's | Woodys
+T Smith Hall
+S Brown Hall
+S Harrison Hall
+S Howell Hall
+S Cloudman Hall
+S Field Hall
+S Hopkins Hall
+S Hanson Hall
+S Matheson Hall
+S Perry Hall
+S Harris Hall
+S Armstrong Hall
+S Hefner Hall
+S Fitten Hall
+S Freeman Hall
+S Montag Hall
+S Fulmer Hall
+S Folk Hall
+S Caldwell Hall
+R Center Street Apartments | Center Street | CSA | Center Street North | Center Street South
+R Crecine Apartments | Hemphill Apartments
+R Eighth Street Apartments | Eighth Street | 8th Street | ESA
+R Maulding Apartments
+R Zbar Apartments
+D Graduate Living Center | GLC
+D Fourth Street Apartments | Fourth Street | 4th Street
+X Tenth and Home | 10th and Home | Family Housing
+?R Nelson-Shell Apartments | NSL | Undergraduate Living Center | ULC ?? Confirm the Undergraduate Living Center was renamed Nelson-Shell.
+?D Techwood Dormitory | Techwood | McDaniel Dormitory ?? Demolished east-campus dorm; confirm the name.
+?D Burge Apartments | Burge ?? Demolished married-student housing; confirm the name.
+?D Curran Street Residence Hall | Curran Street | Curran ?? New first-year hall on west campus; confirm it opened and its name.
+
+@dining | Campus Life | Name a spot where Yellow Jackets grab a bite or a coffee, on or right around campus (past or present)
+C Brittain Dining Hall | Brittain | Brit
+C North Avenue Dining Hall | North Ave Dining | Nave | North Avenue Dining | North Ave
+C West Village | Willage | West Village Dining Commons
+T Junior's Grill | Juniors | Junior's :: A campus institution from 1948 until it closed in 2011.
+T The Varsity | Varsity
+S Waffle House | WaHo | Tech Square Waffle House
+S Chick-fil-A | Chickfila | CFA
+S Panda Express | Panda
+S Starbucks
+S Blue Donkey | Blue Donkey Coffee
+S Kaldi's Coffee | Kaldis
+S Moe's Southwest Grill | Moes
+S Tin Drum | Tin Drum Asian Kitchen | Tin Drum Asiacafe
+S Subway
+R Ray's New York Pizza | Rays | Ray's Pizza | Rays NY Pizza
+R Barrelhouse
+R Rocky Mountain Pizza | Rocky Mountain | Rocky Mountain Pizza Company
+R Woodruff Dining Hall | Woodruff | Woody's
+R Cypress Street Pint & Plate | Cypress Street | Cypress
+R Antico Pizza | Antico | Antico Pizza Napoletana
+D Sublime Doughnuts | Sublime | Sublime Donuts
+X Ferst Place | Ferst Place Restaurant
+?R Twisted Taco ?? Believed to have been in the Student Center Commons; confirm.
+?R Burdell's ?? Believed to be the Student Center convenience store; confirm the name and that it fits "grab a bite".
+?R Einstein Bros. Bagels | Einstein Bros | Einsteins | Einstein Bagels ?? Confirm there was one on campus.
+?R Taco Bell ?? Believed to have been in the old Student Center food court; confirm.
+?D Pizza Hut ?? Believed to have been in the old Student Center food court; confirm.
+?R Highland Bakery ?? Believed to have had a campus location; confirm.
+?R Chipotle ?? Believed to have a Tech Square location; confirm.
+?R Atwoods | Atwoods Pizza Cafe | Atwoods Pizza ?? Believed to be in Tech Square; confirm the name.
+
+@alumni | People | Name a famous Georgia Tech alum or former student who isn't known for pro sports
+C Jimmy Carter | President Carter | James Earl Carter | Carter :: He studied at Tech before transferring to the Naval Academy.
+C John Young | John W. Young :: Walked on the Moon and commanded the first Space Shuttle flight.
+C Jeff Foxworthy | Foxworthy
+T George P. Burdell | George Burdell | Burdell :: Enrolled as a prank in 1927. Tech's most famous student never existed.
+S Sam Nunn | Nunn
+S Kary Mullis | Mullis :: Nobel Prize in Chemistry for inventing PCR.
+S John Portman | Portman
+S G. Wayne Clough | Wayne Clough | Clough
+S Ivan Allen Jr. | Ivan Allen
+S Andre Dickens | Mayor Dickens
+S Chris Klaus | Christopher Klaus | Klaus
+R Mike Duke | Michael Duke :: Former CEO of Walmart.
+R Gil Amelio | Gilbert Amelio | Amelio :: Former CEO of Apple.
+R Sandra Magnus | Sandy Magnus
+R Shane Kimbrough | Robert Kimbrough | R. Shane Kimbrough
+R Richard Truly | Dick Truly | Richard H. Truly
+R Michael Arad :: Designed the National September 11 Memorial.
+R Randolph Scott
+R Phil Gordon
+R Leonard Wood | General Leonard Wood
+R Juan Carlos Varela | Varela :: Former President of Panama.
+R Krishna Bharat :: Created Google News.
+D Jan Davis | N. Jan Davis
+D Eric Boe
+D Susan Still Kilrain | Susan Kilrain | Susan Still
+D William McArthur | Bill McArthur
+D Scott Horowitz | Doc Horowitz
+D Tim Kopra | Timothy Kopra
+D Doug Wheelock | Douglas Wheelock
+D Bill George | William George :: Former CEO of Medtronic.
+D James D. Robinson III | James Robinson | Jim Robinson | James D. Robinson :: Former CEO of American Express.
+D Philip Breedlove | Phil Breedlove | General Breedlove
+D Sandy Winnefeld | James Winnefeld | James A. Winnefeld Jr.
+D Cecil B. Day | Cecil Day :: Founded Days Inn.
+D Nagesh Kukunoor
+D Wick Moorman | Charles Moorman
+D Tom Fanning | Thomas Fanning
+D Brook Byers
+X Y. Frank Freeman | Frank Freeman :: Paramount Pictures executive and the first winner of the Academy's Jean Hersholt Humanitarian Award.
+?D Dennis Hayes ?? The modem pioneer is believed to have attended Tech without graduating; confirm.
+
+@nba | Sports | Name a Georgia Tech basketball player who went on to the NBA
+C Chris Bosh | Bosh
+C Stephon Marbury | Marbury | Starbury
+C Kenny Anderson
+T Mark Price
+T Dennis Scott
+S John Salley
+S Jarrett Jack
+S Thaddeus Young | Thad Young
+S Derrick Favors
+S Iman Shumpert | Shumpert
+S Josh Okogie | Okogie
+S Jose Alvarado | Alvarado
+S Matt Harpring | Harpring
+S Travis Best
+R Brian Oliver
+R Tom Hammonds
+R Duane Ferrell
+R Anthony Morrow
+R Will Bynum
+R Javaris Crittenton
+R Jon Barry
+R Drew Barry
+R Dion Glover
+R Jason Collier
+R Moses Wright
+R Luke Schenscher
+R Malcolm Mackey
+D Gani Lawal
+D Glen Rice Jr. | Glen Rice
+D Marcus Georges-Hunt
+D Mario West
+D Alvin Jones
+D Fred Vinson
+X Craig Neal
+?D Isma'il Muhammad | Ismail Muhammad ?? Confirm he appeared in an NBA regular-season game.
+
+@nfl | Sports | Name a Georgia Tech football player who went on to play pro football
+C Calvin Johnson | Megatron
+C Demaryius Thomas
+T Joe Hamilton
+T Harrison Butker | Butker
+S Keith Brooking
+S Jahmyr Gibbs | Gibbs :: Started his college career at Tech before transferring to Alabama.
+S Darren Waller
+S Shaq Mason | Shaquille Mason
+S Morgan Burnett
+S Derrick Morgan
+S Dorsey Levens
+S Pat Swilling
+S Marco Coleman
+S Jordan Mason
+R Michael Johnson
+R Jonathan Dwyer
+R Tashard Choice
+R Stephen Hill
+R Jeremiah Attaochu
+R Adam Gotsis
+R Daryl Smith
+R Philip Wheeler
+R Dawan Landry
+R Kelly Campbell
+R Dez White
+R Gary Guyton
+R Anthony Allen
+R Ken Whisenhunt
+R Bill Curry
+D Billy Shaw :: Pro Football Hall of Famer who played his whole career in the AFL.
+D Maxie Baughan
+D Larry Morris
+D Eddie Lee Ivery
+D Robert Lavette
+D Willie Clay
+D Coleman Rudolph
+D Pressley Harvin III | Pressley Harvin
+D Tariq Carpenter
+D Keion White
+D Juanyeh Thomas
+D DeAndre Smelter
+D Andrew Gardner
+D Durant Brooks
+D Nick Ferguson
+D Jalen Camp
+X Joe Guyon :: A Pro Football Hall of Famer who starred on Heisman's 1917 national champions.
+
+@diamond | Sports | Name a Yellow Jacket who reached baseball's major leagues or golf's biggest stages
+C Nomar Garciaparra | Nomar | Garciaparra
+C Mark Teixeira | Teixeira
+C Bobby Jones | Bob Jones | Robert Tyre Jones :: A mechanical engineering graduate, and an amateur his whole career.
+T Jason Varitek | Varitek
+T Matt Kuchar | Kuchar
+S Matt Wieters | Wieters
+S Kevin Brown
+S Charlie Blackmon | Blackmon
+S Stewart Cink | Cink
+S David Duval | Duval
+S Joey Bart
+S Larry Mize | Mize
+S Jay Payton
+R Bryce Molder
+R Cameron Tringale
+R Chesson Hadley
+R Ollie Schniederjans | Schniederjans
+R Roberto Castro
+R Troy Matteson
+R Andy Ogletree
+R Derek Dietrich
+R Matt Murton
+R Darren Bragg
+R Deck McGuire
+R Buck Farmer
+R Daniel Palka
+R Eric Patterson
+R Christo Lamprecht
+D Tyler Strafaci
+D Richy Werenski
+D Anders Albertson
+D Vincent Whaley
+D Brandon Boggs
+D Blake Wood
+D Tyler Greene
+D Jim Poole
+D Doug Creek
+D Kris Wilson
+D Brad Rigby
+D Seth Reeves
+D Nicholas Thompson
+D Charlie Rymer
+D Tripp Isenhour
+X Riccardo Ingram :: ACC Player of the Year in baseball who also played safety for the football team.
+?D Marlon Byrd ?? Believed to have started his college career at Tech before transferring; confirm.
+
+@traditions | Traditions | Name a Georgia Tech tradition, symbol, or piece of campus lore
+C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A
+C Buzz
+C The Whistle | Steam Whistle
+T George P. Burdell | George Burdell | Burdell
+T Stealing the T | Steal the T | The T | Stealing the T off Tech Tower
+S RAT Cap | RAT
+S To Hell With Georgia | THWG
+S Clean, Old-Fashioned Hate | COFH
+S Freshman Cake Race | Cake Race
+S Mini 500 | Tricycle Race | Mini 500 Tricycle Race
+S Ramblin' Wreck Parade | Wreck Parade | Reck Parade | Ramblin Reck Parade
+S Fight Song | Ramblin' Wreck from Georgia Tech | I'm a Ramblin' Wreck
+S Yellow Jackets | Jackets
+S White and Gold | Old Gold and White | Gold and White | School Colors
+S Tech Tower | TECH sign
+R Up With the White and Gold
+R Alma Mater
+R Budweiser Song | Bud Song | When You Say Budweiser | Budweiser
+R The Good Word | What's the Good Word
+R Getting Out | Gettin Out | I Got Out
+R The Shaft | Getting Shafted | Shafted
+R Homecoming
+R Dead Week
+R Midnight Bud
+R ANAK | ANAK Society
+R Ramblin' Reck Club | Reck Club | Wreck Club
+R The Swarm | Swarm :: The student section.
+D When the Whistle Blows
+D T-Book
+D Drownproofing | Drown Proofing :: Freddie Lanoue's legendary survival-swimming class.
+D Yellow Jacket Alley
+D TEAM Buzz
+X Sideways | Sideways the Dog :: The campus dog of the 1940s, named for the way she walked. Her grave is beside Tech Tower.
+?D Midnight Breakfast ?? Confirm this finals-week event is an established tradition under this name.
+?D Mock Rock ?? Believed to be a Homecoming event; confirm.
+?D Goldfellas ?? Believed to be the body-painted student fan group; confirm the name.
+
+@neighborhoods | Atlanta | Name an Atlanta neighborhood inside the Perimeter
+C Midtown
+C Buckhead
+C Downtown | Downtown Atlanta
+T Home Park :: Tech's next-door neighbor to the north.
+T Old Fourth Ward | O4W | Old 4th Ward
+S Atlantic Station
+S West Midtown | Westside | West Side
+S Virginia-Highland | VaHi | Virginia Highlands
+S Inman Park
+S Little Five Points | L5P | Little 5 Points
+S Grant Park
+S East Atlanta Village | East Atlanta | EAV
+S Cabbagetown
+S Ansley Park
+S Poncey-Highland
+S West End
+R Vine City
+R English Avenue | English Ave
+R Castleberry Hill
+R Sweet Auburn
+R Candler Park
+R Kirkwood
+R Reynoldstown
+R Edgewood
+R Morningside | Morningside-Lenox Park
+R Druid Hills
+R Summerhill
+R Mechanicsville
+R Peoplestown
+R Bankhead
+R Cascade Heights | Cascade
+R Ormewood Park
+R Lake Claire
+D Collier Hills
+D Brookwood Hills
+D Underwood Hills
+D Berkeley Park
+D Blandtown
+D Piedmont Heights
+D Sherwood Forest
+D Pittsburgh
+D Adair Park
+D Capitol View
+D Sylvan Hills
+D Washington Park
+D Grove Park
+D Knight Park | Howell Station | Knight Park/Howell Station
+D Centennial Place | Techwood | Techwood Homes :: Built on the site of Techwood Homes, the first federal public housing project in the United States.
+D Loring Heights
+X Marietta Street Artery :: The old industrial corridor along the west edge of campus.
+
+@conference | Sports History | Name a school that has shared a conference with Georgia Tech (ACC, SEC, Southern, or Metro)
+C Clemson
+C Georgia | UGA | University of Georgia :: Charter SEC members together, until Tech walked out in 1964.
+C Duke
+C Florida State | FSU
+T Alabama | Bama
+T Notre Dame :: An ACC member in everything but football.
+S Miami | Miami (FL) | The U
+S North Carolina | UNC | Carolina
+S NC State | North Carolina State
+S Virginia | UVA
+S Virginia Tech | VT | VPI
+S Wake Forest | Wake
+S Boston College | BC
+S Pittsburgh | Pitt
+S Syracuse | Cuse
+S Louisville
+R Auburn
+R Tennessee
+R Florida | UF
+R LSU | Louisiana State
+R Kentucky
+R Vanderbilt | Vandy
+R Ole Miss | Mississippi
+R Mississippi State
+R Stanford
+R California | Cal | Berkeley | Cal Berkeley
+R SMU | Southern Methodist
+R Maryland
+D Tulane
+D South Carolina :: Southern Conference mates in the 1920s.
+D Cincinnati :: Metro Conference, 1975 to 1978.
+D Memphis | Memphis State :: Metro Conference, 1975 to 1978.
+D Saint Louis | St. Louis | SLU :: Metro Conference, 1975 to 1978.
+D Washington and Lee | W&L :: Southern Conference mates in the 1920s.
+X Sewanee | University of the South :: A charter member of the SEC alongside Tech in 1932.
+
+@bowls | Sports History | Name a bowl game Georgia Tech football has played in | strip=bowl,classic
+C Orange Bowl
+C Rose Bowl :: The 1929 game, famous for Roy "Wrong Way" Riegels.
+C Peach Bowl | Chick-fil-A Bowl | Chick-fil-A Peach Bowl
+T Sugar Bowl
+T Gator Bowl | TaxSlayer Bowl | TaxSlayer Gator Bowl
+S Cotton Bowl
+S Sun Bowl | Hyundai Sun Bowl
+S Citrus Bowl | Florida Citrus Bowl :: New Year's Day 1991, capping the 1990 national title season.
+S Music City Bowl
+S Independence Bowl
+S Liberty Bowl
+R Gasparilla Bowl
+R Birmingham Bowl
+R Quick Lane Bowl
+R Champs Sports Bowl
+R Humanitarian Bowl
+R Emerald Bowl
+R Seattle Bowl
+R Silicon Valley Bowl | Silicon Valley Football Classic
+R Aloha Bowl
+D Carquest Bowl
+D Bluebonnet Bowl
+D All-American Bowl
+X Oil Bowl :: January 1947, a 41-19 win over Saint Mary's.
+?R Pop-Tarts Bowl | Pop Tarts ?? Believed to be the 2025 season's bowl; confirm. This prompt has exactly 25 answers.
+
+@cs | Academics | Name a Georgia Tech CS course by its number (like "CS 1234") | lead=cs
+C CS 1301 :: Intro to Computing
+C CS 1331 :: Intro to Object-Oriented Programming
+C CS 1332 :: Data Structures and Algorithms
+T CS 2110 :: Computer Organization and Programming
+T CS 1371 :: Computing for Engineers, better known as "the MATLAB class"
+S CS 2050 :: Intro to Discrete Math for CS
+S CS 2200 :: Systems and Networks
+S CS 2340 :: Objects and Design
+S CS 3510 :: Design and Analysis of Algorithms
+S CS 3600 :: Intro to Artificial Intelligence
+S CS 4641 :: Machine Learning
+S CS 4400 :: Intro to Database Systems
+S CS 3210 :: Design of Operating Systems
+S CS 3251 :: Computer Networking I
+S CS 4001 :: Computing, Society, and Professionalism
+R CS 1100 :: Freshman Leap Seminar
+R CS 2051 :: Honors Discrete Math
+R CS 3240 :: Languages and Computation
+R CS 3220 :: Processor Design
+R CS 3311 :: Project Design (Junior Design, part one)
+R CS 3312 :: Project Implementation (Junior Design, part two)
+R CS 3451 :: Computer Graphics
+R CS 3630 :: Intro to Robotics and Perception
+R CS 3750 :: User Interface Design
+R CS 4235 :: Intro to Information Security
+R CS 4476 :: Computer Vision
+R CS 4510 :: Automata and Complexity
+R CS 4540 :: Advanced Algorithms
+R CS 4650 :: Natural Language Processing
+R CS 4731 :: Game AI
+R CS 6515 :: Intro to Graduate Algorithms
+R CS 6035 :: Intro to Information Security
+R CS 7641 :: Machine Learning
+R CS 6200 :: Graduate Intro to Operating Systems
+R CS 4803 :: Special Topics
+D CS 1315 :: Intro to Media Computation
+D CS 2261 :: Media Device Architecture
+D CS 3511 :: Algorithms Honors
+D CS 4240 :: Compilers and Interpreters
+D CS 4261 :: Mobile Apps and Services
+D CS 4290 :: Advanced Computer Organization
+D CS 4460 :: Information Visualization
+D CS 4646 :: Machine Learning for Trading
+D CS 4649 :: Robot Intelligence: Planning
+D CS 4455 :: Video Game Design
+D CS 4210 :: Advanced Operating Systems
+D CS 6601 :: Artificial Intelligence
+D CS 6750 :: Human-Computer Interaction
+D CS 7637 :: Knowledge-Based AI
+D CS 7646 :: Machine Learning for Trading
+D CS 6250 :: Computer Networks
+D CS 6300 :: Software Development Process
+D CS 7642 :: Reinforcement Learning
+D CS 7643 :: Deep Learning
+D CS 6476 :: Computer Vision
+D CS 6290 :: High-Performance Computer Architecture
+D CS 6210 :: Advanced Operating Systems
+D CS 8803 :: Special Topics
+X CS 4496 :: Computer Animation
+?D CS 3001 :: Computing, Society, and Professionalism ?? Believed to be the renumbered CS 4001; confirm.
+?D CS 4590 :: Computer Audio ?? Confirm number and title.
+?D CS 4605 :: Mobile and Ubiquitous Computing ?? Confirm number and title.
+?D CS 4220 :: Embedded Systems ?? Confirm number and title.
+
+@orgs | Campus Life | Name a Georgia Tech student organization or competition team
+C Ramblin' Reck Club | Reck Club | Wreck Club | Ramblin Wreck Club
+C Student Government Association | SGA | Student Government
+C Yellow Jacket Marching Band | Marching Band | Band | GT Marching Band
+T RoboJackets
+T Technique | Nique :: The South's Liveliest College Newspaper.
+S WREK | WREK Atlanta | WREK Radio
+S DramaTech | DramaTech Theatre
+S GT Motorsports | Motorsports | GTMS | Formula SAE
+S Solar Racing | GT Solar Racing | Solar Jackets | Solar Car
+S Glee Club | GT Glee Club
+S HackGT | HexLabs
+S Society of Women Engineers | SWE
+S National Society of Black Engineers | NSBE | GTSBE | Georgia Tech Society of Black Engineers
+S Student Center Programs Council | SCPC
+S Outdoor Recreation Georgia Tech | ORGT
+R ANAK Society | ANAK
+R Society of Hispanic Professional Engineers | SHPE
+R GT Off-Road | Off Road | Baja SAE
+R Wreck Racing
+R Yellow Jacket Flying Club | Flying Club
+R Engineers Without Borders | EWB
+R For The Kids | FTK | Dance Marathon
+R Bits of Good | BoG
+R Blueprint :: The yearbook.
+R Nothin' but Treble | NBT
+R Sympathetic Vibrations | Symp Vibes
+R Infinite Harmony
+R Musician's Network | Under the Couch
+R Buzz Studios
+R GT Barbell | Barbell Club | Barbell
+R India Club
+R Ramblin' Rocket Club | Rocket Club
+R Yellow Jacket Space Program | YJSP
+R Startup Exchange
+D North Avenue Review | NAR
+D Erato :: The student literary and arts magazine.
+D Let's Try This! | LTT
+D VGDev | Video Game Development Club
+D GreyHat | Grey H@t
+D Anime O-Tekku | AOT
+D MOVE | Mobilizing Opportunities for Volunteer Experience
+D GT Sailing Club | Sailing Club | Sailing
+D Rowing Club | Crew | GT Crew | Rowing
+D EcoCAR
+D Student Foundation | GTSF | Georgia Tech Student Foundation
+D GTCN | Georgia Tech Cable Network
+X Amateur Radio Club | W4AQL | Ham Radio Club | Georgia Tech Amateur Radio Club :: On the air as W4AQL, and one of the oldest clubs on campus.
+
+@streets | Campus | Name a street that runs through or alongside Tech's campus, Tech Square, or Home Park | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne
+C North Avenue
+C Tenth Street | 10th
+C Fifth Street | 5th
+T Techwood Drive
+T Ferst Drive
+S Hemphill Avenue
+S State Street
+S Atlantic Drive
+S Bobby Dodd Way
+S Cherry Street
+S Fowler Street
+S Spring Street
+S West Peachtree Street | W Peachtree
+S Williams Street
+S Marietta Street
+S Northside Drive
+R Tech Parkway
+R Luckie Street
+R Fourth Street | 4th
+R Sixth Street | 6th
+R Eighth Street | 8th
+R Center Street
+R McMillan Street
+R Curran Street
+R Dalney Street
+R Plum Street
+R Brittain Drive
+R Fourteenth Street | 14th
+R Means Street
+D Third Street | 3rd :: Most of it is now Bobby Dodd Way.
+D Ethel Street
+D Calhoun Street
+D Hampton Street
+D Francis Street
+D Lynch Avenue
+D Mecaslin Street
+D Holly Street
+D Ivan Allen Jr. Boulevard | Ivan Allen
+D Centennial Olympic Park Drive
+X Uncle Heinie Way
+?D Greenfield Street ?? Believed to be a small street near west campus and Home Park; confirm.
+?D Power Plant Drive ?? Believed to be a campus service road; confirm the name.
+
+@marta | Atlanta | Name a MARTA rail station | strip=station
+C North Avenue | North Ave :: Tech's east-side stop.
+C Midtown :: The Tech Trolley's stop.
+C Airport | Hartsfield-Jackson | Hartsfield Jackson Airport
+C Five Points | 5 Points
+T Arts Center
+T Peachtree Center
+S Buckhead
+S Lindbergh Center | Lindbergh
+S Lenox
+S Civic Center
+S Decatur
+S Doraville
+S North Springs
+S Georgia State
+S Dunwoody
+S Sandy Springs
+S College Park
+S West End
+R Medical Center
+R Brookhaven/Oglethorpe | Brookhaven | Oglethorpe
+R Chamblee
+R East Point
+R Garnett
+R King Memorial
+R Inman Park/Reynoldstown | Inman Park | Reynoldstown
+R Edgewood/Candler Park | Candler Park | Edgewood
+R Vine City
+R Ashby
+R Bankhead
+R Avondale
+R Kensington
+R Indian Creek
+R Oakland City
+D East Lake
+D Lakewood/Fort McPherson | Lakewood | Fort McPherson | Lakewood Ft McPherson
+D Hamilton E. Holmes | H.E. Holmes | Holmes | Hightower
+X West Lake
+?D GWCC/CNN Center | CNN Center | GWCC | Dome | Dome/GWCC/Philips Arena/CNN Center | SEC District ?? Confirm the current station name; believed to have been renamed SEC District.
+
+@landmarks | Atlanta | Name an Atlanta landmark or attraction within a few miles of campus
+C Georgia Aquarium | Aquarium
+C World of Coca-Cola | World of Coke | Coke Museum
+C Mercedes-Benz Stadium | The Benz | MBS | Mercedes Benz
+T The Varsity | Varsity
+T Fox Theatre | The Fox | Fox Theater | Fabulous Fox
+S Piedmont Park
+S Centennial Olympic Park | Centennial Park
+S State Farm Arena | Philips Arena
+S High Museum of Art | High Museum | The High
+S Atlanta Botanical Garden | Botanical Garden
+S Atlanta BeltLine | BeltLine
+S Ponce City Market | PCM
+S CNN Center | CNN
+S College Football Hall of Fame | CFB Hall of Fame
+S Bank of America Plaza | BofA Plaza | Bank of America Tower | Pencil Building
+S Zoo Atlanta | Atlanta Zoo | Zoo
+R National Center for Civil and Human Rights | Center for Civil and Human Rights | Civil Rights Museum
+R Center for Puppetry Arts | Puppetry Arts
+R Margaret Mitchell House
+R Woodruff Arts Center
+R Georgia State Capitol | State Capitol | Capitol | Gold Dome
+R Martin Luther King Jr. National Historical Park | MLK Historic Site | King Center | MLK Birth Home | Ebenezer Baptist Church
+R Oakland Cemetery | Historic Oakland Cemetery
+R Krog Street Market | Krog Street | Krog
+R Westin Peachtree Plaza | Peachtree Plaza | Sun Dial
+R The Tabernacle
+R Underground Atlanta | Underground
+R SkyView Atlanta | SkyView | Ferris Wheel
+R Georgia World Congress Center | GWCC
+R Atlantic Station
+R Jimmy Carter Presidential Library | Carter Center | Carter Library
+D Georgian Terrace Hotel | Georgian Terrace
+D Biltmore | Atlanta Biltmore | Biltmore Hotel :: Tech owns it now.
+D Rhodes Hall
+D One Atlantic Center | IBM Tower
+D Federal Reserve Bank of Atlanta | Federal Reserve | The Fed | Atlanta Fed
+D MODA | Museum of Design Atlanta
+D Atlanta Symphony Hall | Symphony Hall | Atlanta Symphony Orchestra | ASO
+D Alliance Theatre | Alliance Theater
+D Coca-Cola Headquarters | Coca-Cola HQ | Coke HQ | Coca-Cola Plaza :: Right across North Avenue from campus.
+D Fernbank Museum | Fernbank
+D Flatiron Building | Flatiron
+X Millennium Gate | Millennium Gate Museum :: The triumphal arch at Atlantic Station.
+
+@hangouts | Campus | Name a venue, green space, or landmark on Tech's campus (not a classroom building)
+C Bobby Dodd Stadium | Bobby Dodd | Grant Field | Bobby Dodd Stadium at Hyundai Field | Historic Grant Field
+C Campus Recreation Center | CRC
+C Student Center | John Lewis Student Center | Stu Cen | Wenn Student Center
+C Tech Green
+T Kessler Campanile | Campanile | Shaft
+T McCamish Pavilion | McCamish | Thrillerdome | Alexander Memorial Coliseum | AMC | Hank McCamish Pavilion
+S Burger Bowl
+S Ferst Center for the Arts | Ferst Center | Ferst
+S Russ Chandler Stadium | Russ Chandler | Chandler Stadium | Mac Nease Baseball Park | Rusty C
+S Skiles Walkway
+S Tech Square | Technology Square
+S Fifth Street Bridge | 5th Street Bridge | Fifth Street Plaza
+S McAuley Aquatic Center | Aquatic Center | McAuley | Olympic Pool
+S Stamps Field | Roe Stamps Field | Stamps Fields | SAC Fields
+S Tech Walkway | Tech Walk
+R EcoCommons | Eco Commons
+R Einstein Statue | Einstein
+R Harrison Square
+R O'Keefe Gym | O'Keefe | OKeefe Gymnasium
+R Ken Byers Tennis Complex | Byers Tennis Complex | Tennis Center | Bill Moore Tennis Center
+R Mewborn Field | Shirley Clements Mewborn Field | Softball Field
+R Griffin Track | George C. Griffin Track | Track
+R Exhibition Hall
+R Under the Couch
+R Tech Rec
+R Zelnak Basketball Center | Zelnak Center | Zelnak
+R Bill Moore Student Success Center | Student Success Center | Success Center
+R Robert C. Williams Paper Museum | Paper Museum
+R DramaTech Theater | Dean James E. Dull Theatre | Dull Theatre
+R Barnes & Noble at Georgia Tech | Bookstore | Barnes and Noble | Campus Bookstore
+R Georgia Tech Hotel and Conference Center | Georgia Tech Hotel | Hotel and Conference Center
+D Couch Park
+D Edge Center | Edge Athletics Center | Edge Building
+D Noonan Golf Facility | Noonan
+D Brock Football Practice Facility | Brock Indoor Practice Facility | Brock Facility | Brock
+D Peters Parking Deck | Peters Park | Peters Deck
+D Three Pioneers | Three Pioneers Statue
+D Continuing the Conversation | Rosa Parks Statue
+D Sideways' Grave | Sideways
+D Academy of Medicine | Historic Academy of Medicine
+X Rose Bowl Field :: The practice field paid for with the proceeds of the 1929 Rose Bowl.
+
+@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport or discipline contested at the Atlanta Summer Games.
+C Swimming :: Raced in Tech's own Aquatic Center.
+C Basketball
+C Gymnastics | Artistic Gymnastics
+C Track and Field | Athletics | Track
+T Boxing :: Fought in Tech's Alexander Memorial Coliseum.
+T Diving :: Held in Tech's Aquatic Center.
+S Soccer | Football
+S Baseball
+S Softball :: Made its Olympic debut in 1996.
+S Volleyball | Indoor Volleyball
+S Beach Volleyball :: Made its Olympic debut in 1996.
+S Tennis
+S Wrestling
+S Cycling | Road Cycling | Track Cycling
+S Weightlifting
+S Rowing
+R Water Polo :: Played in Tech's Aquatic Center.
+R Synchronized Swimming | Synchro | Artistic Swimming
+R Fencing
+R Judo
+R Archery
+R Shooting
+R Sailing | Yachting
+R Equestrian
+R Field Hockey | Hockey
+R Canoeing | Canoe | Kayak | Kayaking | Canoe/Kayak | Canoe Slalom
+D Table Tennis | Ping Pong
+D Badminton
+D Mountain Biking | Mountain Bike :: Made its Olympic debut in 1996.
+D Rhythmic Gymnastics
+D Handball | Team Handball
+X Modern Pentathlon | Pentathlon
+
+@gacolleges | Rivals | Name another college or university in the state of Georgia | strip=university | lead=university,of
+C University of Georgia | UGA | u[sic]GA :: To Hell With Georgia.
+C Georgia State University | GSU
+C Emory University
+T Kennesaw State University | KSU | Kennesaw
+T Morehouse College | Morehouse
+S Spelman College | Spelman
+S Georgia Southern University
+S SCAD | Savannah College of Art and Design
+S Clark Atlanta University | CAU
+S Mercer University
+S Agnes Scott College | Agnes Scott
+S Oglethorpe University
+S Augusta University | Medical College of Georgia | MCG | Georgia Regents
+S Valdosta State University | VSU | Valdosta
+S University of West Georgia | UWG
+S University of North Georgia | UNG
+R Georgia College & State University | Georgia College | GCSU
+R Berry College | Berry
+R Columbus State University
+R Savannah State University
+R Albany State University
+R Fort Valley State University | FVSU | Fort Valley
+R Georgia Gwinnett College | Georgia Gwinnett | GGC
+R Clayton State University
+R Morris Brown College | Morris Brown
+R Georgia Southwestern State University | Georgia Southwestern | GSW
+R Middle Georgia State University | Middle Georgia | MGA
+R Life University
+R Oxford College of Emory | Oxford College | Oxford
+R Wesleyan College | Wesleyan
+R Brenau University
+R Piedmont University | Piedmont College
+D LaGrange College | LaGrange
+D Covenant College | Covenant
+D Shorter University
+D Reinhardt University
+D Young Harris College | Young Harris
+D Dalton State College | Dalton State
+D Gordon State College | Gordon State
+D Abraham Baldwin Agricultural College | ABAC | Abraham Baldwin
+D Paine College | Paine
+D Point University
+D Emmanuel University | Emmanuel College
+D Truett McConnell University
+D Thomas University
+D Interdenominational Theological Center | ITC
+D Morehouse School of Medicine | MSM
+X Toccoa Falls College | Toccoa Falls
+
+@greek | Campus Life | Name a fraternity or sorority that has had a chapter at Georgia Tech
+C Sigma Chi
+C Sigma Nu
+C Alpha Tau Omega | ATO
+C Sigma Alpha Epsilon | SAE
+T Phi Gamma Delta | FIJI
+T Alpha Phi Alpha
+S Kappa Alpha Order | Kappa Alpha | KA
+S Kappa Sigma | Kappa Sig
+S Pi Kappa Alpha | Pike
+S Sigma Phi Epsilon | SigEp
+S Delta Tau Delta | Delt
+S Beta Theta Pi
+S Chi Phi
+S Phi Delta Theta | Phi Delt
+S Lambda Chi Alpha | Lambda Chi
+S Delta Sigma Phi | Delta Sig
+S Alpha Chi Omega | AXO | Alpha Chi
+S Alpha Delta Pi | ADPi
+S Alpha Gamma Delta | AGD | Alpha Gam
+S Alpha Xi Delta | AXiD | Alpha Xi
+S Phi Mu
+S Zeta Tau Alpha | ZTA
+R Tau Kappa Epsilon | TKE | Teke
+R Theta Chi
+R Pi Kappa Phi | Pi Kapp
+R Phi Kappa Sigma | Skulls
+R Phi Kappa Tau | Phi Tau
+R Phi Sigma Kappa | Phi Sig
+R Delta Chi | DChi
+R Delta Upsilon | DU
+R Alpha Epsilon Pi | AEPi
+R Alpha Sigma Phi | Alpha Sig
+R Alpha Phi
+R Kappa Alpha Theta
+R Alpha Kappa Alpha | AKA
+R Delta Sigma Theta | DST
+R Kappa Alpha Psi | Nupes
+R Omega Psi Phi | Ques
+D Phi Kappa Theta
+D Zeta Beta Tau | ZBT
+D Psi Upsilon | Psi U
+D Chi Psi
+D Phi Beta Sigma
+D Zeta Phi Beta
+X Theta Xi
+?D Sigma Gamma Rho ?? Confirm a chapter at Tech.
+?D Alpha Delta Chi ?? Confirm a chapter at Tech.
+?D Triangle ?? Confirm a chapter or colony at Tech.
+?D Phi Kappa Psi | Phi Psi ?? Confirm a chapter at Tech.
+
+@proteams | Atlanta | Name an Atlanta-area pro sports team, past or present
+C Atlanta Braves | Braves
+C Atlanta Falcons | Falcons
+C Atlanta Hawks | Hawks :: They played home games in Tech's Alexander Memorial Coliseum from 1968 to 1972, and again in the late 1990s.
+T Atlanta Thrashers | Thrashers
+T Atlanta United | Atlanta United FC | United | ATL UTD | Five Stripes
+S Atlanta Dream | Dream
+S Atlanta Flames | Flames
+S Gwinnett Stripers | Stripers | Gwinnett Braves
+S Atlanta Gladiators | Gladiators | Gwinnett Gladiators
+S College Park Skyhawks | Skyhawks
+R Atlanta Silverbacks | Silverbacks
+R Atlanta Chiefs | Chiefs
+R Atlanta Knights | Knights
+R Atlanta Crackers | Crackers
+R Atlanta Black Crackers | Black Crackers
+R Atlanta Beat | Beat
+R Georgia Force | Force
+R Atlanta Legends | Legends
+R Atlanta Vibe | Vibe
+R Atlanta FaZe | FaZe
+R Atlanta Reign | Reign
+R Atlanta Hustle | Hustle
+R Atlanta Blaze | Blaze
+R Rugby ATL | Rugby Atlanta
+R Atlanta United 2 | ATL UTD 2
+D Atlanta Glory | Glory
+D Atlanta Apollos | Apollos
+D Atlanta Attack | Attack
+D Atlanta Ruckus | Ruckus
+D Hawks Talon GC | Hawks Talon
+X Georgia Swarm | Swarm :: Pro box lacrosse, out in Duluth. One in a Swarm, literally.
+?D Atlanta Fire Ants | Fire Ants ?? Believed to be a 1990s pro roller hockey team; confirm.
+
+@coaches | Sports History | Name a Georgia Tech head coach, in any sport and any era
+C John Heisman | Heisman
+C Bobby Dodd | Dodd
+C Paul Johnson | CPJ
+C Brent Key
+T Bobby Cremins | Cremins
+T Bobby Ross
+S Geoff Collins
+S Chan Gailey | Gailey
+S George O'Leary | O'Leary
+S Josh Pastner | Pastner
+S Paul Hewitt | Hewitt
+S Damon Stoudamire | Stoudamire
+S Danny Hall
+S Bill Curry
+S William Alexander | Bill Alexander | Alexander | William A. Alexander
+S Pepper Rodgers
+S Brian Gregory
+R Nell Fortner
+R MaChelle Joseph
+R Bruce Heppler
+R Bill Lewis
+R Bud Carson
+R Bill Fulcher
+R Whack Hyder | John Hyder
+R Dwane Morrison
+R Jim Morris
+R Michelle Collier
+R Kenny Thorne
+R Agnus Berenato
+R Mac McWhorter :: Interim football coach for the 2001 bowl game.
+D Jon Tenuta :: Interim football coach for the 2007 bowl game.
+D Rodney Harmon
+D Bryan Shelton
+D Aileen Morales
+D Sharon Perkins
+D Courtney Shealy Hart | Courtney Hart
+D Grover Hinsdale
+D Alan Drosky
+D Buddy Fowlkes
+D Bond Shymansky
+D Puggy Blackmon
+D Tonya Johnson
+X Freddie Lanoue | Fred Lanoue :: The drownproofing legend also coached Tech's swimmers.
+?D James Ramsey ?? Believed to have succeeded Danny Hall as baseball coach; confirm.
+?D Karen Blair ?? Believed to be the women's basketball coach hired in 2025; confirm.
+
+@qbs | Sports History | Name a quarterback who has started a game for Georgia Tech
+C Haynes King
+C Joe Hamilton
+C Justin Thomas
+T Reggie Ball
+T Shawn Jones :: Quarterback of the 1990 national champions.
+S Josh Nesbitt
+S Tevin Washington
+S Jeff Sims
+S TaQuon Marshall
+S Vad Lee
+S George Godsey
+S Taylor Bennett
+S Zach Pyron
+R James Graham
+R Jordan Yates
+R Tobias Oliver
+R A.J. Suggs
+R Matthew Jordan
+R Zach Gibson
+R John Dewberry
+R Kim King
+R Billy Lothridge
+R Pepper Rodgers
+R Eddie McAshan :: In 1970 he became the first Black quarterback to start for a major Southeastern school.
+R Mike Kelley
+R Donnie Davis
+R Brandon Shaw
+D Darrell Gast
+D Rick Strom
+D Todd Rampley
+D Tommy Luginbill
+D Rudy Allen
+D Gary Lanier
+D Wade Mitchell
+D Stan Gann
+D Darrell Crawford
+X Frank Broyles :: Better known as Arkansas's coach and athletic director, he quarterbacked Tech in the 1940s.
+?R Jaybo Shaw ?? Confirm he started a game at quarterback (believed 2008).
+?R Lucas Johnson ?? Confirm he started a game at quarterback (believed 2019).
+?D Damarius Bilbo ?? Confirm he started at quarterback before moving to receiver.
+
+@corecourses | Academics | Name a non-CS course that haunts Tech transcripts, by subject and number (like "MATH 1554")
+C MATH 1554 :: Linear Algebra
+C MATH 1551 :: Differential Calculus
+C MATH 1552 :: Integral Calculus
+C PHYS 2211 :: Intro Physics I
+T PHYS 2212 :: Intro Physics II
+T APPH 1040 :: Scientific Foundations of Health
+S MATH 2551 :: Multivariable Calculus
+S MATH 2552 :: Differential Equations
+S MATH 1553 :: Intro to Linear Algebra
+S CHEM 1310 :: General Chemistry
+S ENGL 1101 :: English Composition I
+S ENGL 1102 :: English Composition II
+S GT 1000 :: First-Year Seminar
+S ECE 2020 :: Digital System Design
+S ECON 2100 :: Economics and Policy
+S HIST 2111 :: The United States to 1877
+S PSYC 1101 :: General Psychology
+R CHEM 1211K | CHEM 1211 :: Chemical Principles I
+R CHEM 1212K | CHEM 1212 :: Chemical Principles II
+R CHEM 2311 :: Organic Chemistry I
+R MATH 3012 :: Applied Combinatorics
+R MATH 2550 :: Intro to Multivariable Calculus
+R BIOL 1510 | BIOS 1510 :: Biological Principles
+R ECE 2026 :: Intro to Signal Processing
+R ECE 2040 :: Circuit Analysis
+R ECE 2031 :: Digital Design Lab
+R COE 2001 :: Statics
+R ME 2110 :: Creative Decisions and Design
+R ME 2202 :: Dynamics of Rigid Bodies
+R ISYE 2027 :: Probability with Applications
+R ISYE 3770 :: Statistics and Applications
+R MSE 2001 :: Principles and Applications of Engineering Materials
+R ECON 2105 :: Principles of Macroeconomics
+R ECON 2106 :: Principles of Microeconomics
+R HIST 2112 :: The United States since 1877
+R POL 1101 :: Government of the United States
+R APPH 1050 :: The Science of Physical Activity and Health
+D MATH 1564 :: Linear Algebra with Abstract Vector Spaces
+D MATH 3670 :: Probability and Statistics with Applications
+D MATH 3215 :: Intro to Probability and Statistics
+D MATH 2106 :: Foundations of Mathematical Proof
+D MATH 4317 :: Analysis I
+D PHYS 2213 :: Intro to Modern Physics
+D COE 3001 :: Mechanics of Deformable Bodies
+D ME 3322 :: Thermodynamics
+D ME 3340 :: Fluid Mechanics
+D ME 3345 :: Heat Transfer
+D ME 1770 :: Intro to Engineering Graphics and Visualization
+D EAS 1600 :: Intro to Environmental Science
+D EAS 1601 :: Habitable Planet
+D AE 1601 :: Intro to Aerospace Engineering
+D ECE 3710 :: Circuits and Electronics
+D PUBP 3000 :: American Constitutional Issues
+D ISYE 3232 :: Stochastic Manufacturing and Service Systems
+D ISYE 3133 :: Engineering Optimization
+D CHBE 2100 :: Chemical Process Principles
+X LMC 3403 :: Technical Communication
+?D MGT 2250 :: Management Statistics ?? Confirm number and title.
+?D BMED 2110 :: Conservation Principles in BME ?? Believed to have been renumbered; confirm.
+?R INTA 1200 :: American Government in Comparative Perspective ?? Confirm number and title.
+
+@hq | Atlanta | Name a company based in metro Atlanta (U.S. headquarters count)
+C Coca-Cola | Coke | The Coca-Cola Company
+C Delta Air Lines | Delta | Delta Airlines
+C The Home Depot | Home Depot
+C Chick-fil-A | Chickfila | CFA
+T UPS | United Parcel Service
+T Waffle House | WaHo :: Headquartered in Norcross.
+S Southern Company | Southern Co | Georgia Power
+S Georgia-Pacific | GP
+S NCR | NCR Voyix | NCR Atleos | NCR Corporation :: Its headquarters went up in Midtown, right beside Tech Square.
+S Equifax
+S Norfolk Southern | NS
+S Cox Enterprises | Cox | Cox Communications | Cox Automotive
+S Mailchimp | Intuit Mailchimp
+S Invesco
+S CNN | Turner Broadcasting | Turner | TBS
+S Arby's | Inspire Brands
+S Porsche Cars North America | Porsche | Porsche North America
+S Mercedes-Benz USA | Mercedes-Benz | Mercedes | MBUSA
+R Genuine Parts Company | Genuine Parts | GPC | NAPA
+R Intercontinental Exchange | ICE
+R Global Payments
+R Newell Brands | Newell | Newell Rubbermaid
+R PulteGroup | Pulte
+R Carter's
+R Graphic Packaging | Graphic Packaging International
+R Rollins | Orkin
+R Krystal
+R Church's Texas Chicken | Church's Chicken | Church's
+R GoTo Foods | Focus Brands | Cinnabon | Auntie Anne's
+R Floor & Decor
+R Havertys
+R OneTrust
+R Salesloft
+R Cardlytics
+R RaceTrac
+D Novelis
+D Rheem
+D Americold
+D Holder Construction | Holder
+D Oxford Industries | Oxford
+D Saia
+D AGCO
+D Asbury Automotive | Asbury
+D Aaron's
+D Gray Television | Gray Media | Gray TV
+D Acuity Brands | Acuity
+D Beazer Homes | Beazer
+D EarthLink
+D Manhattan Associates
+X Veritiv
+
+@codes | Academics | Name a subject code from Tech's course catalog (like "ISYE")
+C CS
+C MATH
+C ME
+C ECE
+T ISYE
+T APPH :: Applied Physiology, home of the health requirement.
+S PHYS
+S CHEM
+S ENGL
+S AE
+S BMED
+S CEE
+S CHBE
+S MSE
+S MGT
+S ECON
+S PSYC
+S HIST
+S GT :: As in GT 1000.
+R BIOL | BIOS
+R EAS
+R INTA
+R LMC
+R PUBP
+R NRE
+R ID
+R ARCH
+R MUSI
+R COE
+R CSE
+R CX
+R HTS
+R POL
+R SPAN
+R NEUR
+R PHIL
+D FREN
+D GRMN
+D JAPN
+D CHIN
+D KOR
+D RUSS
+D ARBC
+D LING
+D SOC
+D BC
+D CP :: City Planning.
+D COA
+D VIP :: Vertically Integrated Projects.
+D MSL :: Military Science and Leadership (Army ROTC).
+D NS :: Naval Science.
+D AS :: Aerospace Studies (Air Force ROTC).
+D MP :: Medical Physics.
+X CETL :: Center for Teaching and Learning courses, mostly taken by teaching assistants.
+?D PTFE ?? Polymer, Textile and Fiber Engineering; confirm the code is still in the catalog.
+
+@techs | Rivals | Tech isn't the only Tech. Name another U.S. school that goes by "Tech" or "Institute of Technology"
+C Virginia Tech | VT | Virginia Polytechnic Institute | VPI
+C Texas Tech | Texas Tech University | TTU
+T MIT | Massachusetts Institute of Technology
+T Caltech | California Institute of Technology
+S Louisiana Tech | La Tech
+S Michigan Tech | Michigan Technological University | MTU
+S Florida Tech | Florida Institute of Technology
+S Illinois Tech | Illinois Institute of Technology | IIT
+S RIT | Rochester Institute of Technology | Rochester
+S NJIT | New Jersey Institute of Technology | New Jersey Tech
+S Stevens Institute of Technology | Stevens | Stevens Tech
+S Tennessee Tech | Tennessee Technological University
+S Rose-Hulman | Rose-Hulman Institute of Technology
+R Arkansas Tech
+R Montana Tech
+R New Mexico Tech | New Mexico Institute of Mining and Technology | NMT
+R Oregon Tech | Oregon Institute of Technology | OIT
+R Wentworth Institute of Technology | Wentworth | WIT
+R NYIT | New York Institute of Technology | New York Tech
+R Fashion Institute of Technology | Fashion Tech
+R Lawrence Tech | Lawrence Technological University | LTU
+R Indiana Tech | Indiana Institute of Technology
+R Air Force Institute of Technology | AFIT
+R Ivy Tech | Ivy Tech Community College
+D WVU Tech | West Virginia University Institute of Technology | West Virginia Tech
+D DigiPen | DigiPen Institute of Technology
+D Capitol Technology University | Capitol Tech
+D New England Institute of Technology | New England Tech | NEIT
+D Oklahoma State University Institute of Technology | OSUIT | OSU Institute of Technology
+D Atlanta Technical College | Atlanta Tech
+D Gwinnett Technical College | Gwinnett Tech
+D Savannah Technical College | Savannah Tech
+D Texas State Technical College | TSTC
+D Carnegie Tech | Carnegie Institute of Technology :: It merged into Carnegie Mellon in 1967.
+X Southern Tech | Southern Technical Institute | Southern Polytechnic | SPSU :: Founded in 1948 as a division of Georgia Tech. It is now part of Kennesaw State.
+
+@systems | Campus Life | Name a system, app, or ride every Tech student has wrestled with (registering, coursework, getting around)
+C Canvas
+C OSCAR :: Online Student Computer Assisted Registration.
+C BuzzCard
+C Stinger | Stinger Bus | Tech Stinger
+T T-Square :: Canvas's predecessor.
+T Stingerette
+S DegreeWorks
+S BuzzPort
+S Tech Trolley | Trolley
+S Piazza
+S Gradescope
+S Course Critique
+S Duo | Duo Mobile | Two-Factor
+S eduroam
+S Ed Discussion | Ed | EdStem
+S MATLAB
+R GT Scheduler
+R LAWN :: Tech's original campus wireless network.
+R GitHub Enterprise | GT GitHub | github.gatech.edu | GitHub
+R Handshake | CareerBuzz
+R PACE :: The research computing clusters.
+R Midnight Rambler :: The late-night bus loop.
+R Honorlock
+R Passport | GT Passport
+R Banner
+R Workday
+R WebAssign
+R CIOS :: The Course-Instructor Opinion Survey.
+D Engage
+D Techworks
+D Sakai :: The software underneath T-Square.
+X SUMS :: The Shared User Management System, for booking lab and makerspace equipment.
+?R GTwifi ?? Confirm the campus network name.
+?D Passio GO | Passio ?? Believed to be the current bus-tracking app; confirm.
+?D LiveSafe ?? Believed to be the campus safety app; confirm.
+?D BuzzFunds ?? Confirm the name of the BuzzCard money account.
+?D Zimbra ?? Believed to be the old student email system; confirm.
+
+@nicknames | Rivals | Name the team nickname of a school that has shared a conference with Tech
+C Tigers :: Clemson, Auburn, LSU and Memphis all answer to it.
+C Bulldogs | Dawgs :: Georgia and Mississippi State.
+C Seminoles | Noles
+C Blue Devils
+T Crimson Tide | Tide
+T Fighting Irish | Irish
+S Hurricanes | Canes
+S Tar Heels | Tarheels
+S Wolfpack | Wolf Pack
+S Cavaliers | Wahoos | Hoos
+S Hokies
+S Demon Deacons | Deacons | Deacs
+S Eagles
+S Panthers
+S Orange | Orangemen
+S Cardinals :: Louisville's birds, and Stanford's color.
+S Gators
+S Volunteers | Vols
+R Wildcats
+R Commodores | Dores
+R Rebels
+R Golden Bears | Bears
+R Mustangs | Ponies
+R Terrapins | Terps
+D Gamecocks
+D Green Wave
+D Bearcats
+D Generals :: Washington and Lee, a Southern Conference mate in the 1920s.
+X Billikens :: Saint Louis, a Metro Conference mate in the 1970s.
+
+@beaten | Sports History | Name a team from outside today's ACC that Tech football has beaten
+C Georgia | UGA
+C Alabama | Bama
+C Auburn
+T Cumberland :: 222-0, on October 7, 1916. Still the most lopsided game in college football history.
+T Nebraska :: The 1991 Citrus Bowl, which sealed a share of the national title.
+S Tennessee
+S Florida
+S LSU
+S Vanderbilt | Vandy
+S Kentucky
+S Ole Miss | Mississippi
+S Mississippi State
+S South Carolina
+S Tulane
+S Navy
+S Army
+S USC | Southern California | Southern Cal :: The 2012 Sun Bowl.
+R Maryland
+R West Virginia | WVU
+R Missouri | Mizzou
+R Kansas
+R Baylor
+R Arkansas
+R Texas Tech
+R Iowa State
+R Michigan State
+R Tulsa
+R UCF | Central Florida :: The 2023 Gasparilla Bowl.
+R Georgia Southern
+R Georgia State
+R The Citadel
+R Furman
+R Mercer
+R South Florida | USF
+R Troy
+R Bowling Green
+R Samford
+R Jacksonville State
+R Western Carolina
+R Alcorn State
+R VMI
+D Saint Mary's | St. Mary's :: The 1947 Oil Bowl.
+D Penn | Pennsylvania
+D Davidson
+D Presbyterian
+D Elon
+D Wofford
+D Gardner-Webb
+D Middle Tennessee | MTSU | Middle Tennessee State
+D South Carolina State
+X Carlisle | Carlisle Indian School :: Heisman's 1917 national champions beat the famous Carlisle Indians 98-0.
+?R Colorado ?? Believed to be a 2025 season-opening win; confirm.
+?R Kennesaw State ?? Believed to be a 2021 win; confirm.
+?D Sewanee ?? Tech played Sewanee often in the early 1900s; confirm at least one win.

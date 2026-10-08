@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One in a Swarm — the Georgia Tech rare-answer game</title>
+  <meta name="description" content="A daily Georgia Tech word game. Seven prompts, 25 seconds each. The rarer your answer, the higher you fly.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#003057">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7-12-7V9z' fill='%23B3A369' stroke='%23003057' stroke-width='2'/%3E%3Cpath d='M8 13h16M8 19h16' stroke='%23003057' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to game</a>
+
+  <header class="top">
+    <button type="button" class="brand" id="homeBtn" aria-label="One in a Swarm, home">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+        <ellipse class="wing" cx="13" cy="9" rx="9" ry="5" transform="rotate(-24 13 9)"/>
+        <ellipse class="wing" cx="35" cy="9" rx="9" ry="5" transform="rotate(24 35 9)"/>
+        <path class="hex" d="M24 8l15 8.5v17L24 42 9 33.5v-17z"/>
+        <path class="stripe" d="M11 20.5h26M11 29.5h26"/>
+      </svg>
+      <span class="brand-text">One in a <strong>Swarm</strong></span>
+    </button>
+    <button type="button" class="btn btn-quiet" id="howBtn">How to play</button>
+  </header>
+
+  <main id="app">
+    <section data-view="loading" class="card center">
+      <p>Waking the hive…</p>
+    </section>
+
+    <section data-view="error" class="card" hidden>
+      <h1>The hive is empty</h1>
+      <p id="errorText">The prompt bank could not be loaded.</p>
+      <p>This game needs to be served over HTTP. From the project folder, run <code>npx serve .</code> and open the address it prints.</p>
+    </section>
+
+    <section data-view="home" hidden>
+      <div class="hero">
+        <h1 tabindex="-1" id="homeTitle">Don't say the obvious thing.</h1>
+        <p class="lede">Seven Georgia Tech prompts. Twenty-five seconds each. Everybody knows the easy answer, so it's worth almost nothing. Find the one nobody else thinks of.</p>
+      </div>
+
+      <div class="modes">
+        <article class="card mode">
+          <p class="eyebrow">Daily flight · <span id="todayLabel"></span></p>
+          <h2>Today's seven</h2>
+          <p id="dailyStatus" class="muted">The same prompts for every Yellow Jacket, once a day.</p>
+          <button type="button" class="btn btn-primary btn-big" id="dailyBtn">Start today's flight</button>
+          <p class="muted small">New prompts in <span class="js-countdown">--:--:--</span> (00:00 UTC)</p>
+        </article>
+
+        <article class="card mode">
+          <p class="eyebrow">Infinite</p>
+          <h2>Swarm mode</h2>
+          <p class="muted">One 45-second clock that only drains while you're typing. Rare answers buy more time.</p>
+          <button type="button" class="btn btn-gold btn-big" id="infBtn">Start an endless run</button>
+          <p class="muted small" id="bestLabel">No best run yet.</p>
+        </article>
+      </div>
+
+      <section class="card" aria-labelledby="tiersTitle">
+        <h2 id="tiersTitle">What an answer is worth</h2>
+        <ul class="tiers" id="tierLegend"></ul>
+        <p class="muted small">Every point lifts you 4 feet above Tech Tower. Exactly one answer per prompt is the One in a Swarm.</p>
+      </section>
+    </section>
+
+    <section data-view="between" hidden>
+      <div class="card result-card" id="lastResult" hidden>
+        <p class="eyebrow" id="lastRoundLabel"></p>
+        <p class="result-prompt" id="lastPrompt"></p>
+        <p class="result-line"><span class="badge" id="lastBadge"></span> <strong id="lastPoints"></strong></p>
+        <p class="result-answer" id="lastAnswer"></p>
+        <p class="muted" id="lastNote"></p>
+      </div>
+      <div class="card center">
+        <p class="eyebrow" id="nextLabel"></p>
+        <h1 tabindex="-1" id="nextTitle"></h1>
+        <p class="muted" id="nextHint"></p>
+        <button type="button" class="btn btn-primary btn-big" id="nextBtn"></button>
+        <p class="running" id="runningScore"></p>
+      </div>
+    </section>
+
+    <section data-view="play" hidden>
+      <div class="hud">
+        <div class="hud-left">
+          <ol class="pips" id="pips" aria-hidden="true"></ol>
+          <p class="hud-text" id="hudText"></p>
+        </div>
+        <div class="clock" id="clock"><span id="clockNum">25</span><span class="clock-unit">s</span></div>
+      </div>
+      <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+      <p class="sr-only" id="clockLive" aria-live="assertive"></p>
+      <p class="pause-note" id="pauseNote" hidden>Clock paused. It runs while the answer box is active.</p>
+
+      <div class="card prompt-card">
+        <p class="eyebrow" id="cat"></p>
+        <h1 id="promptText" tabindex="-1"></h1>
+        <form id="guessForm" autocomplete="off" novalidate>
+          <label for="guess" class="sr-only">Your answer</label>
+          <div class="entry" id="entry">
+            <input id="guess" name="guess" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="80" placeholder="Type an answer">
+            <button type="submit" class="btn btn-primary">Guess</button>
+          </div>
+        </form>
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        <ul class="tried" id="tried" aria-label="Wrong guesses this round"></ul>
+      </div>
+
+      <div class="play-actions" id="infActions" hidden>
+        <button type="button" class="btn btn-quiet" id="skipBtn">Skip prompt (−5s)</button>
+        <button type="button" class="btn btn-quiet" id="endBtn">End run</button>
+      </div>
+    </section>
+
+    <section data-view="results" hidden>
+      <div class="card summit">
+        <p class="eyebrow">Daily flight · <span id="resDate"></span></p>
+        <h1 tabindex="-1" id="resBand"></h1>
+        <p class="lede" id="resBlurb"></p>
+        <div class="summit-grid">
+          <div class="altimeter" aria-hidden="true">
+            <div class="alt-track"><div class="alt-fill" id="altFill"></div><div class="alt-bee" id="altBee"></div></div>
+            <ul class="alt-ticks" id="altTicks"></ul>
+          </div>
+          <dl class="numbers">
+            <div><dt>Score</dt><dd id="resScore"></dd></div>
+            <div><dt>Altitude above Tech Tower</dt><dd id="resAlt"></dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Share your flight</h2>
+        <label for="shareBox" class="sr-only">Share text</label>
+        <textarea id="shareBox" class="share" rows="5" readonly></textarea>
+        <div class="row">
+          <button type="button" class="btn btn-primary" id="copyBtn">Copy result</button>
+          <p class="feedback" id="copyStatus" role="status" aria-live="polite"></p>
+        </div>
+        <p class="muted small">One square per round, coloured by rarity. No answers are revealed.</p>
+      </div>
+
+      <div class="card">
+        <h2>Round by round</h2>
+        <ol class="breakdown" id="breakdown"></ol>
+        <details class="spoilers">
+          <summary>Show what the One in a Swarm answers were</summary>
+          <ol class="breakdown" id="spoilerList"></ol>
+        </details>
+      </div>
+
+      <div class="card center">
+        <p>Next flight in <strong class="js-countdown">--:--:--</strong></p>
+        <div class="row row-center">
+          <button type="button" class="btn btn-gold" id="resInfBtn">Play Swarm mode</button>
+          <button type="button" class="btn btn-quiet" id="resHomeBtn">Home</button>
+        </div>
+      </div>
+    </section>
+
+    <section data-view="infover" hidden>
+      <div class="card summit center">
+        <p class="eyebrow">Swarm mode</p>
+        <h1 tabindex="-1" id="infTitle"></h1>
+        <dl class="numbers numbers-row">
+          <div><dt>Score</dt><dd id="infScore"></dd></div>
+          <div><dt>Prompts answered</dt><dd id="infCount"></dd></div>
+          <div><dt>Best run</dt><dd id="infBest"></dd></div>
+        </dl>
+        <div class="row row-center">
+          <button type="button" class="btn btn-primary btn-big" id="infAgainBtn">Fly again</button>
+          <button type="button" class="btn btn-quiet" id="infHomeBtn">Home</button>
+        </div>
+      </div>
+      <div class="card" id="infLogCard">
+        <h2>This run</h2>
+        <ol class="breakdown" id="infLog"></ol>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="howDlg" aria-labelledby="howTitle">
+    <h2 id="howTitle">How to play</h2>
+    <ul class="rules">
+      <li><strong>Daily flight:</strong> seven prompts, the same for everyone, new at 00:00 UTC. You get 25 seconds a round.</li>
+      <li>A correct answer ends the round. A wrong one costs 3 seconds, and you keep guessing.</li>
+      <li><strong>Rarer is better.</strong> The obvious answer scores 10. The answer everyone thinks is clever scores 15. The one hidden One in a Swarm answer scores 100.</li>
+      <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, and common short names count (CULC is Clough).</li>
+      <li><strong>Swarm mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3 seconds, a skip costs 5.</li>
+    </ul>
+    <p class="muted small">Rarity tiers are editorial guesses, not measured from real players. An unofficial fan project, not affiliated with or endorsed by the Georgia Institute of Technology.</p>
+    <form method="dialog"><button class="btn btn-primary" id="howClose">Got it</button></form>
+  </dialog>
+
+  <footer class="foot">
+    <p>An unofficial fan project. Not affiliated with or endorsed by Georgia Tech.</p>
+  </footer>
+
+  <script src="js/core.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

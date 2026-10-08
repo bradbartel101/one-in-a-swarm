@@ -1,0 +1,11 @@
+{
+  "name": "one-in-a-swarm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Georgia Tech daily word game that rewards rare answers. Static site, no build step.",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "node --test",
+    "build:data": "node tools/build-prompts.js"
+  }
+}
