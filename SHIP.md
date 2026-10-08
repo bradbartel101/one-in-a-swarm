@@ -14,7 +14,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e `resume mid-round`: reload in round 2 returns to round 2 with the round-1 pip, the wrong-guess chip and 20,994ms -> 20,450ms on the clock. Unit `A4` (16s left, not 25s; never negative).
 - [x] A5 Timer can't be gamed by tab switching, backgrounding or changing the device clock
   - Evidence: Was exploitable: setting the clock back added time. Rounds now store time-left and count max(wall, monotonic) elapsed. e2e `timer cannot be gamed`: clock back 1h mid-round, back again plus reload, tab frozen 3s (23988 -> 22985 -> 22935 -> 19528 ms), clock forward ends the round. Units `A5` x3. Residual limit in HUMAN-TODO section 7.
-- [ ] A6 Infinite clock drains only while typing; focus pause handled; ends cleanly at 0
+- [x] A6 Infinite clock drains only while typing; focus pause handled; ends cleanly at 0
+  - Evidence: e2e `infinite: drains only while typing, pauses on blur, ends cleanly at 0` (bar unchanged over 1.5s while blurred and empty, pause note shown, text in a blurred box drains, +16s on a swarm answer, ends on infover and stays there). Unit `A6`.
 - [ ] A7 Daily rotation doesn't run out or repeat a recent day; coverage number logged
 - [ ] A8 Answer matching edge cases (accents, plurals, aliases, punctuation, spaces, curly quotes, "the", empty, very long, emoji, HTML)
 - [ ] A9 Duplicate guesses in a round are rejected without a penalty
