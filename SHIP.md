@@ -18,7 +18,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e `infinite: drains only while typing, pauses on blur, ends cleanly at 0` (bar unchanged over 1.5s while blurred and empty, pause note shown, text in a blurred box drains, +16s on a swarm answer, ends on infover and stays there). Unit `A6`.
 - [x] A7 Daily rotation doesn't run out or repeat a recent day; coverage number logged
   - Evidence: Rotation rebuilt as a chain from a fixed epoch that excludes the previous days' prompts. The bank covers **4 days** (31 prompts / 7 per day): unit `A7` checks 3,660 consecutive days, each with 7 prompts, no prompt repeated in any 4-day window, every prompt used.
-- [ ] A8 Answer matching edge cases (accents, plurals, aliases, punctuation, spaces, curly quotes, "the", empty, very long, emoji, HTML)
+- [x] A8 Answer matching edge cases (accents, plurals, aliases, punctuation, spaces, curly quotes, "the", empty, very long, emoji, HTML)
+  - Evidence: units `A8: matching on the real bank`, `A8: empty, enormous, emoji and markup input` (500,000-character guess rejected in under 2s) and tests/matching.test.js; e2e `hostile input is shown as text and never runs` (script/img/svg payloads become text chips, `window.__xss` stays undefined, also after reload).
 - [ ] A9 Duplicate guesses in a round are rejected without a penalty
 
 ## B. Storage and failure modes
