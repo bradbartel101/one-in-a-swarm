@@ -24,7 +24,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: unit `A9: a repeated wrong guess costs nothing` (six spellings of one guess, one penalty, both modes); e2e keyboard run asserts 'Already tried' and under 0.03 of the bar lost.
 
 ## B. Storage and failure modes
-- [ ] B1 Game plays with localStorage blocked, full or throwing
+- [x] B1 Game plays with localStorage blocked, full or throwing
+  - Evidence: e2e `storage failure` x3 (every Storage method throws; reading window.localStorage throws; setItem throws QuotaExceededError): a full 7-round day to 420 pts plus an infinite run, empty console.
 - [ ] B2 Corrupted or old-format saves are detected and reset; saves carry a version
 - [ ] B3 A failed prompts.json load shows a friendly error
 
