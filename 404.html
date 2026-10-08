@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found — One in a Swarm</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7-12-7V9z' fill='%23B3A369' stroke='%23003057' stroke-width='2'/%3E%3Cpath d='M8 13h16M8 19h16' stroke='%23003057' stroke-width='3'/%3E%3C/svg%3E">
+  <meta name="color-scheme" content="light dark">
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; text-align: center;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; color: #003057; background: #ffffff; }
+    h1 { font-size: clamp(2rem, 9vw, 3.5rem); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin: 0 0 0.75rem; }
+    p { margin: 0 0 1.25rem; max-width: 30rem; }
+    a { display: inline-flex; align-items: center; min-height: 48px; padding: 0.55rem 1.2rem; border-radius: 12px;
+      background: #003057; color: #ffffff; font-weight: 800; text-decoration: none; }
+    a:focus-visible { outline: 3px solid #003057; outline-offset: 3px; }
+    small { display: block; margin-top: 2rem; color: #4a5d70; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #00213d; color: #ffffff; }
+      a { background: #b3a369; color: #003057; }
+      a:focus-visible { outline-color: #ffd75e; }
+      small { color: #c5d0db; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Wrong turn</h1>
+    <p>This page isn't part of the hive. The game is one click away.</p>
+    <a id="homeLink" href="./">Back to One in a Swarm</a>
+    <small>Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</small>
+  </main>
+  <script>
+    // On GitHub Pages a project site lives under /repo-name/, and this page can be served
+    // for any depth of missing path, so point the link at the site root explicitly.
+    (function () {
+      function siteRoot(hostname, pathname) {
+        var first = pathname.split('/')[1];
+        return /\.github\.io$/.test(hostname) && first ? '/' + first + '/' : '/';
+      }
+      window.swarmSiteRoot = siteRoot;
+      document.getElementById('homeLink').href = siteRoot(window.location.hostname, window.location.pathname);
+    })();
+  </script>
+</body>
+</html>

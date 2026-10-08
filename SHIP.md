@@ -64,7 +64,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: unit `E3` (title, description, inline SVG favicon, og:* and twitter:* tags, assets/og.png is a 1200x630 PNG, 74 KB) and e2e metadata check. Image is original (hexagons and stripes), rendered by tools/make-og.js. The absolute URL is a guess: HUMAN-TODO section 3.
 - [x] E4 Footer disclaimer; no official GT logos, wordmarks or Buzz
   - Evidence: unit `E4 / E5` and e2e assert the exact footer sentence on index.html and 404.html. The only artwork is an inline hexagon-and-stripes SVG and assets/og.png; no <img> tags, no GT marks, no Buzz.
-- [ ] E5 A simple 404.html
+- [x] E5 A simple 404.html
+  - Evidence: 404.html is self-contained (inline CSS and icon). e2e loads a missing path, sees 'Wrong turn', and checks the home link resolves to /repo/ on github.io and / elsewhere.
 
 ## F. Code quality and performance
 - [ ] F1 No console errors or warnings in a full daily run and a full infinite run (headless browser)
