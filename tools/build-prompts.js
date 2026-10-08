@@ -94,6 +94,7 @@ prompts.forEach((p) => {
     md += '- [ ] **' + a.name + '** (' + core.TIERS[a.tier].label + ')' + (a.verifyReason ? ': ' + a.verifyReason : '') + '\n';
   });
 });
+if (!flagged) md += '\nNone. No answer is currently flagged.\n';
 fs.writeFileSync(path.join(ROOT, 'VERIFY.md'), md);
 
 const total = prompts.reduce((s, p) => s + p.answers.length, 0);
