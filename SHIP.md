@@ -38,7 +38,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: All 52 flagged answers checked against live sources (Tech catalog, news and housing pages, Wikipedia): 30 confirmed and unflagged, 22 removed and listed in HUMAN-TODO.md section 5. The check also found a stale unflagged major and a wrongly named bowl, both fixed.
 - [x] C3 No offensive, mean-spirited or overly inside-joke prompts or answers
   - Evidence: Read all 31 prompts and their notes. Reworded two padded prompts, removed 'the famous Carlisle Indians' phrasing, kept Tech's own traditions (To Hell With Georgia, Clean Old-Fashioned Hate, the Budweiser song) as they are official lore. Nothing targets a person or group. A second opinion is requested in HUMAN-TODO section 5.
-- [ ] C4 Spelling and capitalization of displayed answers is correct
+- [x] C4 Spelling and capitalization of displayed answers is correct
+  - Evidence: Script scan of every name and alias: no double spaces, no stray whitespace, all start with a capital or digit except three intentional ones (eduroam, github.gatech.edu, u[sic]GA). CS course titles replaced with the catalog's wording. Proper-noun spelling beyond that is in HUMAN-TODO section 5.
 
 ## D. Cross-device and accessibility
 - [ ] D1 Works at 320, 375, 768 and 1440px; no horizontal scroll, nothing cut off
