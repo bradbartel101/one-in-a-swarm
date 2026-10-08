@@ -28,7 +28,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e `storage failure` x3 (every Storage method throws; reading window.localStorage throws; setItem throws QuotaExceededError): a full 7-round day to 420 pts plus an infinite run, empty console.
 - [x] B2 Corrupted or old-format saves are detected and reset; saves carry a version
   - Evidence: Saves carry `v: 2`; `reviveDaily` / `reviveBest` validate every field. Unit `B2` x3 (18 malformed shapes, tampered score recomputed); e2e `corrupted or old-format saves are reset` loads 15 bad payloads, each boots to a clean home screen and is removed.
-- [ ] B3 A failed prompts.json load shows a friendly error
+- [x] B3 A failed prompts.json load shows a friendly error
+  - Evidence: e2e `prompts.json fails to load` in three ways (truncated JSON, HTTP 500, blocked request): the error view shows 'The game data did not load. Check your connection and try again.', focus is on Try again, and retry recovers.
 
 ## C. Content
 - [ ] C1 Validation script passes on the final data/prompts.json
