@@ -10,7 +10,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: Was broken: a refresh after 00:00 UTC discarded the run. Fixed with `resolveDaily`. Unit `A2: a run started at 23:59 UTC...`; e2e `midnight UTC rollover mid-run` starts at 23:59:30, crosses midnight, reloads, finishes the Oct 8 puzzle, then starts Oct 9 with Oct 9's prompts.
 - [x] A3 A finished day can't be replayed by refreshing; the result screen reappears
   - Evidence: Was wrong: a refresh landed on the home screen. e2e `daily run, keyboard only` reloads after finishing and asserts the results view, 330 pts, an unchanged save, and that the daily button only reopens results. Unit `A3`.
-- [ ] A4 Resume mid-round restores round, score and a fair timer
+- [x] A4 Resume mid-round restores round, score and a fair timer
+  - Evidence: e2e `resume mid-round`: reload in round 2 returns to round 2 with the round-1 pip, the wrong-guess chip and 20,994ms -> 20,450ms on the clock. Unit `A4` (16s left, not 25s; never negative).
 - [ ] A5 Timer can't be gamed by tab switching, backgrounding or changing the device clock
 - [ ] A6 Infinite clock drains only while typing; focus pause handled; ends cleanly at 0
 - [ ] A7 Daily rotation doesn't run out or repeat a recent day; coverage number logged
