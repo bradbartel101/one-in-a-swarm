@@ -1,19 +1,10 @@
 # HUMAN-TODO — what still needs a person
 
-## 1. Create the GitHub repository, then push and open the pull request
+## 1. Review and merge the pull request
 
-The work is committed locally on two branches: `main` (the initial build) and `release/v1.0`
-(the release audit). There is no remote yet, so nothing has been pushed and no pull request exists.
-Creating a public repository is a decision for you. Once you are happy to publish:
-
-```bash
-gh repo create one-in-a-swarm --public --source=. --remote=origin
-git push -u origin main
-git push -u origin release/v1.0
-gh pr create --base main --head release/v1.0 --title "Release v1.0" --body-file SHIP.md
-```
-
-GitHub Pages on a free account needs the repository to be public.
+Done already: the public repository exists at https://github.com/bradbartel101/one-in-a-swarm,
+both branches are pushed, and the "Release v1.0" pull request is open from `release/v1.0` into
+`main`. Check that the Tests workflow is green on it (it has never run on GitHub before), then merge.
 
 ## 2. Turn on GitHub Pages (after the pull request is merged)
 

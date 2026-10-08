@@ -94,5 +94,5 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
 ## Final pass
 - [x] All tests, plus a full daily and infinite run in headless Chrome at mobile and desktop sizes
   - Evidence: final `npm run test:all` exited 0: 86 unit tests, validator OK, 20 of 20 browser scenarios, including daily runs at 1440x900 and 375x667 and infinite runs at 1280x800 and 390x844. The pass before it caught one more defect (a favicon request from the 404 page), now fixed.
-- [ ] Commit, push, open pull request "Release v1.0"
-  - Committed on `release/v1.0`. Push and pull request are blocked: there is no GitHub repository or remote yet. Commands are in HUMAN-TODO.md section 1.
+- [x] Commit, push, open pull request "Release v1.0"
+  - Evidence: repository created at https://github.com/bradbartel101/one-in-a-swarm, `main` and `release/v1.0` pushed, pull request opened from `release/v1.0` into `main`.
