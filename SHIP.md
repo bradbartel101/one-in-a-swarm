@@ -6,7 +6,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
 ## A. Game logic edge cases
 - [x] A1 Daily seed uses UTC consistently (UTC-12, UTC+14, America/New_York get the same 7)
   - Evidence: unit `A1: players in UTC-12, UTC+14 and New York get the same seven` (child processes with TZ set; local dates 7th/9th/8th, same ids) and e2e `same seven prompts in UTC-12, UTC+14 and New York` (Chrome timezone override).
-- [ ] A2 Midnight rollover mid-run finishes yesterday's puzzle; today's is available after
+- [x] A2 Midnight rollover mid-run finishes yesterday's puzzle; today's is available after
+  - Evidence: Was broken: a refresh after 00:00 UTC discarded the run. Fixed with `resolveDaily`. Unit `A2: a run started at 23:59 UTC...`; e2e `midnight UTC rollover mid-run` starts at 23:59:30, crosses midnight, reloads, finishes the Oct 8 puzzle, then starts Oct 9 with Oct 9's prompts.
 - [ ] A3 A finished day can't be replayed by refreshing; the result screen reappears
 - [ ] A4 Resume mid-round restores round, score and a fair timer
 - [ ] A5 Timer can't be gamed by tab switching, backgrounding or changing the device clock

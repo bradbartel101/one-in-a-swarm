@@ -5,8 +5,10 @@
   const C = window.SwarmCore;
   const $ = (id) => document.getElementById(id);
 
-  const K_DAILY = 'swarm.daily.v1';
-  const K_BEST = 'swarm.infinite.best.v1';
+  // Storage keys are stable; the payloads carry their own version (C.SAVE_VERSION).
+  const K_DAILY = 'swarm.daily';
+  const K_BEST = 'swarm.infinite.best';
+  const K_SEEN = 'swarm.seenHowTo';
   const TICK_MS = 100;
   const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from starting the next round
 
@@ -15,7 +17,13 @@
     get(key, fallback) {
       try {
         const raw = window.localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : fallback;
+        if (raw === null) return fallback;
+        try {
+          return JSON.parse(raw);
+        } catch (e) {
+          window.localStorage.removeItem(key); // unreadable: clear it so it cannot linger
+          return fallback;
+        }
       } catch (e) {
         return fallback;
       }
@@ -27,12 +35,24 @@
         /* play on without persistence */
       }
     },
+    remove(key) {
+      try {
+        window.localStorage.removeItem(key);
+      } catch (e) {
+        /* nothing to clean up */
+      }
+    },
   };
 
   let prompts = [];
   let byId = {};
+  let knownIds = new Set();
   let daily = null;
+  let stale = false; // true while `daily` is yesterday's unfinished run
+  let monoAt = 0;
+  let lastSavedSecond = -1;
   let inf = null;
+  let bestAtStart = null;
   let mode = null; // 'daily' | 'infinite' while the play view is live
   let loop = null;
   let lastTick = 0;
@@ -54,6 +74,7 @@
     document.querySelectorAll('[data-view]').forEach((s) => {
       s.hidden = s.getAttribute('data-view') !== name;
     });
+    document.body.classList.toggle('playing', name === 'play');
     window.scrollTo(0, 0);
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
@@ -85,8 +106,25 @@
     e.classList.add('shake');
   }
 
+  function announce(text) {
+    $('announce').textContent = text;
+  }
+
   function saveDaily() {
     if (daily) store.set(K_DAILY, daily);
+  }
+
+  function getBest() {
+    return C.reviveBest(store.get(K_BEST, null));
+  }
+
+  // Charges elapsed time to the live daily round. Wall-clock time covers reloads and device
+  // sleep; the monotonic delta covers a device clock that was changed mid-round.
+  function tickDaily() {
+    const now = performance.now();
+    const mono = now - monoAt;
+    monoAt = now;
+    return C.dailyTick(daily, Date.now(), mono);
   }
 
   function startLoop() {
@@ -118,39 +156,48 @@
 
   /* ---------- home ---------- */
 
+  function resolveDaily() {
+    const r = C.resolveDaily(daily, today());
+    daily = r.run;
+    stale = r.stale;
+  }
+
   function loadDaily() {
-    const saved = store.get(K_DAILY, null);
-    const ok =
-      saved && saved.v === 1 && saved.date === today() &&
-      Array.isArray(saved.promptIds) && saved.promptIds.length === C.ROUNDS &&
-      saved.promptIds.every((id) => byId[id]) && Array.isArray(saved.results);
-    daily = ok ? saved : null;
-    // A round whose deadline passed while the tab was closed counts as a miss.
-    if (daily && C.dailyTick(daily, Date.now())) saveDaily();
+    const raw = store.get(K_DAILY, undefined);
+    daily = C.reviveDaily(raw, knownIds);
+    if (raw !== undefined && !daily) store.remove(K_DAILY); // corrupted or from an older version: start clean
+    resolveDaily();
+    monoAt = performance.now();
+    // A round that ran out while the tab was closed counts as a miss.
+    if (daily && tickDaily()) saveDaily();
   }
 
   function renderHome() {
-    if (daily && daily.date !== today()) daily = null;
+    resolveDaily();
     $('todayLabel').textContent = prettyDate(today());
     const btn = $('dailyBtn');
     const status = $('dailyStatus');
-    if (!daily) {
+    $('skipStaleBtn').hidden = !stale;
+    if (!daily || (!stale && !daily.round && !daily.results.length)) {
       btn.textContent = "Start today's flight";
       status.textContent = 'The same prompts for every Yellow Jacket, once a day.';
     } else if (daily.finished) {
       const score = C.totalScore(daily.results);
       btn.textContent = "See today's results";
       status.textContent = 'Flown: ' + C.formatNumber(score) + ' pts, ' + C.formatNumber(C.altitudeFeet(score)) + ' ft. Come back tomorrow for a new seven.';
-    } else if (daily.round) {
-      btn.textContent = 'Back to round ' + (daily.round.index + 1) + ' (clock is running)';
-      status.textContent = 'You have a round in progress.';
     } else {
-      btn.textContent = 'Resume at round ' + (daily.results.length + 1) + ' of ' + C.ROUNDS;
-      status.textContent = C.formatNumber(C.totalScore(daily.results)) + ' pts so far.';
+      const which = stale ? "yesterday's flight" : "today's flight";
+      if (daily.round) {
+        btn.textContent = 'Back to round ' + (daily.round.index + 1) + ' (clock is running)';
+        status.textContent = 'You have a round in progress in ' + which + '.';
+      } else {
+        btn.textContent = (stale ? "Finish yesterday's flight: round " : 'Resume at round ') + (daily.results.length + 1) + ' of ' + C.ROUNDS;
+        status.textContent = C.formatNumber(C.totalScore(daily.results)) + ' pts so far' + (stale ? ". Today's seven unlock when you finish." : '.');
+      }
     }
-    const best = store.get(K_BEST, null);
+    const best = getBest();
     $('bestLabel').textContent = best && best.score
-      ? 'Best run: ' + C.formatNumber(best.score) + ' pts across ' + best.answered + ' prompts.'
+      ? 'Best run: ' + C.formatNumber(best.score) + ' pts across ' + best.answered + (best.answered === 1 ? ' prompt.' : ' prompts.')
       : 'No best run yet.';
   }
 
@@ -184,6 +231,12 @@
     showBetween();
   }
 
+  function startToday() {
+    daily = null;
+    stale = false;
+    dailyEnter();
+  }
+
   function showBetween() {
     stopLoop();
     mode = null;
@@ -198,6 +251,7 @@
       const b = $('lastBadge');
       b.className = 'badge tier-' + (last.tier || 'miss');
       b.textContent = last.tier ? C.TIERS[last.tier].label : "Time's up";
+      announce('Round ' + done + ': ' + b.textContent + ', ' + (last.answer ? last.answer + ', ' : '') + 'plus ' + last.points + ' points. Total ' + C.totalScore(daily.results) + ' points.');
       $('lastPoints').textContent = '+' + last.points + ' pts';
       $('lastAnswer').textContent = last.answer || 'No answer';
       const bits = [];
@@ -229,6 +283,7 @@
     if (Date.now() - betweenShownAt < NEXT_GUARD_MS) return;
     if (daily.finished) return showResults();
     C.startRound(daily, Date.now());
+    monoAt = performance.now();
     saveDaily();
     enterDailyRound();
   }
@@ -239,8 +294,10 @@
     for (let i = 0; i < C.ROUNDS; i++) {
       const li = el('li');
       const r = daily.results[i];
-      if (r) li.className = 'tier-' + (r.tier || 'miss');
-      else if (daily.round && daily.round.index === i) li.className = 'now';
+      if (r) {
+        li.className = 'tier-' + (r.tier || 'miss');
+        li.textContent = String(r.points); // the number, so rarity is not shown by colour alone
+      } else if (daily.round && daily.round.index === i) li.className = 'now';
       pips.appendChild(li);
     }
   }
@@ -256,6 +313,7 @@
     lastAnnounced = 0;
     const p = byId[daily.promptIds[daily.round.index]];
     $('pips').hidden = false;
+    $('hud').classList.add('is-daily');
     $('infActions').hidden = true;
     $('pauseNote').hidden = true;
     $('hudText').textContent = 'Round ' + (daily.round.index + 1) + ' of ' + C.ROUNDS;
@@ -266,6 +324,7 @@
     setFeedback('', '');
     renderPips();
     renderTried(daily.round.tried.map((t) => t.text));
+    lastSavedSecond = -1;
     renderClock(C.remainingMs(daily, Date.now()), C.ROUND_MS);
     show('play', $('guess'));
     startLoop();
@@ -273,7 +332,9 @@
 
   function dailySubmit(text) {
     const p = byId[daily.promptIds[daily.round.index]];
-    const r = C.dailyGuess(daily, p, text, Date.now());
+    const mono = performance.now() - monoAt;
+    monoAt = performance.now();
+    const r = C.dailyGuess(daily, p, text, Date.now(), mono);
     if (r.status === 'empty') return;
     if (r.status === 'duplicate') {
       setFeedback('Already tried that one. No time lost.', 'bad');
@@ -342,10 +403,18 @@
     });
 
     const here = window.location;
-    const url = /^https?:$/.test(here.protocol) && !/^(localhost|127\.|\[::1\])/.test(here.host) ? here.origin + here.pathname : '';
+    const url = /^https?:$/.test(here.protocol) ? here.origin + here.pathname.replace(/index\.html$/, '') : '';
     $('shareBox').value = C.shareText(daily.date, daily.results, url);
     $('copyStatus').textContent = '';
+    // After finishing yesterday's run past midnight UTC, today's is already open.
+    const todayOpen = daily.date !== today();
+    $('resNext').hidden = todayOpen;
+    $('resTodayBtn').hidden = !todayOpen;
+    announce('Final score ' + score + ' points, ' + C.altitudeFeet(score) + ' feet above Tech Tower. ' + band.name + '.');
     show('results', $('resBand'));
+    const box = $('shareBox'); // grow the box to its text so no line is cut off on narrow screens
+    box.style.height = 'auto';
+    box.style.height = box.scrollHeight + 4 + 'px';
   }
 
   function copyShare() {
@@ -353,7 +422,7 @@
     const status = $('copyStatus');
     const done = () => {
       status.className = 'feedback good';
-      status.textContent = 'Copied. Go brag.';
+      status.textContent = 'Copied!';
     };
     const fallback = () => {
       box.focus();
@@ -393,9 +462,11 @@
 
   function startInfinite() {
     inf = C.newInfinite(C.shuffle(prompts.map((p) => p.id), Math.random));
+    bestAtStart = getBest();
     mode = 'infinite';
     lastAnnounced = 0;
     $('pips').hidden = true;
+    $('hud').classList.remove('is-daily');
     $('infActions').hidden = false;
     $('guess').value = '';
     $('clockLive').textContent = '';
@@ -435,22 +506,22 @@
   }
 
   function saveBest() {
-    const best = store.get(K_BEST, null);
-    if (!best || inf.score > best.score) store.set(K_BEST, { score: inf.score, answered: inf.answered, date: today() });
+    const best = getBest();
+    if (!best || inf.score > best.score) store.set(K_BEST, { v: C.SAVE_VERSION, score: inf.score, answered: inf.answered });
   }
 
   function endInfinite() {
     stopLoop();
     inf.over = true;
     mode = null;
-    const before = store.get(K_BEST, null);
+    const best = bestAtStart;
     saveBest();
-    const best = store.get(K_BEST, null) || { score: inf.score, answered: inf.answered };
-    const isBest = inf.score > 0 && (!before || inf.score >= before.score);
+    const isBest = inf.score > 0 && (!best || inf.score > best.score);
     $('infTitle').textContent = inf.cleared ? 'You emptied the hive.' : isBest ? 'New best run.' : 'Out of air.';
     $('infScore').textContent = C.formatNumber(inf.score) + ' pts';
     $('infCount').textContent = String(inf.answered);
-    $('infBest').textContent = C.formatNumber(Math.max(best.score, inf.score)) + ' pts';
+    $('infBest').textContent = C.formatNumber(Math.max(best ? best.score : 0, inf.score)) + ' pts';
+    announce('Run over. ' + inf.score + ' points across ' + inf.answered + ' prompts.');
     const list = $('infLog');
     list.textContent = '';
     inf.log.forEach((r, i) => list.appendChild(resultRow(i + 1, byId[r.promptId].text, r.answer, r.tier, r.points)));
@@ -462,13 +533,18 @@
 
   function tick() {
     if (mode === 'daily') {
-      const now = Date.now();
-      if (C.dailyTick(daily, now)) {
+      if (tickDaily()) {
         saveDaily();
         showBetween();
         return;
       }
-      renderClock(C.remainingMs(daily, now), C.ROUND_MS, false);
+      const left = daily.round.leftMs;
+      const second = Math.ceil(left / 1000);
+      if (second !== lastSavedSecond) {
+        lastSavedSecond = second;
+        saveDaily(); // once a second, so a reload or a killed tab resumes within a second of the truth
+      }
+      renderClock(left, C.ROUND_MS, false);
     } else if (mode === 'infinite') {
       const now = performance.now();
       const dt = now - lastTick;
@@ -490,7 +566,7 @@
     });
     if (view === 'home') {
       // Catch a round timing out, or the UTC day rolling over, while the player sits on the home screen.
-      if (daily && C.dailyTick(daily, Date.now())) saveDaily();
+      if (daily && tickDaily()) saveDaily();
       renderHome();
     }
   }
@@ -508,6 +584,19 @@
     $('infHomeBtn').addEventListener('click', goHome);
     $('copyBtn').addEventListener('click', copyShare);
     $('endBtn').addEventListener('click', endInfinite);
+    $('retryBtn').addEventListener('click', () => window.location.reload());
+    $('skipStaleBtn').addEventListener('click', startToday);
+    $('resTodayBtn').addEventListener('click', startToday);
+    // Bank the clock before the page is hidden or unloaded.
+    const bank = () => {
+      if (daily && daily.round) {
+        const ended = tickDaily();
+        saveDaily();
+        if (ended && view === 'play') showBetween();
+      }
+    };
+    document.addEventListener('visibilitychange', bank);
+    window.addEventListener('pagehide', bank);
     $('skipBtn').addEventListener('click', () => {
       C.infiniteSkip(inf);
       $('guess').value = '';
@@ -523,14 +612,18 @@
       else if (mode === 'infinite' && inf) infSubmit(text);
       if (view === 'play') $('guess').focus();
     });
-    const dlg = $('howDlg');
-    $('howBtn').addEventListener('click', () => {
-      if (typeof dlg.showModal === 'function') dlg.showModal();
-      else dlg.setAttribute('open', '');
-    });
+    $('howBtn').addEventListener('click', openHowTo);
     $('howClose').addEventListener('click', () => {
+      const dlg = $('howDlg');
       if (typeof dlg.close !== 'function') dlg.removeAttribute('open');
     });
+  }
+
+  function openHowTo() {
+    const dlg = $('howDlg');
+    if (dlg.open) return;
+    if (typeof dlg.showModal === 'function') dlg.showModal();
+    else dlg.setAttribute('open', '');
   }
 
   function boot() {
@@ -547,6 +640,7 @@
         prompts = data.prompts;
         prompts.forEach((p) => {
           byId[p.id] = p;
+          knownIds.add(p.id);
         });
         loadDaily();
         everySecond();
@@ -554,11 +648,21 @@
         // A refresh mid-run lands back where the player was.
         if (daily && daily.round) enterDailyRound();
         else if (daily && !daily.finished && daily.results.length) showBetween();
-        else goHome();
+        else if (daily && daily.finished) showResults();
+        else {
+          goHome();
+          if (!store.get(K_SEEN, null)) {
+            store.set(K_SEEN, { v: C.SAVE_VERSION });
+            openHowTo();
+          }
+        }
       })
       .catch((err) => {
-        $('errorText').textContent = 'The prompt bank could not be loaded (' + err.message + ').';
-        show('error');
+        $('errorText').textContent = window.location.protocol === 'file:'
+          ? 'This page was opened straight from a file, and browsers block the game data that way. Serve the folder over HTTP instead (for example: npx serve .).'
+          : 'The game data did not load. Check your connection and try again.';
+        $('errorDetail').textContent = 'Details: ' + (err && err.message ? err.message : 'unknown error');
+        show('error', $('retryBtn'));
       });
   }
 

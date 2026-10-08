@@ -6,6 +6,21 @@
   <title>One in a Swarm — the Georgia Tech rare-answer game</title>
   <meta name="description" content="A daily Georgia Tech word game. Seven prompts, 25 seconds each. The rarer your answer, the higher you fly.">
   <meta name="color-scheme" content="light dark">
+  <!-- Link previews need absolute URLs. Update these four if the site moves (see README.md). -->
+  <link rel="canonical" href="https://bradbartel101.github.io/one-in-a-swarm/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="One in a Swarm">
+  <meta property="og:title" content="One in a Swarm — the Georgia Tech rare-answer game">
+  <meta property="og:description" content="Seven Georgia Tech prompts a day. The obvious answer is worth almost nothing. Find the one nobody else thinks of.">
+  <meta property="og:url" content="https://bradbartel101.github.io/one-in-a-swarm/">
+  <meta property="og:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="One in a Swarm: a gold hexagon bee over a navy honeycomb, with the line 'Don't say the obvious thing.'">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="One in a Swarm — the Georgia Tech rare-answer game">
+  <meta name="twitter:description" content="Seven Georgia Tech prompts a day. The obvious answer is worth almost nothing.">
+  <meta name="twitter:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
   <meta name="theme-color" content="#003057">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7-12-7V9z' fill='%23B3A369' stroke='%23003057' stroke-width='2'/%3E%3Cpath d='M8 13h16M8 19h16' stroke='%23003057' stroke-width='3'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
@@ -26,6 +41,8 @@
     <button type="button" class="btn btn-quiet" id="howBtn">How to play</button>
   </header>
 
+  <p class="sr-only" id="announce" role="status" aria-live="polite" aria-atomic="true"></p>
+
   <main id="app">
     <section data-view="loading" class="card center">
       <p>Waking the hive…</p>
@@ -33,8 +50,9 @@
 
     <section data-view="error" class="card" hidden>
       <h1>The hive is empty</h1>
-      <p id="errorText">The prompt bank could not be loaded.</p>
-      <p>This game needs to be served over HTTP. From the project folder, run <code>npx serve .</code> and open the address it prints.</p>
+      <p id="errorText">The game data did not load.</p>
+      <p><button type="button" class="btn btn-primary" id="retryBtn">Try again</button></p>
+      <p class="muted small" id="errorDetail"></p>
     </section>
 
     <section data-view="home" hidden>
@@ -49,6 +67,7 @@
           <h2>Today's seven</h2>
           <p id="dailyStatus" class="muted">The same prompts for every Yellow Jacket, once a day.</p>
           <button type="button" class="btn btn-primary btn-big" id="dailyBtn">Start today's flight</button>
+          <button type="button" class="btn btn-quiet btn-big" id="skipStaleBtn" hidden>Skip it and start today's</button>
           <p class="muted small">New prompts in <span class="js-countdown">--:--:--</span> (00:00 UTC)</p>
         </article>
 
@@ -86,7 +105,7 @@
     </section>
 
     <section data-view="play" hidden>
-      <div class="hud">
+      <div class="hud" id="hud">
         <div class="hud-left">
           <ol class="pips" id="pips" aria-hidden="true"></ol>
           <p class="hud-text" id="hudText"></p>
@@ -94,7 +113,7 @@
         <div class="clock" id="clock"><span id="clockNum">25</span><span class="clock-unit">s</span></div>
       </div>
       <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
-      <p class="sr-only" id="clockLive" aria-live="assertive"></p>
+      <p class="sr-only" id="clockLive" role="timer" aria-live="assertive" aria-atomic="true"></p>
       <p class="pause-note" id="pauseNote" hidden>Clock paused. It runs while the answer box is active.</p>
 
       <div class="card prompt-card">
@@ -155,8 +174,9 @@
       </div>
 
       <div class="card center">
-        <p>Next flight in <strong class="js-countdown">--:--:--</strong></p>
+        <p id="resNext">Next flight in <strong class="js-countdown">--:--:--</strong></p>
         <div class="row row-center">
+          <button type="button" class="btn btn-primary" id="resTodayBtn" hidden>Start today's flight</button>
           <button type="button" class="btn btn-gold" id="resInfBtn">Play Swarm mode</button>
           <button type="button" class="btn btn-quiet" id="resHomeBtn">Home</button>
         </div>
@@ -193,12 +213,12 @@
       <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, and common short names count (CULC is Clough).</li>
       <li><strong>Swarm mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3 seconds, a skip costs 5.</li>
     </ul>
-    <p class="muted small">Rarity tiers are editorial guesses, not measured from real players. An unofficial fan project, not affiliated with or endorsed by the Georgia Institute of Technology.</p>
+    <p class="muted small">Rarity tiers are editorial guesses, not measured from real players. Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</p>
     <form method="dialog"><button class="btn btn-primary" id="howClose">Got it</button></form>
   </dialog>
 
   <footer class="foot">
-    <p>An unofficial fan project. Not affiliated with or endorsed by Georgia Tech.</p>
+    <p id="footText">Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</p>
   </footer>
 
   <script src="js/core.js"></script>
