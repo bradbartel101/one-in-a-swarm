@@ -62,7 +62,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e `first visit: how-to dialog opens once, never again`: open on first load with focus on its button, closed after reload, still available from the header.
 - [x] E3 Title, meta description, favicon, Open Graph/Twitter tags, original 1200x630 preview image
   - Evidence: unit `E3` (title, description, inline SVG favicon, og:* and twitter:* tags, assets/og.png is a 1200x630 PNG, 74 KB) and e2e metadata check. Image is original (hexagons and stripes), rendered by tools/make-og.js. The absolute URL is a guess: HUMAN-TODO section 3.
-- [ ] E4 Footer disclaimer; no official GT logos, wordmarks or Buzz
+- [x] E4 Footer disclaimer; no official GT logos, wordmarks or Buzz
+  - Evidence: unit `E4 / E5` and e2e assert the exact footer sentence on index.html and 404.html. The only artwork is an inline hexagon-and-stripes SVG and assets/og.png; no <img> tags, no GT marks, no Buzz.
 - [ ] E5 A simple 404.html
 
 ## F. Code quality and performance
