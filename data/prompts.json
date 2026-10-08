@@ -33,17 +33,21 @@
         {"name":"Computational Media","tier":"rare","aliases":["CM"]},
         {"name":"International Affairs","tier":"rare","aliases":["INTA"]},
         {"name":"Public Policy","tier":"rare","aliases":["PUBP"]},
-        {"name":"Earth and Atmospheric Sciences","tier":"deep","aliases":["EAS"]},
         {"name":"History, Technology, and Society","tier":"deep","aliases":["HTS"]},
         {"name":"Music Technology","tier":"deep","aliases":["Music Tech"]},
         {"name":"Applied Languages and Intercultural Studies","tier":"deep","aliases":["ALIS"]},
         {"name":"Economics and International Affairs","tier":"deep","aliases":["EIA"]},
         {"name":"International Affairs and Modern Languages","tier":"deep","aliases":["International Affairs and Modern Language","IAML"]},
         {"name":"Global Economics and Modern Languages","tier":"swarm","aliases":["GEML"]},
-        {"name":"Building Construction","tier":"deep","aliases":["BC"],"verify":true,"verifyReason":"Confirm the B.S. in Building Construction is still offered."},
-        {"name":"Applied Physics","tier":"deep","verify":true,"verifyReason":"Confirm Applied Physics is a separate B.S. and not a track within Physics."},
-        {"name":"Environmental Science","tier":"rare","verify":true,"verifyReason":"Believed to be a newer B.S. (around 2023); confirm it exists."},
-        {"name":"Atmospheric and Oceanic Sciences","tier":"deep","aliases":["AOS"],"verify":true,"verifyReason":"Believed to be a newer B.S. split from EAS; confirm."}
+        {"name":"Solid Earth and Planetary Sciences","tier":"deep"},
+        {"name":"Astrophysics","tier":"deep"},
+        {"name":"Mathematics and Computing","tier":"deep"},
+        {"name":"Urban Planning and Spatial Analytics","tier":"deep"},
+        {"name":"Arts, Entertainment, and Creative Technologies","tier":"deep","aliases":["AECT"]},
+        {"name":"Construction Science and Management","tier":"deep","aliases":["Construction Science"]},
+        {"name":"Applied Physics","tier":"deep"},
+        {"name":"Environmental Science","tier":"rare"},
+        {"name":"Atmospheric and Oceanic Sciences","tier":"deep","aliases":["AOS"]}
       ]
     },
     {
@@ -140,16 +144,13 @@
         {"name":"Graduate Living Center","tier":"deep","aliases":["GLC"]},
         {"name":"Fourth Street Apartments","tier":"deep","aliases":["4th Street"]},
         {"name":"Tenth and Home","tier":"swarm","aliases":["10th and Home","Family Housing"]},
-        {"name":"Nelson-Shell Apartments","tier":"rare","aliases":["NSL","Undergraduate Living Center","ULC"],"verify":true,"verifyReason":"Confirm the Undergraduate Living Center was renamed Nelson-Shell."},
-        {"name":"Techwood Dormitory","tier":"deep","aliases":["Techwood","McDaniel Dormitory"],"verify":true,"verifyReason":"Demolished east-campus dorm; confirm the name."},
-        {"name":"Burge Apartments","tier":"deep","verify":true,"verifyReason":"Demolished married-student housing; confirm the name."},
-        {"name":"Curran Street Residence Hall","tier":"deep","aliases":["Curran"],"verify":true,"verifyReason":"New first-year hall on west campus; confirm it opened and its name."}
+        {"name":"Nelson-Shell Apartments","tier":"rare","aliases":["NSL"]}
       ]
     },
     {
       "id": "dining",
       "category": "Campus Life",
-      "text": "Name a spot where Yellow Jackets grab a bite or a coffee, on or right around campus (past or present)",
+      "text": "Name a spot to grab a bite or a coffee on or right around campus, past or present",
       "answers": [
         {"name":"Brittain Dining Hall","tier":"common","aliases":["Brittain","Brit"]},
         {"name":"North Avenue Dining Hall","tier":"common","aliases":["North Ave Dining","Nave","North Avenue Dining","North Ave"]},
@@ -173,14 +174,9 @@
         {"name":"Antico Pizza","tier":"rare","aliases":["Antico","Antico Pizza Napoletana"]},
         {"name":"Sublime Doughnuts","tier":"deep","aliases":["Sublime","Sublime Donuts"]},
         {"name":"Ferst Place","tier":"swarm","aliases":["Ferst Place Restaurant"]},
-        {"name":"Twisted Taco","tier":"rare","verify":true,"verifyReason":"Believed to have been in the Student Center Commons; confirm."},
-        {"name":"Burdell's","tier":"rare","verify":true,"verifyReason":"Believed to be the Student Center convenience store; confirm the name and that it fits \"grab a bite\"."},
-        {"name":"Einstein Bros. Bagels","tier":"rare","aliases":["Einstein Bros","Einsteins","Einstein Bagels"],"verify":true,"verifyReason":"Confirm there was one on campus."},
-        {"name":"Taco Bell","tier":"rare","verify":true,"verifyReason":"Believed to have been in the old Student Center food court; confirm."},
-        {"name":"Pizza Hut","tier":"deep","verify":true,"verifyReason":"Believed to have been in the old Student Center food court; confirm."},
-        {"name":"Highland Bakery","tier":"rare","verify":true,"verifyReason":"Believed to have had a campus location; confirm."},
-        {"name":"Chipotle","tier":"rare","verify":true,"verifyReason":"Believed to have a Tech Square location; confirm."},
-        {"name":"Atwoods","tier":"rare","aliases":["Atwoods Pizza Cafe","Atwoods Pizza"],"verify":true,"verifyReason":"Believed to be in Tech Square; confirm the name."}
+        {"name":"Twisted Taco","tier":"rare"},
+        {"name":"Dunkin'","tier":"solid","aliases":["Dunkin Donuts"]},
+        {"name":"Carnegie Kitchen","tier":"rare"}
       ]
     },
     {
@@ -227,7 +223,7 @@
         {"name":"Tom Fanning","tier":"deep","aliases":["Thomas Fanning"]},
         {"name":"Brook Byers","tier":"deep"},
         {"name":"Y. Frank Freeman","tier":"swarm","aliases":["Frank Freeman"],"note":"Paramount Pictures executive and the first winner of the Academy's Jean Hersholt Humanitarian Award."},
-        {"name":"Dennis Hayes","tier":"deep","verify":true,"verifyReason":"The modem pioneer is believed to have attended Tech without graduating; confirm."}
+        {"name":"Dennis Hayes","tier":"deep"}
       ]
     },
     {
@@ -268,8 +264,7 @@
         {"name":"Mario West","tier":"deep"},
         {"name":"Alvin Jones","tier":"deep"},
         {"name":"Fred Vinson","tier":"deep"},
-        {"name":"Craig Neal","tier":"swarm"},
-        {"name":"Isma'il Muhammad","tier":"deep","verify":true,"verifyReason":"Confirm he appeared in an NBA regular-season game."}
+        {"name":"Craig Neal","tier":"swarm"}
       ]
     },
     {
@@ -374,7 +369,7 @@
         {"name":"Charlie Rymer","tier":"deep"},
         {"name":"Tripp Isenhour","tier":"deep"},
         {"name":"Riccardo Ingram","tier":"swarm","note":"ACC Player of the Year in baseball who also played safety for the football team."},
-        {"name":"Marlon Byrd","tier":"deep","verify":true,"verifyReason":"Believed to have started his college career at Tech before transferring; confirm."}
+        {"name":"Marlon Byrd","tier":"deep"}
       ]
     },
     {
@@ -415,9 +410,9 @@
         {"name":"Yellow Jacket Alley","tier":"deep"},
         {"name":"TEAM Buzz","tier":"deep"},
         {"name":"Sideways","tier":"swarm","aliases":["Sideways the Dog"],"note":"The campus dog of the 1940s, named for the way she walked. Her grave is beside Tech Tower."},
-        {"name":"Midnight Breakfast","tier":"deep","verify":true,"verifyReason":"Confirm this finals-week event is an established tradition under this name."},
-        {"name":"Mock Rock","tier":"deep","verify":true,"verifyReason":"Believed to be a Homecoming event; confirm."},
-        {"name":"Goldfellas","tier":"deep","verify":true,"verifyReason":"Believed to be the body-painted student fan group; confirm the name."}
+        {"name":"Midnight Breakfast","tier":"deep"},
+        {"name":"Mock Rock","tier":"deep"},
+        {"name":"Goldfellas","tier":"deep"}
       ]
     },
     {
@@ -480,7 +475,7 @@
     {
       "id": "conference",
       "category": "Sports History",
-      "text": "Name a school that has shared a conference with Georgia Tech (ACC, SEC, Southern, or Metro)",
+      "text": "Name a school that has shared a conference with Tech (ACC, SEC, Southern, or Metro)",
       "answers": [
         {"name":"Clemson","tier":"common"},
         {"name":"Georgia","tier":"common","aliases":["UGA","University of Georgia"],"note":"Charter SEC members together, until Tech walked out in 1964."},
@@ -547,9 +542,9 @@
         {"name":"Aloha Bowl","tier":"rare"},
         {"name":"Carquest Bowl","tier":"deep"},
         {"name":"Bluebonnet Bowl","tier":"deep"},
-        {"name":"All-American Bowl","tier":"deep"},
+        {"name":"Hall of Fame Classic","tier":"deep","aliases":["All-American Bowl"],"note":"The 1985 win over Michigan State in Birmingham."},
         {"name":"Oil Bowl","tier":"swarm","note":"January 1947, a 41-19 win over Saint Mary's."},
-        {"name":"Pop-Tarts Bowl","tier":"rare","verify":true,"verifyReason":"Believed to be the 2025 season's bowl; confirm. This prompt has exactly 25 answers."}
+        {"name":"Pop-Tarts Bowl","tier":"rare"}
       ]
     },
     {
@@ -560,11 +555,11 @@
       "answers": [
         {"name":"CS 1301","tier":"common","note":"Intro to Computing"},
         {"name":"CS 1331","tier":"common","note":"Intro to Object-Oriented Programming"},
-        {"name":"CS 1332","tier":"common","note":"Data Structures and Algorithms"},
+        {"name":"CS 1332","tier":"common","note":"Data Structures and Algorithms for Applications"},
         {"name":"CS 2110","tier":"clever","note":"Computer Organization and Programming"},
         {"name":"CS 1371","tier":"clever","note":"Computing for Engineers, better known as \"the MATLAB class\""},
         {"name":"CS 2050","tier":"solid","note":"Intro to Discrete Math for CS"},
-        {"name":"CS 2200","tier":"solid","note":"Systems and Networks"},
+        {"name":"CS 2200","tier":"solid","note":"Computer Systems and Networks"},
         {"name":"CS 2340","tier":"solid","note":"Objects and Design"},
         {"name":"CS 3510","tier":"solid","note":"Design and Analysis of Algorithms"},
         {"name":"CS 3600","tier":"solid","note":"Intro to Artificial Intelligence"},
@@ -573,20 +568,20 @@
         {"name":"CS 3210","tier":"solid","note":"Design of Operating Systems"},
         {"name":"CS 3251","tier":"solid","note":"Computer Networking I"},
         {"name":"CS 4001","tier":"solid","note":"Computing, Society, and Professionalism"},
-        {"name":"CS 1100","tier":"rare","note":"Freshman Leap Seminar"},
+        {"name":"CS 1100","tier":"rare","note":"Pathways in Computing, long known as the Freshman Leap Seminar"},
         {"name":"CS 2051","tier":"rare","note":"Honors Discrete Math"},
         {"name":"CS 3240","tier":"rare","note":"Languages and Computation"},
-        {"name":"CS 3220","tier":"rare","note":"Processor Design"},
+        {"name":"CS 3220","tier":"rare","note":"Computer Structures: Hardware/Software Codesign of a Processor"},
         {"name":"CS 3311","tier":"rare","note":"Project Design (Junior Design, part one)"},
         {"name":"CS 3312","tier":"rare","note":"Project Implementation (Junior Design, part two)"},
         {"name":"CS 3451","tier":"rare","note":"Computer Graphics"},
-        {"name":"CS 3630","tier":"rare","note":"Intro to Robotics and Perception"},
-        {"name":"CS 3750","tier":"rare","note":"User Interface Design"},
+        {"name":"CS 3630","tier":"rare","note":"Intro to Perception and Robotics"},
+        {"name":"CS 3750","tier":"rare","note":"Human-Computer Interface Design and Evaluation"},
         {"name":"CS 4235","tier":"rare","note":"Intro to Information Security"},
         {"name":"CS 4476","tier":"rare","note":"Computer Vision"},
-        {"name":"CS 4510","tier":"rare","note":"Automata and Complexity"},
+        {"name":"CS 4510","tier":"rare","note":"Automata and Complexity Theory"},
         {"name":"CS 4540","tier":"rare","note":"Advanced Algorithms"},
-        {"name":"CS 4650","tier":"rare","note":"Natural Language Processing"},
+        {"name":"CS 4650","tier":"rare","note":"Natural Language Understanding"},
         {"name":"CS 4731","tier":"rare","note":"Game AI"},
         {"name":"CS 6515","tier":"rare","note":"Intro to Graduate Algorithms"},
         {"name":"CS 6035","tier":"rare","note":"Intro to Information Security"},
@@ -594,15 +589,15 @@
         {"name":"CS 6200","tier":"rare","note":"Graduate Intro to Operating Systems"},
         {"name":"CS 4803","tier":"rare","note":"Special Topics"},
         {"name":"CS 1315","tier":"deep","note":"Intro to Media Computation"},
-        {"name":"CS 2261","tier":"deep","note":"Media Device Architecture"},
+        {"name":"CS 2261","tier":"deep","note":"Media Device Architectures"},
         {"name":"CS 3511","tier":"deep","note":"Algorithms Honors"},
-        {"name":"CS 4240","tier":"deep","note":"Compilers and Interpreters"},
+        {"name":"CS 4240","tier":"deep","note":"Compilers, Interpreters, and Program Analyzers"},
         {"name":"CS 4261","tier":"deep","note":"Mobile Apps and Services"},
         {"name":"CS 4290","tier":"deep","note":"Advanced Computer Organization"},
         {"name":"CS 4460","tier":"deep","note":"Information Visualization"},
         {"name":"CS 4646","tier":"deep","note":"Machine Learning for Trading"},
         {"name":"CS 4649","tier":"deep","note":"Robot Intelligence: Planning"},
-        {"name":"CS 4455","tier":"deep","note":"Video Game Design"},
+        {"name":"CS 4455","tier":"deep","note":"Video Game Design and Programming"},
         {"name":"CS 4210","tier":"deep","note":"Advanced Operating Systems"},
         {"name":"CS 6601","tier":"deep","note":"Artificial Intelligence"},
         {"name":"CS 6750","tier":"deep","note":"Human-Computer Interaction"},
@@ -617,10 +612,10 @@
         {"name":"CS 6210","tier":"deep","note":"Advanced Operating Systems"},
         {"name":"CS 8803","tier":"deep","note":"Special Topics"},
         {"name":"CS 4496","tier":"swarm","note":"Computer Animation"},
-        {"name":"CS 3001","tier":"deep","note":"Computing, Society, and Professionalism","verify":true,"verifyReason":"Believed to be the renumbered CS 4001; confirm."},
-        {"name":"CS 4590","tier":"deep","note":"Computer Audio","verify":true,"verifyReason":"Confirm number and title."},
-        {"name":"CS 4605","tier":"deep","note":"Mobile and Ubiquitous Computing","verify":true,"verifyReason":"Confirm number and title."},
-        {"name":"CS 4220","tier":"deep","note":"Embedded Systems","verify":true,"verifyReason":"Confirm number and title."}
+        {"name":"CS 3001","tier":"deep","note":"Computing, Society, and Professionalism"},
+        {"name":"CS 4590","tier":"deep","note":"Principles and Applications of Computer Audio"},
+        {"name":"CS 4605","tier":"deep","note":"Mobile and Ubiquitous Computing"},
+        {"name":"CS 4220","tier":"deep","note":"Programming Embedded Systems"}
       ]
     },
     {
@@ -722,9 +717,7 @@
         {"name":"Holly Street","tier":"deep"},
         {"name":"Ivan Allen Jr. Boulevard","tier":"deep","aliases":["Ivan Allen"]},
         {"name":"Centennial Olympic Park Drive","tier":"deep"},
-        {"name":"Uncle Heinie Way","tier":"swarm"},
-        {"name":"Greenfield Street","tier":"deep","verify":true,"verifyReason":"Believed to be a small street near west campus and Home Park; confirm."},
-        {"name":"Power Plant Drive","tier":"deep","verify":true,"verifyReason":"Believed to be a campus service road; confirm the name."}
+        {"name":"Uncle Heinie Way","tier":"swarm"}
       ]
     },
     {
@@ -770,7 +763,7 @@
         {"name":"Lakewood/Fort McPherson","tier":"deep","aliases":["Lakewood","Fort McPherson","Lakewood Ft McPherson"]},
         {"name":"Hamilton E. Holmes","tier":"deep","aliases":["H.E. Holmes","Holmes","Hightower"]},
         {"name":"West Lake","tier":"swarm"},
-        {"name":"GWCC/CNN Center","tier":"deep","aliases":["CNN Center","GWCC","Dome","Dome/GWCC/Philips Arena/CNN Center","SEC District"],"verify":true,"verifyReason":"Confirm the current station name; believed to have been renamed SEC District."}
+        {"name":"SEC District","tier":"deep","aliases":["GWCC/CNN Center","CNN Center","GWCC","Dome","Dome/GWCC/Philips Arena/CNN Center","Omni"],"note":"Called GWCC/CNN Center until December 2025."}
       ]
     },
     {
@@ -874,7 +867,7 @@
     {
       "id": "olympics",
       "category": "Sports History",
-      "text": "Tech was the 1996 Olympic Village. Name a sport or discipline contested at the Atlanta Summer Games.",
+      "text": "Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games.",
       "answers": [
         {"name":"Swimming","tier":"common","note":"Raced in Tech's own Aquatic Center."},
         {"name":"Basketball","tier":"common"},
@@ -1017,10 +1010,10 @@
         {"name":"Phi Beta Sigma","tier":"deep"},
         {"name":"Zeta Phi Beta","tier":"deep"},
         {"name":"Theta Xi","tier":"swarm"},
-        {"name":"Sigma Gamma Rho","tier":"deep","verify":true,"verifyReason":"Confirm a chapter at Tech."},
-        {"name":"Alpha Delta Chi","tier":"deep","verify":true,"verifyReason":"Confirm a chapter at Tech."},
-        {"name":"Triangle","tier":"deep","verify":true,"verifyReason":"Confirm a chapter or colony at Tech."},
-        {"name":"Phi Kappa Psi","tier":"deep","aliases":["Phi Psi"],"verify":true,"verifyReason":"Confirm a chapter at Tech."}
+        {"name":"Sigma Gamma Rho","tier":"deep"},
+        {"name":"Alpha Delta Chi","tier":"deep"},
+        {"name":"Triangle","tier":"deep","aliases":["Triangle Fraternity"]},
+        {"name":"Phi Kappa Psi","tier":"deep","aliases":["Phi Psi"]}
       ]
     },
     {
@@ -1059,7 +1052,7 @@
         {"name":"Atlanta Ruckus","tier":"deep","aliases":["Ruckus"]},
         {"name":"Hawks Talon GC","tier":"deep","aliases":["Hawks Talon"]},
         {"name":"Georgia Swarm","tier":"swarm","aliases":["Swarm"],"note":"Pro box lacrosse, out in Duluth. One in a Swarm, literally."},
-        {"name":"Atlanta Fire Ants","tier":"deep","aliases":["Fire Ants"],"verify":true,"verifyReason":"Believed to be a 1990s pro roller hockey team; confirm."}
+        {"name":"Atlanta Fire Ants","tier":"deep","aliases":["Fire Ants"]}
       ]
     },
     {
@@ -1110,8 +1103,8 @@
         {"name":"Puggy Blackmon","tier":"deep"},
         {"name":"Tonya Johnson","tier":"deep"},
         {"name":"Freddie Lanoue","tier":"swarm","aliases":["Fred Lanoue"],"note":"The drownproofing legend also coached Tech's swimmers."},
-        {"name":"James Ramsey","tier":"deep","verify":true,"verifyReason":"Believed to have succeeded Danny Hall as baseball coach; confirm."},
-        {"name":"Karen Blair","tier":"deep","verify":true,"verifyReason":"Believed to be the women's basketball coach hired in 2025; confirm."}
+        {"name":"James Ramsey","tier":"deep"},
+        {"name":"Karen Blair","tier":"deep"}
       ]
     },
     {
@@ -1156,15 +1149,14 @@
         {"name":"Stan Gann","tier":"deep"},
         {"name":"Darrell Crawford","tier":"deep"},
         {"name":"Frank Broyles","tier":"swarm","note":"Better known as Arkansas's coach and athletic director, he quarterbacked Tech in the 1940s."},
-        {"name":"Jaybo Shaw","tier":"rare","verify":true,"verifyReason":"Confirm he started a game at quarterback (believed 2008)."},
-        {"name":"Lucas Johnson","tier":"rare","verify":true,"verifyReason":"Confirm he started a game at quarterback (believed 2019)."},
-        {"name":"Damarius Bilbo","tier":"deep","verify":true,"verifyReason":"Confirm he started at quarterback before moving to receiver."}
+        {"name":"Jaybo Shaw","tier":"rare"},
+        {"name":"Lucas Johnson","tier":"rare"}
       ]
     },
     {
       "id": "corecourses",
       "category": "Academics",
-      "text": "Name a non-CS course that haunts Tech transcripts, by subject and number (like \"MATH 1554\")",
+      "text": "Name a non-CS course by subject and number (like \"MATH 1554\")",
       "answers": [
         {"name":"MATH 1554","tier":"common","note":"Linear Algebra"},
         {"name":"MATH 1551","tier":"common","note":"Differential Calculus"},
@@ -1222,10 +1214,7 @@
         {"name":"ISYE 3232","tier":"deep","note":"Stochastic Manufacturing and Service Systems"},
         {"name":"ISYE 3133","tier":"deep","note":"Engineering Optimization"},
         {"name":"CHBE 2100","tier":"deep","note":"Chemical Process Principles"},
-        {"name":"LMC 3403","tier":"swarm","note":"Technical Communication"},
-        {"name":"MGT 2250","tier":"deep","note":"Management Statistics","verify":true,"verifyReason":"Confirm number and title."},
-        {"name":"BMED 2110","tier":"deep","note":"Conservation Principles in BME","verify":true,"verifyReason":"Believed to have been renumbered; confirm."},
-        {"name":"INTA 1200","tier":"rare","note":"American Government in Comparative Perspective","verify":true,"verifyReason":"Confirm number and title."}
+        {"name":"LMC 3403","tier":"swarm","note":"Technical Communication"}
       ]
     },
     {
@@ -1343,14 +1332,13 @@
         {"name":"NS","tier":"deep","note":"Naval Science."},
         {"name":"AS","tier":"deep","note":"Aerospace Studies (Air Force ROTC)."},
         {"name":"MP","tier":"deep","note":"Medical Physics."},
-        {"name":"CETL","tier":"swarm","note":"Center for Teaching and Learning courses, mostly taken by teaching assistants."},
-        {"name":"PTFE","tier":"deep","verify":true,"verifyReason":"Polymer, Textile and Fiber Engineering; confirm the code is still in the catalog."}
+        {"name":"CETL","tier":"swarm","note":"Center for Teaching and Learning courses, mostly taken by teaching assistants."}
       ]
     },
     {
       "id": "techs",
       "category": "Rivals",
-      "text": "Tech isn't the only Tech. Name another U.S. school that goes by \"Tech\" or \"Institute of Technology\"",
+      "text": "Name another U.S. school that goes by \"Tech\" or \"Institute of Technology\"",
       "answers": [
         {"name":"Virginia Tech","tier":"common","aliases":["VT","Virginia Polytechnic Institute","VPI"]},
         {"name":"Texas Tech","tier":"common","aliases":["Texas Tech University","TTU"]},
@@ -1392,7 +1380,7 @@
     {
       "id": "systems",
       "category": "Campus Life",
-      "text": "Name a system, app, or ride every Tech student has wrestled with (registering, coursework, getting around)",
+      "text": "Name a system, app, or ride every Tech student has wrestled with",
       "answers": [
         {"name":"Canvas","tier":"common"},
         {"name":"OSCAR","tier":"common","note":"Online Student Computer Assisted Registration."},
@@ -1426,11 +1414,10 @@
         {"name":"Techworks","tier":"deep"},
         {"name":"Sakai","tier":"deep","note":"The software underneath T-Square."},
         {"name":"SUMS","tier":"swarm","note":"The Shared User Management System, for booking lab and makerspace equipment."},
-        {"name":"GTwifi","tier":"rare","verify":true,"verifyReason":"Confirm the campus network name."},
-        {"name":"Passio GO","tier":"deep","aliases":["Passio"],"verify":true,"verifyReason":"Believed to be the current bus-tracking app; confirm."},
-        {"name":"LiveSafe","tier":"deep","verify":true,"verifyReason":"Believed to be the campus safety app; confirm."},
-        {"name":"BuzzFunds","tier":"deep","verify":true,"verifyReason":"Confirm the name of the BuzzCard money account."},
-        {"name":"Zimbra","tier":"deep","verify":true,"verifyReason":"Believed to be the old student email system; confirm."}
+        {"name":"GTwifi","tier":"rare","note":"The campus network until eduroam replaced it in 2018."},
+        {"name":"Passio GO","tier":"deep","aliases":["Passio"],"note":"The bus tracker before TransLoc."},
+        {"name":"TransLoc","tier":"rare","note":"Bus tracking and Stingerette requests in one app."},
+        {"name":"LiveSafe","tier":"deep"}
       ]
     },
     {
@@ -1524,10 +1511,9 @@
         {"name":"Gardner-Webb","tier":"deep"},
         {"name":"Middle Tennessee","tier":"deep","aliases":["MTSU","Middle Tennessee State"]},
         {"name":"South Carolina State","tier":"deep"},
-        {"name":"Carlisle","tier":"swarm","aliases":["Carlisle Indian School"],"note":"Heisman's 1917 national champions beat the famous Carlisle Indians 98-0."},
-        {"name":"Colorado","tier":"rare","verify":true,"verifyReason":"Believed to be a 2025 season-opening win; confirm."},
-        {"name":"Kennesaw State","tier":"rare","verify":true,"verifyReason":"Believed to be a 2021 win; confirm."},
-        {"name":"Sewanee","tier":"deep","verify":true,"verifyReason":"Tech played Sewanee often in the early 1900s; confirm at least one win."}
+        {"name":"Carlisle","tier":"swarm","aliases":["Carlisle Indian School"],"note":"Heisman's 1917 national champions won this one 98-0."},
+        {"name":"Colorado","tier":"rare"},
+        {"name":"Kennesaw State","tier":"rare"}
       ]
     }
   ]

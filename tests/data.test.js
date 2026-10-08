@@ -101,7 +101,7 @@ test('VERIFY.md lists every answer marked verify, and nothing else', () => {
       assert.ok(md.includes('**' + a.name + '**'), 'VERIFY.md is missing ' + p.id + ': ' + a.name);
     });
   });
-  assert.ok(flagged > 0);
+  if (!flagged) assert.match(md, /No answer is currently flagged/);
   assert.equal(listed, flagged, 'VERIFY.md lists ' + listed + ' items but the data flags ' + flagged);
 });
 

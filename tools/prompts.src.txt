@@ -30,17 +30,21 @@ R Economics | Econ
 R Computational Media | CM
 R International Affairs | INTA
 R Public Policy | PUBP
-D Earth and Atmospheric Sciences | EAS
 D History, Technology, and Society | HTS
 D Music Technology | Music Tech
 D Applied Languages and Intercultural Studies | ALIS
 D Economics and International Affairs | EIA
 D International Affairs and Modern Languages | International Affairs and Modern Language | IAML
 X Global Economics and Modern Languages | GEML
-?D Building Construction | BC ?? Confirm the B.S. in Building Construction is still offered.
-?D Applied Physics ?? Confirm Applied Physics is a separate B.S. and not a track within Physics.
-?R Environmental Science ?? Believed to be a newer B.S. (around 2023); confirm it exists.
-?D Atmospheric and Oceanic Sciences | AOS ?? Believed to be a newer B.S. split from EAS; confirm.
+D Solid Earth and Planetary Sciences
+D Astrophysics
+D Mathematics and Computing
+D Urban Planning and Spatial Analytics
+D Arts, Entertainment, and Creative Technologies | AECT
+D Construction Science and Management | Construction Science
+D Applied Physics
+R Environmental Science
+D Atmospheric and Oceanic Sciences | AOS
 
 @buildings | Campus | Name an academic or research building on Tech's campus | strip=building,hall,bldg
 C Tech Tower | Lettie Pate Whitehead Evans Administration Building | Administration Building | Evans Administration Building
@@ -125,12 +129,9 @@ R Zbar Apartments
 D Graduate Living Center | GLC
 D Fourth Street Apartments | Fourth Street | 4th Street
 X Tenth and Home | 10th and Home | Family Housing
-?R Nelson-Shell Apartments | NSL | Undergraduate Living Center | ULC ?? Confirm the Undergraduate Living Center was renamed Nelson-Shell.
-?D Techwood Dormitory | Techwood | McDaniel Dormitory ?? Demolished east-campus dorm; confirm the name.
-?D Burge Apartments | Burge ?? Demolished married-student housing; confirm the name.
-?D Curran Street Residence Hall | Curran Street | Curran ?? New first-year hall on west campus; confirm it opened and its name.
+R Nelson-Shell Apartments | NSL
 
-@dining | Campus Life | Name a spot where Yellow Jackets grab a bite or a coffee, on or right around campus (past or present)
+@dining | Campus Life | Name a spot to grab a bite or a coffee on or right around campus, past or present
 C Brittain Dining Hall | Brittain | Brit
 C North Avenue Dining Hall | North Ave Dining | Nave | North Avenue Dining | North Ave
 C West Village | Willage | West Village Dining Commons
@@ -153,14 +154,9 @@ R Cypress Street Pint & Plate | Cypress Street | Cypress
 R Antico Pizza | Antico | Antico Pizza Napoletana
 D Sublime Doughnuts | Sublime | Sublime Donuts
 X Ferst Place | Ferst Place Restaurant
-?R Twisted Taco ?? Believed to have been in the Student Center Commons; confirm.
-?R Burdell's ?? Believed to be the Student Center convenience store; confirm the name and that it fits "grab a bite".
-?R Einstein Bros. Bagels | Einstein Bros | Einsteins | Einstein Bagels ?? Confirm there was one on campus.
-?R Taco Bell ?? Believed to have been in the old Student Center food court; confirm.
-?D Pizza Hut ?? Believed to have been in the old Student Center food court; confirm.
-?R Highland Bakery ?? Believed to have had a campus location; confirm.
-?R Chipotle ?? Believed to have a Tech Square location; confirm.
-?R Atwoods | Atwoods Pizza Cafe | Atwoods Pizza ?? Believed to be in Tech Square; confirm the name.
+R Twisted Taco
+S Dunkin' | Dunkin Donuts | Dunkin
+R Carnegie Kitchen
 
 @alumni | People | Name a famous Georgia Tech alum or former student who isn't known for pro sports
 C Jimmy Carter | President Carter | James Earl Carter | Carter :: He studied at Tech before transferring to the Naval Academy.
@@ -202,7 +198,7 @@ D Wick Moorman | Charles Moorman
 D Tom Fanning | Thomas Fanning
 D Brook Byers
 X Y. Frank Freeman | Frank Freeman :: Paramount Pictures executive and the first winner of the Academy's Jean Hersholt Humanitarian Award.
-?D Dennis Hayes ?? The modem pioneer is believed to have attended Tech without graduating; confirm.
+D Dennis Hayes
 
 @nba | Sports | Name a Georgia Tech basketball player who went on to the NBA
 C Chris Bosh | Bosh
@@ -239,7 +235,6 @@ D Mario West
 D Alvin Jones
 D Fred Vinson
 X Craig Neal
-?D Isma'il Muhammad | Ismail Muhammad ?? Confirm he appeared in an NBA regular-season game.
 
 @nfl | Sports | Name a Georgia Tech football player who went on to play pro football
 C Calvin Johnson | Megatron
@@ -334,7 +329,7 @@ D Nicholas Thompson
 D Charlie Rymer
 D Tripp Isenhour
 X Riccardo Ingram :: ACC Player of the Year in baseball who also played safety for the football team.
-?D Marlon Byrd ?? Believed to have started his college career at Tech before transferring; confirm.
+D Marlon Byrd
 
 @traditions | Traditions | Name a Georgia Tech tradition, symbol, or piece of campus lore
 C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A
@@ -370,9 +365,9 @@ D Drownproofing | Drown Proofing :: Freddie Lanoue's legendary survival-swimming
 D Yellow Jacket Alley
 D TEAM Buzz
 X Sideways | Sideways the Dog :: The campus dog of the 1940s, named for the way she walked. Her grave is beside Tech Tower.
-?D Midnight Breakfast ?? Confirm this finals-week event is an established tradition under this name.
-?D Mock Rock ?? Believed to be a Homecoming event; confirm.
-?D Goldfellas ?? Believed to be the body-painted student fan group; confirm the name.
+D Midnight Breakfast
+D Mock Rock
+D Goldfellas
 
 @neighborhoods | Atlanta | Name an Atlanta neighborhood inside the Perimeter
 C Midtown
@@ -426,7 +421,7 @@ D Centennial Place | Techwood | Techwood Homes :: Built on the site of Techwood 
 D Loring Heights
 X Marietta Street Artery :: The old industrial corridor along the west edge of campus.
 
-@conference | Sports History | Name a school that has shared a conference with Georgia Tech (ACC, SEC, Southern, or Metro)
+@conference | Sports History | Name a school that has shared a conference with Tech (ACC, SEC, Southern, or Metro)
 C Clemson
 C Georgia | UGA | University of Georgia :: Charter SEC members together, until Tech walked out in 1964.
 C Duke
@@ -486,18 +481,18 @@ R Silicon Valley Bowl | Silicon Valley Football Classic
 R Aloha Bowl
 D Carquest Bowl
 D Bluebonnet Bowl
-D All-American Bowl
+D Hall of Fame Classic | Hall of Fame Bowl | All-American Bowl :: The 1985 win over Michigan State in Birmingham.
 X Oil Bowl :: January 1947, a 41-19 win over Saint Mary's.
-?R Pop-Tarts Bowl | Pop Tarts ?? Believed to be the 2025 season's bowl; confirm. This prompt has exactly 25 answers.
+R Pop-Tarts Bowl | Pop Tarts
 
 @cs | Academics | Name a Georgia Tech CS course by its number (like "CS 1234") | lead=cs
 C CS 1301 :: Intro to Computing
 C CS 1331 :: Intro to Object-Oriented Programming
-C CS 1332 :: Data Structures and Algorithms
+C CS 1332 :: Data Structures and Algorithms for Applications
 T CS 2110 :: Computer Organization and Programming
 T CS 1371 :: Computing for Engineers, better known as "the MATLAB class"
 S CS 2050 :: Intro to Discrete Math for CS
-S CS 2200 :: Systems and Networks
+S CS 2200 :: Computer Systems and Networks
 S CS 2340 :: Objects and Design
 S CS 3510 :: Design and Analysis of Algorithms
 S CS 3600 :: Intro to Artificial Intelligence
@@ -506,20 +501,20 @@ S CS 4400 :: Intro to Database Systems
 S CS 3210 :: Design of Operating Systems
 S CS 3251 :: Computer Networking I
 S CS 4001 :: Computing, Society, and Professionalism
-R CS 1100 :: Freshman Leap Seminar
+R CS 1100 :: Pathways in Computing, long known as the Freshman Leap Seminar
 R CS 2051 :: Honors Discrete Math
 R CS 3240 :: Languages and Computation
-R CS 3220 :: Processor Design
+R CS 3220 :: Computer Structures: Hardware/Software Codesign of a Processor
 R CS 3311 :: Project Design (Junior Design, part one)
 R CS 3312 :: Project Implementation (Junior Design, part two)
 R CS 3451 :: Computer Graphics
-R CS 3630 :: Intro to Robotics and Perception
-R CS 3750 :: User Interface Design
+R CS 3630 :: Intro to Perception and Robotics
+R CS 3750 :: Human-Computer Interface Design and Evaluation
 R CS 4235 :: Intro to Information Security
 R CS 4476 :: Computer Vision
-R CS 4510 :: Automata and Complexity
+R CS 4510 :: Automata and Complexity Theory
 R CS 4540 :: Advanced Algorithms
-R CS 4650 :: Natural Language Processing
+R CS 4650 :: Natural Language Understanding
 R CS 4731 :: Game AI
 R CS 6515 :: Intro to Graduate Algorithms
 R CS 6035 :: Intro to Information Security
@@ -527,15 +522,15 @@ R CS 7641 :: Machine Learning
 R CS 6200 :: Graduate Intro to Operating Systems
 R CS 4803 :: Special Topics
 D CS 1315 :: Intro to Media Computation
-D CS 2261 :: Media Device Architecture
+D CS 2261 :: Media Device Architectures
 D CS 3511 :: Algorithms Honors
-D CS 4240 :: Compilers and Interpreters
+D CS 4240 :: Compilers, Interpreters, and Program Analyzers
 D CS 4261 :: Mobile Apps and Services
 D CS 4290 :: Advanced Computer Organization
 D CS 4460 :: Information Visualization
 D CS 4646 :: Machine Learning for Trading
 D CS 4649 :: Robot Intelligence: Planning
-D CS 4455 :: Video Game Design
+D CS 4455 :: Video Game Design and Programming
 D CS 4210 :: Advanced Operating Systems
 D CS 6601 :: Artificial Intelligence
 D CS 6750 :: Human-Computer Interaction
@@ -550,10 +545,10 @@ D CS 6290 :: High-Performance Computer Architecture
 D CS 6210 :: Advanced Operating Systems
 D CS 8803 :: Special Topics
 X CS 4496 :: Computer Animation
-?D CS 3001 :: Computing, Society, and Professionalism ?? Believed to be the renumbered CS 4001; confirm.
-?D CS 4590 :: Computer Audio ?? Confirm number and title.
-?D CS 4605 :: Mobile and Ubiquitous Computing ?? Confirm number and title.
-?D CS 4220 :: Embedded Systems ?? Confirm number and title.
+D CS 3001 :: Computing, Society, and Professionalism
+D CS 4590 :: Principles and Applications of Computer Audio
+D CS 4605 :: Mobile and Ubiquitous Computing
+D CS 4220 :: Programming Embedded Systems
 
 @orgs | Campus Life | Name a Georgia Tech student organization or competition team
 C Ramblin' Reck Club | Reck Club | Wreck Club | Ramblin Wreck Club
@@ -645,8 +640,6 @@ D Holly Street
 D Ivan Allen Jr. Boulevard | Ivan Allen
 D Centennial Olympic Park Drive
 X Uncle Heinie Way
-?D Greenfield Street ?? Believed to be a small street near west campus and Home Park; confirm.
-?D Power Plant Drive ?? Believed to be a campus service road; confirm the name.
 
 @marta | Atlanta | Name a MARTA rail station | strip=station
 C North Avenue | North Ave :: Tech's east-side stop.
@@ -686,7 +679,7 @@ D East Lake
 D Lakewood/Fort McPherson | Lakewood | Fort McPherson | Lakewood Ft McPherson
 D Hamilton E. Holmes | H.E. Holmes | Holmes | Hightower
 X West Lake
-?D GWCC/CNN Center | CNN Center | GWCC | Dome | Dome/GWCC/Philips Arena/CNN Center | SEC District ?? Confirm the current station name; believed to have been renamed SEC District.
+D SEC District | GWCC/CNN Center | CNN Center | GWCC | Dome | Dome/GWCC/Philips Arena/CNN Center | Omni :: Called GWCC/CNN Center until December 2025.
 
 @landmarks | Atlanta | Name an Atlanta landmark or attraction within a few miles of campus
 C Georgia Aquarium | Aquarium
@@ -776,7 +769,7 @@ D Sideways' Grave | Sideways
 D Academy of Medicine | Historic Academy of Medicine
 X Rose Bowl Field :: The practice field paid for with the proceeds of the 1929 Rose Bowl.
 
-@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport or discipline contested at the Atlanta Summer Games.
+@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games.
 C Swimming :: Raced in Tech's own Aquatic Center.
 C Basketball
 C Gymnastics | Artistic Gymnastics
@@ -906,10 +899,10 @@ D Chi Psi
 D Phi Beta Sigma
 D Zeta Phi Beta
 X Theta Xi
-?D Sigma Gamma Rho ?? Confirm a chapter at Tech.
-?D Alpha Delta Chi ?? Confirm a chapter at Tech.
-?D Triangle ?? Confirm a chapter or colony at Tech.
-?D Phi Kappa Psi | Phi Psi ?? Confirm a chapter at Tech.
+D Sigma Gamma Rho
+D Alpha Delta Chi
+D Triangle | Triangle Fraternity
+D Phi Kappa Psi | Phi Psi
 
 @proteams | Atlanta | Name an Atlanta-area pro sports team, past or present
 C Atlanta Braves | Braves
@@ -943,7 +936,7 @@ D Atlanta Attack | Attack
 D Atlanta Ruckus | Ruckus
 D Hawks Talon GC | Hawks Talon
 X Georgia Swarm | Swarm :: Pro box lacrosse, out in Duluth. One in a Swarm, literally.
-?D Atlanta Fire Ants | Fire Ants ?? Believed to be a 1990s pro roller hockey team; confirm.
+D Atlanta Fire Ants | Fire Ants
 
 @coaches | Sports History | Name a Georgia Tech head coach, in any sport and any era
 C John Heisman | Heisman
@@ -989,8 +982,8 @@ D Bond Shymansky
 D Puggy Blackmon
 D Tonya Johnson
 X Freddie Lanoue | Fred Lanoue :: The drownproofing legend also coached Tech's swimmers.
-?D James Ramsey ?? Believed to have succeeded Danny Hall as baseball coach; confirm.
-?D Karen Blair ?? Believed to be the women's basketball coach hired in 2025; confirm.
+D James Ramsey
+D Karen Blair
 
 @qbs | Sports History | Name a quarterback who has started a game for Georgia Tech
 C Haynes King
@@ -1030,11 +1023,10 @@ D Wade Mitchell
 D Stan Gann
 D Darrell Crawford
 X Frank Broyles :: Better known as Arkansas's coach and athletic director, he quarterbacked Tech in the 1940s.
-?R Jaybo Shaw ?? Confirm he started a game at quarterback (believed 2008).
-?R Lucas Johnson ?? Confirm he started a game at quarterback (believed 2019).
-?D Damarius Bilbo ?? Confirm he started at quarterback before moving to receiver.
+R Jaybo Shaw
+R Lucas Johnson
 
-@corecourses | Academics | Name a non-CS course that haunts Tech transcripts, by subject and number (like "MATH 1554")
+@corecourses | Academics | Name a non-CS course by subject and number (like "MATH 1554")
 C MATH 1554 :: Linear Algebra
 C MATH 1551 :: Differential Calculus
 C MATH 1552 :: Integral Calculus
@@ -1092,9 +1084,6 @@ D ISYE 3232 :: Stochastic Manufacturing and Service Systems
 D ISYE 3133 :: Engineering Optimization
 D CHBE 2100 :: Chemical Process Principles
 X LMC 3403 :: Technical Communication
-?D MGT 2250 :: Management Statistics ?? Confirm number and title.
-?D BMED 2110 :: Conservation Principles in BME ?? Believed to have been renumbered; confirm.
-?R INTA 1200 :: American Government in Comparative Perspective ?? Confirm number and title.
 
 @hq | Atlanta | Name a company based in metro Atlanta (U.S. headquarters count)
 C Coca-Cola | Coke | The Coca-Cola Company
@@ -1203,9 +1192,8 @@ D NS :: Naval Science.
 D AS :: Aerospace Studies (Air Force ROTC).
 D MP :: Medical Physics.
 X CETL :: Center for Teaching and Learning courses, mostly taken by teaching assistants.
-?D PTFE ?? Polymer, Textile and Fiber Engineering; confirm the code is still in the catalog.
 
-@techs | Rivals | Tech isn't the only Tech. Name another U.S. school that goes by "Tech" or "Institute of Technology"
+@techs | Rivals | Name another U.S. school that goes by "Tech" or "Institute of Technology"
 C Virginia Tech | VT | Virginia Polytechnic Institute | VPI
 C Texas Tech | Texas Tech University | TTU
 T MIT | Massachusetts Institute of Technology
@@ -1242,7 +1230,7 @@ D Texas State Technical College | TSTC
 D Carnegie Tech | Carnegie Institute of Technology :: It merged into Carnegie Mellon in 1967.
 X Southern Tech | Southern Technical Institute | Southern Polytechnic | SPSU :: Founded in 1948 as a division of Georgia Tech. It is now part of Kennesaw State.
 
-@systems | Campus Life | Name a system, app, or ride every Tech student has wrestled with (registering, coursework, getting around)
+@systems | Campus Life | Name a system, app, or ride every Tech student has wrestled with
 C Canvas
 C OSCAR :: Online Student Computer Assisted Registration.
 C BuzzCard
@@ -1275,11 +1263,10 @@ D Engage
 D Techworks
 D Sakai :: The software underneath T-Square.
 X SUMS :: The Shared User Management System, for booking lab and makerspace equipment.
-?R GTwifi ?? Confirm the campus network name.
-?D Passio GO | Passio ?? Believed to be the current bus-tracking app; confirm.
-?D LiveSafe ?? Believed to be the campus safety app; confirm.
-?D BuzzFunds ?? Confirm the name of the BuzzCard money account.
-?D Zimbra ?? Believed to be the old student email system; confirm.
+R GTwifi :: The campus network until eduroam replaced it in 2018.
+D Passio GO | Passio :: The bus tracker before TransLoc.
+R TransLoc :: Bus tracking and Stingerette requests in one app.
+D LiveSafe
 
 @nicknames | Rivals | Name the team nickname of a school that has shared a conference with Tech
 C Tigers :: Clemson, Auburn, LSU and Memphis all answer to it.
@@ -1363,7 +1350,6 @@ D Wofford
 D Gardner-Webb
 D Middle Tennessee | MTSU | Middle Tennessee State
 D South Carolina State
-X Carlisle | Carlisle Indian School :: Heisman's 1917 national champions beat the famous Carlisle Indians 98-0.
-?R Colorado ?? Believed to be a 2025 season-opening win; confirm.
-?R Kennesaw State ?? Believed to be a 2021 win; confirm.
-?D Sewanee ?? Tech played Sewanee often in the early 1900s; confirm at least one win.
+X Carlisle | Carlisle Indian School :: Heisman's 1917 national champions won this one 98-0.
+R Colorado
+R Kennesaw State

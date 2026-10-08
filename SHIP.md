@@ -34,7 +34,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
 ## C. Content
 - [x] C1 Validation script passes on the final data/prompts.json
   - Evidence: `npm run validate` -> 'Content OK: 31 prompts, 1290 answers, exactly one 100-point answer each, 0 still flagged "verify".' It also rejects empty strings, stray whitespace and prompt text over 90 characters.
-- [ ] C2 Every "verify": true answer re-reviewed; unconfirmed removed; uncertain copied to HUMAN-TODO.md
+- [x] C2 Every "verify": true answer re-reviewed; unconfirmed removed; uncertain copied to HUMAN-TODO.md
+  - Evidence: All 52 flagged answers checked against live sources (Tech catalog, news and housing pages, Wikipedia): 30 confirmed and unflagged, 22 removed and listed in HUMAN-TODO.md section 5. The check also found a stale unflagged major and a wrongly named bowl, both fixed.
 - [ ] C3 No offensive, mean-spirited or overly inside-joke prompts or answers
 - [ ] C4 Spelling and capitalization of displayed answers is correct
 
