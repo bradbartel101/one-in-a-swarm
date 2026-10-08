@@ -46,7 +46,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: e2e `layout at 320, 375, 768 and 1440` audits 9 screens per width: no horizontal scroll, nothing outside the viewport or its card, no clipped text. Screenshots at 320 and 375 reviewed by eye, which is how the clipped results numbers and cut-off share box were found and fixed.
 - [x] D2 Mobile: keyboard doesn't cover input or timer; inputs 16px+; tap targets 44px+
   - Evidence: Same e2e: every button, input and summary is at least 44x44, inputs are 18px. On the longest prompt the answer box ends at 241px (320x568) and 247px (375x667), above the keyboard line; the header is hidden during play on phones. Real-device check listed in HUMAN-TODO section 4.
-- [ ] D3 Keyboard-only play start to finish; focus visible and logical
+- [x] D3 Keyboard-only play start to finish; focus visible and logical
+  - Evidence: e2e `daily run, keyboard only, desktop` uses only Tab and Enter from the first-visit dialog to the copy button, asserting where focus lands at each step and a `solid 3px` focus ring.
 - [ ] D4 Screen reader: timer, feedback and score announced without every tick
 - [ ] D5 Contrast meets WCAG AA in light and dark; tier results not shown by colour alone
 - [ ] D6 prefers-reduced-motion respected
