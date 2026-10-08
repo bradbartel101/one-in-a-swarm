@@ -88,7 +88,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: .nojekyll added; README.md covers what it is, how to play, running, tests, adding prompts and deploying (unit `G2 / G3` checks the commands are named).
 - [x] G3 GitHub Actions workflow runs tests and the content validator on every push
   - Evidence: .github/workflows/test.yml runs `npm test`, `npm run validate` and a check that data/prompts.json matches its source, on every push and pull request. Not yet run on GitHub (no remote).
-- [ ] G4 Exact steps to turn on GitHub Pages written in HUMAN-TODO.md
+- [x] G4 Exact steps to turn on GitHub Pages written in HUMAN-TODO.md
+  - Evidence: HUMAN-TODO.md section 2 has the click-by-click Pages steps; section 1 has the exact commands to create the repository, push and open the pull request.
 
 ## Final pass
 - [ ] All tests, plus a full daily and infinite run in headless Chrome at mobile and desktop sizes
