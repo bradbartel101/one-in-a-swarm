@@ -70,7 +70,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
 ## F. Code quality and performance
 - [x] F1 No console errors or warnings in a full daily run and a full infinite run (headless browser)
   - Evidence: Every one of the 20 e2e scenarios asserts an empty list of console errors, warnings and uncaught exceptions, including a 7-round daily run at 1440px and 375px and an infinite run through all 31 prompts.
-- [ ] F2 All user-entered text inserted with textContent, never innerHTML
+- [x] F2 All user-entered text inserted with textContent, never innerHTML
+  - Evidence: unit `F2` greps the scripts and pages for innerHTML, outerHTML, insertAdjacentHTML, document.write, eval, new Function and inline handlers: none. All text goes through textContent.
 - [ ] F3 Page weight under 500 KB; loads fast on throttled 3G
 - [ ] F4 Nothing external (or HTTPS only)
 - [ ] F5 Dead code, debug logs and TODOs removed
