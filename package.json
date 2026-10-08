@@ -6,6 +6,9 @@
   "scripts": {
     "start": "npx serve .",
     "test": "node --test",
+    "test:e2e": "node tests/e2e/run.js",
+    "validate": "node tools/validate.js",
+    "test:all": "npm test && npm run validate && npm run test:e2e",
     "build:data": "node tools/build-prompts.js"
   }
 }

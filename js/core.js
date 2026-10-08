@@ -216,17 +216,35 @@
     return 86400000 - (((nowMs % 86400000) + 86400000) % 86400000);
   }
 
-  // Days are grouped into blocks. Each block is one seeded shuffle of the whole bank, cut into
-  // `count`-sized slices, so a prompt never repeats within a block.
+  // Each day draws `count` prompts that were not used on any of the previous `window` days, so
+  // no prompt repeats within the number of days the bank can cover. The chain is computed
+  // forward from a fixed epoch, which makes it identical for every player.
+  const ROTATION_EPOCH = '2025-01-01';
+  const rotationCache = new Map();
+
+  function rotationCoverDays(total, count) {
+    return Math.max(1, Math.floor(total / (count || ROUNDS)));
+  }
+
   function dailyPromptIds(prompts, dateKey, count) {
     const n = count || ROUNDS;
     const ids = prompts.map((p) => p.id).sort();
-    const daysPerBlock = Math.max(1, Math.floor(ids.length / n));
-    const day = dayNumber(dateKey);
-    const block = Math.floor(day / daysPerBlock);
-    const slot = ((day % daysPerBlock) + daysPerBlock) % daysPerBlock;
-    const order = shuffle(ids, seededRng('one-in-a-swarm:' + block));
-    return order.slice(slot * n, slot * n + n);
+    const target = dayNumber(dateKey) - dayNumber(ROTATION_EPOCH);
+    if (!(target >= 0)) return shuffle(ids, seededRng('one-in-a-swarm:pre:' + dateKey)).slice(0, n);
+    const signature = n + '|' + ids.join(',');
+    let chain = rotationCache.get(signature);
+    if (!chain) {
+      chain = [];
+      rotationCache.set(signature, chain);
+    }
+    const lookBack = rotationCoverDays(ids.length, n) - 1;
+    for (let d = chain.length; d <= target; d++) {
+      const recent = new Set();
+      for (let k = Math.max(0, d - lookBack); k < d; k++) chain[k].forEach((id) => recent.add(id));
+      const pool = ids.filter((id) => !recent.has(id));
+      chain.push(shuffle(pool, seededRng('one-in-a-swarm:day:' + d)).slice(0, n));
+    }
+    return chain[target].slice();
   }
 
   /* ---------- scoring ---------- */
@@ -269,20 +287,26 @@
     return lines.join('\n');
   }
 
-  /* ---------- daily run (wall-clock deadline per round) ---------- */
+  /* ---------- daily run ----------
+     A round stores the time it has left and when that was last measured. Time only ever
+     counts down: a device clock moved backwards reads as zero elapsed, never as time gained,
+     and the caller may pass a monotonic elapsed time so a clock change mid-round is ignored. */
+
+  const SAVE_VERSION = 2;
 
   function newDaily(dateKey, promptIds) {
-    return { v: 1, date: dateKey, promptIds: promptIds.slice(), results: [], round: null, finished: false };
+    return { v: SAVE_VERSION, date: dateKey, promptIds: promptIds.slice(), results: [], round: null, finished: false };
   }
 
   function startRound(state, now) {
     if (state.finished || state.round) return false;
-    state.round = { index: state.results.length, deadline: now + ROUND_MS, tried: [] };
+    state.round = { index: state.results.length, leftMs: ROUND_MS, seenAt: now, tried: [] };
     return true;
   }
 
   function remainingMs(state, now) {
-    return state.round ? Math.max(0, state.round.deadline - now) : 0;
+    if (!state.round) return 0;
+    return Math.max(0, state.round.leftMs - Math.max(0, now - state.round.seenAt));
   }
 
   function closeRound(state, result) {
@@ -293,16 +317,22 @@
     if (state.results.length >= state.promptIds.length) state.finished = true;
   }
 
-  // Ends the round with a miss if the deadline has passed. Returns true when it did.
-  function dailyTick(state, now) {
-    if (!state.round || state.round.deadline > now) return false;
+  // Charges elapsed time to the live round and ends it with a miss at zero. Returns true when
+  // it ended. `monoElapsedMs` is optional time since the previous call on a monotonic clock.
+  function dailyTick(state, now, monoElapsedMs) {
+    const round = state.round;
+    if (!round) return false;
+    const elapsed = Math.max(0, now - round.seenAt, monoElapsedMs || 0);
+    round.leftMs = Math.max(0, round.leftMs - elapsed);
+    round.seenAt = now;
+    if (round.leftMs > 0) return false;
     closeRound(state, { tier: null, answer: null, points: 0 });
     return true;
   }
 
-  function dailyGuess(state, prompt, input, now) {
+  function dailyGuess(state, prompt, input, now, monoElapsedMs) {
     if (!state.round) return { status: 'idle' };
-    if (dailyTick(state, now)) return { status: 'timeout' };
+    if (dailyTick(state, now, monoElapsedMs)) return { status: 'timeout' };
     const m = matchAnswer(prompt, input);
     if (!m.key) return { status: 'empty' };
     if (m.answer) {
@@ -317,10 +347,83 @@
       return { status: 'correct', result };
     }
     if (state.round.tried.some((t) => sameGuess(t.key, m.key))) return { status: 'duplicate' };
-    state.round.tried.push({ key: m.key, text: String(input).trim().slice(0, 60) });
-    state.round.deadline -= PENALTY_MS;
-    if (dailyTick(state, now)) return { status: 'timeout', lastWrong: true };
-    return { status: 'wrong', remainingMs: remainingMs(state, now) };
+    state.round.tried.push({ key: m.key.slice(0, 80), text: String(input).trim().slice(0, 60) });
+    state.round.leftMs = Math.max(0, state.round.leftMs - PENALTY_MS);
+    if (state.round.leftMs === 0) {
+      closeRound(state, { tier: null, answer: null, points: 0 });
+      return { status: 'timeout', lastWrong: true };
+    }
+    return { status: 'wrong', remainingMs: state.round.leftMs };
+  }
+
+  /* ---------- saved data ---------- */
+
+  function isCount(n, max) {
+    return typeof n === 'number' && Number.isInteger(n) && n >= 0 && n <= max;
+  }
+
+  // Rebuilds a daily run from untrusted storage. Anything malformed, or saved by an older
+  // version, returns null so the caller starts clean instead of crashing later.
+  function reviveDaily(raw, knownIds) {
+    try {
+      if (!raw || typeof raw !== 'object' || raw.v !== SAVE_VERSION) return null;
+      if (typeof raw.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(raw.date) || isNaN(dayNumber(raw.date))) return null;
+      const ids = raw.promptIds;
+      if (!Array.isArray(ids) || ids.length !== ROUNDS || new Set(ids).size !== ROUNDS) return null;
+      if (!ids.every((id) => typeof id === 'string' && knownIds.has(id))) return null;
+      if (!Array.isArray(raw.results) || raw.results.length > ROUNDS) return null;
+      const results = [];
+      for (let i = 0; i < raw.results.length; i++) {
+        const r = raw.results[i];
+        if (!r || typeof r !== 'object' || r.promptId !== ids[i]) return null;
+        if (r.tier !== null && !TIERS[r.tier]) return null;
+        if (r.tier === null ? r.answer !== null : typeof r.answer !== 'string') return null;
+        results.push({
+          tier: r.tier,
+          answer: r.tier === null ? null : r.answer.slice(0, 120),
+          points: tierPoints(r.tier),
+          promptId: r.promptId,
+          wrong: isCount(r.wrong, 1000) ? r.wrong : 0,
+          fuzzy: r.fuzzy === true,
+          note: typeof r.note === 'string' ? r.note.slice(0, 300) : '',
+        });
+      }
+      const finished = results.length === ROUNDS;
+      if (raw.finished !== finished) return null;
+      let round = null;
+      if (raw.round !== null && raw.round !== undefined) {
+        const q = raw.round;
+        if (finished || typeof q !== 'object' || q.index !== results.length) return null;
+        if (typeof q.leftMs !== 'number' || !(q.leftMs >= 0 && q.leftMs <= ROUND_MS)) return null;
+        if (typeof q.seenAt !== 'number' || !isFinite(q.seenAt)) return null;
+        if (!Array.isArray(q.tried) || q.tried.length > 200) return null;
+        if (!q.tried.every((t) => t && typeof t.key === 'string' && typeof t.text === 'string')) return null;
+        round = { index: q.index, leftMs: q.leftMs, seenAt: q.seenAt, tried: q.tried.map((t) => ({ key: t.key.slice(0, 80), text: t.text.slice(0, 60) })) };
+      }
+      return { v: SAVE_VERSION, date: raw.date, promptIds: ids.slice(), results, round, finished };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function reviveBest(raw) {
+    if (!raw || typeof raw !== 'object' || raw.v !== SAVE_VERSION) return null;
+    if (!isCount(raw.score, 1e9) || !isCount(raw.answered, 1e6)) return null;
+    return { v: SAVE_VERSION, score: raw.score, answered: raw.answered };
+  }
+
+  function previousDateKey(dateKey) {
+    return utcDateKey(new Date((dayNumber(dateKey) - 1) * 86400000));
+  }
+
+  // Decides which run the player is in. Today's run always stands. A run begun yesterday and
+  // not finished is "stale": the player may finish it before today's. Anything else is gone.
+  function resolveDaily(run, todayKey) {
+    if (!run) return { run: null, stale: false };
+    if (run.date === todayKey) return { run, stale: false };
+    const started = run.round !== null || run.results.length > 0;
+    if (run.date === previousDateKey(todayKey) && !run.finished && started) return { run, stale: true };
+    return { run: null, stale: false };
   }
 
   /* ---------- infinite run (one clock that drains only while typing) ---------- */
@@ -419,9 +522,10 @@
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
     ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, FEET_PER_POINT, MAX_DAILY_SCORE, MIN_ANSWERS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer,
-    hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds,
+    hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
     tierPoints, totalScore, altitudeFeet, bandFor, formatNumber, shareGrid, shareText,
-    newDaily, startRound, remainingMs, dailyTick, dailyGuess,
+    SAVE_VERSION, newDaily, startRound, remainingMs, dailyTick, dailyGuess,
+    reviveDaily, reviveBest, previousDateKey, resolveDaily,
     newInfinite, infiniteDrains, infiniteTick, infiniteGuess, infiniteSkip,
     validatePrompts,
   };

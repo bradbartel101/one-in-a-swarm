@@ -1,0 +1,60 @@
+# SHIP.md — release audit for v1.0
+
+Resume from the first unchecked item. Each checked item carries one line of evidence.
+Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Everything: `npm run test:all`.
+
+## A. Game logic edge cases
+- [x] A1 Daily seed uses UTC consistently (UTC-12, UTC+14, America/New_York get the same 7)
+  - Evidence: unit `A1: players in UTC-12, UTC+14 and New York get the same seven` (child processes with TZ set; local dates 7th/9th/8th, same ids) and e2e `same seven prompts in UTC-12, UTC+14 and New York` (Chrome timezone override).
+- [ ] A2 Midnight rollover mid-run finishes yesterday's puzzle; today's is available after
+- [ ] A3 A finished day can't be replayed by refreshing; the result screen reappears
+- [ ] A4 Resume mid-round restores round, score and a fair timer
+- [ ] A5 Timer can't be gamed by tab switching, backgrounding or changing the device clock
+- [ ] A6 Infinite clock drains only while typing; focus pause handled; ends cleanly at 0
+- [ ] A7 Daily rotation doesn't run out or repeat a recent day; coverage number logged
+- [ ] A8 Answer matching edge cases (accents, plurals, aliases, punctuation, spaces, curly quotes, "the", empty, very long, emoji, HTML)
+- [ ] A9 Duplicate guesses in a round are rejected without a penalty
+
+## B. Storage and failure modes
+- [ ] B1 Game plays with localStorage blocked, full or throwing
+- [ ] B2 Corrupted or old-format saves are detected and reset; saves carry a version
+- [ ] B3 A failed prompts.json load shows a friendly error
+
+## C. Content
+- [ ] C1 Validation script passes on the final data/prompts.json
+- [ ] C2 Every "verify": true answer re-reviewed; unconfirmed removed; uncertain copied to HUMAN-TODO.md
+- [ ] C3 No offensive, mean-spirited or overly inside-joke prompts or answers
+- [ ] C4 Spelling and capitalization of displayed answers is correct
+
+## D. Cross-device and accessibility
+- [ ] D1 Works at 320, 375, 768 and 1440px; no horizontal scroll, nothing cut off
+- [ ] D2 Mobile: keyboard doesn't cover input or timer; inputs 16px+; tap targets 44px+
+- [ ] D3 Keyboard-only play start to finish; focus visible and logical
+- [ ] D4 Screen reader: timer, feedback and score announced without every tick
+- [ ] D5 Contrast meets WCAG AA in light and dark; tier results not shown by colour alone
+- [ ] D6 prefers-reduced-motion respected
+
+## E. Sharing and polish
+- [ ] E1 Share text copies (Clipboard API with fallback), confirms "Copied!", no spoilers, includes the game URL
+- [ ] E2 "How to play" modal, shown automatically on first visit only
+- [ ] E3 Title, meta description, favicon, Open Graph/Twitter tags, original 1200x630 preview image
+- [ ] E4 Footer disclaimer; no official GT logos, wordmarks or Buzz
+- [ ] E5 A simple 404.html
+
+## F. Code quality and performance
+- [ ] F1 No console errors or warnings in a full daily run and a full infinite run (headless browser)
+- [ ] F2 All user-entered text inserted with textContent, never innerHTML
+- [ ] F3 Page weight under 500 KB; loads fast on throttled 3G
+- [ ] F4 Nothing external (or HTTPS only)
+- [ ] F5 Dead code, debug logs and TODOs removed
+- [ ] F6 Full test suite passes in one command, documented
+
+## G. Deployment (GitHub Pages)
+- [ ] G1 All asset and data paths relative; works from a subpath
+- [ ] G2 .nojekyll and README (what, how to play, tests, adding prompts, deploying)
+- [ ] G3 GitHub Actions workflow runs tests and the content validator on every push
+- [ ] G4 Exact steps to turn on GitHub Pages written in HUMAN-TODO.md
+
+## Final pass
+- [ ] All tests, plus a full daily and infinite run in headless Chrome at mobile and desktop sizes
+- [ ] Commit, push, open pull request "Release v1.0"
