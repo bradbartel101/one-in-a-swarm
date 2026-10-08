@@ -1,0 +1,22 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Unit tests
+        run: npm test
+      - name: Content validator
+        run: npm run validate
+      - name: Prompt bank is in sync with its source
+        run: |
+          npm run build:data
+          git diff --exit-code -- data/prompts.json VERIFY.md

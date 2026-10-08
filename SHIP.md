@@ -86,7 +86,8 @@ Unit tests: `npm test`. Browser tests (headless Chrome): `npm run test:e2e`. Eve
   - Evidence: The e2e server serves the site only under /some-user-repo/ and records any request outside it: none. unit `F4 / G1` rejects root-relative paths.
 - [x] G2 .nojekyll and README (what, how to play, tests, adding prompts, deploying)
   - Evidence: .nojekyll added; README.md covers what it is, how to play, running, tests, adding prompts and deploying (unit `G2 / G3` checks the commands are named).
-- [ ] G3 GitHub Actions workflow runs tests and the content validator on every push
+- [x] G3 GitHub Actions workflow runs tests and the content validator on every push
+  - Evidence: .github/workflows/test.yml runs `npm test`, `npm run validate` and a check that data/prompts.json matches its source, on every push and pull request. Not yet run on GitHub (no remote).
 - [ ] G4 Exact steps to turn on GitHub Pages written in HUMAN-TODO.md
 
 ## Final pass
