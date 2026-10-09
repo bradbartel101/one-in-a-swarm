@@ -57,8 +57,10 @@ Resume from the first unchecked item. One commit per numbered section.
   - e2e "title screen": rules closed on a first visit, lawn 70 to 80% down. The start panel went from 354px to 206px on a phone and its three controls share one row.
 
 ## 6. Content pass
-- [ ] 6a Prompts that combine two categories split or rewritten
-- [ ] 6b Tiers re-checked: nothing obscure is Common or Too Clever
+- [x] 6a Prompts that combine two categories split or rewritten
+  - "baseball's major leagues or golf's biggest stages" is now two prompts: baseball players who reached the majors (29 answers) and Tech golfers (26). Six other prompts lost an "or": alumni, streets, hangouts, organisations, traditions, and the app/website/shuttle one. The bank is 32 prompts, 1,300 answers; `npm run validate` passes.
+- [x] 6b Tiers re-checked: nothing obscure is Common or Too Clever
+  - Moved out of the two cheap tiers: Nuclear and Radiological Engineering, Literature Media and Communication, Marcus Nanotechnology, Junior's Grill (closed 2011), John Young, T-Square (retired), Nebraska. Promoted in their place: Aerospace, Biomedical, Skiles, Waffle House, DegreeWorks, Tennessee. The fifteen new names I was unsure of were checked: eight confirmed, seven removed and listed in HUMAN-TODO.md.
 
 ## 7. Verify (max 5 iterations, logged in REVIEW.md)
 - [ ] 7a All tests pass

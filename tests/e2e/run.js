@@ -755,6 +755,7 @@ async function main() {
       document.querySelectorAll('main *, #hud, #hud *, #tools *').forEach((n) => {
         if (n.closest('.sr-only, [hidden], script, style') || !n.getClientRects().length) return;
         if (getComputedStyle(n).visibility === 'hidden') return;
+        if (n.closest('details:not([open])') && !n.closest('summary')) return; // folded away
         const r = n.getBoundingClientRect();
         const id = n.tagName.toLowerCase() + (n.id ? '#' + n.id : '') + (typeof n.className === 'string' && n.className ? '.' + n.className.split(' ')[0] : '');
         if (r.width && (r.left < -0.5 || r.right > vw + 0.5)) out.push(id + ' leaves the viewport: ' + Math.round(r.left) + '..' + Math.round(r.right));

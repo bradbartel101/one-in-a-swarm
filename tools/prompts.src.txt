@@ -310,13 +310,10 @@ D Doug Creek
 D Kris Wilson
 D Brad Rigby
 X Riccardo Ingram :: ACC Player of the Year in baseball who also played safety for the football team.
-?D Connor Thomas ?? Believed to have debuted in the majors in 2024; confirm.
-?D Xzavion Curry ?? Believed to have debuted in the majors in 2022; confirm.
-?D Brant Hurter ?? Believed to have debuted in the majors in 2024; confirm.
-?D Kyle McCann ?? Believed to have debuted in the majors in 2024; confirm.
-?D Mike Nickeas ?? Believed to have caught for the Mets around 2010; confirm.
-?D Matt Skole ?? Believed to have appeared for the White Sox in 2018; confirm.
-?D Kevin Cameron ?? Believed to have pitched for the Padres in 2007; confirm.
+D Jed Bradley
+D Xzavion Curry
+D Brant Hurter
+D Kyle McCann
 
 @golf | Sports | Name a golfer who played for Georgia Tech
 C Bobby Jones | Bob Jones | Robert Tyre Jones :: A mechanical engineering graduate, and an amateur his whole career.
@@ -340,14 +337,11 @@ R Seth Reeves
 D Nicholas Thompson
 D Charlie Rymer
 X Tripp Isenhour
-?R Luke Schniederjans ?? Believed to have played for Tech after his brother; confirm.
-?R Noah Norton ?? Believed to have played for Tech around 2018 to 2021; confirm.
-?D Connor Howe ?? Believed to have played for Tech around 2019 to 2022; confirm.
-?D Ross Steelman ?? Believed to have transferred to Tech and played around 2021 to 2023; confirm.
-?D Bartley Forrester ?? Believed to have played for Tech around 2019 to 2023; confirm.
-?R Hiroshi Tai ?? Believed to be the Tech golfer who won the 2024 NCAA individual title; confirm.
-?D Benjamin Reuter ?? Believed to have played for Tech around 2021 to 2025; confirm.
-?D Kale Fontenot ?? Believed to have played for Tech in the mid-2020s; confirm.
+R Luke Schniederjans
+R Noah Norton
+D Connor Howe
+D Ross Steelman :: Runner-up at the 2023 NCAA Championship.
+R Hiroshi Tai :: In 2024 he won the NCAA individual title, Tech's first since 2002.
 
 @traditions | Traditions | Name a Georgia Tech tradition or piece of campus lore
 C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A

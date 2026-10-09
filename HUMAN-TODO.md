@@ -43,7 +43,7 @@ Headless Chrome cannot show a real on-screen keyboard, real frame rates, VoiceOv
 
 ## 5. Have a Georgia Tech student or alum review the content
 
-All 1,290 answers were written from memory. In the audit, every answer I had flagged as uncertain
+All 1,304 answers were written from memory. In the audit, every answer I had flagged as uncertain
 was checked against a live source (the Tech course catalog, Tech news and housing pages, Wikipedia).
 That check also caught one answer I had *not* flagged (the retired "Earth and Atmospheric Sciences"
 B.S.), so expect a handful more stale or wrong answers among the unflagged ones.
@@ -72,6 +72,9 @@ the prompt named in brackets, then run `npm run build:data`):
 - [ ] [systems] Zimbra (old student email) — unconfirmed. "BuzzFunds" was dropped because it turned
       out to be a funding programme for student organisations, not the BuzzCard balance.
 - [ ] [beaten] Sewanee — Tech played them often before 1920; I could not confirm a specific win.
+- [ ] [diamond] Connor Thomas, Mike Nickeas, Matt Skole, Kevin Cameron — believed to be Tech players who reached
+      the majors; not confirmed in the v3 content pass.
+- [ ] [golf] Bartley Forrester, Benjamin Reuter, Kale Fontenot — believed to be recent Tech golfers; not confirmed.
 
 ## 6. Decide whether the name and colours are acceptable
 

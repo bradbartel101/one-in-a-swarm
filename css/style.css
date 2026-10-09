@@ -184,6 +184,9 @@ section[data-view="home"] { min-height: 100dvh; padding: 3.6rem 1rem 0.6rem; dis
 .start-links summary { background: var(--panel-2); box-shadow: inset 0 0 0 3px var(--accent); clip-path: var(--steps); color: var(--ink); }
 .start-links summary::before { display: none; }
 .start-links details[open] { grid-column: 1 / -1; }
+.start-links > * { min-width: 0; }
+.start-links summary { flex-wrap: wrap; overflow-wrap: anywhere; }
+.start-links summary span { margin-left: 0.3rem; }
 .start-panel .rule-line { font-size: 0.9rem; }
 .start-panel .btn-big { min-height: 54px; }
 .how summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-family: var(--pixel); font-size: 0.65rem; color: var(--accent); }
@@ -346,6 +349,7 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
 .spoilers { margin-top: 0.4rem; }
 
 @media (max-width: 359px) {
+  .start-links .btn, .start-links summary { font-size: 0.42rem; padding: 0.3rem 0.2rem; }
   .hud-label { display: none; } /* the narrowest phones: the numbers speak for themselves */
   .hud-num { font-size: 0.62rem; }
 }
