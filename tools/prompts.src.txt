@@ -6,12 +6,12 @@
 C Computer Science | CS | Comp Sci | CompSci
 C Mechanical Engineering | ME | MechE | Mechanical
 C Industrial Engineering | IE | ISyE | Industrial and Systems Engineering | Industrial
-T Nuclear and Radiological Engineering | Nuclear Engineering | NRE | Nuclear
-T Literature, Media, and Communication | LMC
-S Aerospace Engineering | AE | Aero | Aerospace
+R Nuclear and Radiological Engineering | Nuclear Engineering | NRE | Nuclear
+R Literature, Media, and Communication | LMC
+T Aerospace Engineering | AE | Aero | Aerospace
 S Electrical Engineering | EE | Electrical
 S Computer Engineering | CompE | CmpE
-S Biomedical Engineering | BME | BMED | Biomedical
+T Biomedical Engineering | BME | BMED | Biomedical
 S Chemical and Biomolecular Engineering | Chemical Engineering | ChBE | ChemE
 S Civil Engineering | CE | Civil | CivE
 S Business Administration | Business | BSBA | Management | MGT
@@ -51,8 +51,8 @@ C Tech Tower | Lettie Pate Whitehead Evans Administration Building | Administrat
 C Clough Undergraduate Learning Commons | CULC | Clough | Clough Commons
 C Klaus Advanced Computing Building | Klaus
 T Kendeda Building for Innovative Sustainable Design | Kendeda | Kendeda Building | Living Building
-T Marcus Nanotechnology Building | Marcus Nanotechnology | Marcus Nano | Marcus | MNB
-S Skiles Classroom Building | Skiles
+R Marcus Nanotechnology Building | Marcus Nanotechnology | Marcus Nano | Marcus | MNB
+T Skiles Classroom Building | Skiles
 S College of Computing Building | CoC | College of Computing | CCB
 S Howey Physics Building | Howey | Howey Physics | Physics Building
 S Van Leer Building
@@ -102,8 +102,8 @@ C Glenn Hall
 C Towers Hall
 C North Avenue Apartments | North Ave | NAA | North Avenue East | North Avenue South | North Avenue West | North Avenue North
 T Woodruff Residence Hall | Woody's | Woodys
-T Smith Hall
-S Brown Hall
+S Smith Hall
+T Brown Hall
 S Harrison Hall
 S Howell Hall
 S Cloudman Hall
@@ -135,9 +135,9 @@ R Nelson-Shell Apartments | NSL
 C Brittain Dining Hall | Brittain | Brit
 C North Avenue Dining Hall | North Ave Dining | Nave | North Avenue Dining | North Ave
 C West Village | Willage | West Village Dining Commons
-T Junior's Grill | Juniors | Junior's :: A campus institution from 1948 until it closed in 2011.
+R Junior's Grill | Juniors | Junior's :: A campus institution from 1948 until it closed in 2011.
 T The Varsity | Varsity
-S Waffle House | WaHo | Tech Square Waffle House
+T Waffle House | WaHo | Tech Square Waffle House
 S Chick-fil-A | Chickfila | CFA
 S Panda Express | Panda
 S Starbucks
@@ -158,9 +158,9 @@ R Twisted Taco
 S Dunkin' | Dunkin Donuts | Dunkin
 R Carnegie Kitchen
 
-@alumni | People | Name a famous Georgia Tech alum or former student who isn't known for pro sports
+@alumni | People | Name a famous person who studied at Georgia Tech (no pro athletes)
 C Jimmy Carter | President Carter | James Earl Carter | Carter :: He studied at Tech before transferring to the Naval Academy.
-C John Young | John W. Young :: Walked on the Moon and commanded the first Space Shuttle flight.
+S John Young | John W. Young :: Walked on the Moon and commanded the first Space Shuttle flight.
 C Jeff Foxworthy | Foxworthy
 T George P. Burdell | George Burdell | Burdell :: Enrolled as a prank in 1927. Tech's most famous student never existed.
 S Sam Nunn | Nunn
@@ -284,27 +284,15 @@ D Nick Ferguson
 D Jalen Camp
 X Joe Guyon :: A Pro Football Hall of Famer who starred on Heisman's 1917 national champions.
 
-@diamond | Sports | Name a Yellow Jacket who reached baseball's major leagues or golf's biggest stages
+@diamond | Sports | Name a Georgia Tech baseball player who reached the major leagues
 C Nomar Garciaparra | Nomar | Garciaparra
 C Mark Teixeira | Teixeira
-C Bobby Jones | Bob Jones | Robert Tyre Jones :: A mechanical engineering graduate, and an amateur his whole career.
 T Jason Varitek | Varitek
-T Matt Kuchar | Kuchar
+T Charlie Blackmon | Blackmon
 S Matt Wieters | Wieters
 S Kevin Brown
-S Charlie Blackmon | Blackmon
-S Stewart Cink | Cink
-S David Duval | Duval
 S Joey Bart
-S Larry Mize | Mize
 S Jay Payton
-R Bryce Molder
-R Cameron Tringale
-R Chesson Hadley
-R Ollie Schniederjans | Schniederjans
-R Roberto Castro
-R Troy Matteson
-R Andy Ogletree
 R Derek Dietrich
 R Matt Murton
 R Darren Bragg
@@ -312,11 +300,8 @@ R Deck McGuire
 R Buck Farmer
 R Daniel Palka
 R Eric Patterson
-R Christo Lamprecht
-D Tyler Strafaci
-D Richy Werenski
-D Anders Albertson
-D Vincent Whaley
+R Marlon Byrd :: He began his college career at Tech before transferring.
+R Micah Owings
 D Brandon Boggs
 D Blake Wood
 D Tyler Greene
@@ -324,14 +309,41 @@ D Jim Poole
 D Doug Creek
 D Kris Wilson
 D Brad Rigby
-D Seth Reeves
+X Riccardo Ingram :: ACC Player of the Year in baseball who also played safety for the football team.
+D Jed Bradley
+D Xzavion Curry
+D Brant Hurter
+D Kyle McCann
+
+@golf | Sports | Name a golfer who played for Georgia Tech
+C Bobby Jones | Bob Jones | Robert Tyre Jones :: A mechanical engineering graduate, and an amateur his whole career.
+C Matt Kuchar | Kuchar
+T Stewart Cink | Cink
+T David Duval | Duval
+S Larry Mize | Mize
+S Bryce Molder
+S Cameron Tringale
+S Chesson Hadley
+S Ollie Schniederjans
+S Andy Ogletree
+R Roberto Castro
+R Troy Matteson
+R Christo Lamprecht
+R Tyler Strafaci
+R Richy Werenski
+R Anders Albertson
+R Vincent Whaley
+R Seth Reeves
 D Nicholas Thompson
 D Charlie Rymer
-D Tripp Isenhour
-X Riccardo Ingram :: ACC Player of the Year in baseball who also played safety for the football team.
-D Marlon Byrd
+X Tripp Isenhour
+R Luke Schniederjans
+R Noah Norton
+D Connor Howe
+D Ross Steelman :: Runner-up at the 2023 NCAA Championship.
+R Hiroshi Tai :: In 2024 he won the NCAA individual title, Tech's first since 2002.
 
-@traditions | Traditions | Name a Georgia Tech tradition, symbol, or piece of campus lore
+@traditions | Traditions | Name a Georgia Tech tradition or piece of campus lore
 C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A
 C Buzz
 C The Whistle | Steam Whistle
@@ -550,7 +562,7 @@ D CS 4590 :: Principles and Applications of Computer Audio
 D CS 4605 :: Mobile and Ubiquitous Computing
 D CS 4220 :: Programming Embedded Systems
 
-@orgs | Campus Life | Name a Georgia Tech student organization or competition team
+@orgs | Campus Life | Name a Georgia Tech student organization
 C Ramblin' Reck Club | Reck Club | Wreck Club | Ramblin Wreck Club
 C Student Government Association | SGA | Student Government
 C Yellow Jacket Marching Band | Marching Band | Band | GT Marching Band
@@ -599,7 +611,7 @@ D Student Foundation | GTSF | Georgia Tech Student Foundation
 D GTCN | Georgia Tech Cable Network
 X Amateur Radio Club | W4AQL | Ham Radio Club | Georgia Tech Amateur Radio Club :: On the air as W4AQL, and one of the oldest clubs on campus.
 
-@streets | Campus | Name a street that runs through or alongside Tech's campus, Tech Square, or Home Park | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne
+@streets | Campus | Name a street on or right beside Tech's campus | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne
 C North Avenue
 C Tenth Street | 10th
 C Fifth Street | 5th
@@ -726,7 +738,7 @@ D Fernbank Museum | Fernbank
 D Flatiron Building | Flatiron
 X Millennium Gate | Millennium Gate Museum :: The triumphal arch at Atlantic Station.
 
-@hangouts | Campus | Name a venue, green space, or landmark on Tech's campus (not a classroom building)
+@hangouts | Campus | Name a place on Tech's campus that isn't a classroom building
 C Bobby Dodd Stadium | Bobby Dodd | Grant Field | Bobby Dodd Stadium at Hyundai Field | Historic Grant Field
 C Campus Recreation Center | CRC
 C Student Center | John Lewis Student Center | Stu Cen | Wenn Student Center
@@ -1230,14 +1242,14 @@ D Texas State Technical College | TSTC
 D Carnegie Tech | Carnegie Institute of Technology :: It merged into Carnegie Mellon in 1967.
 X Southern Tech | Southern Technical Institute | Southern Polytechnic | SPSU :: Founded in 1948 as a division of Georgia Tech. It is now part of Kennesaw State.
 
-@systems | Campus Life | Name a system, app, or ride every Tech student has wrestled with
+@systems | Campus Life | Name a campus app, website, or shuttle that Tech students use
 C Canvas
 C OSCAR :: Online Student Computer Assisted Registration.
 C BuzzCard
 C Stinger | Stinger Bus | Tech Stinger
-T T-Square :: Canvas's predecessor.
+R T-Square :: Canvas's predecessor.
 T Stingerette
-S DegreeWorks
+T DegreeWorks
 S BuzzPort
 S Tech Trolley | Trolley
 S Piazza
@@ -1304,8 +1316,8 @@ C Georgia | UGA
 C Alabama | Bama
 C Auburn
 T Cumberland :: 222-0, on October 7, 1916. Still the most lopsided game in college football history.
-T Nebraska :: The 1991 Citrus Bowl, which sealed a share of the national title.
-S Tennessee
+R Nebraska :: The 1991 Citrus Bowl, which sealed a share of the national title.
+T Tennessee
 S Florida
 S LSU
 S Vanderbilt | Vandy

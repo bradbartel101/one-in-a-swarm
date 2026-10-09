@@ -165,3 +165,69 @@ Still not right, and left as it is:
 | Looks right at 375 and 1440 | PASS | layout scenario at 320, 375, 768 and 1440 including keyboard-up; screenshots reviewed by eye |
 
 Stopped after three iterations.
+
+---
+
+# v3: every flight goes somewhere
+
+The brief: fix six bugs, separate visual height from displayed feet, rebuild the world in zones,
+add easter eggs, and make it feel like a journey. Tracked item by item in `SWARM-V3.md`.
+Two verify iterations.
+
+## Iteration 1
+
+Built sections 1 to 6, then toured every zone in screenshots and looked at them as a new player.
+
+**The question that matters: does a 150-point flight end somewhere that looks different from the
+start?** Yes. It starts on a green lawn under a pale sky beside a brick tower, and ends at
+10,000 ft in clear blue above a floor of cloud, with birds and the sun. In between it passes
+lit office towers, a crane and a train.
+
+What was wrong:
+
+- From the lawn, the office towers filled the whole sky. Each tower was drawn from its top down
+  to the ground, and its top was several screens up. The city now fades in out of haze once the
+  swarm leaves the treetops, and from the lawn it is a line on the horizon.
+- The title screen's bottom panel was 354px tall on a phone and covered the bee and most of
+  campus. Its three controls now share one row and it is 206px.
+- A fact on the left sat on top of the bee. Facts now step aside for the bee, the answer tag and
+  the tier labels.
+- The sun sat behind the swarm for most of the climb. Moved to the right.
+- A gold bee had a brown disc behind it (translucent gold on black). Replaced with a few sparks.
+- The "common" quip said the bees had barely cleared the lawn, at 10,000 ft. Reworded.
+- On phones the tier label ran over the bee, and on the Moon it hid the flag. Bee moved left on
+  narrow screens; flag planted just behind it.
+- "SIGHTINGS" broke mid-word in its button.
+
+Found by tests, not by eye:
+
+- Sightings in view on the loading screen were being counted when a flight resumed.
+- The balloon could still be tapped for a frame after it popped.
+- Headless Chrome floods arrow keys with repeats; the Konami handler now ignores repeats.
+- The title screen scrolled sideways at 320px.
+
+## Iteration 2
+
+Re-ran everything after the fixes and re-shot the screenshots.
+
+| Checklist | Result | Evidence |
+|---|---|---|
+| Typing during the wrong-guess lockout is never lost | PASS | e2e "wrong guess, near-miss and timeout": text typed inside the lockout replaces the selected guess; Enter inside it is ignored; the same Enter works after 400ms |
+| Same points always climb the same height | PASS | e2e "the climb": 15 points at 160 and 15 points at 260 both move the camera 15 points; 10 points is 60% of the screen. Unit test on `SCREENS_PER_POINT` |
+| A 150-pt flight ends in a visibly different zone | PASS | unit test: 150 points crosses campus, skyline and low clouds; screenshots `01-start-campus` and `12-flight150-ends-here` |
+| All 8 zones render; the 700 run reaches the Moon | PASS | screenshots 01, 03 to 08 and 20; e2e "a perfect 700": altimeter reads 238,855 MI and the flag is planted |
+| 12 sightings, 5 secret answers, 4 interaction eggs, all logged | PASS | 21 entries; e2e "easter eggs" exercises the tower, the bee, the Konami code, the night screen, all five secrets, the balloon and a sighting in flight, reading the log from localStorage each time |
+| Facts never clipped or covered; ruler always on top | PASS | e2e: the fact window sits between HUD and reveal card, nothing visible intersects the tag, and the ruler line is one unbroken colour down the canvas |
+| No real logos or brand names in art; facts verified or in VERIFY.md | PASS | all art is rectangles in `js/scene.js`; the jet, train, car and satellite carry no markings; 5 approximate facts are flagged in VERIFY.md |
+| No console errors; reduced motion works; 60fps on mobile emulation | PASS | every scenario asserts an empty console; e2e "reduced motion"; e2e "frame rate": 60 fps average, 95th-percentile frame 17ms, with the CPU slowed 4x during a 4-second climb |
+
+Not right yet, and left:
+
+- Facts fade out at the edge of the clear band rather than staying fully legible to the last
+  pixel. That is deliberate (it is what stops them hiding under panels), but a fact can be
+  half-faded for a moment when a round begins.
+- Weather is the weakest zone. The thunderheads are blocky and you can pass between them
+  without seeing one.
+- The bee is still small, and mid-flip it smears for a few frames.
+- "Tested in a headless browser" is not "played on a phone". Sound, touch targets on the canvas
+  and real frame rate are still unverified by a person.

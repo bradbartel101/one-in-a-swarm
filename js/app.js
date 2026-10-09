@@ -12,16 +12,27 @@
   // Storage keys are stable; the payloads carry their own version (C.SAVE_VERSION).
   const K_DAILY = 'swarm.daily';
   const K_BEST = 'swarm.infinite.best';
-  const K_SEEN = 'swarm.seenHowTo';
   const K_SOUND = 'swarm.sound';
   const K_SCAN = 'swarm.scanlines';
   const K_STATS = 'swarm.stats';
+  const K_SIGHT = 'swarm.sightings';
+  const TOAST_MS = 2400;
+  const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  // Everything there is to find: twelve sightings in the world, five secret answers, four things to do.
+  const EGGS = [
+    ['car', 'The gold jalopy'], ['squirrel', 'The lunch thief'], ['washer', 'The window washer'], ['balloon', 'Sorry, Athens'],
+    ['geese', 'The wrong-way goose'], ['exam', 'CS 1331, 34/100'], ['jet', 'The busiest airport'], ['cap', 'The cap that never came down'],
+    ['wballoon', 'Lost & found'], ['astronaut', 'An alum in orbit'], ['satellite', 'The honeycomb satellite'], ['flag', 'A flag on the Moon'],
+    ['burdell', 'George P. Burdell'], ['buzz', 'Buzz does a flip'], ['thwg', 'THWG'], ['helluva', 'Helluva Engineer'], ['wrongschool', 'Wrong school'],
+    ['beetap', 'The loop'], ['tower', 'The tower chimes'], ['night', 'Studying late'], ['konami', 'The gold swarm'],
+  ];
   const TICK_MS = 100;
   const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from skipping the reveal card
   const LIFTOFF_MS = 2000;
   const WRONG_LOCK_MS = 400;
   const GLIDE_MS = 900; // the short climb used in infinite mode
-  const HOVER = 6; // on the title screen the bee idles this many points above the lawn
+  const HOVER = 2.5; // on the title screen the bee idles this many points above the lawn
+  const BEE_DOWN = 0.6; // how far down the screen the bee rides
   const LINE_NAMES = { common: 'COMMON', clever: 'CLEVER', solid: 'SOLID', rare: 'RARE', deep: 'DEEP CUT', swarm: 'SWARM' };
 
   // Small 8x8 marks, one per tier, so a tier is never told apart by colour alone.
@@ -89,10 +100,21 @@
   let scene = null;
   let cam = 0; // the score the camera sits on
   let anim = null; // { from, to, start, ms, done, lines }
-  let anchor = 0.78;
-  let anchorTarget = 0.78;
-  let shownAlt = -1;
+  let anchor = 0.6;
+  let anchorTarget = 0.6;
+  let shownAlt = '';
   let tierColors = {};
+  let winTop = 0;
+  let countFrom = null; // while a daily climb runs, the score the HUD counts up from
+  let frames = 0;
+  let found = new Set();
+  let toastQueue = [];
+  let toastTimer = 0;
+  let towerTaps = [];
+  let homeNote = null; // { text, until }: a passing line on the title screen
+  let konamiAt = 0;
+  let goldFlight = false;
+  let cardTier = null;
 
   /* ---------- small helpers ---------- */
 
@@ -109,6 +131,126 @@
 
   function setPhase(name) {
     document.body.dataset.phase = name;
+    aimCamera();
+    flushToasts();
+  }
+
+  /* ---------- sightings: the log, the toast, and the things you can do ---------- */
+
+  // True while a round's clock is running. Nothing playful may start then, except a secret
+  // answer the player typed on purpose.
+  function clockLive() {
+    return mode === 'daily' || mode === 'infinite' || document.body.dataset.phase === 'intro';
+  }
+
+  function loadFound() {
+    const raw = store.get(K_SIGHT, null);
+    const ok = raw && raw.v === C.SAVE_VERSION && Array.isArray(raw.found);
+    found = new Set(ok ? raw.found.filter((id) => EGGS.some((e) => e[0] === id)) : []);
+  }
+
+  function renderSightings() {
+    $('sightCount').textContent = found.size + '/' + EGGS.length;
+    $('resSightCount').textContent = '· ' + found.size + ' / ' + EGGS.length + ' found';
+    ['sightGrid', 'resSightGrid'].forEach((id) => {
+      const list = $(id);
+      list.textContent = '';
+      EGGS.forEach((e) => list.appendChild(found.has(e[0]) ? el('li', '', e[1]) : el('li', 'unfound', '? ? ?'))); // unfound ones stay silhouettes
+    });
+  }
+
+  function markFound(id) {
+    if (found.has(id)) return;
+    found.add(id);
+    store.set(K_SIGHT, { v: C.SAVE_VERSION, found: Array.from(found) });
+    renderSightings();
+    toastQueue.push(EGGS.filter((e) => e[0] === id)[0][1]);
+    flushToasts();
+  }
+
+  // Toasts wait until no clock is running, and sit in the open sky, away from the prompt and input.
+  function flushToasts() {
+    if (toastTimer || !toastQueue.length || clockLive()) return;
+    const name = toastQueue.shift();
+    const toast = $('toast');
+    toast.textContent = 'NEW SIGHTING\n' + name;
+    toast.hidden = false;
+    announce('New sighting: ' + name + '.');
+    toastTimer = window.setTimeout(() => {
+      toast.hidden = true;
+      toastTimer = 0;
+      flushToasts();
+    }, TOAST_MS);
+  }
+
+  function goldFlash() {
+    if (reducedMotion()) return;
+    const flash = $('flash');
+    flash.classList.remove('go');
+    void flash.offsetWidth;
+    flash.classList.add('go');
+  }
+
+  function popBalloon() {
+    if (!scene.pop(performance.now())) return;
+    Sfx.pop();
+    $('cap-balloon').hidden = false;
+    markFound('balloon');
+  }
+
+  // A secret answer: a reaction, and nothing else. The round carries on untouched.
+  function onSecret(id) {
+    const now = performance.now();
+    $('guess').value = '';
+    if (id === 'burdell') setFeedback('George P. Burdell is enrolled in every class. Try again.', '');
+    else if (id === 'buzz') {
+      scene.trick('flip', now);
+      setFeedback('Buzz does a flip.', 'good');
+    } else if (id === 'thwg') {
+      goldFlash();
+      scene.puff(now);
+      Sfx.pop();
+      setFeedback('Pop.', 'good');
+    } else if (id === 'helluva') {
+      Sfx.jingle(); // silent unless sound is on
+      setFeedback("That's the spirit.", 'good');
+    } else setFeedback('Wrong school.', '');
+    markFound(id);
+  }
+
+  function onTap(e) {
+    if (e.target.closest('button, input, textarea, summary, a, .panel, .tools')) return;
+    if (clockLive()) return;
+    const what = scene.hit(e.clientX, e.clientY);
+    if (what === 'balloon') popBalloon();
+    else if (what === 'bee') {
+      scene.trick('loop', performance.now());
+      Sfx.buzz();
+      markFound('beetap');
+    } else if (what === 'tower' && view === 'home') {
+      const now = Date.now();
+      towerTaps = towerTaps.filter((t) => now - t < 4000).concat(now);
+      if (towerTaps.length >= 5) {
+        towerTaps = [];
+        Sfx.chime();
+        const time = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        homeNote = { text: 'The tower chimes. It is ' + time + '.', until: now + 6000 };
+        renderHome();
+        markFound('tower');
+      }
+    }
+  }
+
+  function onKey(e) {
+    if (view !== 'home' || e.repeat || e.key === 'Unidentified') return;
+    konamiAt = e.key === KONAMI[konamiAt] || e.key.toLowerCase() === KONAMI[konamiAt] ? konamiAt + 1 : e.key === KONAMI[0] ? 1 : 0;
+    if (konamiAt < KONAMI.length) return;
+    konamiAt = 0;
+    goldFlight = true;
+    scene.setGold(true);
+    homeNote = { text: 'The swarm turns gold for one flight.', until: Date.now() + 6000 };
+    renderHome();
+    markFound('konami');
   }
 
   function show(name, focusTarget) {
@@ -117,8 +259,13 @@
       s.hidden = s.getAttribute('data-view') !== name;
     });
     document.body.classList.toggle('playing', name === 'play' || name === 'between');
+    scene.drainSeen(); // whatever was in view on the last screen does not count on this one
     $('hud').hidden = !(name === 'play' || name === 'between');
     if (name !== 'play' && name !== 'between') window.scrollTo(0, 0);
+    const late = name === 'home' && new Date().getHours() < 4; // the small hours get a night sky
+    scene.setNight(late);
+    $('nightLine').hidden = !late;
+    if (late) markFound('night');
     aimCamera();
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
@@ -132,7 +279,7 @@
   }
 
   function feet(score) {
-    return C.formatNumber(C.altitudeFeet(score)) + ' ft';
+    return C.altitudeText(score);
   }
 
   function tierLabel(tier) {
@@ -158,14 +305,16 @@
     return b;
   }
 
-  // The larger artwork on the reveal card: one bee, a studious bee, a small swarm, and so on.
-  function drawTierArt(canvas, tier) {
+  // The creature on the reveal card. It moves: one bee drifts, a small swarm bobs, a rare
+  // answer sends bees spiralling up, and the hive has bees in orbit. Still under reduced motion.
+  function drawTierArt(canvas, tier, now) {
     const g = canvas.getContext('2d');
-    const bee = { b: '#d9b84a', k: '#00213d', w: '#f4f9ff', e: '#ffffff' };
-    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', e: '#ffffff' };
+    const t = reducedMotion() ? 0 : now || 0;
+    const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d' };
+    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00' };
     const box = (x, y, w, h, color) => {
       g.fillStyle = color;
-      g.fillRect(x, y, w, h);
+      g.fillRect(Math.round(x), Math.round(y), w, h);
     };
     g.clearRect(0, 0, 24, 20);
     if (!tier) {
@@ -173,30 +322,40 @@
       return;
     }
     if (tier === 'swarm') {
-      box(0, 0, 24, 20, 'rgba(255, 210, 63, 0.28)');
       [[9, 6], [7, 10], [6, 12], [6, 12], [7, 10], [9, 6]].forEach((row, i) => {
-        box(row[0], 3 + i * 2, row[1], 2, '#ffd23f');
-        box(row[0], 4 + i * 2, row[1], 1, '#c98f00');
+        box(row[0], 4 + i * 2, row[1], 2, '#ffd23f');
+        box(row[0], 5 + i * 2, row[1], 1, '#c98f00');
       });
-      box(11, 12, 2, 3, '#3a2f00');
-      Scene.stamp(g, Scene.MINI, 0, 2, gold);
-      Scene.stamp(g, Scene.MINI, 19, 5, gold);
-      Scene.stamp(g, Scene.MINI, 2, 14, gold);
+      box(11, 13, 2, 3, '#3a2f00');
+      for (let i = 0; i < 3; i++) { // bees in orbit round the hive
+        const a = t / 520 + i * 2.094;
+        Scene.stamp(g, Scene.MINI, Math.round(8.5 + Math.cos(a) * 9), Math.round(7.5 + Math.sin(a) * 7), gold);
+      }
       return;
     }
     if (tier === 'solid') {
-      [[1, 3], [10, 1], [17, 7], [6, 11], [14, 14]].forEach((p) => Scene.stamp(g, Scene.MINI, p[0], p[1], bee));
+      [[1, 2], [15, 1], [8, 8], [0, 14], [16, 13]].forEach((p, i) => Scene.stamp(g, Scene.MINI, p[0], p[1] + Math.round(Math.sin(t / 300 + i * 1.3)), bee));
       return;
     }
-    Scene.stamp(g, Scene.BEE, 4, 6, bee);
-    if (tier === 'clever') { // spectacles
-      box(11, 9, 4, 1, '#ffffff'); box(11, 12, 4, 1, '#ffffff'); box(11, 9, 1, 4, '#ffffff'); box(14, 9, 1, 4, '#ffffff');
-      box(16, 9, 4, 1, '#ffffff'); box(16, 12, 4, 1, '#ffffff'); box(16, 9, 1, 4, '#ffffff'); box(19, 9, 1, 4, '#ffffff');
-      box(15, 10, 1, 1, '#ffffff');
-    } else if (tier === 'rare') { // a star overhead
+    const drift = tier === 'common' ? Math.round(Math.sin(t / 650) * 3) : 0;
+    const bob = Math.round(Math.sin(t / 420));
+    Scene.stamp(g, Scene.BEE, 4 + drift, 6 + bob, bee);
+    if (tier === 'clever') { // spectacles, with a glint
+      [[13, 10], [18, 10]].forEach((p) => {
+        box(p[0], p[1] + bob, 4, 1, '#ffffff'); box(p[0], p[1] + 3 + bob, 4, 1, '#ffffff'); box(p[0], p[1] + bob, 1, 4, '#ffffff'); box(p[0] + 3, p[1] + bob, 1, 4, '#ffffff');
+      });
+      box(17, 11 + bob, 1, 1, '#ffffff');
+      if (Math.floor(t / 400) % 3 === 0) box(14, 11 + bob, 1, 1, '#ffd23f');
+    } else if (tier === 'rare') { // a star overhead, and a few bees spiralling up to it
       box(19, 0, 1, 5, '#ffd23f'); box(17, 2, 5, 1, '#ffd23f'); box(18, 1, 3, 3, '#fff7d1');
-    } else if (tier === 'deep') { // carrying a gem
+      for (let i = 0; i < 4; i++) {
+        const p = (t / 1500 + i / 4) % 1;
+        box(11 + Math.cos(p * 12.566) * 9, 18 - p * 17, 2, 1, '#ffd23f');
+        box(11 + Math.cos(p * 12.566) * 9, 17 - p * 17, 1, 1, '#ffffff');
+      }
+    } else if (tier === 'deep') { // carrying a gem that catches the light
       box(17, 14, 5, 1, '#d68ac0'); box(16, 15, 7, 1, '#e9b3da'); box(17, 16, 5, 1, '#d68ac0'); box(18, 17, 3, 1, '#b2639b'); box(19, 18, 1, 1, '#b2639b');
+      if (Math.floor(t / 350) % 2) box(18, 15, 1, 1, '#ffffff');
     }
   }
 
@@ -272,17 +431,34 @@
   function aimCamera() {
     if (!scene) return;
     const h = window.innerHeight;
-    if (!$('hud').hidden) document.documentElement.style.setProperty('--hud-h', $('hud').offsetHeight + 'px');
-    if (view === 'play') {
-      const top = $('promptCard').getBoundingClientRect().bottom;
-      const bottom = $('dock').getBoundingClientRect().top;
-      anchorTarget = bottom > top + 60 ? (top + bottom) / 2 / h + 0.03 : 0.5;
+    const root = document.documentElement.style;
+    if (!$('hud').hidden) root.setProperty('--hud-h', $('hud').offsetHeight + 'px');
+    // The clear band of screen that facts and tier lines may be drawn in.
+    const phase = document.body.dataset.phase;
+    let top = $('hud').hidden ? 56 : $('hud').getBoundingClientRect().bottom + 4;
+    let bottom = h;
+    if (view === 'play' && phase !== 'climb') {
+      top = $('promptCard').getBoundingClientRect().bottom + 4;
+      bottom = $('dock').getBoundingClientRect().top - 4;
     } else if (view === 'between') {
-      anchorTarget = window.innerWidth >= 720 ? 0.55 : Math.max(0.16, ($('reveal').getBoundingClientRect().top / h) * 0.6);
+      bottom = $('reveal').getBoundingClientRect().top - 4;
+    }
+    winTop = Math.max(0, Math.round(top));
+    root.setProperty('--win-top', winTop + 'px');
+    root.setProperty('--win-bottom', Math.max(0, Math.round(h - bottom)) + 'px');
+    if (view === 'play') {
+      // The bee rides about 60% of the way down the visible screen, so the sky ahead is in view.
+      // With a keyboard up it is kept inside the gap between the prompt and the answer bar.
+      const visible = h - (parseFloat(root.getPropertyValue('--kb')) || 0);
+      const want = BEE_DOWN * visible;
+      const floor = phase === 'climb' ? visible - 40 : $('dock').getBoundingClientRect().top - 34;
+      const ceiling = phase === 'climb' ? 60 : $('promptCard').getBoundingClientRect().bottom + 34;
+      anchorTarget = Math.max(ceiling, Math.min(floor, want)) / h;
+    } else if (view === 'between') {
+      // The card is short and sits at the bottom; the bee stays where it was unless the card needs the room.
+      anchorTarget = Math.max(0.2, Math.min(BEE_DOWN * h, $('reveal').getBoundingClientRect().top - 70) / h);
     } else if (view === 'home') {
-      // The lawn sits at the foot of the gap between the two panels, with the bee hovering above it.
-      const lawn = $('homeGap').getBoundingClientRect().bottom + window.scrollY - 8;
-      anchorTarget = Math.min(0.9, (lawn - (cam > 0 && cam <= HOVER ? cam : 0) * scene.cssPerPoint()) / h);
+      anchorTarget = BEE_DOWN; // with the bee hovering HOVER points up, the lawn fills about the bottom quarter
     } else {
       anchorTarget = 0.4;
     }
@@ -291,7 +467,7 @@
 
   function layoutWorld() {
     const per = scene.cssPerPoint();
-    document.documentElement.style.setProperty('--ruler', scene.rulerWidth() + 'px');
+    document.documentElement.style.setProperty('--ruler', scene.size().S * 36 + 'px');
     document.querySelectorAll('#worldLayer [data-score]').forEach((node) => {
       node.style.top = -Number(node.dataset.score) * per + 'px';
     });
@@ -299,9 +475,16 @@
 
   function buildFacts() {
     const layer = $('worldLayer');
-    FACTS.forEach((f) => {
-      const node = el('p', 'fact', f.text);
+    FACTS.forEach((f, i) => {
+      const node = el('p', 'fact ' + (i % 2 ? 'left' : 'right'), f.text); // alternating sides
       node.dataset.score = String(C.scoreForFeet(f.feet));
+      layer.appendChild(node);
+    });
+    scene.sightings.forEach((g) => { // a caption beside each sighting, on the side it is not
+      const node = el('p', 'fact sight ' + g.side, g.caption);
+      node.id = 'cap-' + g.id;
+      node.dataset.score = String(g.id === 'flag' ? g.score + 3 : g.score < 1 ? 1.6 : g.score);
+      node.hidden = g.hidden;
       layer.appendChild(node);
     });
     layoutWorld();
@@ -360,15 +543,37 @@
     scene.setAnchor(anchor);
     scene.setCamera(cam);
     scene.draw(now);
-    $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
+    $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
-    const alt = C.altitudeFeet(cam);
-    if (alt !== shownAlt) {
-      shownAlt = alt;
-      $('hudAlt').textContent = C.formatNumber(alt);
+    if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
+    if (++frames % 4 === 0) dodgeTag();
+    if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
+    if (frames % 8 === 0) {
+      const seenNow = scene.drainSeen(); // only counted during a flight, not from the title screen
+      if (view === 'play' || view === 'between') seenNow.forEach((id) => { if (id !== 'balloon' && id !== 'flag') markFound(id); });
+    }
+    const alt = C.altitudeParts(cam);
+    if (alt.value !== shownAlt) {
+      shownAlt = alt.value;
+      $('hudAlt').textContent = alt.value;
+      $('hudUnit').textContent = ' ' + alt.unit.toUpperCase();
     }
     window.requestAnimationFrame(frame);
+  }
+
+  // A fact that would sit under the answer tag or a tier label steps aside while they are there.
+  function dodgeTag() {
+    const tag = $('tag');
+    const blockers = tag.hidden ? [] : [tag.getBoundingClientRect()];
+    const bee = scene.box('bee');
+    if (bee) blockers.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
+    document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => blockers.push(n.getBoundingClientRect()));
+    document.querySelectorAll('#worldLayer .fact').forEach((node) => {
+      const r = node.getBoundingClientRect();
+      const hit = blockers.some((b) => r.bottom > b.top - 6 && r.top < b.bottom + 6 && r.right > b.left - 6 && r.left < b.right + 6);
+      node.classList.toggle('yield', hit);
+    });
   }
 
   /* ---------- title screen ---------- */
@@ -397,9 +602,10 @@
     const btn = $('dailyBtn');
     const status = $('dailyStatus');
     $('skipStaleBtn').hidden = !stale;
+    if (homeNote && Date.now() > homeNote.until) homeNote = null;
     if (!daily || (!stale && !daily.round && !daily.results.length)) {
       btn.textContent = 'BEGIN ASCENT ▲';
-      status.textContent = 'The same seven for every Yellow Jacket, once a day.';
+      status.textContent = '';
     } else if (daily.finished) {
       const score = C.totalScore(daily.results);
       btn.textContent = "SEE TODAY'S FLIGHT";
@@ -414,10 +620,11 @@
         status.textContent = C.formatNumber(C.totalScore(daily.results)) + ' pts so far' + (stale ? ". Today's seven unlock when you land." : '.');
       }
     }
+    if (homeNote) status.textContent = homeNote.text;
     const best = getBest();
     $('bestLabel').textContent = best && best.score
       ? 'Best run: ' + C.formatNumber(best.score) + ' pts across ' + best.answered + (best.answered === 1 ? ' prompt.' : ' prompts.')
-      : 'No best run yet.';
+      : '';
   }
 
   function goHome() {
@@ -430,10 +637,9 @@
     setPhase('home');
     show('home', $('homeTitle'));
     const done = daily && !stale ? daily.results : [];
+    scene.setGold(goldFlight);
     scene.setFollowers(done.filter((r) => r.points).length);
     moveCamera(C.totalScore(done) || HOVER, 0);
-    aimCamera();
-    anchor = anchorTarget;
   }
 
   /* ---------- daily: pacing ---------- */
@@ -498,11 +704,11 @@
     const index = daily.results.length;
     mode = null;
     clearClimb();
+    if (index === 0) newFlight();
     renderDailyHud(index);
     renderTried([]);
     setFeedback('', '');
     $('guess').value = '';
-    $('guess').readOnly = false;
     $('clockLive').textContent = '';
     renderClock(C.ROUND_MS, C.ROUND_MS, true);
     setPhase('intro');
@@ -532,6 +738,20 @@
     aimCamera();
   }
 
+  function newFlight() {
+    scene.newFlight();
+    $('cap-balloon').hidden = true;
+    $('cap-flag').hidden = true;
+  }
+
+  // A perfect day: the swarm is on the Moon, and leaves a flag.
+  function maybePlantFlag() {
+    if (!daily.finished || C.totalScore(daily.results) < C.TOP_SCORE) return;
+    scene.plantFlag();
+    $('cap-flag').hidden = false;
+    markFound('flag');
+  }
+
   function enterRound(fromIntro) {
     mode = 'daily';
     lastAnnounced = 0;
@@ -541,8 +761,7 @@
       clearClimb();
       renderDailyHud(daily.round.index);
       $('guess').value = '';
-      $('guess').readOnly = false;
-      $('clockLive').textContent = '';
+        $('clockLive').textContent = '';
       setFeedback('', '');
       $('liftoff').hidden = true;
     }
@@ -556,12 +775,14 @@
 
   function lockInput() {
     const g = $('guess');
+    // Typing is never blocked. Only submitting again is, briefly, so a double tap cannot cost
+    // two penalties. The wrong text stays selected, so the next keystroke replaces it.
     lockUntil = performance.now() + WRONG_LOCK_MS;
-    g.readOnly = true;
+    g.dataset.locked = '1';
+    g.focus();
     g.select();
     window.setTimeout(() => {
-      g.readOnly = false;
-      if (view === 'play') g.select();
+      delete g.dataset.locked;
     }, WRONG_LOCK_MS);
   }
 
@@ -590,6 +811,7 @@
       $('guess').select();
       return;
     }
+    if (r.status === 'secret') return onSecret(r.secret);
     if (r.status === 'near') {
       saveDaily();
       return onNear(text, r.suggestion);
@@ -613,25 +835,24 @@
     const tier = C.TIERS[result.tier];
     $('guess').blur();
     setPhase('climb');
-    $('hudScore').textContent = C.formatNumber(base + result.points);
+    countFrom = base;
     const tag = $('tag');
     tag.textContent = result.answer;
     tag.hidden = false;
     scene.setMood('happy');
-    anchorTarget = window.innerWidth >= 720 ? 0.55 : 0.5;
     const lines = buildTierLines(base, result.points);
     const ms = reducedMotion() ? 0 : tier.climbMs;
     if (ms) Sfx.rise(ms / 1000);
     moveCamera(base + result.points, ms, () => {
+      countFrom = null;
+      $('hudScore').textContent = C.formatNumber(base + result.points);
       scene.setFollowers(daily.results.filter((x) => x.points).length);
       if (result.tier === 'swarm') {
         scene.setMood('gold');
         if (!reducedMotion()) {
           scene.burst(performance.now());
-          const flash = $('flash');
-          flash.classList.remove('go');
-          void flash.offsetWidth;
-          flash.classList.add('go');
+          goldFlash();
+          quake();
         }
       } else {
         scene.setMood('idle');
@@ -643,16 +864,19 @@
     }, lines);
   }
 
+  function quake() {
+    if (reducedMotion()) return;
+    document.body.classList.remove('shake');
+    void document.body.offsetWidth;
+    document.body.classList.add('shake');
+  }
+
   function missed() {
     $('guess').blur();
     clearClimb();
     scene.setMood('sad');
     scene.setDim(0.45);
-    if (!reducedMotion()) {
-      document.body.classList.remove('shake');
-      void document.body.offsetWidth;
-      document.body.classList.add('shake');
-    }
+    quake();
     Sfx.timeout();
     showReveal(true);
   }
@@ -668,12 +892,12 @@
     const card = $('reveal');
     card.className = 'panel reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
     card.style.setProperty('--tier', last.tier ? tierColors[last.tier] : '#c3ccd6');
-    drawTierArt($('lastIcon'), last.tier);
+    cardTier = last.tier;
+    drawTierArt($('lastIcon'), cardTier, performance.now());
     $('lastRoundLabel').textContent = 'Round ' + done + ' of ' + C.ROUNDS;
     $('lastBadge').textContent = last.tier ? C.TIERS[last.tier].label.toUpperCase() : 'NOTHING LANDED';
     $('lastAnswer').textContent = last.tier ? last.answer : 'the clock beat you.';
-    const gained = C.altitudeFeet(score) - C.altitudeFeet(score - last.points);
-    $('lastPoints').textContent = last.tier ? '+' + last.points + ' PTS · climb ' + C.formatNumber(gained) + ' ft' : '+0 PTS · holding at ' + feet(score);
+    $('lastPoints').textContent = last.tier ? '+' + last.points + ' PTS · now at ' + feet(score) : '+0 PTS · holding at ' + feet(score);
     const bits = [];
     if (last.tier) bits.push(C.TIERS[last.tier].quip);
     if (last.note) bits.push(last.note);
@@ -690,7 +914,7 @@
     }
     $('runningScore').textContent = C.formatNumber(score) + ' pts · ' + feet(score) + ' so far';
     announce(last.tier
-      ? 'Round ' + done + ': ' + C.TIERS[last.tier].label + ', ' + last.answer + ', plus ' + last.points + ' points. Total ' + score + ' points, ' + C.altitudeFeet(score) + ' feet.'
+      ? 'Round ' + done + ': ' + C.TIERS[last.tier].label + ', ' + last.answer + ', plus ' + last.points + ' points. Total ' + score + ' points, ' + feet(score) + '.'
       : "Round " + done + ": time's up. No points. Total " + score + ' points.');
     if (!fresh) {
       clearClimb();
@@ -699,6 +923,7 @@
     }
     renderPips();
     $('hudScore').textContent = C.formatNumber(score);
+    maybePlantFlag();
     revealShownAt = Date.now();
     setPhase('reveal');
     show('between', btn);
@@ -784,7 +1009,10 @@
     const todayOpen = daily.date !== today();
     $('resNext').hidden = todayOpen;
     $('resTodayBtn').hidden = !todayOpen;
-    announce('Final score ' + score + ' points, ' + C.altitudeFeet(score) + ' feet up. ' + band.name + '.');
+    announce('Final score ' + score + ' points, ' + feet(score) + ' up. ' + band.name + '.');
+    maybePlantFlag();
+    renderSightings();
+    goldFlight = false; // the gold swarm lasts one flight
     setPhase('results');
     show('results', $('resBand'));
     scene.setFollowers(daily.results.filter((r) => r.points).length);
@@ -843,11 +1071,11 @@
     mode = 'infinite';
     lastAnnounced = 0;
     clearClimb();
+    newFlight();
     $('pips').hidden = true;
     $('infActions').hidden = false;
     $('liftoff').hidden = true;
     $('guess').value = '';
-    $('guess').readOnly = false;
     $('clockLive').textContent = '';
     setFeedback('', '');
     renderInfinite();
@@ -873,6 +1101,7 @@
       $('guess').select();
       return;
     }
+    if (r.status === 'secret') return onSecret(r.secret);
     if (r.status === 'near') return onNear(text, r.suggestion);
     if (r.status === 'wrong') {
       onWrong(text);
@@ -912,6 +1141,7 @@
     list.textContent = '';
     inf.log.forEach((r, i) => list.appendChild(resultRow(i + 1, byId[r.promptId].text, r.answer, r.tier, r.points)));
     $('infLogCard').hidden = inf.log.length === 0;
+    goldFlight = false;
     setPhase('infover');
     show('infover', $('infTitle'));
     moveCamera(inf.score, 0);
@@ -1061,6 +1291,8 @@
         }
       }
     };
+    document.addEventListener('pointerdown', onTap);
+    document.addEventListener('keydown', onKey);
     document.addEventListener('visibilitychange', bank);
     window.addEventListener('pagehide', bank);
   }
@@ -1070,15 +1302,18 @@
     C.TIER_ORDER.concat('miss').forEach((t) => {
       tierColors[t] = css.getPropertyValue('--t-' + t).trim();
     });
-    scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, reducedMotion });
+    scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, scoreForFeet: C.scoreForFeet, reducedMotion });
     wire();
     const sound = store.get(K_SOUND, null);
     applySound(!!(sound && sound.on === true)); // off until the player turns it on
     const scan = store.get(K_SCAN, null);
     applyScan(!(scan && scan.on === false));
     buildFacts();
+    loadFound();
+    renderSightings();
     trackKeyboard();
     window.requestAnimationFrame(frame);
+    window.__swarm = { scene, camera: () => cam }; // read-only handle for the browser tests
 
     fetch('data/prompts.json')
       .then((res) => {
@@ -1102,10 +1337,6 @@
         else if (daily && daily.finished) showResults();
         else {
           goHome();
-          if (!store.get(K_SEEN, null)) {
-            store.set(K_SEEN, { v: C.SAVE_VERSION });
-            $('howDlg').open = true; // rules open on a first visit only
-          }
         }
       })
       .catch((err) => {

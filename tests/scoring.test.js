@@ -17,25 +17,45 @@ test('infinite-mode time bonuses match the spec', () => {
   assert.deepEqual(['swarm', 'deep', 'rare', 'solid', 'clever', 'common'].map(secs), [16, 12, 10, 9, 8, 8]);
 });
 
-test('total score, and an altitude curve that runs from the lawn to the edge of space', () => {
+test('total score, and one altitude curve from the lawn to the Moon', () => {
   const results = [{ points: 100 }, { points: 85 }, { points: 0 }, { points: 15 }];
   assert.equal(C.totalScore(results), 200);
   assert.equal(C.TOP_SCORE, 700);
+  // the brief's anchors
   assert.equal(C.altitudeFeet(0), 0);
-  assert.equal(C.altitudeFeet(C.TOP_SCORE), C.TOP_FEET, 'a perfect day reaches the Karman line');
-  assert.equal(C.TOP_FEET, 328084);
-  for (let s = 1; s <= 1000; s++) assert.ok(C.altitudeFeet(s) >= C.altitudeFeet(s - 1), 'altitude never falls as score rises, at ' + s);
-  for (let s = 10; s <= 1000; s += 5) assert.ok(C.altitudeFeet(s) > C.altitudeFeet(s - 5), 'every answer gains altitude, at ' + s);
-  assert.ok(C.altitudeFeet(10) < 20, 'one obvious answer barely leaves the lawn');
-  const allCommon = C.altitudeFeet(70);
-  assert.ok(allCommon > 1023 && allCommon < 1100, 'seven obvious answers just clear the tallest building in Atlanta: ' + allCommon);
-  assert.ok(C.altitudeFeet(-5) === 0);
+  assert.equal(C.altitudeFeet(150), 10000);
+  assert.equal(C.altitudeFeet(350), 40000);
+  assert.equal(C.altitudeFeet(550), 328084, 'the edge of space, 100 km');
+  assert.equal(C.altitudeFeet(700), 238855 * 5280, 'the Moon');
+  assert.equal(C.altitudeText(700), '238,855 mi');
+  assert.equal(C.altitudeFeet(-5), 0);
+  // smooth and monotonic: it always rises, and never jumps
+  let prev = 0;
+  for (let s = 0.5; s <= 1200; s += 0.5) {
+    const ft = C.altitudeFeet(s);
+    assert.ok(ft > prev, 'altitude rises at ' + s);
+    if (s > 20) assert.ok(ft / prev < 1.06, 'no jump at ' + s + ': ' + prev + ' -> ' + ft);
+    prev = ft;
+  }
+  // where the zones begin
+  assert.ok(C.altitudeFeet(40) > 100 && C.altitudeFeet(40) < 150, 'treetop height leaving campus');
+  assert.ok(C.altitudeFeet(105) > 900 && C.altitudeFeet(110) < 1300, 'the skyline tops out near 1,000 ft');
+  assert.ok(C.altitudeFeet(700) < C.altitudeFeet(701), 'infinite mode keeps climbing past the Moon');
+});
+
+test('altitude text switches from feet to miles so it always fits the HUD', () => {
+  assert.deepEqual(C.altitudeParts(0), { value: '0', unit: 'ft' });
+  assert.deepEqual(C.altitudeParts(150), { value: '10,000', unit: 'ft' });
+  assert.deepEqual(C.altitudeParts(550), { value: '328,084', unit: 'ft' });
+  assert.equal(C.altitudeParts(600).unit, 'mi');
+  for (let s = 0; s <= 3100; s += 7) assert.ok(C.altitudeText(s).length <= 10, 'fits at ' + s + ': ' + C.altitudeText(s));
 });
 
 test('scoreForFeet is the inverse of altitudeFeet', () => {
-  for (const s of [10, 70, 145, 286, 435, 700]) assert.ok(Math.abs(C.scoreForFeet(C.altitudeFeet(s)) - s) < 0.5, 'round trip at ' + s);
-  assert.equal(Math.round(C.scoreForFeet(1023)), 70);
-  assert.equal(Math.round(C.scoreForFeet(35000)), 286);
+  for (const s of [10, 70, 145, 286, 435, 560, 700]) assert.ok(Math.abs(C.scoreForFeet(C.altitudeFeet(s)) - s) < 0.5, 'round trip at ' + s);
+  assert.ok(C.scoreForFeet(1023) > 95 && C.scoreForFeet(1023) < 110, 'the tallest building in Atlanta sits in the skyline zone');
+  assert.ok(C.scoreForFeet(35000) > 300 && C.scoreForFeet(35000) < 350, 'airliners cruise in the high sky');
+  assert.ok(C.scoreForFeet(250 * 5280) > 550 && C.scoreForFeet(250 * 5280) < 650, 'low Earth orbit is in the space zone');
 });
 
 test('flight numbers count days since launch', () => {
@@ -99,7 +119,7 @@ test('share text: one emoji per round, no answers, correct maths', () => {
   assert.equal(lines[0], 'One in a Swarm 🐝 Flight #1');
   assert.equal(lines[1], '⬜🟩🟧🟦🟪🐝⬛');
   assert.equal(Array.from(lines[1]).length, 7);
-  assert.equal(lines[2], '300 pts · ' + C.formatNumber(C.altitudeFeet(300)) + ' ft up');
+  assert.equal(lines[2], '300 pts · ' + C.altitudeText(300) + ' up');
   assert.equal(lines[3], 'https://example.test/swarm/');
   assert.equal(lines.length, 4);
   assert.ok(!/SECRET/.test(text));

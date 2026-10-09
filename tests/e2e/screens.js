@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 'use strict';
-/* Plays one flight in headless Chrome at phone and desktop size and saves screenshots of the
-   moments worth looking at: start, a wrong guess, a near-miss, mid-climb, a reveal card, the
-   One in a Swarm moment, a timeout, and the results. Run with: npm run screens */
+/* Plays three flights in headless Chrome at phone and desktop size and saves screenshots into
+   screenshots/v3/: one of about 150 points, one of about 350, and a perfect 700, plus every
+   zone, some easter eggs, a secret answer, the One in a Swarm moment and the results screen.
+   Tiers are forced by looking answers up by tier in the prompt bank. Run with: npm run screens */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { launch, sleep } = require('./cdp.js');
+const C = require('../../js/core.js');
 const data = require('../../data/prompts.json');
 
 const ROOT = path.join(__dirname, '..', '..');
-const OUT = path.join(ROOT, 'screenshots');
+const OUT = path.join(ROOT, 'screenshots', 'v3');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.woff2': 'font/woff2' };
 
 const server = http.createServer((req, res) => {
@@ -24,12 +26,23 @@ const server = http.createServer((req, res) => {
   res.end(fs.readFileSync(file));
 });
 
-const fakeClock = `(() => { const R = Date; let off = 0;
-  class D extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } }
-  window.Date = D; window.__shiftClock = (ms) => { off += ms; }; })();`;
+const day = C.utcDateKey(new Date());
+const order = ['majors', 'nba', 'marta', 'nfl', 'cs', 'codes', 'qbs']; // prompts where no secret answer is a real one
+const answer = (id, tier) => data.prompts.find((p) => p.id === id).answers.find((a) => a.tier === tier);
+
+// A saved run with these tiers already played, so a flight can be picked up near its end.
+function seed(tiers) {
+  const state = C.newDaily(day, order);
+  tiers.forEach((tier, i) => {
+    const a = tier ? answer(order[i], tier) : null;
+    state.results.push({ tier: tier || null, answer: a ? a.name : null, points: C.tierPoints(tier), promptId: order[i], wrong: 0, fuzzy: false, note: '' });
+  });
+  state.finished = state.results.length === 7;
+  return state;
+}
 
 async function run(browser, base, name, width, height, mobile) {
-  const page = await browser.newPage({ width, height, mobile, initScript: fakeClock });
+  const page = await browser.newPage({ width, height, mobile });
   const shot = async (label) => {
     const file = path.join(OUT, name + '-' + label + '.png');
     for (let attempt = 1; ; attempt++) {
@@ -39,92 +52,110 @@ async function run(browser, base, name, width, height, mobile) {
     }
     process.stdout.write(label + ' ');
   };
-  const phase = (p) => page.waitFor('document.body.dataset.phase === "' + p + '"', 12000, 'phase ' + p);
-  const prompt = async () => data.prompts.find((p) => p.text === document_text);
-  let document_text = '';
-  const current = async () => {
-    document_text = await page.eval('document.getElementById("promptText").textContent');
-    return prompt();
+  const phase = (p, ms) => page.waitFor('document.body.dataset.phase === "' + p + '"', ms || 12000, 'phase ' + p);
+  const load = async (state) => {
+    await page.eval(state ? 'localStorage.setItem("swarm.daily", ' + JSON.stringify(JSON.stringify(state)) + ')' : 'localStorage.removeItem("swarm.daily")');
+    await page.goto(base);
+    await page.waitFor('document.body.dataset.phase !== "loading"', 12000, 'boot');
+    await page.eval('document.fonts.ready');
+    await sleep(900);
   };
   const submit = async (text) => {
+    await page.waitFor('!document.getElementById("guess").dataset.locked', 3000, 'lock');
     await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.value = ' + JSON.stringify(text) + '; document.getElementById("guessForm").requestSubmit(); })()');
+  };
+  const play = async (tier) => {
+    await phase('guess');
+    const id = await page.eval('JSON.parse(localStorage.getItem("swarm.daily")).promptIds[JSON.parse(localStorage.getItem("swarm.daily")).round.index]');
+    await submit(answer(id, tier).name);
   };
   const next = async () => {
     await sleep(700);
     await page.eval('document.getElementById("nextBtn").click()');
   };
+  const tap = async (what) => {
+    const b = await page.eval('window.__swarm.scene.box("' + what + '")');
+    if (b) await page.click(b.x + b.w / 2, b.y + b.h / 2);
+    return !!b;
+  };
 
   await page.goto(base);
-  await page.eval('localStorage.setItem("swarm.seenHowTo", "1")');
-  await page.goto(base);
-  await phase('home');
-  await page.eval('document.fonts.ready');
+  await load(null);
+  await shot('01-start-campus');
+  for (let i = 0; i < 5; i++) await tap('tower');
   await sleep(500);
-  await shot('1-start');
+  await shot('02-egg-tower-chime');
 
-  // round 1: a wrong guess, a near-miss, then confirm it and watch the climb
-  await page.eval('document.getElementById("dailyBtn").click()');
-  await sleep(400);
-  await shot('2-liftoff');
-  await phase('guess');
-  let p = await current();
-  await submit('gatorade');
-  await sleep(150);
-  await shot('3-wrong-guess');
-  await sleep(450);
-  const target = p.answers.find((a) => a.tier === 'rare' && !/\d/.test(a.name) && a.name.length >= 7) || p.answers.find((a) => !/\d/.test(a.name) && a.name.length >= 7);
-  const typo = target.name.slice(0, 2) + target.name.slice(3);
-  await submit(typo);
-  await sleep(150);
-  await shot('4-near-miss');
-  await submit(typo);
-  await phase('climb');
-  await sleep(900);
-  await shot('5-mid-climb');
-  await phase('reveal');
-  await sleep(400);
-  await shot('6-reveal-card');
-
-  // round 2: the One in a Swarm answer
-  await next();
-  await phase('guess');
-  p = await current();
-  await submit(p.answers.find((a) => a.tier === 'swarm').name);
-  await phase('climb');
-  await sleep(1500);
-  await shot('7-swarm-climb');
-  await page.waitFor('document.getElementById("flash").classList.contains("go")', 8000, 'the gold flash');
-  await sleep(160);
-  await shot('8-swarm-moment');
-  await phase('reveal');
-  await sleep(700);
-  await shot('9-swarm-card');
-
-  // round 3: let the clock run out
-  await next();
-  await phase('guess');
-  await page.eval('__shiftClock(60000)');
-  await phase('reveal');
-  await sleep(700);
-  await shot('10-timeout');
-
-  // rounds 4 to 7, then land
-  for (const tier of ['deep', 'rare', 'swarm', 'deep']) {
-    await next();
-    await phase('guess');
-    p = await current();
-    await submit(p.answers.find((a) => a.tier === tier).name);
-    await phase('reveal');
+  // every zone, at rest on the reveal card
+  const stops = [['midtown', ['rare', 'clever']], ['clouds', ['swarm', 'solid', 'common', 'common']], ['weather', ['swarm', 'swarm', 'rare']],
+    ['highsky', ['swarm', 'swarm', 'swarm', 'rare']], ['stratosphere', ['swarm', 'swarm', 'swarm', 'swarm', 'deep']], ['space', ['swarm', 'swarm', 'swarm', 'swarm', 'swarm', 'deep']]];
+  let n = 3;
+  for (const [zone, tiers] of stops) {
+    await load(seed(tiers));
+    await shot(String(n++).padStart(2, '0') + '-zone-' + zone);
   }
-  await sleep(300);
-  await shot('11-high-altitude');
+
+  // flight one: about 150 points. A secret answer, a real climb, and where it ends up.
+  await load(seed(['rare', 'solid', 'clever', 'common']));
+  await next();
+  await phase('guess');
+  await submit('Buzz');
+  await sleep(250);
+  await shot('09-secret-answer-buzz');
+  await submit('UGA');
+  await sleep(200);
+  await shot('10-secret-answer-wrong-school');
+  await play('solid');
+  await phase('climb');
+  await sleep(1100);
+  await shot('11-flight150-mid-climb');
+  await phase('reveal');
+  await sleep(900);
+  await shot('12-flight150-ends-here');
+  await load(seed(['swarm', 'clever'])); // 115 points: the red-and-black balloon is just overhead
+  if (await tap('balloon')) {
+    await sleep(300);
+    await shot('13-egg-balloon-popped');
+  }
+  await load(seed(['rare', 'solid', 'clever', 'common', 'solid', null, null]));
+  await shot('14-flight150-results');
+
+  // flight two: about 350 points
+  await load(seed(['swarm', 'deep', 'rare', 'solid', 'clever']));
+  await next();
+  await play('rare');
+  await phase('climb');
+  await sleep(1400);
+  await shot('15-flight350-mid-climb');
+  await phase('reveal');
+  await sleep(900);
+  await shot('16-flight350-ends-here');
+
+  // flight three: a perfect 700
+  await load(seed(['swarm', 'swarm', 'swarm', 'swarm', 'swarm']));
+  await next();
+  await play('swarm');
+  await page.waitFor('document.getElementById("flash").classList.contains("go")', 9000, 'the gold flash');
+  await sleep(140);
+  await shot('17-one-in-a-swarm-moment');
+  await phase('reveal');
+  await sleep(900);
+  await shot('18-egg-astronaut-in-space');
+  await next();
+  await play('swarm');
+  await phase('climb');
+  await sleep(2600);
+  await shot('19-moon-approach');
+  await phase('reveal');
+  await sleep(1200);
+  await shot('20-zone-moon-landed-with-flag');
   await next();
   await phase('results');
-  await sleep(400);
-  await shot('12-results');
-  await page.eval('window.scrollTo(0, document.body.scrollHeight)');
-  await sleep(200);
-  await shot('13-results-lower');
+  await sleep(500);
+  await shot('21-flight700-results');
+  await page.eval('document.querySelector("#resSightGrid").scrollIntoView({ block: "center" })');
+  await sleep(300);
+  await shot('22-results-sightings-panel');
   const problems = page.problems.slice();
   await page.close();
   return problems;
@@ -138,21 +169,18 @@ async function run(browser, base, name, width, height, mobile) {
   let bad = [];
   for (const [name, w, h, mobile] of [['phone-375', 375, 812, true], ['desktop-1440', 1440, 900, false]]) {
     bad = bad.concat(await run(browser, base, name, w, h, mobile));
-    console.log('saved ' + name + ' screenshots');
+    console.log('\nsaved ' + name + ' screenshots');
   }
   // The link-preview image is the real title screen, without the corner buttons.
   const og = await browser.newPage({ width: 1200, height: 630 });
   await og.goto(base);
-  await og.eval('localStorage.setItem("swarm.seenHowTo", "1")');
-  await og.goto(base);
   await og.waitFor('document.body.dataset.phase === "home"', 12000, 'title screen');
   await og.eval('document.fonts.ready');
   await og.eval('document.getElementById("tools").hidden = true; document.getElementById("footText").hidden = true;');
-  await sleep(500);
+  await sleep(600);
   await og.screenshot(path.join(ROOT, 'assets', 'og.png'));
   await og.close();
   console.log('saved assets/og.png');
-
   await browser.close();
   server.close();
   if (bad.length) {
