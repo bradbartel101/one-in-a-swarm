@@ -8,6 +8,7 @@
     "test": "node --test",
     "test:e2e": "node tests/e2e/run.js",
     "validate": "node tools/validate.js",
+    "screens": "node tests/e2e/screens.js",
     "test:all": "npm test && npm run validate && npm run test:e2e",
     "build:data": "node tools/build-prompts.js"
   }

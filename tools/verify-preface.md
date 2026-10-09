@@ -9,6 +9,14 @@ the game and listed in `HUMAN-TODO.md` for a Tech student to rule on.
 To flag a new answer, put `?` before its tier letter in `tools/prompts.src.txt` and add
 `?? reason` at the end of the line, then run `npm run build:data`.
 
+## Altitude facts
+
+The facts that slide past on the climb live in `js/facts.js`. The specific numbers were checked
+against sources during the v1.1 rebuild (building heights, Brasstown Bald, the National Weather
+Service cloud chart, the Baumgartner and Eustace jumps, the SR-71 record). The ones that are
+typical or approximate figures rather than single measurements are flagged below. The game
+measures altitude from campus, while mountain heights are quoted above sea level, as they always are.
+
 ## Things to check that are not single answers
 
 - **Most unflagged answers were written from memory and not individually checked.** The audit's

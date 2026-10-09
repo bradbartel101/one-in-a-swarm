@@ -7,11 +7,12 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const SITE = ['index.html', '404.html', 'css/style.css', 'js/core.js', 'js/sfx.js', 'js/app.js', 'data/prompts.json'];
+const SCRIPTS = ['js/core.js', 'js/facts.js', 'js/sfx.js', 'js/scene.js', 'js/app.js'];
+const SITE = ['index.html', '404.html', 'css/style.css', 'data/prompts.json', 'assets/fonts/press-start-2p.woff2'].concat(SCRIPTS);
 const DISCLAIMER = 'Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.';
 
 test('F2: no HTML-string sinks or dynamic code anywhere in the scripts', () => {
-  for (const f of ['js/core.js', 'js/sfx.js', 'js/app.js', 'index.html', '404.html']) {
+  for (const f of SCRIPTS.concat('index.html', '404.html')) {
     const src = read(f);
     for (const bad of [/\binnerHTML\b/, /\bouterHTML\b/, /insertAdjacentHTML/, /document\.write/, /\beval\s*\(/, /new Function/, /\bsetTimeout\s*\(\s*['"`]/, /\son\w+\s*=\s*["']/]) {
       assert.ok(!bad.test(src), f + ' contains ' + bad);
@@ -39,13 +40,15 @@ test('F4 / G1: nothing is loaded from another origin, and every path is relative
     });
   }
   const css = read('css/style.css');
-  [...css.matchAll(/url\(\s*["']?([^"')]+)/g)].forEach((m) => assert.ok(m[1].startsWith('data:'), 'css loads ' + m[1]));
+  [...css.matchAll(/url\(\s*["']?([^"')]+)/g)].forEach((m) => assert.ok(m[1].startsWith('data:') || m[1] === '../assets/fonts/press-start-2p.woff2', 'css loads ' + m[1]));
   assert.ok(!/@import/.test(css));
   const fetches = [...read('js/app.js').matchAll(/fetch\(\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
   assert.deepEqual(fetches, ['data/prompts.json']);
-  assert.ok(!/https?:\/\//.test(read('js/app.js') + read('js/core.js') + read('js/sfx.js')), 'scripts mention no URLs');
-  assert.ok(!/\.(mp3|ogg|wav|m4a)\b/.test(read('js/sfx.js') + read('index.html')), 'sound is synthesised, not downloaded');
-  assert.ok(!/google|analytics|gtag|sentry|facebook|pixel/i.test(read('index.html') + read('js/app.js')), 'no analytics or tracking');
+  const scripts = SCRIPTS.map(read).join('');
+  assert.ok(!/https?:\/\//.test(scripts), 'scripts mention no URLs');
+  assert.ok(!/\.(mp3|ogg|wav|m4a|png|jpg|gif|webp)\b/.test(scripts + read('index.html').replace(/assets\/og\.png/g, '')), 'art and sound are made in code, not downloaded');
+  assert.match(read('assets/fonts/OFL.txt'), /SIL Open Font License/, 'the self-hosted font ships with its licence');
+  assert.ok(!/google-analytics|googletagmanager|gtag\(|sentry|facebook|fbq\(/i.test(read('index.html') + read('js/app.js')), 'no analytics or tracking');
 });
 
 test('E3: title, description, favicon, Open Graph and Twitter tags, and a 1200x630 PNG', () => {
@@ -65,11 +68,12 @@ test('E4 / E5: the disclaimer is on every page, and no image files besides the p
   assert.ok(read('index.html').includes(DISCLAIMER));
   assert.ok(read('404.html').includes(DISCLAIMER));
   assert.ok(!/<img\b/.test(read('index.html') + read('404.html')), 'no raster or remote images in the pages');
-  assert.deepEqual(fs.readdirSync(path.join(ROOT, 'assets')), ['og.png']);
+  assert.deepEqual(fs.readdirSync(path.join(ROOT, 'assets')).sort(), ['fonts', 'og.png']);
+  assert.deepEqual(fs.readdirSync(path.join(ROOT, 'assets', 'fonts')).sort(), ['OFL.txt', 'press-start-2p.woff2']);
 });
 
 test('F5: no debug logging, debugger statements or leftover TODOs in shipped files', () => {
-  for (const f of SITE.filter((x) => x !== 'data/prompts.json')) {
+  for (const f of SITE.filter((x) => !/\.(json|woff2)$/.test(x))) {
     const src = read(f);
     for (const bad of [/console\.\w+\s*\(/, /\bdebugger\b/, /\bTODO\b/, /\bFIXME\b/, /\bXXX\b/]) assert.ok(!bad.test(src), f + ' contains ' + bad);
   }
@@ -86,6 +90,7 @@ test('F5: every function defined in app.js is used', () => {
 test('F5: every core export is used by the app or the tools', () => {
   const core = require('../js/core.js');
   const users = read('js/app.js') + read('tools/build-prompts.js') + read('tools/validate.js');
+  assert.ok(!/[\u{1F300}-\u{1FAFF}\u{2B1B}\u{2B1C}]/u.test(read('index.html') + read('js/app.js') + read('css/style.css')), 'no emoji in the interface, only in the share text');
   const internal = read('js/core.js');
   Object.keys(core).forEach((k) => {
     const usedOutside = new RegExp('\\b(C|core)\\.' + k + '\\b').test(users);
