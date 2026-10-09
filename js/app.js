@@ -100,8 +100,8 @@
   let scene = null;
   let cam = 0; // the score the camera sits on
   let anim = null; // { from, to, start, ms, done, lines }
-  let anchor = 0.78;
-  let anchorTarget = 0.78;
+  let anchor = 0.6;
+  let anchorTarget = 0.6;
   let shownAlt = '';
   let tierColors = {};
   let winTop = 0;
@@ -114,6 +114,7 @@
   let homeNote = null; // { text, until }: a passing line on the title screen
   let konamiAt = 0;
   let goldFlight = false;
+  let cardTier = null;
 
   /* ---------- small helpers ---------- */
 
@@ -149,9 +150,8 @@
   }
 
   function renderSightings() {
-    const count = found.size + ' / ' + EGGS.length + ' found';
-    $('sightCount').textContent = '· ' + count;
-    $('resSightCount').textContent = '· ' + count;
+    $('sightCount').textContent = found.size + '/' + EGGS.length;
+    $('resSightCount').textContent = '· ' + found.size + ' / ' + EGGS.length + ' found';
     ['sightGrid', 'resSightGrid'].forEach((id) => {
       const list = $(id);
       list.textContent = '';
@@ -242,7 +242,7 @@
   }
 
   function onKey(e) {
-    if (view !== 'home') return;
+    if (view !== 'home' || e.repeat || e.key === 'Unidentified') return;
     konamiAt = e.key === KONAMI[konamiAt] || e.key.toLowerCase() === KONAMI[konamiAt] ? konamiAt + 1 : e.key === KONAMI[0] ? 1 : 0;
     if (konamiAt < KONAMI.length) return;
     konamiAt = 0;
@@ -259,6 +259,7 @@
       s.hidden = s.getAttribute('data-view') !== name;
     });
     document.body.classList.toggle('playing', name === 'play' || name === 'between');
+    scene.drainSeen(); // whatever was in view on the last screen does not count on this one
     $('hud').hidden = !(name === 'play' || name === 'between');
     if (name !== 'play' && name !== 'between') window.scrollTo(0, 0);
     const late = name === 'home' && new Date().getHours() < 4; // the small hours get a night sky
@@ -304,14 +305,16 @@
     return b;
   }
 
-  // The larger artwork on the reveal card: one bee, a studious bee, a small swarm, and so on.
-  function drawTierArt(canvas, tier) {
+  // The creature on the reveal card. It moves: one bee drifts, a small swarm bobs, a rare
+  // answer sends bees spiralling up, and the hive has bees in orbit. Still under reduced motion.
+  function drawTierArt(canvas, tier, now) {
     const g = canvas.getContext('2d');
-    const bee = { b: '#d9b84a', k: '#00213d', w: '#f4f9ff', e: '#ffffff' };
-    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', e: '#ffffff' };
+    const t = reducedMotion() ? 0 : now || 0;
+    const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d' };
+    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00' };
     const box = (x, y, w, h, color) => {
       g.fillStyle = color;
-      g.fillRect(x, y, w, h);
+      g.fillRect(Math.round(x), Math.round(y), w, h);
     };
     g.clearRect(0, 0, 24, 20);
     if (!tier) {
@@ -319,30 +322,40 @@
       return;
     }
     if (tier === 'swarm') {
-      box(0, 0, 24, 20, 'rgba(255, 210, 63, 0.28)');
       [[9, 6], [7, 10], [6, 12], [6, 12], [7, 10], [9, 6]].forEach((row, i) => {
-        box(row[0], 3 + i * 2, row[1], 2, '#ffd23f');
-        box(row[0], 4 + i * 2, row[1], 1, '#c98f00');
+        box(row[0], 4 + i * 2, row[1], 2, '#ffd23f');
+        box(row[0], 5 + i * 2, row[1], 1, '#c98f00');
       });
-      box(11, 12, 2, 3, '#3a2f00');
-      Scene.stamp(g, Scene.MINI, 0, 2, gold);
-      Scene.stamp(g, Scene.MINI, 19, 5, gold);
-      Scene.stamp(g, Scene.MINI, 2, 14, gold);
+      box(11, 13, 2, 3, '#3a2f00');
+      for (let i = 0; i < 3; i++) { // bees in orbit round the hive
+        const a = t / 520 + i * 2.094;
+        Scene.stamp(g, Scene.MINI, Math.round(8.5 + Math.cos(a) * 9), Math.round(7.5 + Math.sin(a) * 7), gold);
+      }
       return;
     }
     if (tier === 'solid') {
-      [[1, 3], [10, 1], [17, 7], [6, 11], [14, 14]].forEach((p) => Scene.stamp(g, Scene.MINI, p[0], p[1], bee));
+      [[1, 2], [15, 1], [8, 8], [0, 14], [16, 13]].forEach((p, i) => Scene.stamp(g, Scene.MINI, p[0], p[1] + Math.round(Math.sin(t / 300 + i * 1.3)), bee));
       return;
     }
-    Scene.stamp(g, Scene.BEE, 4, 6, bee);
-    if (tier === 'clever') { // spectacles
-      box(11, 9, 4, 1, '#ffffff'); box(11, 12, 4, 1, '#ffffff'); box(11, 9, 1, 4, '#ffffff'); box(14, 9, 1, 4, '#ffffff');
-      box(16, 9, 4, 1, '#ffffff'); box(16, 12, 4, 1, '#ffffff'); box(16, 9, 1, 4, '#ffffff'); box(19, 9, 1, 4, '#ffffff');
-      box(15, 10, 1, 1, '#ffffff');
-    } else if (tier === 'rare') { // a star overhead
+    const drift = tier === 'common' ? Math.round(Math.sin(t / 650) * 3) : 0;
+    const bob = Math.round(Math.sin(t / 420));
+    Scene.stamp(g, Scene.BEE, 4 + drift, 6 + bob, bee);
+    if (tier === 'clever') { // spectacles, with a glint
+      [[13, 10], [18, 10]].forEach((p) => {
+        box(p[0], p[1] + bob, 4, 1, '#ffffff'); box(p[0], p[1] + 3 + bob, 4, 1, '#ffffff'); box(p[0], p[1] + bob, 1, 4, '#ffffff'); box(p[0] + 3, p[1] + bob, 1, 4, '#ffffff');
+      });
+      box(17, 11 + bob, 1, 1, '#ffffff');
+      if (Math.floor(t / 400) % 3 === 0) box(14, 11 + bob, 1, 1, '#ffd23f');
+    } else if (tier === 'rare') { // a star overhead, and a few bees spiralling up to it
       box(19, 0, 1, 5, '#ffd23f'); box(17, 2, 5, 1, '#ffd23f'); box(18, 1, 3, 3, '#fff7d1');
-    } else if (tier === 'deep') { // carrying a gem
+      for (let i = 0; i < 4; i++) {
+        const p = (t / 1500 + i / 4) % 1;
+        box(11 + Math.cos(p * 12.566) * 9, 18 - p * 17, 2, 1, '#ffd23f');
+        box(11 + Math.cos(p * 12.566) * 9, 17 - p * 17, 1, 1, '#ffffff');
+      }
+    } else if (tier === 'deep') { // carrying a gem that catches the light
       box(17, 14, 5, 1, '#d68ac0'); box(16, 15, 7, 1, '#e9b3da'); box(17, 16, 5, 1, '#d68ac0'); box(18, 17, 3, 1, '#b2639b'); box(19, 18, 1, 1, '#b2639b');
+      if (Math.floor(t / 350) % 2) box(18, 15, 1, 1, '#ffffff');
     }
   }
 
@@ -442,7 +455,8 @@
       const ceiling = phase === 'climb' ? 60 : $('promptCard').getBoundingClientRect().bottom + 34;
       anchorTarget = Math.max(ceiling, Math.min(floor, want)) / h;
     } else if (view === 'between') {
-      anchorTarget = Math.max(0.16, ($('reveal').getBoundingClientRect().top / h) * 0.6);
+      // The card is short and sits at the bottom; the bee stays where it was unless the card needs the room.
+      anchorTarget = Math.max(0.2, Math.min(BEE_DOWN * h, $('reveal').getBoundingClientRect().top - 70) / h);
     } else if (view === 'home') {
       anchorTarget = BEE_DOWN; // with the bee hovering HOVER points up, the lawn fills about the bottom quarter
     } else {
@@ -534,6 +548,7 @@
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
     if (++frames % 4 === 0) dodgeTag();
+    if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
     if (frames % 8 === 0) {
       const seenNow = scene.drainSeen(); // only counted during a flight, not from the title screen
       if (view === 'play' || view === 'between') seenNow.forEach((id) => { if (id !== 'balloon' && id !== 'flag') markFound(id); });
@@ -590,7 +605,7 @@
     if (homeNote && Date.now() > homeNote.until) homeNote = null;
     if (!daily || (!stale && !daily.round && !daily.results.length)) {
       btn.textContent = 'BEGIN ASCENT ▲';
-      status.textContent = 'The same seven for every Yellow Jacket, once a day.';
+      status.textContent = '';
     } else if (daily.finished) {
       const score = C.totalScore(daily.results);
       btn.textContent = "SEE TODAY'S FLIGHT";
@@ -609,7 +624,7 @@
     const best = getBest();
     $('bestLabel').textContent = best && best.score
       ? 'Best run: ' + C.formatNumber(best.score) + ' pts across ' + best.answered + (best.answered === 1 ? ' prompt.' : ' prompts.')
-      : 'No best run yet.';
+      : '';
   }
 
   function goHome() {
@@ -877,7 +892,8 @@
     const card = $('reveal');
     card.className = 'panel reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
     card.style.setProperty('--tier', last.tier ? tierColors[last.tier] : '#c3ccd6');
-    drawTierArt($('lastIcon'), last.tier);
+    cardTier = last.tier;
+    drawTierArt($('lastIcon'), cardTier, performance.now());
     $('lastRoundLabel').textContent = 'Round ' + done + ' of ' + C.ROUNDS;
     $('lastBadge').textContent = last.tier ? C.TIERS[last.tier].label.toUpperCase() : 'NOTHING LANDED';
     $('lastAnswer').textContent = last.tier ? last.answer : 'the clock beat you.';

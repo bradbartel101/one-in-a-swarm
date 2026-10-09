@@ -144,6 +144,11 @@ async function launch() {
       await s('Input.dispatchKeyEvent', Object.assign({ type: 'keyDown' }, base, text ? { text } : {}));
       await s('Input.dispatchKeyEvent', Object.assign({ type: 'keyUp' }, base));
     };
+    page.click = async (x, y) => {
+      const at = { x: Math.round(x), y: Math.round(y), button: 'left', clickCount: 1, pointerType: 'mouse' };
+      await s('Input.dispatchMouseEvent', Object.assign({ type: 'mousePressed' }, at));
+      await s('Input.dispatchMouseEvent', Object.assign({ type: 'mouseReleased' }, at));
+    };
     page.enter = () => page.key('Enter', 'Enter', 13, '\r');
     page.tab = () => page.key('Tab', 'Tab', 9);
     page.type = (text) => s('Input.insertText', { text });

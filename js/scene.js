@@ -937,6 +937,7 @@
         if (popped) return false;
         const b = boxes.balloon;
         popped = true;
+        delete boxes.balloon;
         if (!still()) spray(t, b ? b.x + 9 : beeX() + 40, b ? b.y + 9 : anchorRow() - 30, 26, ['#c8102e', '#1c1c1c', '#ff8fa0'], false);
         return true;
       },
