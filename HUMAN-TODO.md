@@ -37,7 +37,11 @@ Headless Chrome cannot show a real on-screen keyboard, real frame rates, VoiceOv
 - [ ] **Sound** is off by default. Turn it on and listen: wrong-guess buzz, the rising tone on the
       climb, the One in a Swarm chord, the last-five-seconds ticks. Nobody has heard these yet;
       the tests only prove they fire and that the mute button silences them.
-- [ ] **Taste:** look at `screenshots/` and play it. This rebuild was made without being able to
+- [ ] **Easter eggs by hand:** tap the bee, tap the clock tower five times on the title screen, pop the
+      red-and-black balloon (it drifts by at about 2,400 ft), and try the secret answers. They are
+      tested in headless Chrome, but taps on a small canvas deserve a real thumb.
+- [ ] **Konami code** needs a keyboard, so it cannot be entered on a phone. Decide whether that matters.
+- [ ] **Taste:** look at `screenshots/v3/` and play it. This rebuild was made without being able to
       see krillion.io's game screens (they render in script and did not load here), so it follows
       your written spec, not that site's look. Say what feels off.
 
@@ -86,9 +90,13 @@ that I can't make for you. If in doubt, ask Georgia Tech's licensing office befo
 ## 7. Known limitations to accept or schedule
 
 - Rarity is preset, not measured. Real rarity needs a small backend.
-- Altitude is a curve, not a fixed number of feet per point, so that 700 points reaches the edge of
-  space while the first obvious answers barely leave the lawn. "+60 PTS" therefore climbs a
-  different number of feet depending on how high you already are. The card shows the real figure.
+- Distance climbed on screen depends only on points. The feet shown do not: they follow a curve so
+  that 700 points can reach the Moon, so the same answer adds more feet the higher you already are.
+  The reveal card now says where you are ("now at 8,893 ft"), not how many feet you gained.
+- There are 31 altitude facts, not one per half screen. That density would need about 85, and I kept
+  only ones I could check. Space in particular is sparse.
+- The sightings toast and tap eggs are held back while a round's clock runs, so the two ground-level
+  sightings are logged in round one but announced only once you answer.
 - Flight numbers count from 8 October 2026 (`LAUNCH_DATE` in `js/core.js`).
 - Everything runs in the browser, so a determined player can read `data/prompts.json` or edit their
   saved score. The timer resists refreshes, tab switching and clock changes, but someone who sets

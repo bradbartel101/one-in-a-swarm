@@ -23,12 +23,25 @@ confirm it ("Clough") and costs nothing. Answers score by rarity:
 | Deep Cut | 85 | |
 | One in a Swarm | 100 | exactly one hidden answer per prompt |
 
-**The ascent.** The whole game is one tall pixel-art world. Every correct answer flies the swarm
-upward from the campus lawn, and the world never resets between rounds: past the Atlanta skyline,
-low clouds, airliners and cirrus, into a darkening stratosphere and out to the edge of space.
-Altitude follows a curve (`TOP_FEET` and `ALTITUDE_CURVE` in `js/core.js`): seven obvious answers
-just clear the tallest building in Atlanta at about 1,000 ft, and a perfect 700 reaches the Karman
-line at 328,084 ft. Real altitude facts slide past on the way up.
+**The ascent.** The whole game is one tall pixel-art world, and it never resets between rounds.
+Height on screen depends only on points: one point is 6% of the screen, so a 10-point answer climbs
+a little over half a screen and a 100-point answer climbs six. The feet on the ruler come from one
+curve (`altitudeFeet()` in `js/core.js`) pinned so that real altitudes land in the right scenery:
+
+| Points | Zone | About |
+|---|---|---|
+| 0 | Campus | the lawn |
+| 40 | Midtown skyline | 120 ft |
+| 110 | Low clouds | 1,200 ft |
+| 200 | Weather | 16,000 ft |
+| 300 | High sky | 29,000 ft |
+| 420 | Stratosphere | 70,000 ft |
+| 550 | Space | the Karman line, 100 km |
+| 650 to 700 | The Moon | 238,855 miles |
+
+Real altitude facts slide past on the way up, and there are 21 sightings to find: twelve odd things
+drawn into the world at their real altitudes, five secret answers, and four things to do. Found
+ones are kept in the browser and listed on the title and results screens.
 
 A finished day cannot be replayed. If you are mid-run when the day rolls over, you finish
 yesterday's flight first. Streak, flights, average and best are kept in the browser.
@@ -67,11 +80,11 @@ That one command runs all three of these:
 |---|---|
 | `npm test` | Unit tests: matching, daily seed and rotation, timers, scoring, saved data, colour contrast, file checks |
 | `npm run validate` | Content validator for `data/prompts.json` |
-| `npm run test:e2e` | 24 scenarios in headless Chrome: full daily and infinite runs, the climb and reveal card, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing |
+| `npm run test:e2e` | 27 scenarios in headless Chrome: full daily and infinite runs, the climb and reveal card, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
 
-`npm run screens` plays one flight at 375x812 and 1440x900 and saves screenshots of the start
-screen, a wrong guess, a near-miss, mid-climb, the reveal card, the One in a Swarm moment, a
-timeout and the results into `screenshots/`. It also refreshes the link-preview image.
+`npm run screens` plays flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900
+and saves screenshots of every zone, some sightings, a secret answer, the One in a Swarm moment and
+the results into `screenshots/v3/`. It also refreshes the link-preview image.
 
 ## Adding or changing prompts
 
@@ -102,7 +115,7 @@ X Tenth and Home | 10th and Home :: A note shown after a correct answer.
 Only include answers you are sure are real. Changing the set of prompt ids reshuffles the daily
 rotation for everyone, so ship prompt additions and removals just after 00:00 UTC.
 
-The daily rotation never repeats a prompt within `floor(prompts / 7)` days (4 days with 31 prompts).
+The daily rotation never repeats a prompt within `floor(prompts / 7)` days (4 days with 32 prompts).
 
 ## Deploying to GitHub Pages
 
@@ -122,14 +135,15 @@ index.html, 404.html     the pages
 css/style.css            styles; colour pairs are contrast-tested
 js/core.js               game rules, pure functions, shared by the browser and the tests
 js/scene.js              the world: one tall pixel-art scene drawn on a canvas
-js/facts.js              the altitude facts
+js/facts.js              the altitude facts (flag an approximate one with `verify`)
 js/sfx.js                sound effects, synthesised with Web Audio
 js/app.js                camera, round pacing and the DOM
 data/prompts.json        the prompt bank (generated)
 assets/fonts/            Press Start 2P and its licence
 tools/                   prompt source and build, validator
 tests/                   unit tests, and tests/e2e for headless Chrome
-screenshots/             the latest `npm run screens` output
+screenshots/v3/          the latest `npm run screens` output
+SWARM-V3.md              the v3 checklist with evidence
 SHIP.md                  release checklist with evidence
 HUMAN-TODO.md            what still needs a person
 ```

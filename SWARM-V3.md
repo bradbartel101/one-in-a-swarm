@@ -63,7 +63,11 @@ Resume from the first unchecked item. One commit per numbered section.
   - Moved out of the two cheap tiers: Nuclear and Radiological Engineering, Literature Media and Communication, Marcus Nanotechnology, Junior's Grill (closed 2011), John Young, T-Square (retired), Nebraska. Promoted in their place: Aerospace, Biomedical, Skiles, Waffle House, DegreeWorks, Tennessee. The fifteen new names I was unsure of were checked: eight confirmed, seven removed and listed in HUMAN-TODO.md.
 
 ## 7. Verify (max 5 iterations, logged in REVIEW.md)
-- [ ] 7a All tests pass
-- [ ] 7b Flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900, screenshots in screenshots/v3/
-- [ ] 7c Screenshot review written up and problems fixed
-- [ ] 7d Final checklist with evidence; commit, push, open a PR
+- [x] 7a All tests pass
+  - `npm run test:all` exits 0: 99 unit tests, the content validator, 27 of 27 browser scenarios, each asserting an empty console.
+- [x] 7b Flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900, screenshots in screenshots/v3/
+  - `npm run screens`: 44 screenshots covering every zone, the tower chime, the popped balloon, the astronaut, two secret answers, the One in a Swarm moment, the Moon landing with its flag, and the results with the Sightings panel. Tiers are forced by looking answers up by tier in the prompt bank, so no test hook is needed in the game for that; the game exposes one read-only handle, `window.__swarm`, for camera and hit-box checks.
+- [x] 7c Screenshot review written up and problems fixed
+  - REVIEW.md, "v3: every flight goes somewhere": two iterations, twelve problems found and fixed, four left and named.
+- [x] 7d Final checklist with evidence; commit, push, open a PR
+  - The eight-line checklist is at the end of REVIEW.md, every line PASS with its evidence.

@@ -142,7 +142,7 @@
     const rowOf = (score, f) => anchorRow() - Math.round((score - cam) * PPP * (f || 1));
     const scoreOf = (row) => cam + (anchorRow() - row) / PPP;
     const onScreen = (y, pad) => y > -(pad || 30) && y < H + (pad || 30);
-    const beeX = () => Math.round(W * (W < 150 ? 0.28 : 0.36));
+    const beeX = () => Math.round(W * (W < 150 ? 0.2 : 0.36)); // further left on phones, clear of the tier labels
 
     function px(x, y, w, h, color) {
       ctx.fillStyle = color;
@@ -751,7 +751,7 @@
       },
       flag(g, x) {
         if (!flagUp) return null;
-        const fx = beeX() + 22;
+        const fx = beeX() - 8; // just behind the bee, clear of the answer tag and the tier label
         const fy = anchorRow() + 7;
         px(fx, fy - 15, 1, 16, '#f4f6f8');
         px(fx + 1, fy - 15, 5, 5, '#c9a94d');

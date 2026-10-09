@@ -185,8 +185,8 @@ section[data-view="home"] { min-height: 100dvh; padding: 3.6rem 1rem 0.6rem; dis
 .start-links summary::before { display: none; }
 .start-links details[open] { grid-column: 1 / -1; }
 .start-links > * { min-width: 0; }
-.start-links summary { flex-wrap: wrap; overflow-wrap: anywhere; }
-.start-links summary span { margin-left: 0.3rem; }
+.start-links summary { flex-direction: column; }
+.start-links summary span { display: block; }
 .start-panel .rule-line { font-size: 0.9rem; }
 .start-panel .btn-big { min-height: 54px; }
 .how summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-family: var(--pixel); font-size: 0.65rem; color: var(--accent); }

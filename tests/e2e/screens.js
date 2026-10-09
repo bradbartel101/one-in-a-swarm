@@ -112,8 +112,9 @@ async function run(browser, base, name, width, height, mobile) {
   await phase('reveal');
   await sleep(900);
   await shot('12-flight150-ends-here');
+  await load(seed(['swarm', 'clever'])); // 115 points: the red-and-black balloon is just overhead
   if (await tap('balloon')) {
-    await sleep(350);
+    await sleep(300);
     await shot('13-egg-balloon-popped');
   }
   await load(seed(['rare', 'solid', 'clever', 'common', 'solid', null, null]));

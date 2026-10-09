@@ -7,7 +7,7 @@
   'use strict';
 
   const TIERS = {
-    common: { points: 10, label: 'Common', emoji: '⬜', bonusMs: 8000, climbMs: 2500, quip: 'Everybody said that one. The bees barely cleared the lawn.' },
+    common: { points: 10, label: 'Common', emoji: '⬜', bonusMs: 8000, climbMs: 2500, quip: 'Everybody said that one. A short hop.' },
     clever: { points: 15, label: 'Too Clever', emoji: '🟩', bonusMs: 8000, climbMs: 2800, quip: 'You and every other clever Jacket.' },
     solid: { points: 30, label: 'Solid', emoji: '🟧', bonusMs: 9000, climbMs: 3100, quip: 'A good answer. The swarm picks up speed.' },
     rare: { points: 60, label: 'Rare', emoji: '🟦', bonusMs: 10000, climbMs: 3400, quip: 'Not many think of that one. Up you go.' },
