@@ -36,8 +36,10 @@ measures altitude from campus, while mountain heights are quoted above sea level
 
 ## Flagged answers
 
-### Altitude facts (`js/facts.js`, 16 facts)
+### Altitude facts (`js/facts.js`, 31 facts)
 
+- [ ] **About 100 ft: the roof of a ten-storey building.** A rule of thumb (roughly 10 ft a storey), not a measurement.
 - [ ] **Skydivers usually step out around 13,000 ft.** A typical figure; drop zones quote anything from 10,000 to 14,000 ft.
-- [ ] **Around 36,000 ft the stratosphere begins. The weather is all below you now.** This is the standard-atmosphere figure; the real boundary moves with latitude and season.
+- [ ] **Around 36,000 ft the stratosphere begins. The weather is below you now.** The standard-atmosphere figure; the real boundary moves with latitude and season.
 - [ ] **Weather balloons burst at around 100,000 ft. The sky overhead is nearly black.** Burst height varies by balloon; "nearly black" is a description, not a measurement.
+- [ ] **The International Space Station orbits about 250 miles up.** Its altitude drifts between roughly 230 and 260 miles.

@@ -312,7 +312,7 @@
 
   function layoutWorld() {
     const per = scene.cssPerPoint();
-    document.documentElement.style.setProperty('--ruler', scene.rulerWidth() + 'px');
+    document.documentElement.style.setProperty('--ruler', scene.size().S * 36 + 'px');
     document.querySelectorAll('#worldLayer [data-score]').forEach((node) => {
       node.style.top = -Number(node.dataset.score) * per + 'px';
     });
@@ -320,8 +320,8 @@
 
   function buildFacts() {
     const layer = $('worldLayer');
-    FACTS.forEach((f) => {
-      const node = el('p', 'fact', f.text);
+    FACTS.forEach((f, i) => {
+      const node = el('p', 'fact ' + (i % 2 ? 'left' : 'right'), f.text); // alternating sides
       node.dataset.score = String(C.scoreForFeet(f.feet));
       layer.appendChild(node);
     });
@@ -395,16 +395,16 @@
     window.requestAnimationFrame(frame);
   }
 
-  // A fact that would sit under the answer tag steps aside while the tag is there.
+  // A fact that would sit under the answer tag or a tier label steps aside while they are there.
   function dodgeTag() {
     const tag = $('tag');
-    const box = tag.hidden ? null : tag.getBoundingClientRect();
+    const blockers = tag.hidden ? [] : [tag.getBoundingClientRect()];
+    const bee = scene.box('bee');
+    if (bee) blockers.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
+    document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => blockers.push(n.getBoundingClientRect()));
     document.querySelectorAll('#worldLayer .fact').forEach((node) => {
-      let hit = false;
-      if (box) {
-        const r = node.getBoundingClientRect();
-        hit = r.bottom > box.top - 6 && r.top < box.bottom + 6 && r.right > box.left - 6 && r.left < box.right + 6;
-      }
+      const r = node.getBoundingClientRect();
+      const hit = blockers.some((b) => r.bottom > b.top - 6 && r.top < b.bottom + 6 && r.right > b.left - 6 && r.left < b.right + 6);
       node.classList.toggle('yield', hit);
     });
   }
@@ -470,8 +470,6 @@
     const done = daily && !stale ? daily.results : [];
     scene.setFollowers(done.filter((r) => r.points).length);
     moveCamera(C.totalScore(done) || HOVER, 0);
-    aimCamera();
-    anchor = anchorTarget;
   }
 
   /* ---------- daily: pacing ---------- */
@@ -1107,7 +1105,7 @@
     C.TIER_ORDER.concat('miss').forEach((t) => {
       tierColors[t] = css.getPropertyValue('--t-' + t).trim();
     });
-    scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, reducedMotion });
+    scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, scoreForFeet: C.scoreForFeet, reducedMotion });
     wire();
     const sound = store.get(K_SOUND, null);
     applySound(!!(sound && sound.on === true)); // off until the player turns it on

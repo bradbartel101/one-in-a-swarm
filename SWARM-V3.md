@@ -25,10 +25,14 @@ Resume from the first unchecked item. One commit per numbered section.
   - Unit test on tier climb times (2.5 s to 4 s, rising); `BEE_DOWN = 0.6` in js/app.js, clamped to the gap above the answer bar when a keyboard is up. Browser check lands with section 3, once the world is redrawn at the new scale.
 
 ## 3. A world that changes
-- [ ] 3a Eight zones by points with their own props; sky is a continuous gradient
-- [ ] 3b At least three parallax depth layers
-- [ ] 3c Ground fills about the bottom quarter of the start screen
-- [ ] 3d Facts as small monospace text with leader lines, alternating sides, verified; uncertain ones in VERIFY.md
+- [x] 3a Eight zones by points with their own props; sky is a continuous gradient
+  - js/scene.js redrawn: campus (halls, trees, clock tower, paths, walkers), skyline (three depths of lit towers, a train, a crane), low clouds (three shapes, birds, hills), weather (thunderheads with lightning and rain, a jet), high sky (cirrus, low sun, warm haze, a cloud floor), stratosphere (stars, the Earth's curve), space (black, satellites, Earth with a thin blue line), the Moon. Unit test "eight zones"; a phone-size tour was captured and reviewed by eye.
+- [x] 3b At least three parallax depth layers
+  - Four: far 0.3, mid 0.6, near 1, front 1.4, plus stars at 0.12. Unit test "at least three depth layers".
+- [x] 3c Ground fills about the bottom quarter of the start screen
+  - The bee idles 2.5 points up at 60% down the screen, which puts the lawn at 75%. The city no longer fills the start screen: towers fade in from haze once the swarm leaves the treetops.
+- [x] 3d Facts as small monospace text with leader lines, alternating sides, verified; uncertain ones in VERIFY.md
+  - 31 facts in js/facts.js as outlined text with a dotted leader to the ruler, alternating sides. Five approximate ones are flagged and listed in VERIFY.md. Short of "one per half screen": that would need about 85, and I only kept ones I could stand behind. Unit test "facts are in altitude order...".
 
 ## 4. Easter eggs
 - [ ] 4a Twelve altitude sightings with captions, original pixel art
