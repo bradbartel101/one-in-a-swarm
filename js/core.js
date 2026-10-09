@@ -25,18 +25,21 @@
   const MIN_ANSWERS = 25;
   const LAUNCH_DATE = '2026-10-08'; // flight #1
 
-  // Altitude. A perfect day (700 points) reaches the edge of space, and the scale is curved so
-  // the first obvious answers barely leave the lawn. Every altitude in the game comes from here.
+  // Altitude has two halves. How far the swarm climbs on screen depends only on points (the
+  // world is measured in points; see scene.js). The feet shown are those points pushed through
+  // one curve, altitudeFeet(), pinned to these anchors so that real altitudes land in the
+  // right part of the world: skyline, clouds, airliners, the edge of space, the Moon.
   const TOP_SCORE = ROUNDS * TIERS.swarm.points;
-  const TOP_FEET = 328084; // the Karman line, 100 km
-  const ALTITUDE_CURVE = 2.5;
+  const SPACE_FEET = 328084; // the Karman line, 100 km
+  const MOON_MILES = 238855; // average distance to the Moon
+  const ALTITUDE_ANCHORS = [[0, 0], [40, 120], [110, 1200], [150, 10000], [350, 40000], [550, SPACE_FEET], [TOP_SCORE, MOON_MILES * 5280]];
 
   const BANDS = [
     { min: 0, name: 'Still in the Hive', blurb: 'Barely off the ground. Even George P. Burdell got further, and he never existed.' },
-    { min: 100, name: 'Clear of the Skyline', blurb: 'Airborne, and above every roof in Atlanta.' },
+    { min: 100, name: 'Clear of the Skyline', blurb: 'Airborne, and level with the tallest roofs in Atlanta.' },
     { min: 225, name: 'Above the Weather', blurb: 'Up past the obvious answers and the clouds with them.' },
-    { min: 375, name: 'Stratosphere Bound', blurb: 'Rare air. The sky is going dark and most of the swarm is below you.' },
-    { min: 525, name: 'Helluva Engineer', blurb: 'Nearly every answer a deep cut. You got out, all the way to the edge of space.' },
+    { min: 375, name: 'Stratosphere Bound', blurb: 'Rare air. Above the airliners, and the sky is going dark.' },
+    { min: 525, name: 'Helluva Engineer', blurb: 'Nearly every answer a deep cut. You got out, past the edge of space.' },
   ];
 
   /* ---------- matching ---------- */
@@ -267,13 +270,63 @@
     return results.reduce((sum, r) => sum + (r.points || 0), 0);
   }
 
+  // A monotone cubic through the anchors, worked in log space so that 120 ft and a billion feet
+  // can share one smooth curve. This is the only place points become feet.
+  const squash = (ft) => Math.log(1 + ft / 100);
+  const AX = ALTITUDE_ANCHORS.map((a) => a[0]);
+  const AY = ALTITUDE_ANCHORS.map((a) => squash(a[1]));
+  const SLOPES = (function () {
+    const n = AX.length;
+    const secant = [];
+    for (let i = 0; i < n - 1; i++) secant.push((AY[i + 1] - AY[i]) / (AX[i + 1] - AX[i]));
+    const m = [secant[0]];
+    for (let i = 1; i < n - 1; i++) m.push((2 * secant[i - 1] * secant[i]) / (secant[i - 1] + secant[i])); // harmonic mean keeps it monotone
+    m.push(secant[n - 2]);
+    return m;
+  })();
+
   function altitudeFeet(score) {
-    return Math.round(TOP_FEET * Math.pow(Math.max(0, score) / TOP_SCORE, ALTITUDE_CURVE));
+    if (!(score > 0)) return 0;
+    const n = AX.length;
+    let y;
+    if (score >= AX[n - 1]) {
+      y = AY[n - 1] + SLOPES[n - 1] * (score - AX[n - 1]); // past the Moon, in infinite mode
+    } else {
+      let i = 0;
+      while (AX[i + 1] < score) i++;
+      const h = AX[i + 1] - AX[i];
+      const t = (score - AX[i]) / h;
+      const t2 = t * t;
+      const t3 = t2 * t;
+      y = (2 * t3 - 3 * t2 + 1) * AY[i] + (t3 - 2 * t2 + t) * h * SLOPES[i] + (-2 * t3 + 3 * t2) * AY[i + 1] + (t3 - t2) * h * SLOPES[i + 1];
+    }
+    return Math.round(100 * (Math.exp(y) - 1));
   }
 
-  // The inverse: where on the climb a real-world altitude sits. Used to place scenery and facts.
+  // The inverse: where in the world a real altitude sits. Facts and sightings are placed with it.
   function scoreForFeet(feet) {
-    return TOP_SCORE * Math.pow(Math.max(0, feet) / TOP_FEET, 1 / ALTITUDE_CURVE);
+    let lo = 0;
+    let hi = TOP_SCORE * 3;
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      if (altitudeFeet(mid) < feet) lo = mid;
+      else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  // Feet up to a million, then miles, so the number always fits the HUD.
+  function altitudeParts(score) {
+    const ft = altitudeFeet(score);
+    if (ft < 1000000) return { value: formatNumber(ft), unit: 'ft' };
+    const miles = ft / 5280;
+    if (miles < 1000000) return { value: formatNumber(Math.round(miles)), unit: 'mi' };
+    return { value: miles < 999e6 ? (miles / 1e6).toFixed(1) + 'M' : '999M+', unit: 'mi' }; // only reachable in infinite mode
+  }
+
+  function altitudeText(score) {
+    const a = altitudeParts(score);
+    return a.value + ' ' + a.unit;
   }
 
   function flightNumber(dateKey) {
@@ -299,7 +352,7 @@
     const lines = [
       'One in a Swarm 🐝 Flight #' + flightNumber(dateKey),
       shareGrid(results),
-      formatNumber(score) + ' pts · ' + formatNumber(altitudeFeet(score)) + ' ft up',
+      formatNumber(score) + ' pts · ' + altitudeText(score) + ' up',
     ];
     if (url) lines.push(url);
     return lines.join('\n');
@@ -582,10 +635,10 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, TOP_FEET,
+    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
-    tierPoints, totalScore, altitudeFeet, scoreForFeet, flightNumber, bandFor, formatNumber, shareGrid, shareText,
+    tierPoints, totalScore, altitudeFeet, scoreForFeet, altitudeParts, altitudeText, flightNumber, bandFor, formatNumber, shareGrid, shareText,
     SAVE_VERSION, newDaily, startRound, remainingMs, dailyTick, dailyGuess,
     reviveDaily, reviveBest, previousDateKey, resolveDaily,
     newStats, recordFlight, reviveStats, currentStreak,

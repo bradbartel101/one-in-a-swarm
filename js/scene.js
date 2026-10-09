@@ -4,7 +4,9 @@
 (function (root) {
   'use strict';
 
-  const PPP = 3; // art pixels per point of score
+  // One point of score is a fixed slice of the screen: 6% of its height. A 10-point answer
+  // therefore climbs 60% of a screen and a 100-point answer six screens, at any altitude.
+  const SCREENS_PER_POINT = 0.06;
   const SKY = [
     [-60, [226, 244, 255]], [0, [184, 228, 255]], [60, [128, 198, 250]], [150, [88, 162, 238]],
     [250, [56, 122, 212]], [330, [34, 84, 168]], [420, [18, 48, 112]], [520, [10, 28, 72]],
@@ -64,6 +66,7 @@
     let W = 160;
     let H = 200;
     let S = 3;
+    let PPP = 16; // art pixels per point, set from the screen height in resize()
     let cam = 0;
     let anchor = 0.6;
     let mood = 'idle';
@@ -77,6 +80,7 @@
       S = w < 560 ? 3 : w < 1100 ? 4 : 5;
       W = Math.ceil(w / S);
       H = Math.ceil(h / S);
+      PPP = (h * SCREENS_PER_POINT) / S;
       canvas.width = W;
       canvas.height = H;
       canvas.style.width = W * S + 'px';
@@ -395,5 +399,5 @@
     }
   }
 
-  root.SwarmScene = { create, stamp, BEE, MINI };
+  root.SwarmScene = { create, stamp, BEE, MINI, SCREENS_PER_POINT };
 })(typeof self !== 'undefined' ? self : this);

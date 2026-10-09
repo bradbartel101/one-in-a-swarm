@@ -21,7 +21,8 @@
   const LIFTOFF_MS = 2000;
   const WRONG_LOCK_MS = 400;
   const GLIDE_MS = 900; // the short climb used in infinite mode
-  const HOVER = 6; // on the title screen the bee idles this many points above the lawn
+  const HOVER = 2.5; // on the title screen the bee idles this many points above the lawn
+  const BEE_DOWN = 0.6; // how far down the screen the bee rides
   const LINE_NAMES = { common: 'COMMON', clever: 'CLEVER', solid: 'SOLID', rare: 'RARE', deep: 'DEEP CUT', swarm: 'SWARM' };
 
   // Small 8x8 marks, one per tier, so a tier is never told apart by colour alone.
@@ -91,7 +92,7 @@
   let anim = null; // { from, to, start, ms, done, lines }
   let anchor = 0.78;
   let anchorTarget = 0.78;
-  let shownAlt = -1;
+  let shownAlt = '';
   let tierColors = {};
   let winTop = 0;
   let countFrom = null; // while a daily climb runs, the score the HUD counts up from
@@ -136,7 +137,7 @@
   }
 
   function feet(score) {
-    return C.formatNumber(C.altitudeFeet(score)) + ' ft';
+    return C.altitudeText(score);
   }
 
   function tierLabel(tier) {
@@ -292,15 +293,17 @@
     root.setProperty('--win-top', winTop + 'px');
     root.setProperty('--win-bottom', Math.max(0, Math.round(h - bottom)) + 'px');
     if (view === 'play') {
-      const top = $('promptCard').getBoundingClientRect().bottom;
-      const bottom = $('dock').getBoundingClientRect().top;
-      anchorTarget = bottom > top + 60 ? (top + bottom) / 2 / h + 0.03 : 0.5;
+      // The bee rides about 60% of the way down the visible screen, so the sky ahead is in view.
+      // With a keyboard up it is kept inside the gap between the prompt and the answer bar.
+      const visible = h - (parseFloat(root.getPropertyValue('--kb')) || 0);
+      const want = BEE_DOWN * visible;
+      const floor = phase === 'climb' ? visible - 40 : $('dock').getBoundingClientRect().top - 34;
+      const ceiling = phase === 'climb' ? 60 : $('promptCard').getBoundingClientRect().bottom + 34;
+      anchorTarget = Math.max(ceiling, Math.min(floor, want)) / h;
     } else if (view === 'between') {
       anchorTarget = Math.max(0.16, ($('reveal').getBoundingClientRect().top / h) * 0.6);
     } else if (view === 'home') {
-      // The lawn sits at the foot of the gap between the two panels, with the bee hovering above it.
-      const lawn = $('homeGap').getBoundingClientRect().bottom + window.scrollY - 8;
-      anchorTarget = Math.min(0.9, (lawn - (cam > 0 && cam <= HOVER ? cam : 0) * scene.cssPerPoint()) / h);
+      anchorTarget = BEE_DOWN; // with the bee hovering HOVER points up, the lawn fills about the bottom quarter
     } else {
       anchorTarget = 0.4;
     }
@@ -383,10 +386,11 @@
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
     if (++frames % 4 === 0) dodgeTag();
-    const alt = C.altitudeFeet(cam);
-    if (alt !== shownAlt) {
-      shownAlt = alt;
-      $('hudAlt').textContent = C.formatNumber(alt);
+    const alt = C.altitudeParts(cam);
+    if (alt.value !== shownAlt) {
+      shownAlt = alt.value;
+      $('hudAlt').textContent = alt.value;
+      $('hudUnit').textContent = ' ' + alt.unit.toUpperCase();
     }
     window.requestAnimationFrame(frame);
   }
@@ -652,7 +656,6 @@
     tag.textContent = result.answer;
     tag.hidden = false;
     scene.setMood('happy');
-    anchorTarget = window.innerWidth >= 720 ? 0.55 : 0.5;
     const lines = buildTierLines(base, result.points);
     const ms = reducedMotion() ? 0 : tier.climbMs;
     if (ms) Sfx.rise(ms / 1000);
@@ -708,8 +711,7 @@
     $('lastRoundLabel').textContent = 'Round ' + done + ' of ' + C.ROUNDS;
     $('lastBadge').textContent = last.tier ? C.TIERS[last.tier].label.toUpperCase() : 'NOTHING LANDED';
     $('lastAnswer').textContent = last.tier ? last.answer : 'the clock beat you.';
-    const gained = C.altitudeFeet(score) - C.altitudeFeet(score - last.points);
-    $('lastPoints').textContent = last.tier ? '+' + last.points + ' PTS · climb ' + C.formatNumber(gained) + ' ft' : '+0 PTS · holding at ' + feet(score);
+    $('lastPoints').textContent = last.tier ? '+' + last.points + ' PTS · now at ' + feet(score) : '+0 PTS · holding at ' + feet(score);
     const bits = [];
     if (last.tier) bits.push(C.TIERS[last.tier].quip);
     if (last.note) bits.push(last.note);
@@ -726,7 +728,7 @@
     }
     $('runningScore').textContent = C.formatNumber(score) + ' pts · ' + feet(score) + ' so far';
     announce(last.tier
-      ? 'Round ' + done + ': ' + C.TIERS[last.tier].label + ', ' + last.answer + ', plus ' + last.points + ' points. Total ' + score + ' points, ' + C.altitudeFeet(score) + ' feet.'
+      ? 'Round ' + done + ': ' + C.TIERS[last.tier].label + ', ' + last.answer + ', plus ' + last.points + ' points. Total ' + score + ' points, ' + feet(score) + '.'
       : "Round " + done + ": time's up. No points. Total " + score + ' points.');
     if (!fresh) {
       clearClimb();
@@ -820,7 +822,7 @@
     const todayOpen = daily.date !== today();
     $('resNext').hidden = todayOpen;
     $('resTodayBtn').hidden = !todayOpen;
-    announce('Final score ' + score + ' points, ' + C.altitudeFeet(score) + ' feet up. ' + band.name + '.');
+    announce('Final score ' + score + ' points, ' + feet(score) + ' up. ' + band.name + '.');
     setPhase('results');
     show('results', $('resBand'));
     scene.setFollowers(daily.results.filter((r) => r.points).length);
@@ -1114,6 +1116,7 @@
     buildFacts();
     trackKeyboard();
     window.requestAnimationFrame(frame);
+    window.__swarm = { scene, camera: () => cam }; // read-only handle for the browser tests
 
     fetch('data/prompts.json')
       .then((res) => {

@@ -5,7 +5,8 @@ Resume from the first unchecked item. One commit per numbered section.
 ## 1. Bugs (each with a regression test)
 - [x] 1a Typing during the wrong-guess lockout is never dropped; only re-submitting is blocked for 400ms
   - e2e "wrong guess, near-miss and timeout": text typed inside the lockout lands and replaces the selected wrong text; Enter inside it is ignored at no cost; the same Enter works after 400ms.
-- [ ] 1b The same points always climb the same distance (delivered by section 2)
+- [x] 1b The same points always climb the same distance (delivered by section 2)
+  - The world is measured in points at 6% of the screen height each. e2e "the climb" plays 15 points at 160 and again at 260 and asserts the camera moved 15 points both times, and that 10 points is 60% of a screen.
 - [x] 1c HUD score counts up in sync with the climb
   - e2e "the climb": the HUD score is strictly between 0 and 60 at 500ms into a 60-point climb.
 - [x] 1d Altitude facts are never clipped under the HUD or hidden under the reveal card
@@ -16,9 +17,12 @@ Resume from the first unchecked item. One commit per numbered section.
   - A fact under the tag fades out while the tag is there. e2e asserts nothing visible intersects the tag at the end of a climb.
 
 ## 2. Altitude system
-- [ ] 2a Visual height in points: fixed pixels per point, 10 pts is about 60% of a screen, 100 pts about 6 screens
-- [ ] 2b Displayed feet from one curve: 0 = 0 ft, 150 ≈ 10,000 ft, 350 ≈ 40,000 ft, 550 ≈ edge of space, 700 = the Moon
-- [ ] 2c Climb 2.5 to 4 s, eased, longer for higher tiers; bee held about 60% down the screen
+- [x] 2a Visual height in points: fixed pixels per point, 10 pts is about 60% of a screen, 100 pts about 6 screens
+  - `SCREENS_PER_POINT = 0.06` in js/scene.js. Asserted in the browser by the same scenario.
+- [x] 2b Displayed feet from one curve: 0 = 0 ft, 150 ≈ 10,000 ft, 350 ≈ 40,000 ft, 550 ≈ edge of space, 700 = the Moon
+  - `altitudeFeet()` in js/core.js, a monotone cubic through seven anchors. Unit test "one altitude curve from the lawn to the Moon": exact at every anchor (700 reads 238,855 mi), strictly rising every half point to 1,200, no step over 6%.
+- [x] 2c Climb 2.5 to 4 s, eased, longer for higher tiers; bee held about 60% down the screen
+  - Unit test on tier climb times (2.5 s to 4 s, rising); `BEE_DOWN = 0.6` in js/app.js, clamped to the gap above the answer bar when a keyboard is up. Browser check lands with section 3, once the world is redrawn at the new scale.
 
 ## 3. A world that changes
 - [ ] 3a Eight zones by points with their own props; sky is a continuous gradient

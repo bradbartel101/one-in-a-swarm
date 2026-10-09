@@ -62,7 +62,8 @@ const click = (page, id) => page.eval('document.getElementById(' + JSON.stringif
 const saved = (page) => page.eval('JSON.parse(localStorage.getItem("swarm.daily"))');
 const barScale = (page) => page.eval('Number(/scaleX\\(([\\d.]+)\\)/.exec(document.getElementById("barFill").style.transform)[1])');
 const waitPhase = (page, name, ms) => page.waitFor('document.body.dataset.phase === "' + name + '"', ms || 9000, 'phase ' + name);
-const feet = (score) => C.formatNumber(C.altitudeFeet(score)) + ' ft';
+const feet = (score) => C.altitudeText(score);
+const altNum = (score) => C.altitudeParts(score).value;
 const noProblems = (page, allow) => {
   const bad = page.problems.filter((p) => !(allow && allow.test(p)));
   assert.deepEqual(bad, [], 'console problems');
@@ -283,7 +284,7 @@ async function main() {
     await sleep(500);
     const mid = await page.eval(`({
       tag: document.getElementById('tag').textContent, tagHidden: document.getElementById('tag').hidden,
-      alt: Number(document.getElementById('hudAlt').textContent.replace(/,/g, '')),
+      alt: Number(document.getElementById('hudAlt').textContent.replace(/,/g, '')), y0: window.__swarm.scene.cssY(0), vh: window.innerHeight,
       lines: [...document.querySelectorAll('.tier-line')].map((n) => n.textContent + (n.classList.contains('on') ? ' ON' : '')),
       dock: getComputedStyle(document.getElementById('dock')).visibility })`);
     assert.equal(mid.tag, answer, 'the answer rides up as a tag');
@@ -316,17 +317,17 @@ async function main() {
       const seen = new Set(); for (let i = 0; i < d.length; i += 4) seen.add(d[i] + ',' + d[i + 1] + ',' + d[i + 2]); return [...seen]; })()`);
     assert.deepEqual(ruler, ['11,42,74'], 'nothing is drawn over the ruler strip');
     assert.ok(end.gap >= 0 && end.gap < 60, 'the tag has stopped just above its own tier line (gap ' + end.gap + 'px)');
-    assert.deepEqual(await hud(), { alt: C.formatNumber(C.altitudeFeet(60)), score: '60' });
+    assert.deepEqual(await hud(), { alt: altNum(60), score: '60' });
     assert.equal(await text(page, 'lastBadge'), 'RARE');
     assert.equal(await text(page, 'lastAnswer'), answer);
-    assert.equal(await text(page, 'lastPoints'), '+60 PTS · climb ' + feet(60));
+    assert.equal(await text(page, 'lastPoints'), '+60 PTS · now at ' + feet(60));
     assert.ok((await text(page, 'lastNote')).startsWith(C.TIERS.rare.quip));
     assert.ok(await page.eval('Array.from(document.getElementById("lastIcon").getContext("2d").getImageData(0, 0, 24, 20).data).some((v) => v > 0)'), 'the tier artwork is drawn');
     assert.equal(await page.eval('document.querySelector("#pips li").dataset.tier'), 'rare');
 
     // round 2 starts where round 1 ended
     await startNextRound(page);
-    assert.deepEqual(await hud(), { alt: C.formatNumber(C.altitudeFeet(60)), score: '60' }, 'the world did not reset');
+    assert.deepEqual(await hud(), { alt: altNum(60), score: '60' }, 'the world did not reset');
     assert.equal(await page.eval('document.querySelectorAll(".tier-line").length'), 0, 'old tier lines are cleared');
     await guess(page, answerOf(await text(page, 'promptText'), 'swarm'));
     await page.waitFor('document.getElementById("flash").classList.contains("go")', 8000, 'the gold flash');
@@ -334,14 +335,30 @@ async function main() {
     await waitPhase(page, 'reveal', 3000);
     assert.equal(await page.eval('document.getElementById("reveal").classList.contains("is-swarm")'), true);
     assert.equal(await text(page, 'lastBadge'), 'ONE IN A SWARM');
-    assert.deepEqual(await hud(), { alt: C.formatNumber(C.altitudeFeet(160)), score: '160' });
-    await playDaily(page, ['', '', 'swarm', 'swarm', 'swarm', 'swarm', 'swarm']);
+    assert.deepEqual(await hud(), { alt: altNum(160), score: '160' });
+    // Regression: the same points climb the same distance on screen, wherever you are.
+    const perPoint = await page.eval('window.__swarm.scene.cssPerPoint()');
+    const vh = await page.eval('window.innerHeight');
+    assert.ok(Math.abs(perPoint * 10 - 0.6 * vh) < 2, 'a 10-point answer climbs 60% of a screen: ' + (perPoint * 10).toFixed(1) + 'px of ' + vh);
+    const climbed = [];
+    for (const tier of ['clever', 'deep', 'clever']) { // 15 points low down, then 15 points 100 points higher
+      await startNextRound(page);
+      const before = await page.eval('window.__swarm.scene.cssY(0)');
+      await guess(page, answerOf(await text(page, 'promptText'), tier));
+      await waitPhase(page, 'reveal', 8000);
+      await sleep(900); // let the camera settle on the reveal card
+      climbed.push({ tier, y: before, after: await page.eval('window.__swarm.camera()') });
+    }
+    assert.equal(climbed[0].after - 160, 15);
+    assert.equal(climbed[2].after - climbed[1].after, 15);
+    assert.ok(Math.abs(perPoint * 15 - 0.9 * vh) < 3, '15 points is always ' + (perPoint * 15).toFixed(0) + 'px, 90% of a screen, at 160 points and at 260');
+    await playDaily(page, ['', '', '', '', '', 'swarm', 'swarm']);
     const spaceSky = await skyTop();
     assert.notEqual(spaceSky, groundSky, 'the sky at the top is not the sky at the bottom');
     const sum = (rgb) => rgb.split(',').reduce((n, v) => n + Number(v), 0);
     assert.ok(sum(spaceSky) < sum(groundSky) / 4, 'and it is far darker up here: ' + groundSky + ' -> ' + spaceSky);
     await land(page);
-    assert.equal(await text(page, 'resScore'), '660 pts');
+    assert.equal(await text(page, 'resScore'), '475 pts');
     assert.equal(await page.eval('document.querySelectorAll("#flightLog li").length'), 7);
     const body = await page.eval('document.querySelector("[data-view=results]").innerText');
     assert.ok(!/%|players|percentile|better than/i.test(body), 'no invented player statistics on the results screen');
@@ -434,7 +451,7 @@ async function main() {
     assert.equal(await page.eval('document.querySelector("#tried li").textContent'), 'a wrong guess <b>bold</b>', 'wrong guesses restored as text');
     assert.equal(await page.eval('document.querySelectorAll("#tried li b").length'), 0);
     assert.equal(await page.eval('document.querySelector("#pips li").dataset.tier'), 'rare', 'round 1 result restored');
-    assert.equal(await text(page, 'hudAlt'), C.formatNumber(C.altitudeFeet(60)), 'and the swarm is still at its altitude');
+    assert.equal(await text(page, 'hudAlt'), altNum(60), 'and the swarm is still at its altitude');
     await guess(page, 'a wrong guess <b>bold</b>');
     assert.match(await text(page, 'feedback'), /already tried/, 'duplicate memory survives the reload');
     await guess(page, answerOf(await text(page, 'promptText'), 'solid'));
@@ -565,7 +582,7 @@ async function main() {
     await sleep(200); // the clock face repaints on the next tick
     const e = Number(await text(page, 'clockNum'));
     assert.ok(e >= 55 && e <= 59, 'clock grew by 16s: ' + e);
-    assert.equal(await text(page, 'hudAlt'), C.formatNumber(C.altitudeFeet(100)), 'and the swarm climbed');
+    assert.equal(await text(page, 'hudAlt'), altNum(100), 'and the swarm climbed');
     await click(page, 'skipBtn');
     await sleep(200);
     const f = Number(await text(page, 'clockNum'));
@@ -798,7 +815,7 @@ async function main() {
         await page.eval('(() => { const vv = window.visualViewport; delete vv.height; vv.dispatchEvent(new Event("resize")); })()');
         await sleep(200);
       }
-      assert.equal(await text(page, 'hudAlt'), C.formatNumber(C.altitudeFeet(600)));
+      assert.equal(await text(page, 'hudAlt'), altNum(600));
       await guess(page, longest.answers.find((a) => a.tier === 'swarm').name);
       await waitPhase(page, 'reveal');
       await check('reveal card');
@@ -841,7 +858,7 @@ async function main() {
     assert.deepEqual(await page.eval('window.__said'), ['10 seconds left', '5 seconds left'], 'the clock speaks exactly twice in a round');
     await guess(page, answerOf(await text(page, 'promptText'), 'deep'));
     await waitPhase(page, 'reveal');
-    assert.match(await text(page, 'announce'), /^Round 1: Deep Cut, .+, plus 85 points\. Total 85 points, [\d]+ feet\.$/);
+    assert.match(await text(page, 'announce'), /^Round 1: Deep Cut, .+, plus 85 points\. Total 85 points, [\d,]+ ft\.$/);
     assert.equal(await text(page, 'lastBadge'), 'DEEP CUT', 'tier is written out, not only coloured');
     assert.equal(await page.eval('document.querySelector("#pips li").dataset.tier'), 'deep');
     assert.equal(await page.eval('document.querySelectorAll("#pips li canvas").length'), 1, 'the pip carries a mark as well as a colour');
@@ -886,7 +903,7 @@ async function main() {
     assert.ok(Date.now() - sent < 1200, 'the reveal card comes straight up');
     assert.equal(await still.eval('getComputedStyle(document.getElementById("reveal")).animationName'), 'fade', 'with a short fade');
     assert.equal(await still.eval('document.getElementById("flash").classList.contains("go")'), false, 'no flash');
-    await still.waitFor('document.getElementById("hudAlt").textContent === "' + C.formatNumber(C.altitudeFeet(100)) + '"', 2000, 'the altitude to jump to the right place');
+    await still.waitFor('document.getElementById("hudAlt").textContent === "' + altNum(100) + '"', 2000, 'the altitude to jump to the right place');
     noProblems(still);
     await still.close();
 
