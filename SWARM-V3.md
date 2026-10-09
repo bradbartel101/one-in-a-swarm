@@ -47,10 +47,14 @@ Resume from the first unchecked item. One commit per numbered section.
   - Taps and toasts are ignored or queued while `clockLive()`; the toast sits in the open sky band; flips, loops, flashes and bursts are skipped under reduced motion. Secret answers are the one exception, since the player types them. Browser evidence in section 7.
 
 ## 5. Feel and look
-- [ ] 5a Ruler: thin line, ticks and small labels on a transparent background
-- [ ] 5b Reveal card smaller, lower, translucent; the tier creature animates
-- [ ] 5c The swarm grows by one bee per correct answer and is clearly visible
-- [ ] 5d Start screen: rules collapsed by default, smaller title panel, room for the campus
+- [x] 5a Ruler: thin line, ticks and small labels on a transparent background
+  - A one-pixel line with a hairline shadow, ticks every point and labels every ten. e2e "the climb" reads the canvas: the line is one unbroken colour and the column beside it is sky, not a band.
+- [x] 5b Reveal card smaller, lower, translucent; the tier creature animates
+  - e2e asserts the card is under 40% of the screen and starts below 60%, and the bee rides between 45% and 68% down. The creature is redrawn every third frame: a drifting bee, a glinting pair of spectacles, a bobbing swarm, bees spiralling to a star, a gem that catches the light, a hive with bees in orbit. One in a Swarm adds a short screen shake to its flash and burst.
+- [x] 5c The swarm grows by one bee per correct answer and is clearly visible
+  - Followers are now 7x5 outlined bees with flapping wings, one per scoring round, trailing behind and below.
+- [x] 5d Start screen: rules collapsed by default, smaller title panel, room for the campus
+  - e2e "title screen": rules closed on a first visit, lawn 70 to 80% down. The start panel went from 354px to 206px on a phone and its three controls share one row.
 
 ## 6. Content pass
 - [ ] 6a Prompts that combine two categories split or rewritten
