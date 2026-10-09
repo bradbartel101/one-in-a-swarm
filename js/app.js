@@ -12,10 +12,20 @@
   // Storage keys are stable; the payloads carry their own version (C.SAVE_VERSION).
   const K_DAILY = 'swarm.daily';
   const K_BEST = 'swarm.infinite.best';
-  const K_SEEN = 'swarm.seenHowTo';
   const K_SOUND = 'swarm.sound';
   const K_SCAN = 'swarm.scanlines';
   const K_STATS = 'swarm.stats';
+  const K_SIGHT = 'swarm.sightings';
+  const TOAST_MS = 2400;
+  const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  // Everything there is to find: twelve sightings in the world, five secret answers, four things to do.
+  const EGGS = [
+    ['car', 'The gold jalopy'], ['squirrel', 'The lunch thief'], ['washer', 'The window washer'], ['balloon', 'Sorry, Athens'],
+    ['geese', 'The wrong-way goose'], ['exam', 'CS 1331, 34/100'], ['jet', 'The busiest airport'], ['cap', 'The cap that never came down'],
+    ['wballoon', 'Lost & found'], ['astronaut', 'An alum in orbit'], ['satellite', 'The honeycomb satellite'], ['flag', 'A flag on the Moon'],
+    ['burdell', 'George P. Burdell'], ['buzz', 'Buzz does a flip'], ['thwg', 'THWG'], ['helluva', 'Helluva Engineer'], ['wrongschool', 'Wrong school'],
+    ['beetap', 'The loop'], ['tower', 'The tower chimes'], ['night', 'Studying late'], ['konami', 'The gold swarm'],
+  ];
   const TICK_MS = 100;
   const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from skipping the reveal card
   const LIFTOFF_MS = 2000;
@@ -97,6 +107,13 @@
   let winTop = 0;
   let countFrom = null; // while a daily climb runs, the score the HUD counts up from
   let frames = 0;
+  let found = new Set();
+  let toastQueue = [];
+  let toastTimer = 0;
+  let towerTaps = [];
+  let homeNote = null; // { text, until }: a passing line on the title screen
+  let konamiAt = 0;
+  let goldFlight = false;
 
   /* ---------- small helpers ---------- */
 
@@ -114,6 +131,126 @@
   function setPhase(name) {
     document.body.dataset.phase = name;
     aimCamera();
+    flushToasts();
+  }
+
+  /* ---------- sightings: the log, the toast, and the things you can do ---------- */
+
+  // True while a round's clock is running. Nothing playful may start then, except a secret
+  // answer the player typed on purpose.
+  function clockLive() {
+    return mode === 'daily' || mode === 'infinite' || document.body.dataset.phase === 'intro';
+  }
+
+  function loadFound() {
+    const raw = store.get(K_SIGHT, null);
+    const ok = raw && raw.v === C.SAVE_VERSION && Array.isArray(raw.found);
+    found = new Set(ok ? raw.found.filter((id) => EGGS.some((e) => e[0] === id)) : []);
+  }
+
+  function renderSightings() {
+    const count = found.size + ' / ' + EGGS.length + ' found';
+    $('sightCount').textContent = '· ' + count;
+    $('resSightCount').textContent = '· ' + count;
+    ['sightGrid', 'resSightGrid'].forEach((id) => {
+      const list = $(id);
+      list.textContent = '';
+      EGGS.forEach((e) => list.appendChild(found.has(e[0]) ? el('li', '', e[1]) : el('li', 'unfound', '? ? ?'))); // unfound ones stay silhouettes
+    });
+  }
+
+  function markFound(id) {
+    if (found.has(id)) return;
+    found.add(id);
+    store.set(K_SIGHT, { v: C.SAVE_VERSION, found: Array.from(found) });
+    renderSightings();
+    toastQueue.push(EGGS.filter((e) => e[0] === id)[0][1]);
+    flushToasts();
+  }
+
+  // Toasts wait until no clock is running, and sit in the open sky, away from the prompt and input.
+  function flushToasts() {
+    if (toastTimer || !toastQueue.length || clockLive()) return;
+    const name = toastQueue.shift();
+    const toast = $('toast');
+    toast.textContent = 'NEW SIGHTING\n' + name;
+    toast.hidden = false;
+    announce('New sighting: ' + name + '.');
+    toastTimer = window.setTimeout(() => {
+      toast.hidden = true;
+      toastTimer = 0;
+      flushToasts();
+    }, TOAST_MS);
+  }
+
+  function goldFlash() {
+    if (reducedMotion()) return;
+    const flash = $('flash');
+    flash.classList.remove('go');
+    void flash.offsetWidth;
+    flash.classList.add('go');
+  }
+
+  function popBalloon() {
+    if (!scene.pop(performance.now())) return;
+    Sfx.pop();
+    $('cap-balloon').hidden = false;
+    markFound('balloon');
+  }
+
+  // A secret answer: a reaction, and nothing else. The round carries on untouched.
+  function onSecret(id) {
+    const now = performance.now();
+    $('guess').value = '';
+    if (id === 'burdell') setFeedback('George P. Burdell is enrolled in every class. Try again.', '');
+    else if (id === 'buzz') {
+      scene.trick('flip', now);
+      setFeedback('Buzz does a flip.', 'good');
+    } else if (id === 'thwg') {
+      goldFlash();
+      scene.puff(now);
+      Sfx.pop();
+      setFeedback('Pop.', 'good');
+    } else if (id === 'helluva') {
+      Sfx.jingle(); // silent unless sound is on
+      setFeedback("That's the spirit.", 'good');
+    } else setFeedback('Wrong school.', '');
+    markFound(id);
+  }
+
+  function onTap(e) {
+    if (e.target.closest('button, input, textarea, summary, a, .panel, .tools')) return;
+    if (clockLive()) return;
+    const what = scene.hit(e.clientX, e.clientY);
+    if (what === 'balloon') popBalloon();
+    else if (what === 'bee') {
+      scene.trick('loop', performance.now());
+      Sfx.buzz();
+      markFound('beetap');
+    } else if (what === 'tower' && view === 'home') {
+      const now = Date.now();
+      towerTaps = towerTaps.filter((t) => now - t < 4000).concat(now);
+      if (towerTaps.length >= 5) {
+        towerTaps = [];
+        Sfx.chime();
+        const time = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        homeNote = { text: 'The tower chimes. It is ' + time + '.', until: now + 6000 };
+        renderHome();
+        markFound('tower');
+      }
+    }
+  }
+
+  function onKey(e) {
+    if (view !== 'home') return;
+    konamiAt = e.key === KONAMI[konamiAt] || e.key.toLowerCase() === KONAMI[konamiAt] ? konamiAt + 1 : e.key === KONAMI[0] ? 1 : 0;
+    if (konamiAt < KONAMI.length) return;
+    konamiAt = 0;
+    goldFlight = true;
+    scene.setGold(true);
+    homeNote = { text: 'The swarm turns gold for one flight.', until: Date.now() + 6000 };
+    renderHome();
+    markFound('konami');
   }
 
   function show(name, focusTarget) {
@@ -124,6 +261,10 @@
     document.body.classList.toggle('playing', name === 'play' || name === 'between');
     $('hud').hidden = !(name === 'play' || name === 'between');
     if (name !== 'play' && name !== 'between') window.scrollTo(0, 0);
+    const late = name === 'home' && new Date().getHours() < 4; // the small hours get a night sky
+    scene.setNight(late);
+    $('nightLine').hidden = !late;
+    if (late) markFound('night');
     aimCamera();
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
@@ -281,7 +422,7 @@
     if (!$('hud').hidden) root.setProperty('--hud-h', $('hud').offsetHeight + 'px');
     // The clear band of screen that facts and tier lines may be drawn in.
     const phase = document.body.dataset.phase;
-    let top = $('hud').hidden ? 0 : $('hud').getBoundingClientRect().bottom + 4;
+    let top = $('hud').hidden ? 56 : $('hud').getBoundingClientRect().bottom + 4;
     let bottom = h;
     if (view === 'play' && phase !== 'climb') {
       top = $('promptCard').getBoundingClientRect().bottom + 4;
@@ -323,6 +464,13 @@
     FACTS.forEach((f, i) => {
       const node = el('p', 'fact ' + (i % 2 ? 'left' : 'right'), f.text); // alternating sides
       node.dataset.score = String(C.scoreForFeet(f.feet));
+      layer.appendChild(node);
+    });
+    scene.sightings.forEach((g) => { // a caption beside each sighting, on the side it is not
+      const node = el('p', 'fact sight ' + g.side, g.caption);
+      node.id = 'cap-' + g.id;
+      node.dataset.score = String(g.id === 'flag' ? g.score + 3 : g.score < 1 ? 1.6 : g.score);
+      node.hidden = g.hidden;
       layer.appendChild(node);
     });
     layoutWorld();
@@ -386,6 +534,10 @@
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
     if (++frames % 4 === 0) dodgeTag();
+    if (frames % 8 === 0) {
+      const seenNow = scene.drainSeen(); // only counted during a flight, not from the title screen
+      if (view === 'play' || view === 'between') seenNow.forEach((id) => { if (id !== 'balloon' && id !== 'flag') markFound(id); });
+    }
     const alt = C.altitudeParts(cam);
     if (alt.value !== shownAlt) {
       shownAlt = alt.value;
@@ -435,6 +587,7 @@
     const btn = $('dailyBtn');
     const status = $('dailyStatus');
     $('skipStaleBtn').hidden = !stale;
+    if (homeNote && Date.now() > homeNote.until) homeNote = null;
     if (!daily || (!stale && !daily.round && !daily.results.length)) {
       btn.textContent = 'BEGIN ASCENT ▲';
       status.textContent = 'The same seven for every Yellow Jacket, once a day.';
@@ -452,6 +605,7 @@
         status.textContent = C.formatNumber(C.totalScore(daily.results)) + ' pts so far' + (stale ? ". Today's seven unlock when you land." : '.');
       }
     }
+    if (homeNote) status.textContent = homeNote.text;
     const best = getBest();
     $('bestLabel').textContent = best && best.score
       ? 'Best run: ' + C.formatNumber(best.score) + ' pts across ' + best.answered + (best.answered === 1 ? ' prompt.' : ' prompts.')
@@ -468,6 +622,7 @@
     setPhase('home');
     show('home', $('homeTitle'));
     const done = daily && !stale ? daily.results : [];
+    scene.setGold(goldFlight);
     scene.setFollowers(done.filter((r) => r.points).length);
     moveCamera(C.totalScore(done) || HOVER, 0);
   }
@@ -534,6 +689,7 @@
     const index = daily.results.length;
     mode = null;
     clearClimb();
+    if (index === 0) newFlight();
     renderDailyHud(index);
     renderTried([]);
     setFeedback('', '');
@@ -565,6 +721,20 @@
     };
     step();
     aimCamera();
+  }
+
+  function newFlight() {
+    scene.newFlight();
+    $('cap-balloon').hidden = true;
+    $('cap-flag').hidden = true;
+  }
+
+  // A perfect day: the swarm is on the Moon, and leaves a flag.
+  function maybePlantFlag() {
+    if (!daily.finished || C.totalScore(daily.results) < C.TOP_SCORE) return;
+    scene.plantFlag();
+    $('cap-flag').hidden = false;
+    markFound('flag');
   }
 
   function enterRound(fromIntro) {
@@ -626,6 +796,7 @@
       $('guess').select();
       return;
     }
+    if (r.status === 'secret') return onSecret(r.secret);
     if (r.status === 'near') {
       saveDaily();
       return onNear(text, r.suggestion);
@@ -665,10 +836,8 @@
         scene.setMood('gold');
         if (!reducedMotion()) {
           scene.burst(performance.now());
-          const flash = $('flash');
-          flash.classList.remove('go');
-          void flash.offsetWidth;
-          flash.classList.add('go');
+          goldFlash();
+          quake();
         }
       } else {
         scene.setMood('idle');
@@ -680,16 +849,19 @@
     }, lines);
   }
 
+  function quake() {
+    if (reducedMotion()) return;
+    document.body.classList.remove('shake');
+    void document.body.offsetWidth;
+    document.body.classList.add('shake');
+  }
+
   function missed() {
     $('guess').blur();
     clearClimb();
     scene.setMood('sad');
     scene.setDim(0.45);
-    if (!reducedMotion()) {
-      document.body.classList.remove('shake');
-      void document.body.offsetWidth;
-      document.body.classList.add('shake');
-    }
+    quake();
     Sfx.timeout();
     showReveal(true);
   }
@@ -735,6 +907,7 @@
     }
     renderPips();
     $('hudScore').textContent = C.formatNumber(score);
+    maybePlantFlag();
     revealShownAt = Date.now();
     setPhase('reveal');
     show('between', btn);
@@ -821,6 +994,9 @@
     $('resNext').hidden = todayOpen;
     $('resTodayBtn').hidden = !todayOpen;
     announce('Final score ' + score + ' points, ' + feet(score) + ' up. ' + band.name + '.');
+    maybePlantFlag();
+    renderSightings();
+    goldFlight = false; // the gold swarm lasts one flight
     setPhase('results');
     show('results', $('resBand'));
     scene.setFollowers(daily.results.filter((r) => r.points).length);
@@ -879,6 +1055,7 @@
     mode = 'infinite';
     lastAnnounced = 0;
     clearClimb();
+    newFlight();
     $('pips').hidden = true;
     $('infActions').hidden = false;
     $('liftoff').hidden = true;
@@ -908,6 +1085,7 @@
       $('guess').select();
       return;
     }
+    if (r.status === 'secret') return onSecret(r.secret);
     if (r.status === 'near') return onNear(text, r.suggestion);
     if (r.status === 'wrong') {
       onWrong(text);
@@ -947,6 +1125,7 @@
     list.textContent = '';
     inf.log.forEach((r, i) => list.appendChild(resultRow(i + 1, byId[r.promptId].text, r.answer, r.tier, r.points)));
     $('infLogCard').hidden = inf.log.length === 0;
+    goldFlight = false;
     setPhase('infover');
     show('infover', $('infTitle'));
     moveCamera(inf.score, 0);
@@ -1096,6 +1275,8 @@
         }
       }
     };
+    document.addEventListener('pointerdown', onTap);
+    document.addEventListener('keydown', onKey);
     document.addEventListener('visibilitychange', bank);
     window.addEventListener('pagehide', bank);
   }
@@ -1112,6 +1293,8 @@
     const scan = store.get(K_SCAN, null);
     applyScan(!(scan && scan.on === false));
     buildFacts();
+    loadFound();
+    renderSightings();
     trackKeyboard();
     window.requestAnimationFrame(frame);
     window.__swarm = { scene, camera: () => cam }; // read-only handle for the browser tests
@@ -1138,10 +1321,6 @@
         else if (daily && daily.finished) showResults();
         else {
           goHome();
-          if (!store.get(K_SEEN, null)) {
-            store.set(K_SEEN, { v: C.SAVE_VERSION });
-            $('howDlg').open = true; // rules open on a first visit only
-          }
         }
       })
       .catch((err) => {

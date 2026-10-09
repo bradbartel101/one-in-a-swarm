@@ -183,6 +183,23 @@
     return { key, answer: null, fuzzy: false };
   }
 
+  /* ---------- secret answers ----------
+     Typed in any round, these earn a reaction and nothing else: no points, no penalty, not a
+     wrong guess. They only apply where the text is not a real answer to the prompt, so
+     "Georgia" still scores on the prompts where Georgia belongs. */
+  const SECRETS = {
+    georgepburdell: 'burdell', georgeburdell: 'burdell', burdell: 'burdell',
+    buzz: 'buzz',
+    tohellwithgeorgia: 'thwg', thwg: 'thwg',
+    helluvaengineer: 'helluva', ahelluvaengineer: 'helluva',
+    uga: 'wrongschool', georgia: 'wrongschool', universityofgeorgia: 'wrongschool',
+  };
+
+  function secretFor(input) {
+    const id = SECRETS[normalize(input)];
+    return id || null;
+  }
+
   /* ---------- seeded randomness and the daily draw ---------- */
 
   function hashString(str) {
@@ -406,6 +423,7 @@
     if (dailyTick(state, now, monoElapsedMs)) return { status: 'timeout' };
     const m = matchAnswer(prompt, input);
     if (!m.key) return { status: 'empty' };
+    if ((!m.answer || m.fuzzy) && secretFor(input)) return { status: 'secret', secret: secretFor(input) };
     if (m.answer && m.fuzzy && state.round.pending !== m.key) {
       state.round.pending = m.key; // typing the same thing again confirms it
       return { status: 'near', suggestion: m.label };
@@ -571,6 +589,7 @@
     if (state.over) return { status: 'idle' };
     const m = matchAnswer(prompt, input);
     if (!m.key) return { status: 'empty' };
+    if ((!m.answer || m.fuzzy) && secretFor(input)) return { status: 'secret', secret: secretFor(input) };
     if (m.answer && m.fuzzy && state.pending !== m.key) {
       state.pending = m.key;
       return { status: 'near', suggestion: m.label };
@@ -636,7 +655,7 @@
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
     ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
-    tokenize, normalize, variants, editDistance, buildIndex, matchAnswer,
+    tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
     tierPoints, totalScore, altitudeFeet, scoreForFeet, altitudeParts, altitudeText, flightNumber, bandFor, formatNumber, shareGrid, shareText,
     SAVE_VERSION, newDaily, startRound, remainingMs, dailyTick, dailyGuess,

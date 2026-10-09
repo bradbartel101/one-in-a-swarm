@@ -35,11 +35,16 @@ Resume from the first unchecked item. One commit per numbered section.
   - 31 facts in js/facts.js as outlined text with a dotted leader to the ruler, alternating sides. Five approximate ones are flagged and listed in VERIFY.md. Short of "one per half screen": that would need about 85, and I only kept ones I could stand behind. Unit test "facts are in altitude order...".
 
 ## 4. Easter eggs
-- [ ] 4a Twelve altitude sightings with captions, original pixel art
-- [ ] 4b Five secret answers: Burdell, Buzz, THWG, Helluva Engineer, wrong school
-- [ ] 4c Four interaction eggs: tap the bee, tower chime, night start screen, Konami gold swarm
-- [ ] 4d Sightings log in localStorage, panel on results and the menu, "NEW SIGHTING" toast
-- [ ] 4e Eggs never block input, never cover the prompt or input, never fire while the clock runs; reduced motion respected
+- [x] 4a Twelve altitude sightings with captions, original pixel art
+  - Drawn in js/scene.js from rectangles: gold jalopy, squirrel on a bench, window washer, red-and-black balloon (tap to pop), geese with one going the wrong way, a paper-dart exam, a climbing jet, a mortarboard, a weather balloon with a navy-and-gold payload, an astronaut, a honeycomb satellite, a flag on the Moon. Each is placed by its altitude through the curve. The busiest-airport claim was checked (ACI, 2025: Atlanta first, 106.3m passengers). Browser evidence in section 7.
+- [x] 4b Five secret answers: Burdell, Buzz, THWG, Helluva Engineer, wrong school
+  - `secretFor()` in js/core.js. Unit tests: no time lost, not counted wrong, round stays open, and a secret never overrides a real answer ("Georgia" still scores where Georgia belongs).
+- [x] 4c Four interaction eggs: tap the bee, tower chime, night start screen, Konami gold swarm
+  - Wired in js/app.js (`onTap`, `onKey`, night sky between midnight and 4am local). Browser evidence in section 7.
+- [x] 4d Sightings log in localStorage, panel on results and the menu, "NEW SIGHTING" toast
+  - 21 in all (12 + 5 + 4), stored under `swarm.sightings`, shown as "n / 21 found" with silhouettes for the rest.
+- [x] 4e Eggs never block input, never cover the prompt or input, never fire while the clock runs; reduced motion respected
+  - Taps and toasts are ignored or queued while `clockLive()`; the toast sits in the open sky band; flips, loops, flashes and bursts are skipped under reduced motion. Secret answers are the one exception, since the player types them. Browser evidence in section 7.
 
 ## 5. Feel and look
 - [ ] 5a Ruler: thin line, ticks and small labels on a transparent background

@@ -940,6 +940,8 @@
         if (!still()) spray(t, b ? b.x + 9 : beeX() + 40, b ? b.y + 9 : anchorRow() - 30, 26, ['#c8102e', '#1c1c1c', '#ff8fa0'], false);
         return true;
       },
+      // A burst of red and black beside the bee, without touching the balloon out in the world.
+      puff(t) { if (!still()) spray(t, beeX() + 30, anchorRow() - 22, 26, ['#c8102e', '#1c1c1c', '#ff8fa0'], false); },
       plantFlag() { flagUp = true; },
       newFlight() { popped = false; flagUp = false; particles = []; trick = null; },
       // Which thing, if any, is under a point given in CSS pixels.

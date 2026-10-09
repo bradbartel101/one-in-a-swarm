@@ -373,3 +373,39 @@ test('course numbers and very short answers are never near-misses', () => {
   assert.equal(C.matchAnswer(cs, '1333').answer, null);
   assert.equal(C.matchAnswer(buildings, 'culk').answer, null);
 });
+
+/* ----- secret answers ----- */
+
+test('secret answers earn a reaction and nothing else: no points, no penalty, not a wrong guess', () => {
+  const run = C.newDaily('2026-10-08', [buildings.id].concat(ids.filter((i) => i !== buildings.id).slice(0, 6)));
+  C.startRound(run, 0);
+  const cases = { 'George P. Burdell': 'burdell', 'george burdell': 'burdell', Buzz: 'buzz', 'To Hell With Georgia': 'thwg', 'THWG!': 'thwg', 'Helluva Engineer': 'helluva', UGA: 'wrongschool', Georgia: 'wrongschool' };
+  Object.keys(cases).forEach((typed) => {
+    assert.deepEqual(C.dailyGuess(run, buildings, typed, 0), { status: 'secret', secret: cases[typed] }, typed);
+  });
+  assert.equal(run.round.leftMs, 25000, 'no time lost');
+  assert.equal(run.round.tried.length, 0, 'not counted as wrong');
+  assert.equal(run.results.length, 0, 'the round is still open');
+  assert.equal(C.dailyGuess(run, buildings, 'Klaus', 0).status, 'correct', 'and can still be won');
+
+  const inf = C.newInfinite([buildings.id, ids[5]]);
+  assert.deepEqual(C.infiniteGuess(inf, buildings, 'thwg'), { status: 'secret', secret: 'thwg' });
+  assert.deepEqual([inf.clockMs, inf.score, inf.pos], [45000, 0, 0]);
+});
+
+test('a secret never overrides a real answer to the prompt', () => {
+  const play = (id, typed) => {
+    const p = data.prompts.find((q) => q.id === id);
+    const run = C.newDaily('2026-10-08', [id].concat(ids.filter((i) => i !== id).slice(0, 6)));
+    C.startRound(run, 0);
+    return C.dailyGuess(run, p, typed, 0);
+  };
+  assert.equal(play('conference', 'Georgia').status, 'correct', 'Georgia shared a conference with Tech');
+  assert.equal(play('gacolleges', 'UGA').status, 'correct');
+  assert.equal(play('traditions', 'George P. Burdell').status, 'correct');
+  assert.equal(play('traditions', 'Buzz').status, 'correct');
+  assert.equal(play('traditions', 'THWG').status, 'correct');
+  assert.equal(play('majors', 'Georgia').secret, 'wrongschool', 'on any other prompt it is the wrong school');
+  assert.equal(play('majors', 'Buzz').secret, 'buzz');
+  assert.equal(C.secretFor('nothing special'), null);
+});

@@ -125,6 +125,31 @@
     skip() {
       play(() => tone(500, 0, 0.18, 'sine', 0.2, 200));
     },
+    buzz() {
+      play(() => {
+        tone(180, 0, 0.35, 'sawtooth', 0.14, 240);
+        tone(186, 0, 0.35, 'sawtooth', 0.1, 250);
+      });
+    },
+    pop() {
+      play(() => {
+        wind(0, 0.09, 2600, 500, 0.5);
+        tone(700, 0, 0.07, 'square', 0.12, 160);
+      });
+    },
+    // A tower clock: one low struck note with a long tail, then another.
+    chime() {
+      play(() => {
+        [0, 0.7].forEach((at) => {
+          tone(semis(-12), at, 1.4, 'sine', 0.3);
+          tone(semis(-12) * 2.76, at, 0.9, 'sine', 0.08);
+        });
+      });
+    },
+    // A short original flourish. Not a tune anyone owns.
+    jingle() {
+      play(() => [0, 4, 7, 4, 7, 12].forEach((n, i) => tone(semis(n), i * 0.11, 0.2, 'square', 0.14)));
+    },
     // The climb: rising wind plus a rising hum, lasting as long as the animation.
     rise(seconds) {
       play(() => {

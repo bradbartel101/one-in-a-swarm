@@ -114,6 +114,20 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
   box-shadow: 4px 4px 0 rgba(0, 20, 40, 0.55); overflow-wrap: anywhere; pointer-events: none;
 }
 
+/* A small notice in the open sky, clear of the prompt and the answer bar. */
+.toast {
+  position: fixed; z-index: 7; top: calc(var(--win-top, 80px) + 8px); right: calc(var(--ruler, 108px) + 8px); margin: 0;
+  padding: 0.35rem 0.5rem; max-width: 60vw; font-size: 0.5rem; line-height: 1.7; pointer-events: none; white-space: pre-line;
+  background: var(--accent); color: var(--accent-ink); border: 2px solid var(--accent-ink);
+}
+.toast::first-line { font-size: 0.55rem; }
+.sight-grid { list-style: none; margin: 0.4rem 0 0.6rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(8.6rem, 1fr)); gap: 0.3rem; }
+.sight-grid li { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.35rem; font-size: 0.78rem; background: var(--panel-2); min-width: 0; }
+.sight-grid li::before { content: ""; flex: none; width: 12px; height: 12px; background: var(--accent); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.sight-grid li.unfound { color: var(--muted); }
+.sight-grid li.unfound::before { background: #05080f; } /* a silhouette */
+.night-line { margin: 0; font-style: italic; color: var(--accent); }
+
 /* ----- panels and buttons ----- */
 
 .panel { position: relative; isolation: isolate; clip-path: var(--steps); background: var(--edge); padding: 1rem 1.1rem; }

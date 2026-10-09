@@ -31,6 +31,7 @@
   <div id="worldWindow" aria-hidden="true"><div id="worldLayer"></div></div>
   <div id="tag" class="tag" aria-hidden="true" hidden></div>
   <div id="flash" aria-hidden="true"></div>
+  <p id="toast" class="toast pixel" aria-hidden="true" hidden></p>
   <div id="scan" aria-hidden="true"></div>
 
   <a class="skip" href="#app">Skip to game</a>
@@ -89,6 +90,12 @@
           <button type="button" class="btn btn-small btn-ghost" id="infBtn">INFINITE MODE</button>
           <p class="muted small" id="bestLabel"></p>
         </div>
+        <p class="night-line" id="nightLine" hidden>studying late? classic Tech.</p>
+        <details class="how" id="sightDlg">
+          <summary>Sightings <span id="sightCount"></span></summary>
+          <p class="muted small">Odd things turn up on the way to the Moon, and a few only show if you go looking.</p>
+          <ul class="sight-grid" id="sightGrid"></ul>
+        </details>
         <details class="how" id="howDlg">
           <summary>How to play</summary>
           <ul class="rules">
@@ -96,6 +103,7 @@
             <li>A correct answer ends the round and lifts the swarm. A wrong one costs 3 seconds, and you keep guessing.</li>
             <li><strong>Rarer is better.</strong> The obvious answer scores 10 and barely leaves the lawn. The one hidden One in a Swarm answer scores 100. A perfect day reaches the edge of space.</li>
             <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, short names count (CULC is Clough), and a near-miss asks you to confirm.</li>
+            <li>Every answer climbs the same distance per point. Ten points is a little over half a screen; a hundred is six screens. A perfect 700 lands on the Moon.</li>
             <li><strong>Infinite mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3, a skip costs 5.</li>
           </ul>
           <p class="muted small">Rarity tiers are editorial guesses, not measured from real players.</p>
@@ -179,6 +187,9 @@
           <button type="button" class="btn" id="copyBtn">COPY RESULT</button>
           <p class="feedback" id="copyStatus" role="status" aria-live="polite"></p>
         </div>
+
+        <h2 class="pixel">SIGHTINGS <span id="resSightCount"></span></h2>
+        <ul class="sight-grid" id="resSightGrid"></ul>
 
         <h2 class="pixel">YOUR RECORD</h2>
         <dl class="stats" id="stats">
