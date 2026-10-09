@@ -16,8 +16,8 @@
 
 | Question | Decision | Why |
 |---|---|---|
-| Daily timer vs refresh | Each round stores a wall-clock deadline | A refresh resumes the round but cannot pause or reset the clock |
-| Daily repeats | Days are grouped into blocks; each block is one seeded shuffle of the bank, sliced 7 per day | Same prompts for everyone on a UTC date, and no prompt repeats inside a block |
+| Daily timer vs refresh | Each round stores a wall-clock deadline (replaced in iteration 2) | A refresh resumes the round but cannot pause or reset the clock |
+| Daily repeats | Days are grouped into blocks; each block is one seeded shuffle of the bank, sliced 7 per day (replaced in iteration 2) | Same prompts for everyone on a UTC date, and no prompt repeats inside a block |
 | Infinite "drains while focus/text" | Clock drains when the input is focused **or** has text in it | Literal reading of the spec; text left in a blurred box can't be used as a pause |
 | Infinite wrong guess | −3 s, same as daily | Otherwise guessing is free |
 | Stuck in infinite | Skip button, −5 s | A prompt you can't answer shouldn't end the run slowly |
@@ -27,6 +27,20 @@
 
 **Checklist target for this iteration:** all eight items, with evidence.
 
-## Iteration 2
+## Iteration 2 — the release audit
 
-Filled in from REVIEW.md after iteration 1's critique.
+**Why:** iteration 1's critique (REVIEW.md) failed five of eight checklist items, and the request
+grew into a ship-readiness audit. The highest-impact failures went first.
+
+1. Timer integrity. Replace the stored deadline with "time left + when measured", count elapsed
+   time as the larger of wall-clock and monotonic time, never negative.
+2. Midnight rollover. An unfinished run from yesterday is finished first; today's opens after.
+3. Saved data. Version it, validate every field on load, throw away anything malformed.
+4. A real browser. Drive headless Chrome over the DevTools protocol with no dependencies, serve the
+   site from a subpath, and assert an empty console on every scenario.
+5. Small-phone layout, found by screenshot: results screen, share box, answer box above the keyboard.
+6. Rotation. Guarantee no prompt repeats within the days the bank covers, across any boundary.
+7. Content. Check every flagged answer against a live source; remove what cannot be confirmed.
+8. Release furniture: first-visit help, link-preview tags and image, 404 page, README, CI.
+
+Tracked in SHIP.md.
