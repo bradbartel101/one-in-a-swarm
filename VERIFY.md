@@ -9,6 +9,14 @@ the game and listed in `HUMAN-TODO.md` for a Tech student to rule on.
 To flag a new answer, put `?` before its tier letter in `tools/prompts.src.txt` and add
 `?? reason` at the end of the line, then run `npm run build:data`.
 
+## Altitude facts
+
+The facts that slide past on the climb live in `js/facts.js`. The specific numbers were checked
+against sources during the v1.1 rebuild (building heights, Brasstown Bald, the National Weather
+Service cloud chart, the Baumgartner and Eustace jumps, the SR-71 record). The ones that are
+typical or approximate figures rather than single measurements are flagged below. The game
+measures altitude from campus, while mountain heights are quoted above sea level, as they always are.
+
 ## Things to check that are not single answers
 
 - **Most unflagged answers were written from memory and not individually checked.** The audit's
@@ -28,4 +36,8 @@ To flag a new answer, put `?` before its tier letter in `tools/prompts.src.txt` 
 
 ## Flagged answers
 
-None. No answer is currently flagged.
+### Altitude facts (`js/facts.js`, 16 facts)
+
+- [ ] **Skydivers usually step out around 13,000 ft.** A typical figure; drop zones quote anything from 10,000 to 14,000 ft.
+- [ ] **Around 36,000 ft the stratosphere begins. The weather is all below you now.** This is the standard-atmosphere figure; the real boundary moves with latitude and season.
+- [ ] **Weather balloons burst at around 100,000 ft. The sky overhead is nearly black.** Burst height varies by balloon; "nearly black" is a description, not a measurement.

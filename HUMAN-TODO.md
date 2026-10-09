@@ -20,21 +20,26 @@ check that the preview image appears.
 
 ## 4. Check on real phones
 
-Headless Chrome cannot show a real on-screen keyboard, VoiceOver or TalkBack. Please check:
+Headless Chrome cannot show a real on-screen keyboard, real frame rates, VoiceOver or TalkBack.
 
-- [ ] **iPhone Safari and Android Chrome, during a round:** with the keyboard open, the clock, the
-      prompt and the answer box are all visible. (Measured in tests: the answer box ends 241px from
-      the top at 320x568 and 247px at 375x667, which should clear the keyboard.)
-- [ ] **iPhone:** tapping the answer box does not zoom the page.
-- [ ] **Copy result** shows "Copied!" on iPhone Safari and Android Chrome, and the paste is right.
-- [ ] **Sound:** on a real phone and a laptop, listen to a wrong guess, each rarity of correct answer,
-      the climb, the last-five-seconds ticks and the end fanfare. Volume and taste are yours to judge;
-      the tests only prove the sounds fire and that mute silences them. (iPhones stay silent while
-      the ring switch is off.)
-- [ ] **The flight scene:** check the artwork reads well on a phone, and that the slim sky strip
-      during a round (shown on screens 380px and wider) does not push the answer box under the keyboard.
+- [ ] **Keyboard, iPhone Safari and Android Chrome:** during a round the clock ring, the prompt and
+      the answer box all stay visible above the keyboard. The bar is lifted using the visual
+      viewport and the layout tightens when little height is left; both are tested, but only by
+      simulating the keyboard.
+- [ ] **Smoothness:** the climb should hold a steady frame rate on a mid-range phone. The world is
+      a small canvas scaled up (about 125 x 270 art pixels on a phone), which is cheap, but I have
+      not measured it on real hardware.
+- [ ] **iPhone:** tapping the answer box does not zoom the page, and the keyboard opens when a
+      round starts without a second tap.
+- [ ] **Copy result** shows "Copied!" on both, and the paste is right.
 - [ ] **VoiceOver or TalkBack:** a wrong guess, "10 seconds left", "5 seconds left", the round
       result and the final score are each read out once, and the clock is not read every second.
+- [ ] **Sound** is off by default. Turn it on and listen: wrong-guess buzz, the rising tone on the
+      climb, the One in a Swarm chord, the last-five-seconds ticks. Nobody has heard these yet;
+      the tests only prove they fire and that the mute button silences them.
+- [ ] **Taste:** look at `screenshots/` and play it. This rebuild was made without being able to
+      see krillion.io's game screens (they render in script and did not load here), so it follows
+      your written spec, not that site's look. Say what feels off.
 
 ## 5. Have a Georgia Tech student or alum review the content
 
@@ -78,6 +83,10 @@ that I can't make for you. If in doubt, ask Georgia Tech's licensing office befo
 ## 7. Known limitations to accept or schedule
 
 - Rarity is preset, not measured. Real rarity needs a small backend.
+- Altitude is a curve, not a fixed number of feet per point, so that 700 points reaches the edge of
+  space while the first obvious answers barely leave the lawn. "+60 PTS" therefore climbs a
+  different number of feet depending on how high you already are. The card shows the real figure.
+- Flight numbers count from 8 October 2026 (`LAUNCH_DATE` in `js/core.js`).
 - Everything runs in the browser, so a determined player can read `data/prompts.json` or edit their
   saved score. The timer resists refreshes, tab switching and clock changes, but someone who sets
   their device clock back *while the page is closed* pauses the clock for that long.

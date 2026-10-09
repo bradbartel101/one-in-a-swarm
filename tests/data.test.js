@@ -93,7 +93,12 @@ test('the validator catches broken data', () => {
 test('VERIFY.md lists every answer marked verify, and nothing else', () => {
   const md = fs.readFileSync(path.join(__dirname, '..', 'VERIFY.md'), 'utf8');
   const listed = (md.match(/^- \[ \] \*\*(.+?)\*\*/gm) || []).length;
+  const facts = require('../js/facts.js');
   let flagged = 0;
+  facts.filter((f) => f.verify).forEach((f) => {
+    flagged += 1;
+    assert.ok(md.includes('**' + f.text + '**'), 'VERIFY.md is missing the fact: ' + f.text);
+  });
   data.prompts.forEach((p) => {
     p.answers.filter((a) => a.verify).forEach((a) => {
       flagged += 1;
@@ -101,7 +106,7 @@ test('VERIFY.md lists every answer marked verify, and nothing else', () => {
       assert.ok(md.includes('**' + a.name + '**'), 'VERIFY.md is missing ' + p.id + ': ' + a.name);
     });
   });
-  if (!flagged) assert.match(md, /No answer is currently flagged/);
+  if (!flagged) assert.match(md, /Nothing is currently flagged/);
   assert.equal(listed, flagged, 'VERIFY.md lists ' + listed + ' items but the data flags ' + flagged);
 });
 

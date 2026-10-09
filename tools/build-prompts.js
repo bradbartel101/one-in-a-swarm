@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const core = require('../js/core.js');
+const facts = require('../js/facts.js');
 
 const ROOT = path.join(__dirname, '..');
 const TIER = { C: 'common', T: 'clever', S: 'solid', R: 'rare', D: 'deep', X: 'swarm' };
@@ -94,7 +95,15 @@ prompts.forEach((p) => {
     md += '- [ ] **' + a.name + '** (' + core.TIERS[a.tier].label + ')' + (a.verifyReason ? ': ' + a.verifyReason : '') + '\n';
   });
 });
-if (!flagged) md += '\nNone. No answer is currently flagged.\n';
+const flaggedFacts = facts.filter((f) => f.verify);
+if (flaggedFacts.length) {
+  md += '\n### Altitude facts (`js/facts.js`, ' + facts.length + ' facts)\n\n';
+  flaggedFacts.forEach((f) => {
+    flagged += 1;
+    md += '- [ ] **' + f.text + '** ' + f.verify + '\n';
+  });
+}
+if (!flagged) md += '\nNone. Nothing is currently flagged.\n';
 fs.writeFileSync(path.join(ROOT, 'VERIFY.md'), md);
 
 const total = prompts.reduce((s, p) => s + p.answers.length, 0);

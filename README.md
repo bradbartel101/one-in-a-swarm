@@ -9,8 +9,10 @@ Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Techn
 
 ## How to play
 
-**Daily flight.** Seven prompts, new at 00:00 UTC. A correct answer ends the round. A wrong answer
-costs 3 seconds and you keep guessing. Answers score by rarity:
+**Daily flight.** Seven prompts, new at 00:00 UTC. Each round a prompt slides in, the swarm takes
+two seconds to lift off, and then you have 25 seconds. A correct answer ends the round. A wrong
+answer costs 3 seconds and you keep guessing. A near-miss ("clugh") asks you to submit again to
+confirm it ("Clough") and costs nothing. Answers score by rarity:
 
 | Tier | Points | |
 |---|---|---|
@@ -21,24 +23,30 @@ costs 3 seconds and you keep guessing. Answers score by rarity:
 | Deep Cut | 85 | |
 | One in a Swarm | 100 | exactly one hidden answer per prompt |
 
-Each point is 4 feet of altitude above Tech Tower. A finished day cannot be replayed. If you are
-mid-run when the day rolls over, you finish yesterday's flight first.
+**The ascent.** The whole game is one tall pixel-art world. Every correct answer flies the swarm
+upward from the campus lawn, and the world never resets between rounds: past the Atlanta skyline,
+low clouds, airliners and cirrus, into a darkening stratosphere and out to the edge of space.
+Altitude follows a curve (`TOP_FEET` and `ALTITUDE_CURVE` in `js/core.js`): seven obvious answers
+just clear the tallest building in Atlanta at about 1,000 ft, and a perfect 700 reaches the Karman
+line at 328,084 ft. Real altitude facts slide past on the way up.
 
-**Swarm mode.** One 45-second clock for the whole run, draining only while the answer box is active
-or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs 3, a skip costs 5.
+A finished day cannot be replayed. If you are mid-run when the day rolls over, you finish
+yesterday's flight first. Streak, flights, average and best are kept in the browser.
 
-**The flight.** Your score is drawn as a climb: the bee lifts off the campus lawn, passes the skyline
-and the clouds, and ends among the stars on a great day. Sound effects are synthesised in the
-browser (no audio files) and the speaker button in the header turns them off. With
-`prefers-reduced-motion` the scene jumps to the new altitude without animating.
+**Infinite mode.** One 45-second clock for the whole run, draining only while the answer box is
+active or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs 3, a skip costs 5.
 
-Spelling is forgiving: case, accents, punctuation, plurals and a one-letter typo on longer answers
-don't matter, and short names count ("CULC" is the Clough Undergraduate Learning Commons).
+Spelling is forgiving: case, accents, punctuation and plurals don't matter, and short names count
+("CULC" is the Clough Undergraduate Learning Commons).
+
+Sound is off until you turn it on with the speaker button. Scanlines can be switched off too. With
+`prefers-reduced-motion` the long climb, the screen shake and the scanlines are all skipped.
 
 ## Run it locally
 
 It is a static site: HTML, CSS and vanilla JavaScript, with no build step, backend, dependencies,
-analytics or tracking. It has to be served over HTTP, because browsers block `fetch` on `file://`.
+analytics or tracking. All artwork is drawn in code on a canvas and all sound is synthesised; the
+only asset is one self-hosted open-licence font (Press Start 2P, SIL OFL, in `assets/fonts/`). It has to be served over HTTP, because browsers block `fetch` on `file://`.
 
 ```bash
 npx serve .
@@ -59,7 +67,11 @@ That one command runs all three of these:
 |---|---|
 | `npm test` | Unit tests: matching, daily seed and rotation, timers, scoring, saved data, colour contrast, file checks |
 | `npm run validate` | Content validator for `data/prompts.json` |
-| `npm run test:e2e` | 21 scenarios in headless Chrome: full daily and infinite runs, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths, keyboard-only play, screen-reader announcements, sharing |
+| `npm run test:e2e` | 24 scenarios in headless Chrome: full daily and infinite runs, the climb and reveal card, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing |
+
+`npm run screens` plays one flight at 375x812 and 1440x900 and saves screenshots of the start
+screen, a wrong guess, a near-miss, mid-climb, the reveal card, the One in a Swarm moment, a
+timeout and the results into `screenshots/`. It also refreshes the link-preview image.
 
 ## Adding or changing prompts
 
@@ -109,11 +121,15 @@ assumes a project site (`/<repo>/`) on `github.io` and a domain root everywhere 
 index.html, 404.html     the pages
 css/style.css            styles; colour pairs are contrast-tested
 js/core.js               game rules, pure functions, shared by the browser and the tests
+js/scene.js              the world: one tall pixel-art scene drawn on a canvas
+js/facts.js              the altitude facts
 js/sfx.js                sound effects, synthesised with Web Audio
-js/app.js                the DOM layer
+js/app.js                camera, round pacing and the DOM
 data/prompts.json        the prompt bank (generated)
-tools/                   prompt source and build, validator, preview-image generator
+assets/fonts/            Press Start 2P and its licence
+tools/                   prompt source and build, validator
 tests/                   unit tests, and tests/e2e for headless Chrome
+screenshots/             the latest `npm run screens` output
 SHIP.md                  release checklist with evidence
 HUMAN-TODO.md            what still needs a person
 ```

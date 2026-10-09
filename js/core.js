@@ -7,12 +7,12 @@
   'use strict';
 
   const TIERS = {
-    common: { points: 10, label: 'Common', emoji: '⬜', bonusMs: 8000 },
-    clever: { points: 15, label: 'Too Clever', emoji: '🟨', bonusMs: 8000 },
-    solid: { points: 30, label: 'Solid', emoji: '🟧', bonusMs: 9000 },
-    rare: { points: 60, label: 'Rare', emoji: '🟦', bonusMs: 10000 },
-    deep: { points: 85, label: 'Deep Cut', emoji: '🟪', bonusMs: 12000 },
-    swarm: { points: 100, label: 'One in a Swarm', emoji: '🐝', bonusMs: 16000 },
+    common: { points: 10, label: 'Common', emoji: '⬜', bonusMs: 8000, climbMs: 2500, quip: 'Everybody said that one. The bees barely cleared the lawn.' },
+    clever: { points: 15, label: 'Too Clever', emoji: '🟩', bonusMs: 8000, climbMs: 2800, quip: 'You and every other clever Jacket.' },
+    solid: { points: 30, label: 'Solid', emoji: '🟧', bonusMs: 9000, climbMs: 3100, quip: 'A good answer. The swarm picks up speed.' },
+    rare: { points: 60, label: 'Rare', emoji: '🟦', bonusMs: 10000, climbMs: 3400, quip: 'Not many think of that one. Up you go.' },
+    deep: { points: 85, label: 'Deep Cut', emoji: '🟪', bonusMs: 12000, climbMs: 3700, quip: 'A deep cut. The air is getting thin.' },
+    swarm: { points: 100, label: 'One in a Swarm', emoji: '🐝', bonusMs: 16000, climbMs: 4000, quip: 'The one answer hidden in the hive. Helluva pull.' },
   };
   const TIER_ORDER = ['common', 'clever', 'solid', 'rare', 'deep', 'swarm'];
   const MISS_EMOJI = '⬛';
@@ -22,15 +22,21 @@
   const PENALTY_MS = 3000;
   const INFINITE_START_MS = 45000;
   const SKIP_MS = 5000;
-  const FEET_PER_POINT = 4;
   const MIN_ANSWERS = 25;
+  const LAUNCH_DATE = '2026-10-08'; // flight #1
+
+  // Altitude. A perfect day (700 points) reaches the edge of space, and the scale is curved so
+  // the first obvious answers barely leave the lawn. Every altitude in the game comes from here.
+  const TOP_SCORE = ROUNDS * TIERS.swarm.points;
+  const TOP_FEET = 328084; // the Karman line, 100 km
+  const ALTITUDE_CURVE = 2.5;
 
   const BANDS = [
     { min: 0, name: 'Still in the Hive', blurb: 'Barely off the ground. Even George P. Burdell got further, and he never existed.' },
-    { min: 100, name: 'Skimming Tech Green', blurb: 'Airborne, but low enough to dodge frisbees.' },
-    { min: 225, name: 'Clearing the Campanile', blurb: 'Up past the obvious answers. Now we are getting somewhere.' },
-    { min: 375, name: 'Over the Midtown Skyline', blurb: 'Rare air. Most of the swarm is below you.' },
-    { min: 525, name: 'Helluva Engineer', blurb: 'Nearly every answer a deep cut. You got out.' },
+    { min: 100, name: 'Clear of the Skyline', blurb: 'Airborne, and above every roof in Atlanta.' },
+    { min: 225, name: 'Above the Weather', blurb: 'Up past the obvious answers and the clouds with them.' },
+    { min: 375, name: 'Stratosphere Bound', blurb: 'Rare air. The sky is going dark and most of the swarm is below you.' },
+    { min: 525, name: 'Helluva Engineer', blurb: 'Nearly every answer a deep cut. You got out, all the way to the edge of space.' },
   ];
 
   /* ---------- matching ---------- */
@@ -107,18 +113,19 @@
 
   const indexCache = new WeakMap();
 
-  function answerKeys(prompt, answer) {
-    return [answer.name].concat(answer.aliases || []).map((s) => normalize(s, prompt));
-  }
-
   function buildIndex(prompt) {
     let idx = indexCache.get(prompt);
     if (idx) return idx;
     const exact = new Map();
     const loose = new Map();
+    const labels = new Map(); // key -> the text an author wrote, for "did you mean" messages
     prompt.answers.forEach((answer, i) => {
-      answerKeys(prompt, answer).forEach((k) => {
-        if (k && !exact.has(k)) exact.set(k, i);
+      [answer.name].concat(answer.aliases || []).forEach((text) => {
+        const k = normalize(text, prompt);
+        if (k && !exact.has(k)) {
+          exact.set(k, i);
+          labels.set(k, text);
+        }
       });
     });
     exact.forEach((i, k) => {
@@ -126,17 +133,19 @@
         if (!exact.has(v) && !loose.has(v)) loose.set(v, i);
       });
     });
-    idx = { exact, loose };
+    idx = { exact, loose, labels };
     indexCache.set(prompt, idx);
     return idx;
   }
 
   function fuzzyLimit(key) {
-    if (/\d/.test(key) || key.length < 7) return 0;
+    if (/\d/.test(key) || key.length < 5) return 0;
     return key.length >= 12 ? 2 : 1;
   }
 
-  // Returns { key, answer, fuzzy } where answer is null when nothing matched.
+  // Returns { key, answer, fuzzy } where answer is null when nothing matched. A fuzzy match is
+  // a near-miss: callers ask the player to confirm it rather than accepting it outright, and
+  // `label` is the spelling to show them.
   function matchAnswer(prompt, input) {
     const key = normalize(input, prompt);
     if (!key) return { key: '', answer: null, fuzzy: false };
@@ -150,6 +159,7 @@
     if (fuzzyLimit(key) > 0) {
       let best = Infinity;
       let bestAnswer = -1;
+      let bestKey = '';
       let tie = false;
       idx.exact.forEach((ai, k) => {
         const max = Math.min(fuzzyLimit(k), fuzzyLimit(key));
@@ -159,12 +169,13 @@
         if (d < best) {
           best = d;
           bestAnswer = ai;
+          bestKey = k;
           tie = false;
         } else if (d === best && ai !== bestAnswer) {
           tie = true;
         }
       });
-      if (bestAnswer !== -1 && !tie) return { key, answer: prompt.answers[bestAnswer], fuzzy: true };
+      if (bestAnswer !== -1 && !tie) return { key, answer: prompt.answers[bestAnswer], fuzzy: true, label: idx.labels.get(bestKey) };
     }
     return { key, answer: null, fuzzy: false };
   }
@@ -257,7 +268,16 @@
   }
 
   function altitudeFeet(score) {
-    return score * FEET_PER_POINT;
+    return Math.round(TOP_FEET * Math.pow(Math.max(0, score) / TOP_SCORE, ALTITUDE_CURVE));
+  }
+
+  // The inverse: where on the climb a real-world altitude sits. Used to place scenery and facts.
+  function scoreForFeet(feet) {
+    return TOP_SCORE * Math.pow(Math.max(0, feet) / TOP_FEET, 1 / ALTITUDE_CURVE);
+  }
+
+  function flightNumber(dateKey) {
+    return dayNumber(dateKey) - dayNumber(LAUNCH_DATE) + 1;
   }
 
   function bandFor(score) {
@@ -277,10 +297,9 @@
   function shareText(dateKey, results, url) {
     const score = totalScore(results);
     const lines = [
-      'One in a Swarm 🐝 ' + dateKey,
+      'One in a Swarm 🐝 Flight #' + flightNumber(dateKey),
       shareGrid(results),
-      formatNumber(score) + ' pts · ' + formatNumber(altitudeFeet(score)) + ' ft above Tech Tower',
-      bandFor(score).name,
+      formatNumber(score) + ' pts · ' + formatNumber(altitudeFeet(score)) + ' ft up',
     ];
     if (url) lines.push(url);
     return lines.join('\n');
@@ -334,6 +353,10 @@
     if (dailyTick(state, now, monoElapsedMs)) return { status: 'timeout' };
     const m = matchAnswer(prompt, input);
     if (!m.key) return { status: 'empty' };
+    if (m.answer && m.fuzzy && state.round.pending !== m.key) {
+      state.round.pending = m.key; // typing the same thing again confirms it
+      return { status: 'near', suggestion: m.label };
+    }
     if (m.answer) {
       const result = {
         tier: m.answer.tier,
@@ -398,6 +421,7 @@
         if (!Array.isArray(q.tried) || q.tried.length > 200) return null;
         if (!q.tried.every((t) => t && typeof t.key === 'string' && typeof t.text === 'string')) return null;
         round = { index: q.index, leftMs: q.leftMs, seenAt: q.seenAt, tried: q.tried.map((t) => ({ key: t.key.slice(0, 80), text: t.text.slice(0, 60) })) };
+        if (typeof q.pending === 'string') round.pending = q.pending.slice(0, 80);
       }
       return { v: SAVE_VERSION, date: raw.date, promptIds: ids.slice(), results, round, finished };
     } catch (e) {
@@ -409,6 +433,40 @@
     if (!raw || typeof raw !== 'object' || raw.v !== SAVE_VERSION) return null;
     if (!isCount(raw.score, 1e9) || !isCount(raw.answered, 1e6)) return null;
     return { v: SAVE_VERSION, score: raw.score, answered: raw.answered };
+  }
+
+  /* ---------- lifetime stats ---------- */
+
+  function newStats() {
+    return { v: SAVE_VERSION, played: 0, total: 0, best: 0, streak: 0, lastDate: '' };
+  }
+
+  // Adds a finished flight. Recording the same date twice changes nothing.
+  function recordFlight(stats, dateKey, score) {
+    const s = stats || newStats();
+    if (s.lastDate && dayNumber(dateKey) <= dayNumber(s.lastDate)) return s;
+    return {
+      v: SAVE_VERSION,
+      played: s.played + 1,
+      total: s.total + score,
+      best: Math.max(s.best, score),
+      streak: s.lastDate === previousDateKey(dateKey) ? s.streak + 1 : 1,
+      lastDate: dateKey,
+    };
+  }
+
+  function reviveStats(raw) {
+    if (!raw || typeof raw !== 'object' || raw.v !== SAVE_VERSION) return null;
+    if (!isCount(raw.played, 1e6) || !isCount(raw.total, 1e9) || !isCount(raw.best, TOP_SCORE) || !isCount(raw.streak, 1e6)) return null;
+    if (typeof raw.lastDate !== 'string' || (raw.lastDate && isNaN(dayNumber(raw.lastDate)))) return null;
+    if (raw.streak > raw.played || raw.total > raw.played * TOP_SCORE) return null;
+    return { v: SAVE_VERSION, played: raw.played, total: raw.total, best: raw.best, streak: raw.streak, lastDate: raw.lastDate };
+  }
+
+  // A streak only counts if the last flight was today or yesterday.
+  function currentStreak(stats, todayKey) {
+    if (!stats || !stats.lastDate) return 0;
+    return stats.lastDate === todayKey || stats.lastDate === previousDateKey(todayKey) ? stats.streak : 0;
   }
 
   function previousDateKey(dateKey) {
@@ -443,6 +501,7 @@
   function infiniteAdvance(state) {
     state.pos += 1;
     state.tried = [];
+    state.pending = null;
     if (state.pos >= state.order.length && !state.over) {
       state.over = true;
       state.cleared = true;
@@ -459,6 +518,10 @@
     if (state.over) return { status: 'idle' };
     const m = matchAnswer(prompt, input);
     if (!m.key) return { status: 'empty' };
+    if (m.answer && m.fuzzy && state.pending !== m.key) {
+      state.pending = m.key;
+      return { status: 'near', suggestion: m.label };
+    }
     if (m.answer) {
       const tier = TIERS[m.answer.tier];
       state.score += tier.points;
@@ -519,12 +582,13 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, FEET_PER_POINT, MIN_ANSWERS,
+    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, TOP_FEET,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
-    tierPoints, totalScore, altitudeFeet, bandFor, formatNumber, shareGrid, shareText,
+    tierPoints, totalScore, altitudeFeet, scoreForFeet, flightNumber, bandFor, formatNumber, shareGrid, shareText,
     SAVE_VERSION, newDaily, startRound, remainingMs, dailyTick, dailyGuess,
     reviveDaily, reviveBest, previousDateKey, resolveDaily,
+    newStats, recordFlight, reviveStats, currentStreak,
     newInfinite, infiniteDrains, infiniteTick, infiniteGuess, infiniteSkip,
     validatePrompts,
   };

@@ -2,263 +2,228 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
   <title>One in a Swarm — the Georgia Tech rare-answer game</title>
-  <meta name="description" content="A daily Georgia Tech word game. Seven prompts, 25 seconds each. The rarer your answer, the higher you fly.">
-  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="A daily Georgia Tech word game. Seven prompts, 25 seconds each. The rarer your answer, the higher the swarm flies.">
+  <meta name="color-scheme" content="dark">
   <!-- Link previews need absolute URLs. Update these four if the site moves (see README.md). -->
   <link rel="canonical" href="https://bradbartel101.github.io/one-in-a-swarm/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="One in a Swarm">
   <meta property="og:title" content="One in a Swarm — the Georgia Tech rare-answer game">
-  <meta property="og:description" content="Seven Georgia Tech prompts a day. The obvious answer is worth almost nothing. Find the one nobody else thinks of.">
+  <meta property="og:description" content="Seven Georgia Tech prompts a day. The obvious answer barely leaves the lawn. The rare one reaches space.">
   <meta property="og:url" content="https://bradbartel101.github.io/one-in-a-swarm/">
   <meta property="og:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="One in a Swarm: a gold hexagon bee over a navy honeycomb, with the line 'Don't say the obvious thing.'">
+  <meta property="og:image:alt" content="One in a Swarm: a pixel-art bee climbing from a college campus into space.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="One in a Swarm — the Georgia Tech rare-answer game">
-  <meta name="twitter:description" content="Seven Georgia Tech prompts a day. The obvious answer is worth almost nothing.">
+  <meta name="twitter:description" content="Seven Georgia Tech prompts a day. The obvious answer barely leaves the lawn.">
   <meta name="twitter:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
   <meta name="theme-color" content="#003057">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7-12-7V9z' fill='%23B3A369' stroke='%23003057' stroke-width='2'/%3E%3Cpath d='M8 13h16M8 19h16' stroke='%23003057' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath d='M3 4h10v8H3z' fill='%23d9b84a'/%3E%3Cpath d='M5 4h2v8H5zM9 4h2v8H9zM2 5h1v6H2zM13 5h1v6h-1z' fill='%2300213d'/%3E%3Cpath d='M4 1h3v3H4zM9 1h3v3H9z' fill='%23f4f9ff'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <a class="skip" href="#app">Skip to game</a>
+<body data-phase="loading">
+  <canvas id="world" aria-hidden="true"></canvas>
+  <div id="worldLayer" aria-hidden="true"></div>
+  <div id="tag" class="tag" aria-hidden="true" hidden></div>
+  <div id="flash" aria-hidden="true"></div>
+  <div id="scan" aria-hidden="true"></div>
 
-  <header class="top">
-    <button type="button" class="brand" id="homeBtn" aria-label="One in a Swarm, home">
-      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-        <ellipse class="wing" cx="13" cy="9" rx="9" ry="5" transform="rotate(-24 13 9)"/>
-        <ellipse class="wing" cx="35" cy="9" rx="9" ry="5" transform="rotate(24 35 9)"/>
-        <path class="hex" d="M24 8l15 8.5v17L24 42 9 33.5v-17z"/>
-        <path class="stripe" d="M11 20.5h26M11 29.5h26"/>
-      </svg>
-      <span class="brand-text">One in a <strong>Swarm</strong></span>
+  <a class="skip" href="#app">Skip to game</a>
+  <p class="sr-only" id="announce" role="status" aria-live="polite" aria-atomic="true"></p>
+  <p class="sr-only" id="clockLive" role="timer" aria-live="assertive" aria-atomic="true"></p>
+
+  <div class="tools" id="tools">
+    <button type="button" class="tool" id="homeBtn" aria-label="Back to the title screen">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><path d="M7 2h2v1h1v1h1v1h1v1h1v1h1v2h-2v5H9v-4H7v4H4V9H2V7h1V6h1V5h1V4h1V3h1z"/></svg>
     </button>
-    <div class="top-actions">
-      <button type="button" class="btn btn-quiet btn-icon" id="soundBtn" aria-pressed="true" aria-label="Sound">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="spk" d="M4 9v6h4l5 4V5L8 9z"/><path class="waves" d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12"/><path class="mute" d="M16 9l5 6M21 9l-5 6"/></svg>
-      </button>
-      <button type="button" class="btn btn-quiet" id="howBtn">How to play</button>
+    <button type="button" class="tool" id="soundBtn" aria-pressed="false" aria-label="Sound">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><path d="M2 6h3V5h1V4h1V3h1v10H7v-1H6v-1H5v-1H2z"/><path class="on" d="M10 6h1v4h-1zM12 4h1v8h-1z"/><path class="off" d="M10 6h1v1h1v1h1V7h1V6h-1v1h-1V6zM10 10h1V9h1v1h-1zM13 9h1v1h-1z"/></svg>
+    </button>
+    <button type="button" class="tool" id="scanBtn" aria-pressed="true" aria-label="Scanlines">
+      <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><path d="M2 3h12v1H2zM2 6h12v1H2zM2 9h12v1H2zM2 12h12v1H2z"/></svg>
+    </button>
+  </div>
+
+  <header class="hud panel" id="hud" hidden>
+    <div class="hud-cell hud-alt"><span class="hud-label">ALT</span><span class="hud-num pixel"><span id="hudAlt">0</span><small> FT</small></span></div>
+    <div class="hud-cell hud-mid">
+      <ol class="pips" id="pips" aria-hidden="true"></ol>
+      <p class="hud-text" id="hudText"></p>
     </div>
+    <div class="hud-cell hud-score"><span class="hud-label">SCORE</span><span class="hud-num pixel" id="hudScore">0</span></div>
   </header>
 
-  <p class="sr-only" id="announce" role="status" aria-live="polite" aria-atomic="true"></p>
-
   <main id="app">
-    <section data-view="loading" class="card center">
-      <p>Waking the hive…</p>
+    <section data-view="loading" class="center-screen">
+      <p class="pixel">WAKING THE HIVE…</p>
     </section>
 
-    <section data-view="error" class="card" hidden>
-      <h1>The hive is empty</h1>
-      <p id="errorText">The game data did not load.</p>
-      <p><button type="button" class="btn btn-primary" id="retryBtn">Try again</button></p>
-      <p class="muted small" id="errorDetail"></p>
+    <section data-view="error" class="center-screen" hidden>
+      <div class="panel">
+        <h1 class="pixel">THE HIVE IS EMPTY</h1>
+        <p id="errorText">The game data did not load.</p>
+        <p><button type="button" class="btn" id="retryBtn">TRY AGAIN</button></p>
+        <p class="muted small" id="errorDetail"></p>
+      </div>
     </section>
 
     <section data-view="home" hidden>
-      <div class="hero">
-        <h1 tabindex="-1" id="homeTitle">Don't say the obvious thing.</h1>
-        <p class="lede">Seven Georgia Tech prompts. Twenty-five seconds each. Everybody knows the easy answer, so it's worth almost nothing. Find the one nobody else thinks of.</p>
-        <div class="flight-slot" data-slot="home">
-        <div class="flight" id="flight" aria-hidden="true">
-          <div class="flight-world" id="flightWorld">
-            <div class="stars"></div>
-            <div class="moon"></div>
-            <svg class="prop satellite" viewBox="0 0 60 30"><rect x="24" y="9" width="12" height="12" rx="2" fill="#d9dee5"/><rect x="2" y="11" width="18" height="8" fill="#3d6fb3" stroke="#d9dee5"/><rect x="40" y="11" width="18" height="8" fill="#3d6fb3" stroke="#d9dee5"/><path d="M30 9V3" stroke="#d9dee5" stroke-width="2"/></svg>
-            <div class="mark" style="bottom:1698px"><span>2,100 ft</span></div>
-            <div class="mark" style="bottom:1230px"><span>1,500 ft</span></div>
-            <svg class="prop plane" viewBox="0 0 80 30"><path d="M4 16h52l16-8h4l-8 10 8 4-4 2-18-2H10z" fill="#f4f6f8"/><path d="M34 16l-10-12h6l14 12zM30 20l-8 8h5l12-8z" fill="#c9d2dc"/></svg>
-            <div class="cloud" style="bottom:1420px;left:58%"></div>
-            <div class="cloud small" style="bottom:1240px;left:8%"></div>
-            <div class="cloud" style="bottom:1090px;left:44%"></div>
-            <div class="cloud small" style="bottom:960px;left:72%"></div>
-            <div class="mark" style="bottom:762px"><span>900 ft</span></div>
-            <div class="cloud" style="bottom:780px;left:12%"></div>
-            <svg class="prop balloon" viewBox="0 0 40 60"><path d="M20 2c11 0 18 8 18 18 0 9-8 16-13 22H15C10 36 2 29 2 20 2 10 9 2 20 2z" fill="#b3a369"/><path d="M20 2c4 0 7 8 7 18s-2 16-4 22h-6c-2-6-4-12-4-22S16 2 20 2z" fill="#f4f6f8"/><path d="M15 42l1 8M25 42l-1 8" stroke="#3b2a12"/><rect x="15" y="50" width="10" height="8" rx="1.5" fill="#6b4a22"/></svg>
-            <div class="cloud small" style="bottom:640px;left:60%"></div>
-            <div class="cloud" style="bottom:540px;left:30%"></div>
-            <div class="mark" style="bottom:372px"><span>400 ft</span></div>
-            <svg class="skyline" viewBox="0 0 400 300" preserveAspectRatio="xMidYMax meet"><g fill="#5f93c6"><path d="M4 300V190h30v110zM40 300V150h24v150zM70 300V210h34v90zM300 300V170h30v130zM336 300V205h26v95zM366 300V140h28v160z"/></g><g fill="#3d6ea5"><path d="M112 300V120l12-22 12 22v180zM142 300V175h26v125zM176 300V70h9V44h4v26h9v230zM206 300V150h22l8 12v138zM244 300V100h18l6-14 6 14v200zM270 300V195h24v105z"/></g><g fill="#cfe4f7" opacity=".55"><path d="M116 130h4v6h-4zM124 130h4v6h-4zM116 146h4v6h-4zM124 146h4v6h-4zM116 162h4v6h-4zM124 178h4v6h-4zM180 84h3v6h-3zM187 84h3v6h-3zM180 100h3v6h-3zM187 116h3v6h-3zM180 132h3v6h-3zM187 148h3v6h-3zM248 112h4v6h-4zM258 112h4v6h-4zM248 128h4v6h-4zM258 144h4v6h-4zM248 160h4v6h-4zM44 160h4v6h-4zM54 176h4v6h-4zM370 150h4v6h-4zM382 166h4v6h-4zM370 182h4v6h-4z"/></g></svg>
-            <svg class="campus" viewBox="0 0 400 160" preserveAspectRatio="xMidYMax slice"><rect y="112" width="400" height="48" fill="#4f9a55"/><path d="M0 112q100-10 200 0t200 0v6H0z" fill="#63b267"/><g fill="#8d3f2d"><rect x="18" y="74" width="74" height="40"/><rect x="150" y="62" width="34" height="52"/><rect x="232" y="78" width="96" height="36"/><rect x="340" y="84" width="48" height="30"/></g><path d="M146 62l21-30 21 30z" fill="#5d2a1f"/><rect x="161" y="72" width="12" height="12" rx="6" fill="#f3ead2"/><g fill="#f3ead2"><path d="M26 84h10v10H26zM44 84h10v10H44zM62 84h10v10H62zM242 88h10v10h-10zM262 88h10v10h-10zM282 88h10v10h-10zM302 88h10v10h-10zM350 94h8v8h-8zM368 94h8v8h-8z"/></g><g fill="#2f7a3b"><circle cx="112" cy="100" r="15"/><circle cx="128" cy="106" r="11"/><circle cx="208" cy="102" r="13"/></g><g fill="#5b3b1d"><rect x="110" y="110" width="4" height="8"/><rect x="206" y="110" width="4" height="8"/></g></svg>
-          </div>
-          <svg class="flight-bee" id="flightBee" viewBox="0 0 48 48"><g class="wings"><ellipse cx="13" cy="9" rx="9" ry="5" transform="rotate(-24 13 9)"/><ellipse cx="35" cy="9" rx="9" ry="5" transform="rotate(24 35 9)"/></g><path class="body" d="M24 8l15 8.5v17L24 42 9 33.5v-17z"/><path class="band" d="M11 20.5h26M11 29.5h26"/></svg>
-          <p class="flight-zone" id="flightZone"></p>
-          <p class="flight-alt"><span id="flightAlt">0</span> ft</p>
+      <div class="panel title-block">
+        <p class="flight-no pixel" id="flightNo">FLIGHT #1</p>
+        <h1 class="title pixel" tabindex="-1" id="homeTitle">ONE IN A<br><span>SWARM</span></h1>
+        <p class="tagline">A Georgia Tech word game. Rarer answers fly higher.</p>
+      </div>
+      <div class="home-gap" id="homeGap" aria-hidden="true"></div>
+
+      <div class="panel start-panel">
+        <p class="rule-line">Seven prompts, 25 seconds each. Don't say the obvious thing.</p>
+        <p class="muted small" id="dailyStatus"></p>
+        <button type="button" class="btn btn-big" id="dailyBtn">BEGIN ASCENT ▲</button>
+        <button type="button" class="btn btn-small btn-ghost" id="skipStaleBtn" hidden>SKIP IT, FLY TODAY'S</button>
+        <div class="start-row">
+          <button type="button" class="btn btn-small btn-ghost" id="infBtn">INFINITE MODE</button>
+          <p class="muted small" id="bestLabel"></p>
         </div>
-        </div>
+        <details class="how" id="howDlg">
+          <summary>How to play</summary>
+          <ul class="rules">
+            <li><strong>Daily flight:</strong> seven prompts, the same for everyone, new at 00:00 UTC. You get 25 seconds a round.</li>
+            <li>A correct answer ends the round and lifts the swarm. A wrong one costs 3 seconds, and you keep guessing.</li>
+            <li><strong>Rarer is better.</strong> The obvious answer scores 10 and barely leaves the lawn. The one hidden One in a Swarm answer scores 100. A perfect day reaches the edge of space.</li>
+            <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, short names count (CULC is Clough), and a near-miss asks you to confirm.</li>
+            <li><strong>Infinite mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3, a skip costs 5.</li>
+          </ul>
+          <p class="muted small">Rarity tiers are editorial guesses, not measured from real players.</p>
+        </details>
+        <p class="muted small"><span id="todayLabel"></span> · next flight in <span class="js-countdown">--:--:--</span></p>
       </div>
-
-      <div class="modes">
-        <article class="card mode">
-          <p class="eyebrow">Daily flight · <span id="todayLabel"></span></p>
-          <h2>Today's seven</h2>
-          <p id="dailyStatus" class="muted">The same prompts for every Yellow Jacket, once a day.</p>
-          <button type="button" class="btn btn-primary btn-big" id="dailyBtn">Start today's flight</button>
-          <button type="button" class="btn btn-quiet btn-big" id="skipStaleBtn" hidden>Skip it and start today's</button>
-          <p class="muted small">New prompts in <span class="js-countdown">--:--:--</span> (00:00 UTC)</p>
-        </article>
-
-        <article class="card mode">
-          <p class="eyebrow">Infinite</p>
-          <h2>Swarm mode</h2>
-          <p class="muted">One 45-second clock that only drains while you're typing. Rare answers buy more time.</p>
-          <button type="button" class="btn btn-gold btn-big" id="infBtn">Start an endless run</button>
-          <p class="muted small" id="bestLabel">No best run yet.</p>
-        </article>
-      </div>
-
-      <section class="card" aria-labelledby="tiersTitle">
-        <h2 id="tiersTitle">What an answer is worth</h2>
-        <ul class="tiers" id="tierLegend"></ul>
-        <p class="muted small">Every point lifts you 4 feet above Tech Tower. Exactly one answer per prompt is the One in a Swarm.</p>
-      </section>
-    </section>
-
-    <section data-view="between" hidden>
-      <div class="flight-slot" data-slot="between"></div>
-      <div class="card result-card" id="lastResult" hidden>
-        <p class="eyebrow" id="lastRoundLabel"></p>
-        <p class="result-prompt" id="lastPrompt"></p>
-        <p class="result-line"><span class="badge" id="lastBadge"></span> <strong id="lastPoints"></strong></p>
-        <p class="result-answer" id="lastAnswer"></p>
-        <p class="muted" id="lastNote"></p>
-      </div>
-      <div class="card center">
-        <p class="eyebrow" id="nextLabel"></p>
-        <h1 tabindex="-1" id="nextTitle"></h1>
-        <p class="muted" id="nextHint"></p>
-        <button type="button" class="btn btn-primary btn-big" id="nextBtn"></button>
-        <p class="running" id="runningScore"></p>
-      </div>
+      <p class="foot" id="footText">Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</p>
     </section>
 
     <section data-view="play" hidden>
-      <div class="flight-slot flight-slot-play" data-slot="play"></div>
-      <div class="hud" id="hud">
-        <div class="hud-left">
-          <ol class="pips" id="pips" aria-hidden="true"></ol>
-          <p class="hud-text" id="hudText"></p>
-        </div>
-        <div class="clock" id="clock"><span id="clockNum">25</span><span class="clock-unit">s</span></div>
-      </div>
-      <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
-      <p class="sr-only" id="clockLive" role="timer" aria-live="assertive" aria-atomic="true"></p>
-      <p class="pause-note" id="pauseNote" hidden>Clock paused. It runs while the answer box is active.</p>
-
-      <div class="card prompt-card">
+      <div class="panel prompt-card" id="promptCard">
         <p class="eyebrow" id="cat"></p>
         <h1 id="promptText" tabindex="-1"></h1>
-        <form id="guessForm" autocomplete="off" novalidate>
-          <label for="guess" class="sr-only">Your answer</label>
-          <div class="entry" id="entry">
-            <input id="guess" name="guess" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="80" placeholder="Type an answer">
-            <button type="submit" class="btn btn-primary">Guess</button>
-          </div>
-        </form>
-        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
-        <ul class="tried" id="tried" aria-label="Wrong guesses this round"></ul>
+        <p class="liftoff pixel" id="liftoff" hidden></p>
       </div>
 
-      <div class="play-actions" id="infActions" hidden>
-        <button type="button" class="btn btn-quiet" id="skipBtn">Skip prompt (−5s)</button>
-        <button type="button" class="btn btn-quiet" id="endBtn">End run</button>
+      <div class="dock" id="dock">
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        <ul class="tried" id="tried" aria-label="Wrong guesses this round"></ul>
+        <form class="panel dock-form" id="guessForm" autocomplete="off" novalidate>
+          <div class="ring" id="ring">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle class="ring-track" cx="24" cy="24" r="20"/><circle class="ring-fill" id="ringFill" cx="24" cy="24" r="20"/></svg>
+            <span class="pixel" id="clockNum">25</span>
+          </div>
+          <div class="field" id="entry">
+            <label for="guess" class="sr-only">Your answer</label>
+            <input id="guess" name="guess" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="80" placeholder="type an answer">
+            <div class="bar" aria-hidden="true"><i id="barFill"></i></div>
+          </div>
+          <button type="submit" class="btn btn-fly" id="flyBtn">FLY ▲</button>
+        </form>
+        <div class="dock-actions" id="infActions" hidden>
+          <button type="button" class="btn btn-small btn-ghost" id="skipBtn">SKIP (−5s)</button>
+          <button type="button" class="btn btn-small btn-ghost" id="endBtn">END RUN</button>
+        </div>
+      </div>
+    </section>
+
+    <section data-view="between" hidden>
+      <div class="panel reveal" id="reveal">
+        <canvas class="art" id="lastIcon" width="24" height="20" aria-hidden="true"></canvas>
+        <p class="eyebrow" id="lastRoundLabel"></p>
+        <h1 class="tier-name pixel" id="lastBadge" tabindex="-1"></h1>
+        <p class="reveal-answer" id="lastAnswer"></p>
+        <p class="reveal-points pixel" id="lastPoints"></p>
+        <p class="reveal-quip" id="lastNote"></p>
+        <p class="muted small" id="lastPrompt"></p>
+        <button type="button" class="btn btn-big" id="nextBtn">CLIMB ▲</button>
+        <p class="muted small" id="nextLabel"></p>
+        <p class="sr-only" id="runningScore"></p>
       </div>
     </section>
 
     <section data-view="results" hidden>
-      <div class="card summit">
-        <p class="eyebrow">Daily flight · <span id="resDate"></span></p>
-        <h1 tabindex="-1" id="resBand"></h1>
-        <p class="lede" id="resBlurb"></p>
-        <div class="summit-grid">
-          <div class="flight-slot" data-slot="results"></div>
-          <div>
-            <dl class="numbers">
-              <div><dt>Score</dt><dd id="resScore"></dd></div>
-              <div><dt>Altitude above Tech Tower</dt><dd id="resAlt"></dd></div>
-            </dl>
-            <ol class="ladder" id="ladder" aria-label="Altitude bands"></ol>
-          </div>
-        </div>
-      </div>
+      <div class="panel results">
+        <p class="eyebrow">FLIGHT #<span id="resFlight"></span> · <span id="resDate"></span></p>
+        <h1 class="pixel band" tabindex="-1" id="resBand"></h1>
+        <p id="resBlurb"></p>
+        <dl class="numbers">
+          <div><dt>Score</dt><dd class="pixel" id="resScore"></dd></div>
+          <div><dt>Final altitude</dt><dd class="pixel" id="resAlt"></dd></div>
+        </dl>
 
-      <div class="card">
-        <h2>Share your flight</h2>
-        <label for="shareBox" class="sr-only">Share text</label>
-        <textarea id="shareBox" class="share" rows="5" readonly></textarea>
-        <div class="row">
-          <button type="button" class="btn btn-primary" id="copyBtn">Copy result</button>
-          <p class="feedback" id="copyStatus" role="status" aria-live="polite"></p>
-        </div>
-        <p class="muted small">One square per round, coloured by rarity. No answers are revealed.</p>
-      </div>
+        <h2 class="pixel">FLIGHT LOG</h2>
+        <ol class="log" id="flightLog" aria-label="Each round's tier, drawn at its height"></ol>
 
-      <div class="card">
-        <h2>Round by round</h2>
+        <h2 class="pixel">BANDS</h2>
+        <ol class="ladder" id="ladder" aria-label="Score bands"></ol>
+
+        <h2 class="pixel">ROUND BY ROUND</h2>
         <ol class="breakdown" id="breakdown"></ol>
-        <details class="spoilers">
-          <summary>Show what the One in a Swarm answers were</summary>
+        <details class="how spoilers">
+          <summary>Show the One in a Swarm answers</summary>
           <ol class="breakdown" id="spoilerList"></ol>
         </details>
-      </div>
 
-      <div class="card center">
-        <p id="resNext">Next flight in <strong class="js-countdown">--:--:--</strong></p>
-        <div class="row row-center">
-          <button type="button" class="btn btn-primary" id="resTodayBtn" hidden>Start today's flight</button>
-          <button type="button" class="btn btn-gold" id="resInfBtn">Play Swarm mode</button>
-          <button type="button" class="btn btn-quiet" id="resHomeBtn">Home</button>
+        <h2 class="pixel">SHARE</h2>
+        <label for="shareBox" class="sr-only">Share text</label>
+        <textarea id="shareBox" class="share" rows="4" readonly></textarea>
+        <div class="row">
+          <button type="button" class="btn" id="copyBtn">COPY RESULT</button>
+          <p class="feedback" id="copyStatus" role="status" aria-live="polite"></p>
         </div>
+
+        <h2 class="pixel">YOUR RECORD</h2>
+        <dl class="stats" id="stats">
+          <div><dt>Streak</dt><dd class="pixel" id="statStreak">0</dd></div>
+          <div><dt>Flights</dt><dd class="pixel" id="statPlayed">0</dd></div>
+          <div><dt>Average</dt><dd class="pixel" id="statAvg">0</dd></div>
+          <div><dt>Best</dt><dd class="pixel" id="statBest">0</dd></div>
+        </dl>
+
+        <p class="muted" id="resNext">Next flight in <strong class="js-countdown">--:--:--</strong></p>
+        <div class="row">
+          <button type="button" class="btn" id="resTodayBtn" hidden>FLY TODAY'S ▲</button>
+          <button type="button" class="btn btn-small btn-ghost" id="resInfBtn">INFINITE MODE</button>
+          <button type="button" class="btn btn-small btn-ghost" id="resHomeBtn">TITLE SCREEN</button>
+        </div>
+        <p class="muted small">Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</p>
       </div>
     </section>
 
     <section data-view="infover" hidden>
-      <div class="card summit center">
-        <p class="eyebrow">Swarm mode</p>
-        <h1 tabindex="-1" id="infTitle"></h1>
-        <div class="flight-slot" data-slot="infover"></div>
-        <dl class="numbers numbers-row">
-          <div><dt>Score</dt><dd id="infScore"></dd></div>
-          <div><dt>Prompts answered</dt><dd id="infCount"></dd></div>
-          <div><dt>Best run</dt><dd id="infBest"></dd></div>
+      <div class="panel results">
+        <p class="eyebrow">INFINITE MODE</p>
+        <h1 class="pixel band" tabindex="-1" id="infTitle"></h1>
+        <dl class="numbers">
+          <div><dt>Score</dt><dd class="pixel" id="infScore"></dd></div>
+          <div><dt>Altitude</dt><dd class="pixel" id="infAlt"></dd></div>
+          <div><dt>Prompts</dt><dd class="pixel" id="infCount"></dd></div>
+          <div><dt>Best run</dt><dd class="pixel" id="infBest"></dd></div>
         </dl>
-        <div class="row row-center">
-          <button type="button" class="btn btn-primary btn-big" id="infAgainBtn">Fly again</button>
-          <button type="button" class="btn btn-quiet" id="infHomeBtn">Home</button>
+        <div class="row">
+          <button type="button" class="btn" id="infAgainBtn">FLY AGAIN ▲</button>
+          <button type="button" class="btn btn-small btn-ghost" id="infHomeBtn">TITLE SCREEN</button>
         </div>
-      </div>
-      <div class="card" id="infLogCard">
-        <h2>This run</h2>
-        <ol class="breakdown" id="infLog"></ol>
+        <div id="infLogCard">
+          <h2 class="pixel">THIS RUN</h2>
+          <ol class="breakdown" id="infLog"></ol>
+        </div>
       </div>
     </section>
   </main>
 
-  <dialog id="howDlg" aria-labelledby="howTitle">
-    <h2 id="howTitle">How to play</h2>
-    <ul class="rules">
-      <li><strong>Daily flight:</strong> seven prompts, the same for everyone, new at 00:00 UTC. You get 25 seconds a round.</li>
-      <li>A correct answer ends the round. A wrong one costs 3 seconds, and you keep guessing.</li>
-      <li><strong>Rarer is better.</strong> The obvious answer scores 10. The answer everyone thinks is clever scores 15. The one hidden One in a Swarm answer scores 100.</li>
-      <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, and common short names count (CULC is Clough).</li>
-      <li>The better you do, the higher you fly: off the lawn, past the skyline, through the clouds and out among the stars. Sound effects can be switched off with the speaker button.</li>
-      <li><strong>Swarm mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3 seconds, a skip costs 5.</li>
-    </ul>
-    <p class="muted small">Rarity tiers are editorial guesses, not measured from real players. Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</p>
-    <form method="dialog"><button class="btn btn-primary" id="howClose">Got it</button></form>
-  </dialog>
-
-  <footer class="foot">
-    <p id="footText">Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.</p>
-  </footer>
-
   <script src="js/core.js"></script>
+  <script src="js/facts.js"></script>
   <script src="js/sfx.js"></script>
+  <script src="js/scene.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

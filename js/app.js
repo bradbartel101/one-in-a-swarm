@@ -1,9 +1,12 @@
-/* One in a Swarm — the DOM layer. All game rules live in core.js. */
+/* One in a Swarm — the presentation layer. Game rules live in core.js, the world in scene.js.
+   This file moves the camera, runs the round pacing, and keeps the DOM in step. */
 (function () {
   'use strict';
 
   const C = window.SwarmCore;
   const Sfx = window.SwarmSfx;
+  const Scene = window.SwarmScene;
+  const FACTS = window.SwarmFacts;
   const $ = (id) => document.getElementById(id);
 
   // Storage keys are stable; the payloads carry their own version (C.SAVE_VERSION).
@@ -11,11 +14,26 @@
   const K_BEST = 'swarm.infinite.best';
   const K_SEEN = 'swarm.seenHowTo';
   const K_SOUND = 'swarm.sound';
-  const PX_PER_FOOT = 0.78; // how far the sky scrolls per foot climbed (matches the marks in index.html)
-  const SKY_TOP_FEET = 3050; // the painted sky ends here; the altitude readout keeps counting
-  const CLIMB_MS = 1800;
+  const K_SCAN = 'swarm.scanlines';
+  const K_STATS = 'swarm.stats';
   const TICK_MS = 100;
-  const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from starting the next round
+  const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from skipping the reveal card
+  const LIFTOFF_MS = 2000;
+  const WRONG_LOCK_MS = 400;
+  const GLIDE_MS = 900; // the short climb used in infinite mode
+  const HOVER = 6; // on the title screen the bee idles this many points above the lawn
+  const LINE_NAMES = { common: 'COMMON', clever: 'CLEVER', solid: 'SOLID', rare: 'RARE', deep: 'DEEP CUT', swarm: 'SWARM' };
+
+  // Small 8x8 marks, one per tier, so a tier is never told apart by colour alone.
+  const MARKS = {
+    common: ['........', '..####..', '.######.', '.######.', '.######.', '.######.', '..####..', '........'],
+    clever: ['........', '........', '.##..##.', '#..##..#', '#..##..#', '.##..##.', '........', '........'],
+    solid: ['........', '...##...', '...##...', '........', '.##..##.', '.##..##.', '........', '........'],
+    rare: ['...##...', '...##...', '..####..', '########', '########', '..####..', '...##...', '...##...'],
+    deep: ['........', '.######.', '########', '.######.', '..####..', '...##...', '........', '........'],
+    swarm: ['.#....#.', '..#..#..', '.######.', '##.##.##', '########', '.######.', '..####..', '........'],
+    miss: ['........', '..####..', '.#....#.', '.#....#.', '.#....#.', '.#....#.', '..####..', '........'],
+  };
 
   // localStorage can throw (private mode, blocked site data, quota). The game must run without it.
   const store = {
@@ -51,23 +69,30 @@
 
   let prompts = [];
   let byId = {};
-  let knownIds = new Set();
+  const knownIds = new Set();
   let daily = null;
   let stale = false; // true while `daily` is yesterday's unfinished run
-  let monoAt = 0;
-  let lastSavedSecond = -1;
   let inf = null;
   let bestAtStart = null;
-  let mode = null; // 'daily' | 'infinite' while the play view is live
-  let loop = null;
-  let lastTick = 0;
-  let lastAnnounced = 0;
-  let betweenShownAt = 0;
+  let mode = null; // 'daily' | 'infinite' while a clock is live
   let view = 'loading';
-  let sceneFeet = 0;
-  let sceneAnim = 0;
+  let loop = null;
+  let monoAt = 0;
+  let lastTick = 0;
+  let lastSavedSecond = -1;
+  let lastAnnounced = 0;
   let lastTickSecond = 0;
-  let justEnded = false; // a round ended in this page session (as opposed to a reload)
+  let revealShownAt = 0;
+  let introTimer = 0;
+  let lockUntil = 0;
+
+  let scene = null;
+  let cam = 0; // the score the camera sits on
+  let anim = null; // { from, to, start, ms, done, lines }
+  let anchor = 0.78;
+  let anchorTarget = 0.78;
+  let shownAlt = -1;
+  let tierColors = {};
 
   /* ---------- small helpers ---------- */
 
@@ -78,15 +103,23 @@
     return node;
   }
 
+  function reducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+
+  function setPhase(name) {
+    document.body.dataset.phase = name;
+  }
+
   function show(name, focusTarget) {
     view = name;
     document.querySelectorAll('[data-view]').forEach((s) => {
       s.hidden = s.getAttribute('data-view') !== name;
     });
-    document.body.classList.toggle('playing', name === 'play');
-    const slot = document.querySelector('[data-view="' + name + '"] .flight-slot');
-    if (slot && $('flight').parentNode !== slot) slot.appendChild($('flight'));
-    window.scrollTo(0, 0);
+    document.body.classList.toggle('playing', name === 'play' || name === 'between');
+    $('hud').hidden = !(name === 'play' || name === 'between');
+    if (name !== 'play' && name !== 'between') window.scrollTo(0, 0);
+    aimCamera();
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
 
@@ -95,19 +128,86 @@
   }
 
   function prettyDate(key) {
-    const d = new Date(key + 'T00:00:00Z');
-    return d.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
+    return new Date(key + 'T00:00:00Z').toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function feet(score) {
+    return C.formatNumber(C.altitudeFeet(score)) + ' ft';
+  }
+
+  function tierLabel(tier) {
+    return tier ? C.TIERS[tier].label : 'Missed';
+  }
+
+  function pipIcon(tier) {
+    const key = tier || 'miss';
+    const c = el('canvas', 'pip-icon');
+    c.width = 8;
+    c.height = 8;
+    const g = c.getContext('2d');
+    g.fillStyle = tierColors[key];
+    g.fillRect(0, 0, 8, 8);
+    Scene.stamp(g, MARKS[key], 0, 0, { '#': key === 'miss' ? '#ffffff' : '#00213d' });
+    return c;
   }
 
   function badge(tier) {
-    const b = el('span', 'badge tier-' + (tier || 'miss'), tier ? C.TIERS[tier].label : 'Missed');
+    const b = el('span', 'badge tier-' + (tier || 'miss'));
+    b.appendChild(pipIcon(tier));
+    b.appendChild(el('span', '', tierLabel(tier)));
     return b;
+  }
+
+  // The larger artwork on the reveal card: one bee, a studious bee, a small swarm, and so on.
+  function drawTierArt(canvas, tier) {
+    const g = canvas.getContext('2d');
+    const bee = { b: '#d9b84a', k: '#00213d', w: '#f4f9ff', e: '#ffffff' };
+    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', e: '#ffffff' };
+    const box = (x, y, w, h, color) => {
+      g.fillStyle = color;
+      g.fillRect(x, y, w, h);
+    };
+    g.clearRect(0, 0, 24, 20);
+    if (!tier) {
+      Scene.stamp(g, MARKS.miss.map((r) => r.replace(/#/g, 'm')), 8, 6, { m: '#8c96a3' });
+      return;
+    }
+    if (tier === 'swarm') {
+      box(0, 0, 24, 20, 'rgba(255, 210, 63, 0.28)');
+      [[9, 6], [7, 10], [6, 12], [6, 12], [7, 10], [9, 6]].forEach((row, i) => {
+        box(row[0], 3 + i * 2, row[1], 2, '#ffd23f');
+        box(row[0], 4 + i * 2, row[1], 1, '#c98f00');
+      });
+      box(11, 12, 2, 3, '#3a2f00');
+      Scene.stamp(g, Scene.MINI, 0, 2, gold);
+      Scene.stamp(g, Scene.MINI, 19, 5, gold);
+      Scene.stamp(g, Scene.MINI, 2, 14, gold);
+      return;
+    }
+    if (tier === 'solid') {
+      [[1, 3], [10, 1], [17, 7], [6, 11], [14, 14]].forEach((p) => Scene.stamp(g, Scene.MINI, p[0], p[1], bee));
+      return;
+    }
+    Scene.stamp(g, Scene.BEE, 4, 6, bee);
+    if (tier === 'clever') { // spectacles
+      box(11, 9, 4, 1, '#ffffff'); box(11, 12, 4, 1, '#ffffff'); box(11, 9, 1, 4, '#ffffff'); box(14, 9, 1, 4, '#ffffff');
+      box(16, 9, 4, 1, '#ffffff'); box(16, 12, 4, 1, '#ffffff'); box(16, 9, 1, 4, '#ffffff'); box(19, 9, 1, 4, '#ffffff');
+      box(15, 10, 1, 1, '#ffffff');
+    } else if (tier === 'rare') { // a star overhead
+      box(19, 0, 1, 5, '#ffd23f'); box(17, 2, 5, 1, '#ffd23f'); box(18, 1, 3, 3, '#fff7d1');
+    } else if (tier === 'deep') { // carrying a gem
+      box(17, 14, 5, 1, '#d68ac0'); box(16, 15, 7, 1, '#e9b3da'); box(17, 16, 5, 1, '#d68ac0'); box(18, 17, 3, 1, '#b2639b'); box(19, 18, 1, 1, '#b2639b');
+    }
   }
 
   function setFeedback(text, kind) {
     const f = $('feedback');
     f.className = 'feedback' + (kind ? ' ' + kind : '');
     f.textContent = text;
+  }
+
+  function announce(text) {
+    $('announce').textContent = text;
   }
 
   function shake() {
@@ -117,78 +217,12 @@
     e.classList.add('shake');
   }
 
-  /* ---------- the flight scene ---------- */
-
-  function reducedMotion() {
-    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  }
-
-  function paintScene(feet) {
-    $('flightAlt').textContent = C.formatNumber(Math.round(feet));
-    $('flightZone').textContent = C.bandFor(feet / C.FEET_PER_POINT).name;
-  }
-
-  // Puts the bee at `feet`. With `animate`, the sky scrolls and the readout counts up to it.
-  function setScene(feet, animate) {
-    const flight = $('flight');
-    const world = $('flightWorld');
-    const from = sceneFeet;
-    const moving = animate && feet !== from && !reducedMotion();
-    window.cancelAnimationFrame(sceneAnim);
-    sceneFeet = feet;
-    world.style.transition = moving ? '' : 'none';
-    world.style.transform = 'translateY(' + Math.round(Math.min(feet, SKY_TOP_FEET) * PX_PER_FOOT) + 'px)';
-    flight.classList.remove('stalled');
-    flight.classList.toggle('climbing', moving);
-    if (!moving) {
-      paintScene(feet);
-      return;
-    }
-    Sfx.rise(CLIMB_MS / 1000);
-    const started = performance.now();
-    const step = (now) => {
-      const t = Math.min(1, (now - started) / CLIMB_MS);
-      const eased = 1 - Math.pow(1 - t, 3);
-      paintScene(from + (feet - from) * eased);
-      if (t < 1) sceneAnim = window.requestAnimationFrame(step);
-      else flight.classList.remove('climbing');
-    };
-    sceneAnim = window.requestAnimationFrame(step);
-  }
-
-  function stallScene() {
-    const flight = $('flight');
-    flight.classList.remove('stalled');
-    void flight.offsetWidth; // restart the animation
-    flight.classList.add('stalled');
-  }
-
-  function applySound(on) {
-    Sfx.setEnabled(on);
-    const btn = $('soundBtn');
-    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    btn.setAttribute('aria-label', on ? 'Sound is on. Turn sound off' : 'Sound is off. Turn sound on');
-  }
-
-  function announce(text) {
-    $('announce').textContent = text;
-  }
-
   function saveDaily() {
     if (daily) store.set(K_DAILY, daily);
   }
 
   function getBest() {
     return C.reviveBest(store.get(K_BEST, null));
-  }
-
-  // Charges elapsed time to the live daily round. Wall-clock time covers reloads and device
-  // sleep; the monotonic delta covers a device clock that was changed mid-round.
-  function tickDaily() {
-    const now = performance.now();
-    const mono = now - monoAt;
-    monoAt = now;
-    return C.dailyTick(daily, Date.now(), mono);
   }
 
   function startLoop() {
@@ -202,27 +236,142 @@
     loop = null;
   }
 
+  // Charges elapsed time to the live daily round. Wall-clock time covers reloads and device
+  // sleep; the monotonic delta covers a device clock that was changed mid-round.
+  function tickDaily() {
+    const now = performance.now();
+    const mono = now - monoAt;
+    monoAt = now;
+    return C.dailyTick(daily, Date.now(), mono);
+  }
+
   function renderClock(ms, fullMs, paused) {
     const secs = Math.ceil(ms / 1000);
-    $('clockNum').textContent = String(secs);
+    const frac = Math.max(0, Math.min(1, ms / fullMs));
     const low = ms <= 5000;
-    $('clock').classList.toggle('low', low);
-    const bar = $('barFill').parentNode;
-    bar.classList.toggle('low', low);
-    bar.classList.toggle('paused', !!paused);
-    $('barFill').style.transform = 'scaleX(' + Math.max(0, Math.min(1, ms / fullMs)).toFixed(4) + ')';
-    // Screen readers get the clock at 10 and 5 seconds, not every tick.
+    $('clockNum').textContent = String(secs);
+    $('ring').classList.toggle('low', low);
+    $('ring').classList.toggle('paused', !!paused);
+    $('ringFill').style.strokeDashoffset = (125.66 * (1 - frac)).toFixed(2);
+    $('barFill').parentNode.classList.toggle('low', low);
+    $('barFill').style.transform = 'scaleX(' + frac.toFixed(4) + ')';
     if (mode === 'daily' && secs <= 5 && secs > 0 && secs !== lastTickSecond) {
       lastTickSecond = secs;
       Sfx.tick();
     }
+    // Screen readers get the clock at 10 and 5 seconds, not every tick.
     if ((secs === 10 || secs === 5) && lastAnnounced !== secs) {
       lastAnnounced = secs;
       $('clockLive').textContent = secs + ' seconds left';
     }
   }
 
-  /* ---------- home ---------- */
+  /* ---------- the world: camera, facts, tier lines, the answer tag ---------- */
+
+  // Where the bee sits on screen (0 = top, 1 = bottom) depends on what is covering the view.
+  function aimCamera() {
+    if (!scene) return;
+    const h = window.innerHeight;
+    if (!$('hud').hidden) document.documentElement.style.setProperty('--hud-h', $('hud').offsetHeight + 'px');
+    if (view === 'play') {
+      const top = $('promptCard').getBoundingClientRect().bottom;
+      const bottom = $('dock').getBoundingClientRect().top;
+      anchorTarget = bottom > top + 60 ? (top + bottom) / 2 / h + 0.03 : 0.5;
+    } else if (view === 'between') {
+      anchorTarget = window.innerWidth >= 720 ? 0.55 : Math.max(0.16, ($('reveal').getBoundingClientRect().top / h) * 0.6);
+    } else if (view === 'home') {
+      // The lawn sits at the foot of the gap between the two panels, with the bee hovering above it.
+      const lawn = $('homeGap').getBoundingClientRect().bottom + window.scrollY - 8;
+      anchorTarget = Math.min(0.9, (lawn - (cam > 0 && cam <= HOVER ? cam : 0) * scene.cssPerPoint()) / h);
+    } else {
+      anchorTarget = 0.4;
+    }
+    if (reducedMotion()) anchor = anchorTarget;
+  }
+
+  function layoutWorld() {
+    const per = scene.cssPerPoint();
+    document.documentElement.style.setProperty('--ruler', scene.rulerWidth() + 'px');
+    document.querySelectorAll('#worldLayer [data-score]').forEach((node) => {
+      node.style.top = -Number(node.dataset.score) * per + 'px';
+    });
+  }
+
+  function buildFacts() {
+    const layer = $('worldLayer');
+    FACTS.forEach((f) => {
+      const node = el('p', 'fact', f.text);
+      node.dataset.score = String(C.scoreForFeet(f.feet));
+      layer.appendChild(node);
+    });
+    layoutWorld();
+  }
+
+  function clearClimb() {
+    document.querySelectorAll('#worldLayer .tier-line').forEach((n) => n.remove());
+    $('tag').hidden = true;
+    scene.setDim(0);
+    scene.setMood('idle');
+  }
+
+  // The tier lines above where this round began. Each appears as the answer passes it.
+  function buildTierLines(base, points) {
+    const lines = [];
+    C.TIER_ORDER.forEach((t) => {
+      const tier = C.TIERS[t];
+      if (tier.points > points) return;
+      const node = el('div', 'tier-line');
+      node.style.setProperty('--line', tierColors[t]);
+      node.dataset.score = String(base + tier.points);
+      node.appendChild(el('span', '', LINE_NAMES[t] + ' · ' + tier.points));
+      $('worldLayer').appendChild(node);
+      lines.push({ node, score: base + tier.points });
+    });
+    layoutWorld();
+    return lines;
+  }
+
+  function moveCamera(to, ms, done, lines) {
+    if (reducedMotion() || ms <= 0 || to === cam) {
+      anim = null;
+      cam = to;
+      if (lines) lines.forEach((l) => l.node.classList.add('on'));
+      if (done) done();
+      return;
+    }
+    anim = { from: cam, to, start: performance.now(), ms, done, lines };
+  }
+
+  function frame(now) {
+    if (anim) {
+      const t = (now - anim.start) / anim.ms;
+      if (t >= 1) {
+        const finished = anim;
+        cam = finished.to;
+        anim = null;
+        if (finished.lines) finished.lines.forEach((l) => l.node.classList.add('on'));
+        if (finished.done) finished.done();
+      } else {
+        cam = anim.from + (anim.to - anim.from) * (1 - Math.pow(1 - t, 3)); // fast start, slow settle
+        if (anim.lines) anim.lines.forEach((l) => l.node.classList.toggle('on', cam >= l.score - 0.2));
+      }
+    }
+    anchor += (anchorTarget - anchor) * 0.14;
+    scene.setAnchor(anchor);
+    scene.setCamera(cam);
+    scene.draw(now);
+    $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
+    const tag = $('tag');
+    if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
+    const alt = C.altitudeFeet(cam);
+    if (alt !== shownAlt) {
+      shownAlt = alt;
+      $('hudAlt').textContent = C.formatNumber(alt);
+    }
+    window.requestAnimationFrame(frame);
+  }
+
+  /* ---------- title screen ---------- */
 
   function resolveDaily() {
     const r = C.resolveDaily(daily, today());
@@ -242,25 +391,27 @@
 
   function renderHome() {
     resolveDaily();
+    const flight = C.flightNumber(today());
+    $('flightNo').textContent = 'FLIGHT #' + (stale ? flight - 1 : flight);
     $('todayLabel').textContent = prettyDate(today());
     const btn = $('dailyBtn');
     const status = $('dailyStatus');
     $('skipStaleBtn').hidden = !stale;
     if (!daily || (!stale && !daily.round && !daily.results.length)) {
-      btn.textContent = "Start today's flight";
-      status.textContent = 'The same prompts for every Yellow Jacket, once a day.';
+      btn.textContent = 'BEGIN ASCENT ▲';
+      status.textContent = 'The same seven for every Yellow Jacket, once a day.';
     } else if (daily.finished) {
       const score = C.totalScore(daily.results);
-      btn.textContent = "See today's results";
-      status.textContent = 'Flown: ' + C.formatNumber(score) + ' pts, ' + C.formatNumber(C.altitudeFeet(score)) + ' ft. Come back tomorrow for a new seven.';
+      btn.textContent = "SEE TODAY'S FLIGHT";
+      status.textContent = 'Flown: ' + C.formatNumber(score) + ' pts, ' + feet(score) + '. A new seven tomorrow.';
     } else {
       const which = stale ? "yesterday's flight" : "today's flight";
       if (daily.round) {
-        btn.textContent = 'Back to round ' + (daily.round.index + 1) + ' (clock is running)';
-        status.textContent = 'You have a round in progress in ' + which + '.';
+        btn.textContent = 'BACK TO ROUND ' + (daily.round.index + 1) + ' ▲';
+        status.textContent = 'A round is in progress in ' + which + ', and its clock is running.';
       } else {
-        btn.textContent = (stale ? "Finish yesterday's flight: round " : 'Resume at round ') + (daily.results.length + 1) + ' of ' + C.ROUNDS;
-        status.textContent = C.formatNumber(C.totalScore(daily.results)) + ' pts so far' + (stale ? ". Today's seven unlock when you finish." : '.');
+        btn.textContent = (stale ? "FINISH YESTERDAY'S: ROUND " : 'RESUME AT ROUND ') + (daily.results.length + 1) + ' ▲';
+        status.textContent = C.formatNumber(C.totalScore(daily.results)) + ' pts so far' + (stale ? ". Today's seven unlock when you land." : '.');
       }
     }
     const best = getBest();
@@ -271,24 +422,21 @@
 
   function goHome() {
     if (mode === 'infinite' && inf && !inf.over) return endInfinite();
+    window.clearTimeout(introTimer);
     stopLoop();
     mode = null;
+    clearClimb();
     renderHome();
+    setPhase('home');
     show('home', $('homeTitle'));
-    setScene(daily && !stale ? C.altitudeFeet(C.totalScore(daily.results)) : 0, false);
+    const done = daily && !stale ? daily.results : [];
+    scene.setFollowers(done.filter((r) => r.points).length);
+    moveCamera(C.totalScore(done) || HOVER, 0);
+    aimCamera();
+    anchor = anchorTarget;
   }
 
-  function renderLegend() {
-    const list = $('tierLegend');
-    C.TIER_ORDER.forEach((t) => {
-      const li = el('li');
-      li.appendChild(badge(t));
-      li.appendChild(el('span', 'pts', C.TIERS[t].points + ' pts'));
-      list.appendChild(li);
-    });
-  }
-
-  /* ---------- daily ---------- */
+  /* ---------- daily: pacing ---------- */
 
   function dailyEnter() {
     if (!daily) {
@@ -296,8 +444,9 @@
       saveDaily();
     }
     if (daily.finished) return showResults();
-    if (daily.round) return enterDailyRound();
-    showBetween();
+    if (daily.round) return enterRound(false);
+    if (daily.results.length) return showReveal(false);
+    startIntro();
   }
 
   function startToday() {
@@ -306,74 +455,20 @@
     dailyEnter();
   }
 
-  function showBetween() {
-    stopLoop();
-    mode = null;
-    const done = daily.results.length;
-    const last = daily.results[done - 1];
-    const card = $('lastResult');
-    card.hidden = !last;
-    if (last) {
-      const p = byId[last.promptId];
-      $('lastRoundLabel').textContent = 'Round ' + done + ' of ' + C.ROUNDS;
-      $('lastPrompt').textContent = p.text;
-      const b = $('lastBadge');
-      b.className = 'badge tier-' + (last.tier || 'miss');
-      b.textContent = last.tier ? C.TIERS[last.tier].label : "Time's up";
-      announce('Round ' + done + ': ' + b.textContent + ', ' + (last.answer ? last.answer + ', ' : '') + 'plus ' + last.points + ' points. Total ' + C.totalScore(daily.results) + ' points.');
-      $('lastPoints').textContent = '+' + last.points + ' pts';
-      $('lastAnswer').textContent = last.answer || 'No answer';
-      const bits = [];
-      if (last.note) bits.push(last.note);
-      if (last.fuzzy) bits.push('Close enough on the spelling.');
-      if (last.wrong) bits.push(last.wrong + (last.wrong === 1 ? ' wrong guess' : ' wrong guesses') + ' first.');
-      $('lastNote').textContent = bits.join(' ');
-    }
-    const score = C.totalScore(daily.results);
-    const btn = $('nextBtn');
-    if (daily.finished) {
-      $('nextLabel').textContent = 'Flight complete';
-      $('nextTitle').textContent = 'All seven flown.';
-      $('nextHint').textContent = '';
-      btn.textContent = 'See your altitude';
-    } else {
-      const next = byId[daily.promptIds[done]];
-      $('nextLabel').textContent = 'Round ' + (done + 1) + ' of ' + C.ROUNDS;
-      $('nextTitle').textContent = 'Next up: ' + next.category;
-      $('nextHint').textContent = '25 seconds. A wrong guess costs 3. The clock starts when you press the button.';
-      btn.textContent = done === 0 ? 'Start round 1' : 'Start round ' + (done + 1);
-    }
-    $('runningScore').textContent = done ? C.formatNumber(score) + ' pts · ' + C.formatNumber(C.altitudeFeet(score)) + ' ft so far' : '';
-    betweenShownAt = Date.now();
-    show('between', btn);
-    // Start from where the bee was before this round, then climb to the new total.
-    const climbed = justEnded && last ? last.points : 0;
-    setScene(C.altitudeFeet(score - climbed), false);
-    if (climbed) window.requestAnimationFrame(() => setScene(C.altitudeFeet(score), true));
-    else if (justEnded) stallScene();
-    justEnded = false;
-  }
-
-  function onNext() {
-    if (Date.now() - betweenShownAt < NEXT_GUARD_MS) return;
-    if (daily.finished) return showResults();
-    C.startRound(daily, Date.now());
-    monoAt = performance.now();
-    saveDaily();
-    Sfx.start();
-    enterDailyRound();
-  }
-
   function renderPips() {
     const pips = $('pips');
     pips.textContent = '';
+    const current = daily.round ? daily.round.index : daily.results.length;
     for (let i = 0; i < C.ROUNDS; i++) {
       const li = el('li');
       const r = daily.results[i];
       if (r) {
-        li.className = 'tier-' + (r.tier || 'miss');
-        li.textContent = String(r.points); // the number, so rarity is not shown by colour alone
-      } else if (daily.round && daily.round.index === i) li.className = 'now';
+        li.className = 'done';
+        li.dataset.tier = r.tier || 'miss'; // the mark inside carries the tier, not just the colour
+        li.appendChild(pipIcon(r.tier));
+      } else if (i === current) {
+        li.className = 'now';
+      }
       pips.appendChild(li);
     }
   }
@@ -384,56 +479,235 @@
     items.forEach((t) => list.appendChild(el('li', '', t)));
   }
 
-  function enterDailyRound() {
-    mode = 'daily';
-    lastAnnounced = 0;
-    const p = byId[daily.promptIds[daily.round.index]];
+  function renderDailyHud(index) {
+    const score = C.totalScore(daily.results);
     $('pips').hidden = false;
-    $('hud').classList.add('is-daily');
     $('infActions').hidden = true;
-    $('pauseNote').hidden = true;
-    $('hudText').textContent = 'Round ' + (daily.round.index + 1) + ' of ' + C.ROUNDS;
+    $('hudText').textContent = 'Round ' + (index + 1) + ' of ' + C.ROUNDS;
+    $('hudScore').textContent = C.formatNumber(score);
+    const p = byId[daily.promptIds[index]];
     $('cat').textContent = p.category;
     $('promptText').textContent = p.text;
-    $('guess').value = '';
-    $('clockLive').textContent = '';
-    setFeedback('', '');
     renderPips();
-    renderTried(daily.round.tried.map((t) => t.text));
+    scene.setFollowers(daily.results.filter((r) => r.points).length);
+    moveCamera(score, 0);
+  }
+
+  // Prompt slides in, two seconds of "lifting off", then the clock starts.
+  function startIntro() {
+    const index = daily.results.length;
+    mode = null;
+    clearClimb();
+    renderDailyHud(index);
+    renderTried([]);
+    setFeedback('', '');
+    $('guess').value = '';
+    $('guess').readOnly = false;
+    $('clockLive').textContent = '';
+    renderClock(C.ROUND_MS, C.ROUND_MS, true);
+    setPhase('intro');
+    show('play', $('guess'));
+    const card = $('promptCard');
+    card.classList.remove('slide');
+    void card.offsetWidth;
+    card.classList.add('slide');
+    const lift = $('liftoff');
+    lift.hidden = false;
+    let left = LIFTOFF_MS / 1000;
+    const step = () => {
+      if (left <= 0) {
+        lift.hidden = true;
+        C.startRound(daily, Date.now());
+        monoAt = performance.now();
+        saveDaily();
+        Sfx.start();
+        enterRound(true);
+        return;
+      }
+      lift.textContent = 'lifting off · the clock starts in ' + left;
+      left -= 1;
+      introTimer = window.setTimeout(step, 1000);
+    };
+    step();
+    aimCamera();
+  }
+
+  function enterRound(fromIntro) {
+    mode = 'daily';
+    lastAnnounced = 0;
     lastSavedSecond = -1;
     lastTickSecond = 0;
-    renderClock(C.remainingMs(daily, Date.now()), C.ROUND_MS);
+    if (!fromIntro) {
+      clearClimb();
+      renderDailyHud(daily.round.index);
+      $('guess').value = '';
+      $('guess').readOnly = false;
+      $('clockLive').textContent = '';
+      setFeedback('', '');
+      $('liftoff').hidden = true;
+    }
+    renderPips();
+    renderTried(daily.round.tried.map((t) => t.text));
+    renderClock(C.remainingMs(daily, Date.now()), C.ROUND_MS, false);
+    setPhase('guess');
     show('play', $('guess'));
-    setScene(C.altitudeFeet(C.totalScore(daily.results)), false);
     startLoop();
+  }
+
+  function lockInput() {
+    const g = $('guess');
+    lockUntil = performance.now() + WRONG_LOCK_MS;
+    g.readOnly = true;
+    g.select();
+    window.setTimeout(() => {
+      g.readOnly = false;
+      if (view === 'play') g.select();
+    }, WRONG_LOCK_MS);
+  }
+
+  function onWrong(text) {
+    setFeedback('no buzz. try again. −3s', 'bad');
+    shake();
+    lockInput();
+    Sfx.wrong();
+    return text;
+  }
+
+  function onNear(typed, suggestion) {
+    setFeedback("'" + typed.trim().slice(0, 30) + "' → '" + suggestion + "'. submit again to confirm", 'good');
+    $('guess').select();
   }
 
   function dailySubmit(text) {
     const p = byId[daily.promptIds[daily.round.index]];
+    const base = C.totalScore(daily.results);
     const mono = performance.now() - monoAt;
     monoAt = performance.now();
     const r = C.dailyGuess(daily, p, text, Date.now(), mono);
     if (r.status === 'empty') return;
     if (r.status === 'duplicate') {
-      setFeedback('Already tried that one. No time lost.', 'bad');
+      setFeedback('already tried that. no time lost.', 'bad');
       $('guess').select();
       return;
     }
+    if (r.status === 'near') {
+      saveDaily();
+      return onNear(text, r.suggestion);
+    }
     if (r.status === 'wrong') {
       saveDaily();
-      setFeedback('Not on the list. −3 seconds.', 'bad');
       renderTried(daily.round.tried.map((t) => t.text));
-      $('guess').value = '';
-      shake();
-      Sfx.wrong();
+      onWrong(text);
       return;
     }
-    // correct or timeout: the round is over either way
+    stopLoop();
+    mode = null;
     saveDaily();
-    if (r.status === 'correct') Sfx.correct(C.TIER_ORDER.indexOf(r.result.tier));
-    else Sfx.timeout();
-    justEnded = true;
-    showBetween();
+    if (r.status === 'correct') climb(r.result, base);
+    else missed();
+  }
+
+  /* ---------- daily: the climb and the reveal ---------- */
+
+  function climb(result, base) {
+    const tier = C.TIERS[result.tier];
+    $('guess').blur();
+    setPhase('climb');
+    $('hudScore').textContent = C.formatNumber(base + result.points);
+    const tag = $('tag');
+    tag.textContent = result.answer;
+    tag.hidden = false;
+    scene.setMood('happy');
+    anchorTarget = window.innerWidth >= 720 ? 0.55 : 0.5;
+    const lines = buildTierLines(base, result.points);
+    const ms = reducedMotion() ? 0 : tier.climbMs;
+    if (ms) Sfx.rise(ms / 1000);
+    moveCamera(base + result.points, ms, () => {
+      scene.setFollowers(daily.results.filter((x) => x.points).length);
+      if (result.tier === 'swarm') {
+        scene.setMood('gold');
+        if (!reducedMotion()) {
+          scene.burst(performance.now());
+          const flash = $('flash');
+          flash.classList.remove('go');
+          void flash.offsetWidth;
+          flash.classList.add('go');
+        }
+      } else {
+        scene.setMood('idle');
+      }
+      Sfx.correct(C.TIER_ORDER.indexOf(result.tier));
+      // The top answer gets a beat to itself before the card comes up.
+      if (result.tier === 'swarm' && !reducedMotion()) window.setTimeout(() => showReveal(true), 750);
+      else showReveal(true);
+    }, lines);
+  }
+
+  function missed() {
+    $('guess').blur();
+    clearClimb();
+    scene.setMood('sad');
+    scene.setDim(0.45);
+    if (!reducedMotion()) {
+      document.body.classList.remove('shake');
+      void document.body.offsetWidth;
+      document.body.classList.add('shake');
+    }
+    Sfx.timeout();
+    showReveal(true);
+  }
+
+  // The card for the round just finished. `fresh` is false after a reload, when nothing replays.
+  function showReveal(fresh) {
+    stopLoop();
+    mode = null;
+    const done = daily.results.length;
+    const last = daily.results[done - 1];
+    const score = C.totalScore(daily.results);
+    const p = byId[last.promptId];
+    const card = $('reveal');
+    card.className = 'panel reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
+    card.style.setProperty('--tier', last.tier ? tierColors[last.tier] : '#c3ccd6');
+    drawTierArt($('lastIcon'), last.tier);
+    $('lastRoundLabel').textContent = 'Round ' + done + ' of ' + C.ROUNDS;
+    $('lastBadge').textContent = last.tier ? C.TIERS[last.tier].label.toUpperCase() : 'NOTHING LANDED';
+    $('lastAnswer').textContent = last.tier ? last.answer : 'the clock beat you.';
+    const gained = C.altitudeFeet(score) - C.altitudeFeet(score - last.points);
+    $('lastPoints').textContent = last.tier ? '+' + last.points + ' PTS · climb ' + C.formatNumber(gained) + ' ft' : '+0 PTS · holding at ' + feet(score);
+    const bits = [];
+    if (last.tier) bits.push(C.TIERS[last.tier].quip);
+    if (last.note) bits.push(last.note);
+    if (last.wrong) bits.push(last.wrong + (last.wrong === 1 ? ' wrong guess first.' : ' wrong guesses first.'));
+    $('lastNote').textContent = bits.join(' ');
+    $('lastPrompt').textContent = p.text;
+    const btn = $('nextBtn');
+    if (daily.finished) {
+      btn.textContent = 'LAND ▼';
+      $('nextLabel').textContent = 'Flight complete.';
+    } else {
+      btn.textContent = 'CLIMB ▲';
+      $('nextLabel').textContent = 'Next: round ' + (done + 1) + ' of ' + C.ROUNDS + ' · ' + byId[daily.promptIds[done]].category;
+    }
+    $('runningScore').textContent = C.formatNumber(score) + ' pts · ' + feet(score) + ' so far';
+    announce(last.tier
+      ? 'Round ' + done + ': ' + C.TIERS[last.tier].label + ', ' + last.answer + ', plus ' + last.points + ' points. Total ' + score + ' points, ' + C.altitudeFeet(score) + ' feet.'
+      : "Round " + done + ": time's up. No points. Total " + score + ' points.');
+    if (!fresh) {
+      clearClimb();
+      renderDailyHud(Math.min(done, C.ROUNDS - 1));
+      if (last.tier === 'swarm') scene.setMood('gold');
+    }
+    renderPips();
+    $('hudScore').textContent = C.formatNumber(score);
+    revealShownAt = Date.now();
+    setPhase('reveal');
+    show('between', btn);
+  }
+
+  function onNext() {
+    if (Date.now() - revealShownAt < NEXT_GUARD_MS) return;
+    if (daily.finished) return showResults();
+    startIntro();
   }
 
   /* ---------- results ---------- */
@@ -453,20 +727,35 @@
 
   function showResults() {
     stopLoop();
+    window.clearTimeout(introTimer);
     mode = null;
+    clearClimb();
     const score = C.totalScore(daily.results);
     const band = C.bandFor(score);
+    $('resFlight').textContent = String(C.flightNumber(daily.date));
     $('resDate').textContent = prettyDate(daily.date);
-    $('resBand').textContent = band.name;
+    $('resBand').textContent = band.name.toUpperCase();
     $('resBlurb').textContent = band.blurb;
     $('resScore').textContent = C.formatNumber(score) + ' pts';
-    $('resAlt').textContent = C.formatNumber(C.altitudeFeet(score)) + ' ft';
+    $('resAlt').textContent = feet(score);
+
+    // Flight log: each round's mark at the height its tier earned, on a stem from the ground.
+    const log = $('flightLog');
+    log.textContent = '';
+    daily.results.forEach((r, i) => {
+      const li = el('li');
+      li.setAttribute('aria-label', 'Round ' + (i + 1) + ': ' + tierLabel(r.tier) + ', ' + r.points + ' points');
+      li.appendChild(pipIcon(r.tier));
+      const stem = el('span', 'stem');
+      stem.style.height = (r.points / C.TIERS.swarm.points) * 130 + 'px';
+      li.appendChild(stem);
+      li.appendChild(el('span', 'round', String(i + 1)));
+      log.appendChild(li);
+    });
 
     const ladder = $('ladder');
     ladder.textContent = '';
-    C.BANDS.forEach((b) => {
-      ladder.appendChild(el('li', b === band ? 'on' : '', C.formatNumber(C.altitudeFeet(b.min)) + ' ft · ' + b.name));
-    });
+    C.BANDS.forEach((b) => ladder.appendChild(el('li', b === band ? 'on' : '', b.min + '+ pts · ' + b.name)));
 
     const list = $('breakdown');
     const spoilers = $('spoilerList');
@@ -475,26 +764,34 @@
     daily.results.forEach((r, i) => {
       const p = byId[r.promptId];
       list.appendChild(resultRow(i + 1, p.text, r.answer || 'No answer', r.tier, r.points));
-      const top = p.answers.filter((a) => a.tier === 'swarm')[0];
-      spoilers.appendChild(resultRow(i + 1, p.text, top.name, 'swarm', null));
+      spoilers.appendChild(resultRow(i + 1, p.text, p.answers.filter((a) => a.tier === 'swarm')[0].name, 'swarm', null));
     });
 
     const here = window.location;
     const url = /^https?:$/.test(here.protocol) ? here.origin + here.pathname.replace(/index\.html$/, '') : '';
     $('shareBox').value = C.shareText(daily.date, daily.results, url);
     $('copyStatus').textContent = '';
+
+    // Lifetime record. Recording the same date twice changes nothing.
+    const stats = C.recordFlight(C.reviveStats(store.get(K_STATS, null)), daily.date, score);
+    store.set(K_STATS, stats);
+    $('statStreak').textContent = String(C.currentStreak(stats, today()));
+    $('statPlayed').textContent = String(stats.played);
+    $('statAvg').textContent = String(Math.round(stats.total / stats.played));
+    $('statBest').textContent = String(stats.best);
+
     // After finishing yesterday's run past midnight UTC, today's is already open.
     const todayOpen = daily.date !== today();
     $('resNext').hidden = todayOpen;
     $('resTodayBtn').hidden = !todayOpen;
-    announce('Final score ' + score + ' points, ' + C.altitudeFeet(score) + ' feet above Tech Tower. ' + band.name + '.');
+    announce('Final score ' + score + ' points, ' + C.altitudeFeet(score) + ' feet up. ' + band.name + '.');
+    setPhase('results');
     show('results', $('resBand'));
+    scene.setFollowers(daily.results.filter((r) => r.points).length);
+    moveCamera(score, 0);
     const box = $('shareBox'); // grow the box to its text so no line is cut off on narrow screens
     box.style.height = 'auto';
-    box.style.height = box.scrollHeight + 4 + 'px';
-    // Replay the whole climb from the lawn.
-    setScene(0, false);
-    if (score) window.requestAnimationFrame(() => setScene(C.altitudeFeet(score), true));
+    box.style.height = box.scrollHeight + 6 + 'px';
     Sfx.fanfare(C.BANDS.indexOf(band));
   }
 
@@ -520,11 +817,8 @@
         status.textContent = 'Could not copy automatically. The text is selected, so copy it by hand.';
       }
     };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(box.value).then(done, fallback);
-    } else {
-      fallback();
-    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(box.value).then(done, fallback);
+    else fallback();
   }
 
   /* ---------- infinite ---------- */
@@ -535,27 +829,33 @@
 
   function renderInfinite() {
     const p = infPrompt();
-    $('hudText').textContent = C.formatNumber(inf.score) + ' pts · prompt ' + (inf.answered + 1);
+    $('hudText').textContent = 'Prompt ' + (inf.answered + 1);
+    $('hudScore').textContent = C.formatNumber(inf.score);
     $('cat').textContent = p.category;
     $('promptText').textContent = p.text;
     renderTried([]);
   }
 
   function startInfinite() {
+    window.clearTimeout(introTimer);
     inf = C.newInfinite(C.shuffle(prompts.map((p) => p.id), Math.random));
     bestAtStart = getBest();
     mode = 'infinite';
     lastAnnounced = 0;
+    clearClimb();
     $('pips').hidden = true;
-    $('hud').classList.remove('is-daily');
     $('infActions').hidden = false;
+    $('liftoff').hidden = true;
     $('guess').value = '';
+    $('guess').readOnly = false;
     $('clockLive').textContent = '';
     setFeedback('', '');
     renderInfinite();
     renderClock(inf.clockMs, C.INFINITE_START_MS, false);
+    scene.setFollowers(0);
+    moveCamera(0, 0);
+    setPhase('guess');
     show('play', $('guess'));
-    setScene(0, false);
     Sfx.start();
     startLoop();
   }
@@ -569,23 +869,22 @@
     const r = C.infiniteGuess(inf, infPrompt() || {}, text);
     if (r.status === 'empty' || r.status === 'idle') return;
     if (r.status === 'duplicate') {
-      setFeedback('Already tried that one. No time lost.', 'bad');
+      setFeedback('already tried that. no time lost.', 'bad');
       $('guess').select();
       return;
     }
+    if (r.status === 'near') return onNear(text, r.suggestion);
     if (r.status === 'wrong') {
-      setFeedback('Not on the list. −3 seconds.', 'bad');
-      $('guess').value = '';
-      shake();
-      Sfx.wrong();
+      onWrong(text);
       if (inf.over) endInfinite();
       return;
     }
-    Sfx.correct(C.TIER_ORDER.indexOf(r.answer.tier));
-    setScene(C.altitudeFeet(inf.score), true);
     $('guess').value = '';
     lastAnnounced = 0;
     setFeedback(r.answer.name + ': ' + C.TIERS[r.answer.tier].label + ', +' + r.points + ' pts, +' + r.bonusMs / 1000 + 's', 'good');
+    Sfx.correct(C.TIER_ORDER.indexOf(r.answer.tier));
+    scene.setFollowers(inf.answered);
+    moveCamera(inf.score, GLIDE_MS);
     saveBest();
     if (inf.over) return endInfinite();
     renderInfinite();
@@ -603,8 +902,9 @@
     const best = bestAtStart;
     saveBest();
     const isBest = inf.score > 0 && (!best || inf.score > best.score);
-    $('infTitle').textContent = inf.cleared ? 'You emptied the hive.' : isBest ? 'New best run.' : 'Out of air.';
+    $('infTitle').textContent = inf.cleared ? 'YOU EMPTIED THE HIVE' : isBest ? 'NEW BEST RUN' : 'OUT OF AIR';
     $('infScore').textContent = C.formatNumber(inf.score) + ' pts';
+    $('infAlt').textContent = feet(inf.score);
     $('infCount').textContent = String(inf.answered);
     $('infBest').textContent = C.formatNumber(Math.max(best ? best.score : 0, inf.score)) + ' pts';
     announce('Run over. ' + inf.score + ' points across ' + inf.answered + ' prompts.');
@@ -612,21 +912,22 @@
     list.textContent = '';
     inf.log.forEach((r, i) => list.appendChild(resultRow(i + 1, byId[r.promptId].text, r.answer, r.tier, r.points)));
     $('infLogCard').hidden = inf.log.length === 0;
+    setPhase('infover');
     show('infover', $('infTitle'));
-    setScene(C.altitudeFeet(inf.score), false);
+    moveCamera(inf.score, 0);
     if (inf.cleared) Sfx.fanfare(4);
     else Sfx.timeout();
   }
 
-  /* ---------- clock ---------- */
+  /* ---------- clocks ---------- */
 
   function tick() {
     if (mode === 'daily') {
       if (tickDaily()) {
+        stopLoop();
+        mode = null;
         saveDaily();
-        Sfx.timeout();
-        justEnded = true;
-        showBetween();
+        missed();
         return;
       }
       const left = daily.round.leftMs;
@@ -641,25 +942,61 @@
       const dt = now - lastTick;
       lastTick = now;
       const draining = C.infiniteTick(inf, dt, infInputState());
-      $('pauseNote').hidden = draining || inf.over;
       renderClock(inf.clockMs, Math.max(C.INFINITE_START_MS, inf.clockMs), !draining);
+      if (!draining && !inf.over && !$('feedback').textContent) setFeedback('clock paused. it runs while the answer box is active.', '');
       if (inf.over) endInfinite();
     }
   }
 
   function everySecond() {
-    const ms = C.msUntilNextUtcDay(Date.now());
-    const s = Math.floor(ms / 1000);
+    const s = Math.floor(C.msUntilNextUtcDay(Date.now()) / 1000);
     const pad = (n) => String(n).padStart(2, '0');
     const text = pad(Math.floor(s / 3600)) + ':' + pad(Math.floor((s % 3600) / 60)) + ':' + pad(s % 60);
     document.querySelectorAll('.js-countdown').forEach((n) => {
       n.textContent = text;
     });
     if (view === 'home') {
-      // Catch a round timing out, or the UTC day rolling over, while the player sits on the home screen.
+      // Catch a round timing out, or the UTC day rolling over, while the player sits on the title screen.
       if (daily && tickDaily()) saveDaily();
       renderHome();
     }
+  }
+
+  /* ---------- settings ---------- */
+
+  function applySound(on) {
+    Sfx.setEnabled(on);
+    const btn = $('soundBtn');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Sound is on. Turn sound off' : 'Sound is off. Turn sound on');
+  }
+
+  function applyScan(on) {
+    document.body.classList.toggle('no-scan', !on);
+    const btn = $('scanBtn');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Scanlines are on. Turn scanlines off' : 'Scanlines are off. Turn scanlines on');
+  }
+
+  // Keeps the answer bar above the on-screen keyboard where the browser does not resize the page.
+  function trackKeyboard() {
+    const vv = window.visualViewport;
+    const update = () => {
+      const hidden = vv ? Math.max(0, window.innerHeight - vv.height - vv.offsetTop) : 0;
+      document.documentElement.style.setProperty('--kb', Math.round(hidden) + 'px');
+      document.body.classList.toggle('tight', (vv ? vv.height : window.innerHeight) < 440);
+      aimCamera();
+    };
+    if (vv) {
+      vv.addEventListener('resize', update);
+      vv.addEventListener('scroll', update);
+    }
+    window.addEventListener('resize', () => {
+      scene.resize();
+      layoutWorld();
+      update();
+    });
+    update();
   }
 
   /* ---------- wiring ---------- */
@@ -678,20 +1015,21 @@
     $('retryBtn').addEventListener('click', () => window.location.reload());
     $('skipStaleBtn').addEventListener('click', startToday);
     $('resTodayBtn').addEventListener('click', startToday);
-    // Bank the clock before the page is hidden or unloaded.
-    const bank = () => {
-      if (daily && daily.round) {
-        const ended = tickDaily();
-        saveDaily();
-        if (ended && view === 'play') showBetween();
-      }
-    };
-    document.addEventListener('visibilitychange', bank);
-    window.addEventListener('pagehide', bank);
+    $('soundBtn').addEventListener('click', () => {
+      const on = !Sfx.isEnabled();
+      applySound(on);
+      store.set(K_SOUND, { v: C.SAVE_VERSION, on });
+      if (on) Sfx.start();
+    });
+    $('scanBtn').addEventListener('click', () => {
+      const on = document.body.classList.contains('no-scan');
+      applyScan(on);
+      store.set(K_SCAN, { v: C.SAVE_VERSION, on });
+    });
     $('skipBtn').addEventListener('click', () => {
       C.infiniteSkip(inf);
       $('guess').value = '';
-      setFeedback('Skipped. −5 seconds.', 'bad');
+      setFeedback('skipped. −5s', 'bad');
       Sfx.skip();
       if (inf.over) return endInfinite();
       renderInfinite();
@@ -700,35 +1038,48 @@
     $('guessForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const text = $('guess').value;
-      if (mode === 'daily' && daily && daily.round) dailySubmit(text);
-      else if (mode === 'infinite' && inf) infSubmit(text);
-      if (view === 'play') $('guess').focus();
+      if (document.body.dataset.phase === 'intro') {
+        setFeedback('hold on. still lifting off.', '');
+      } else if (performance.now() < lockUntil) {
+        return;
+      } else if (mode === 'daily' && daily && daily.round) {
+        dailySubmit(text);
+      } else if (mode === 'infinite' && inf) {
+        infSubmit(text);
+      }
+      if (view === 'play' && document.body.dataset.phase !== 'climb') $('guess').focus();
     });
-    $('howBtn').addEventListener('click', openHowTo);
-    $('soundBtn').addEventListener('click', () => {
-      const on = !Sfx.isEnabled();
-      applySound(on);
-      store.set(K_SOUND, { v: C.SAVE_VERSION, on });
-      if (on) Sfx.start();
-    });
-    $('howClose').addEventListener('click', () => {
-      const dlg = $('howDlg');
-      if (typeof dlg.close !== 'function') dlg.removeAttribute('open');
-    });
-  }
-
-  function openHowTo() {
-    const dlg = $('howDlg');
-    if (dlg.open) return;
-    if (typeof dlg.showModal === 'function') dlg.showModal();
-    else dlg.setAttribute('open', '');
+    // Bank the clock before the page is hidden or unloaded.
+    const bank = () => {
+      if (daily && daily.round) {
+        const ended = tickDaily();
+        saveDaily();
+        if (ended && mode === 'daily') {
+          stopLoop();
+          mode = null;
+          missed();
+        }
+      }
+    };
+    document.addEventListener('visibilitychange', bank);
+    window.addEventListener('pagehide', bank);
   }
 
   function boot() {
+    const css = window.getComputedStyle(document.documentElement);
+    C.TIER_ORDER.concat('miss').forEach((t) => {
+      tierColors[t] = css.getPropertyValue('--t-' + t).trim();
+    });
+    scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, reducedMotion });
     wire();
-    renderLegend();
     const sound = store.get(K_SOUND, null);
-    applySound(!(sound && sound.on === false));
+    applySound(!!(sound && sound.on === true)); // off until the player turns it on
+    const scan = store.get(K_SCAN, null);
+    applyScan(!(scan && scan.on === false));
+    buildFacts();
+    trackKeyboard();
+    window.requestAnimationFrame(frame);
+
     fetch('data/prompts.json')
       .then((res) => {
         if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -746,14 +1097,14 @@
         everySecond();
         window.setInterval(everySecond, 1000);
         // A refresh mid-run lands back where the player was.
-        if (daily && daily.round) enterDailyRound();
-        else if (daily && !daily.finished && daily.results.length) showBetween();
+        if (daily && daily.round) enterRound(false);
+        else if (daily && !daily.finished && daily.results.length) showReveal(false);
         else if (daily && daily.finished) showResults();
         else {
           goHome();
           if (!store.get(K_SEEN, null)) {
             store.set(K_SEEN, { v: C.SAVE_VERSION });
-            openHowTo();
+            $('howDlg').open = true; // rules open on a first visit only
           }
         }
       })
@@ -762,6 +1113,7 @@
           ? 'This page was opened straight from a file, and browsers block the game data that way. Serve the folder over HTTP instead (for example: npx serve .).'
           : 'The game data did not load. Check your connection and try again.';
         $('errorDetail').textContent = 'Details: ' + (err && err.message ? err.message : 'unknown error');
+        setPhase('error');
         show('error', $('retryBtn'));
       });
   }

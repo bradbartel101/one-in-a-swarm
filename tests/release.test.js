@@ -252,7 +252,8 @@ test('A8: empty, enormous, emoji and markup input are all handled', () => {
   assert.equal(name(buildings, 'klaus '.repeat(50000)), null);
   assert.ok(Date.now() - started < 2000, 'huge input is rejected quickly');
   for (const s of ['<script>alert(1)</script>', '<img src=x onerror=alert(1)>', '"><b>Klaus', "'; DROP TABLE answers;--"]) {
-    assert.equal(name(buildings, s), null, s);
+    const m = C.matchAnswer(buildings, s);
+    assert.ok(!m.answer || m.fuzzy, s + ' must never be accepted outright');
   }
   assert.equal(name(buildings, '<b>Klaus</b>'), null, 'tags are not silently stripped into a match');
 });
@@ -333,4 +334,42 @@ test('B2: best-run saves are validated too', () => {
   for (const bad of [null, 'x', { score: 5, answered: 1 }, { v: 1, score: 5, answered: 1 }, { v: C.SAVE_VERSION, score: -1, answered: 1 }, { v: C.SAVE_VERSION, score: 1.5, answered: 1 }, { v: C.SAVE_VERSION, score: '9', answered: 1 }]) {
     assert.equal(C.reviveBest(bad), null, JSON.stringify(bad));
   }
+});
+
+/* ----- near-misses ----- */
+
+test('a near-miss asks for confirmation instead of scoring or costing time', () => {
+  const run = C.newDaily('2026-10-08', [buildings.id].concat(ids.filter((i) => i !== buildings.id).slice(0, 6)));
+  C.startRound(run, 0);
+  const first = C.dailyGuess(run, buildings, 'clugh', 1000);
+  assert.deepEqual(first, { status: 'near', suggestion: 'Clough' });
+  assert.equal(run.round.leftMs, 24000, 'no penalty');
+  assert.equal(run.round.tried.length, 0);
+  assert.equal(run.results.length, 0, 'not scored yet');
+  // survives a save and reload, then the same text confirms it
+  const back = C.reviveDaily(JSON.parse(JSON.stringify(run)), known);
+  const second = C.dailyGuess(back, buildings, 'clugh', 2000);
+  assert.equal(second.status, 'correct');
+  assert.equal(second.result.answer, 'Clough Undergraduate Learning Commons');
+  assert.equal(second.result.fuzzy, true);
+});
+
+test('a different near-miss needs its own confirmation, and exact answers never do', () => {
+  const run = C.newDaily('2026-10-08', [buildings.id].concat(ids.filter((i) => i !== buildings.id).slice(0, 6)));
+  C.startRound(run, 0);
+  assert.equal(C.dailyGuess(run, buildings, 'clugh', 0).status, 'near');
+  assert.equal(C.dailyGuess(run, buildings, 'skilse', 0).status, 'near', 'a second, different near-miss');
+  assert.equal(C.dailyGuess(run, buildings, 'clugh', 0).status, 'near', 'the first one must be offered again');
+  assert.equal(C.dailyGuess(run, buildings, 'Skiles', 0).status, 'correct', 'the exact spelling goes straight through');
+
+  const inf = C.newInfinite([buildings.id, ids[5]]);
+  assert.deepEqual(C.infiniteGuess(inf, buildings, 'clugh'), { status: 'near', suggestion: 'Clough' });
+  assert.equal(inf.clockMs, 45000);
+  assert.equal(C.infiniteGuess(inf, buildings, 'clugh').status, 'correct');
+});
+
+test('course numbers and very short answers are never near-misses', () => {
+  const cs = data.prompts.find((p) => p.id === 'cs');
+  assert.equal(C.matchAnswer(cs, '1333').answer, null);
+  assert.equal(C.matchAnswer(buildings, 'culk').answer, null);
 });
