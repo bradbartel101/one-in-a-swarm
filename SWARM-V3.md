@@ -1,16 +1,19 @@
 # SWARM-V3 — make every flight a journey
 
 Resume from the first unchecked item. One commit per numbered section.
-The brief arrived cut off: section 4C ends after "Tap the clock tower 5 times", with one empty
-bullet after it. Everything that came through is listed here.
 
 ## 1. Bugs (each with a regression test)
-- [ ] 1a Typing during the wrong-guess lockout is never dropped; only re-submitting is blocked for 400ms
+- [x] 1a Typing during the wrong-guess lockout is never dropped; only re-submitting is blocked for 400ms
+  - e2e "wrong guess, near-miss and timeout": text typed inside the lockout lands and replaces the selected wrong text; Enter inside it is ignored at no cost; the same Enter works after 400ms.
 - [ ] 1b The same points always climb the same distance (delivered by section 2)
-- [ ] 1c HUD score counts up in sync with the climb
-- [ ] 1d Altitude facts are never clipped under the HUD or hidden under the reveal card
-- [ ] 1e The altitude ruler is always the top layer
-- [ ] 1f The answer tag does not collide with facts or tier labels
+- [x] 1c HUD score counts up in sync with the climb
+  - e2e "the climb": the HUD score is strictly between 0 and 60 at 500ms into a 60-point climb.
+- [x] 1d Altitude facts are never clipped under the HUD or hidden under the reveal card
+  - Facts and tier lines now live in a window that spans only the clear band of screen and fades at its edges. e2e asserts the window sits between the HUD and the reveal card.
+- [x] 1e The altitude ruler is always the top layer
+  - Ruler is drawn last. e2e reads the ruler's column from the canvas and asserts one flat colour top to bottom.
+- [x] 1f The answer tag does not collide with facts or tier labels
+  - A fact under the tag fades out while the tag is there. e2e asserts nothing visible intersects the tag at the end of a climb.
 
 ## 2. Altitude system
 - [ ] 2a Visual height in points: fixed pixels per point, 10 pts is about 60% of a screen, 100 pts about 6 screens
@@ -25,8 +28,23 @@ bullet after it. Everything that came through is listed here.
 
 ## 4. Easter eggs
 - [ ] 4a Twelve altitude sightings with captions, original pixel art
-- [ ] 4b Secret answers: Burdell, Buzz, THWG, Helluva Engineer, wrong school
-- [ ] 4c Tap the bee; tap the clock tower five times on the start screen
+- [ ] 4b Five secret answers: Burdell, Buzz, THWG, Helluva Engineer, wrong school
+- [ ] 4c Four interaction eggs: tap the bee, tower chime, night start screen, Konami gold swarm
+- [ ] 4d Sightings log in localStorage, panel on results and the menu, "NEW SIGHTING" toast
+- [ ] 4e Eggs never block input, never cover the prompt or input, never fire while the clock runs; reduced motion respected
 
-## Wrap-up
-- [ ] Full test suite and a screenshot review
+## 5. Feel and look
+- [ ] 5a Ruler: thin line, ticks and small labels on a transparent background
+- [ ] 5b Reveal card smaller, lower, translucent; the tier creature animates
+- [ ] 5c The swarm grows by one bee per correct answer and is clearly visible
+- [ ] 5d Start screen: rules collapsed by default, smaller title panel, room for the campus
+
+## 6. Content pass
+- [ ] 6a Prompts that combine two categories split or rewritten
+- [ ] 6b Tiers re-checked: nothing obscure is Common or Too Clever
+
+## 7. Verify (max 5 iterations, logged in REVIEW.md)
+- [ ] 7a All tests pass
+- [ ] 7b Flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900, screenshots in screenshots/v3/
+- [ ] 7c Screenshot review written up and problems fixed
+- [ ] 7d Final checklist with evidence; commit, push, open a PR

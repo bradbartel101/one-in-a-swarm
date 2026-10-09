@@ -291,9 +291,7 @@
 
     function drawRuler() {
       const x = W - 3;
-      ctx.globalAlpha = 0.45;
-      px(W - 27, 0, 27, H, '#00182f');
-      ctx.globalAlpha = 1;
+      px(W - 27, 0, 27, H, '#0b2a4a'); // opaque, so clouds and props never show through
       px(x, 0, 1, H, '#e8f1fb');
       const from = Math.max(0, Math.floor(scoreOf(H) / 10) * 10);
       const to = Math.ceil(scoreOf(0) / 10) * 10;
@@ -349,8 +347,8 @@
       drawClouds(t);
       drawTraffic(t);
       drawCampus();
-      drawRuler();
       drawBees(t);
+      drawRuler(); // always last: nothing in the world may cover the ruler
       if (dim) {
         ctx.globalAlpha = dim;
         px(0, 0, W, H, '#05080f');

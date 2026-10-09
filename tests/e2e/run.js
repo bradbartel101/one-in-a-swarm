@@ -117,7 +117,7 @@ async function startNextRound(page) {
 }
 
 async function guess(page, value) {
-  await page.waitFor('!document.getElementById("guess").readOnly', 3000, 'input to unlock');
+  await page.waitFor('!document.getElementById("guess").dataset.locked', 3000, 'the re-submit lock to lift');
   await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.value = ' + JSON.stringify(value) + '; })()');
   await page.eval('document.getElementById("guessForm").requestSubmit()');
 }
@@ -292,6 +292,8 @@ async function main() {
     assert.deepEqual(mid.lines.map((l) => l.replace(' ON', '')), ['COMMON · 10', 'CLEVER · 15', 'SOLID · 30', 'RARE · 60'], 'tier lines up to the one earned');
     assert.ok(mid.lines[0].endsWith('ON'), 'the first line has appeared');
     assert.equal(mid.dock, 'hidden', 'the answer bar steps aside for the climb');
+    const midScore = Number(await text(page, 'hudScore'));
+    assert.ok(midScore > 0 && midScore < 60, 'regression: the HUD score counts up with the climb instead of jumping (' + midScore + ' at 500ms)');
     await waitPhase(page, 'reveal', 6000);
     const took = Date.now() - sent;
     assert.ok(took > 3000 && took < 4600, 'a rare climb takes about 3.4s, took ' + took + 'ms');
@@ -299,6 +301,20 @@ async function main() {
       const last = lines[lines.length - 1].getBoundingClientRect();
       return { on: lines.filter((n) => n.classList.contains('on')).length, gap: Math.round(last.top - tag.bottom), tagTop: tag.top }; })()`);
     assert.equal(end.on, 4, 'all four lines are showing');
+    // Regression: facts and tier lines are confined to the clear band above the reveal card.
+    const band = await page.eval(`(() => { const r = (id) => document.getElementById(id).getBoundingClientRect(); const w = r('worldWindow');
+      return { top: Math.round(w.top), bottom: Math.round(w.bottom), hud: Math.round(r('hud').bottom), card: Math.round(r('reveal').top) }; })()`);
+    assert.ok(band.top >= band.hud && band.bottom <= band.card, 'facts are drawn only between the HUD and the reveal card: ' + JSON.stringify(band));
+    // Regression: the answer tag never sits on a fact or a tier label.
+    const clash = await page.eval(`(() => { const t = document.getElementById('tag').getBoundingClientRect();
+      const hits = (r) => r.bottom > t.top && r.top < t.bottom && r.right > t.left && r.left < t.right;
+      return [...document.querySelectorAll('#worldLayer .fact, #worldLayer .tier-line span')].filter((n) => getComputedStyle(n).opacity > 0.1 && hits(n.getBoundingClientRect())).map((n) => n.textContent); })()`);
+    assert.deepEqual(clash, [], 'nothing is under the answer tag');
+    // Regression: the ruler is the top layer. Its rightmost column is one flat colour from top to bottom.
+    const ruler = await page.eval(`(() => { const c = document.getElementById('world'); const t = document.createElement('canvas'); t.width = 1; t.height = c.height;
+      const g = t.getContext('2d'); g.drawImage(c, c.width - 1, 0, 1, c.height, 0, 0, 1, c.height); const d = g.getImageData(0, 0, 1, c.height).data;
+      const seen = new Set(); for (let i = 0; i < d.length; i += 4) seen.add(d[i] + ',' + d[i + 1] + ',' + d[i + 2]); return [...seen]; })()`);
+    assert.deepEqual(ruler, ['11,42,74'], 'nothing is drawn over the ruler strip');
     assert.ok(end.gap >= 0 && end.gap < 60, 'the tag has stopped just above its own tier line (gap ' + end.gap + 'px)');
     assert.deepEqual(await hud(), { alt: C.formatNumber(C.altitudeFeet(60)), score: '60' });
     assert.equal(await text(page, 'lastBadge'), 'RARE');
@@ -341,16 +357,24 @@ async function main() {
     const p = promptOf(await text(page, 'promptText'));
     // wrong
     await guess(page, 'gatorade');
-    const wrong = await page.eval(`({ msg: document.getElementById('feedback').textContent, locked: document.getElementById('guess').readOnly,
-      shaking: getComputedStyle(document.getElementById('entry')).animationName, value: document.getElementById('guess').value,
+    const wrong = await page.eval(`({ msg: document.getElementById('feedback').textContent, readOnly: document.getElementById('guess').readOnly,
+      focused: document.activeElement.id, shaking: getComputedStyle(document.getElementById('entry')).animationName, value: document.getElementById('guess').value,
       selected: document.getElementById('guess').selectionEnd - document.getElementById('guess').selectionStart })`);
-    assert.deepEqual(wrong, { msg: 'no buzz. try again. −3s', locked: true, shaking: 'shake', value: 'gatorade', selected: 8 }, 'input shakes, locks, and keeps its text selected');
-    await guess(page, 'still locked?'); // waits for the lock to lift first
-    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2);
+    assert.deepEqual(wrong, { msg: 'no buzz. try again. −3s', readOnly: false, focused: 'guess', shaking: 'shake', value: 'gatorade', selected: 8 }, 'input shakes, stays focused and typeable, and keeps its text selected');
+    // Regression: keys typed during the 400ms lockout used to be dropped. They must land.
+    await page.type('pow');
+    assert.equal(await page.eval('document.getElementById("guess").value'), 'pow', 'typing during the lockout replaces the selected wrong text');
+    await page.type('erade');
+    await page.enter(); // still inside the lockout: this submit is ignored, at no cost
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 1, 're-submitting inside the lockout does nothing');
+    assert.equal(await page.eval('document.getElementById("guess").value'), 'powerade', 'and the typed text is kept');
+    await page.waitFor('!document.getElementById("guess").dataset.locked', 2000, 'the lock to lift');
+    await page.enter();
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'after 400ms the same Enter goes through');
     // near-miss
     const target = p.answers.find((a) => !/\d/.test(a.name) && a.name.length >= 8);
     const typo = target.name.slice(0, 2) + target.name.slice(3);
-    await page.waitFor('!document.getElementById("guess").readOnly', 3000, 'input to unlock');
+    await page.waitFor('!document.getElementById("guess").dataset.locked', 3000, 'the lock to lift');
     const before = await barScale(page);
     await guess(page, typo);
     const near = await text(page, 'feedback');

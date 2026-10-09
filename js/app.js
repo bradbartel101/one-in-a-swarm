@@ -93,6 +93,9 @@
   let anchorTarget = 0.78;
   let shownAlt = -1;
   let tierColors = {};
+  let winTop = 0;
+  let countFrom = null; // while a daily climb runs, the score the HUD counts up from
+  let frames = 0;
 
   /* ---------- small helpers ---------- */
 
@@ -109,6 +112,7 @@
 
   function setPhase(name) {
     document.body.dataset.phase = name;
+    aimCamera();
   }
 
   function show(name, focusTarget) {
@@ -272,13 +276,27 @@
   function aimCamera() {
     if (!scene) return;
     const h = window.innerHeight;
-    if (!$('hud').hidden) document.documentElement.style.setProperty('--hud-h', $('hud').offsetHeight + 'px');
+    const root = document.documentElement.style;
+    if (!$('hud').hidden) root.setProperty('--hud-h', $('hud').offsetHeight + 'px');
+    // The clear band of screen that facts and tier lines may be drawn in.
+    const phase = document.body.dataset.phase;
+    let top = $('hud').hidden ? 0 : $('hud').getBoundingClientRect().bottom + 4;
+    let bottom = h;
+    if (view === 'play' && phase !== 'climb') {
+      top = $('promptCard').getBoundingClientRect().bottom + 4;
+      bottom = $('dock').getBoundingClientRect().top - 4;
+    } else if (view === 'between') {
+      bottom = $('reveal').getBoundingClientRect().top - 4;
+    }
+    winTop = Math.max(0, Math.round(top));
+    root.setProperty('--win-top', winTop + 'px');
+    root.setProperty('--win-bottom', Math.max(0, Math.round(h - bottom)) + 'px');
     if (view === 'play') {
       const top = $('promptCard').getBoundingClientRect().bottom;
       const bottom = $('dock').getBoundingClientRect().top;
       anchorTarget = bottom > top + 60 ? (top + bottom) / 2 / h + 0.03 : 0.5;
     } else if (view === 'between') {
-      anchorTarget = window.innerWidth >= 720 ? 0.55 : Math.max(0.16, ($('reveal').getBoundingClientRect().top / h) * 0.6);
+      anchorTarget = Math.max(0.16, ($('reveal').getBoundingClientRect().top / h) * 0.6);
     } else if (view === 'home') {
       // The lawn sits at the foot of the gap between the two panels, with the bee hovering above it.
       const lawn = $('homeGap').getBoundingClientRect().bottom + window.scrollY - 8;
@@ -360,15 +378,31 @@
     scene.setAnchor(anchor);
     scene.setCamera(cam);
     scene.draw(now);
-    $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
+    $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
+    if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
+    if (++frames % 4 === 0) dodgeTag();
     const alt = C.altitudeFeet(cam);
     if (alt !== shownAlt) {
       shownAlt = alt;
       $('hudAlt').textContent = C.formatNumber(alt);
     }
     window.requestAnimationFrame(frame);
+  }
+
+  // A fact that would sit under the answer tag steps aside while the tag is there.
+  function dodgeTag() {
+    const tag = $('tag');
+    const box = tag.hidden ? null : tag.getBoundingClientRect();
+    document.querySelectorAll('#worldLayer .fact').forEach((node) => {
+      let hit = false;
+      if (box) {
+        const r = node.getBoundingClientRect();
+        hit = r.bottom > box.top - 6 && r.top < box.bottom + 6 && r.right > box.left - 6 && r.left < box.right + 6;
+      }
+      node.classList.toggle('yield', hit);
+    });
   }
 
   /* ---------- title screen ---------- */
@@ -502,7 +536,6 @@
     renderTried([]);
     setFeedback('', '');
     $('guess').value = '';
-    $('guess').readOnly = false;
     $('clockLive').textContent = '';
     renderClock(C.ROUND_MS, C.ROUND_MS, true);
     setPhase('intro');
@@ -541,8 +574,7 @@
       clearClimb();
       renderDailyHud(daily.round.index);
       $('guess').value = '';
-      $('guess').readOnly = false;
-      $('clockLive').textContent = '';
+        $('clockLive').textContent = '';
       setFeedback('', '');
       $('liftoff').hidden = true;
     }
@@ -556,12 +588,14 @@
 
   function lockInput() {
     const g = $('guess');
+    // Typing is never blocked. Only submitting again is, briefly, so a double tap cannot cost
+    // two penalties. The wrong text stays selected, so the next keystroke replaces it.
     lockUntil = performance.now() + WRONG_LOCK_MS;
-    g.readOnly = true;
+    g.dataset.locked = '1';
+    g.focus();
     g.select();
     window.setTimeout(() => {
-      g.readOnly = false;
-      if (view === 'play') g.select();
+      delete g.dataset.locked;
     }, WRONG_LOCK_MS);
   }
 
@@ -613,7 +647,7 @@
     const tier = C.TIERS[result.tier];
     $('guess').blur();
     setPhase('climb');
-    $('hudScore').textContent = C.formatNumber(base + result.points);
+    countFrom = base;
     const tag = $('tag');
     tag.textContent = result.answer;
     tag.hidden = false;
@@ -623,6 +657,8 @@
     const ms = reducedMotion() ? 0 : tier.climbMs;
     if (ms) Sfx.rise(ms / 1000);
     moveCamera(base + result.points, ms, () => {
+      countFrom = null;
+      $('hudScore').textContent = C.formatNumber(base + result.points);
       scene.setFollowers(daily.results.filter((x) => x.points).length);
       if (result.tier === 'swarm') {
         scene.setMood('gold');
@@ -847,7 +883,6 @@
     $('infActions').hidden = false;
     $('liftoff').hidden = true;
     $('guess').value = '';
-    $('guess').readOnly = false;
     $('clockLive').textContent = '';
     setFeedback('', '');
     renderInfinite();

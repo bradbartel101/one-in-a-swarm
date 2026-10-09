@@ -64,7 +64,18 @@ h1, h2 { margin: 0 0 0.5rem; line-height: 1.25; }
 
 #world { position: fixed; left: 0; top: 0; z-index: 0; image-rendering: crisp-edges; image-rendering: pixelated; }
 canvas, .art, .pip-icon { image-rendering: pixelated; }
-#worldLayer { position: fixed; left: 0; right: 0; top: 0; height: 0; z-index: 1; pointer-events: none; will-change: transform; }
+/* Facts and tier lines live in the world, but are only shown in the clear band of screen between
+   the HUD (or prompt) and the answer bar (or reveal card), fading at its edges. They are never
+   half-hidden under a panel. */
+#worldWindow {
+  position: fixed; left: 0; right: 0; top: var(--win-top, 0px); bottom: var(--win-bottom, 0px); z-index: 1;
+  overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+}
+#worldLayer { position: absolute; left: 0; right: 0; top: 0; height: 0; will-change: transform; }
+.fact { transition: opacity 0.15s linear; }
+.fact.yield { opacity: 0; }
 #scan {
   position: fixed; inset: 0; z-index: 40; pointer-events: none;
   background: repeating-linear-gradient(to bottom, rgba(0, 8, 20, 0.13) 0 1px, transparent 1px 3px);
@@ -208,7 +219,6 @@ section[data-view="play"] > * { pointer-events: auto; }
 }
 .field input::placeholder { color: #51606f; opacity: 1; font-weight: 400; }
 .field input:focus-visible { outline: 3px solid var(--accent); outline-offset: 0; }
-.field input[readonly] { background: #d6d2c4; }
 .field.shake { animation: shake 0.3s linear; }
 @keyframes shake { 25% { transform: translateX(-6px); } 50% { transform: translateX(6px); } 75% { transform: translateX(-3px); } }
 .bar { height: 4px; margin-top: 4px; background: var(--panel-2); overflow: hidden; }
@@ -313,9 +323,8 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
   .prompt-card { padding: 1rem 1.2rem; }
   .prompt-card h1 { font-size: 1.35rem; }
   .fact { font-size: 0.9rem; left: 24px; }
-  .tag { font-size: 1.15rem; left: 41%; max-width: 17vw; }
+  .tag { font-size: 1.15rem; left: 41%; max-width: 30vw; }
   .tier-line span { font-size: 0.7rem; }
-  section[data-view="between"] { align-items: center; justify-content: flex-end; padding-right: max(6vw, 60px); }
   .btn { font-size: 0.75rem; }
   .btn-big { font-size: 1rem; }
 }
