@@ -1,27 +1,21 @@
 # HUMAN-TODO — what still needs a person
 
-## 1. Review and merge the pull request
+## 1. Merged and live
 
-Done already: the public repository exists at https://github.com/bradbartel101/one-in-a-swarm,
-both branches are pushed, and the "Release v1.0" pull request is open from `release/v1.0` into
-`main`. Check that the Tests workflow is green on it (it has never run on GitHub before), then merge.
+Done: the "Release v1.0" pull request is merged into `main`, and GitHub Pages is serving `main`
+at https://bradbartel101.github.io/one-in-a-swarm/ (checked: the game loads and a round starts,
+the missing-page URL returns the "Wrong turn" page).
 
-## 2. Turn on GitHub Pages (after the pull request is merged)
+## 2. (done) GitHub Pages
 
-1. On GitHub, open the repository and go to **Settings → Pages**.
-2. Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-3. Set **Branch** to `main` and the folder to `/ (root)`, then press **Save**.
-4. Wait a minute or two, reload the page, and open the address it shows
-   (expected: `https://bradbartel101.github.io/one-in-a-swarm/`).
-5. Play one round, then open `https://bradbartel101.github.io/one-in-a-swarm/nope` and confirm the
-   "Wrong turn" page appears and its button leads back to the game.
+Settings → Pages is set to "Deploy from a branch", `main`, `/ (root)`. Every push to `main`
+redeploys the site.
 
 ## 3. Confirm the site address used in link previews
 
 `index.html` contains four absolute URLs (`canonical`, `og:url`, `og:image`, `twitter:image`) that
-assume `https://bradbartel101.github.io/one-in-a-swarm/`. I guessed that from the signed-in GitHub
-account and the folder name. If the repository name or owner differs, or you add a custom domain,
-change those four lines. Then paste the live link into a group chat (iMessage, Slack, Discord) and
+assume `https://bradbartel101.github.io/one-in-a-swarm/`, which is where the site now lives. If you
+add a custom domain, change those four lines. Still to do: paste the live link into a group chat (iMessage, Slack, Discord) and
 check that the preview image appears.
 
 ## 4. Check on real phones
