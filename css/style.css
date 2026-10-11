@@ -64,14 +64,12 @@ h1, h2 { margin: 0 0 0.5rem; line-height: 1.25; }
 
 #world { position: fixed; left: 0; top: 0; z-index: 0; image-rendering: crisp-edges; image-rendering: pixelated; }
 canvas, .art, .pip-icon { image-rendering: pixelated; }
-/* Facts and tier lines live in the world, but are only shown in the clear band of screen between
-   the HUD (or prompt) and the answer bar (or reveal card), fading at its edges. They are never
-   half-hidden under a panel. */
+/* The safe area: the clear band of screen between the HUD (or prompt) and the answer bar (or
+   reveal button). Tier lines are cut off at its edges. A fact is shown only when the whole of
+   it is inside, so no text is ever half under a panel. */
 #worldWindow {
   position: fixed; left: 0; right: 0; top: var(--win-top, 0px); bottom: var(--win-bottom, 0px); z-index: 1;
   overflow: hidden; pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
 }
 #worldLayer { position: absolute; left: 0; right: 0; top: 0; height: 0; will-change: transform; }
 .fact { transition: opacity 0.15s linear; }
@@ -103,8 +101,6 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
 .fact::after { content: ""; position: absolute; top: 50%; border-top: 2px dotted rgba(244, 241, 230, 0.7); }
 .fact.left::after { left: calc(100% + 6px); width: 100vw; }
 .fact.right::after { left: calc(100% + 4px); width: var(--ruler, 108px); }
-.fact.sight { color: var(--accent); font-style: italic; }
-.fact.sight::after { display: none; }
 .tier-line { position: absolute; left: 0; right: 0; border-top: 3px dashed var(--line, var(--edge)); opacity: 0; transition: opacity 0.2s linear; }
 .tier-line.on { opacity: 1; }
 .tier-line span { position: absolute; right: calc(var(--ruler, 90px) + 6px); top: -13px; padding: 0.1rem 0.45rem; font-family: var(--pixel); font-size: 0.6rem; line-height: 1.6; background: var(--line, var(--panel)); color: var(--tier-ink); border-color: var(--tier-ink); }
@@ -116,10 +112,18 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
 
 /* A small notice in the open sky, clear of the prompt and the answer bar. */
 .toast {
-  position: fixed; z-index: 7; top: calc(var(--win-top, 80px) + 8px); right: calc(var(--ruler, 108px) + 8px); margin: 0;
+  position: fixed; z-index: 7; bottom: calc(var(--win-bottom, 120px) + 8px); right: calc(var(--ruler, 108px) + 8px); margin: 0;
   padding: 0.35rem 0.5rem; max-width: 60vw; font-size: 0.5rem; line-height: 1.7; pointer-events: none; white-space: pre-line;
   background: var(--accent); color: var(--accent-ink); border: 2px solid var(--accent-ink);
 }
+/* One caption at a time, in the top corner of the safe area. */
+.caption {
+  position: fixed; z-index: 7; top: calc(var(--win-top, 80px) + 8px); left: 8px; margin: 0; max-width: min(62vw, 22rem); pointer-events: none;
+  font-family: var(--mono); font-size: 0.8rem; font-weight: 700; font-style: italic; line-height: 1.3; color: var(--accent);
+  text-shadow: 1px 1px 0 #00213d, -1px 1px 0 #00213d, 1px -1px 0 #00213d, -1px -1px 0 #00213d, 0 2px 0 #00213d;
+  transition: opacity 0.3s linear;
+}
+.caption.out { opacity: 0; }
 .toast::first-line { font-size: 0.55rem; }
 .sight-grid { list-style: none; margin: 0.4rem 0 0.6rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(8.6rem, 1fr)); gap: 0.3rem; }
 .sight-grid li { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.35rem; font-size: 0.78rem; background: var(--panel-2); min-width: 0; }

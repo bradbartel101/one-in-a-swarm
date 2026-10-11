@@ -8,7 +8,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const SCRIPTS = ['js/core.js', 'js/facts.js', 'js/sfx.js', 'js/scene.js', 'js/app.js'];
-const SITE = ['index.html', '404.html', 'css/style.css', 'data/prompts.json', 'assets/fonts/press-start-2p.woff2'].concat(SCRIPTS);
+const SITE = ['index.html', '404.html', 'css/style.css', 'data/prompts.json', 'data/schedule.json', 'assets/fonts/press-start-2p.woff2'].concat(SCRIPTS);
 const DISCLAIMER = 'Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.';
 
 test('F2: no HTML-string sinks or dynamic code anywhere in the scripts', () => {
@@ -43,7 +43,7 @@ test('F4 / G1: nothing is loaded from another origin, and every path is relative
   [...css.matchAll(/url\(\s*["']?([^"')]+)/g)].forEach((m) => assert.ok(m[1].startsWith('data:') || m[1] === '../assets/fonts/press-start-2p.woff2', 'css loads ' + m[1]));
   assert.ok(!/@import/.test(css));
   const fetches = [...read('js/app.js').matchAll(/fetch\(\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-  assert.deepEqual(fetches, ['data/prompts.json']);
+  assert.deepEqual(fetches.sort(), ['data/prompts.json', 'data/schedule.json']);
   const scripts = SCRIPTS.map(read).join('');
   assert.ok(!/https?:\/\//.test(scripts), 'scripts mention no URLs');
   assert.ok(!/\.(mp3|ogg|wav|m4a|png|jpg|gif|webp)\b/.test(scripts + read('index.html').replace(/assets\/og\.png/g, '')), 'art and sound are made in code, not downloaded');
@@ -89,7 +89,7 @@ test('F5: every function defined in app.js is used', () => {
 
 test('F5: every core export is used by the app or the tools', () => {
   const core = require('../js/core.js');
-  const users = read('js/app.js') + read('tools/build-prompts.js') + read('tools/validate.js');
+  const users = read('js/app.js') + read('tools/build-prompts.js') + read('tools/build-schedule.js') + read('tools/validate.js');
   assert.ok(!/[\u{1F300}-\u{1FAFF}\u{2B1B}\u{2B1C}]/u.test(read('index.html') + read('js/app.js') + read('css/style.css')), 'no emoji in the interface, only in the share text');
   const internal = read('js/core.js');
   Object.keys(core).forEach((k) => {

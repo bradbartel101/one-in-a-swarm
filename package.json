@@ -10,6 +10,7 @@
     "validate": "node tools/validate.js",
     "screens": "node tests/e2e/screens.js",
     "test:all": "npm test && npm run validate && npm run test:e2e",
-    "build:data": "node tools/build-prompts.js"
+    "build:data": "node tools/build-prompts.js",
+    "build:schedule": "node tools/build-schedule.js"
   }
 }
