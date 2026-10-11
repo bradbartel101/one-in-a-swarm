@@ -345,8 +345,8 @@
   function drawTierArt(canvas, tier, now) {
     const g = canvas.getContext('2d');
     const t = reducedMotion() ? 0 : now || 0;
-    const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d' };
-    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00' };
+    const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d', f: '#f6dc7a' };
+    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00', f: '#fff0a8' };
     const box = (x, y, w, h, color) => {
       g.fillStyle = color;
       g.fillRect(Math.round(x), Math.round(y), w, h);
@@ -475,8 +475,9 @@
     if (view === 'play' && phase !== 'climb') {
       top = $('promptCard').getBoundingClientRect().bottom + 4;
       bottom = $('dock').getBoundingClientRect().top - 4;
-    } else if (view === 'between') {
-      bottom = $('reveal').getBoundingClientRect().top - 4;
+    } else if (view === 'between') { // between the reveal text and the button
+      top = $('reveal').getBoundingClientRect().bottom - 14;
+      bottom = $('revealFoot').getBoundingClientRect().top - 4;
     }
     if (view === 'home') { // the open sky between the title and the start panel
       top = document.querySelector('.title-block').getBoundingClientRect().bottom + 4;
@@ -495,8 +496,10 @@
       const ceiling = phase === 'climb' ? 60 : $('promptCard').getBoundingClientRect().bottom + 34;
       anchorTarget = Math.max(ceiling, Math.min(floor, want)) / h;
     } else if (view === 'between') {
-      // The card is short and sits at the bottom; the bee stays where it was unless the card needs the room.
-      anchorTarget = Math.max(0.2, Math.min(BEE_DOWN * h, $('reveal').getBoundingClientRect().top - 70) / h);
+      // The reveal sits above and the button below; the bee keeps its place between them.
+      const roomTop = $('reveal').getBoundingClientRect().bottom + 26;
+      const roomBottom = $('revealFoot').getBoundingClientRect().top - 40;
+      anchorTarget = Math.max(roomTop, Math.min(roomBottom, BEE_DOWN * h)) / h;
     } else if (view === 'home') {
       anchorTarget = BEE_DOWN; // with the bee hovering HOVER points up, the lawn fills about the bottom quarter
     } else {
@@ -590,6 +593,8 @@
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
     if (++frames % 4 === 0) placeFacts();
+    // The bee glances down at the answer box while something is being typed.
+    scene.setLook(document.body.dataset.phase === 'guess' && $('guess').value.length > 0);
     if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
     if (frames % 8 === 0) {
       const seenNow = scene.drainSeen(); // only counted during a flight, not from the title screen
@@ -902,10 +907,14 @@
     scene.setMood('happy');
     const lines = buildTierLines(base, result.points);
     const ms = reducedMotion() ? 0 : tier.climbMs;
-    if (ms) Sfx.rise(ms / 1000);
+    if (ms) {
+      Sfx.rise(ms / 1000);
+      scene.pollen(performance.now()); // even a short hop leaves a puff behind
+    }
     moveCamera(base + result.points, ms, () => {
       countFrom = null;
       $('hudScore').textContent = C.formatNumber(base + result.points);
+      if (lines.length) lines[lines.length - 1].node.classList.add('won'); // the line it stopped on turns solid
       scene.setFollowers(daily.results.filter((x) => x.points).length);
       if (result.tier === 'swarm') {
         scene.setMood('gold');
@@ -915,7 +924,8 @@
           quake();
         }
       } else {
-        scene.setMood('idle');
+        scene.setMood('cheer');
+        window.setTimeout(() => { if (document.body.dataset.phase === 'reveal') scene.setMood('idle'); }, 1600);
       }
       Sfx.correct(C.TIER_ORDER.indexOf(result.tier));
       // The top answer gets a beat to itself before the card comes up.
@@ -950,7 +960,7 @@
     const score = C.totalScore(daily.results);
     const p = byId[last.promptId];
     const card = $('reveal');
-    card.className = 'panel reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
+    card.className = 'reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
     card.style.setProperty('--tier', last.tier ? tierColors[last.tier] : '#c3ccd6');
     cardTier = last.tier;
     drawTierArt($('lastIcon'), cardTier, performance.now());
@@ -1024,15 +1034,29 @@
     $('resScore').textContent = C.formatNumber(score) + ' pts';
     $('resAlt').textContent = feet(score);
 
-    // Flight log: each round's mark at the height its tier earned, on a stem from the ground.
+    // Flight log: one column per round, each mark at the altitude the flight had reached by
+    // then, on a line from the ground, with the zones behind.
+    const bands = $('logBands');
+    bands.textContent = '';
+    Scene.ZONES.forEach((z, i) => {
+      const end = i + 1 < Scene.ZONES.length ? Scene.ZONES[i + 1][0] : C.TOP_SCORE;
+      const li = el('li');
+      li.style.flex = String(end - z[0]);
+      li.style.background = scene.skyColor((z[0] + end) / 2);
+      li.appendChild(el('span', '', z[2].replace(' skyline', '')));
+      bands.appendChild(li);
+    });
     const log = $('flightLog');
     log.textContent = '';
+    let reached = 0;
     daily.results.forEach((r, i) => {
+      reached += r.points;
       const li = el('li');
-      li.setAttribute('aria-label', 'Round ' + (i + 1) + ': ' + tierLabel(r.tier) + ', ' + r.points + ' points');
+      li.setAttribute('aria-label', 'Round ' + (i + 1) + ': ' + tierLabel(r.tier) + ', ' + r.points + ' points, reaching ' + feet(reached));
+      li.dataset.reached = String(reached);
       li.appendChild(pipIcon(r.tier));
       const stem = el('span', 'stem');
-      stem.style.height = (r.points / C.TIERS.swarm.points) * 130 + 'px';
+      stem.style.height = 'calc(' + (reached / C.TOP_SCORE) * 100 + '% - 22px)';
       li.appendChild(stem);
       li.appendChild(el('span', 'round', String(i + 1)));
       log.appendChild(li);

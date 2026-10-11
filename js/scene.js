@@ -16,8 +16,8 @@
     [300, 'highsky', 'High sky'], [420, 'stratosphere', 'Stratosphere'], [550, 'space', 'Space'], [650, 'moon', 'The Moon'],
   ];
   const SKY = [
-    [-20, [208, 238, 255]], [0, [178, 224, 255]], [40, [142, 206, 252]], [110, [112, 186, 246]], [200, [84, 150, 226]],
-    [300, [50, 108, 204]], [420, [22, 56, 132]], [500, [10, 26, 70]], [550, [4, 9, 28]], [650, [1, 2, 10]], [1e9, [1, 2, 10]],
+    [-20, [208, 238, 255]], [0, [178, 224, 255]], [40, [142, 206, 252]], [110, [108, 182, 244]], [200, [74, 138, 218]],
+    [300, [34, 82, 178]], [400, [18, 46, 116]], [450, [10, 26, 78]], [500, [6, 16, 48]], [550, [3, 7, 24]], [650, [1, 2, 10]], [1e9, [1, 2, 10]],
   ];
   // 3x5 glyphs for the ruler.
   const GLYPHS = {
@@ -33,7 +33,7 @@
     '..kkkkkkkkkkkk..',
     '.kbbkkbbkkbhhhk.',
     'kkbbkkbbkkbhehk.',
-    'kkbbkkbbkkbhhhk.',
+    'kkbbkkbbkkbhfhk.',
     '.kbbkkbbkkbhhhk.',
     '..kkkkkkkkkkkk..',
     '....k..k..k.....',
@@ -102,6 +102,7 @@
     let particles = [];
     let dim = 0;
     let trick = null; // { name, start, ms }
+    let look = false; // glancing down at the answer box
     let popped = false;
     let flagUp = false;
     const boxes = {}; // hit boxes in art pixels, refreshed every frame
@@ -190,7 +191,7 @@
     }
 
     function drawStars(t) {
-      const strength = night ? 0.9 : clamp((cam - 400) / 130);
+      const strength = night ? 0.9 : clamp((cam - 370) / 90); // first stars before 400, a full sky by 460
       if (strength <= 0) return;
       const cell = 9;
       const drift = cam * PPP * 0.12; // the farthest layer of all
@@ -264,6 +265,23 @@
       px(0, g, W, 2, '#6fbf6a');
       for (let i = 0; i < W; i += 5) if (hash(i * 19) < 0.5) px(i, g + 16 + Math.floor(hash(i) * 30), 2, 1, '#3f8748');
       px(0, g + 8, W, 5, '#e6d9b8'); // the cross path
+      for (let i = 0; i < 5; i++) { // flower beds in gold and white beside the path
+        const bx = Math.round((0.04 + i * 0.21) * W);
+        px(bx, g + 15, 16, 4, '#3a2a1a');
+        for (let k = 0; k < 7; k++) px(bx + 1 + k * 2, g + 14 + (k % 2), 1, 2, k % 3 === 0 ? '#ffffff' : '#ffd23f');
+        px(bx + 20, g - 10, 1, 13, '#2b2f36'); // a lamp post
+        px(bx + 19, g - 12, 3, 2, night ? '#ffe9a8' : '#dfe6ee');
+      }
+      for (let x = 0; x < W; x += 3) px(x, g + 26 + Math.round(Math.sin(x / 5) * 1.2), 3, 3, '#3d8647'); // a clipped hedge
+      px(0, g + 29, W, 2, '#2f6f3a');
+      for (let i = 0; i < W / 22 + 1; i++) { // bushes in the foreground
+        const bx = i * 22 + Math.round(hash(i * 41) * 8) - 6;
+        const by = g + 44 + Math.round(hash(i * 23) * 10);
+        disc(bx, by, 8, '#2c6b38');
+        disc(bx + 7, by + 3, 6, '#357a42');
+        px(bx - 3, by - 5, 2, 2, '#ffd23f');
+        px(bx + 4, by - 1, 2, 2, '#ffffff');
+      }
       px(Math.round(W * 0.46), g + 13, 9, H, '#e6d9b8'); // the path toward you
       [[0.0, 20, 15], [0.52, 16, 12]].forEach((b) => {
         const x = Math.round(b[0] * W);
@@ -398,26 +416,30 @@
       }
     }
 
+    // Thunderheads: tall, dark-bottomed, flat-topped, staggered left and right all the way up
+    // the zone so every flight through it meets at least one.
     function drawThunderheads(t) {
-      [[214, 0.04, 0], [246, 0.5, 1], [276, 0.2, 2], [292, 0.62, 3]].forEach((c) => {
+      [[208, 0.02, 0], [226, 0.5, 1], [244, 0.08, 2], [262, 0.46, 3], [280, 0.0, 4], [296, 0.52, 5]].forEach((c) => {
         const y = rowOf(c[0], LAYERS.mid);
-        if (!onScreen(y, 70)) return;
-        const x = Math.round(c[1] * W);
-        const period = 2700 + c[2] * 800;
-        const flash = !still() && t % period < 150 && hash(Math.floor(t / period) * 7 + c[2]) < 0.7;
-        const body = flash ? '#f4f7ff' : '#9aa7ba';
-        px(x - 6, y - 40, 60, 5, flash ? '#ffffff' : '#d3dbe7'); // the anvil
-        px(x + 2, y - 35, 44, 6, body);
-        px(x + 8, y - 29, 32, 8, body);
-        px(x + 4, y - 21, 40, 9, body);
-        px(x, y - 12, 48, 8, flash ? '#dfe6f2' : '#7d8a9e');
-        px(x + 2, y - 4, 44, 4, '#56637a'); // a dark, flat base
-        for (let r = 0; r < 9; r++) { // rain
-          const rx = x + 5 + r * 4;
-          const ry = y + ((still() ? r * 3 : Math.floor(t / 60) + r * 5) % 14);
-          px(rx, ry, 1, 2, '#8fb4e0');
+        if (!onScreen(y, 90)) return;
+        const x = Math.round(c[1] * W) + (c[2] % 2 ? 6 : 0);
+        const period = 2300 + c[2] * 700;
+        const flash = !still() && t % period < 160 && hash(Math.floor(t / period) * 7 + c[2]) < 0.75;
+        const lit = flash ? '#ffffff' : '#c3cedd';
+        const mid = flash ? '#eef3fb' : '#93a1b6';
+        const dark = flash ? '#cfd8e6' : '#5e6c84';
+        px(x - 8, y - 54, 68, 4, lit); // the anvil
+        px(x - 2, y - 50, 56, 4, lit);
+        [[10, -40, 11], [26, -44, 13], [42, -40, 11], [6, -26, 12], [24, -28, 15], [44, -26, 12]].forEach((d) => disc(x + d[0], y + d[1], d[2], mid));
+        [[8, -12, 11], [26, -12, 13], [44, -12, 11]].forEach((d) => disc(x + d[0], y + d[1], d[2], dark));
+        px(x - 4, y - 6, 60, 7, dark); // a dark, flat base
+        px(x - 2, y + 1, 56, 2, '#465369');
+        for (let r = 0; r < 12; r++) { // rain
+          const rx = x + r * 5 - 2;
+          const ry = y + 4 + ((still() ? r * 3 : Math.floor(t / 50) + r * 7) % 20);
+          px(rx, ry, 1, 3, '#9cc0ea');
         }
-        if (flash) [[20, 0], [18, 4], [22, 8], [19, 12], [23, 16], [21, 20]].forEach((p) => px(x + p[0], y + p[1], 2, 4, '#fff7c2'));
+        if (flash) [[24, 3], [21, 8], [26, 13], [22, 18], [27, 23], [24, 28]].forEach((p) => px(x + p[0], y + p[1], 2, 5, '#fff7c2'));
       });
     }
 
@@ -501,8 +523,8 @@
     /* ----- the Earth below, 420 upward ----- */
 
     function drawEarth() {
-      if (cam < 400 || cam > 698) return;
-      const a = smooth((cam - 400) / 150);
+      if (cam < 360 || cam > 698) return;
+      const a = smooth((cam - 360) / 130); // the curve is plain by 450
       const b = smooth((cam - 550) / 100);
       const c = smooth((cam - 650) / 45);
       const R = lerp(lerp(lerp(W * 9, W * 2.4, a), W * 0.8, b), W * 0.32, c);
@@ -804,7 +826,10 @@
         const flapM = !still() && Math.floor(t / 70 + i) % 2 === 0;
         sprite(flapM ? MINI.map((r, k) => (k === 0 ? '.......' : r)) : MINI, fx, fy, palette);
       }
-      const flap = !still() && Math.floor(t / (mood === 'happy' || goldNow ? 50 : 90)) % 2 === 0;
+      const flap = !still() && Math.floor(t / (mood === 'happy' || mood === 'cheer' || goldNow ? 50 : 90)) % 2 === 0;
+      if (mood === 'cheer' && !still()) my -= Math.round(Math.abs(Math.sin(t / 130)) * 5); // a little dance
+      palette.f = look ? palette.e : palette.h; // the eye drops when the bee looks down at the answer box
+      if (look) palette.e = palette.h;
       const rows = mood === 'sad' || flap ? BEE.map((r, i) => (i < 4 ? '................' : r)) : BEE;
       if (goldNow) { // a few sparks round a golden bee
         const tw = still() ? 0 : Math.floor(t / 160) % 4;
@@ -925,6 +950,10 @@
       setCamera(score) { cam = score; },
       setAnchor(frac) { anchor = frac; },
       setMood(m) { mood = m; },
+      setLook(on) { look = !!on; },
+      // A small cloud of pollen left behind as a climb begins.
+      pollen(t) { if (!still()) for (let i = 0; i < 14; i++) particles.push({ born: t, life: 700 + hash(i * 7 + t) * 500, x: beeX() + 2 + hash(i * 3 + t) * 12, y: anchorRow() + 4, vx: (hash(i * 13 + t) - 0.5) * 26, vy: 20 + hash(i * 5 + t) * 30, bee: false, color: i % 2 ? '#ffe58a' : '#fff7d1', size: 1 }); },
+      skyColor: skyAt,
       setGold(on) { gold = !!on; },
       setNight(on) { night = !!on; },
       setFollowers(n) { followers = Math.max(0, Math.min(7, n)); },

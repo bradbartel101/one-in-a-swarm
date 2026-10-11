@@ -106,10 +106,15 @@ const hideable = `(() => {
 
 // Most scenarios run with reduced motion, which skips the long climb and keeps the suite quick.
 // The ones that test the animation pass { reducedMotion: false }.
-const calm = (opts) => Object.assign({ reducedMotion: true }, opts);
+// Pages also believe it is midday unless a test says otherwise, so the small-hours easter egg
+// cannot fire just because the suite happens to run at night.
+const MIDDAY = 'Date.prototype.getHours = function () { return 12; };';
+const calm = (opts) => Object.assign({ reducedMotion: true }, opts, { initScript: (opts && opts.realHours ? '' : MIDDAY) + ((opts && opts.initScript) || '') });
+const openPages = [];
+const track = (page) => { openPages.push(page); return page; };
 
 async function open(opts, url) {
-  const page = await browser.newPage(calm(opts));
+  const page = track(await browser.newPage(calm(opts)));
   await page.goto(url || base);
   return page;
 }
@@ -120,7 +125,7 @@ async function ready(page) {
 
 async function fresh(opts) {
   // A page whose first-visit rules have already been seen.
-  const page = await browser.newPage(calm(opts));
+  const page = track(await browser.newPage(calm(opts)));
   await page.goto(base + '404-probe-for-origin');
   await page.eval(SEEN);
   page.problems.length = 0; // the probe page is a deliberate 404
@@ -161,7 +166,7 @@ async function land(page) {
 }
 
 async function scenario(name, fn) {
-  if (only && !name.toLowerCase().includes(only.toLowerCase())) return;
+  if (only && !only.toLowerCase().split('|').some((part) => name.toLowerCase().includes(part))) return;
   const started = Date.now();
   try {
     const note = await fn();
@@ -171,6 +176,8 @@ async function scenario(name, fn) {
     results.push({ name, ok: false });
     console.log('✖ ' + name + '\n    ' + String(err && err.stack ? err.stack : err).split('\n').slice(0, 6).join('\n    '));
   }
+  // A failed scenario must not leave its pages running behind the next one.
+  while (openPages.length) await openPages.pop().close().catch(() => {});
 }
 
 const TIERS7 = ['common', 'clever', 'solid', 'rare', 'deep', 'swarm', 'solid'];
@@ -302,15 +309,17 @@ async function main() {
 
     // round 1: a rare answer. Watch the climb.
     const answer = answerOf(await text(page, 'promptText'), 'rare');
+    // Regression: the climb starts at once. Timed inside the page: from the submit to the first
+    // frame in which the answer is a tag and the camera has moved.
+    await page.eval(`window.__start = null; (function watch() { const s = window.__swarm; if (window.__t0 && !window.__start && s.camera() > 0.05 && !document.getElementById('tag').hidden) window.__start = performance.now() - window.__t0; if (!window.__start) setTimeout(watch, 8); })();
+      document.getElementById('guessForm').addEventListener('submit', () => { window.__t0 = performance.now(); }, true);`);
     const sent = Date.now();
     await guess(page, answer);
     await waitPhase(page, 'climb', 1000);
-    // Regression: the climb starts at once. 150ms after the submit the tag is up and the camera has moved.
-    await sleep(Math.max(0, 150 - (Date.now() - sent)));
-    const early = await page.eval('({ cam: window.__swarm.camera(), tag: !document.getElementById("tag").hidden })');
-    assert.ok(Date.now() - sent < 400, 'measured promptly');
-    assert.ok(early.tag && early.cam > 0.5, 'within 200ms of submitting, the answer is a tag and the world is moving: ' + JSON.stringify(early));
-    await sleep(350);
+    await page.waitFor('window.__start !== null', 1500, 'the climb to start');
+    const startedIn = Math.round(await page.eval('window.__start'));
+    assert.ok(startedIn <= 200, 'the answer becomes a tag and the world starts moving ' + startedIn + 'ms after the submit');
+    await sleep(Math.max(0, 500 - (Date.now() - sent)));
     const mid = await page.eval(`({
       tag: document.getElementById('tag').textContent, tagHidden: document.getElementById('tag').hidden,
       alt: Number(document.getElementById('hudAlt').textContent.replace(/,/g, '')), y0: window.__swarm.scene.cssY(0), vh: window.innerHeight,
@@ -331,6 +340,7 @@ async function main() {
       const last = lines[lines.length - 1].getBoundingClientRect();
       return { on: lines.filter((n) => n.classList.contains('on')).length, gap: Math.round(last.top - tag.bottom), tagTop: tag.top }; })()`);
     assert.equal(end.on, 4, 'all four lines are showing');
+    assert.deepEqual(await page.eval('[...document.querySelectorAll(".tier-line.won")].map((n) => n.textContent + " " + getComputedStyle(n).borderTopStyle)'), ['RARE · 60 solid'], 'the line it stopped on is the one solid, highlighted line');
     // Regression: no fact is ever partly under the HUD, the reveal text or the button. A fact is
     // visible only when all of it is inside the safe area.
     const stray = await page.eval(`(() => { const hud = document.getElementById('hud').getBoundingClientRect().bottom; const floor = document.getElementById('nextBtn').getBoundingClientRect().top;
@@ -399,11 +409,16 @@ async function main() {
     await land(page);
     assert.equal(await text(page, 'resScore'), '475 pts');
     assert.equal(await page.eval('document.querySelectorAll("#flightLog li").length'), 7);
+    // the flight log: one column per round at the altitude reached, on eight zone bands
+    assert.deepEqual(await page.eval('[...document.querySelectorAll("#flightLog li")].map((n) => Number(n.dataset.reached))'), [60, 160, 175, 260, 275, 375, 475]);
+    assert.equal(await page.eval('document.querySelectorAll("#logBands li").length'), 8);
+    const heights = await page.eval('[...document.querySelectorAll("#flightLog .pip-icon")].map((n) => Math.round(n.getBoundingClientRect().top))');
+    for (let i = 1; i < heights.length; i++) assert.ok(heights[i] < heights[i - 1], 'each round sits higher than the one before: ' + heights.join(', '));
     const body = await page.eval('document.querySelector("[data-view=results]").innerText');
     assert.ok(!/%|players|percentile|better than/i.test(body), 'no invented player statistics on the results screen');
     noProblems(page);
     await page.close();
-    return 'ground sky rgb(' + groundSky + '), top sky rgb(' + spaceSky + '); rare climb took ' + took + 'ms';
+    return 'climb began ' + startedIn + 'ms after submit; ground sky rgb(' + groundSky + '), top sky rgb(' + spaceSky + '); rare climb took ' + took + 'ms';
   });
 
   await scenario('wrong guess, near-miss and timeout all behave and look intentional', async () => {
@@ -736,7 +751,7 @@ async function main() {
   await scenario('prompts.json fails to load: friendly error with retry', async () => {
     const expected = /Failed to load resource|prompts\.json/;
     for (const mode of ['badjson', '500', 'blocked']) {
-      const page = await browser.newPage(calm({ width: 375, height: 667, mobile: true }));
+      const page = track(await browser.newPage(calm({ width: 375, height: 667, mobile: true })));
       server.mode = mode;
       if (mode === 'blocked') await page.send('Network.setBlockedURLs', { urls: ['*prompts.json'] });
       await page.goto(base);
@@ -1111,13 +1126,13 @@ async function main() {
     await page.close();
 
     // a night owl: 2am local time
-    const night = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', initScript: fakeClock('2026-10-09T02:10:00Z') });
+    const night = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', realHours: true, initScript: fakeClock('2026-10-09T02:10:00Z') });
     assert.equal(await night.eval('document.getElementById("nightLine").hidden'), false);
     assert.equal(await text(night, 'nightLine'), 'studying late? classic Tech.');
     assert.deepEqual(await night.eval('JSON.parse(localStorage.getItem("swarm.sightings")).found'), ['night']);
     noProblems(night);
     await night.close();
-    const day2 = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', initScript: fakeClock('2026-10-09T14:10:00Z') });
+    const day2 = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', realHours: true, initScript: fakeClock('2026-10-09T14:10:00Z') });
     assert.equal(await day2.eval('document.getElementById("nightLine").hidden'), true, 'not in the afternoon');
     await day2.close();
   });
@@ -1285,7 +1300,7 @@ async function main() {
   });
 
   await scenario('page weight, slow 3G load, nothing external, share metadata, 404', async () => {
-    const page = await browser.newPage(calm({ width: 375, height: 667, mobile: true }));
+    const page = track(await browser.newPage(calm({ width: 375, height: 667, mobile: true })));
     await page.send('Network.setCacheDisabled', { cacheDisabled: true });
     await page.send('Network.emulateNetworkConditions', { offline: false, latency: 400, downloadThroughput: 50000, uploadThroughput: 50000 });
     const t0 = Date.now();

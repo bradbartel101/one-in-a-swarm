@@ -80,11 +80,11 @@ That one command runs all three of these:
 |---|---|
 | `npm test` | Unit tests: matching, daily seed and rotation, timers, scoring, saved data, colour contrast, file checks |
 | `npm run validate` | Content validator for `data/prompts.json` |
-| `npm run test:e2e` | 27 scenarios in headless Chrome: full daily and infinite runs, the climb and reveal card, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
+| `npm run test:e2e` | 30 scenarios in headless Chrome: full daily and infinite runs, the climb (starting within 200ms) and the reveal, a page hidden mid-climb, a frame loop that dies, captions one at a time, the frozen schedule against a changed prompt bank, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
 
 `npm run screens` plays flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900
 and saves screenshots of every zone, some sightings, a secret answer, the One in a Swarm moment and
-the results into `screenshots/v3/`. It also refreshes the link-preview image.
+the results into `screenshots/v4/`. It also refreshes the link-preview image.
 
 ## Adding or changing prompts
 
@@ -112,8 +112,19 @@ X Tenth and Home | 10th and Home :: A note shown after a correct answer.
 - The build refuses a prompt with fewer than 25 answers, anything other than exactly one `X`,
   two answers a player could not tell apart, or prompt text over 90 characters.
 
-Only include answers you are sure are real. Changing the set of prompt ids reshuffles the daily
-rotation for everyone, so ship prompt additions and removals just after 00:00 UTC.
+**The daily schedule is frozen.** `data/schedule.json` pins every date to its seven prompt ids, a
+year ahead. A day that is in the file never changes, whatever you do to the prompt bank; prompts
+you add are only drawn into days appended later. Extend it with:
+
+```bash
+npm run build:schedule
+```
+
+Run that at least once a year (it appends days; it never rewrites one). Do not delete or rename a
+prompt id that is still scheduled: the build refuses, and the game would fall back to an
+unscheduled draw on those days. CI checks that no published day has changed.
+
+Only include answers you are sure are real.
 
 The daily rotation never repeats a prompt within `floor(prompts / 7)` days (4 days with 32 prompts).
 
@@ -142,8 +153,9 @@ data/prompts.json        the prompt bank (generated)
 assets/fonts/            Press Start 2P and its licence
 tools/                   prompt source and build, validator
 tests/                   unit tests, and tests/e2e for headless Chrome
-screenshots/v3/          the latest `npm run screens` output
-SWARM-V3.md              the v3 checklist with evidence
+screenshots/v4/          the latest `npm run screens` output
+data/schedule.json       each date's seven prompts, frozen (generated, append-only)
+SWARM-V3.md, SWARM-V4.md the v3 and v4 checklists with evidence
 SHIP.md                  release checklist with evidence
 HUMAN-TODO.md            what still needs a person
 ```
