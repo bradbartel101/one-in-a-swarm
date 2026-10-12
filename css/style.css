@@ -101,12 +101,12 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
 .fact::after { content: ""; position: absolute; top: 50%; border-top: 2px dotted rgba(244, 241, 230, 0.7); }
 .fact.left::after { left: calc(100% + 6px); width: 100vw; }
 .fact.right::after { left: calc(100% + 4px); width: var(--ruler, 108px); }
-.tier-line { position: absolute; left: 0; right: 0; border-top: 3px dashed var(--line, var(--edge)); opacity: 0; }
+.tier-line { position: absolute; left: 0; right: var(--ruler, 90px); /* stops short of the ruler's numbers */ border-top: 3px dashed var(--line, var(--edge)); opacity: 0; }
 .tier-line.on { opacity: 1; animation: line-pulse 0.5s ease-out; } /* a pulse as the answer passes */
 .tier-line.won { border-top: 5px solid var(--line, var(--edge)); margin-top: -1px; box-shadow: 0 0 12px var(--line, var(--edge)); } /* where it stopped */
 .tier-line.won span { outline: 2px solid #ffffff; }
 @keyframes line-pulse { 0% { opacity: 0; transform: scaleY(1); } 30% { opacity: 1; transform: scaleY(3.5); } 100% { opacity: 1; transform: scaleY(1); } }
-.tier-line span { position: absolute; right: calc(var(--ruler, 90px) + 6px); top: -13px; padding: 0.1rem 0.45rem; font-family: var(--pixel); font-size: 0.6rem; line-height: 1.6; background: var(--line, var(--panel)); color: var(--tier-ink); border-color: var(--tier-ink); }
+.tier-line span { position: absolute; right: 6px; top: -13px; padding: 0.1rem 0.45rem; font-family: var(--pixel); font-size: 0.6rem; line-height: 1.6; background: var(--line, var(--panel)); color: var(--tier-ink); border-color: var(--tier-ink); }
 .tag {
   position: fixed; z-index: 2; left: 50%; max-width: 46vw; padding: 0.35rem 0.6rem; font-size: 0.95rem; line-height: 1.2;
   background: var(--accent); color: var(--accent-ink); border: 3px solid var(--accent-ink);
@@ -127,6 +127,8 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
   transition: opacity 0.3s linear;
 }
 .caption.out { opacity: 0; }
+/* captions belong to the flight: never over the title screen panels' text or the results */
+body[data-phase="results"] .caption, body[data-phase="infover"] .caption, body[data-phase="error"] .caption { display: none; }
 .toast::first-line { font-size: 0.55rem; }
 .sight-grid { list-style: none; margin: 0.4rem 0 0.6rem; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(8.6rem, 1fr)); gap: 0.3rem; }
 .sight-grid li { display: flex; align-items: center; gap: 0.4rem; padding: 0.2rem 0.35rem; font-size: 0.78rem; background: var(--panel-2); min-width: 0; }
@@ -303,7 +305,7 @@ section[data-view="between"] { position: fixed; inset: 0; pointer-events: none; 
 .reveal-answer::after { content: "\201D"; }
 .reveal.is-miss .reveal-answer::before, .reveal.is-miss .reveal-answer::after { content: ""; }
 .reveal-points { margin: 0 0 0.45rem; font-size: 0.58rem; line-height: 1.7; color: var(--accent); }
-.reveal-quip { margin: 0; font-size: 0.9rem; }
+.reveal-quip { white-space: pre-line; margin: 0; font-size: 0.9rem; }
 .reveal.is-miss .tier-name { color: #c3ccd6; }
 .reveal.is-miss .reveal-points { color: var(--muted); }
 .reveal-foot { position: absolute; left: 50%; bottom: calc(max(12px, env(safe-area-inset-bottom))); transform: translateX(-50%); width: min(94%, 24rem); text-align: center; pointer-events: auto; }

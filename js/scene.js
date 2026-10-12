@@ -103,6 +103,8 @@
     let dim = 0;
     let trick = null; // { name, start, ms }
     let look = false; // glancing down at the answer box
+    let safeTop = -Infinity;
+    let safeBottom = Infinity;
     let popped = false;
     let flagUp = false;
     const boxes = {}; // hit boxes in art pixels, refreshed every frame
@@ -897,6 +899,7 @@
         px(x - len, y, len, 1, '#f4f1e6');
         if (s % 10 === 0) {
           px(x - len, y + 1, len, 1, '#00213d'); // a hairline of shadow keeps it readable on any sky
+          if (y - 3 < safeTop || y + 4 > safeBottom) continue; // no label under the HUD, the reveal or the answer bar
           const label = compact(feetFor(s));
           text(label, x - 7, y - 1, '#00213d');
           text(label, x - 8, y - 2, '#f4f1e6');
@@ -951,6 +954,8 @@
       setAnchor(frac) { anchor = frac; },
       setMood(m) { mood = m; },
       setLook(on) { look = !!on; },
+      // Rows of the canvas that ruler labels may be drawn in.
+      setSafe(top, bottom) { safeTop = top; safeBottom = bottom; },
       // A small cloud of pollen left behind as a climb begins.
       pollen(t) { if (!still()) for (let i = 0; i < 14; i++) particles.push({ born: t, life: 700 + hash(i * 7 + t) * 500, x: beeX() + 2 + hash(i * 3 + t) * 12, y: anchorRow() + 4, vx: (hash(i * 13 + t) - 0.5) * 26, vy: 20 + hash(i * 5 + t) * 30, bee: false, color: i % 2 ? '#ffe58a' : '#fff7d1', size: 1 }); },
       skyColor: skyAt,

@@ -249,6 +249,7 @@ async function main() {
       await page.enter();
     }
     await waitPhase(page, 'results');
+    assert.equal(await page.eval('document.getElementById("caption").getClientRects().length'), 0, 'no caption floats over the results');
     assert.equal(await text(page, 'resScore'), '330 pts');
     assert.equal(await text(page, 'resAlt'), feet(330));
     assert.equal(await text(page, 'resBand'), C.bandFor(330).name.toUpperCase());

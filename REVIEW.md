@@ -231,3 +231,35 @@ Not right yet, and left:
 - The bee is still small, and mid-flip it smears for a few frames.
 - "Tested in a headless browser" is not "played on a phone". Sound, touch targets on the canvas
   and real frame rate are still unverified by a person.
+
+# v4 — bugs, and the remaining gap in feel
+
+Reference: the written description of Krillion in the v4 brief (feel and pacing only; no site was visited, nothing was copied).
+
+## v4 iteration 1 — first full run
+- Tests: 28 of 30 browser scenarios. Two real failures:
+  - The "NEW SIGHTING" toast sat on the start panel after the panel grew a status line, and on the answer bar when it appeared during a climb. Fixed: the safe area is measured again when a toast shows, and it always stops above the answer bar.
+  - The near-miss check typed a slip that the rules correctly refuse as ambiguous ("Unversity of Georgia" is one letter from two answers). The test now picks a slip the rules accept.
+- Not a game bug, but it cost hours: the test machine was asleep with its lid closed, so timed tests stalled. The harness now fails any browser command that gets no reply in 30 s.
+
+## v4 iteration 2 — the screenshots, as a skeptical player
+Differences from the reference, and what was done:
+- Ruler numbers ran under the HUD and through the reveal text. Fixed: ruler numbers are drawn only inside the safe area.
+- The winning tier line struck through the ruler number beside it. Fixed: tier lines stop short of the ruler.
+- The reveal's extra note ran into the quip as one sentence. Fixed: one line of quip, extras on their own line.
+- A campus caption floated over the results screen. Fixed, with a test.
+- Still different, and left: the start panel covers part of the lawn on a phone, so some of the new foreground detail is hidden there; the header buttons stay fixed over the results column when it scrolls; the reference alternates facts on both sides, ours keep them on the left on a phone because the ruler takes the right edge.
+- Tests after the fixes: 106 unit, content OK, 30 of 30 browser scenarios.
+
+## v4 final checklist
+- PASS — climb starts within 200 ms: measured in the page, 23 ms ("the climb").
+- PASS — hidden then visible mid-climb always ends in the reveal: "page hidden mid-climb" scenario.
+- PASS — one caption at a time, no text under the HUD or over the title: "captions" and "the climb" scenarios; screenshots -01, -12, -19.
+- PASS — secrets never clear later typing: "easter eggs" scenario.
+- PASS — points to feet at five checkpoints: unit test.
+- PASS — about 150 and about 350 end in visibly different zones: screenshots -12 (8,893 ft) and -19 (40,000 ft).
+- PASS — 700 reaches the Moon and plants the flag: "a perfect 700" scenario; screenshot -23.
+- PASS — daily schedule frozen by date: tests/schedule.test.js and the "daily schedule" scenario.
+- PASS — no console errors, reduced motion works, all tests pass: every scenario ends with a console check; "reduced motion" scenario; npm run test:all.
+
+Open decision for the owner: the round clock now pauses while the page is hidden, as the v4 brief asks. That reverses the v1 rule that switching tabs gains nothing (HUMAN-TODO 4b).
