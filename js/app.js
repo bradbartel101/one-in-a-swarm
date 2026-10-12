@@ -184,6 +184,9 @@
     const toast = $('toast');
     toast.textContent = 'NEW SIGHTING\n' + name;
     toast.hidden = false;
+    // The panels may have just grown a line (a status message, the sightings count): measure again.
+    aimCamera();
+    window.setTimeout(aimCamera, 0);
     announce('New sighting: ' + name + '.');
     toastTimer = window.setTimeout(() => {
       toast.hidden = true;
@@ -472,9 +475,9 @@
     const phase = document.body.dataset.phase;
     let top = $('hud').hidden ? 56 : $('hud').getBoundingClientRect().bottom + 4;
     let bottom = h;
-    if (view === 'play' && phase !== 'climb') {
-      top = $('promptCard').getBoundingClientRect().bottom + 4;
-      bottom = $('dock').getBoundingClientRect().top - 4;
+    if (view === 'play') {
+      if (phase !== 'climb') top = $('promptCard').getBoundingClientRect().bottom + 4;
+      if ($('dock').getClientRects().length) bottom = $('dock').getBoundingClientRect().top - 4;
     } else if (view === 'between') { // between the reveal text and the button
       top = $('reveal').getBoundingClientRect().bottom - 14;
       bottom = $('revealFoot').getBoundingClientRect().top - 4;

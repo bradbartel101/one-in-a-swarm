@@ -443,8 +443,10 @@ async function main() {
     await page.enter();
     assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'after 400ms the same Enter goes through');
     // near-miss
-    const target = p.answers.find((a) => !/\d/.test(a.name) && a.name.length >= 8);
-    const typo = target.name.slice(0, 2) + target.name.slice(3);
+    // a one-letter slip that the rules accept as a near miss (some are refused as ambiguous)
+    const slip = (a) => a.name.slice(0, 2) + a.name.slice(3);
+    const target = p.answers.find((a) => { if (/\d/.test(a.name) || a.name.length < 8) return false; const m = C.matchAnswer(p, slip(a)); return m.fuzzy && m.answer && m.answer.name === a.name; });
+    const typo = slip(target);
     await page.waitFor('!document.getElementById("guess").dataset.locked', 3000, 'the lock to lift');
     const before = await barScale(page);
     await guess(page, typo);
