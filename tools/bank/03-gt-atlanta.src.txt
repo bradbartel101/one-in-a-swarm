@@ -771,7 +771,7 @@ D Kirby Smart :: Raised in Bainbridge.
 ! Burt Reynolds :: born in Michigan and raised in Florida
 ! Bulldogs :: a team
 
-@cokebrands | ATLANTA | Name a drink made by The Coca-Cola Company | pool=gt | type=open | clar=any brand it owns or has sold, past or present
+@cokebrands | ATLANTA | Name a drink made by The Coca-Cola Company | pool=gt | type=open | clar=any brand it owns or has ever sold
 C Coca-Cola | Coke | Coca Cola | Coke Classic | Coca-Cola Classic
 C Diet Coke | Diet Coca-Cola
 C Sprite
@@ -1451,7 +1451,7 @@ R Ansley Park
 ! King and Queen Towers :: in Sandy Springs, outside the city
 ! Eddie's Attic :: in Decatur
 
-@southernfood | THE SOUTH | Name a Southern food | pool=gt | type=open | clar=dishes, sides, sweets and drinks of the American South
+@southernfood | THE SOUTH | Name a Southern food | pool=gt | type=open | clar=dishes, sides, sweets and drinks of the South
 C Fried Chicken
 C Grits | Shrimp and Grits | Cheese Grits
 C Biscuits | Biscuit | Biscuits and Gravy | Buttermilk Biscuits
@@ -1894,7 +1894,7 @@ X Benz or Beamer | Benz or a Beamer :: From the "New Jersey Drive" soundtrack in
 ! Georgia on My Mind :: Ray Charles
 ! Royal Flush :: Big Boi, solo, with André 3000 and Raekwon
 
-@united | ATLANTA SPORTS | Name a player from Atlanta United history | pool=gt | type=open | unverified | source=Wikipedia's list of players is complete only to April 2021; later players are from memory | clar=anyone who has played for the club since 2017
+@united | ATLANTA SPORTS | Name a player from Atlanta United history | pool=gt | type=open | unverified | source=Wikipedia's list of players is complete only to April 2021; later players are from memory | clar=anyone who has played for the club
 C Josef Martínez | Josef Martinez | Josef :: The King. MVP, Golden Boot and MLS Cup in 2018.
 C Miguel Almirón | Miguel Almiron | Almiron | Miggy
 C Brad Guzan | Guzan
@@ -2102,6 +2102,27 @@ R Sunny Side Up Eggs | Over Easy Eggs | Over Easy | Sunny Side Up
 ! Pizza :: no
 ! Tacos :: no
 ! Beer :: no alcohol
+R Two Egg Breakfast | 2 Egg Breakfast
+R Unsweet Tea | Unsweetened Tea
+R Diet Coke
+R Sprite
+R Sausage Biscuit
+R Grilled Chicken Salad
+R Garden Salad | Side Salad
+R Egg Sandwich
+R Lemonade | Minute Maid Lemonade
+! Pancakes :: Waffle House does not serve pancakes
+! French Toast :: not on the menu
+! Fries :: hashbrowns, not fries
+! French Fries :: hashbrowns, not fries
+! Milkshake :: not on the menu
+! Chicken and Waffles :: not on the menu
+! Onion Rings :: not on the menu
+! Belgian Waffle :: the waffles are the thin classic kind
+! Chicken Biscuit :: that is the other Georgia chain
+! Hot Dog :: not on the menu
+! Pizza :: not on the menu
+! Bagel :: not on the menu
 
 @chickfila | ATLANTA | Name something on the Chick-fil-A menu | pool=gt | type=open | unverified | source=written from memory of the menu; not checked against the current one | clar=food, drinks and sauces, past or present
 C Chicken Sandwich | Chick-fil-A Chicken Sandwich | Original Chicken Sandwich | Sandwich

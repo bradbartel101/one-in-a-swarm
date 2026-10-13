@@ -1,8 +1,8 @@
 {
   "id": "traditions",
-  "pool": "gt",
-  "category": "TRADITIONS",
+  "category": "Traditions",
   "text": "Name a Georgia Tech tradition or piece of campus lore",
+  "retired": true,
   "answers": [
 {"name":"Ramblin' Wreck","tier":"common","aliases":["Ramblin Reck","Wreck","Reck","1930 Ford Model A","Model A"]},
 {"name":"Buzz","tier":"common"},

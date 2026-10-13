@@ -3,7 +3,7 @@
   "pool": "gt",
   "category": "ATLANTA",
   "text": "Name a drink made by The Coca-Cola Company",
-  "clarifier": "any brand it owns or has sold, past or present",
+  "clarifier": "any brand it owns or has ever sold",
   "answers": [
 {"name":"Coca-Cola","tier":"common","aliases":["Coke","Coke Classic","Coca-Cola Classic"]},
 {"name":"Diet Coke","tier":"common","aliases":["Diet Coca-Cola"]},

@@ -3,7 +3,7 @@
   "pool": "gt",
   "category": "GEORGIA",
   "text": "Name an official state symbol of Georgia",
-  "clarifier": "the state bird, the state fruit, and so on",
+  "clarifier": "the state bird, state fruit and so on",
   "answers": [
 {"name":"Peach","tier":"common","aliases":["Peaches"],"note":"The state fruit."},
 {"name":"Brown Thrasher","tier":"common","aliases":["Thrasher"],"note":"The state bird. Atlanta's hockey team was named for it."},

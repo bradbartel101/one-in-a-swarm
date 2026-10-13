@@ -1,9 +1,8 @@
 {
   "id": "hq",
-  "pool": "gt",
-  "category": "ATLANTA",
+  "category": "Atlanta",
   "text": "Name a company headquartered in metro Atlanta",
-  "clarifier": "U.S. headquarters count",
+  "retired": true,
   "answers": [
 {"name":"Coca-Cola","tier":"common","aliases":["Coke","The Coca-Cola Company"]},
 {"name":"Delta Air Lines","tier":"common","aliases":["Delta"]},

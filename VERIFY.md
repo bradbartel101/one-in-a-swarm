@@ -188,6 +188,6 @@ These answers are **not in the game**. Each was left out because I was not confi
 
 - [ ] **Name a player from Atlanta United history** (`united`, 87 answers): Wikipedia's list of players is complete only to April 2021; later players are from memory
 
-- [ ] **Name something on the Waffle House menu** (`wafflehouse`, 72 answers): written from memory of the menu; not checked against the current one
+- [ ] **Name something on the Waffle House menu** (`wafflehouse`, 81 answers): written from memory of the menu; not checked against the current one
 
 - [ ] **Name something on the Chick-fil-A menu** (`chickfila`, 82 answers): written from memory of the menu; not checked against the current one

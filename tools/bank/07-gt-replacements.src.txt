@@ -1,0 +1,1003 @@
+# Prompt bank v2: gt prompts that replace traditions, head coaches and Atlanta headquarters, and bring the pool to 60.
+
+@atlnonstop | ATLANTA | Name a city you can fly to nonstop from Atlanta | pool=gt | type=open | source=Wikipedia, Hartsfield-Jackson airport destination table, read October 2026 | clar=scheduled passenger routes, including seasonal ones
+C Chicago | Midway | O'Hare
+C London
+C Los Angeles
+C Miami
+C New York | New York City | NYC | JFK | LaGuardia
+C Orlando
+T Dallas | Fort Worth | Dallas/Fort Worth | DFW | McKinney
+T Las Vegas
+T Paris
+S Amsterdam
+S Austin
+S Baltimore
+S Boston
+S Cancún | Cancun
+S Charlotte
+S Denver
+S Detroit
+S Fort Lauderdale
+S Honolulu | Hawaii | Oahu
+S Houston | Hobby
+S Minneapolis | St. Paul | Minneapolis/St. Paul | Twin Cities
+S Nashville
+S New Orleans
+S Philadelphia
+S Phoenix
+S Rome
+S Salt Lake City
+S San Diego
+S San Francisco
+S Savannah
+S Seattle | Tacoma | Seattle/Tacoma
+S Tampa
+S Tokyo | Haneda
+S Washington | Washington, D.C. | DC | Washington DC | Dulles | Reagan | Reagan National
+R Abu Dhabi
+R Accra
+R Addis Ababa
+R Albany
+R Albuquerque
+R Anchorage
+R Aruba
+R Asheville
+R Aspen
+R Athens
+R Augusta
+R Bangor
+R Barcelona
+R Baton Rouge
+R Bermuda
+R Birmingham
+R Bogotá
+R Boise
+R Bozeman
+R Brunswick
+R Brussels
+R Buenos Aires
+R Buffalo
+R Burbank
+R Burlington
+R Calgary
+R Cape Town
+R Charleston
+R Chattanooga
+R Cincinnati
+R Cleveland
+R Colorado Springs
+R Columbia
+R Columbus
+R Copenhagen
+R Dayton
+R Daytona Beach
+R Des Moines
+R Destin | Fort Walton Beach
+R Doha
+R Dublin
+R Edinburgh
+R El Paso
+R Fort Myers
+R Frankfurt
+R Gainesville
+R Grand Cayman | George Town | Cayman Islands
+R Grand Rapids
+R Greensboro
+R Greenville | Spartanburg | Greenville-Spartanburg | Greer
+R Guadalajara
+R Hartford
+R Hilton Head
+R Huntsville
+R Indianapolis
+R Istanbul
+R Jackson
+R Jackson Hole
+R Jacksonville
+R Johannesburg
+R Kansas City
+R Key West
+R Knoxville
+R Lagos
+R Lexington
+R Lima
+R Little Rock
+R Louisville
+R Madison
+R Madrid
+R Manchester
+R Marrakesh
+R Maui | Kahului
+R Memphis
+R Mexico City
+R Milan
+R Milwaukee
+R Mobile
+R Montego Bay | Jamaica
+R Montgomery
+R Montréal
+R Munich
+R Myrtle Beach
+R Nassau | Bahamas
+R Newark
+R Nice
+R Norfolk
+R Oklahoma City
+R Omaha
+R Ontario
+R Orange County | Santa Ana | John Wayne
+R Palm Springs
+R Panama City | Panama
+R Pensacola
+R Pittsburgh
+R Portland
+R Providence
+R Puerto Vallarta
+R Punta Cana
+R Raleigh | Durham | Raleigh/Durham | RDU
+R Reno | Tahoe | Lake Tahoe
+R Richmond
+R Rio de Janeiro
+R Rochester
+R Sacramento
+R San Antonio
+R San José | San Jose | Costa Rica
+R San José del Cabo | Cabo | Los Cabos | Cabo San Lucas
+R San Juan | Puerto Rico
+R Santiago | Santiago de Chile
+R Sarasota | Bradenton
+R Seoul | Incheon
+R Spokane
+R St. Louis
+R St. Thomas
+R Syracuse
+R São Paulo
+R Tallahassee
+R Tel Aviv
+R Toronto
+R Tucson
+R Tulsa
+R Vail | Eagle
+R Valdosta
+R Vancouver
+R Venice
+R West Palm Beach
+R Wichita
+R Wilmington
+R Zurich
+D Alexandria
+D Allentown
+D Antigua
+D Appleton
+D Barbados
+D Belize City | Belize
+D Bloomington | Normal
+D Bonaire
+D Cartagena
+D Cedar Rapids | Iowa City
+D Charlottesville
+D Cozumel
+D Curaçao
+D Dothan
+D Evansville
+D Fargo
+D Fayetteville | Bentonville | Northwest Arkansas
+D Fort Wayne
+D Green Bay
+D Grenada
+D Guatemala City
+D Gulfport | Biloxi
+D Harrisburg
+D Kingston
+D Lafayette
+D Lakeland
+D León | El Bajío | Leon Guanajuato
+D Liberia | Guanacaste
+D Marsh Harbour
+D Melbourne
+D Moline | Quad Cities
+D Monroe
+D Monterrey
+D Montrose
+D Naples
+D New Haven
+D Panama City Beach | Panama City, Florida
+D Providenciales | Turks and Caicos | Provo
+D Puerto Plata
+D Querétaro
+D Quito
+D Roanoke
+D Roatán
+D San Pedro Sula
+D San Salvador
+D Santo Domingo
+D Shreveport
+D Sioux Falls
+D South Bend
+D Springfield | Branson
+D St. Croix
+D St. Kitts
+D St. Lucia | Saint Lucia
+D St. Maarten | Sint Maarten | Saint Martin | St. Martin
+D Steamboat Springs | Hayden | Steamboat
+D Tri-Cities | Bristol | Johnson City | Kingsport
+D Tulum
+D White Plains
+X North Eleuthera | Eleuthera :: A Bahamian out-island with its own flight from Atlanta.
+! Atlanta :: that is where you are leaving from
+! Macon :: no scheduled passenger flights from Atlanta
+! Sydney :: no nonstop; connect through the West Coast
+! Dubai :: no nonstop on the list checked
+! Beijing :: no nonstop on the list checked
+! Shanghai :: no nonstop on the list checked
+! Hong Kong :: no nonstop on the list checked
+! Mumbai :: no nonstop on the list checked
+! Delhi :: no nonstop on the list checked
+! Moscow :: no nonstop
+! Havana :: no nonstop on the list checked
+! Berlin :: no nonstop on the list checked
+! Lisbon :: no nonstop on the list checked
+! Reykjavik :: no nonstop on the list checked
+! Stuttgart :: once a Delta route, not on the list checked
+! Düsseldorf :: once a Delta route, not on the list checked
+! Shannon :: no nonstop on the list checked
+! Singapore :: no nonstop
+! Auckland :: no nonstop
+! Oakland :: no nonstop on the list checked
+! Long Beach :: no nonstop on the list checked
+! Marietta :: a suburb with no airline service
+
+@atlairlines | ATLANTA | Name an airline that flies passengers out of Atlanta | pool=gt | type=closed | count=27 | source=Wikipedia, Hartsfield-Jackson airport destination table, read October 2026; regional brands are counted with their parent | clar=scheduled service at Hartsfield-Jackson today | strip=airlines,airways,air,lines
+C Delta Air Lines | Delta | Delta Connection
+C Southwest Airlines | Southwest
+C American Airlines | American | American Eagle
+T United Airlines | United | United Express
+T Frontier Airlines | Frontier
+S JetBlue | Jet Blue | JetBlue Airways
+S Alaska Airlines | Alaska
+S British Airways | BA
+S Air France
+S Lufthansa
+S KLM | KLM Royal Dutch Airlines
+S Air Canada | Air Canada Express
+R Virgin Atlantic | Virgin
+R Qatar Airways | Qatar
+R Turkish Airlines | Turkish
+R Korean Air | Korean Air Lines | Korean
+R Sun Country Airlines | Sun Country
+R Aeroméxico | Aeromexico | Aeroméxico Connect
+R WestJet | West Jet
+R Scandinavian Airlines | SAS | Scandinavian
+D Avelo Airlines | Avelo
+D Copa Airlines | Copa
+D Etihad Airways | Etihad
+D LATAM | LATAM Perú | LATAM Airlines | LAN
+D Volaris
+D Denver Air Connection :: Flies a small-town route to Greenville, Mississippi.
+X Ethiopian Airlines | Ethiopian :: Flies Atlanta to Addis Ababa.
+! Spirit Airlines :: not on the list of airlines checked
+! AirTran :: Atlanta's old low-fare airline was folded into Southwest by 2014
+! Eastern Air Lines :: Atlanta's other hometown airline shut down in 1991
+! ValuJet :: became AirTran in 1997
+! Emirates :: does not fly to Atlanta
+! Allegiant :: does not fly to Atlanta
+! Hawaiian Airlines :: does not fly to Atlanta
+! Breeze Airways :: not on the list of airlines checked
+! Air India :: does not fly to Atlanta
+! Japan Airlines :: does not fly to Atlanta
+! Singapore Airlines :: does not fly to Atlanta
+! Pan Am :: gone since 1991
+! Northwest :: merged into Delta
+! FedEx :: cargo, not passengers
+! UPS :: cargo, not passengers
+
+@gagovernors | GEORGIA | Name a governor of Georgia | pool=gt | type=closed | count=77 | source=Wikipedia, List of governors of Georgia: every state governor from 1776 to Brian Kemp, each person once | clar=state governors since 1776, not colonial ones
+C Jimmy Carter | James Carter | James Earl Carter | Carter :: Studied at Tech before the Naval Academy.
+C Zell Miller | Miller
+C Sonny Perdue | George Perdue | Perdue
+C Nathan Deal | Deal
+C Brian Kemp | Kemp
+T Lester Maddox | Maddox
+T Roy Barnes | Barnes
+S Button Gwinnett | Gwinnett
+S George Walton | Walton
+S Lyman Hall | Hall :: The signer of the Declaration, not the Tech president of the same name.
+S Alexander H. Stephens | Alexander Stephens | Stephens
+S Richard B. Russell Jr. | Richard Russell | Dick Russell | Russell
+S Eugene Talmadge
+S Herman Talmadge
+S Carl Sanders | Sanders
+S George Busbee | Busbee
+S Joe Frank Harris | Joe Harris
+R Archibald Bulloch | Bulloch
+R John A. Treutlen | John Treutlen | Treutlen
+R John Houstoun | Houstoun
+R Samuel Elbert | Elbert
+R Edward Telfair | Telfair
+R Jared Irwin | Irwin
+R James Jackson | Jackson
+R David Emanuel | Emanuel
+R Josiah Tattnall | Tattnall
+R John Milledge | Milledge
+R David Brydie Mitchell | David Mitchell | David B. Mitchell | Mitchell
+R Peter Early | Early
+R William Rabun | Rabun
+R Matthew Talbot | Talbot
+R John Clark | John Clarke | Clark
+R George Troup | Troup
+R John Forsyth | Forsyth
+R George Rockingham Gilmer | George Gilmer | Gilmer
+R Wilson Lumpkin | Lumpkin
+R William Schley | Schley
+R George W. Crawford | George Crawford | Crawford
+R George W. Towns | George Towns | Towns
+R Howell Cobb | Cobb
+R Charles J. Jenkins | Charles Jenkins | Jenkins
+R Rufus Bullock | Bullock
+R Alfred H. Colquitt | Alfred Colquitt | Colquitt
+R John B. Gordon | John Gordon | Gordon
+R Allen D. Candler | Allen Candler | Candler
+R Joseph M. Terrell | Joseph Terrell | Terrell
+R John M. Slaton | John Slaton | Slaton
+R Hugh Dorsey | Dorsey
+R Eurith D. Rivers | Eurith Rivers | E.D. Rivers | Ed Rivers | Rivers
+R Ellis Arnall | Arnall
+R Marvin Griffin | Griffin
+R Ernest Vandiver | Vandiver
+D John Wereat | Wereat
+D Richard Howly | Howly
+D George Wells | Wells
+D Nathan Brownson | Brownson
+D John Martin | Martin
+D George Mathews | Mathews
+D George Handley | Handley
+D Charles James McDonald | Charles McDonald | McDonald
+D Herschel V. Johnson | Herschel Johnson
+D Joseph E. Brown | Joe Brown
+D James Johnson
+D Thomas H. Ruger | Thomas Ruger | Ruger
+D Benjamin F. Conley | Benjamin Conley | Conley
+D James Milton Smith | James Smith
+D James S. Boynton | James Boynton | Boynton
+D Henry Dickerson McDaniel | Henry McDaniel | Henry D. McDaniel | McDaniel
+D William J. Northen | William Northen | Northen
+D William Yates Atkinson | William Atkinson | Atkinson
+D M. Hoke Smith | M. Smith | Hoke Smith
+D Joseph Mackey Brown | Joseph M. Brown | Little Joe Brown
+D Thomas W. Hardwick | Thomas Hardwick | Hardwick
+D Clifford Walker | Walker
+D Lamartine Griffin Hardman | Lamartine Hardman | L.G. Hardman | Hardman
+D Melvin E. Thompson | Melvin Thompson | M.E. Thompson | Thompson
+X Nathaniel Edwin Harris | Nathaniel Harris | Nathaniel E. Harris | Nat Harris :: As a legislator he wrote the bill that created Georgia Tech.
+! James Oglethorpe :: founded the colony; he was never a state governor
+! Stacey Abrams :: lost the 2018 and 2022 elections
+! Sam Nunn :: a senator, never governor
+! Johnny Isakson :: a senator; he lost the 1990 race for governor
+! Newt Gingrich :: Speaker of the U.S. House, never governor
+! Andrew Young :: mayor of Atlanta; he lost the 1990 primary for governor
+! Maynard Jackson :: mayor of Atlanta
+! Raphael Warnock :: a senator
+! Jon Ossoff :: a senator
+! Burt Jones :: lieutenant governor
+! Casey Cagle :: lieutenant governor
+! Max Cleland :: a senator
+! Ivan Allen Jr. :: mayor of Atlanta
+! James Wright :: a royal governor, before statehood
+! Geoff Duncan :: lieutenant governor
+! David Perdue :: a senator; Sonny Perdue is his cousin
+! Tom Murphy :: Speaker of the Georgia House for 28 years, never governor
+
+@atltallest | ATLANTA | Name one of Atlanta's tallest buildings | pool=gt | type=closed | count=125 | source=Wikipedia, List of tallest buildings in Atlanta: every building of 300 feet or more, read October 2026 | clar=300 feet or taller, inside the city | strip=building,tower,hotel,atlanta,condominiums
+C Bank of America Plaza | Bank of America Tower | BofA Plaza | Bank of America Building :: The tallest building in Georgia, a few blocks from campus.
+C Truist Plaza | SunTrust Plaza | Truist Tower
+C Westin Peachtree Plaza Hotel | Westin Peachtree Plaza | Westin | Peachtree Plaza | The Westin
+T Georgia Pacific Tower | Georgia-Pacific Center | Georgia-Pacific Tower | Georgia-Pacific
+T Atlanta Marriott Marquis | Marriott Marquis
+S One Atlantic Center | IBM Tower
+S 191 Peachtree Tower | 191 Peachtree
+S Promenade II | Promenade | Promenade Two
+S Tower Square | AT&T Midtown Center | BellSouth Center | AT&T Tower
+S 1180 Peachtree | Symphony Tower
+S Signia Hilton Atlanta | Signia | Signia by Hilton
+S One Coca-Cola Plaza | Coca-Cola Headquarters | Coca-Cola Building | Coca-Cola Tower
+S Coda at Tech Square | Coda :: The Tech Square tower that houses Tech researchers.
+S Hyatt Regency Atlanta | Hyatt Regency | Hyatt
+S NCR Global Headquarters | NCR | NCR Headquarters
+S Norfolk Southern Headquarters | Norfolk Southern
+S Square On Fifth | SQ5 :: The student apartment tower in Tech Square.
+R 1072 West Peachtree Street | 1072 West Peachtree
+R 3344 Peachtree | Sovereign
+R GLG Grand-Four Seasons | Four Seasons | GLG Grand | Four Seasons Hotel
+R Waldorf Astoria Atlanta Buckhead | Waldorf Astoria | Mandarin Oriental
+R The Atlantic
+R State of Georgia Building | 2 Peachtree | Two Peachtree
+R The Hue Midtown
+R ViewPoint
+R TWELVE Centennial Park Tower I | Twelve Centennial Park
+R 1075 Peachtree Office Tower
+R Park Avenue Condominiums
+R Terminus 100 | Terminus
+R The Paramount at Buckhead
+R The Ritz-Carlton Residences | Ritz-Carlton Residences
+R 101 Marietta Street
+R Equitable Building | 100 Peachtree
+R Spire
+R Buckhead Grand
+R One Park Tower
+R 1105 West Peachtree
+R 1100 Peachtree
+R Atlanta Plaza 1
+R Park Place
+R Elora at Buckhead
+R 2828 Peachtree
+R Momentum Midtown
+R Two Alliance Center
+R 1280 West
+R 1010 Midtown
+R Tower Place 100
+R 1081 Juniper I
+R 1020 Spring
+D Kinetic
+D 999 Peachtree
+D Mayfair Renaissance
+D 171 17th Street
+D Sam Nunn Atlanta Federal Center | Sam Nunn Federal Center | Atlanta Federal Center
+D Loews Midtown | Loews Atlanta Hotel | Loews
+D Monarch Tower
+D Atlanta Hilton Hotel | Hilton Atlanta
+D Richard B. Russell Federal Building | Russell Federal Building | Richard Russell Federal Building
+D 230 Peachtree Building
+D Harris Tower
+D Southern Bell Telephone Company Building | Southern Bell Building
+D 1081 Juniper II
+D Marquis I | Marquis One
+D Marquis II | Marquis Two
+D 25 Park Place
+D Coastal States Insurance Building
+D Peachtree Center International Tower
+D BB&T Tower
+D Midtown Union Office Building
+D Realm
+D One Georgia Center
+D Mayfair Tower Condominiums
+D Terminus 200
+D The Campanile
+D Regions Plaza
+D 10 Terminus Place
+D Society Atlanta
+D Atlantic House
+D The Legacy at Centennial
+D Resurgens Plaza
+D Nomia
+D 903 Peachtree
+D Emmi Midtown
+D Three Alliance Center
+D Hanover Midtown
+D Sora at Spring Quarter
+D The Proscenium
+D The Oaks at Buckhead
+D The Pinnacle
+D Twelve Atlantic Station
+D The Connector
+D The Grandview
+D Peachtree Center South
+D Georgia Power Company Headquarters | Georgia Power | Georgia Power Building
+D Gallery
+D The St. Regis Atlanta | St. Regis
+D Peachtree Center North
+D W Downtown Atlanta Hotel & Residences | W Downtown | W Hotel Downtown
+D The Dagny Midtown
+D Linea Midtown
+D Ascent Peachtree
+D Mira at Midtown Union
+D Colony Square 100 | Colony Square
+D Crown Plaza & Staybridge Suites Atlanta Midtown | Crowne Plaza Midtown | Crowne Plaza
+D Modera Parkside
+D Phipps Tower
+D The Mark at Atlanta
+D Anthem Technology Center I | Anthem Technology Center
+D 712 West Peachtree
+D The Starling
+D Omni Atlanta Hotel at Centennial Park | Omni Hotel | Omni
+D Museum Tower at Centennial Hill
+D Colony Square 400
+D One Alliance Center
+D Vireo
+D The Concorde
+D Ascent Midtown
+D MAA Midtown
+D 270 Peachtree
+D The Huntley Buckhead
+D Altitude Apartments
+D AMLI Arts Center
+D Merchandise Mart | AmericasMart
+D Coca-Cola USA Building
+X Peachtree Summit
+! King and Queen towers :: the Concourse towers are in Sandy Springs, outside the city
+! Concourse :: in Sandy Springs, outside the city
+! Tech Tower :: famous, but nowhere near 300 feet
+! Georgia State Capitol :: under 300 feet to the top of the dome
+! Ponce City Market :: big, not tall
+! Flatiron Building :: 11 storeys
+! Candler Building :: 17 storeys; Atlanta's tallest in 1906, but under 300 feet
+! Rhodes-Haverty Building :: once Atlanta's tallest, but under 300 feet
+! The Biltmore :: 11 storeys
+! Fox Theatre :: a theatre, not a tall building
+! Clough Commons :: five storeys
+! Empire State Building :: in New York
+! Georgia Tech Hotel :: not on the list
+! SkyView :: a Ferris wheel
+! Stone Mountain :: not a building
+! CNN Center :: not on the list of buildings over 300 feet
+! Georgia Aquarium :: not a tall building
+
+@falconspicks | ATLANTA SPORTS | Name a Falcons first-round draft pick | pool=gt | type=closed | count=61 | source=Wikipedia, List of Atlanta Falcons first-round draft picks, 1966 through the 2026 draft | clar=taken by Atlanta in round one
+C Deion Sanders | Prime Time | Deion :: Fifth overall in 1989.
+C Michael Vick | Mike Vick :: First overall in 2001.
+C Matt Ryan :: Third overall in 2008.
+C Julio Jones | Julio
+T Kyle Pitts
+T Bijan Robinson
+S Tommy Nobis :: The first pick in franchise history, first overall in 1966.
+S Steve Bartkowski
+S Keith Brooking :: The only Tech player the Falcons have taken in the first round.
+S Roddy White | Sharod White
+S Jake Matthews
+S Vic Beasley
+S Calvin Ridley
+S Chris Lindstrom
+S A.J. Terrell | AJ Terrell
+S Drake London
+S Michael Penix Jr. | Michael Penix
+S Jalon Walker
+S James Pearce Jr. | James Pearce
+R Claude Humphrey
+R Mike Kenn
+R Gerald Riggs
+R Bill Fralic
+R Tony Casillas
+R Chris Miller
+R Aundray Bruce
+R Bob Whitfield
+R Devin Bush Sr. | Devin Bush
+R Patrick Kerney
+R T.J. Duckett | TJ Duckett
+R DeAngelo Hall
+R Michael Jenkins
+R Sam Baker
+R Sean Weatherspoon
+R Desmond Trufant
+R Keanu Neal
+R Takkarist McKinley | Takk McKinley
+R Kaleb McGary
+D Randy Johnson
+D George Kunz
+D John Small
+D Joe Profit
+D Clarence Ellis
+D Bubba Bean
+D Warren Bryant
+D Don Smith
+D Junior Miller
+D Bobby Butler
+D Mike Pitts
+D Rick Bryan
+D Tim Green
+D Shawn Collins
+D Steve Broussard
+D Bruce Pickens
+D Mike Pritchard
+D Tony Smith
+D Lincoln Kennedy
+D Michael Booker
+D Jamaal Anderson
+D Peria Jerry
+X Wilson Faumuina
+! Brett Favre :: taken in the second round in 1991
+! Jamal Anderson :: taken in the seventh round in 1994
+! Grady Jarrett :: taken in the fifth round in 2015
+! Deion Jones :: taken in the second round in 2016
+! Jessie Tuggle :: undrafted
+! Tony Gonzalez :: a Kansas City first-rounder who came to Atlanta by trade
+! Andre Rison :: an Indianapolis first-rounder who came to Atlanta by trade
+! Jeff George :: an Indianapolis first-rounder who came to Atlanta by trade
+! Warrick Dunn :: a Tampa Bay first-rounder
+! Kirk Cousins :: a Washington fourth-rounder
+! Calvin Johnson :: Detroit took the Tech receiver second overall in 2007
+! Alge Crumpler :: taken in the second round in 2001
+! William Andrews :: taken in the third round in 1979
+! Devonta Freeman :: taken in the fourth round in 2014
+! John Abraham :: a Jets first-rounder who came to Atlanta by trade
+! Younghoe Koo :: undrafted
+
+
+@gawildlife | GEORGIA | Name a wild animal that lives in Georgia | pool=gt | type=open | clar=mammals, birds, reptiles, fish, even bugs
+C White-tailed Deer | Deer | Whitetail | Whitetail Deer
+C Squirrel | Gray Squirrel | Eastern Gray Squirrel | Fox Squirrel
+C Alligator | American Alligator | Gator
+C Yellow Jacket | Yellowjacket | Yellow Jackets :: Naturally.
+C Black Bear | Bear | American Black Bear
+C Raccoon
+T Opossum | Possum | Virginia Opossum
+T Armadillo | Nine-banded Armadillo
+T Copperhead
+S Coyote
+S Bobcat
+S Red Fox | Fox
+S Gray Fox
+S Rabbit | Eastern Cottontail | Cottontail
+S Chipmunk | Eastern Chipmunk
+S Beaver
+S Skunk | Striped Skunk
+S Bat | Brown Bat | Little Brown Bat | Big Brown Bat
+S Wild Turkey | Turkey
+S Bald Eagle | Eagle
+S Red-tailed Hawk | Hawk
+S Owl | Barred Owl | Great Horned Owl | Screech Owl | Barn Owl
+S Cardinal | Northern Cardinal
+S Blue Jay
+S Mockingbird | Northern Mockingbird
+S Robin | American Robin
+S Crow | American Crow
+S Canada Goose | Goose
+S Mallard | Duck
+S Great Blue Heron | Heron | Blue Heron
+S Rattlesnake | Timber Rattlesnake | Eastern Diamondback | Diamondback Rattlesnake | Pygmy Rattlesnake | Canebrake Rattlesnake
+S Cottonmouth | Water Moccasin
+S Box Turtle | Eastern Box Turtle
+S Snapping Turtle | Common Snapping Turtle | Alligator Snapping Turtle
+S Bullfrog | American Bullfrog | Frog
+S Largemouth Bass | Bass :: Georgia's state fish.
+S Catfish | Channel Catfish | Blue Catfish | Flathead Catfish
+S Wild Hog | Feral Hog | Wild Boar | Feral Pig | Wild Pig
+S Firefly | Lightning Bug
+S Mosquito
+S Fire Ant | Red Imported Fire Ant
+S Honeybee | Honey Bee | Bee :: Georgia's state insect.
+S Cicada
+S Dolphin | Bottlenose Dolphin
+S Manatee | West Indian Manatee
+S Sea Turtle | Loggerhead | Loggerhead Sea Turtle | Green Sea Turtle
+R Brown Thrasher | Thrasher :: Georgia's state bird.
+R Gopher Tortoise :: Georgia's state reptile.
+R Right Whale | North Atlantic Right Whale :: Georgia's state marine mammal; it calves off the coast.
+R Green Tree Frog | Tree Frog | Treefrog :: Georgia's state amphibian.
+R River Otter | Otter
+R Mink
+R Muskrat
+R Groundhog | Woodchuck
+R Weasel | Long-tailed Weasel
+R Flying Squirrel | Southern Flying Squirrel
+R Mole | Eastern Mole
+R Vole
+R Deer Mouse | Mouse | Field Mouse
+R Rat | Norway Rat | Cotton Rat
+R Turkey Vulture | Vulture | Buzzard | Black Vulture
+R Osprey
+R Red-shouldered Hawk
+R Cooper's Hawk
+R Kestrel | American Kestrel
+R Woodpecker | Pileated Woodpecker | Red-bellied Woodpecker | Downy Woodpecker | Red-cockaded Woodpecker
+R Hummingbird | Ruby-throated Hummingbird
+R Bluebird | Eastern Bluebird
+R Carolina Wren | Wren
+R Carolina Chickadee | Chickadee
+R Tufted Titmouse | Titmouse
+R Mourning Dove | Dove
+R Bobwhite | Bobwhite Quail | Northern Bobwhite | Quail
+R Wood Duck
+R Egret | Great Egret | Snowy Egret
+R Pelican | Brown Pelican
+R Wood Stork | Stork
+R Sandhill Crane | Crane
+R Seagull | Gull | Laughing Gull
+R Goldfinch | American Goldfinch
+R Sparrow | House Sparrow | Song Sparrow
+R Starling | European Starling
+R Pigeon | Rock Pigeon
+R Grackle | Common Grackle
+R Black Rat Snake | Rat Snake | Eastern Rat Snake | Chicken Snake
+R King Snake | Kingsnake | Eastern Kingsnake
+R Garter Snake
+R Corn Snake
+R Coral Snake | Eastern Coral Snake
+R Indigo Snake | Eastern Indigo Snake
+R Water Snake | Banded Water Snake | Northern Water Snake
+R Black Racer | Racer
+R Green Anole | Anole | Carolina Anole
+R Skink | Five-lined Skink | Broadhead Skink
+R Fence Lizard | Eastern Fence Lizard
+R Salamander
+R Toad | American Toad | Fowler's Toad
+R Spring Peeper
+R Painted Turtle | Slider | Yellow-bellied Slider | Pond Slider
+R Bream | Bluegill | Sunfish
+R Crappie | Black Crappie
+R Trout | Rainbow Trout | Brook Trout | Brown Trout
+R Striped Bass | Striper
+R Shoal Bass
+R Gar | Longnose Gar
+R Sturgeon | Atlantic Sturgeon
+R Redfish | Red Drum
+R Shrimp | White Shrimp
+R Blue Crab | Crab
+R Fiddler Crab
+R Crawfish | Crayfish | Crawdad
+R Monarch Butterfly | Butterfly | Monarch
+R Tiger Swallowtail | Eastern Tiger Swallowtail | Swallowtail :: Georgia's state butterfly.
+R Dragonfly
+R Praying Mantis | Mantis
+R Wasp | Paper Wasp
+R Hornet | Bald-faced Hornet
+R Bumblebee | Bumble Bee
+R Carpenter Bee
+R Tick | Deer Tick | Lone Star Tick
+R Chigger | Red Bug
+R Gnat
+R Palmetto Bug | Cockroach | Roach | American Cockroach
+R Black Widow | Black Widow Spider
+R Brown Recluse
+R Joro Spider | Joro :: The big yellow spider that arrived in north Georgia around 2013.
+R Spider | Wolf Spider | Orb Weaver | Garden Spider
+R Kudzu Bug
+R June Bug | June Beetle | Japanese Beetle
+R Cricket
+R Grasshopper | Lubber Grasshopper
+R Katydid
+R Luna Moth | Moth
+R Stink Bug
+R Love Bug | Lovebug
+D Wild Horse | Cumberland Island Horse | Feral Horse :: They roam Cumberland Island.
+D Nutria
+D Bobolink
+D Swallow-tailed Kite | Kite
+D Anhinga
+D Ibis | White Ibis
+D Roseate Spoonbill | Spoonbill
+D Painted Bunting | Indigo Bunting | Bunting
+D Whip-poor-will | Chuck-will's-widow
+D Killdeer
+D Kingfisher | Belted Kingfisher
+D Purple Martin | Martin
+D Chimney Swift | Swift
+D Cedar Waxwing | Waxwing
+D Eastern Towhee | Towhee
+D Brown-headed Nuthatch | Nuthatch
+D Catbird | Gray Catbird
+D Wood Thrush | Thrush
+D Warbler | Pine Warbler | Yellow-rumped Warbler
+D Oystercatcher | American Oystercatcher
+D Black Skimmer | Skimmer
+D Piping Plover | Plover
+D Hognose Snake | Eastern Hognose
+D Ringneck Snake | Ring-necked Snake
+D Scarlet Kingsnake | Scarlet Snake
+D Pine Snake
+D Glass Lizard | Legless Lizard
+D Six-lined Racerunner | Racerunner
+D Diamondback Terrapin | Terrapin
+D Softshell Turtle | Spiny Softshell | Florida Softshell
+D Musk Turtle | Stinkpot
+D Bog Turtle
+D Marbled Salamander | Spotted Salamander
+D Flatwoods Salamander
+D Siren | Greater Siren
+D Amphiuma
+D Bowfin | Mudfish
+D Chain Pickerel | Pickerel | Jackfish
+D Redbreast Sunfish | Redbreast
+D Redeye Bass
+D Walleye
+D Shad | American Shad
+D Flounder | Southern Flounder
+D Spotted Seatrout | Speckled Trout | Sea Trout
+D Sheepshead
+D Tarpon
+D Horseshoe Crab
+D Oyster | Eastern Oyster
+D Whelk | Knobbed Whelk :: Georgia's state seashell.
+D Mussel | Freshwater Mussel
+D Shark | Blacktip Shark | Bonnethead | Bull Shark
+D Stingray | Atlantic Stingray | Ray
+D Jellyfish | Cannonball Jellyfish
+D Velvet Ant | Cow Killer
+D Pine Beetle | Southern Pine Beetle
+D Boll Weevil
+D Mole Cricket
+D Walking Stick | Stick Bug
+D Assassin Bug | Wheel Bug
+D Cicada Killer
+D Dirt Dauber | Mud Dauber
+D Earthworm | Worm
+D Millipede
+D Centipede
+D Snail | Slug
+D Pocket Gopher | Southeastern Pocket Gopher
+D Shrew
+D Woodrat | Wood Rat | Packrat
+D Marsh Rabbit | Swamp Rabbit
+D Spotted Skunk
+X Hellbender | Hellbender Salamander | Snot Otter :: A two-foot salamander that lives in north Georgia mountain streams.
+! Bulldog :: a pet, and a rival mascot
+! Dog :: a pet
+! Cat :: a pet
+! Cow :: livestock
+! Chicken :: livestock
+! Horse :: livestock, apart from the wild ones on Cumberland Island
+! Lion :: only at the zoo
+! Tiger :: only at the zoo
+! Giant Panda :: Zoo Atlanta's pandas went home in 2024
+! Gorilla :: only at the zoo
+! Whale Shark :: only at the Georgia Aquarium
+! Beluga :: only at the Georgia Aquarium
+! Moose :: not found in the South
+! Wolf :: red wolves are gone from the wild in Georgia
+! Elk :: no longer wild in Georgia
+! Bison :: no longer wild in Georgia
+! Panther :: no breeding population in Georgia
+! Cougar :: no breeding population in Georgia
+! Mountain Lion :: no breeding population in Georgia
+! Crocodile :: Georgia has alligators, not crocodiles
+! Porcupine :: not found in Georgia
+! Grizzly Bear :: not found in the South
+! Roadrunner :: a bird of the Southwest
+! Buzz :: the mascot, though yellow jackets count
+
+@backpack | CAMPUS LIFE | Name something in a Tech student's backpack | pool=gt | type=open | clar=anything you'd carry to class
+C Laptop | Computer | MacBook | Notebook Computer
+C Calculator | Graphing Calculator | TI-84 | TI-89 | Scientific Calculator
+C Notebook | Spiral Notebook | Composition Book | Notebooks
+C Pencil | Mechanical Pencil | Pencils
+C Charger | Laptop Charger | Phone Charger | Charging Cable | Power Cord | Cable
+C Textbook | Book | Books | Textbooks
+C Water Bottle | Hydro Flask | Nalgene | Stanley | Bottle
+T BuzzCard | Buzz Card | Student ID | ID | ID Card :: Tech's student ID.
+T Pen | Pens
+T Headphones | Earbuds | AirPods | Earphones
+S Phone | Cell Phone | iPhone | Smartphone
+S iPad | Tablet
+S Stylus | Apple Pencil
+S Folder | Folders
+S Binder
+S Paper | Loose-leaf Paper | Notebook Paper | Printer Paper
+S Engineering Paper | Green Engineering Paper | Graph Paper | Engineering Pad
+S Eraser
+S Highlighter | Highlighters
+S Snack | Snacks | Granola Bar | Protein Bar | Chips
+S Umbrella
+S Keys | Dorm Key | Room Key | Car Keys
+S Wallet
+S Mouse | Wireless Mouse | Computer Mouse
+S Flash Drive | USB Drive | Thumb Drive | USB Stick
+S Homework | Problem Set | Pset | Assignment
+S Notes | Lecture Notes | Class Notes
+S Energy Drink | Red Bull | Monster | Celsius
+S Coffee | Thermos | Travel Mug | Coffee Cup
+S Gum | Chewing Gum | Mints
+S Jacket | Hoodie | Sweatshirt | Rain Jacket | Sweater
+S Lunch | Lunchbox | Sandwich | Lunch Box
+S Planner | Agenda | Calendar
+S Hand Sanitizer | Sanitizer
+S Ruler | Straightedge
+S Lab Notebook | Lab Manual | Lab Report
+S Portable Charger | Power Bank | Battery Pack | Portable Battery
+R Lab Goggles | Safety Goggles | Safety Glasses | Goggles
+R Lab Coat
+R Arduino | Microcontroller | Raspberry Pi
+R Breadboard
+R Resistors | Resistor | Jumper Wires | Wires
+R Multimeter
+R Protractor
+R Compass
+R Index Cards | Flashcards | Flash Cards | Note Cards
+R Sticky Notes | Post-it Notes | Post-its
+R Stapler | Staples
+R Tape | Scotch Tape
+R Scissors
+R Glue Stick | Glue
+R Markers | Marker | Sharpie | Dry Erase Marker | Expo Marker
+R Colored Pencils | Crayons
+R Pencil Case | Pencil Pouch | Pencil Bag
+R Pencil Lead | Lead | Lead Refills
+R Pencil Sharpener | Sharpener
+R White-Out | Correction Tape | Wite-Out
+R Paper Clips | Binder Clips
+R Hole Punch
+R Clipboard
+R Scantron | Blue Book | Bubble Sheet
+R Syllabus
+R Formula Sheet | Cheat Sheet | Crib Sheet | Equation Sheet
+R Tissues | Kleenex
+R Chapstick | Lip Balm
+R Sunglasses
+R Glasses | Reading Glasses
+R Deodorant
+R Medicine | Advil | Ibuprofen | Tylenol | Aspirin
+R Band-Aids | Bandages | First Aid Kit
+R Mask | Face Mask
+R Extension Cord | Power Strip
+R HDMI Cable | Adapter | Dongle | USB-C Adapter | USB Hub
+R Ethernet Cable
+R Hard Drive | External Hard Drive | SSD
+R Laptop Sleeve | Laptop Case
+R Bike Lock | U-Lock | Lock
+R Helmet | Bike Helmet
+R Gym Clothes | Workout Clothes | Gym Shorts
+R Towel
+R Socks | Extra Socks
+R Hat | Cap | Beanie
+R Gloves
+R Scarf
+R RAT Cap | Rat Cap :: The gold freshman cap, a Tech tradition since 1915.
+R T-Book | T Book :: The freshman handbook of Tech traditions.
+R Technique | The Technique | Newspaper :: Tech's student newspaper.
+R Parking Pass | Parking Permit
+R MARTA Card | Breeze Card
+R Receipt | Receipts
+R Cash | Money | Spare Change | Coins
+R Credit Card | Debit Card
+R Fruit | Apple | Banana | Orange
+R Candy | Chocolate
+R Tupperware | Leftovers
+R Fork | Spoon | Utensils
+R Napkins
+R Tea | Tea Bags
+R Soda | Coke | Coca-Cola
+R Ramen | Instant Noodles
+R Trash | Wrappers | Crumbs
+D Slide Rule
+D Drafting Triangle | Triangle | T-Square
+D Soldering Iron | Solder
+D Screwdriver | Screwdrivers | Pocket Knife | Multitool
+D Calipers | Micrometer
+D Safety Pin | Sewing Kit
+D Clicker | iClicker
+D Playing Cards | Deck of Cards
+D Rubik's Cube
+D Frisbee
+D Hammock | ENO
+D Juggling Balls
+D Nintendo Switch | Game Console | Steam Deck
+D Camera
+D Sketchbook | Sketch Pad
+D Novel | Paperback
+D Kindle | E-reader
+D Résumé | Resume | Resumes :: For the career fair.
+D Business Cards
+D Padfolio | Portfolio
+D Tie
+D Toothbrush | Toothpaste
+D Contact Lens Case | Contact Solution | Eye Drops
+D Hair Tie | Hair Ties | Scrunchie
+D Hairbrush | Comb
+D Lotion | Sunscreen
+D Bug Spray
+D Pepper Spray
+D Flashlight
+D Whistle
+D Carabiner
+D Duct Tape | Electrical Tape
+D Zip Ties
+D Batteries
+D Lighter
+D Sheet Music
+D Drumsticks
+D Tennis Ball | Racquetball
+D Jump Rope
+D Protein Shake | Shaker Bottle
+D Vitamins
+D Inhaler
+D EpiPen
+X Drop Form | Withdrawal Form :: The paperwork for dropping a class.
+! Desk :: too big to carry
+! Dorm :: not in a backpack
+! Professor :: not in a backpack
+! Free Time :: famously not
+! Sleep :: famously not
+! Diploma :: you have to get out first
+! Girlfriend :: an old joke, not an item
+! Car :: too big to carry
+! Bike :: you ride it; it does not go in the bag
+! Scooter :: you ride it; it does not go in the bag
+! Buzz :: the mascot does not fit
+! Backpack :: that is the bag itself

@@ -869,7 +869,7 @@ D Connor Howe
 D Ross Steelman :: Runner-up at the 2023 NCAA Championship.
 R Hiroshi Tai :: In 2024 he won the NCAA individual title, Tech's first since 2002.
 
-@traditions | TRADITIONS | Name a Georgia Tech tradition or piece of campus lore | pool=gt | type=open
+@traditions | Traditions | Name a Georgia Tech tradition or piece of campus lore | retired
 C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A
 C Buzz
 C The Whistle | Steam Whistle
@@ -1901,7 +1901,7 @@ D Hawks Talon GC | Hawks Talon
 X Georgia Swarm | Swarm :: Pro box lacrosse, out in Duluth. One in a Swarm, literally.
 D Atlanta Fire Ants | Fire Ants
 
-@coaches | SPORTS HISTORY | Name a Georgia Tech head coach | pool=gt | type=open | clar=any sport, any era
+@coaches | Sports History | Name a Georgia Tech head coach | retired
 C John Heisman | Heisman
 C Bobby Dodd | Dodd
 C Paul Johnson | CPJ
@@ -2048,7 +2048,7 @@ D ISYE 3133 :: Engineering Optimization
 D CHBE 2100 :: Chemical Process Principles
 X LMC 3403 :: Technical Communication
 
-@hq | ATLANTA | Name a company headquartered in metro Atlanta | pool=gt | type=open | clar=U.S. headquarters count
+@hq | Atlanta | Name a company headquartered in metro Atlanta | retired
 C Coca-Cola | Coke | The Coca-Cola Company
 C Delta Air Lines | Delta | Delta Airlines
 C The Home Depot | Home Depot
@@ -3121,7 +3121,7 @@ R Calais Campbell
 R Matthew Judon
 R Justin Simmons
 R Kaleb McGary
-R Jalen Walker
+R Jalon Walker | Jalen Walker
 R James Pearce Jr. | James Pearce
 R Xavier Watts
 R Joey Harrington
@@ -3479,10 +3479,6 @@ D Cincinnati
 D St. Louis | Saint Louis :: Saint Louis University, from Tech's Metro Conference years.
 X Sewanee :: The University of the South, a charter member of the SEC with Tech in 1932.
 ! Atlanta :: Tech's own home
-! Miami :: the University of Miami is in Coral Gables
-! Boston :: Boston College is in Chestnut Hill
-! Palo Alto :: Stanford's address is Stanford, California
-! Notre Dame :: the usual answer is South Bend, which is listed
 ! Columbus :: no school in Tech's conference history is there
 ! Austin :: Texas has never shared a conference with Tech
 ! Fayetteville :: Arkansas joined the SEC after Tech left
@@ -3952,7 +3948,6 @@ X Holy Cross :: Champions in 1947.
 ! Dayton :: runner-up in 1967
 ! San Diego State :: runner-up in 2023
 ! Georgia :: one Final Four, in 1983
-! UTEP :: accepted under Texas Western, its name when it won
 
 @heisman | SPORTS | Name a Heisman Trophy winner | pool=general | type=closed | count=90 | source=heisman.com winners list, 1935 to 2025 (91 trophies, Archie Griffin twice) | clar=1935 to 2025; Heisman coached at Tech
 C Tim Tebow

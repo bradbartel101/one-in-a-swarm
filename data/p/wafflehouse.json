@@ -76,6 +76,15 @@
 {"name":"Dark Roast Coffee","tier":"rare","aliases":["Decaf","Decaf Coffee"]},
 {"name":"Grilled Onions","tier":"rare"},
 {"name":"Chili with Cheese and Onions","tier":"rare","aliases":["Chili Cheese"]},
-{"name":"Sunny Side Up Eggs","tier":"rare","aliases":["Over Easy Eggs","Over Easy","Sunny Side Up"]}
+{"name":"Sunny Side Up Eggs","tier":"rare","aliases":["Over Easy Eggs","Over Easy","Sunny Side Up"]},
+{"name":"Two Egg Breakfast","tier":"rare","aliases":["2 Egg Breakfast"]},
+{"name":"Unsweet Tea","tier":"rare","aliases":["Unsweetened Tea"]},
+{"name":"Diet Coke","tier":"rare"},
+{"name":"Sprite","tier":"rare"},
+{"name":"Sausage Biscuit","tier":"rare"},
+{"name":"Grilled Chicken Salad","tier":"rare"},
+{"name":"Garden Salad","tier":"rare","aliases":["Side Salad"]},
+{"name":"Egg Sandwich","tier":"rare"},
+{"name":"Lemonade","tier":"rare","aliases":["Minute Maid Lemonade"]}
   ]
 }

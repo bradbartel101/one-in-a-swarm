@@ -3,7 +3,7 @@
   "pool": "gt",
   "category": "ATLANTA SPORTS",
   "text": "Name a player from Atlanta United history",
-  "clarifier": "anyone who has played for the club since 2017",
+  "clarifier": "anyone who has played for the club",
   "answers": [
 {"name":"Josef Martínez","tier":"common","aliases":["Josef"],"note":"The King. MVP, Golden Boot and MLS Cup in 2018."},
 {"name":"Miguel Almirón","tier":"common","aliases":["Almiron","Miggy"]},

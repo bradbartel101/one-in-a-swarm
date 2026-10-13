@@ -3,7 +3,7 @@
   "pool": "gt",
   "category": "THE SOUTH",
   "text": "Name a Southern food",
-  "clarifier": "dishes, sides, sweets and drinks of the American South",
+  "clarifier": "dishes, sides, sweets and drinks of the South",
   "answers": [
 {"name":"Fried Chicken","tier":"common"},
 {"name":"Grits","tier":"common","aliases":["Shrimp and Grits","Cheese Grits"]},

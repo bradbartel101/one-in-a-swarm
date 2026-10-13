@@ -312,7 +312,7 @@ X International Affairs, Science, and Technology | International Affairs Science
 ! History :: the catalog's version is History and Sociology of Technology and Science
 ! Journalism :: not offered at Tech
 
-@statesymbols | GEORGIA | Name an official state symbol of Georgia | pool=gt | type=closed | count=57 | source=Wikipedia, List of Georgia state symbols | clar=the state bird, the state fruit, and so on
+@statesymbols | GEORGIA | Name an official state symbol of Georgia | pool=gt | type=closed | count=57 | source=Wikipedia, List of Georgia state symbols | clar=the state bird, state fruit and so on
 C Peach | Peaches :: The state fruit.
 C Brown Thrasher | Thrasher :: The state bird. Atlanta's hockey team was named for it.
 C Honeybee | Honey Bee | Bee :: The state insect. A relative, at least.
