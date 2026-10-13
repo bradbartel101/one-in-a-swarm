@@ -842,3 +842,278 @@ D ECE 9000
 ! ECE 4011 :: not in the current catalog
 ! ECE 2030 :: not in the current catalog (Digital System Design is 2020)
 ! ECE 1010 :: not a catalog number
+
+@aecourses | ACADEMICS | Name a Georgia Tech AE course by its number | pool=gt | type=closed | count=136 | source=catalog.gatech.edu/coursesaz/ae, every numbered course (placeholders and recitations left out) | clar=like "AE 1601" | lead=ae
+R AE 1355
+C AE 1601 :: Introduction to Aerospace Engineering
+C AE 2010 :: Thermodynamics & Fluids Fundamentals
+S AE 2011
+S AE 2220 :: Dynamics
+S AE 2221
+R AE 2355
+S AE 2610 :: Introduction to Experimental Methods in Aerospace
+S AE 2611 :: Technical Communications for Aerospace Engineers
+D AE 2698
+D AE 2699
+D AE 2801
+D AE 2810
+C AE 3030 :: Aerodynamics
+S AE 3140 :: Structural Analysis
+S AE 3330 :: Introduction to Aerospace Vehicle Performance
+R AE 3355
+S AE 3530 :: System Dynamics and Vibration
+S AE 3531
+S AE 3610
+R AE 4040
+R AE 4071
+R AE 4080
+R AE 4132
+D AE 4220
+R AE 4311
+R AE 4312
+R AE 4321
+R AE 4322
+R AE 4331
+R AE 4332
+S AE 4341 :: Aircraft Design
+T AE 4342 :: Space System Design
+R AE 4343
+R AE 4355
+D AE 4361
+D AE 4376
+R AE 4451
+D AE 4453
+D AE 4461
+R AE 4531
+R AE 4532
+D AE 4552
+D AE 4580
+D AE 4610
+D AE 4698
+D AE 4699
+D AE 4701
+D AE 4753
+D AE 4760
+D AE 4791
+D AE 4793
+D AE 4802
+D AE 4803
+D AE 4806
+D AE 4863
+X AE 6009 :: A real graduate catalog number: the lowest in the 6000s.
+D AE 6012
+D AE 6015
+D AE 6030
+D AE 6042
+D AE 6050
+D AE 6060
+D AE 6070
+D AE 6080
+D AE 6100
+D AE 6114
+D AE 6115
+D AE 6170
+D AE 6200
+D AE 6210
+D AE 6211
+D AE 6220
+D AE 6230
+D AE 6270
+D AE 6310
+D AE 6333
+D AE 6334
+D AE 6343
+D AE 6344
+D AE 6353
+D AE 6355
+D AE 6356
+D AE 6357
+D AE 6361
+D AE 6362
+D AE 6372
+D AE 6373
+D AE 6383
+D AE 6393
+D AE 6394
+D AE 6410
+D AE 6412
+D AE 6450
+D AE 6451
+D AE 6503
+D AE 6505
+D AE 6511
+D AE 6513
+D AE 6520
+D AE 6530
+D AE 6531
+D AE 6551
+D AE 6580
+D AE 6694
+D AE 6701
+D AE 6705
+D AE 6721
+D AE 6744
+D AE 6760
+D AE 6761
+D AE 6762
+D AE 6765
+D AE 6766
+D AE 6769
+D AE 7000
+D AE 7741
+D AE 7742
+D AE 7743
+D AE 7772
+D AE 7774
+D AE 7775
+D AE 7785
+D AE 8002
+D AE 8741
+D AE 8750
+D AE 8751
+D AE 8801
+D AE 8802
+D AE 8803
+D AE 8813
+D AE 8883
+D AE 8900
+D AE 8997
+D AE 8998
+D AE 9000
+! AE 1001 :: not a catalog number
+! AE 2020 :: not an AE number
+! AE 3000 :: not a catalog number
+
+@chemcourses | ACADEMICS | Name a Georgia Tech CHEM course by its number | pool=gt | type=closed | count=129 | source=catalog.gatech.edu/coursesaz/chem, every numbered course (placeholders and recitations left out) | clar=like "CHEM 1310" | lead=chem
+C CHEM 1211K | CHEM 1211 :: Principles of Chemistry I
+C CHEM 1212K | CHEM 1212 :: Principles of Chemistry II
+C CHEM 1310 :: Principles of General Chemistry for Engineers
+T CHEM 1315 :: Survey of Organic Chemistry for Engineers
+S CHEM 2211
+R CHEM 2214
+R CHEM 2216
+S CHEM 2311 :: Organic Chemistry I
+S CHEM 2312 :: Organic Chemistry II
+S CHEM 2313 :: Organic and Bioorganic Chemistry
+S CHEM 2380 :: Synthesis Laboratory I
+D CHEM 2601
+D CHEM 2694
+D CHEM 2695
+D CHEM 2698
+D CHEM 2699
+D CHEM 2801
+X CHEM 2832 :: A real catalog number at the 2000 level.
+R CHEM 3111
+R CHEM 3211
+R CHEM 3216
+R CHEM 3281
+R CHEM 3371
+R CHEM 3380
+S CHEM 3411 :: Physical Chemistry I
+S CHEM 3412
+R CHEM 3481
+S CHEM 3511 :: Survey of Biochemistry
+R CHEM 3521
+R CHEM 3522
+D CHEM 3700
+D CHEM 4113
+R CHEM 4311
+R CHEM 4341
+D CHEM 4401
+D CHEM 4414
+D CHEM 4452
+D CHEM 4485
+R CHEM 4511
+R CHEM 4512
+D CHEM 4521
+D CHEM 4532
+D CHEM 4581
+D CHEM 4582
+D CHEM 4601
+D CHEM 4684
+D CHEM 4694
+D CHEM 4695
+D CHEM 4696
+D CHEM 4698
+D CHEM 4699
+D CHEM 4710
+D CHEM 4740
+D CHEM 4759
+D CHEM 4760
+D CHEM 4762
+D CHEM 4765
+D CHEM 4770
+D CHEM 4775
+D CHEM 4776
+D CHEM 4785
+D CHEM 4801
+D CHEM 4802
+D CHEM 4803
+D CHEM 6170
+D CHEM 6171
+D CHEM 6172
+D CHEM 6181
+D CHEM 6182
+D CHEM 6183
+D CHEM 6271
+D CHEM 6273
+D CHEM 6274
+D CHEM 6281
+D CHEM 6282
+D CHEM 6283
+D CHEM 6288
+D CHEM 6370
+D CHEM 6371
+D CHEM 6372
+D CHEM 6373
+D CHEM 6381
+D CHEM 6414
+D CHEM 6481
+D CHEM 6482
+D CHEM 6483
+D CHEM 6485
+D CHEM 6491
+D CHEM 6492
+D CHEM 6501
+D CHEM 6502
+D CHEM 6532
+D CHEM 6571
+D CHEM 6572
+D CHEM 6573
+D CHEM 6581
+D CHEM 6582
+D CHEM 6710
+D CHEM 6750
+D CHEM 6751
+D CHEM 6752
+D CHEM 6755
+D CHEM 6756
+D CHEM 6757
+D CHEM 6760
+D CHEM 6762
+D CHEM 6770
+D CHEM 6785
+D CHEM 7000
+D CHEM 7001
+D CHEM 8000
+D CHEM 8001
+D CHEM 8002
+D CHEM 8003
+D CHEM 8801
+D CHEM 8802
+D CHEM 8803
+D CHEM 8813
+D CHEM 8823
+D CHEM 8833
+D CHEM 8843
+D CHEM 8853
+D CHEM 8863
+D CHEM 8901
+D CHEM 8902
+D CHEM 8903
+D CHEM 8997
+D CHEM 8998
+D CHEM 9000
+! CHEM 1101 :: not a catalog number
+! CHEM 1311 :: not a catalog number
+! CHEM 2000 :: not a catalog number

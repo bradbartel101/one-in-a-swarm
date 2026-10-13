@@ -318,3 +318,64 @@ S Xavier University of Louisiana | Xavier | XULA
 ! Bishop College :: closed in 1988
 ! Saint Paul's College :: closed in 2013
 ! Concordia College Alabama :: closed in 2018
+
+@peachbowl | ATLANTA SPORTS | Name a team that has played in the Peach Bowl | pool=gt | type=closed | count=47 | source=Wikipedia, Peach Bowl game results (through January 2026) | clar=also called the Chick-fil-A Bowl
+C LSU | Louisiana State
+S Florida State | FSU | Seminoles
+R West Virginia | WVU
+S South Carolina | Gamecocks
+R Arizona State | ASU
+S North Carolina | UNC | Tar Heels | Carolina
+S Ole Miss | Mississippi
+C Georgia Tech | Tech | GT | Yellow Jackets :: Four trips, the last after the 2008 season.
+S NC State | North Carolina State | N.C. State | Wolfpack
+C Georgia | UGA | Bulldogs
+R Maryland | Terps
+R Texas Tech
+R Vanderbilt | Vandy
+R Kentucky | UK
+R Iowa State
+R Purdue
+R Baylor
+C Clemson
+S Miami | The U | Miami Florida
+S Virginia Tech | VT | Hokies
+S Florida | UF | Gators
+R Iowa | Hawkeyes
+S Tennessee | Vols
+R Virginia | UVA
+R Army | West Point :: The 1985 game, against Illinois.
+R Illinois
+S Indiana | IU :: The most recent winner on the list: a playoff semifinal in January 2026.
+R Syracuse
+C Auburn
+X East Carolina | ECU :: The Pirates won it in 1992, coming back from 17 down in the fourth quarter against NC State.
+R Mississippi State
+R TCU | Texas Christian
+S Texas A&M | Texas A and M | A&M
+R Duke
+R Houston
+C Alabama | Bama | Crimson Tide
+S Washington | UW | Huskies
+T UCF | Central Florida :: The unbeaten 2017 team beat Auburn here and declared itself national champion.
+S Michigan
+S Oklahoma | OU | Sooners
+R Cincinnati
+S Michigan State | MSU
+R Pittsburgh | Pitt
+S Ohio State | OSU | Buckeyes
+S Penn State | PSU
+S Texas | Longhorns
+S Oregon | Ducks
+! Notre Dame :: never in the Peach Bowl
+! Southern California :: never in the Peach Bowl
+! Nebraska :: never in the Peach Bowl
+! Wisconsin :: never in the Peach Bowl
+! Arkansas :: never in the Peach Bowl
+! Missouri :: never in the Peach Bowl
+! Louisville :: never in the Peach Bowl
+! Boston College :: never in the Peach Bowl
+! Wake Forest :: never in the Peach Bowl
+! Stanford :: never in the Peach Bowl
+! Oklahoma State :: never in the Peach Bowl
+! Kansas :: never in the Peach Bowl
