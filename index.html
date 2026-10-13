@@ -99,11 +99,11 @@
             <summary>RULES</summary>
             <ul class="rules">
               <li><strong>Daily flight:</strong> seven prompts, the same for everyone, new at 00:00 UTC. You get 25 seconds a round.</li>
-              <li>A correct answer ends the round and lifts the swarm. A wrong one costs 3 seconds, and you keep guessing.</li>
+              <li>A correct answer ends the round and lifts the swarm. A wrong one costs no time: the box shakes and you keep guessing. Repeats of a guess are ignored.</li>
               <li><strong>Rarer is better.</strong> The obvious answer scores 10. The one hidden One in a Swarm answer scores 100.</li>
               <li>Every answer climbs the same distance per point. Ten points is a little over half a screen; a hundred is six screens. A perfect 700 lands on the Moon.</li>
               <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, short names count (CULC is Clough), and a near-miss asks you to confirm.</li>
-              <li><strong>Infinite mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3, a skip costs 5.</li>
+              <li><strong>Infinite mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs nothing; a skip costs 5.</li>
             </ul>
             <p class="muted small">Rarity tiers are editorial guesses, not measured from real players.</p>
           </details>
@@ -168,6 +168,7 @@
         <dl class="numbers">
           <div><dt>Score</dt><dd class="pixel" id="resScore"></dd></div>
           <div><dt>Final altitude</dt><dd class="pixel" id="resAlt"></dd></div>
+          <div><dt>Wrong guesses</dt><dd class="pixel" id="resMisses"></dd></div>
         </dl>
 
         <h2 class="pixel">FLIGHT LOG</h2>
@@ -223,6 +224,7 @@
           <div><dt>Score</dt><dd class="pixel" id="infScore"></dd></div>
           <div><dt>Altitude</dt><dd class="pixel" id="infAlt"></dd></div>
           <div><dt>Prompts</dt><dd class="pixel" id="infCount"></dd></div>
+          <div><dt>Wrong guesses</dt><dd class="pixel" id="infMisses"></dd></div>
           <div><dt>Best run</dt><dd class="pixel" id="infBest"></dd></div>
         </dl>
         <div class="row">

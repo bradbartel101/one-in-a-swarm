@@ -104,13 +104,13 @@ test('A4: resuming restores round, score and a timer that neither resets nor goe
   C.startRound(run, T);
   C.dailyGuess(run, p0, p0.answers.find((a) => a.tier === 'rare').name, T + 1000);
   C.startRound(run, T + 2000);
-  C.dailyGuess(run, p1, wrongs[0], T + 6000); // 4s used, 3s penalty: 18s left
+  C.dailyGuess(run, p1, wrongs[0], T + 6000); // 4s used, no penalty: 21s left
   const stored = JSON.stringify(run);
 
   const soon = C.reviveDaily(JSON.parse(stored), known);
   assert.equal(soon.round.index, 1);
   assert.equal(C.totalScore(soon.results), 60);
-  assert.equal(C.remainingMs(soon, T + 8000), 16000, '2s later: 16s, not a fresh 25s');
+  assert.equal(C.remainingMs(soon, T + 8000), 19000, '2s later: 19s, not a fresh 25s');
   assert.equal(soon.round.tried[0].text, wrongs[0]);
 
   const late = C.reviveDaily(JSON.parse(stored), known);
@@ -276,13 +276,14 @@ test('A9: a repeated wrong guess costs nothing, in either mode, however it is ty
   for (const again of ['Hogwarts Tower', 'hogwarts tower', '  HOGWARTS   TOWER!! ', 'the hogwarts tower', 'Hogwarts Towers', 'Hógwarts Tower']) {
     assert.equal(C.dailyGuess(run, buildings, again, 0).status, 'duplicate', again);
   }
-  assert.equal(run.round.leftMs, 22000, 'one penalty only');
+  assert.equal(run.round.leftMs, 25000, 'no time lost, and counted once');
   assert.equal(run.round.tried.length, 1);
 
   const inf = C.newInfinite([buildings.id, ids[5]]);
   C.infiniteGuess(inf, buildings, 'Hogwarts Tower');
   assert.equal(C.infiniteGuess(inf, buildings, 'hogwarts towers').status, 'duplicate');
-  assert.equal(inf.clockMs, 42000);
+  assert.equal(inf.clockMs, 45000);
+  assert.equal(inf.misses, 1);
 });
 
 /* ----- B2: saved data ----- */

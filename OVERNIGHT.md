@@ -3,7 +3,7 @@
 Resume from the first unchecked item. One item at a time: code, tests, all tests passing, commit, push.
 Branch `overnight` only. Never push to main, never merge.
 
-- [ ] 1. No time penalty for wrong answers (duplicates ignored silently, 350 ms submit cooldown, misses shown on results, not in share text)
+- [x] 1. No time penalty for wrong answers (duplicates ignored silently, 350 ms submit cooldown, misses shown on results, not in share text)
 - [ ] 2. Polish: sun never behind the tag, tier labels or reveal text; captions ~3 s then fade, removed when scrolled off; tier labels one size with a glow
 - [ ] 3. Launch essentials: GoatCounter (config.js), feedback link, Open Graph preview, web app manifest and icons
 - [ ] 4. Better sharing: "Save image" 1080x1350 PNG, native share sheet on phones, same render at 375 and 1440

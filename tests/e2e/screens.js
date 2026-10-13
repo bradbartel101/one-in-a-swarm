@@ -206,7 +206,7 @@ async function run(browser, base, name, width, height, mobile) {
   await infAnswer('swarm');
   await infAnswer('solid');
   await shot('27-infinite-mid-run');
-  for (let i = 0; i < 40 && (await page.eval('document.body.dataset.phase')) === 'guess'; i++) await submit('wrong guess ' + i).catch(() => {});
+  for (let i = 0; i < 40 && (await page.eval('document.body.dataset.phase')) === 'guess'; i++) await page.eval('document.getElementById("skipBtn").click()'); // skips spend the clock
   await phase('infover', 20000);
   await sleep(600);
   await shot('28-infinite-clock-ran-out');

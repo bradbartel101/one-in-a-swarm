@@ -346,6 +346,7 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
 .breakdown li { padding: 0.55rem 0; border-top: 2px dotted var(--panel-2); }
 .breakdown li:first-child { border-top: 0; }
 .breakdown .q { display: block; font-size: 0.8rem; color: var(--muted); }
+.breakdown .misses { display: block; font-size: 0.75rem; color: var(--muted); font-style: italic; }
 .breakdown .a { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.3rem 0.7rem; font-weight: 700; }
 .breakdown .ans { overflow-wrap: anywhere; }
 .breakdown .meta { display: inline-flex; align-items: center; gap: 0.4rem; }

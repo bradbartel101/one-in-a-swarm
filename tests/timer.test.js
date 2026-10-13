@@ -30,16 +30,24 @@ test('a round lasts 25 seconds', () => {
   assert.equal(s.round, null);
 });
 
-test('a wrong guess costs exactly 3 seconds and the round continues', () => {
+test('a wrong guess costs no time and the round continues', () => {
   const s = C.newDaily('2026-10-08', ids);
   C.startRound(s, T0);
   const r = C.dailyGuess(s, prompt, 'nope', T0 + 5000);
   assert.equal(r.status, 'wrong');
-  assert.equal(r.remainingMs, 17000);
-  assert.equal(C.remainingMs(s, T0 + 5000), 17000);
+  assert.equal(r.remainingMs, 20000, 'only the five seconds that really passed are gone');
+  assert.equal(r.misses, 1);
+  assert.equal(C.remainingMs(s, T0 + 5000), 20000);
   assert.ok(s.round, 'round is still open');
-  assert.equal(C.dailyGuess(s, prompt, 'still no', T0 + 5000).remainingMs, 14000);
+  const again = C.dailyGuess(s, prompt, 'still no', T0 + 5000);
+  assert.equal(again.remainingMs, 20000);
+  assert.equal(again.misses, 2);
   assert.equal(s.round.tried.length, 2);
+  // Regression: the old rule took 3 seconds a guess. Twenty wrong guesses now take nothing.
+  for (let i = 0; i < 20; i++) C.dailyGuess(s, prompt, 'wrong number ' + i, T0 + 5000);
+  assert.equal(C.remainingMs(s, T0 + 5000), 20000);
+  assert.equal(C.SUBMIT_COOLDOWN_MS, 350);
+  assert.equal(C.PENALTY_MS, undefined, 'there is no penalty constant any more');
 });
 
 test('a correct answer ends the round and scores its tier', () => {
@@ -56,13 +64,18 @@ test('a correct answer ends the round and scores its tier', () => {
   assert.equal(C.dailyGuess(s, prompt, 'rare one', T0 + 3000).status, 'idle');
 });
 
-test('a wrong guess that eats the last of the clock ends the round as a miss', () => {
+test('a wrong guess with two seconds left does not end the round; the clock does, and the misses are kept', () => {
   const s = C.newDaily('2026-10-08', ids);
   C.startRound(s, T0);
-  const r = C.dailyGuess(s, prompt, 'nope', T0 + 23000); // 2s left, penalty is 3s
-  assert.equal(r.status, 'timeout');
+  const r = C.dailyGuess(s, prompt, 'nope', T0 + 23000); // 2s left: the old 3s penalty ended the round here
+  assert.equal(r.status, 'wrong');
+  assert.equal(r.remainingMs, 2000);
+  assert.equal(C.dailyTick(s, T0 + 25000), true);
   assert.equal(s.results[0].points, 0);
   assert.equal(s.results[0].wrong, 1);
+  assert.deepEqual(C.missCounts(s.results), { perRound: [1], total: 1 });
+  assert.deepEqual(C.missCounts([{ wrong: 2 }, {}, { wrong: 'x' }, null, { wrong: -3 }, { wrong: 1 }]), { perRound: [2, 0, 0, 0, 0, 1], total: 3 }, 'old or damaged saves count as zero');
+  assert.deepEqual(C.missCounts(undefined), { perRound: [], total: 0 });
 });
 
 test('a guess submitted after the deadline does not score', () => {
@@ -103,8 +116,8 @@ test('state survives a JSON round trip mid-round (the refresh case) and the cloc
   assert.deepEqual(revived, s);
   assert.equal(revived.round.index, 1);
   assert.equal(revived.round.tried[0].text, 'nope');
-  // 8 seconds later, in a "new page load": 25 - 2 - 3 - 8 = 12 seconds left
-  assert.equal(C.remainingMs(revived, T0 + 60000), 12000);
+  // 8 seconds later, in a "new page load": 25 - 2 - 8 = 15 seconds left
+  assert.equal(C.remainingMs(revived, T0 + 60000), 15000);
   assert.equal(C.dailyGuess(revived, prompt, 'nope', T0 + 60000).status, 'duplicate');
   assert.equal(C.dailyGuess(revived, prompt, 'deep one', T0 + 60000).status, 'correct');
   assert.equal(C.totalScore(revived.results), 115);
@@ -166,21 +179,25 @@ test('correct answers add time by tier and move to the next prompt', () => {
   });
 });
 
-test('wrong guesses cost 3 seconds, duplicates cost nothing, and tried guesses reset per prompt', () => {
+test('wrong guesses and duplicates cost nothing, and tried guesses reset per prompt', () => {
   const s = C.newInfinite(order);
   assert.equal(C.infiniteGuess(s, prompt, 'nope').status, 'wrong');
-  assert.equal(s.clockMs, 42000);
+  assert.equal(s.clockMs, 45000);
   assert.equal(C.infiniteGuess(s, prompt, 'NOPE!').status, 'duplicate');
-  assert.equal(s.clockMs, 42000);
+  assert.equal(s.clockMs, 45000);
+  assert.equal(s.misses, 1, 'the duplicate is not counted');
   C.infiniteGuess(s, prompt, 'common one');
   assert.deepEqual(s.tried, []);
   assert.equal(C.infiniteGuess(s, prompt, 'nope').status, 'wrong');
 });
 
-test('a wrong guess can end the run', () => {
+test('a wrong guess cannot end the run; only the clock can', () => {
   const s = C.newInfinite(order);
   C.infiniteTick(s, 43000, typing);
   assert.equal(C.infiniteGuess(s, prompt, 'nope').status, 'wrong');
+  assert.equal(s.over, false);
+  assert.equal(s.clockMs, 2000);
+  C.infiniteTick(s, 2000, typing);
   assert.equal(s.over, true);
 });
 

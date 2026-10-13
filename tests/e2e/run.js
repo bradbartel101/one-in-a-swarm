@@ -229,12 +229,28 @@ async function main() {
         assert.equal(await page.eval('document.activeElement.id'), 'guess', 'focus stays in the box after a wrong guess');
         await sleep(500);
         const afterWrong = await barScale(page);
-        assert.ok(before - afterWrong > 0.11 && before - afterWrong < 0.22, 'a wrong guess costs about 3 of 25 seconds, got ' + (before - afterWrong).toFixed(3));
+        // Regression: a wrong guess used to take 3 of the 25 seconds (0.12 of the bar).
+        assert.ok(before - afterWrong < 0.05, 'a wrong guess costs no time: only the half second that passed, got ' + (before - afterWrong).toFixed(3));
+        assert.doesNotMatch(await text(page, 'feedback'), /−|-\d|3s/, 'and the message no longer mentions a penalty');
+        // the same guess again, typed differently: ignored, with no message and no count
+        await page.eval('document.getElementById("feedback").textContent = "(unchanged)"');
         await page.type('  Definitely NOT an answer!! '); // the old text is still selected, so this replaces it
         await page.enter();
-        assert.match(await text(page, 'feedback'), /already tried/);
-        await sleep(150);
-        assert.ok(afterWrong - (await barScale(page)) < 0.03, 'a duplicate costs no time');
+        assert.equal(await text(page, 'feedback'), '(unchanged)', 'a duplicate says nothing');
+        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 1, 'and is not counted');
+        // the cooldown: a second submit inside 350 ms is ignored, the same submit after it counts
+        await sleep(400);
+        await page.type('first of two');
+        await page.enter();
+        await page.type('second of two'); // typing is never blocked
+        await page.enter();
+        assert.equal(await page.eval('document.getElementById("guess").value'), 'second of two');
+        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'the submit inside the cooldown did nothing');
+        await page.waitFor('!document.getElementById("guess").dataset.locked', 2000, 'the cooldown to end');
+        await page.enter();
+        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 3, 'and counts once the cooldown is over');
+        await sleep(400);
+        assert.ok(before - (await barScale(page)) < 0.12, 'three wrong guesses, a duplicate and a blocked submit: still only real time gone');
         await page.eval('document.getElementById("guess").value = ""');
       }
       const answer = answerOf(prompt, TIERS7[i]);
@@ -249,6 +265,9 @@ async function main() {
       await page.enter();
     }
     await waitPhase(page, 'results');
+    assert.equal(await text(page, 'resMisses'), '3', 'wrong guesses are totalled on the results');
+    assert.deepEqual(await page.eval('Array.from(document.querySelectorAll("#breakdown .misses")).map((n) => n.textContent)'), ['Round 1 · 3 misses'], 'and shown for the round they happened in');
+    assert.doesNotMatch(await page.eval('document.getElementById("shareBox").value'), /miss|wrong/i, 'but never in the share text');
     assert.equal(await page.eval('document.getElementById("caption").getClientRects().length'), 0, 'no caption floats over the results');
     assert.equal(await text(page, 'resScore'), '330 pts');
     assert.equal(await text(page, 'resAlt'), feet(330));
@@ -432,8 +451,8 @@ async function main() {
     const wrong = await page.eval(`({ msg: document.getElementById('feedback').textContent, readOnly: document.getElementById('guess').readOnly,
       focused: document.activeElement.id, shaking: getComputedStyle(document.getElementById('entry')).animationName, value: document.getElementById('guess').value,
       selected: document.getElementById('guess').selectionEnd - document.getElementById('guess').selectionStart })`);
-    assert.deepEqual(wrong, { msg: "'gatorade': no buzz. try again. −3s", readOnly: false, focused: 'guess', shaking: 'shake', value: 'gatorade', selected: 8 }, 'input shakes, stays focused and typeable, and keeps its text selected');
-    // Regression: keys typed during the 400ms lockout used to be dropped. They must land.
+    assert.deepEqual(wrong, { msg: "'gatorade': no buzz. try again.", readOnly: false, focused: 'guess', shaking: 'shake', value: 'gatorade', selected: 8 }, 'input shakes, stays focused and typeable, and keeps its text selected');
+    // Regression: keys typed during the submit cooldown used to be dropped. They must land.
     await page.type('pow');
     assert.equal(await page.eval('document.getElementById("guess").value'), 'pow', 'typing during the lockout replaces the selected wrong text');
     await page.type('erade');
@@ -442,7 +461,7 @@ async function main() {
     assert.equal(await page.eval('document.getElementById("guess").value'), 'powerade', 'and the typed text is kept');
     await page.waitFor('!document.getElementById("guess").dataset.locked', 2000, 'the lock to lift');
     await page.enter();
-    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'after 400ms the same Enter goes through');
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'after the cooldown the same Enter goes through');
     // near-miss
     // a one-letter slip that the rules accept as a near miss (some are refused as ambiguous)
     const slip = (a) => a.name.slice(0, 2) + a.name.slice(3);
@@ -543,7 +562,8 @@ async function main() {
     assert.equal(await page.eval('document.querySelector("#pips li").dataset.tier'), 'rare', 'round 1 result restored');
     assert.equal(await text(page, 'hudAlt'), altNum(60), 'and the swarm is still at its altitude');
     await guess(page, 'a wrong guess <b>bold</b>');
-    assert.match(await text(page, 'feedback'), /already tried/, 'duplicate memory survives the reload');
+    assert.equal(await text(page, 'feedback'), '', 'duplicate memory survives the reload: the repeat is ignored');
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 1);
     await guess(page, answerOf(await text(page, 'promptText'), 'solid'));
     await waitPhase(page, 'reveal');
     assert.match(await text(page, 'runningScore'), /^90 pts/);
@@ -685,13 +705,19 @@ async function main() {
     await sleep(200);
     const f = Number(await text(page, 'clockNum'));
     assert.ok(e - f >= 4 && e - f <= 6, 'skip costs 5s: ' + e + ' -> ' + f);
-    let wrong = 0;
-    while ((await view(page)) === 'play') {
-      await guess(page, 'wrong guess number ' + wrong++).catch(() => {});
-      assert.ok(wrong < 40, 'run should end');
+    // Regression: wrong guesses used to take 3 seconds each and could end the run.
+    for (let i = 0; i < 5; i++) await guess(page, 'wrong guess number ' + i);
+    await sleep(200);
+    const g = Number(await text(page, 'clockNum'));
+    assert.ok(f - g <= 4, 'five wrong guesses cost no time, only the seconds that passed: ' + f + ' -> ' + g);
+    assert.equal(await view(page), 'play');
+    let skips = 0;
+    while ((await view(page)) === 'play') { // the clock is what ends a run: skips spend it
+      await click(page, 'skipBtn').catch(() => {});
+      assert.ok(++skips < 30, 'run should end');
     }
     assert.equal(await view(page), 'infover');
-    assert.ok(wrong >= 12 && wrong <= 21, 'a run of wrong guesses drains the clock, took ' + wrong);
+    assert.equal(await text(page, 'infMisses'), '5', 'wrong guesses are counted on the end screen');
     assert.equal(await text(page, 'infScore'), '100 pts');
     assert.equal(await text(page, 'infAlt'), feet(100));
     assert.equal(await text(page, 'infTitle'), 'NEW BEST RUN');
@@ -953,8 +979,8 @@ async function main() {
     await page.eval('window.__said = []; new MutationObserver(() => window.__said.push(document.getElementById("clockLive").textContent)).observe(document.getElementById("clockLive"), { childList: true, characterData: true, subtree: true })');
     await sleep(1000);
     await guess(page, 'nope nope');
-    assert.equal(await text(page, 'feedback'), "'nope nope': no buzz. try again. −3s");
-    await page.eval('__shiftClock(10000)');
+    assert.equal(await text(page, 'feedback'), "'nope nope': no buzz. try again.");
+    await page.eval('__shiftClock(13000)'); // the wrong guess took no time, so the clock needs the full 13 seconds
     await sleep(1200);
     await page.eval('__shiftClock(4000)');
     await sleep(1000);
@@ -1123,6 +1149,7 @@ async function main() {
     assert.equal(lines.burdell, 'George P. Burdell is enrolled in every class. Try again.');
     // Regression: the message is there the instant the secret is submitted, and whatever the
     // player types next is theirs to keep.
+    await page.waitFor('!document.getElementById("guess").dataset.locked', 2000, 'the cooldown to end');
     await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.value = "George P. Burdell"; document.getElementById("feedback").textContent = ""; document.getElementById("guessForm").requestSubmit(); window.__msgAtOnce = document.getElementById("feedback").textContent; })()');
     assert.equal(await page.eval('window.__msgAtOnce'), 'George P. Burdell is enrolled in every class. Try again.', 'shown in the same tick as the submit');
     assert.equal(await page.eval('(() => { const g = document.getElementById("guess"); return g.value === "George P. Burdell" && g.selectionEnd - g.selectionStart === g.value.length; })()'), true, 'the secret stays in the box, selected');
@@ -1136,7 +1163,7 @@ async function main() {
     assert.equal(await page.eval('document.getElementById("flash").classList.contains("go")'), true, 'THWG flashes gold');
     assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 0, 'none of them counts as a wrong guess');
     assert.equal(await phase(page), 'guess', 'and the round is still going');
-    assert.ok(before - (await barScale(page)) < 0.1, 'only real time has passed');
+    assert.ok(before - (await barScale(page)) < 0.2, 'only real time has passed (six secrets, each after the submit cooldown)');
     assert.equal(await page.eval('document.activeElement.id'), 'guess', 'the input keeps focus throughout');
     assert.deepEqual((await found()).slice().sort(), ['burdell', 'buzz', 'helluva', 'thwg', 'tower', 'wrongschool'].sort());
     // answer: 75 -> 105 points climbs past the window washer at about 620 ft

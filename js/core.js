@@ -19,7 +19,9 @@
 
   const ROUNDS = 7;
   const ROUND_MS = 25000;
-  const PENALTY_MS = 3000;
+  // A wrong guess costs no time. What keeps guessing honest instead: a guess already made this
+  // round is ignored, and submits are accepted at most once every 350 ms.
+  const SUBMIT_COOLDOWN_MS = 350;
   const INFINITE_START_MS = 45000;
   const SKIP_MS = 5000;
   const MIN_ANSWERS = 25;
@@ -376,6 +378,12 @@
     return set[feet < THIN_AIR_FT ? 0 : feet < SPACE_FT ? 1 : 2];
   }
 
+  // Wrong guesses made in a finished run, round by round and in all. Old saves count as zero.
+  function missCounts(results) {
+    const perRound = (results || []).map((r) => (r && isFinite(r.wrong) && r.wrong > 0 ? Math.floor(r.wrong) : 0));
+    return { perRound, total: perRound.reduce((a, b) => a + b, 0) };
+  }
+
   function tierPoints(tier) {
     return TIERS[tier] ? TIERS[tier].points : 0;
   }
@@ -538,12 +546,7 @@
     }
     if (state.round.tried.some((t) => sameGuess(t.key, m.key))) return { status: 'duplicate' };
     state.round.tried.push({ key: m.key.slice(0, 80), text: String(input).trim().slice(0, 60) });
-    state.round.leftMs = Math.max(0, state.round.leftMs - PENALTY_MS);
-    if (state.round.leftMs === 0) {
-      closeRound(state, { tier: null, answer: null, points: 0 });
-      return { status: 'timeout', lastWrong: true };
-    }
-    return { status: 'wrong', remainingMs: state.round.leftMs };
+    return { status: 'wrong', remainingMs: state.round.leftMs, misses: state.round.tried.length };
   }
 
   /* ---------- saved data ---------- */
@@ -702,7 +705,7 @@
     }
     if (state.tried.some((k) => sameGuess(k, m.key))) return { status: 'duplicate' };
     state.tried.push(m.key);
-    infiniteSpend(state, PENALTY_MS);
+    state.misses = (state.misses || 0) + 1;
     return { status: 'wrong' };
   }
 
@@ -751,8 +754,8 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    climbMs, climbCurve, quipFor, THIN_AIR_FT,
-    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
+    climbMs, climbCurve, quipFor, THIN_AIR_FT, missCounts,
+    ROUNDS, ROUND_MS, SUBMIT_COOLDOWN_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
     scheduleDay, extendSchedule, scheduledIds,

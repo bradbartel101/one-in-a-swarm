@@ -99,7 +99,7 @@ test('wrong and empty input', () => {
   assert.equal(C.matchAnswer(prompt, null).key, '');
 });
 
-test('duplicate wrong guesses are rejected without a second penalty', () => {
+test('duplicate wrong guesses are ignored and not counted twice', () => {
   const s = C.newDaily('2026-10-08', ['t']);
   C.startRound(s, 0);
   assert.equal(C.dailyGuess(s, prompt, 'Skiles', 1000).status, 'wrong');

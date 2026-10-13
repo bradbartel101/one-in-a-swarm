@@ -31,7 +31,7 @@
   const TICK_MS = 100;
   const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from skipping the reveal card
   const LIFTOFF_MS = 2000;
-  const WRONG_LOCK_MS = 400;
+  const COOLDOWN_MS = C.SUBMIT_COOLDOWN_MS; // the gap between submits; typing is never blocked
   const GLIDE_MS = 900; // the short climb used in infinite mode
   const HOVER = 2.5; // on the title screen the bee idles this many points above the lawn
   const BEE_DOWN = 0.6; // how far down the screen the bee rides
@@ -98,6 +98,7 @@
   let revealShownAt = 0;
   let introTimer = 0;
   let lockUntil = 0;
+  let lockTimer = 0;
 
   let scene = null;
   let cam = 0; // the score the camera sits on
@@ -928,6 +929,7 @@
     setFeedback('', '');
     $('guess').value = ''; // every round starts with an empty box and no submit waiting
     lockUntil = 0;
+    delete $('guess').dataset.locked;
     $('clockLive').textContent = '';
     renderClock(C.ROUND_MS, C.ROUND_MS, true);
     setPhase('intro');
@@ -991,23 +993,26 @@
     startLoop();
   }
 
-  function lockInput() {
+  // Every submit starts a short cooldown before the next one counts. Typing is never blocked,
+  // only submitting, so a double tap or a held Enter cannot fire a burst of guesses.
+  function startCooldown() {
     const g = $('guess');
-    // Typing is never blocked. Only submitting again is, briefly, so a double tap cannot cost
-    // two penalties. The wrong text stays selected, so the next keystroke replaces it.
-    lockUntil = performance.now() + WRONG_LOCK_MS;
+    lockUntil = performance.now() + COOLDOWN_MS;
     g.dataset.locked = '1';
-    g.focus();
-    g.select();
-    window.setTimeout(() => {
+    window.clearTimeout(lockTimer);
+    lockTimer = window.setTimeout(() => {
       delete g.dataset.locked;
-    }, WRONG_LOCK_MS);
+    }, COOLDOWN_MS);
   }
 
+  // A wrong guess costs no time. The box shakes, and the text stays selected so the next
+  // keystroke replaces it.
   function onWrong(text) {
-    setFeedback("'" + String(text).trim().slice(0, 24) + "': no buzz. try again. −3s", 'bad');
+    setFeedback("'" + String(text).trim().slice(0, 24) + "': no buzz. try again.", 'bad');
     shake();
-    lockInput();
+    const g = $('guess');
+    g.focus();
+    g.select();
     Sfx.wrong();
     return text;
   }
@@ -1024,8 +1029,7 @@
     monoAt = performance.now();
     const r = C.dailyGuess(daily, p, text, Date.now(), mono);
     if (r.status === 'empty') return;
-    if (r.status === 'duplicate') {
-      setFeedback('already tried that. no time lost.', 'bad');
+    if (r.status === 'duplicate') { // already guessed this round: ignored, with no message and no count
       $('guess').select();
       return;
     }
@@ -1170,9 +1174,10 @@
 
   /* ---------- results ---------- */
 
-  function resultRow(index, promptText, answerText, tier, points) {
+  function resultRow(index, promptText, answerText, tier, points, misses) {
     const li = el('li');
     li.appendChild(el('span', 'q', index + '. ' + promptText));
+    if (misses) li.appendChild(el('span', 'misses', 'Round ' + index + ' · ' + misses + (misses === 1 ? ' miss' : ' misses')));
     const a = el('span', 'a');
     a.appendChild(el('span', 'ans', answerText));
     const meta = el('span', 'meta');
@@ -1233,9 +1238,11 @@
     const spoilers = $('spoilerList');
     list.textContent = '';
     spoilers.textContent = '';
+    const misses = C.missCounts(daily.results);
+    $('resMisses').textContent = String(misses.total);
     daily.results.forEach((r, i) => {
       const p = byId[r.promptId];
-      list.appendChild(resultRow(i + 1, p.text, r.answer || 'No answer', r.tier, r.points));
+      list.appendChild(resultRow(i + 1, p.text, r.answer || 'No answer', r.tier, r.points, misses.perRound[i]));
       spoilers.appendChild(resultRow(i + 1, p.text, p.answers.filter((a) => a.tier === 'swarm')[0].name, 'swarm', null));
     });
 
@@ -1343,8 +1350,7 @@
   function infSubmit(text) {
     const r = C.infiniteGuess(inf, infPrompt() || {}, text);
     if (r.status === 'empty' || r.status === 'idle') return;
-    if (r.status === 'duplicate') {
-      setFeedback('already tried that. no time lost.', 'bad');
+    if (r.status === 'duplicate') { // already guessed this round: ignored, with no message and no count
       $('guess').select();
       return;
     }
@@ -1382,6 +1388,7 @@
     $('infScore').textContent = C.formatNumber(inf.score) + ' pts';
     $('infAlt').textContent = feet(inf.score);
     $('infCount').textContent = String(inf.answered);
+    $('infMisses').textContent = String(inf.misses || 0);
     $('infBest').textContent = C.formatNumber(Math.max(best ? best.score : 0, inf.score)) + ' pts';
     announce('Run over. ' + inf.score + ' points across ' + inf.answered + ' prompts.');
     const list = $('infLog');
@@ -1523,8 +1530,10 @@
       } else if (performance.now() < lockUntil) {
         return;
       } else if (mode === 'daily' && daily && daily.round) {
+        startCooldown();
         dailySubmit(text);
       } else if (mode === 'infinite' && inf) {
+        startCooldown();
         infSubmit(text);
       }
       if (view === 'play' && document.body.dataset.phase !== 'climb') $('guess').focus();

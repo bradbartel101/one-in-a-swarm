@@ -11,7 +11,7 @@ Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Techn
 
 **Daily flight.** Seven prompts, new at 00:00 UTC. Each round a prompt slides in, the swarm takes
 two seconds to lift off, and then you have 25 seconds. A correct answer ends the round. A wrong
-answer costs 3 seconds and you keep guessing. A near-miss ("clugh") asks you to submit again to
+answer costs no time and you keep guessing (a repeat of a guess is ignored, and submits are accepted at most every 350 ms). A near-miss ("clugh") asks you to submit again to
 confirm it ("Clough") and costs nothing. Answers score by rarity:
 
 | Tier | Points | |
@@ -47,7 +47,7 @@ A finished day cannot be replayed. If you are mid-run when the day rolls over, y
 yesterday's flight first. Streak, flights, average and best are kept in the browser.
 
 **Infinite mode.** One 45-second clock for the whole run, draining only while the answer box is
-active or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs 3, a skip costs 5.
+active or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs nothing, a skip costs 5.
 
 Spelling is forgiving: case, accents, punctuation and plurals don't matter, and short names count
 ("CULC" is the Clough Undergraduate Learning Commons).
