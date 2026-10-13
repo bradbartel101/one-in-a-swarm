@@ -384,6 +384,31 @@
     return { perRound, total: perRound.reduce((a, b) => a + b, 0) };
   }
 
+  /* ---------- launch settings (config.js) ---------- */
+
+  // The visit counter. Returns what to load for a GoatCounter site code, or null when the
+  // code is empty or is not a plain site code (so a typo can never load some other script).
+  function goatCounter(code) {
+    const c = String(code == null ? '' : code).trim().toLowerCase();
+    if (!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(c)) return null;
+    return { src: 'https://gc.zgo.at/count.js', endpoint: 'https://' + c + '.goatcounter.com/count' };
+  }
+
+  // "Wrong tier? Tell us": the owner's link with the date and the day's prompt ids added, so
+  // a report says which round it means. Returns '' (no link) for an empty or unsafe address.
+  function feedbackLink(url, dateKey, promptIds) {
+    const u = String(url == null ? '' : url).trim();
+    const ids = (promptIds || []).filter((id) => /^[a-z0-9-]+$/i.test(id)).join(',');
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(dateKey) ? dateKey : '';
+    if (/^mailto:[^\s?]+@[^\s?]+$/i.test(u)) {
+      return u + '?subject=' + encodeURIComponent('One in a Swarm: wrong tier? (' + date + ')') + '&body=' + encodeURIComponent('Date: ' + date + '\nPrompts: ' + ids + '\n\nWhich answer, and what tier should it be?\n');
+    }
+    if (!/^https:\/\/[^\s]+$/i.test(u)) return '';
+    const hash = u.indexOf('#') === -1 ? '' : u.slice(u.indexOf('#'));
+    const bare = hash ? u.slice(0, u.indexOf('#')) : u;
+    return bare + (bare.indexOf('?') === -1 ? '?' : '&') + 'date=' + encodeURIComponent(date) + '&prompts=' + encodeURIComponent(ids) + hash;
+  }
+
   function tierPoints(tier) {
     return TIERS[tier] ? TIERS[tier].points : 0;
   }
@@ -754,7 +779,7 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    climbMs, climbCurve, quipFor, THIN_AIR_FT, missCounts,
+    climbMs, climbCurve, quipFor, THIN_AIR_FT, missCounts, goatCounter, feedbackLink,
     ROUNDS, ROUND_MS, SUBMIT_COOLDOWN_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,

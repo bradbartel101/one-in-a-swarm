@@ -1203,7 +1203,10 @@
 
   function onNext() {
     if (Date.now() - revealShownAt < NEXT_GUARD_MS) return;
-    if (daily.finished) return showResults();
+    if (daily.finished) {
+      countEvent('flight-finished', 'Daily flight finished'); // once, when the flight really ends; not on a reload
+      return showResults();
+    }
     startIntro();
   }
 
@@ -1221,6 +1224,31 @@
     a.appendChild(meta);
     li.appendChild(a);
     return li;
+  }
+
+  /* ---------- launch settings: the visit counter and the feedback link (config.js) ---------- */
+
+  const CONFIG = window.SwarmConfig || {};
+
+  // Loads GoatCounter only when the owner has set a site code. It counts page views by itself,
+  // uses no cookies and stores nothing on the device. With no code, nothing is loaded at all.
+  function loadCounter() {
+    const gc = C.goatCounter(CONFIG.GOATCOUNTER_CODE);
+    if (!gc) return;
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = gc.src;
+    tag.setAttribute('data-goatcounter', gc.endpoint);
+    tag.id = 'visitCounter';
+    document.head.appendChild(tag);
+  }
+
+  function countEvent(path, title) {
+    try {
+      if (C.goatCounter(CONFIG.GOATCOUNTER_CODE) && window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count({ path, title, event: true });
+      }
+    } catch (e) { /* counting must never break the game */ }
   }
 
   function showResults() {
@@ -1268,6 +1296,11 @@
     const ladder = $('ladder');
     ladder.textContent = '';
     C.BANDS.forEach((b) => ladder.appendChild(el('li', b === band ? 'on' : '', b.min + '+ pts · ' + b.name)));
+
+    const report = C.feedbackLink(CONFIG.FEEDBACK_URL, daily.date, daily.promptIds);
+    $('feedbackRow').hidden = !report;
+    if (report) $('feedbackLink').href = report;
+    else $('feedbackLink').removeAttribute('href');
 
     const list = $('breakdown');
     const spoilers = $('spoilerList');
@@ -1620,6 +1653,7 @@
     });
     scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, scoreForFeet: C.scoreForFeet, reducedMotion });
     wire();
+    loadCounter();
     const sound = store.get(K_SOUND, null);
     applySound(!!(sound && sound.on === true)); // off until the player turns it on
     const scan = store.get(K_SCAN, null);

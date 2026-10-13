@@ -9,11 +9,13 @@
   <!-- Link previews need absolute URLs. Update these four if the site moves (see README.md). -->
   <link rel="canonical" href="https://bradbartel101.github.io/one-in-a-swarm/">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="One in a Swarm">
   <meta property="og:title" content="One in a Swarm — the Georgia Tech rare-answer game">
   <meta property="og:description" content="Seven Georgia Tech prompts a day. The obvious answer barely leaves the lawn. The rare one reaches space.">
   <meta property="og:url" content="https://bradbartel101.github.io/one-in-a-swarm/">
   <meta property="og:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="One in a Swarm: a pixel-art bee climbing from a college campus into space.">
@@ -21,7 +23,14 @@
   <meta name="twitter:title" content="One in a Swarm — the Georgia Tech rare-answer game">
   <meta name="twitter:description" content="Seven Georgia Tech prompts a day. The obvious answer barely leaves the lawn.">
   <meta name="twitter:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
+  <meta name="twitter:image:alt" content="One in a Swarm: a pixel-art bee climbing from a college campus into space.">
   <meta name="theme-color" content="#003057">
+  <!-- Add to home screen -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Swarm">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath d='M3 4h10v8H3z' fill='%23d9b84a'/%3E%3Cpath d='M5 4h2v8H5zM9 4h2v8H9zM2 5h1v6H2zM13 5h1v6h-1z' fill='%2300213d'/%3E%3Cpath d='M4 1h3v3H4zM9 1h3v3H9z' fill='%23f4f9ff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
@@ -187,6 +196,8 @@
           <ol class="breakdown" id="spoilerList"></ol>
         </details>
 
+        <p class="small" id="feedbackRow" hidden><a id="feedbackLink" target="_blank" rel="noopener noreferrer">Wrong tier? Tell us</a></p>
+
         <h2 class="pixel">SHARE</h2>
         <label for="shareBox" class="sr-only">Share text</label>
         <textarea id="shareBox" class="share" rows="4" readonly></textarea>
@@ -239,6 +250,7 @@
     </section>
   </main>
 
+  <script src="config.js"></script>
   <script src="js/core.js"></script>
   <script src="js/facts.js"></script>
   <script src="js/sfx.js"></script>

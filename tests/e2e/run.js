@@ -31,6 +31,10 @@ const httpServer = http.createServer((req, res) => {
   if (rel.endsWith('/')) rel += 'index.html';
   const file = path.join(ROOT, rel);
   if (!file.startsWith(ROOT) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return notFound();
+  if (rel === 'config.js' && server.config) { // the owner's settings, filled in
+    res.writeHead(200, { 'content-type': TYPES['.js'], 'cache-control': 'no-store' });
+    return res.end('window.SwarmConfig = ' + JSON.stringify(server.config) + ';');
+  }
   if (rel === 'data/prompts.json' && server.mode === 'badjson') {
     res.writeHead(200, { 'content-type': TYPES['.json'] });
     return res.end('{"version": 1, "prompts": [');
@@ -266,6 +270,10 @@ async function main() {
     }
     await waitPhase(page, 'results');
     assert.equal(await text(page, 'resMisses'), '3', 'wrong guesses are totalled on the results');
+    // launch settings ship empty: no counter script, no cookies, no feedback link
+    assert.equal(await page.eval('document.getElementById("visitCounter")'), null, 'no visit counter is loaded while the site code is empty');
+    assert.equal(await page.eval('document.cookie'), '');
+    assert.equal(await page.eval('document.getElementById("feedbackRow").hidden'), true, 'the feedback link is hidden while its address is empty');
     assert.deepEqual(await page.eval('Array.from(document.querySelectorAll("#breakdown .misses")).map((n) => n.textContent)'), ['Round 1 · 3 misses'], 'and shown for the round they happened in');
     assert.doesNotMatch(await page.eval('document.getElementById("shareBox").value'), /miss|wrong/i, 'but never in the share text');
     assert.equal(await page.eval('document.getElementById("caption").getClientRects().length'), 0, 'no caption floats over the results');
@@ -1334,6 +1342,38 @@ async function main() {
       await page.close();
     }
     return notes.join('; ');
+  });
+
+  await scenario('launch settings: the visit counter and the feedback link switch on from config.js', async () => {
+    server.config = { GOATCOUNTER_CODE: 'testswarm', FEEDBACK_URL: 'https://feedback.example/form?src=game' };
+    try {
+      // GoatCounter itself is never contacted from a test: its address is blocked, and a stand-in records what would be counted.
+      const page = await fresh({ width: 1280, height: 800, blockUrls: ['*gc.zgo.at*', '*goatcounter.com*'], initScript: 'window.__gc = []; window.goatcounter = { count: (o) => window.__gc.push(o) };' });
+      assert.match(await page.eval('String(window.goatcounter.count)'), /__gc/, 'the real counting script never ran: its address is blocked in tests');
+      const tag = await page.eval('(() => { const t = document.getElementById("visitCounter"); return t && { src: t.src, to: t.getAttribute("data-goatcounter"), async: t.async, n: document.querySelectorAll("script[data-goatcounter]").length }; })()');
+      assert.deepEqual(tag, { src: 'https://gc.zgo.at/count.js', to: 'https://testswarm.goatcounter.com/count', async: true, n: 1 });
+      assert.equal(await page.eval('document.cookie'), '', 'no cookies');
+      assert.deepEqual(await page.eval('window.__gc'), [], 'nothing is counted as an event just for opening the page');
+      await click(page, 'dailyBtn');
+      await playDaily(page, TIERS7);
+      assert.deepEqual(await page.eval('window.__gc'), [], 'and nothing during the flight');
+      await land(page);
+      assert.deepEqual(await page.eval('window.__gc'), [{ path: 'flight-finished', title: 'Daily flight finished', event: true }], 'one event when the flight is finished');
+      const run = await saved(page);
+      const link = await page.eval('(() => { const a = document.getElementById("feedbackLink"); return { shown: !document.getElementById("feedbackRow").hidden && a.getClientRects().length > 0, href: a.href, text: a.textContent, rel: a.rel, target: a.target }; })()');
+      assert.deepEqual(link, { shown: true, href: 'https://feedback.example/form?src=game&date=' + run.date + '&prompts=' + encodeURIComponent(run.promptIds.join(',')), text: 'Wrong tier? Tell us', rel: 'noopener noreferrer', target: '_blank' });
+      assert.equal(JSON.stringify(Object.keys(await page.eval('Object.assign({}, localStorage)')).sort()).includes('goat'), false, 'the counter stores nothing on the device');
+      await page.reload(); // the results again, after a reload: the flight is not counted twice
+      await ready(page);
+      await page.eval('document.getElementById("dailyBtn") && document.body.dataset.phase === "home" && document.getElementById("dailyBtn").click()');
+      await waitPhase(page, 'results');
+      assert.deepEqual(await page.eval('window.__gc'), [], 'reopening the results counts nothing');
+      const real = page.problems.filter((p) => !/gc\.zgo\.at|ERR_BLOCKED_BY_CLIENT|ERR_FAILED/.test(p));
+      assert.deepEqual(real, [], 'no problems besides the blocked counter script');
+      await page.close();
+    } finally {
+      server.config = null;
+    }
   });
 
   await scenario('captions: one at a time, about three seconds each', async () => {

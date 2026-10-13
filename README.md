@@ -57,8 +57,8 @@ Sound is off until you turn it on with the speaker button. Scanlines can be swit
 
 ## Run it locally
 
-It is a static site: HTML, CSS and vanilla JavaScript, with no build step, backend, dependencies,
-analytics or tracking. All artwork is drawn in code on a canvas and all sound is synthesised; the
+It is a static site: HTML, CSS and vanilla JavaScript, with no build step, backend or dependencies.
+Nothing is loaded from another site unless you switch on the visit counter in `config.js` (below). All artwork is drawn in code on a canvas and all sound is synthesised; the
 only asset is one self-hosted open-licence font (Press Start 2P, SIL OFL, in `assets/fonts/`). It has to be served over HTTP, because browsers block `fetch` on `file://`.
 
 ```bash
@@ -159,3 +159,19 @@ SWARM-V3.md, SWARM-V4.md the v3 and v4 checklists with evidence
 SHIP.md                  release checklist with evidence
 HUMAN-TODO.md            what still needs a person
 ```
+
+## Launch settings (`config.js`)
+
+Two values, both empty (off) as shipped:
+
+- `GOATCOUNTER_CODE` — your GoatCounter site code (`myswarm` for `myswarm.goatcounter.com`). When set, the page
+  loads GoatCounter's script, which counts page views; the game adds one event, `flight-finished`, each time a
+  daily flight is completed. GoatCounter uses no cookies and collects no personal data, and the game stores
+  nothing for it. When empty, no script is loaded and nothing leaves the page.
+- `FEEDBACK_URL` — where "Wrong tier? Tell us" on the results page points: an `https:` form or page, or a
+  `mailto:` address. The link carries `date=` and `prompts=` (the day's prompt ids) so a report says which
+  round it means. When empty, the link is hidden.
+
+The site can be added to a phone's home screen (`manifest.webmanifest`, icons in `assets/icons/`, drawn by
+`npm run build:icons`). There is no service worker, so the daily puzzle is always fetched fresh and the game
+needs a connection to load.
