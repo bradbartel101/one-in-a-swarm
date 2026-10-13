@@ -5,7 +5,7 @@ Tiers are estimates until there is real player data.
 
 ## Checklist
 - [x] A. Plumbing: `pool`, clarifier, type/count/source, held-out and rejected lists in the build tool; clarifier shown in the game; retired prompts stay playable on days already scheduled
-- [ ] B. Daily mix: 4 gt + 3 general in the order general, gt, gt, general, gt, general, gt; easy general first; repeat rule; tests
+- [x] B. Daily mix: 4 gt + 3 general in the order general, gt, gt, general, gt, general, gt; easy general first; repeat rule; tests
 - [ ] C. Audit of the 44 existing prompts: keep, rewrite or drop, with reasons; pool tags
 - [ ] D1. Batch 1: closed GT lists verified against official sources
 - [ ] D2. Batch 2: kept GT prompts made exhaustive
