@@ -324,7 +324,15 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
 .numbers dd, .stats dd { margin: 0.2rem 0 0; }
 /* four numbers never share a row narrower than they are: two columns */
 [data-view="infover"] .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.numbers dd { font-size: clamp(0.8rem, 4.2vw, 1.4rem); overflow-wrap: anywhere; }
+/* A number and its unit never part ("8,893 ft" stays on one line). On a wide screen the stats sit
+   in a row; on a narrow one they go two to a row, with the altitude on a full-width row of its own. */
+.numbers dd { font-size: clamp(0.8rem, 4.2vw, 1.4rem); white-space: nowrap; }
+[data-view="results"] .numbers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+[data-view="results"] .numbers dd { font-size: clamp(0.8rem, 4.2vw, 1.1rem); } /* "238,855 mi" has to fit a third of the panel */
+@media (max-width: 560px) {
+  [data-view="results"] .numbers, [data-view="infover"] .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .numbers .wide { grid-column: 1 / -1; order: 9; }
+}
 .stats { grid-template-columns: repeat(5, 1fr); }
 @media (max-width: 520px) { .stats { grid-template-columns: repeat(3, 1fr); } }
 /* Your flights: one bar per flight, the last 30, on the same 0 to 700 scale */

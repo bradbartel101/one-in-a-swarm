@@ -99,6 +99,7 @@
   let introTimer = 0;
   let lockUntil = 0;
   let lockTimer = 0;
+  let pendingSubmit = 0; // a submit made during the cooldown, waiting for it to end
   let capId = null; // the sighting the caption on screen belongs to
 
   let scene = null;
@@ -142,7 +143,13 @@
     return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
 
+  function cancelPendingSubmit() {
+    window.clearTimeout(pendingSubmit);
+    pendingSubmit = 0;
+  }
+
   function setPhase(name) {
+    cancelPendingSubmit(); // a correct answer, the clock running out or a new round: nothing waits across them
     document.body.dataset.phase = name;
     // The answer box only exists while a prompt is on screen. During a climb, on the reveal and
     // on the end screens it is switched off, so nothing typed there can reach the next round.
@@ -356,6 +363,11 @@
 
   function feet(score) {
     return C.altitudeText(score);
+  }
+
+  // For display: a non-breaking space, so "8,893 ft" can never leave "ft" alone on a line.
+  function joined(text) {
+    return String(text).replace(/ /g, '\u00a0');
   }
 
   function tierLabel(tier) {
@@ -784,9 +796,12 @@
         revealBoxes.push(layoutBox(n)); // and where it is heading
       });
     }
-    scene.setAvoid(revealBoxes.concat(taken.slice(floatFixed.length)));
+    const sunAvoid = revealBoxes.concat(taken.slice(floatFixed.length));
     const bee = scene.box('bee');
     if (bee) taken.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
+    // Wherever the sun is this frame, new text is placed clear of it, and a fact gives way to it.
+    const sunBox = scene.box('sun');
+    if (sunBox) taken.push({ left: sunBox.x, right: sunBox.x + sunBox.w, top: sunBox.y, bottom: sunBox.y + sunBox.h });
     const free = (r) => r.left >= area.left && r.right <= area.right && r.top >= area.top && r.bottom <= area.bottom && !taken.some((b) => hits(r, b, 6));
 
     if (full) {
@@ -818,6 +833,8 @@
     } else {
       floatPlaced.forEach((r) => taken.push(r));
     }
+    // the sun, for its part, keeps off a toast or a caption once one is up
+    scene.setAvoid(sunAvoid.concat(floatPlaced));
 
     // facts belong to the world: they cannot move, so they show only where they are free
     document.querySelectorAll('#worldLayer .fact').forEach((node) => {
@@ -1294,8 +1311,8 @@
     $('resDate').textContent = prettyDate(daily.date);
     $('resBand').textContent = band.name.toUpperCase();
     $('resBlurb').textContent = band.blurb;
-    $('resScore').textContent = C.formatNumber(score) + ' pts';
-    $('resAlt').textContent = feet(score);
+    $('resScore').textContent = joined(C.formatNumber(score) + ' pts');
+    $('resAlt').textContent = joined(feet(score));
 
     // Flight log: one column per round, each mark at the altitude the flight had reached by
     // then, on a line from the ground, with the zones behind.
@@ -1581,11 +1598,11 @@
     saveBest();
     const isBest = inf.score > 0 && (!best || inf.score > best.score);
     $('infTitle').textContent = inf.cleared ? 'YOU EMPTIED THE HIVE' : isBest ? 'NEW BEST RUN' : 'OUT OF AIR';
-    $('infScore').textContent = C.formatNumber(inf.score) + ' pts';
-    $('infAlt').textContent = feet(inf.score);
+    $('infScore').textContent = joined(C.formatNumber(inf.score) + ' pts');
+    $('infAlt').textContent = joined(feet(inf.score));
     $('infCount').textContent = String(inf.answered);
     $('infMisses').textContent = String(inf.misses || 0);
-    $('infBest').textContent = C.formatNumber(Math.max(best ? best.score : 0, inf.score)) + ' pts';
+    $('infBest').textContent = joined(C.formatNumber(Math.max(best ? best.score : 0, inf.score)) + ' pts');
     announce('Run over. ' + inf.score + ' points across ' + inf.answered + ' prompts.');
     const list = $('infLog');
     list.textContent = '';
@@ -1716,8 +1733,9 @@
       renderInfinite();
       $('guess').focus();
     });
-    $('guessForm').addEventListener('submit', (e) => {
-      e.preventDefault();
+    // One submit. During the cooldown it is not dropped: the latest one is remembered and
+    // fired by itself when the cooldown ends, with whatever is in the box at that moment.
+    const submitGuess = () => {
       const text = $('guess').value;
       const phase = document.body.dataset.phase;
       if (phase === 'intro') {
@@ -1725,6 +1743,12 @@
       } else if (phase !== 'guess' || $('guess').disabled) {
         return; // a submit only counts while a prompt is live
       } else if (performance.now() < lockUntil) {
+        if (!pendingSubmit) {
+          pendingSubmit = window.setTimeout(() => {
+            pendingSubmit = 0;
+            submitGuess();
+          }, Math.max(0, lockUntil - performance.now()) + 5);
+        }
         return;
       } else if (mode === 'daily' && daily && daily.round) {
         startCooldown();
@@ -1734,6 +1758,10 @@
         infSubmit(text);
       }
       if (view === 'play' && document.body.dataset.phase !== 'climb') $('guess').focus();
+    };
+    $('guessForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitGuess();
     });
     // Bank the clock before the page unloads: closing or reloading never pauses a round.
     const bank = () => {

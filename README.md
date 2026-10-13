@@ -80,7 +80,7 @@ That one command runs all three of these:
 |---|---|
 | `npm test` | Unit tests: matching, daily seed and rotation, timers, scoring, saved data, colour contrast, file checks |
 | `npm run validate` | Content validator for `data/prompts.json` |
-| `npm run test:e2e` | 35 scenarios in headless Chrome: full daily and infinite runs, the climb (starting within 200ms) and the reveal, a page hidden mid-climb, a frame loop that dies, captions one at a time, the frozen schedule against a changed prompt bank, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
+| `npm run test:e2e` | 38 scenarios in headless Chrome: full daily and infinite runs, the climb (starting within 200ms) and the reveal, a page hidden mid-climb, a frame loop that dies, captions one at a time, the frozen schedule against a changed prompt bank, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
 
 `npm run screens` plays flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900
 and saves screenshots of every zone, some sightings, a secret answer, the One in a Swarm moment and
