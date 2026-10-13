@@ -149,9 +149,12 @@ test('feedback link: carries the date and the prompt ids, and only ever points a
   assert.equal(C.feedbackLink('https://x.example/', 'not a date', ['ok', 'bad id!', '<b>']), 'https://x.example/?date=&prompts=ok', 'only clean values are passed on');
 });
 
-test('link preview and home-screen files: the right sizes, and every address on the GitHub Pages URL', () => {
+test('link preview and home-screen files: the right sizes, and every address on the site domain', () => {
   const html = read('index.html');
-  const SITE_URL = 'https://bradbartel101.github.io/one-in-a-swarm/';
+  const SITE_URL = 'https://oneinaswarm.io/';
+  // the custom domain GitHub Pages serves is the one in CNAME, and nothing still points at the old address
+  assert.equal(read('CNAME').trim(), new URL(SITE_URL).hostname);
+  for (const f of ['index.html', '404.html', 'manifest.webmanifest', 'config.js', 'js/app.js', 'js/core.js', 'js/card.js']) assert.ok(!/github\.io\/one-in-a-swarm/.test(read(f)), f + ' still names the old github.io address');
   assert.deepEqual(pngSize('assets/og.png'), [1200, 630]);
   const meta = (key) => { const m = new RegExp('<meta (?:property|name)="' + key + '" content="([^"]*)"').exec(html); assert.ok(m, key + ' is set'); return m[1]; };
   assert.equal(meta('og:url'), SITE_URL);
@@ -173,7 +176,7 @@ test('link preview and home-screen files: the right sizes, and every address on 
   assert.equal(man.name, 'One in a Swarm');
   assert.ok(man.short_name.length <= 12);
   assert.equal(man.display, 'standalone');
-  assert.equal(man.start_url, './', 'relative, so it works under the /one-in-a-swarm/ path');
+  assert.equal(man.start_url, './', 'relative: the domain root on oneinaswarm.io, and still right under a sub-path');
   assert.equal(man.scope, './');
   assert.match(man.theme_color, /^#003057$/i);
   assert.deepEqual(man.icons.map((i) => i.sizes + ' ' + i.purpose).sort(), ['192x192 any', '512x512 any', '512x512 maskable']);

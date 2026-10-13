@@ -3,7 +3,8 @@
 ## 1. Merged and live
 
 Done: the "Release v1.0" pull request is merged into `main`, and GitHub Pages is serving `main`
-at https://bradbartel101.github.io/one-in-a-swarm/ (checked: the game loads and a round starts,
+at https://oneinaswarm.io/ (a custom domain since October 2026; the old
+https://bradbartel101.github.io/one-in-a-swarm/ address redirects to it. Checked: the game loads and a round starts,
 the missing-page URL returns the "Wrong turn" page).
 
 ## 2. (done) GitHub Pages
@@ -14,8 +15,8 @@ redeploys the site.
 ## 3. Confirm the site address used in link previews
 
 `index.html` contains four absolute URLs (`canonical`, `og:url`, `og:image`, `twitter:image`) that
-assume `https://bradbartel101.github.io/one-in-a-swarm/`, which is where the site now lives. If you
-add a custom domain, change those four lines. Still to do: paste the live link into a group chat (iMessage, Slack, Discord) and
+point at `https://oneinaswarm.io/`, the custom domain the site now lives on. If the domain
+changes again, change those four lines, `CNAME`, and `SITE_URL` in `tests/static.test.js`. Still to do: paste the live link into a group chat (iMessage, Slack, Discord) and
 check that the preview image appears.
 
 ## 4. Check on real phones

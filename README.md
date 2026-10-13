@@ -130,14 +130,22 @@ The daily rotation never repeats a prompt within `floor(prompts / 7)` days (6 da
 
 ## Deploying to GitHub Pages
 
-Every path in the site is relative, so it works from `https://<user>.github.io/<repo>/`. The exact
-steps are in [HUMAN-TODO.md](HUMAN-TODO.md). In short: push to GitHub, then set
-Settings → Pages → "Deploy from a branch" → `main` / `/ (root)`. `.nojekyll` is already in place,
-and `.github/workflows/test.yml` runs the unit tests and the content validator on every push.
+The site is served by GitHub Pages at **https://oneinaswarm.io/**, a custom domain set in
+Settings → Pages and recorded in the `CNAME` file at the top of the repository. Do not delete
+`CNAME`: without it the next deploy drops the domain. The old address,
+`https://bradbartel101.github.io/one-in-a-swarm/`, redirects to the new one.
 
-If the site ends up anywhere other than `https://bradbartel101.github.io/one-in-a-swarm/`, update
-the four absolute URLs near the top of `index.html` so link previews keep working. The 404 page
-assumes a project site (`/<repo>/`) on `github.io` and a domain root everywhere else.
+Pages is set to "Deploy from a branch" → `main` / `/ (root)`, so every push to `main` redeploys.
+`.nojekyll` is in place, and `.github/workflows/test.yml` runs the unit tests and the content
+validator on every push. The original setup steps are in [HUMAN-TODO.md](HUMAN-TODO.md).
+
+Every path inside the site is relative (scripts, styles, data, icons, and the manifest's
+`start_url` and `scope`), so the same files work at the domain root and under a sub-path such as
+a fork's `https://<user>.github.io/<repo>/`. Only the four link-preview addresses near the top of
+`index.html` (`canonical`, `og:url`, `og:image`, `twitter:image`) are absolute; if the domain ever
+changes, update those four, `CNAME`, and `SITE_URL` in `tests/static.test.js`. The share text and
+the saved share image take their address from wherever the page is being served, so they need no
+change. The 404 page links home to `/`, or to `/<repo>/` when it is served from `github.io`.
 
 ## Layout
 
