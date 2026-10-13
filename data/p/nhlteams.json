@@ -33,9 +33,9 @@
 {"name":"Buffalo Sabres","tier":"rare","aliases":["Sabres","Buffalo"]},
 {"name":"Minnesota Wild","tier":"rare","aliases":["Wild","Minnesota"]},
 {"name":"Vancouver Canucks","tier":"rare","aliases":["Canucks","Vancouver"]},
-{"name":"Calgary Flames","tier":"rare","aliases":["Flames","Calgary"],"note":"They were the Atlanta Flames until 1980."},
-{"name":"Ottawa Senators","tier":"rare","aliases":["Senators","Sens","Ottawa"]},
-{"name":"Columbus Blue Jackets","tier":"rare","aliases":["Blue Jackets","Columbus","Jackets"]},
+{"name":"Calgary Flames","tier":"deep","aliases":["Flames","Calgary"],"note":"They were the Atlanta Flames until 1980."},
+{"name":"Ottawa Senators","tier":"deep","aliases":["Senators","Sens","Ottawa"]},
+{"name":"Columbus Blue Jackets","tier":"deep","aliases":["Blue Jackets","Columbus","Jackets"]},
 {"name":"Utah Mammoth","tier":"swarm","aliases":["Mammoth","Utah","Utah Hockey Club"],"note":"The league's newest name: the former Arizona Coyotes, in Salt Lake City since 2024."}
   ]
 }

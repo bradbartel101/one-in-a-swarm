@@ -800,62 +800,62 @@ R Ladybug
 R Firefly | Lightning Bug
 R Banana Slug
 R Rain Boots | Galoshes | Boots
-R Sweater | Yellow Sweater | Shirt | Dress
-R Yellow Brick Road | Brick Road
-R Ramblin' Wreck | Ramblin Wreck | The Wreck :: Old gold and white, since 1930.
-R Ferrari
-R Lamborghini
-R Corvette
-R Bumblebee Camaro | Camaro | Transformers
-R Volkswagen Beetle | VW Bug | Punch Buggy
-R Jeep
-R Kayak
-R Life Raft | Raft
-R Life Jacket | Life Vest
-R Buoy
-R Frisbee
-R Softball
-R Golf Ball
-R Yellow Card
-R Penalty Flag | Flag
-R Goalposts | Goal Post | Uprights
-R First Down Line | First-Down Line
-R Jersey | Yellow Jersey | Maillot Jaune
-R Lakers Jersey | Lakers
-R Steelers Towel | Terrible Towel
-R Packers Helmet | Packers
-R Pittsburgh Pirates | Pirates
-R Michigan Helmet | Maize
-R Banana Peel | Peel
-R Lemon Meringue Pie | Lemon Pie | Lemon Bar
-R Pineapple Upside-Down Cake | Cake | Yellow Cake
-R Twinkie
-R Nilla Wafers | Vanilla Wafer
-R Tortilla Chips | Nachos | Taco Shell
-R Cheez-It | Goldfish Crackers | Cheetos
-R Kraft Singles | American Cheese
-R Egg Noodles
-R Hollandaise
-R Honey Mustard
-R Pickled Ginger
-R Banana Pepper | Pepperoncini
-R Yukon Gold | Potato | Potatoes
-R Onion | Yellow Onion
-R Rutabaga
-R Spaghetti Squash
-R Wax Beans
-R Chickpeas
-R Lentils
-R Rice | Saffron Rice | Yellow Rice
-R Couscous
-R Polenta
-R Cornmeal
-R Custard Apple
-R Quince
-R Durian
-R Jackfruit
-R Yuzu
-R Rainier Cherry
+D Sweater | Yellow Sweater | Shirt | Dress
+D Yellow Brick Road | Brick Road
+D Ramblin' Wreck | Ramblin Wreck | The Wreck :: Old gold and white, since 1930.
+D Ferrari
+D Lamborghini
+D Corvette
+D Bumblebee Camaro | Camaro | Transformers
+D Volkswagen Beetle | VW Bug | Punch Buggy
+D Jeep
+D Kayak
+D Life Raft | Raft
+D Life Jacket | Life Vest
+D Buoy
+D Frisbee
+D Softball
+D Golf Ball
+D Yellow Card
+D Penalty Flag | Flag
+D Goalposts | Goal Post | Uprights
+D First Down Line | First-Down Line
+D Jersey | Yellow Jersey | Maillot Jaune
+D Lakers Jersey | Lakers
+D Steelers Towel | Terrible Towel
+D Packers Helmet | Packers
+D Pittsburgh Pirates | Pirates
+D Michigan Helmet | Maize
+D Banana Peel | Peel
+D Lemon Meringue Pie | Lemon Pie | Lemon Bar
+D Pineapple Upside-Down Cake | Cake | Yellow Cake
+D Twinkie
+D Nilla Wafers | Vanilla Wafer
+D Tortilla Chips | Nachos | Taco Shell
+D Cheez-It | Goldfish Crackers | Cheetos
+D Kraft Singles | American Cheese
+D Egg Noodles
+D Hollandaise
+D Honey Mustard
+D Pickled Ginger
+D Banana Pepper | Pepperoncini
+D Yukon Gold | Potato | Potatoes
+D Onion | Yellow Onion
+D Rutabaga
+D Spaghetti Squash
+D Wax Beans
+D Chickpeas
+D Lentils
+D Rice | Saffron Rice | Yellow Rice
+D Couscous
+D Polenta
+D Cornmeal
+D Custard Apple
+D Quince
+D Durian
+D Jackfruit
+D Yuzu
+D Rainier Cherry
 X Gamboge :: A pigment made from tree resin, the deep yellow of Buddhist monks' robes. In large doses, a strong laxative.
 ! Grass :: green
 ! Sky :: blue

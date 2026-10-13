@@ -31,9 +31,9 @@
 {"name":"Sacramento Kings","tier":"rare","aliases":["Kings","Sacramento"]},
 {"name":"Utah Jazz","tier":"rare","aliases":["Jazz","Utah"]},
 {"name":"Indiana Pacers","tier":"rare","aliases":["Pacers","Indiana"]},
-{"name":"Washington Wizards","tier":"rare","aliases":["Wizards","Washington"]},
-{"name":"Charlotte Hornets","tier":"rare","aliases":["Hornets","Charlotte"],"note":"A fellow stinging insect."},
-{"name":"New Orleans Pelicans","tier":"rare","aliases":["Pelicans","Pels","New Orleans"]},
+{"name":"Washington Wizards","tier":"deep","aliases":["Wizards","Washington"]},
+{"name":"Charlotte Hornets","tier":"deep","aliases":["Hornets","Charlotte"],"note":"A fellow stinging insect."},
+{"name":"New Orleans Pelicans","tier":"deep","aliases":["Pelicans","Pels","New Orleans"]},
 {"name":"Memphis Grizzlies","tier":"swarm","aliases":["Grizzlies","Grizz","Memphis"],"note":"They began in Vancouver, which explains the bear."}
   ]
 }

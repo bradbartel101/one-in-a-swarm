@@ -31,9 +31,9 @@
 {"name":"Cincinnati Reds","tier":"rare","aliases":["Reds","Cincinnati"]},
 {"name":"Pittsburgh Pirates","tier":"rare","aliases":["Pirates","Pittsburgh"]},
 {"name":"Kansas City Royals","tier":"rare","aliases":["Royals","Kansas City"]},
-{"name":"Colorado Rockies","tier":"rare","aliases":["Rockies","Colorado"]},
-{"name":"Arizona Diamondbacks","tier":"rare","aliases":["Diamondbacks","D-backs","Arizona"]},
-{"name":"Los Angeles Angels","tier":"rare","aliases":["Angels","Anaheim Angels","LA Angels"]},
+{"name":"Colorado Rockies","tier":"deep","aliases":["Rockies","Colorado"]},
+{"name":"Arizona Diamondbacks","tier":"deep","aliases":["Diamondbacks","D-backs","Arizona"]},
+{"name":"Los Angeles Angels","tier":"deep","aliases":["Angels","Anaheim Angels","LA Angels"]},
 {"name":"Athletics","tier":"swarm","aliases":["A's","Oakland Athletics","Oakland A's","Oakland","Sacramento Athletics"],"note":"Philadelphia, Kansas City, Oakland, Sacramento, and Las Vegas next."}
   ]
 }

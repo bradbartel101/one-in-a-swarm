@@ -96,12 +96,13 @@ test('v2: clarifiers are eight words or fewer and prompt text fits above a phone
   });
 });
 
-test('v2: every live prompt has an obvious answer, a too-clever one, one 100-pointer, and a spread of tiers', () => {
+test('v2: every live prompt has an answer in each of the six tiers, and exactly one 100-pointer', () => {
   live.forEach((p) => {
     const n = (tier) => p.answers.filter((a) => a.tier === tier).length;
     assert.ok(n('common') >= 1, p.id + ' has no common answer');
     assert.ok(n('clever') >= 1, p.id + ' has no too-clever answer');
     assert.equal(n('swarm'), 1, p.id + ' swarm answers');
+    ['solid', 'rare', 'deep'].forEach((tier) => assert.ok(n(tier) >= 1, p.id + ' has no ' + tier + ' answer')); // every score is reachable on every prompt
     assert.ok(n('common') <= p.answers.length / 2, p.id + ': more than half the answers are common');
     assert.ok(p.answers.every((a) => !a.verify), p.id + ' ships an answer still marked for verification');
   });

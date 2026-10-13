@@ -215,9 +215,9 @@ R New York Islanders | Islanders | Isles
 R Buffalo Sabres | Sabres | Buffalo
 R Minnesota Wild | Wild | Minnesota
 R Vancouver Canucks | Canucks | Vancouver
-R Calgary Flames | Flames | Calgary :: They were the Atlanta Flames until 1980.
-R Ottawa Senators | Senators | Sens | Ottawa
-R Columbus Blue Jackets | Blue Jackets | Columbus | Jackets
+D Calgary Flames | Flames | Calgary :: They were the Atlanta Flames until 1980.
+D Ottawa Senators | Senators | Sens | Ottawa
+D Columbus Blue Jackets | Blue Jackets | Columbus | Jackets
 X Utah Mammoth | Mammoth | Utah | Utah Hockey Club :: The league's newest name: the former Arizona Coyotes, in Salt Lake City since 2024.
 ! Atlanta Thrashers :: moved to Winnipeg in 2011 and became the Jets
 ! Atlanta Flames :: moved to Calgary in 1980

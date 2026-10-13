@@ -501,12 +501,12 @@ S Zimbabwe
 
 @landlocked | WORLD | Name a landlocked country | pool=general | type=closed | count=44 | source=countries on the list of 195 with no ocean coastline | clar=no coast on any ocean or open sea
 C Afghanistan
-D Andorra
-D Armenia
+R Andorra
+R Armenia
 C Austria
-D Azerbaijan
+R Azerbaijan
 S Belarus
-D Bhutan
+R Bhutan
 C Bolivia
 S Botswana
 D Burkina Faso
@@ -523,24 +523,24 @@ S Laos
 D Lesotho
 X Liechtenstein :: Doubly landlocked: every neighbour is landlocked too. Only Uzbekistan shares that.
 S Luxembourg
-D Malawi
+R Malawi
 S Mali
-D Moldova
+R Moldova
 C Mongolia
 S Nepal
 S Niger
 D North Macedonia | Macedonia
 T Paraguay
 S Rwanda
-D San Marino
+R San Marino
 S Serbia
 S Slovakia
-D South Sudan
+R South Sudan
 C Switzerland
 D Tajikistan
 D Turkmenistan
 S Uganda
-D Uzbekistan
+R Uzbekistan
 T Vatican City | Vatican | Holy See | The Vatican
 S Zambia
 S Zimbabwe

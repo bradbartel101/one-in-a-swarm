@@ -350,19 +350,19 @@ S Indiana | IU :: The most recent winner on the list: a playoff semifinal in Jan
 R Syracuse
 C Auburn
 X East Carolina | ECU :: The Pirates won it in 1992, coming back from 17 down in the fourth quarter against NC State.
-R Mississippi State
-R TCU | Texas Christian
+D Mississippi State
+D TCU | Texas Christian
 S Texas A&M | Texas A and M | A&M
-R Duke
-R Houston
+D Duke
+D Houston
 C Alabama | Bama | Crimson Tide
 S Washington | UW | Huskies
 T UCF | Central Florida :: The unbeaten 2017 team beat Auburn here and declared itself national champion.
 S Michigan
 S Oklahoma | OU | Sooners
-R Cincinnati
+D Cincinnati
 S Michigan State | MSU
-R Pittsburgh | Pitt
+D Pittsburgh | Pitt
 S Ohio State | OSU | Buckeyes
 S Penn State | PSU
 S Texas | Longhorns

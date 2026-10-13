@@ -178,33 +178,33 @@ R Parking | Parking Decks | Traffic
 R Tech Tower | The Tower :: Just up the hill, in view from the stands.
 R The Hill | Freshman Hill
 R Edge Building | Edge Center | Rice Center
-R Heisman | John Heisman | Heisman Statue
-R Bobby Dodd Statue | Bobby Dodd | Dodd Statue
-R Retired Numbers | Ring of Honor | Banners
-R Trophy | Trophies
-R Rival | Georgia | Bulldogs | UGA Fans | Clemson
-R T-Shirts | T-Shirt Toss | Shirts | T-Shirt Cannon
-R Wave | The Wave
-R Chants | Cheers | Chant
-R Good Word | What's the Good Word | To Hell With Georgia | THWG
-R Keys | Key Jingle | Jingling Keys :: Keys out and jingling on kickoffs and big third downs.
-R Push-Ups | Pushups | Buzz Push-Ups | Crowd Surfing
-R Field Rush | Storming the Field | Rushing the Field
-R Mic Man | Announcer | PA Announcer
-R Recruits | Scouts
-R Kids | Families | Children
-R Homecoming Court | Mr. and Ms. Georgia Tech | Homecoming
-R Sting | Stinger | Stingers
-R Bees | Bee
-R Lights | Stadium Lights | Floodlights
-R Clock | Game Clock | Play Clock
-R Pylons | Pylon
-R Kicking Net | Net
-R Headsets | Headset | Clipboard | Play Sheet
-R Megaphone | Megaphones
-R Golf Carts | Cart
-R Ambulance
-R Blimp | Drone
+D Heisman | John Heisman | Heisman Statue
+D Bobby Dodd Statue | Bobby Dodd | Dodd Statue
+D Retired Numbers | Ring of Honor | Banners
+D Trophy | Trophies
+D Rival | Georgia | Bulldogs | UGA Fans | Clemson
+D T-Shirts | T-Shirt Toss | Shirts | T-Shirt Cannon
+D Wave | The Wave
+D Chants | Cheers | Chant
+D Good Word | What's the Good Word | To Hell With Georgia | THWG
+D Keys | Key Jingle | Jingling Keys :: Keys out and jingling on kickoffs and big third downs.
+D Push-Ups | Pushups | Buzz Push-Ups | Crowd Surfing
+D Field Rush | Storming the Field | Rushing the Field
+D Mic Man | Announcer | PA Announcer
+D Recruits | Scouts
+D Kids | Families | Children
+D Homecoming Court | Mr. and Ms. Georgia Tech | Homecoming
+D Sting | Stinger | Stingers
+D Bees | Bee
+D Lights | Stadium Lights | Floodlights
+D Clock | Game Clock | Play Clock
+D Pylons | Pylon
+D Kicking Net | Net
+D Headsets | Headset | Clipboard | Play Sheet
+D Megaphone | Megaphones
+D Golf Carts | Cart
+D Ambulance
+D Blimp | Drone
 X Clint Castleberry's 19 | Number 19 | 19 | Castleberry :: The only number Tech football has retired, for the freshman star of 1942 who died in the war.
 ! Uga :: the wrong school's dog; only when Georgia visits
 ! Sanford Stadium :: that is in Athens

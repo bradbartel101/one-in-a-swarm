@@ -124,44 +124,44 @@ R University Avenue | University
 R Ralph David Abernathy Boulevard | Abernathy | Ralph David Abernathy | Gordon Street
 R Georgia Avenue | Georgia
 R Ormewood Avenue | Ormewood
-R Confederate Avenue | United Avenue | United
-R Cherokee Avenue | Cherokee
-R Hill Street | Hill
-R Fair Street | Fair
-R Chapel Street | Chapel
-R James P. Brawley Drive | Brawley
-R West End Avenue | West End
-R Beecher Street | Beecher
-R Fulton Industrial Boulevard | Fulton Industrial
-R Greenbriar Parkway | Greenbriar
-R Mount Zion Road | Mount Zion
-R Perry Boulevard | Perry
-R Johnson Road | Johnson
-R Habersham Road | Habersham
-R Tuxedo Road | Tuxedo
-R Blackland Road | Blackland
-R Powers Ferry Road | Powers Ferry
-R Lake Forrest Drive | Lake Forrest
-R Means Street | Means
-R Tech Parkway :: The road along Tech's western edge.
-R Dalney Street | Dalney
-R Plum Street | Plum
-R McMillan Street | McMillan
-R Curran Street | Curran
-R Center Street | Center
-R Turner Place | Turner
-R Brittain Drive | Brittain
+D Confederate Avenue | United Avenue | United
+D Cherokee Avenue | Cherokee
+D Hill Street | Hill
+D Fair Street | Fair
+D Chapel Street | Chapel
+D James P. Brawley Drive | Brawley
+D West End Avenue | West End
+D Beecher Street | Beecher
+D Fulton Industrial Boulevard | Fulton Industrial
+D Greenbriar Parkway | Greenbriar
+D Mount Zion Road | Mount Zion
+D Perry Boulevard | Perry
+D Johnson Road | Johnson
+D Habersham Road | Habersham
+D Tuxedo Road | Tuxedo
+D Blackland Road | Blackland
+D Powers Ferry Road | Powers Ferry
+D Lake Forrest Drive | Lake Forrest
+D Means Street | Means
+D Tech Parkway :: The road along Tech's western edge.
+D Dalney Street | Dalney
+D Plum Street | Plum
+D McMillan Street | McMillan
+D Curran Street | Curran
+D Center Street | Center
+D Turner Place | Turner
+D Brittain Drive | Brittain
 X Uncle Heinie Way | Uncle Heinie :: A real street sign on Tech's campus.
-R Ethel Street | Ethel
-R Mecaslin Street | Mecaslin
-R Deering Road | Deering
-R Peachtree Industrial Boulevard | Peachtree Industrial
-R Interstate 75 | I-75 | I75 | 75
-R Interstate 85 | I-85 | I85 | 85
-R Interstate 20 | I-20 | I20 | 20
-R Interstate 285 | I-285 | I285 | 285 | The Perimeter | Perimeter
-R Downtown Connector | The Connector | Connector | 75/85
-R Georgia 400 | GA 400 | 400
+D Ethel Street | Ethel
+D Mecaslin Street | Mecaslin
+D Deering Road | Deering
+D Peachtree Industrial Boulevard | Peachtree Industrial
+D Interstate 75 | I-75 | I75 | 75
+D Interstate 85 | I-85 | I85 | 85
+D Interstate 20 | I-20 | I20 | 20
+D Interstate 285 | I-285 | I285 | 285 | The Perimeter | Perimeter
+D Downtown Connector | The Connector | Connector | 75/85
+D Georgia 400 | GA 400 | 400
 ! Broadway :: that is New York (Atlanta's is Broad Street)
 ! Bourbon Street :: New Orleans
 ! Sesame Street :: no
@@ -273,40 +273,40 @@ R Woolsey
 R Whitesburg
 R Temple
 R Bremen
-R Rockmart
-R Jasper
-R Waleska
-R Nelson
-R Jefferson
-R Bethlehem
-R Statham
-R Porterdale
-R Mansfield
-R Jackson
-R Jenkinsburg
-R Zebulon
-R Barnesville
-R Moreland
-R Grantville
-R Hogansville
-R Turin
-R Haralson
-R Milner
-R Sunny Side
-R Lake City
-R Conley
-R Panthersville
-R Gresham Park
-R Belvedere Park
-R Redan
-R Candler-McAfee | Candler McAfee
-R North Druid Hills
-R Toco Hills
-R Embry Hills
-R Northlake
-R Smoke Rise
-R Centerville
-R Mountain View
+D Rockmart
+D Jasper
+D Waleska
+D Nelson
+D Jefferson
+D Bethlehem
+D Statham
+D Porterdale
+D Mansfield
+D Jackson
+D Jenkinsburg
+D Zebulon
+D Barnesville
+D Moreland
+D Grantville
+D Hogansville
+D Turin
+D Haralson
+D Milner
+D Sunny Side
+D Lake City
+D Conley
+D Panthersville
+D Gresham Park
+D Belvedere Park
+D Redan
+D Candler-McAfee | Candler McAfee
+D North Druid Hills
+D Toco Hills
+D Embry Hills
+D Northlake
+D Smoke Rise
+D Centerville
+D Mountain View
 X Between :: A real town in Walton County, named for sitting halfway between Monroe and Loganville.
 ! Atlanta :: the city itself
 ! Athens :: about seventy miles east, and its own metro area
@@ -859,44 +859,44 @@ R Fruitopia
 R Powerade Zero
 R Glaceau | Glacéau
 R Innocent | Innocent Smoothies
-R Chaudfontaine
-R Apollinaris
+D Chaudfontaine
+D Apollinaris
 ~D Vio ?? A German water brand I believe Coca-Cola owns; not confirmed.
-R Mezzo Mix :: Cola and orange together. Germany loves it.
+D Mezzo Mix :: Cola and orange together. Germany loves it.
 X Beverly :: A bitter Italian aperitif soda. Visitors are dared to taste it at the World of Coca-Cola in Atlanta.
-R Stoney | Stoney Ginger Beer
-R Sparletta
-R Krest
+D Stoney | Stoney Ginger Beer
+D Sparletta
+D Krest
 ~D Bibo ?? A juice brand I believe Coca-Cola sold in Africa; not confirmed.
-R Kuat
-R Guaraná Jesus | Guarana Jesus
+D Kuat
+D Guaraná Jesus | Guarana Jesus
 ~D Quatro ?? A grapefruit soda I believe Coca-Cola sells in South America; not confirmed.
-R Manzana Lift | Lift
+D Manzana Lift | Lift
 ~D Sidral Mundet ?? A Mexican apple soda I believe Coca-Cola owns; not confirmed.
 ~D Joya ?? A Mexican fruit soda I believe Coca-Cola owns; not confirmed.
 ~D Delaware Punch ?? I believe Coca-Cola owns it; not confirmed.
-R Ramblin' Root Beer | Ramblin Root Beer :: Coke's root beer of the late 1970s, before it bought Barq's.
+D Ramblin' Root Beer | Ramblin Root Beer :: Coke's root beer of the late 1970s, before it bought Barq's.
 ~D Santiba ?? A mixer line I believe Coca-Cola sold in the 1970s; not confirmed.
 ~D Veep ?? A lemon-lime soda I believe Coca-Cola sold in the 1960s; not confirmed.
 ~D Simba ?? A citrus soda I believe Coca-Cola sold around 1970; not confirmed.
-R OK Soda | OK :: A 1993 experiment aimed at Generation X.
-R Diet Coke Plus
-R Diet Coke Feisty Cherry | Feisty Cherry
-R Diet Coke Ginger Lime
-R Coca-Cola Clear
-R Coca-Cola Light | Coke Light
-R Tab Clear
-R Enviga
+D OK Soda | OK :: A 1993 experiment aimed at Generation X.
+D Diet Coke Plus
+D Diet Coke Feisty Cherry | Feisty Cherry
+D Diet Coke Ginger Lime
+D Coca-Cola Clear
+D Coca-Cola Light | Coke Light
+D Tab Clear
+D Enviga
 ~R Nestea ?? A Nestlé brand that Coca-Cola made under a joint venture until 2017.
-R Tum-E Yummies | Tum E Yummies
-R Bright & Early
+D Tum-E Yummies | Tum E Yummies
+D Bright & Early
 ~R Bacardi Mixers ?? Sold under licence; not sure it counts as a Coca-Cola drink.
-R Jack & Coke | Jack Daniel's & Coca-Cola | Jack and Coke :: Sold ready-mixed in a can since 2022.
-R Topo Chico Hard Seltzer
-R Simply Spiked | Simply Spiked Lemonade
-R Burn | Burn Energy
-R Relentless
-R Mother | Mother Energy
+D Jack & Coke | Jack Daniel's & Coca-Cola | Jack and Coke :: Sold ready-mixed in a can since 2022.
+D Topo Chico Hard Seltzer
+D Simply Spiked | Simply Spiked Lemonade
+D Burn | Burn Energy
+D Relentless
+D Mother | Mother Energy
 ~D Royal Tru ?? A Philippine orange soda I believe Coca-Cola owns; not confirmed.
 ~D Fioravanti ?? An Ecuadorian soda I believe Coca-Cola owns; not confirmed.
 ~D Urge ?? The Norwegian name for Surge, as far as I know.
@@ -1210,65 +1210,65 @@ R Brad Rigby
 R Riccardo Ingram
 R Jed Bradley
 R Xzavion Curry
-R Brant Hurter
-R Kyle McCann
+D Brant Hurter
+D Kyle McCann
 C Bobby Jones | Bob Jones | Robert Tyre Jones
 S Matt Kuchar | Kuchar
 S Stewart Cink | Cink
 S David Duval | Duval
-R Larry Mize | Mize
-R Bryce Molder
-R Cameron Tringale
-R Chesson Hadley
-R Ollie Schniederjans
-R Andy Ogletree
-R Roberto Castro
-R Troy Matteson
-R Christo Lamprecht
-R Tyler Strafaci
-R Richy Werenski
-R Anders Albertson
-R Vincent Whaley
-R Seth Reeves
-R Nicholas Thompson
-R Charlie Rymer
-R Tripp Isenhour
-R Luke Schniederjans
-R Noah Norton
-R Connor Howe
-R Ross Steelman
-R Hiroshi Tai
-R Angelo Taylor :: Two Olympic golds in the 400-metre hurdles.
+D Larry Mize | Mize
+D Bryce Molder
+D Cameron Tringale
+D Chesson Hadley
+D Ollie Schniederjans
+D Andy Ogletree
+D Roberto Castro
+D Troy Matteson
+D Christo Lamprecht
+D Tyler Strafaci
+D Richy Werenski
+D Anders Albertson
+D Vincent Whaley
+D Seth Reeves
+D Nicholas Thompson
+D Charlie Rymer
+D Tripp Isenhour
+D Luke Schniederjans
+D Noah Norton
+D Connor Howe
+D Ross Steelman
+D Hiroshi Tai
+D Angelo Taylor :: Two Olympic golds in the 400-metre hurdles.
 X Derrick Adkins :: Olympic champion in the 400-metre hurdles in 1996, in Atlanta, across town from the campus where he trained.
-R Derek Mills :: Olympic relay gold in Atlanta, 1996.
-R Antonio McKay :: Olympic relay gold in 1984 and 1988.
-R Chaunté Lowe | Chaunte Lowe | Chaunte Howard :: High jumper, four Olympics.
-R Roger Kaiser :: Tech basketball's first consensus All-American.
-R Rich Yunkus
-R Clint Castleberry :: The only football number Tech has retired.
-R Jerry Mays
-R Randy Rhino
-R Ben Lammers
-R Michael Devoe
-R B.J. Elder | BJ Elder
-R James Forrest
-R Bruce Dalrymple
-R Kisha Ford
-R Alex Montgomery
-R Tyaunna Marshall
-R Kevin Parada
-R Kenny Thorne
-R Bryan Shelton :: An ATP player, then Tech's national-champion women's tennis coach.
-R Irina Falconi
-R Amanda McDowell :: NCAA singles champion in 2008.
-R Caio Pumputis
-R Gal Nevo
-R Monique Mead
-R Kele Eveland
-R Jessica Sallinger
-R Teegan Van Gunst
-R Julia Bergmann :: A Tech volleyball All-American and Olympian for Brazil.
-R Mariana Brambilla
+D Derek Mills :: Olympic relay gold in Atlanta, 1996.
+D Antonio McKay :: Olympic relay gold in 1984 and 1988.
+D Chaunté Lowe | Chaunte Lowe | Chaunte Howard :: High jumper, four Olympics.
+D Roger Kaiser :: Tech basketball's first consensus All-American.
+D Rich Yunkus
+D Clint Castleberry :: The only football number Tech has retired.
+D Jerry Mays
+D Randy Rhino
+D Ben Lammers
+D Michael Devoe
+D B.J. Elder | BJ Elder
+D James Forrest
+D Bruce Dalrymple
+D Kisha Ford
+D Alex Montgomery
+D Tyaunna Marshall
+D Kevin Parada
+D Kenny Thorne
+D Bryan Shelton :: An ATP player, then Tech's national-champion women's tennis coach.
+D Irina Falconi
+D Amanda McDowell :: NCAA singles champion in 2008.
+D Caio Pumputis
+D Gal Nevo
+D Monique Mead
+D Kele Eveland
+D Jessica Sallinger
+D Teegan Van Gunst
+D Julia Bergmann :: A Tech volleyball All-American and Olympian for Brazil.
+D Mariana Brambilla
 ! Herschel Walker :: Georgia
 ! Matt Ryan :: Boston College, then the Falcons
 ! Hank Aaron :: a Brave, never a Tech student
@@ -1397,45 +1397,45 @@ R Rodney Cook Sr. Park | Cook Park
 R Morningside Nature Preserve
 R Lullwater Preserve | Lullwater
 R Atlanta Memorial Park
-R Bitsy Grant Tennis Center
-R Bobby Jones Golf Course
-R East Lake Golf Club | East Lake
-R Lakewood Amphitheatre | Lakewood | Lakewood Amphitheater
-R Atlanta Dairies
-R Westside Provisions District | Westside Provisions
-R The Works
-R Atlanta City Hall | City Hall
-R Fulton County Courthouse
-R Richard B. Russell Federal Building | Russell Federal Building
-R Federal Reserve Bank of Atlanta | Federal Reserve | The Fed
-R Centers for Disease Control | CDC
-R Grady Memorial Hospital | Grady | Grady Hospital
-R Atlanta Central Library | Central Library
-R Peachtree Center
-R AmericasMart | Americas Mart | Merchandise Mart
-R Five Points
+D Bitsy Grant Tennis Center
+D Bobby Jones Golf Course
+D East Lake Golf Club | East Lake
+D Lakewood Amphitheatre | Lakewood | Lakewood Amphitheater
+D Atlanta Dairies
+D Westside Provisions District | Westside Provisions
+D The Works
+D Atlanta City Hall | City Hall
+D Fulton County Courthouse
+D Richard B. Russell Federal Building | Russell Federal Building
+D Federal Reserve Bank of Atlanta | Federal Reserve | The Fed
+D Centers for Disease Control | CDC
+D Grady Memorial Hospital | Grady | Grady Hospital
+D Atlanta Central Library | Central Library
+D Peachtree Center
+D AmericasMart | Americas Mart | Merchandise Mart
+D Five Points
 X Zero Mile Post | Zero Milepost :: The 1850s railroad marker that the city grew up around. Atlanta's first name was Terminus.
-R Peace Monument | Sidney Lanier Monument
-R Atlanta from the Ashes | The Phoenix | Phoenix Statue
-R John Lewis Mural | HERO Mural
-R Hank Aaron Home Run Wall | Home Run Wall | Hank Aaron Wall :: The piece of outfield fence his 715th cleared, still standing in a parking lot.
-R Rainbow Crosswalks | Rainbow Crosswalk
+D Peace Monument | Sidney Lanier Monument
+D Atlanta from the Ashes | The Phoenix | Phoenix Statue
+D John Lewis Mural | HERO Mural
+D Hank Aaron Home Run Wall | Home Run Wall | Hank Aaron Wall :: The piece of outfield fence his 715th cleared, still standing in a parking lot.
+D Rainbow Crosswalks | Rainbow Crosswalk
 ~D Doll's Head Trail ?? At Constitution Lakes; I believe it lies just outside the city limits in DeKalb County.
-R Tiny Doors ATL | Tiny Doors
-R 54 Columns
-R Noguchi Playscape | Playscapes
-R Folk Art Park
-R Castleberry Hill
-R Cabbagetown
-R Inman Park
-R Virginia-Highland | Virginia Highland
-R West End
-R Vine City
-R Old Fourth Ward | O4W
-R East Atlanta Village | EAV
-R Edgewood
-R Summerhill
-R Ansley Park
+D Tiny Doors ATL | Tiny Doors
+D 54 Columns
+D Noguchi Playscape | Playscapes
+D Folk Art Park
+D Castleberry Hill
+D Cabbagetown
+D Inman Park
+D Virginia-Highland | Virginia Highland
+D West End
+D Vine City
+D Old Fourth Ward | O4W
+D East Atlanta Village | EAV
+D Edgewood
+D Summerhill
+D Ansley Park
 ! Stone Mountain :: sixteen miles east, outside the city
 ! Six Flags :: in Cobb County, outside the city
 ! Truist Park :: in Cobb County, outside the city
@@ -1585,54 +1585,54 @@ R Cathead Biscuits
 R Country Sausage | Sausage | Sausage Biscuit
 R Bacon
 R Livers | Chicken Livers | Fried Chicken Livers | Gizzards
-R Fried Turkey | Deep-Fried Turkey
-R Smothered Pork Chops | Pork Chops | Fried Pork Chops
-R Oxtails
-R Neck Bones
-R Pig's Feet | Pigs Feet
-R Fried Fish | Fish Fry
-R Salmon Croquettes | Salmon Patties
-R Crab Cakes
-R Deviled Crab
-R Shrimp Creole
-R Seafood Boil
-R Oyster Stew
-R Turtle Soup
-R Peanut Soup
-R Cornmeal Mush
-R Fried Corn
-R Fried Squash
-R Fried Apples
-R Stewed Tomatoes | Stewed Okra and Tomatoes
-R Rice and Gravy
-R Mashed Potatoes
-R Yeast Rolls | Rolls
-R Buttermilk
-R Lemonade
-R Mint Julep
-R Sazerac
-R Hurricane
-R Bourbon
-R Moonshine
-R RC Cola | RC Cola and a Moon Pie
-R Cheerwine
-R Coca-Cola | Coke | Coke and Peanuts :: Invented in Atlanta in 1886. Some pour peanuts straight into the bottle.
-R Ale-8-One | Ale 8
-R Sun Drop
-R Krispy Kreme | Krispy Kreme Doughnuts
-R Chick-fil-A | Chicken Sandwich
-R Pig Pickin' Cake | Pig Pickin Cake
-R Texas Sheet Cake
-R Mississippi Mud Pie | Mud Pie
-R Bread Pudding
-R Rice Pudding
-R Blackberry Cobbler
-R Strawberry Shortcake
-R Tea Cakes
-R Benne Wafers | Benne Seed Wafers
-R Pecan Sandies | Pecan Tassies
-R Bourbon Balls
-R Fudge
+D Fried Turkey | Deep-Fried Turkey
+D Smothered Pork Chops | Pork Chops | Fried Pork Chops
+D Oxtails
+D Neck Bones
+D Pig's Feet | Pigs Feet
+D Fried Fish | Fish Fry
+D Salmon Croquettes | Salmon Patties
+D Crab Cakes
+D Deviled Crab
+D Shrimp Creole
+D Seafood Boil
+D Oyster Stew
+D Turtle Soup
+D Peanut Soup
+D Cornmeal Mush
+D Fried Corn
+D Fried Squash
+D Fried Apples
+D Stewed Tomatoes | Stewed Okra and Tomatoes
+D Rice and Gravy
+D Mashed Potatoes
+D Yeast Rolls | Rolls
+D Buttermilk
+D Lemonade
+D Mint Julep
+D Sazerac
+D Hurricane
+D Bourbon
+D Moonshine
+D RC Cola | RC Cola and a Moon Pie
+D Cheerwine
+D Coca-Cola | Coke | Coke and Peanuts :: Invented in Atlanta in 1886. Some pour peanuts straight into the bottle.
+D Ale-8-One | Ale 8
+D Sun Drop
+D Krispy Kreme | Krispy Kreme Doughnuts
+D Chick-fil-A | Chicken Sandwich
+D Pig Pickin' Cake | Pig Pickin Cake
+D Texas Sheet Cake
+D Mississippi Mud Pie | Mud Pie
+D Bread Pudding
+D Rice Pudding
+D Blackberry Cobbler
+D Strawberry Shortcake
+D Tea Cakes
+D Benne Wafers | Benne Seed Wafers
+D Pecan Sandies | Pecan Tassies
+D Bourbon Balls
+D Fudge
 X Kool-Aid Pickles | Koolickles | Koolaid Pickles :: Dill pickles soaked in Kool-Aid until they turn red. A Mississippi Delta original.
 ! Pizza :: Italy by way of New York
 ! Sushi :: Japan
@@ -1725,47 +1725,47 @@ R High Falls Lake | High Falls
 R Lake Acworth | Acworth
 ~R Lake Arrowhead ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Lake Varner ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Bull Sluice Lake | Bull Sluice | Morgan Falls
+D Bull Sluice Lake | Bull Sluice | Morgan Falls
 ~R Stone Mountain Lake ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Lake Clara Meer | Clara Meer :: The lake in Piedmont Park.
+D Lake Clara Meer | Clara Meer :: The lake in Piedmont Park.
 ~R Lake Peachtree ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Lake Spivey ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Lake Trahlyta ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Lake Winfield Scott ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Lake Conasauga ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Lake Chehaw | Lake Worth | Chehaw
-R Banks Lake
+D Lake Chehaw | Lake Worth | Chehaw
+D Banks Lake
 ~R Grand Bay ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Ogeechee Canal | Savannah-Ogeechee Canal
-R Augusta Canal
-R Ebenezer Creek | Ebenezer
-R Chickamauga Creek | Chickamauga | West Chickamauga Creek
-R Lookout Creek | Lookout
-R Amicalola Creek | Amicalola
+D Ogeechee Canal | Savannah-Ogeechee Canal
+D Augusta Canal
+D Ebenezer Creek | Ebenezer
+D Chickamauga Creek | Chickamauga | West Chickamauga Creek
+D Lookout Creek | Lookout
+D Amicalola Creek | Amicalola
 ~R Noonday Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Nickajack Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Rottenwood Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Tanyard Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Clear Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Intrenchment Creek | Entrenchment Creek
+D Intrenchment Creek | Entrenchment Creek
 ~R Camp Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Line Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Flat Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Whitewater Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Pataula Creek | Pataula
-R Muckalee Creek | Muckalee
-R Little Ocmulgee River | Little Ocmulgee
-R Little Satilla River | Little Satilla
-R Medway River | Medway
-R Wilmington River | Wilmington
-R Brunswick River
-R Turtle River | Turtle
-R Crooked River | Crooked
-R North Oconee River | North Oconee | Middle Oconee River | Middle Oconee
+D Pataula Creek | Pataula
+D Muckalee Creek | Muckalee
+D Little Ocmulgee River | Little Ocmulgee
+D Little Satilla River | Little Satilla
+D Medway River | Medway
+D Wilmington River | Wilmington
+D Brunswick River
+D Turtle River | Turtle
+D Crooked River | Crooked
+D North Oconee River | North Oconee | Middle Oconee River | Middle Oconee
 ~R Mulberry River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Hudson River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
 ~R Coleman River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
-R Jacks River | Jacks
+D Jacks River | Jacks
 ! Mississippi River :: nowhere near
 ! Tennessee River :: it comes within about a mile of Georgia's corner, but never enters the state
 ! Lake Okeechobee :: Florida
@@ -1854,32 +1854,32 @@ R Last Call
 R Happy Valentine's Day | Happy Valentines Day
 R Spread
 R Love Hater
-R She Lives in My Lap
-R Dracula's Wedding | Draculas Wedding
-R Behold a Lady
-R Pink & Blue | Pink and Blue
-R Love in War
-R She's Alive | Shes Alive
-R Take Off Your Cool
-R Vibrate
-R A Life in the Day of Benjamin André (Incomplete) | A Life in the Day of Benjamin Andre | Life in the Day of Benjamin Andre
-R My Favorite Things
-R Hollywood Divorce
-R The Train
-R Chronomentrophobia
-R PJ & Rooster | PJ and Rooster
-R Call the Law
-R Makes No Sense at All
-R Life Is Like a Musical
-R N2U
-R Peaches
-R Buggface
-R Greatest Show on Earth
-R When I Look in Your Eyes
-R Dyin' to Live | Dyin to Live
-R A Bad Note
-R In Your Dreams
-R Mutron Angel
+D She Lives in My Lap
+D Dracula's Wedding | Draculas Wedding
+D Behold a Lady
+D Pink & Blue | Pink and Blue
+D Love in War
+D She's Alive | Shes Alive
+D Take Off Your Cool
+D Vibrate
+D A Life in the Day of Benjamin André (Incomplete) | A Life in the Day of Benjamin Andre | Life in the Day of Benjamin Andre
+D My Favorite Things
+D Hollywood Divorce
+D The Train
+D Chronomentrophobia
+D PJ & Rooster | PJ and Rooster
+D Call the Law
+D Makes No Sense at All
+D Life Is Like a Musical
+D N2U
+D Peaches
+D Buggface
+D Greatest Show on Earth
+D When I Look in Your Eyes
+D Dyin' to Live | Dyin to Live
+D A Bad Note
+D In Your Dreams
+D Mutron Angel
 X Benz or Beamer | Benz or a Beamer :: From the "New Jersey Drive" soundtrack in 1995, between their first two albums.
 ! Welcome to Atlanta :: Jermaine Dupri and Ludacris
 ! Yeah! :: Usher
@@ -2079,13 +2079,13 @@ R Milk
 R Hot Chocolate
 R Coca-Cola | Coke | Soda | Cherry Coke | Vanilla Coke
 R Apple Juice
-R Syrup | Maple Syrup
-R Jelly | Grape Jelly | Apple Butter
-R Kids Meal | Kid's Meal | Kids Waffle
-R Dark Roast Coffee | Decaf | Decaf Coffee
-R Grilled Onions
-R Chili with Cheese and Onions | Chili Cheese
-R Sunny Side Up Eggs | Over Easy Eggs | Over Easy | Sunny Side Up
+D Syrup | Maple Syrup
+D Jelly | Grape Jelly | Apple Butter
+D Kids Meal | Kid's Meal | Kids Waffle
+D Dark Roast Coffee | Decaf | Decaf Coffee
+D Grilled Onions
+D Chili with Cheese and Onions | Chili Cheese
+D Sunny Side Up Eggs | Over Easy Eggs | Over Easy | Sunny Side Up
 ~D Papa Joe's Pork Chops ?? I believe this is the pork chops' full menu name; not checked.
 ~D Lib's Patty Melt ?? I believe this is the patty melt's full menu name; not checked.
 ~D Alice's Iced Tea ?? I believe the tea is named this way on the menu; not checked.
@@ -2102,15 +2102,15 @@ R Sunny Side Up Eggs | Over Easy Eggs | Over Easy | Sunny Side Up
 ! Pizza :: no
 ! Tacos :: no
 ! Beer :: no alcohol
-R Two Egg Breakfast | 2 Egg Breakfast
-R Unsweet Tea | Unsweetened Tea
-R Diet Coke
-R Sprite
-R Sausage Biscuit
-R Grilled Chicken Salad
-R Garden Salad | Side Salad
-R Egg Sandwich
-R Lemonade | Minute Maid Lemonade
+D Two Egg Breakfast | 2 Egg Breakfast
+D Unsweet Tea | Unsweetened Tea
+D Diet Coke
+D Sprite
+D Sausage Biscuit
+D Grilled Chicken Salad
+D Garden Salad | Side Salad
+D Egg Sandwich
+D Lemonade | Minute Maid Lemonade
 ! Pancakes :: Waffle House does not serve pancakes
 ! French Toast :: not on the menu
 ! Fries :: hashbrowns, not fries
@@ -2189,41 +2189,41 @@ R Orange Juice | Simply Orange
 R Apple Juice
 R Bottled Water | Water | Dasani
 R Kids Meal | Kid's Meal
-R Nugget Tray | Catering Tray | Chicken Nugget Tray | Trays
-R Honey Pepper Pimento Chicken Sandwich | Honey Pepper Pimento | Pimento Chicken Sandwich
+D Nugget Tray | Catering Tray | Chicken Nugget Tray | Trays
+D Honey Pepper Pimento Chicken Sandwich | Honey Pepper Pimento | Pimento Chicken Sandwich
 ~R Maple Pepper Bacon Sandwich ?? A limited-time or retired item named from memory; not checked.
-R Grilled Spicy Deluxe | Spicy Grilled Deluxe | Grilled Spicy Chicken Deluxe
-R Spicy Chick-n-Strips | Spicy Strips | Spicy Chicken Strips
-R Chicken Salad Sandwich | Chicken Salad :: Retired in 2017.
-R Cole Slaw | Coleslaw | Slaw :: Retired in 2016. The company published the recipe on the way out.
+D Grilled Spicy Deluxe | Spicy Grilled Deluxe | Grilled Spicy Chicken Deluxe
+D Spicy Chick-n-Strips | Spicy Strips | Spicy Chicken Strips
+D Chicken Salad Sandwich | Chicken Salad :: Retired in 2017.
+D Cole Slaw | Coleslaw | Slaw :: Retired in 2016. The company published the recipe on the way out.
 X Carrot & Raisin Salad | Carrot and Raisin Salad | Carrot Raisin Salad :: A side on the old menu for decades, long since retired.
-R Cinnamon Cluster
-R Chicken, Egg & Cheese Bagel | Chicken Egg and Cheese Bagel | Bagel | Sunflower Multigrain Bagel
-R Key Lime Frosted | Frosted Key Lime
+D Cinnamon Cluster
+D Chicken, Egg & Cheese Bagel | Chicken Egg and Cheese Bagel | Bagel | Sunflower Multigrain Bagel
+D Key Lime Frosted | Frosted Key Lime
 ~R Banana Pudding Milkshake ?? A limited-time or retired item named from memory; not checked.
-R Mango Passion Sunjoy | Mango Passion Tea Lemonade | Mango Passion Lemonade
-R Watermelon Mint Lemonade | Watermelon Lemonade
-R White Peach Sunjoy | White Peach Lemonade | White Peach Tea Lemonade
+D Mango Passion Sunjoy | Mango Passion Tea Lemonade | Mango Passion Lemonade
+D Watermelon Mint Lemonade | Watermelon Lemonade
+D White Peach Sunjoy | White Peach Lemonade | White Peach Tea Lemonade
 ~R Cherry Berry Lemonade ?? A limited-time or retired item named from memory; not checked.
 ~R Cloudberry Sunjoy ?? A limited-time or retired item named from memory; not checked.
 ~R Mocha Cream Cold Brew ?? A limited-time or retired item named from memory; not checked.
 ~R Lemon Pie ?? A limited-time or retired item named from memory; not checked.
-R Chargrilled Chicken Sandwich | Chargrilled Sandwich | Chargrilled Chicken
+D Chargrilled Chicken Sandwich | Chargrilled Sandwich | Chargrilled Chicken
 ~R Chargrilled Chicken Garden Salad ?? A limited-time or retired item named from memory; not checked.
 ~R Chick-n-Strips Salad ?? A limited-time or retired item named from memory; not checked.
 ~R Asian Salad ?? A limited-time or retired item named from memory; not checked.
 ~R Superfood Side ?? A limited-time or retired item named from memory; not checked.
 ~R Oatmeal ?? A limited-time or retired item named from memory; not checked.
-R Yogurt | Greek Yogurt
+D Yogurt | Greek Yogurt
 ~R Cheesecake ?? A limited-time or retired item named from memory; not checked.
-R Ice Dream Sundae | Sundae | Hot Fudge Sundae
+D Ice Dream Sundae | Sundae | Hot Fudge Sundae
 ~R Frosted Sunrise ?? A limited-time or retired item named from memory; not checked.
 ~R Frosted Caramel Coffee ?? A limited-time or retired item named from memory; not checked.
 ~R Smokehouse BBQ Bacon Sandwich ?? A limited-time or retired item named from memory; not checked.
 ~R Grilled Chicken Burrito ?? A limited-time or retired item named from memory; not checked.
 ~R Chilled Grilled Chicken Sub Sandwich ?? A limited-time or retired item named from memory; not checked.
-R Texas Pete | Hot Sauce
-R Pickles | Pickle | Extra Pickles
+D Texas Pete | Hot Sauce
+D Pickles | Pickle | Extra Pickles
 ! Hamburger :: the cows have opinions about that
 ! Burger :: the cows have opinions about that
 ! Popcorn Chicken :: KFC

@@ -34,9 +34,9 @@
 {"name":"Carolina Panthers","tier":"rare","aliases":["Panthers","Carolina"]},
 {"name":"Los Angeles Chargers","tier":"rare","aliases":["Chargers","LA Chargers","San Diego Chargers"]},
 {"name":"Indianapolis Colts","tier":"rare","aliases":["Colts","Indianapolis","Indy"]},
-{"name":"Washington Commanders","tier":"rare","aliases":["Commanders","Washington","Washington Football Team"]},
-{"name":"Arizona Cardinals","tier":"rare","aliases":["Cardinals","Arizona"]},
-{"name":"Houston Texans","tier":"rare","aliases":["Texans","Houston"]},
+{"name":"Washington Commanders","tier":"deep","aliases":["Commanders","Washington","Washington Football Team"]},
+{"name":"Arizona Cardinals","tier":"deep","aliases":["Cardinals","Arizona"]},
+{"name":"Houston Texans","tier":"deep","aliases":["Texans","Houston"]},
 {"name":"Tennessee Titans","tier":"swarm","aliases":["Titans","Tennessee"],"note":"They began as the Houston Oilers."}
   ]
 }

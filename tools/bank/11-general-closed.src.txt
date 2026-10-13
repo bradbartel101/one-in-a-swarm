@@ -215,9 +215,9 @@ R Cleveland Browns | Browns | Cleveland
 R Carolina Panthers | Panthers | Carolina
 R Los Angeles Chargers | Chargers | LA Chargers | San Diego Chargers
 R Indianapolis Colts | Colts | Indianapolis | Indy
-R Washington Commanders | Commanders | Washington | Washington Football Team
-R Arizona Cardinals | Cardinals | Arizona
-R Houston Texans | Texans | Houston
+D Washington Commanders | Commanders | Washington | Washington Football Team
+D Arizona Cardinals | Cardinals | Arizona
+D Houston Texans | Texans | Houston
 X Tennessee Titans | Titans | Tennessee :: They began as the Houston Oilers.
 ! Houston Oilers :: the franchise is now the Tennessee Titans
 ! Los Angeles :: two teams play there; say Rams or Chargers
@@ -255,9 +255,9 @@ R Orlando Magic | Magic | Orlando
 R Sacramento Kings | Kings | Sacramento
 R Utah Jazz | Jazz | Utah
 R Indiana Pacers | Pacers | Indiana
-R Washington Wizards | Wizards | Washington
-R Charlotte Hornets | Hornets | Charlotte :: A fellow stinging insect.
-R New Orleans Pelicans | Pelicans | Pels | New Orleans
+D Washington Wizards | Wizards | Washington
+D Charlotte Hornets | Hornets | Charlotte :: A fellow stinging insect.
+D New Orleans Pelicans | Pelicans | Pels | New Orleans
 X Memphis Grizzlies | Grizzlies | Grizz | Memphis :: They began in Vancouver, which explains the bear.
 ! Seattle SuperSonics :: moved to Oklahoma City in 2008 and became the Thunder
 ! Vancouver Grizzlies :: now the Memphis Grizzlies
@@ -294,9 +294,9 @@ R Milwaukee Brewers | Brewers | Milwaukee
 R Cincinnati Reds | Reds | Cincinnati
 R Pittsburgh Pirates | Pirates | Pittsburgh
 R Kansas City Royals | Royals | Kansas City
-R Colorado Rockies | Rockies | Colorado
-R Arizona Diamondbacks | Diamondbacks | D-backs | Dbacks | Arizona
-R Los Angeles Angels | Angels | Anaheim Angels | LA Angels
+D Colorado Rockies | Rockies | Colorado
+D Arizona Diamondbacks | Diamondbacks | D-backs | Dbacks | Arizona
+D Los Angeles Angels | Angels | Anaheim Angels | LA Angels
 X Athletics | A's | Oakland Athletics | Oakland A's | Oakland | Sacramento Athletics :: Philadelphia, Kansas City, Oakland, Sacramento, and Las Vegas next.
 ! Montreal Expos :: moved in 2005 and became the Washington Nationals
 ! Brooklyn Dodgers :: the Dodgers have been in Los Angeles since 1958
