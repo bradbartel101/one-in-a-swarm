@@ -39,8 +39,8 @@ curve (`altitudeFeet()` in `js/core.js`) pinned so that real altitudes land in t
 | 550 | Space | the Karman line, 100 km |
 | 650 to 700 | The Moon | 238,855 miles |
 
-Real altitude facts slide past on the way up, and there are 21 sightings to find: twelve odd things
-drawn into the world at their real altitudes, five secret answers, and four things to do. Found
+Real altitude facts slide past on the way up, and there are 26 sightings to find: sixteen odd things
+drawn into the world at their real altitudes, six secret answers, and four things to do. Found
 ones are kept in the browser and listed on the title and results screens.
 
 A finished day cannot be replayed. If you are mid-run when the day rolls over, you finish

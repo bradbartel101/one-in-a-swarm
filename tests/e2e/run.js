@@ -202,8 +202,8 @@ async function main() {
     assert.equal(await page.eval('document.getElementById("howDlg").open'), false, 'rules are collapsed, even on a first visit');
     await page.eval('document.querySelector("#howDlg summary").click()');
     assert.equal(await page.eval('document.getElementById("howDlg").open'), true, 'and open on demand');
-    assert.equal(await text(page, 'sightCount'), '0/21');
-    assert.equal(await page.eval('document.querySelectorAll("#sightGrid li.unfound").length'), 21, 'unfound sightings are silhouettes');
+    assert.equal(await text(page, 'sightCount'), '0/26');
+    assert.equal(await page.eval('document.querySelectorAll("#sightGrid li.unfound").length'), 26, 'unfound sightings are silhouettes');
     assert.match(await text(page, 'flightNo'), /^FLIGHT #\d+$/);
     // the lawn fills about the bottom quarter of the start screen
     const lawn = await page.eval('window.__swarm.scene.cssY(0) / window.innerHeight');
@@ -1131,8 +1131,8 @@ async function main() {
     await page.eval('["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"].forEach((key) => document.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true })))');
     assert.equal(await text(page, 'dailyStatus'), 'The swarm turns gold for one flight.');
     assert.equal((await found()).includes('konami'), true);
-    assert.equal(await text(page, 'sightCount'), '3/21');
-    assert.equal(await page.eval('document.querySelectorAll("#sightGrid li.unfound").length'), 18);
+    assert.equal(await text(page, 'sightCount'), '3/26');
+    assert.equal(await page.eval('document.querySelectorAll("#sightGrid li.unfound").length'), 23);
 
     // In flight. Seed a run at 75 points on a prompt where none of the secrets is a real answer.
     const day = C.utcDateKey(new Date());
@@ -1149,10 +1149,11 @@ async function main() {
     // while the clock runs: taps do nothing, and no toast may appear
     const before = await barScale(page);
     await tapOn('bee');
-    assert.deepEqual(await found(), ['tower'], 'tapping the bee during a round does nothing');
+    // (at 75 points the pizza drone is in view, and seeing it is a sighting of its own)
+    assert.deepEqual((await found()).filter((id) => id !== 'drone'), ['tower'], 'tapping the bee during a round does nothing');
     // secret answers: a reaction each, no penalty, not wrong, round still open
     const lines = {};
-    for (const [typed, id] of [['George P. Burdell', 'burdell'], ['Buzz', 'buzz'], ['THWG', 'thwg'], ['Helluva Engineer', 'helluva'], ['UGA', 'wrongschool']]) {
+    for (const [typed, id] of [['George P. Burdell', 'burdell'], ['Buzz', 'buzz'], ['THWG', 'thwg'], ['Helluva Engineer', 'helluva'], ['UGA', 'wrongschool'], ["What's the good word?", 'goodword']]) {
       await guess(page, typed);
       lines[id] = await text(page, 'feedback');
       assert.equal(await page.eval('document.getElementById("toast").hidden'), true, 'no toast while the clock runs (' + id + ')');
@@ -1171,12 +1172,14 @@ async function main() {
     assert.equal(await page.eval('document.getElementById("guess").value'), 'Klaus', 'typing after a secret is never cleared');
     await page.eval('document.getElementById("guess").value = ""');
     assert.equal(lines.wrongschool, 'Wrong school.');
+    assert.equal(lines.goodword, 'To hell with Georgia!', 'the call gets its answer');
     assert.equal(await page.eval('document.getElementById("flash").classList.contains("go")'), true, 'THWG flashes gold');
     assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 0, 'none of them counts as a wrong guess');
     assert.equal(await phase(page), 'guess', 'and the round is still going');
     assert.ok(before - (await barScale(page)) < 0.2, 'only real time has passed (six secrets, each after the submit cooldown)');
     assert.equal(await page.eval('document.activeElement.id'), 'guess', 'the input keeps focus throughout');
-    assert.deepEqual((await found()).slice().sort(), ['burdell', 'buzz', 'helluva', 'thwg', 'tower', 'wrongschool'].sort());
+    assert.deepEqual((await found()).filter((id) => id !== 'drone').sort(), ['burdell', 'buzz', 'goodword', 'helluva', 'thwg', 'tower', 'wrongschool'].sort());
+    assert.equal((await found()).includes('drone'), true, 'the drone hovering at 350 ft was sighted on the way');
     // answer: 75 -> 105 points climbs past the window washer at about 620 ft
     await guess(page, answerOf(await text(page, 'promptText'), 'solid'));
     await page.waitFor('!document.getElementById("toast").hidden', 3000, 'queued toasts appear once the clock stops');
@@ -1579,8 +1582,8 @@ async function main() {
     assert.equal((await page.eval('JSON.parse(localStorage.getItem("swarm.sightings")).found')).includes('flag'), true);
     await land(page);
     assert.equal(await text(page, 'resAlt'), '238,855 mi');
-    assert.match(await text(page, 'resSightCount'), /^· \d+ \/ 21 found$/);
-    assert.equal(await page.eval('document.querySelectorAll("#resSightGrid li").length'), 21);
+    assert.match(await text(page, 'resSightCount'), /^· \d+ \/ 26 found$/);
+    assert.equal(await page.eval('document.querySelectorAll("#resSightGrid li").length'), 26);
     assert.deepEqual(Array.from(new Set(Array.from({ length: 71 }, (_, i) => require('../../js/scene.js').SwarmScene.zoneAt(i * 10).id))), ['campus', 'midtown', 'clouds', 'weather', 'highsky', 'stratosphere', 'space', 'moon']);
     noProblems(page);
     await page.close();

@@ -128,19 +128,23 @@
     const boxes = {}; // hit boxes in art pixels, refreshed every frame
     const seen = new Set();
 
-    // The twelve sightings. Each sits at one place in the world, so a flight passes it once.
+    // The sixteen sightings. Each sits at one place in the world, so a flight passes it once.
     // `x` is a fraction of the width; real altitudes go through the same curve as the ruler.
     const SIGHTINGS = [
       { id: 'car', score: 0.4, x: 0.3, caption: 'The old gold jalopy, out for a lap.' },
       { id: 'squirrel', score: 0.6, x: 0.1, caption: 'Campus squirrels remain undefeated.' },
+      { id: 'drone', score: at(350), x: 0.5, caption: 'One large pepperoni, bound for the dorms.' },
       { id: 'washer', score: at(620), x: 0.7, caption: 'A window washer waves back.' },
       { id: 'balloon', score: at(2400), x: 0.62, caption: 'Sorry, Athens.', hidden: true },
       { id: 'geese', score: at(3500), x: 0.5, caption: 'One of them had other plans.' },
       { id: 'exam', score: at(8000), x: 0.58, caption: 'CS 1331 · 34/100' },
       { id: 'jet', score: at(18000), x: 0.5, caption: "Climbing out of the world's busiest airport." },
       { id: 'cap', score: at(27000), x: 0.64, caption: 'A cap from commencement. It never came down.' },
+      { id: 'paperplane', score: at(45000), x: 0.52, caption: 'A paper airplane. Excellent engineering.' },
       { id: 'wballoon', score: at(95000), x: 0.62, caption: 'A weather balloon. The tag says: lost & found.' },
+      { id: 'jumper', score: at(120000), x: 0.56, caption: 'Somebody is taking the long way down.' },
       { id: 'astronaut', score: at(300 * 5280), x: 0.6, caption: 'Tech alumni have flown up here. This one waves.' },
+      { id: 'teapot', score: at(5000 * 5280), x: 0.5, caption: "A teapot, in orbit. Nobody can prove it isn't." },
       { id: 'satellite', score: at(22236 * 5280), x: 0.56, caption: 'Somebody insisted on honeycomb solar panels.' },
       { id: 'flag', score: 700, x: 0.5, caption: 'Planted: gold and navy, 238,855 miles from campus.', hidden: true },
     ];
@@ -793,6 +797,60 @@
         px(x + 11, cy + 2, 1, 5, '#c9a94d'); // tassel
         px(x + 10, cy + 7, 3, 2, '#c9a94d');
         return { x, y: cy, w: 13, h: 9 };
+      },
+      drone(g, x, y, t) {
+        const dy = y + (still() ? 0 : Math.round(Math.sin(t / 500) * 2));
+        const spin = !still() && Math.floor(t / 60) % 2;
+        px(x + 3, dy + 2, 9, 3, '#3b4658'); // a small delivery drone
+        px(x, dy + 1, 15, 1, '#3b4658'); // arms
+        px(x + (spin ? 0 : -1), dy, 4, 1, '#c9d2dc'); // rotors
+        px(x + (spin ? 12 : 11), dy, 4, 1, '#c9d2dc');
+        px(x + 7, dy + 3, 1, 1, '#ff5a4d'); // a running light
+        px(x + 5, dy + 5, 1, 3, '#c9d2dc'); // string
+        px(x + 9, dy + 5, 1, 3, '#c9d2dc');
+        px(x + 2, dy + 8, 11, 2, '#f4f1e6'); // a flat box
+        px(x + 2, dy + 10, 11, 1, '#c9bfa5');
+        px(x + 7, dy + 8, 1, 1, '#c8102e');
+        return { x: x - 1, y: dy, w: 17, h: 11 };
+      },
+      paperplane(g, x, y, t) {
+        const px0 = x + (still() ? 0 : Math.round(Math.sin(t / 1700) * 6));
+        const py = y + (still() ? 0 : Math.round(Math.cos(t / 1700) * 2));
+        px(px0, py + 3, 12, 1, '#ffffff'); // a folded dart, nose to the right
+        px(px0 + 2, py + 2, 8, 1, '#ffffff');
+        px(px0 + 4, py + 1, 5, 1, '#f4f6f8');
+        px(px0 + 6, py, 2, 1, '#f4f6f8');
+        px(px0 + 3, py + 4, 6, 1, '#c9d2dc'); // the fold underneath
+        px(px0 + 5, py + 5, 2, 1, '#c9d2dc');
+        px(px0 + 12, py + 3, 2, 1, '#ffffff');
+        return { x: px0, y: py, w: 14, h: 6 };
+      },
+      jumper(g, x, y, t) {
+        const jy = y + (still() ? 0 : Math.round(Math.sin(t / 900) * 2));
+        const flap = !still() && Math.floor(t / 300) % 2;
+        px(x + 5, jy, 4, 4, '#f4f6f8'); // helmet
+        px(x + 6, jy + 1, 2, 2, '#22344d'); // visor
+        px(x + 4, jy + 4, 6, 5, '#f4f6f8'); // pressure suit
+        px(x + 1, jy + 4 + (flap ? 1 : 0), 3, 2, '#f4f6f8'); // arms out
+        px(x + 10, jy + 4 + (flap ? 0 : 1), 3, 2, '#f4f6f8');
+        px(x + 4, jy + 9, 2, 4, '#f4f6f8'); // legs
+        px(x + 8, jy + 9, 2, 4, '#f4f6f8');
+        px(x + 6, jy + 5, 2, 2, '#c9a94d'); // a gold chest pack
+        return { x, y: jy, w: 14, h: 13 };
+      },
+      teapot(g, x, y, t) {
+        const ty = y + (still() ? 0 : Math.round(Math.sin(t / 2100) * 3));
+        disc(x + 7, ty + 6, 4, '#f4f1e6'); // a china teapot, tumbling very slowly
+        px(x + 3, ty + 5, 9, 1, '#c9a94d'); // a gold band
+        px(x + 5, ty + 1, 5, 1, '#f4f1e6'); // lid
+        px(x + 7, ty, 1, 1, '#c9a94d'); // knob
+        px(x + 12, ty + 4, 2, 1, '#f4f1e6'); // spout
+        px(x + 13, ty + 3, 2, 1, '#f4f1e6');
+        px(x + 1, ty + 4, 2, 1, '#f4f1e6'); // handle
+        px(x, ty + 5, 1, 3, '#f4f1e6');
+        px(x + 1, ty + 8, 2, 1, '#f4f1e6');
+        px(x + 5, ty + 10, 5, 1, '#c9bfa5'); // foot
+        return { x, y: ty, w: 15, h: 11 };
       },
       wballoon(g, x, y, t) {
         const by = y + (still() ? 0 : Math.round(Math.sin(t / 1500) * 2));

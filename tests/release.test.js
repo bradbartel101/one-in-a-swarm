@@ -384,6 +384,7 @@ test('secret answers earn a reaction and nothing else: no points, no penalty, no
   Object.keys(cases).forEach((typed) => {
     assert.deepEqual(C.dailyGuess(run, buildings, typed, 0), { status: 'secret', secret: cases[typed] }, typed);
   });
+  for (const typed of ["What's the good word?", 'whats the good word', 'The Good Word']) assert.deepEqual(C.dailyGuess(run, buildings, typed, 0), { status: 'secret', secret: 'goodword' }, typed);
   assert.equal(run.round.leftMs, 25000, 'no time lost');
   assert.equal(run.round.tried.length, 0, 'not counted as wrong');
   assert.equal(run.results.length, 0, 'the round is still open');

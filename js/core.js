@@ -195,6 +195,7 @@
     tohellwithgeorgia: 'thwg', thwg: 'thwg',
     helluvaengineer: 'helluva', ahelluvaengineer: 'helluva',
     uga: 'wrongschool', georgia: 'wrongschool', universityofgeorgia: 'wrongschool',
+    whatsthegoodword: 'goodword', thegoodword: 'goodword', goodword: 'goodword',
   };
 
   function secretFor(input) {

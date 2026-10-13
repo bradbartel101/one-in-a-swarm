@@ -20,12 +20,12 @@
   const CAPTION_MS = 3000;
   const MOVE_GRACE_MS = 400; // how long after a move should have ended before a timer ends it
   const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  // Everything there is to find: twelve sightings in the world, five secret answers, four things to do.
+  // Everything there is to find: sixteen sightings in the world, six secret answers, four things to do.
   const EGGS = [
-    ['car', 'The gold jalopy'], ['squirrel', 'The lunch thief'], ['washer', 'The window washer'], ['balloon', 'Sorry, Athens'],
+    ['car', 'The gold jalopy'], ['squirrel', 'The lunch thief'], ['drone', 'The pizza drone'], ['washer', 'The window washer'], ['balloon', 'Sorry, Athens'],
     ['geese', 'The wrong-way goose'], ['exam', 'CS 1331, 34/100'], ['jet', 'The busiest airport'], ['cap', 'The cap that never came down'],
-    ['wballoon', 'Lost & found'], ['astronaut', 'An alum in orbit'], ['satellite', 'The honeycomb satellite'], ['flag', 'A flag on the Moon'],
-    ['burdell', 'George P. Burdell'], ['buzz', 'Buzz does a flip'], ['thwg', 'THWG'], ['helluva', 'Helluva Engineer'], ['wrongschool', 'Wrong school'],
+    ['paperplane', 'The paper airplane'], ['wballoon', 'Lost & found'], ['jumper', 'The long way down'], ['astronaut', 'An alum in orbit'], ['teapot', 'The teapot'], ['satellite', 'The honeycomb satellite'], ['flag', 'A flag on the Moon'],
+    ['burdell', 'George P. Burdell'], ['buzz', 'Buzz does a flip'], ['thwg', 'THWG'], ['helluva', 'Helluva Engineer'], ['wrongschool', 'Wrong school'], ['goodword', "What's the good word?"],
     ['beetap', 'The loop'], ['tower', 'The tower chimes'], ['night', 'Studying late'], ['konami', 'The gold swarm'],
   ];
   const TICK_MS = 100;
@@ -284,6 +284,10 @@
     } else if (id === 'helluva') {
       Sfx.jingle(); // silent unless sound is on
       setFeedback("That's the spirit.", 'good');
+    } else if (id === 'goodword') {
+      goldFlash(); // the old call, and its answer
+      Sfx.jingle();
+      setFeedback('To hell with Georgia!', 'good');
     } else setFeedback('Wrong school.', '');
     markFound(id);
   }
