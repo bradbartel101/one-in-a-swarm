@@ -914,3 +914,369 @@ R Mother | Mother Energy
 ! Tropicana :: not Coca-Cola
 ! A&W :: Keurig Dr Pepper
 ! Budweiser :: beer, and Anheuser-Busch
+
+@cartoonnetwork | ATLANTA | Name a Cartoon Network original show | pool=gt | type=open | clar=Adult Swim counts; both are based in Atlanta
+C The Powerpuff Girls | Powerpuff Girls | PPG
+C Dexter's Laboratory | Dexters Laboratory | Dexter's Lab | Dexter
+C Adventure Time
+C Rick and Morty | Rick & Morty
+C Johnny Bravo
+C Teen Titans | Teen Titans Go | Teen Titans Go!
+T Aqua Teen Hunger Force | ATHF | Aqua Teen :: Set in New Jersey, made on Williams Street in Atlanta.
+T Courage the Cowardly Dog | Courage
+S Ed, Edd n Eddy | Ed Edd and Eddy | Ed Edd n Eddy
+S Regular Show
+S Steven Universe
+S The Amazing World of Gumball | Gumball | Amazing World of Gumball
+S Ben 10 | Ben Ten
+S Samurai Jack
+S Foster's Home for Imaginary Friends | Fosters Home for Imaginary Friends | Foster's
+S Codename: Kids Next Door | Kids Next Door | KND
+S The Grim Adventures of Billy & Mandy | Billy and Mandy | Grim Adventures of Billy and Mandy | Billy & Mandy
+S Cow and Chicken | Cow & Chicken
+S Robot Chicken
+S The Boondocks | Boondocks
+S We Bare Bears
+S Chowder
+S Space Ghost Coast to Coast | Space Ghost
+S Harvey Birdman, Attorney at Law | Harvey Birdman
+S The Venture Bros. | Venture Bros | Venture Brothers
+S Total Drama Island | Total Drama
+S Camp Lazlo
+S Craig of the Creek
+S Clarence
+S Over the Garden Wall
+R I Am Weasel
+R Sheep in the Big City
+R Mike, Lu & Og | Mike Lu and Og | Mike Lu & Og
+R Time Squad
+R Whatever Happened to... Robot Jones? | Robot Jones | Whatever Happened to Robot Jones
+R Megas XLR
+R The Life and Times of Juniper Lee | Juniper Lee
+R My Gym Partner's a Monkey | My Gym Partners a Monkey
+R Squirrel Boy
+R Class of 3000 :: André 3000's cartoon, set at a music school in Atlanta.
+R The Marvelous Misadventures of Flapjack | Flapjack
+R Evil Con Carne
+R Hi Hi Puffy AmiYumi | Puffy AmiYumi
+R Generator Rex
+R The Secret Saturdays | Secret Saturdays
+R Sym-Bionic Titan | Symbionic Titan
+R Uncle Grandpa
+R Mighty Magiswords
+R OK K.O.! Let's Be Heroes | OK KO | OK K.O.
+R Summer Camp Island
+R Infinity Train
+R Victor and Valentino
+R Apple & Onion | Apple and Onion
+R Ben 10: Alien Force | Alien Force
+R Star Wars: Clone Wars | Clone Wars
+R Justice League | Justice League Unlimited
+R Young Justice
+R Batman: The Brave and the Bold | Brave and the Bold
+R The Looney Tunes Show | Looney Tunes Show
+R MAD
+R ThunderCats Roar | ThunderCats
+R Primal
+R Unikitty | Unikitty!
+R Mao Mao: Heroes of Pure Heart | Mao Mao
+R Squidbillies :: Set in the north Georgia mountains.
+R Sealab 2021 | Sealab
+R The Brak Show | Brak Show
+R Metalocalypse
+R Moral Orel
+R Frisky Dingo
+R Home Movies
+R Tim and Eric Awesome Show, Great Job! | Tim and Eric | Tim & Eric
+R The Eric Andre Show | Eric Andre Show | Eric Andre
+R Childrens Hospital | Children's Hospital
+R Black Dynamite
+R Superjail! | Superjail
+R Smiling Friends
+R Mr. Pickles | Mr Pickles
+R 12 oz. Mouse | 12 oz Mouse | Twelve Ounce Mouse
+R Perfect Hair Forever
+R Tom Goes to the Mayor
+R Check It Out! with Dr. Steve Brule | Check It Out | Dr. Steve Brule
+R Xavier: Renegade Angel | Xavier Renegade Angel
+R Assy McGee
+R Stroker and Hoop | Stroker & Hoop
+R Minoriteam
+R Lucy, the Daughter of the Devil | Lucy Daughter of the Devil
+R Titan Maximum
+R Mary Shelley's Frankenhole | Frankenhole
+R China, IL | China IL
+R Your Pretty Face Is Going to Hell
+R The Heart, She Holler
+R Delocated
+R NTSF:SD:SUV:: | NTSF
+R Eagleheart
+R Loiter Squad
+R Off the Air
+R Infomercials | Too Many Cooks :: "Too Many Cooks" was one of them.
+R Tigtone
+R Ballmastrz: 9009 | Ballmastrz
+R Joe Pera Talks with You | Joe Pera
+R Dream Corp LLC | Dream Corp
+R Three Busy Debras
+R YOLO: Crystal Fantasy | YOLO
+R Royal Crackers
+R Unicorn: Warriors Eternal
+R My Adventures with Superman
+R Common Side Effects
+R The Problem Solverz | Problem Solverz
+R Secret Mountain Fort Awesome
+R Out of Jimmy's Head
+R Level Up
+R Tower Prep
+D Dude, What Would Happen
+D Destroy Build Destroy
+X The Moxy Show | Moxy Show | Moxy Pirate Show :: Cartoon Network's first original series, in 1993: a 3-D dog introducing old cartoons.
+R What a Cartoon! | What a Cartoon | World Premiere Toons
+R Cartoon Planet
+R JBVO
+R Toonami :: A programming block, but everyone thinks of it as a show.
+R Mixels
+R Long Live the Royals
+R Steven Universe Future
+R Adventure Time: Distant Lands | Distant Lands
+R Fionna and Cake
+R The Fungies | Fungies
+R Tig n' Seek | Tig n Seek
+R Elliott from Earth
+R Jellystone | Jellystone!
+R We Baby Bears
+! SpongeBob SquarePants :: Nickelodeon
+! Rugrats :: Nickelodeon
+! Avatar: The Last Airbender :: Nickelodeon
+! The Fairly OddParents :: Nickelodeon
+! Kim Possible :: Disney Channel
+! Phineas and Ferb :: Disney Channel
+! Gravity Falls :: Disney Channel
+! The Simpsons :: Fox
+! Family Guy :: Fox, though Adult Swim reran it for years
+! Futurama :: Fox and Comedy Central; Adult Swim only reran it
+! South Park :: Comedy Central
+! Scooby-Doo :: Hanna-Barbera, long before the channel existed
+! Tom and Jerry :: MGM shorts from the 1940s
+! Dragon Ball Z :: Japanese; Toonami only aired it
+! Pokémon :: not a Cartoon Network original
+! Archer :: FX
+! Bob's Burgers :: Fox
+
+@gtathletes | SPORTS | Name a famous Georgia Tech athlete | pool=gt | type=open | clar=any sport, any era
+C Chris Bosh | Bosh
+C Stephon Marbury | Marbury | Starbury
+S Kenny Anderson
+S Mark Price
+S Dennis Scott
+S John Salley
+S Jarrett Jack
+S Thaddeus Young | Thad Young
+S Derrick Favors
+S Iman Shumpert | Shumpert
+S Josh Okogie | Okogie
+T Jose Alvarado | Alvarado
+S Matt Harpring | Harpring
+S Travis Best
+R Brian Oliver
+S Tom Hammonds
+R Duane Ferrell
+S Anthony Morrow
+S Will Bynum
+R Javaris Crittenton
+R Jon Barry
+R Drew Barry
+R Dion Glover
+R Jason Collier
+R Moses Wright
+R Luke Schenscher
+R Malcolm Mackey
+R Gani Lawal
+R Glen Rice Jr. | Glen Rice
+R Marcus Georges-Hunt
+R Mario West
+R Alvin Jones
+R Fred Vinson
+R Craig Neal
+C Calvin Johnson | Megatron
+C Demaryius Thomas
+T Joe Hamilton
+S Harrison Butker | Butker
+S Keith Brooking
+R Jahmyr Gibbs | Gibbs
+R Darren Waller
+R Shaq Mason | Shaquille Mason
+R Morgan Burnett
+R Derrick Morgan
+S Dorsey Levens
+S Pat Swilling
+S Marco Coleman
+R Jordan Mason
+R Michael Johnson
+S Jonathan Dwyer
+S Tashard Choice
+R Stephen Hill
+R Jeremiah Attaochu
+R Adam Gotsis
+R Daryl Smith
+R Philip Wheeler
+R Dawan Landry
+R Kelly Campbell
+R Dez White
+R Gary Guyton
+R Anthony Allen
+R Ken Whisenhunt
+R Bill Curry
+R Billy Shaw
+R Maxie Baughan
+R Larry Morris
+R Eddie Lee Ivery
+R Robert Lavette
+R Willie Clay
+R Coleman Rudolph
+R Pressley Harvin III | Pressley Harvin
+R Tariq Carpenter
+R Keion White
+R Juanyeh Thomas
+R DeAndre Smelter
+R Andrew Gardner
+R Durant Brooks
+R Nick Ferguson
+R Jalen Camp
+R Joe Guyon
+S Haynes King
+S Justin Thomas
+S Reggie Ball
+S Shawn Jones
+R Josh Nesbitt
+R Tevin Washington
+S Jeff Sims
+R TaQuon Marshall
+R Vad Lee
+R George Godsey
+R Taylor Bennett
+R Zach Pyron
+R James Graham
+R Jordan Yates
+R Tobias Oliver
+R A.J. Suggs
+R Matthew Jordan
+R Zach Gibson
+R John Dewberry
+R Kim King
+R Billy Lothridge
+R Pepper Rodgers
+R Eddie McAshan
+R Mike Kelley
+R Donnie Davis
+R Brandon Shaw
+R Darrell Gast
+R Rick Strom
+R Todd Rampley
+R Tommy Luginbill
+R Rudy Allen
+R Gary Lanier
+R Wade Mitchell
+R Stan Gann
+R Darrell Crawford
+R Frank Broyles
+R Jaybo Shaw
+R Lucas Johnson
+S Nomar Garciaparra | Nomar | Garciaparra
+C Mark Teixeira | Teixeira
+S Jason Varitek | Varitek
+R Charlie Blackmon | Blackmon
+S Matt Wieters | Wieters
+R Kevin Brown
+R Joey Bart
+R Jay Payton
+R Derek Dietrich
+R Matt Murton
+R Darren Bragg
+R Deck McGuire
+R Buck Farmer
+R Daniel Palka
+R Eric Patterson
+R Marlon Byrd
+R Micah Owings
+R Brandon Boggs
+R Blake Wood
+R Tyler Greene
+R Jim Poole
+R Doug Creek
+R Kris Wilson
+R Brad Rigby
+R Riccardo Ingram
+R Jed Bradley
+R Xzavion Curry
+R Brant Hurter
+R Kyle McCann
+C Bobby Jones | Bob Jones | Robert Tyre Jones
+S Matt Kuchar | Kuchar
+S Stewart Cink | Cink
+S David Duval | Duval
+R Larry Mize | Mize
+R Bryce Molder
+R Cameron Tringale
+R Chesson Hadley
+R Ollie Schniederjans
+R Andy Ogletree
+R Roberto Castro
+R Troy Matteson
+R Christo Lamprecht
+R Tyler Strafaci
+R Richy Werenski
+R Anders Albertson
+R Vincent Whaley
+R Seth Reeves
+R Nicholas Thompson
+R Charlie Rymer
+R Tripp Isenhour
+R Luke Schniederjans
+R Noah Norton
+R Connor Howe
+R Ross Steelman
+R Hiroshi Tai
+R Angelo Taylor :: Two Olympic golds in the 400-metre hurdles.
+X Derrick Adkins :: Olympic champion in the 400-metre hurdles in 1996, in Atlanta, across town from the campus where he trained.
+R Derek Mills :: Olympic relay gold in Atlanta, 1996.
+R Antonio McKay :: Olympic relay gold in 1984 and 1988.
+R Chaunté Lowe | Chaunte Lowe | Chaunte Howard :: High jumper, four Olympics.
+R Roger Kaiser :: Tech basketball's first consensus All-American.
+R Rich Yunkus
+R Clint Castleberry :: The only football number Tech has retired.
+R Jerry Mays
+R Randy Rhino
+R Ben Lammers
+R Michael Devoe
+R B.J. Elder | BJ Elder
+R James Forrest
+R Bruce Dalrymple
+R Kisha Ford
+R Alex Montgomery
+R Tyaunna Marshall
+R Kevin Parada
+R Kenny Thorne
+R Bryan Shelton :: An ATP player, then Tech's national-champion women's tennis coach.
+R Irina Falconi
+R Amanda McDowell :: NCAA singles champion in 2008.
+R Caio Pumputis
+R Gal Nevo
+R Monique Mead
+R Kele Eveland
+R Jessica Sallinger
+R Teegan Van Gunst
+R Julia Bergmann :: A Tech volleyball All-American and Olympian for Brazil.
+R Mariana Brambilla
+! Herschel Walker :: Georgia
+! Matt Ryan :: Boston College, then the Falcons
+! Hank Aaron :: a Brave, never a Tech student
+! Dominique Wilkins :: Georgia
+! Michael Jordan :: North Carolina
+! Buzz :: the mascot
+! Tiger Woods :: Stanford
+! Trae Young :: Oklahoma, then the Hawks
+! Bobby Cremins :: the coach; he played at South Carolina
+! Paul Johnson :: the coach
+! Deion Sanders :: Florida State
