@@ -84,6 +84,12 @@ These answers are **not in the game**. Each was left out because I was not confi
 - [ ] **Fioravanti** (would be Deep Cut): An Ecuadorian soda I believe Coca-Cola owns; not confirmed.
 - [ ] **Urge** (would be Deep Cut): The Norwegian name for Surge, as far as I know.
 
+### Name a landmark in the city of Atlanta (`atllandmarks`)
+
+- [ ] **Fernbank Museum** (would be Solid): An Atlanta address, but I believe it sits in unincorporated DeKalb County, outside the city limits.
+- [ ] **Delta Flight Museum** (would be Rare): At Delta's headquarters by the airport; not sure it is inside the city limits.
+- [ ] **Doll's Head Trail** (would be Deep Cut): At Constitution Lakes; I believe it lies just outside the city limits in DeKalb County.
+
 ### Name an animated Disney movie (`disney`)
 
 - [ ] **Toy Story 5** (would be Rare): Scheduled for June 2026; I could not confirm it was released as planned.

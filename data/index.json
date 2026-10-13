@@ -60,6 +60,8 @@
     {"id": "cokebrands", "pool": "gt", "category": "ATLANTA", "text": "Name a drink made by The Coca-Cola Company", "clarifier": "any brand it owns or has sold, past or present", "n": 109},
     {"id": "cartoonnetwork", "pool": "gt", "category": "ATLANTA", "text": "Name a Cartoon Network original show", "clarifier": "Adult Swim counts; both are based in Atlanta", "n": 130},
     {"id": "gtathletes", "pool": "gt", "category": "SPORTS", "text": "Name a famous Georgia Tech athlete", "clarifier": "any sport, any era", "n": 204},
+    {"id": "atllandmarks", "pool": "gt", "category": "ATLANTA", "text": "Name a landmark in the city of Atlanta", "clarifier": "buildings, venues, museums, parks and monuments", "n": 151},
+    {"id": "southernfood", "pool": "gt", "category": "THE SOUTH", "text": "Name a Southern food", "clarifier": "dishes, sides, sweets and drinks of the American South", "n": 182},
     {"id": "fightsong", "pool": "gt", "category": "TRADITIONS", "text": "Name a word in the \"Ramblin' Wreck\" fight song", "clarifier": "any word from its three verses", "n": 75},
     {"id": "gameday", "pool": "gt", "category": "GAMEDAY", "text": "Name something you'd see at a Tech football game", "clarifier": "people, things and traditions at Bobby Dodd", "n": 117},
     {"id": "bulldogs", "pool": "gt", "category": "RIVALS", "text": "Know thy enemy: name a Georgia Bulldogs football great", "clarifier": "anyone who played football at Georgia", "n": 189},

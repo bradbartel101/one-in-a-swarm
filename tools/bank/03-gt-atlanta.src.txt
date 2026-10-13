@@ -1280,3 +1280,367 @@ R Mariana Brambilla
 ! Bobby Cremins :: the coach; he played at South Carolina
 ! Paul Johnson :: the coach
 ! Deion Sanders :: Florida State
+
+@atllandmarks | ATLANTA | Name a landmark in the city of Atlanta | pool=gt | type=open | clar=buildings, venues, museums, parks and monuments
+C Georgia Aquarium | The Aquarium | Aquarium
+C World of Coca-Cola | World of Coke | Coke Museum | Coca-Cola Museum
+C Mercedes-Benz Stadium | Mercedes Benz Stadium | The Benz | MBS
+C Piedmont Park
+C Centennial Olympic Park | Centennial Park | Olympic Park
+C Fox Theatre | The Fox | Fox Theater | Fabulous Fox
+T The Varsity | Varsity :: "What'll ya have?" The world's largest drive-in, across the Connector from Tech.
+T Tech Tower :: Ours.
+S Atlanta BeltLine | BeltLine | The Beltline | Belt Line
+S Ponce City Market | PCM
+S Krog Street Market | Krog Street Tunnel | Krog
+S State Farm Arena | Philips Arena | Phillips Arena
+S Georgia State Capitol | State Capitol | Capitol | The Capitol | Gold Dome
+S Martin Luther King Jr. National Historical Park | MLK Historic Site | King Center | The King Center | MLK Birth Home | King Birth Home | MLK National Historical Park
+S Ebenezer Baptist Church | Ebenezer
+S Zoo Atlanta | Atlanta Zoo | The Zoo
+S Atlanta Botanical Garden | Botanical Garden | Botanical Gardens
+S High Museum of Art | High Museum | The High
+S Bobby Dodd Stadium | Bobby Dodd | Grant Field
+S CNN Center | CNN | The Center
+S Hartsfield-Jackson Airport | Hartsfield-Jackson | The Airport | ATL | Hartsfield | Hartsfield Jackson
+S College Football Hall of Fame | Hall of Fame
+S National Center for Civil and Human Rights | Center for Civil and Human Rights | Civil Rights Museum
+S Atlantic Station
+S Lenox Square | Lenox Mall | Lenox
+S Westin Peachtree Plaza | Peachtree Plaza | The Westin | Sun Dial
+S Bank of America Plaza | Bank of America Tower | Pencil Building :: The tallest building in Atlanta.
+S Oakland Cemetery | Historic Oakland Cemetery
+S Underground Atlanta | Underground | The Underground
+S Olympic Rings | Olympic Cauldron | Olympic Torch | Cauldron
+S Swan House | Atlanta History Center | History Center
+S Carter Center | Jimmy Carter Presidential Library | Carter Library | Carter Presidential Center
+S Margaret Mitchell House
+~S Fernbank Museum ?? An Atlanta address, but I believe it sits in unincorporated DeKalb County, outside the city limits.
+S Center for Puppetry Arts | Puppetry Arts | Puppet Museum
+S SkyView Atlanta | SkyView | Ferris Wheel | Skyview Ferris Wheel
+S Grant Park
+S Little Five Points | L5P
+S Buckhead
+S Midtown
+R Woodruff Arts Center | Woodruff | Symphony Hall | Alliance Theatre
+R Tabernacle | The Tabernacle
+R Georgia World Congress Center | GWCC | World Congress Center
+R Georgia Dome | The Dome :: Demolished in 2017, but nobody has forgotten it.
+R Turner Field | The Ted | Center Parc Stadium | Centennial Olympic Stadium | Olympic Stadium
+R Atlanta-Fulton County Stadium | Fulton County Stadium | Atlanta Stadium
+R The Omni | Omni Coliseum | Omni
+R McCamish Pavilion | Alexander Memorial Coliseum | The Thrillerdome | Thrillerdome
+R Kessler Campanile | The Campanile | Campanile
+R Clough Commons | CULC
+R Tech Green
+R Technology Square | Tech Square
+R Georgia Tech Hotel
+R Coda | Coda Building
+R Kendeda Building | Kendeda
+R Georgia State University | GSU | Georgia State
+R Morehouse College | Morehouse
+R Spelman College | Spelman
+R Emory University | Emory
+R Atlanta University Center | AUC
+R Flatiron Building | English-American Building :: Finished in 1897, five years before New York's.
+R Candler Building
+R Healey Building
+R Rhodes Hall
+R Rhodes-Haverty Building
+R Hurt Building
+R Equitable Building
+R Georgia-Pacific Tower | Georgia Pacific Tower | Georgia-Pacific Center
+R Truist Plaza | SunTrust Plaza
+R 191 Peachtree | 191 Peachtree Tower
+R One Atlantic Center | IBM Tower
+R Promenade | Promenade II
+R AT&T Midtown Center | BellSouth Center
+R Atlanta Marriott Marquis | Marriott Marquis
+R Hyatt Regency | Polaris | Hyatt Regency Atlanta :: The hotel with the blue flying-saucer restaurant on top.
+R Georgian Terrace | Georgian Terrace Hotel
+R Biltmore | Atlanta Biltmore | Biltmore Hotel
+R Clermont Hotel | Clermont Lounge | Hotel Clermont
+R Plaza Theatre | The Plaza
+R Variety Playhouse
+R Buckhead Theatre
+R The Masquerade | Masquerade
+R Manuel's Tavern | Manuels Tavern
+R Mary Mac's Tea Room | Mary Macs
+R Paschal's | Paschals
+R Busy Bee Cafe | Busy Bee
+R The Vortex | Vortex
+R Majestic Diner | The Majestic
+R Sweet Auburn Curb Market | Municipal Market | Curb Market | Sweet Auburn Market
+R Sweet Auburn | Auburn Avenue
+R APEX Museum | Apex Museum
+R Herndon Home
+R Wren's Nest | Wrens Nest
+R Atlanta Cyclorama | Cyclorama
+R Millennium Gate | The Millennium Gate
+R Pemberton Place
+R Children's Museum of Atlanta | Childrens Museum
+~R Delta Flight Museum ?? At Delta's headquarters by the airport; not sure it is inside the city limits.
+R Michael C. Carlos Museum | Carlos Museum
+R Museum of Design Atlanta | MODA
+R Atlanta Contemporary | Atlanta Contemporary Art Center
+R Trap Music Museum
+R Jackson Street Bridge :: The skyline view from the opening of "The Walking Dead".
+R Historic Fourth Ward Park | Fourth Ward Park | Old Fourth Ward Park
+R Westside Park | Bellwood Quarry
+R Freedom Park
+R Candler Park
+R Chastain Park | Chastain Park Amphitheater | Chastain | Cadence Bank Amphitheatre
+R Lake Clara Meer
+R Woodruff Park
+R Hurt Park
+R Rodney Cook Sr. Park | Cook Park
+R Morningside Nature Preserve
+R Lullwater Preserve | Lullwater
+R Atlanta Memorial Park
+R Bitsy Grant Tennis Center
+R Bobby Jones Golf Course
+R East Lake Golf Club | East Lake
+R Lakewood Amphitheatre | Lakewood | Lakewood Amphitheater
+R Atlanta Dairies
+R Westside Provisions District | Westside Provisions
+R The Works
+R Atlanta City Hall | City Hall
+R Fulton County Courthouse
+R Richard B. Russell Federal Building | Russell Federal Building
+R Federal Reserve Bank of Atlanta | Federal Reserve | The Fed
+R Centers for Disease Control | CDC
+R Grady Memorial Hospital | Grady | Grady Hospital
+R Atlanta Central Library | Central Library
+R Peachtree Center
+R AmericasMart | Americas Mart | Merchandise Mart
+R Five Points
+X Zero Mile Post | Zero Milepost :: The 1850s railroad marker that the city grew up around. Atlanta's first name was Terminus.
+R Peace Monument | Sidney Lanier Monument
+R Atlanta from the Ashes | The Phoenix | Phoenix Statue
+R John Lewis Mural | HERO Mural
+R Hank Aaron Home Run Wall | Home Run Wall | Hank Aaron Wall :: The piece of outfield fence his 715th cleared, still standing in a parking lot.
+R Rainbow Crosswalks | Rainbow Crosswalk
+~D Doll's Head Trail ?? At Constitution Lakes; I believe it lies just outside the city limits in DeKalb County.
+R Tiny Doors ATL | Tiny Doors
+R 54 Columns
+R Noguchi Playscape | Playscapes
+R Folk Art Park
+R Castleberry Hill
+R Cabbagetown
+R Inman Park
+R Virginia-Highland | Virginia Highland
+R West End
+R Vine City
+R Old Fourth Ward | O4W
+R East Atlanta Village | EAV
+R Edgewood
+R Summerhill
+R Ansley Park
+! Stone Mountain :: sixteen miles east, outside the city
+! Six Flags :: in Cobb County, outside the city
+! Truist Park :: in Cobb County, outside the city
+! The Battery :: in Cobb County, outside the city
+! Kennesaw Mountain :: in Cobb County
+! Big Chicken :: in Marietta
+! Lake Lanier :: an hour north
+! Sanford Stadium :: in Athens
+! Atlanta Motor Speedway :: in Hampton, thirty miles south
+! Braves Stadium :: the Braves now play in Cobb County; Turner Field is accepted
+! Gateway Arch :: St. Louis
+! Callaway Gardens :: in Pine Mountain
+! King and Queen Towers :: in Sandy Springs, outside the city
+! Eddie's Attic :: in Decatur
+
+@southernfood | THE SOUTH | Name a Southern food | pool=gt | type=open | clar=dishes, sides, sweets and drinks of the American South
+C Fried Chicken
+C Grits | Shrimp and Grits | Cheese Grits
+C Biscuits | Biscuit | Biscuits and Gravy | Buttermilk Biscuits
+C Sweet Tea | Sweet Iced Tea
+C Peach Cobbler | Cobbler
+C Barbecue | BBQ | Pulled Pork | Barbeque
+T Boiled Peanuts :: Sold hot from roadside stands, and the official snack of South Carolina.
+T Pimento Cheese | Pimiento Cheese
+S Collard Greens | Collards | Greens
+S Cornbread | Corn Bread
+S Mac and Cheese | Macaroni and Cheese
+S Fried Okra | Okra
+S Black-Eyed Peas | Black Eyed Peas | Hoppin' John | Hoppin John
+S Pecan Pie
+S Banana Pudding | Nana Pudding
+S Fried Green Tomatoes
+S Chicken and Waffles
+S Gumbo
+S Jambalaya
+S Hush Puppies | Hushpuppies
+S Catfish | Fried Catfish
+S Country Fried Steak | Chicken Fried Steak
+S Sausage Gravy | Gravy | White Gravy
+S Coleslaw | Slaw
+S Deviled Eggs
+S Potato Salad
+S Sweet Potato Pie
+S Sweet Potato Casserole | Candied Yams | Yams
+S Brunswick Stew :: Georgia and Virginia both claim it.
+S Chicken and Dumplings
+S Country Ham | Ham
+S Ribs | Barbecue Ribs
+S Pralines | Praline
+S Red Velvet Cake
+S Key Lime Pie
+S Waffles | Waffle House Waffle
+S Hash Browns | Hashbrowns
+R Crawfish | Crawfish Boil | Crawfish Étouffée | Etouffee
+R Po' Boy | Po Boy | Poboy
+R Beignets | Beignet
+R Red Beans and Rice
+R Dirty Rice
+R Boudin
+R Andouille
+R Muffuletta
+R Bananas Foster
+R King Cake
+R Lowcountry Boil | Low Country Boil | Frogmore Stew
+R She-Crab Soup | She Crab Soup
+R Fried Pickles
+R Fried Shrimp
+R Oysters | Fried Oysters | Raw Oysters
+R Chitterlings | Chitlins
+R Fatback | Salt Pork
+R Ham Hocks | Ham Hock
+R Pork Rinds | Cracklins | Cracklings
+R Livermush | Liver Mush
+R Red-Eye Gravy | Red Eye Gravy | Redeye Gravy
+R Tomato Gravy
+R Squash Casserole
+R Green Bean Casserole | Green Beans
+R Butter Beans | Lima Beans
+R Field Peas | Crowder Peas
+R Succotash
+R Creamed Corn
+R Corn Pudding
+R Spoonbread | Spoon Bread
+R Hoecakes | Hoe Cakes | Johnnycakes | Johnny Cakes
+R Cornbread Dressing | Dressing
+R Turnip Greens | Mustard Greens
+R Pot Likker | Potlikker | Pot Liquor
+R Tomato Sandwich
+R Tomato Pie
+R Vidalia Onions | Vidalia Onion
+R Pecans | Candied Pecans
+R Peaches | Peach
+R Peach Pie
+R Peach Ice Cream
+R Peanut Brittle
+R Divinity
+R Chess Pie
+R Buttermilk Pie
+R Hummingbird Cake
+R Coconut Cake
+R Caramel Cake
+R Pound Cake
+R Lane Cake :: Alabama's own; it turns up in "To Kill a Mockingbird".
+R Moon Pie | MoonPie
+R Goo Goo Cluster | Goo Goo Clusters
+R Fried Pies | Fried Pie | Hand Pies
+R Ambrosia | Ambrosia Salad
+R Congealed Salad | Jello Salad
+R Pear Salad
+R Chicken Salad
+R Cheese Straws
+R Sausage Balls
+R Country Captain :: A curried chicken dish with Savannah roots.
+R Chicken Bog
+R Perloo | Purloo | Pilau
+R Red Rice | Savannah Red Rice
+R Burgoo
+R Hot Brown | Kentucky Hot Brown
+R Derby Pie
+R Benedictine
+R Beer Cheese
+R Nashville Hot Chicken | Hot Chicken
+R Memphis Dry Rub Ribs | Dry Rub Ribs
+R Alabama White Sauce | White Barbecue Sauce
+R Carolina Gold Sauce | Mustard Barbecue Sauce
+R Vinegar Slaw | Red Slaw
+R Smoked Brisket | Brisket
+R Burnt Ends
+R Smoked Sausage
+R Fried Bologna | Fried Bologna Sandwich
+R Pimento Cheese Sandwich
+R Chili Dog | Slaw Dog
+R Frito Pie
+R Tamales | Delta Tamales | Hot Tamales
+R Comeback Sauce
+R Chow-Chow | Chow Chow
+R Pepper Jelly
+R Pickled Okra
+R Watermelon | Watermelon Rind Pickles
+R Muscadines | Scuppernongs
+R Sorghum | Sorghum Syrup
+R Cane Syrup | Molasses
+R Sweet Potato Biscuits
+R Angel Biscuits
+R Beaten Biscuits
+R Cathead Biscuits
+R Country Sausage | Sausage | Sausage Biscuit
+R Bacon
+R Livers | Chicken Livers | Fried Chicken Livers | Gizzards
+R Fried Turkey | Deep-Fried Turkey
+R Smothered Pork Chops | Pork Chops | Fried Pork Chops
+R Oxtails
+R Neck Bones
+R Pig's Feet | Pigs Feet
+R Fried Fish | Fish Fry
+R Salmon Croquettes | Salmon Patties
+R Crab Cakes
+R Deviled Crab
+R Shrimp Creole
+R Seafood Boil
+R Oyster Stew
+R Turtle Soup
+R Peanut Soup
+R Cornmeal Mush
+R Fried Corn
+R Fried Squash
+R Fried Apples
+R Stewed Tomatoes | Stewed Okra and Tomatoes
+R Rice and Gravy
+R Mashed Potatoes
+R Yeast Rolls | Rolls
+R Buttermilk
+R Lemonade
+R Mint Julep
+R Sazerac
+R Hurricane
+R Bourbon
+R Moonshine
+R RC Cola | RC Cola and a Moon Pie
+R Cheerwine
+R Coca-Cola | Coke | Coke and Peanuts :: Invented in Atlanta in 1886. Some pour peanuts straight into the bottle.
+R Ale-8-One | Ale 8
+R Sun Drop
+R Krispy Kreme | Krispy Kreme Doughnuts
+R Chick-fil-A | Chicken Sandwich
+R Pig Pickin' Cake | Pig Pickin Cake
+R Texas Sheet Cake
+R Mississippi Mud Pie | Mud Pie
+R Bread Pudding
+R Rice Pudding
+R Blackberry Cobbler
+R Strawberry Shortcake
+R Tea Cakes
+R Benne Wafers | Benne Seed Wafers
+R Pecan Sandies | Pecan Tassies
+R Bourbon Balls
+R Fudge
+X Kool-Aid Pickles | Koolickles | Koolaid Pickles :: Dill pickles soaked in Kool-Aid until they turn red. A Mississippi Delta original.
+! Pizza :: Italy by way of New York
+! Sushi :: Japan
+! Bagel :: New York
+! Clam Chowder :: New England
+! Cheesesteak :: Philadelphia
+! Tacos :: Mexico and the Southwest
+! Poutine :: Canada
+! Lobster Roll :: New England
+! Deep Dish :: Chicago
+! Hamburger :: everywhere
