@@ -31,7 +31,7 @@ Branch: `overnight`. Nothing was pushed to main and nothing was merged; the live
      | Desktop | 100 | 100 | 100 | 100 |
 
      Mobile: first paint 1.4 s, largest paint 2.0 s, no blocking time, no layout shift. One fix came out of it: the invisible window that facts scroll through used to move when the page settled, which Lighthouse counted as a layout shift (0.17 to 0.25); it now stays put (0). Before that fix mobile performance was 92. Against a plain uncompressed local server the first run scored 50 for performance, but that server is not how the site is hosted.
-   - **Pull request:** "Overnight improvements", from `overnight` to `main`. Not merged.
+   - **Pull request:** "Overnight improvements", https://github.com/bradbartel101/one-in-a-swarm/pull/6, from `overnight` to `main`. Not merged.
 
 ## Skipped
 Nothing was skipped. One item fell short of its target: see item 5 (content).
