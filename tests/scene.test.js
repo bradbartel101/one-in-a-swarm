@@ -82,3 +82,20 @@ test('there is exactly one sun: it only ever sinks and warms, and once set it ne
   assert.equal(at(62000), null);
   assert.notEqual(Scene.sunAt(0).core, Scene.sunAt(250).core, 'and it changes colour on the way');
 });
+
+test('the lower sky changes: it deepens every few thousand feet, and there is a cloud deck to fly through', () => {
+  const rgb = (feet) => Scene.skyAt(C.scoreForFeet(feet)).match(/\d+/g).map(Number);
+  const stops = [0, 1000, 3000, 6000, 9000, 13000, 20000].map(rgb);
+  for (let i = 1; i < stops.length; i++) {
+    const d = Math.hypot(stops[i][0] - stops[i - 1][0], stops[i][1] - stops[i - 1][1], stops[i][2] - stops[i - 1][2]);
+    assert.ok(d >= 14, 'a visible step between stop ' + (i - 1) + ' and ' + i + ': ' + stops[i - 1] + ' -> ' + stops[i]);
+    assert.ok(stops[i][0] < stops[i - 1][0] && stops[i][1] < stops[i - 1][1], 'always deeper, never lighter');
+  }
+  assert.ok(Math.hypot(...stops[0].map((v, k) => v - stops[6][k])) > 180, 'the ground and 20,000 ft look nothing alike');
+  // the deck sits where 3,000 to 6,000 ft is, and is drawn on both sides of the swarm
+  assert.ok(Scene.CUMULUS.from <= C.scoreForFeet(3000) && Scene.CUMULUS.to >= C.scoreForFeet(6000));
+  const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'scene.js'), 'utf8');
+  const order = ['drawCumulus(t, false);', 'drawBees(t);', 'drawCumulus(t, true);'].map((call) => src.indexOf(call));
+  assert.ok(order[0] > 0 && order[0] < order[1] && order[1] < order[2], 'clouds behind the bee, the bee, then clouds in front');
+  assert.match(src, /drawMorning\(\);/);
+});

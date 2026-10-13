@@ -15,9 +15,11 @@
     [0, 'campus', 'Campus'], [40, 'midtown', 'Midtown skyline'], [110, 'clouds', 'Low clouds'], [200, 'weather', 'Weather'],
     [300, 'highsky', 'High sky'], [420, 'stratosphere', 'Stratosphere'], [550, 'space', 'Space'], [650, 'moon', 'The Moon'],
   ];
+  // The sky deepens every few thousand feet: 126 points is 3,000 ft, 137 is 6,000, 146 is 9,000, 174 is 13,000.
   const SKY = [
-    [-20, [208, 238, 255]], [0, [178, 224, 255]], [40, [142, 206, 252]], [110, [108, 182, 244]], [200, [74, 138, 218]],
-    [300, [34, 82, 178]], [400, [18, 46, 116]], [450, [10, 26, 78]], [500, [6, 16, 48]], [550, [3, 7, 24]], [650, [1, 2, 10]], [1e9, [1, 2, 10]],
+    [-20, [255, 232, 190]], [0, [208, 232, 244]], [18, [166, 216, 250]], [40, [136, 202, 250]], [80, [114, 188, 246]], [110, [98, 174, 240]],
+    [126, [84, 160, 236]], [137, [70, 146, 228]], [146, [56, 128, 216]], [174, [46, 110, 204]], [190, [42, 102, 198]], [232, [34, 88, 184]],
+    [300, [30, 74, 170]], [400, [18, 46, 116]], [450, [10, 26, 78]], [500, [6, 16, 48]], [550, [3, 7, 24]], [650, [1, 2, 10]], [1e9, [1, 2, 10]],
   ];
   // 3x5 glyphs for the ruler.
   const GLYPHS = {
@@ -60,6 +62,8 @@
 
   // The one sun. It hangs far away, so it slides down the screen slowly as the swarm climbs,
   // warming from pale yellow to orange, and has set for good a little below 30,000 ft.
+  // A deck of cumulus to fly through, from about 3,000 to 6,000 ft.
+  const CUMULUS = { from: 123, to: 141 };
   const SUN_SET = 300;
   function sunAt(score) {
     const low = Math.max(0, score) / SUN_SET;
@@ -454,8 +458,39 @@
       });
     }
 
+    // Golden morning haze lying over campus, gone by the time the skyline is below.
+    function drawMorning() {
+      const strength = night ? 0 : 1 - clamp(cam / 75);
+      if (strength <= 0) return;
+      const base = rowOf(0, LAYERS.far);
+      for (let i = 0; i < 26; i++) {
+        ctx.globalAlpha = strength * (1 - i / 26) * 0.6;
+        px(0, base - i * 2 - 1, W, 2, i < 9 ? '#ffd27a' : '#ffe2a6');
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // The cumulus deck. Half of it is drawn behind the swarm and half in front, so the bee
+    // passes in front of some clouds and behind others on its way through.
+    function drawCumulus(t, front) {
+      const f = front ? 1.2 : 0.9;
+      for (let i = front ? 1 : 0; i < 14; i += 2) {
+        const s = CUMULUS.from + hash(i * 97 + 5) * (CUMULUS.to - CUMULUS.from);
+        const y = rowOf(s, f);
+        if (!onScreen(y, 40)) continue;
+        const size = 0.8 + hash(i * 31) * 0.7;
+        const span = W + 140;
+        const x = Math.round(((hash(i * 61 + 9) * span + (still() ? 0 : (t / 1000) * (front ? 5 : 3))) % span) - 70);
+        const r = Math.round(9 * size);
+        if (front) ctx.globalAlpha = 0.8; // the bee shows faintly through a cloud that passes over it
+        px(x - r * 2, y + 2, r * 5, r - 2, front ? '#dbe7f4' : '#c9daee'); // the shaded, flat base
+        [[-r * 1.5, 0, r * 0.8], [-r * 0.4, -r * 0.5, r * 1.1], [r * 0.9, -r * 0.3, r], [r * 2, 0.5, r * 0.75]].forEach((d) => disc(Math.round(x + d[0]), Math.round(y + d[1]), Math.round(d[2]), front ? '#ffffff' : '#eef5fd'));
+        ctx.globalAlpha = 1;
+      }
+    }
+
     function drawBirds(t) {
-      [[128, 0.2, 14], [156, 0.6, -11], [181, 0.35, 9]].forEach((b, n) => {
+      [[13, 0.7, 10], [24, 0.15, -8], [36, 0.5, 12], [58, 0.3, -10], [92, 0.65, 9], [128, 0.2, 14], [156, 0.6, -11], [181, 0.35, 9]].forEach((b, n) => {
         const y = rowOf(b[0]);
         if (!onScreen(y)) return;
         const span = W + 60;
@@ -473,7 +508,8 @@
 
     // Things in the far distance below: hills as the city falls away, then a floor of cloud.
     function drawHorizon() {
-      const rise = smooth((cam - 98) / 30) - smooth((cam - 185) / 45);
+      // distant hills behind a band of haze, from just above campus until the weather hides them
+      const rise = smooth((cam - 34) / 40) - smooth((cam - 205) / 50);
       if (rise > 0.01) {
         const top = H - Math.round(H * 0.2 * rise);
         for (let x = 0; x < W; x += 2) {
@@ -482,6 +518,12 @@
           px(x, a, 2, H - a, '#9dbfe2');
           px(x, b, 2, H - b, '#7ea7d2');
         }
+        for (let i = 0; i < 14; i++) { // the haze the hills stand in
+          ctx.globalAlpha = rise * (1 - i / 14) * 0.5;
+          px(0, top - 8 - i * 2, W, 2, '#f1f6fb');
+          if (i < 6) px(0, top + i * 2, W, 2, '#dfeaf6');
+        }
+        ctx.globalAlpha = 1;
       }
       const deck = smooth((cam - 195) / 40) - smooth((cam - 425) / 50);
       if (deck > 0.01) {
@@ -921,6 +963,7 @@
       drawSky();
       drawStars(t);
       drawSun();
+      drawMorning();
       drawTowers('far', t);
       drawClouds('far', t);
       drawHorizon();
@@ -937,7 +980,9 @@
       drawHighSky(t);
       drawSpace(t);
       drawSightings(t);
+      drawCumulus(t, false);
       drawBees(t);
+      drawCumulus(t, true);
       drawFront(t);
       if (dim) {
         ctx.globalAlpha = dim;
@@ -1017,5 +1062,5 @@
     }
   }
 
-  root.SwarmScene = { create, stamp, zoneAt, sunAt, SUN_SET, BEE, MINI, LAYERS, ZONES, SCREENS_PER_POINT };
+  root.SwarmScene = { create, stamp, zoneAt, sunAt, skyAt, SUN_SET, CUMULUS, BEE, MINI, LAYERS, ZONES, SCREENS_PER_POINT };
 })(typeof self !== 'undefined' ? self : this);
