@@ -770,3 +770,147 @@ D Kirby Smart :: Raised in Bainbridge.
 ! Chipper Jones :: Florida
 ! Burt Reynolds :: born in Michigan and raised in Florida
 ! Bulldogs :: a team
+
+@cokebrands | ATLANTA | Name a drink made by The Coca-Cola Company | pool=gt | type=open | clar=any brand it owns or has sold, past or present
+C Coca-Cola | Coke | Coca Cola | Coke Classic | Coca-Cola Classic
+C Diet Coke | Diet Coca-Cola
+C Sprite
+C Fanta | Fanta Orange
+C Dasani
+C Powerade
+T Coke Zero | Coca-Cola Zero | Coke Zero Sugar | Coca-Cola Zero Sugar
+T Tab | TaB :: The first diet cola from Coke, 1963 to 2020.
+S Minute Maid | Minute Maid Lemonade | Minute Maid Orange Juice
+S Cherry Coke | Coca-Cola Cherry
+S Vanilla Coke | Coca-Cola Vanilla
+S Mello Yello | Mellow Yellow
+S Barq's | Barqs | Barq's Root Beer
+S Fresca
+S Smartwater | Smart Water | Glaceau Smartwater
+S Vitaminwater | Vitamin Water | Glaceau Vitaminwater
+S Simply | Simply Orange | Simply Lemonade | Simply Juice
+S Honest Tea | Honest
+S Gold Peak | Gold Peak Tea
+S Fuze | Fuze Tea | Fuze Iced Tea
+S Topo Chico
+S Pibb | Mr. Pibb | Mr Pibb | Pibb Xtra
+S Seagram's Ginger Ale | Seagram's | Seagrams
+S Hi-C | Hi C
+S Sprite Zero | Sprite Zero Sugar
+S Caffeine-Free Coke | Caffeine Free Coke | Caffeine-Free Diet Coke
+S New Coke | Coke II :: 1985. It lasted 79 days before the original came back.
+S Fairlife | Fairlife Milk
+S Costa Coffee | Costa
+S BodyArmor | Body Armor
+R Surge
+R Coke Vanilla Zero | Vanilla Coke Zero
+R Cherry Coke Zero | Coca-Cola Cherry Zero
+R Coca-Cola Life | Coke Life
+R Coke with Lime | Diet Coke with Lime | Coke Lime
+R Coca-Cola with Lemon | Diet Coke with Lemon | Coke Lemon
+R Coca-Cola Blak | Coke Blak
+R Coca-Cola C2 | C2
+R Coke with Coffee | Coca-Cola with Coffee
+R Coca-Cola Spiced | Coke Spiced
+R Coca-Cola Starlight | Starlight
+R Coca-Cola Dreamworld | Dreamworld
+R Orange Vanilla Coke | Coca-Cola Orange Vanilla
+R Coca-Cola Energy | Coke Energy
+R Diet Cherry Coke
+R Sprite Cranberry | Sprite Winter Spiced Cranberry
+R Sprite Remix
+R Sprite Lymonade
+R Sprite Tropical Mix
+R Fanta Grape | Grape Fanta
+R Fanta Pineapple | Pineapple Fanta
+R Fanta Strawberry | Strawberry Fanta
+R Peace Tea
+R Aha | AHA | Aha Sparkling Water
+R Zico | Zico Coconut Water
+R Odwalla
+R Core Power
+~R Dunkin' Iced Coffee ?? Bottled by Coca-Cola under licence from Dunkin'.
+~R Monster ?? Coca-Cola owns a minority stake and distributes it, but does not make it.
+R Full Throttle
+R NOS
+R Vault
+~D Northern Neck Ginger Ale ?? A Virginia regional brand I believe Coca-Cola owned until 2020; not confirmed.
+R Schweppes :: Coca-Cola's brand in many countries outside the United States.
+~R Canada Dry ?? Bottled by Coca-Cola in some countries; owned by Keurig Dr Pepper in the United States.
+~R Dr Pepper ?? Coca-Cola sells it in parts of Europe, but it is not a Coca-Cola brand in the United States.
+R Inca Kola
+R Thums Up
+R Kinley
+R Limca
+R Maaza
+R Georgia Coffee | Georgia :: Canned coffee, named for Coke's home state, and huge in Japan.
+R Aquarius
+R Ayataka
+R I Lohas
+R Del Valle
+R Ciel
+R Bonaqua | BonAqua
+R Appletiser | Appletizer
+R Lilt
+R Oasis
+R Kia-Ora | Kia Ora
+R Five Alive
+R Fruitopia
+R Powerade Zero
+R Glaceau | Glacéau
+R Innocent | Innocent Smoothies
+R Chaudfontaine
+R Apollinaris
+~D Vio ?? A German water brand I believe Coca-Cola owns; not confirmed.
+R Mezzo Mix :: Cola and orange together. Germany loves it.
+X Beverly :: A bitter Italian aperitif soda. Visitors are dared to taste it at the World of Coca-Cola in Atlanta.
+R Stoney | Stoney Ginger Beer
+R Sparletta
+R Krest
+~D Bibo ?? A juice brand I believe Coca-Cola sold in Africa; not confirmed.
+R Kuat
+R Guaraná Jesus | Guarana Jesus
+~D Quatro ?? A grapefruit soda I believe Coca-Cola sells in South America; not confirmed.
+R Manzana Lift | Lift
+~D Sidral Mundet ?? A Mexican apple soda I believe Coca-Cola owns; not confirmed.
+~D Joya ?? A Mexican fruit soda I believe Coca-Cola owns; not confirmed.
+~D Delaware Punch ?? I believe Coca-Cola owns it; not confirmed.
+R Ramblin' Root Beer | Ramblin Root Beer :: Coke's root beer of the late 1970s, before it bought Barq's.
+~D Santiba ?? A mixer line I believe Coca-Cola sold in the 1970s; not confirmed.
+~D Veep ?? A lemon-lime soda I believe Coca-Cola sold in the 1960s; not confirmed.
+~D Simba ?? A citrus soda I believe Coca-Cola sold around 1970; not confirmed.
+R OK Soda | OK :: A 1993 experiment aimed at Generation X.
+R Diet Coke Plus
+R Diet Coke Feisty Cherry | Feisty Cherry
+R Diet Coke Ginger Lime
+R Coca-Cola Clear
+R Coca-Cola Light | Coke Light
+R Tab Clear
+R Enviga
+~R Nestea ?? A Nestlé brand that Coca-Cola made under a joint venture until 2017.
+R Tum-E Yummies | Tum E Yummies
+R Bright & Early
+~R Bacardi Mixers ?? Sold under licence; not sure it counts as a Coca-Cola drink.
+R Jack & Coke | Jack Daniel's & Coca-Cola | Jack and Coke :: Sold ready-mixed in a can since 2022.
+R Topo Chico Hard Seltzer
+R Simply Spiked | Simply Spiked Lemonade
+R Burn | Burn Energy
+R Relentless
+R Mother | Mother Energy
+~D Royal Tru ?? A Philippine orange soda I believe Coca-Cola owns; not confirmed.
+~D Fioravanti ?? An Ecuadorian soda I believe Coca-Cola owns; not confirmed.
+~D Urge ?? The Norwegian name for Surge, as far as I know.
+! Pepsi :: the other one
+! Mountain Dew :: PepsiCo
+! Gatorade :: PepsiCo
+! 7 Up :: Keurig Dr Pepper in the United States
+! RC Cola :: born in Columbus, Georgia, but never a Coca-Cola brand
+! Red Bull :: its own company
+! Aquafina :: PepsiCo
+! Lipton :: Unilever and PepsiCo
+! Sierra Mist :: PepsiCo
+! Snapple :: Keurig Dr Pepper
+! Starbucks Frappuccino :: bottled with PepsiCo
+! Tropicana :: not Coca-Cola
+! A&W :: Keurig Dr Pepper
+! Budweiser :: beer, and Anheuser-Busch

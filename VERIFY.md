@@ -62,6 +62,28 @@ These answers are **not in the game**. Each was left out because I was not confi
 
 - [ ] **Fernando Mendoza** (would be Solid): I believe he won in 2025, but that is at the edge of what I know for certain.
 
+### Name a drink made by The Coca-Cola Company (`cokebrands`)
+
+- [ ] **Dunkin' Iced Coffee** (would be Rare): Bottled by Coca-Cola under licence from Dunkin'.
+- [ ] **Monster** (would be Rare): Coca-Cola owns a minority stake and distributes it, but does not make it.
+- [ ] **Northern Neck Ginger Ale** (would be Deep Cut): A Virginia regional brand I believe Coca-Cola owned until 2020; not confirmed.
+- [ ] **Canada Dry** (would be Rare): Bottled by Coca-Cola in some countries; owned by Keurig Dr Pepper in the United States.
+- [ ] **Dr Pepper** (would be Rare): Coca-Cola sells it in parts of Europe, but it is not a Coca-Cola brand in the United States.
+- [ ] **Vio** (would be Deep Cut): A German water brand I believe Coca-Cola owns; not confirmed.
+- [ ] **Bibo** (would be Deep Cut): A juice brand I believe Coca-Cola sold in Africa; not confirmed.
+- [ ] **Quatro** (would be Deep Cut): A grapefruit soda I believe Coca-Cola sells in South America; not confirmed.
+- [ ] **Sidral Mundet** (would be Deep Cut): A Mexican apple soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Joya** (would be Deep Cut): A Mexican fruit soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Delaware Punch** (would be Deep Cut): I believe Coca-Cola owns it; not confirmed.
+- [ ] **Santiba** (would be Deep Cut): A mixer line I believe Coca-Cola sold in the 1970s; not confirmed.
+- [ ] **Veep** (would be Deep Cut): A lemon-lime soda I believe Coca-Cola sold in the 1960s; not confirmed.
+- [ ] **Simba** (would be Deep Cut): A citrus soda I believe Coca-Cola sold around 1970; not confirmed.
+- [ ] **Nestea** (would be Rare): A Nestlé brand that Coca-Cola made under a joint venture until 2017.
+- [ ] **Bacardi Mixers** (would be Rare): Sold under licence; not sure it counts as a Coca-Cola drink.
+- [ ] **Royal Tru** (would be Deep Cut): A Philippine orange soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Fioravanti** (would be Deep Cut): An Ecuadorian soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Urge** (would be Deep Cut): The Norwegian name for Surge, as far as I know.
+
 ### Name an animated Disney movie (`disney`)
 
 - [ ] **Toy Story 5** (would be Rare): Scheduled for June 2026; I could not confirm it was released as planned.
