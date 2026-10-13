@@ -238,3 +238,147 @@ D MATH 9000
 ! MATH 2401 :: Calculus III under the old numbering; no longer in the catalog
 ! MATH 2403 :: Differential Equations under the old numbering; no longer in the catalog
 ! MATH 1555 :: not a catalog number
+
+@gtmasters | ACADEMICS | Name a master's degree offered at Georgia Tech | pool=gt | type=closed | count=59 | source=catalog.gatech.edu/programs, master's degrees (59 different program names) | clar=the field is enough, like "Analytics"
+C Computer Science | CS | OMSCS | MSCS :: The online version, OMSCS, is the biggest computer science master's in the world.
+C Business Administration | MBA | Business
+C Mechanical Engineering | ME | MSME
+C Electrical and Computer Engineering | ECE | Electrical Engineering | Computer Engineering | MSECE
+C Aerospace Engineering | AE | Aerospace
+T Analytics | OMSA | MS Analytics | Data Analytics
+T Cybersecurity | OMS Cybersecurity | Cyber Security
+S Industrial Engineering | IE | MSIE
+S Civil Engineering | CE
+S Biomedical Engineering | BME
+S Chemical Engineering | ChBE | ChemE
+S Materials Science and Engineering | MSE | Materials Science
+S Nuclear Engineering | NRE
+S Environmental Engineering | EnvE
+S Architecture | M.Arch | MArch
+S Human-Computer Interaction | HCI | Human Computer Interaction
+S Robotics
+S Mathematics | Math
+S Physics
+S Chemistry
+S Biology
+S Psychology
+S Economics
+S Statistics
+S Operations Research | OR
+S Supply Chain Engineering | Supply Chain
+S City and Regional Planning | City Planning | Urban Planning | MCRP
+R Bioengineering
+R Bioinformatics
+R Computational Science and Engineering | CSE
+R Quantitative and Computational Finance | QCF | Quant Finance | Quantitative Finance
+R Management | MS Management
+R Business Administration - Management of Technology | Executive MBA | MBA Management of Technology | Management of Technology | EMBA
+R Business Administration - Global Business | Global Executive MBA | MBA Global Business | Global Business
+R Industrial Design | MID
+R Digital Media
+R Music Technology
+R Public Policy | MSPP
+R International Affairs
+R International Security
+R Earth and Atmospheric Sciences | EAS
+R Medical Physics
+R Health Systems
+R Urban Design
+R Urban Analytics
+R Real Estate Development
+R Building Construction and Facility Management | Building Construction
+R Geographic Information Science and Technology | GIS | GIST
+R Sustainable Energy and Environmental Management | SEEM
+R Applied Systems Engineering | PMASE | Systems Engineering
+R Manufacturing Leadership | PMML
+R Occupational Safety and Health | PMOSH
+D Biomedical Innovation and Development | BioID
+D Engineering Science and Mechanics | ESM
+D Global Development
+D Global Media and Cultures
+D Applied Languages and Intercultural Studies | ALIS
+D History and Sociology of Technology and Science | HSTS
+X International Affairs, Science, and Technology | International Affairs Science and Technology | IAST :: A real master's, from the Sam Nunn School.
+! Law :: Tech has no law school
+! Medicine :: Tech has no medical school
+! Nursing :: not offered at Tech
+! Education :: not offered at Tech
+! Data Science :: not a master's by that name; the nearest is Analytics
+! Artificial Intelligence :: not a master's by that name in the catalog
+! Software Engineering :: not a master's by that name in the catalog
+! Finance :: the catalog's version is Quantitative and Computational Finance
+! Accounting :: not a master's in the catalog
+! English :: not offered as a master's
+! History :: the catalog's version is History and Sociology of Technology and Science
+! Journalism :: not offered at Tech
+
+@statesymbols | GEORGIA | Name an official state symbol of Georgia | pool=gt | type=closed | count=57 | source=Wikipedia, List of Georgia state symbols | clar=the state bird, the state fruit, and so on
+C Peach | Peaches :: The state fruit.
+C Brown Thrasher | Thrasher :: The state bird. Atlanta's hockey team was named for it.
+C Honeybee | Honey Bee | Bee :: The state insect. A relative, at least.
+C Georgia on My Mind :: The state song, in Ray Charles's version.
+C Peanut | Peanuts :: The state crop.
+T Grits :: The official prepared food.
+T Vidalia Onion | Vidalia Sweet Onion | Vidalia | Onion :: The state vegetable.
+S Live Oak | Southern Live Oak | Oak :: The state tree.
+S Pecan | Pecans :: The state nut.
+S White-Tailed Deer | Whitetail Deer | Deer :: The state mammal.
+S Largemouth Bass | Bass :: The state fish.
+S State Flag | Flag | Flag of Georgia
+S Great Seal | State Seal | Seal | Great Seal of Georgia
+S Wisdom, Justice, Moderation | Wisdom Justice Moderation | State Motto | Motto | Wisdom Justice and Moderation :: The state motto.
+S Azalea :: The state wildflower.
+S Quartz :: The state gem.
+S Gopher Tortoise | Tortoise :: The state reptile.
+S Right Whale | North Atlantic Right Whale | Whale :: The state marine mammal.
+S Shark Tooth | Shark Teeth | Shark's Tooth :: The state fossil.
+S Square Dance | Square Dancing :: The state folk dance.
+S Green Tree Frog | American Green Tree Frog | Tree Frog | Frog :: The state amphibian.
+S Tiger Swallowtail | Eastern Tiger Swallowtail | Swallowtail | Butterfly :: The state butterfly.
+S Bobwhite Quail | Quail | Bobwhite :: The state game bird.
+R Muscadine | Muscadine Grape | Grape :: The state grape.
+R Sweetbay Magnolia | Magnolia :: The state flower.
+R White Shrimp | Shrimp :: The state crustacean.
+R Red Drum | Redfish :: The state salt-water fish.
+R Shoal Bass :: The state riverine sport fish.
+R Brook Trout | Southern Appalachian Brook Trout | Trout :: The state cold-water game fish.
+R Staurolite | Fairy Cross | Fairy Stone :: The state mineral.
+R Knobbed Whelk | Whelk :: The state seashell.
+R Adoptable Dog | Dog | Rescue Dog | Shelter Dog :: The state dog is any dog waiting for a home.
+R Pogo | Pogo Possum | Pogo 'Possum | Possum | Opossum :: The comic-strip possum from the Okefenokee is the official state 'possum.
+R Atlanta Ballet :: The state ballet company.
+R Springer Opera House | Springer :: The state theater, in Columbus.
+R Georgia Museum of Art :: The state art museum, in Athens.
+R State Botanical Garden of Georgia | State Botanical Garden | Botanical Garden
+R Plains High School :: The state school: Jimmy Carter's.
+R Georgia Tartan | Tartan
+R Poet Laureate | Poet Laureate of Georgia
+R Georgian's Creed | Georgians Creed | Creed
+R Our Georgia :: The state waltz.
+D Swamp Gravy :: The state folk-life play, staged in Colquitt.
+D The Reach of Song | Reach of Song :: The state historic drama.
+D Colquitt | First Mural City :: Georgia's official First Mural City.
+D Georgia Folk Festival | Folk Festival
+D Southeastern Railway Museum :: The state transportation history museum, in Duluth.
+D Central of Georgia Railroad Shops Complex | Central of Georgia Railroad Shops | Georgia State Railroad Museum :: The state railroad museum, in Savannah.
+D Ralph Mark Gilbert Civil Rights Museum | Ralph Mark Gilbert Museum :: The state historical civil rights museum, in Savannah.
+D Funk Heritage Center :: The state frontier and Southeastern Indian interpretive center.
+D National Museum of the Mighty Eighth Air Force | Mighty Eighth Air Force Museum | Mighty Eighth :: The state center for character education.
+D Jekyll Island Musical Theatre Festival :: The state musical theater.
+D The Atlas of Georgia | Atlas of Georgia :: The state atlas.
+D Shoot the Bull | Hawkinsville Civitan Club's Shoot the Bull :: The state beef barbecue cook-off.
+D Southeast Georgia Soap Box Derby | Soap Box Derby :: The state soap box derby.
+D Ashburn Peanut Monument | Peanut Monument :: Turner County's is the official state peanut monument.
+X Slosheye Trail Big Pig Jig | Big Pig Jig | Slosheye Trail :: The state pork cook-off, held in Dooly County. It is in the law.
+! Cherokee Rose :: the state flower for a century, until the sweetbay magnolia replaced it
+! Bulldog :: Georgia's mascot, not a state symbol
+! Yellow Jacket :: the state insect is the honeybee
+! Coca-Cola :: no official state drink
+! Peach Pie :: not official
+! Pine Tree :: the state tree is the live oak
+! Cardinal :: the state bird is the brown thrasher
+! Stone Mountain :: not a symbol
+! Dogwood :: not a Georgia state symbol
+! Waffle House :: regrettably not
+! Sweet Tea :: not official
+! Cotton :: not a state symbol

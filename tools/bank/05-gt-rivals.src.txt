@@ -202,3 +202,119 @@ X Terry Hoage :: A two-time All-American safety in the early 1980s.
 ! Deshaun Watson :: Clemson; from Gainesville, Georgia, but never a Bulldog
 ! Joe Hamilton :: one of ours
 ! Dominique Wilkins :: Georgia basketball, not football
+
+@hbcus | COLLEGES | Name a historically Black college or university | pool=gt | type=closed | count=105 | source=Wikipedia, List of historically black colleges and universities (current institutions) | clar=Atlanta is home to six of them | strip=university,college
+S Alabama A&M University | Alabama A&M | Alabama A and M | AAMU
+S Alabama State University | Alabama State
+S Albany State University | Albany State
+R Alcorn State University | Alcorn State | Alcorn
+R Allen University | Allen
+D American Baptist College
+R University of Arkansas at Pine Bluff | Arkansas-Pine Bluff | UAPB | Arkansas Pine Bluff | Pine Bluff
+D Arkansas Baptist College
+R Barber-Scotia College | Barber-Scotia | Barber Scotia
+R Benedict College | Benedict
+R Bennett College | Bennett
+S Bethune-Cookman University | Bethune-Cookman | Bethune Cookman | BCU
+D Bishop State Community College
+R Bluefield State University | Bluefield State
+R Bowie State University | Bowie State
+R Central State University | Central State
+X Cheyney University of Pennsylvania | Cheyney | Cheyney University :: Founded in 1837, the oldest of them all.
+R Claflin University | Claflin
+C Clark Atlanta University | Clark Atlanta | CAU | Clark | Atlanta University :: Atlanta.
+D Clinton College
+D Coahoma Community College
+R Coppin State University | Coppin State
+S Delaware State University | Delaware State
+D Denmark Technical College
+S Dillard University | Dillard
+R University of the District of Columbia | UDC
+R Edward Waters University | Edward Waters
+R Elizabeth City State University | Elizabeth City State | ECSU
+R Fayetteville State University | Fayetteville State
+S Fisk University | Fisk
+C Florida A&M University | FAMU | Florida A&M | Florida A and M
+R Florida Memorial University | Florida Memorial
+S Fort Valley State University | Fort Valley State | Fort Valley | FVSU
+D Gadsden State Community College
+S Grambling State University | Grambling | Grambling State
+S Hampton University | Hampton
+R Harris-Stowe State University | Harris-Stowe | Harris Stowe
+D Hinds Community College at Utica
+C Howard University | Howard
+R Huston-Tillotson University | Huston-Tillotson | Huston Tillotson
+R Interdenominational Theological Center | ITC :: Atlanta.
+D J. F. Drake State Technical College
+S Jackson State University | Jackson State | JSU
+R Jarvis Christian University | Jarvis Christian
+R Johnson C. Smith University | Johnson C. Smith | JCSU | Johnson C Smith
+R Kentucky State University | Kentucky State
+D Knoxville College
+R Lane College | Lane
+R Langston University | Langston
+D Lawson State Community College
+R LeMoyne-Owen College | LeMoyne-Owen | LeMoyne Owen
+R Lincoln University (Pennsylvania) | Lincoln University | Lincoln | Lincoln University of Pennsylvania
+R Lincoln University of Missouri | Lincoln University Missouri | Lincoln Missouri
+R Livingstone College | Livingstone
+R University of Maryland Eastern Shore | Maryland Eastern Shore | UMES
+S Meharry Medical College | Meharry
+R Miles College | Miles
+R Mississippi Valley State University | Mississippi Valley State | MVSU | Mississippi Valley | Valley
+C Morehouse College | Morehouse :: Tech's neighbour across town, and Martin Luther King Jr.'s college.
+R Morehouse School of Medicine | MSM :: Atlanta.
+S Morgan State University | Morgan State | Morgan
+T Morris Brown College | Morris Brown :: Atlanta.
+D Morris College
+S Norfolk State University | Norfolk State
+S North Carolina Agricultural & Technical State University | North Carolina A&T | NC A&T | A&T | North Carolina A and T | NCAT
+S North Carolina Central University | NC Central | North Carolina Central | NCCU
+R Oakwood University | Oakwood
+R Paine College | Paine
+R Paul Quinn College | Paul Quinn
+D Payne Theological Seminary
+R Philander Smith University | Philander Smith | Philander Smith College
+S Prairie View A&M University | Prairie View | Prairie View A&M | PVAMU
+R Rust College | Rust
+S Savannah State University | Savannah State
+D Selma University
+R Shaw University | Shaw
+D Shorter College
+D Shelton State Community College
+R Simmons College | Simmons College of Kentucky
+S South Carolina State University | South Carolina State | SC State
+R Southern University at New Orleans | SUNO
+R Southern University at Shreveport | SUSLA
+S Southern University and A&M College | Southern University | Southern | Southern University Baton Rouge
+D Southwestern Christian College
+C Spelman College | Spelman :: Atlanta.
+R St. Augustine's University | St. Augustine's | Saint Augustine's | St Augustines
+D St. Philip's College
+R Stillman College | Stillman
+R Talladega College | Talladega
+S Tennessee State University | Tennessee State | TSU
+D Texas College
+S Texas Southern University | Texas Southern | TSU Texas
+R Tougaloo College | Tougaloo
+D Trenholm State Community College
+T Tuskegee University | Tuskegee
+R University of the Virgin Islands | UVI | Virgin Islands
+R Virginia State University | Virginia State
+R Virginia Union University | Virginia Union
+R Virginia University of Lynchburg | VUL
+R Voorhees University | Voorhees
+R West Virginia State University | West Virginia State
+R Wilberforce University | Wilberforce
+R Wiley University | Wiley | Wiley College
+R Winston-Salem State University | Winston-Salem State | WSSU | Winston Salem State
+S Xavier University of Louisiana | Xavier | XULA
+! Georgia Tech :: not an HBCU
+! Georgia State :: not an HBCU
+! Emory :: not an HBCU
+! Harvard :: not an HBCU
+! Kennesaw State :: not an HBCU
+! Atlanta Metropolitan :: a predominantly Black institution, but not a designated HBCU
+! Bishop College :: closed in 1988
+! Saint Paul's College :: closed in 2013
+! Concordia College Alabama :: closed in 2018
