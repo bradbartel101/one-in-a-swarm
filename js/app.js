@@ -80,8 +80,9 @@
     },
   };
 
-  let prompts = [];
+  let prompts = []; // every prompt, from the index; `answers` arrives when a prompt's own file is fetched
   let byId = {};
+  const fetching = {}; // id -> the promise for that prompt's file
   const knownIds = new Set();
   let daily = null;
   let stale = false; // true while `daily` is yesterday's unfinished run
@@ -919,9 +920,58 @@
 
   /* ---------- daily: pacing ---------- */
 
+  // Prompts still in play (retired ones only survive on days that were already scheduled).
+  function livePrompts() {
+    return prompts.filter((p) => !p.retired);
+  }
+
+  function todaysIds() {
+    return C.scheduledIds(schedule, today(), knownIds) || C.dailyPromptIds(livePrompts(), today());
+  }
+
+  function loaded(id) {
+    return !!(byId[id] && Array.isArray(byId[id].answers));
+  }
+
+  // Fetches the answer lists for these prompts (each file once) and resolves when all are in.
+  function ensurePrompts(ids) {
+    return Promise.all(ids.filter((id) => byId[id] && !loaded(id)).map((id) => {
+      if (!fetching[id]) {
+        fetching[id] = fetch('data/p/' + encodeURIComponent(id) + '.json').then((res) => {
+          if (!res.ok) throw new Error('HTTP ' + res.status + ' for prompt ' + id);
+          return res.json();
+        }).then((p) => {
+          const problems = C.validatePrompts({ prompts: [p] });
+          if (problems.length || p.id !== id) throw new Error('Prompt "' + id + '" failed validation: ' + (problems[0] || 'wrong id'));
+          byId[id].strip = p.strip;
+          byId[id].lead = p.lead;
+          byId[id].answers = p.answers;
+        }).catch((err) => {
+          delete fetching[id]; // so a retry can fetch it again
+          throw err;
+        });
+      }
+      return fetching[id];
+    }));
+  }
+
+  function loadFailed(err) {
+    $('errorText').textContent = 'The game data did not load. Check your connection and try again.';
+    $('errorDetail').textContent = 'Details: ' + (err && err.message ? err.message : 'unknown error');
+    stopLoop();
+    mode = null;
+    setPhase('error');
+    show('error', $('retryBtn'));
+  }
+
   function dailyEnter() {
+    const ids = daily ? daily.promptIds : todaysIds();
+    if (!ids.every(loaded)) { // a new day began while the page was open: fetch its prompts first
+      ensurePrompts(ids).then(dailyEnter, loadFailed);
+      return;
+    }
     if (!daily) {
-      daily = C.newDaily(today(), C.scheduledIds(schedule, today(), knownIds) || C.dailyPromptIds(prompts, today()));
+      daily = C.newDaily(today(), ids);
       saveDaily();
     }
     if (daily.finished) return showResults();
@@ -934,6 +984,14 @@
     daily = null;
     stale = false;
     dailyEnter();
+  }
+
+  // The prompt card: its label, the prompt, and the short rule under it when it has one.
+  function showPrompt(p) {
+    $('cat').textContent = p.category;
+    $('promptText').textContent = p.text;
+    $('clar').textContent = p.clarifier || '';
+    $('clar').hidden = !p.clarifier;
   }
 
   function renderPips() {
@@ -967,8 +1025,7 @@
     $('hudText').textContent = 'Round ' + (index + 1) + ' of ' + C.ROUNDS;
     $('hudScore').textContent = C.formatNumber(score);
     const p = byId[daily.promptIds[index]];
-    $('cat').textContent = p.category;
-    $('promptText').textContent = p.text;
+    showPrompt(p);
     renderPips();
     scene.setFollowers(daily.results.filter((r) => r.points).length);
     moveCamera(score, 0);
@@ -1526,14 +1583,41 @@
     const p = infPrompt();
     $('hudText').textContent = 'Prompt ' + (inf.answered + 1);
     $('hudScore').textContent = C.formatNumber(inf.score);
-    $('cat').textContent = p.category;
-    $('promptText').textContent = p.text;
+    showPrompt(p);
     renderTried([]);
+    ensurePrompts(inf.order.slice(inf.pos + 1, inf.pos + 4)).catch(() => {}); // the next few, ahead of time
+  }
+
+  // Moves on to the prompt at inf.pos. Its answers are normally already here; if the connection
+  // is slow the clock waits for them rather than running against a prompt that cannot be answered.
+  function infShow() {
+    const id = inf.order[inf.pos];
+    if (loaded(id)) return renderInfinite();
+    stopLoop();
+    showPrompt(byId[id]);
+    renderTried([]);
+    setFeedback('loading the next prompt…', '');
+    const run = inf;
+    ensurePrompts([id]).then(() => {
+      if (inf !== run || mode !== 'infinite' || inf.over) return;
+      setFeedback('', '');
+      renderInfinite();
+      startLoop();
+    }, loadFailed);
   }
 
   function startInfinite() {
     window.clearTimeout(introTimer);
-    inf = C.newInfinite(C.shuffle(prompts.map((p) => p.id), Math.random));
+    const order = C.shuffle(livePrompts().map((p) => p.id), Math.random);
+    if (!loaded(order[0])) { // fetch the first few prompts, then start
+      ensurePrompts(order.slice(0, 3)).then(() => beginInfinite(order), loadFailed);
+      return;
+    }
+    beginInfinite(order);
+  }
+
+  function beginInfinite(order) {
+    inf = C.newInfinite(order);
     bestAtStart = getBest();
     mode = 'infinite';
     lastAnnounced = 0;
@@ -1561,6 +1645,7 @@
   }
 
   function infSubmit(text) {
+    if (!loaded(inf.order[inf.pos])) return; // its answers are still on the way
     const r = C.infiniteGuess(inf, infPrompt() || {}, text);
     if (r.status === 'empty' || r.status === 'idle') return;
     if (r.status === 'duplicate') { // already guessed this round: ignored, with no message and no count
@@ -1582,7 +1667,7 @@
     moveCamera(inf.score, GLIDE_MS);
     saveBest();
     if (inf.over) return endInfinite();
-    renderInfinite();
+    infShow();
   }
 
   function saveBest() {
@@ -1730,7 +1815,7 @@
       setFeedback('skipped. −5s', 'bad');
       Sfx.skip();
       if (inf.over) return endInfinite();
-      renderInfinite();
+      infShow();
       $('guess').focus();
     });
     // One submit. During the cooldown it is not dropped: the latest one is remembered and
@@ -1826,21 +1911,29 @@
     // The schedule pins each date to its seven prompts. If it cannot be read the game still
     // runs, working the day out the old way.
     const loadSchedule = fetch('data/schedule.json').then((res) => (res.ok ? res.json() : null)).catch(() => null);
-    const loadPrompts = fetch('data/prompts.json').then((res) => {
+    // The index lists every prompt without its answers. Answers are fetched one prompt at a
+    // time, and only for the prompts a flight is about to use.
+    const loadIndex = fetch('data/index.json').then((res) => {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res.json();
     });
-    Promise.all([loadPrompts, loadSchedule])
+    Promise.all([loadIndex, loadSchedule])
       .then((loaded) => {
         const data = loaded[0];
         schedule = loaded[1];
-        const problems = C.validatePrompts(data);
-        if (problems.length) throw new Error('Prompt bank failed validation: ' + problems[0]);
-        prompts = data.prompts;
-        prompts.forEach((p) => {
+        if (!data || !Array.isArray(data.prompts) || !data.prompts.length) throw new Error('Prompt index is empty');
+        data.prompts.forEach((p) => {
+          if (!p || typeof p.id !== 'string' || !p.id || !p.text || !p.category || byId[p.id]) throw new Error('Prompt index failed validation near "' + (p && p.id) + '"');
           byId[p.id] = p;
           knownIds.add(p.id);
         });
+        prompts = data.prompts;
+        // what today needs: a run already under way, and today's seven
+        const saved = store.get(K_DAILY, undefined);
+        const first = (saved && Array.isArray(saved.promptIds) ? saved.promptIds : []).concat(todaysIds()).filter((id) => byId[id]);
+        return ensurePrompts(first);
+      })
+      .then(() => {
         loadDaily();
         everySecond();
         window.setInterval(everySecond, 1000);

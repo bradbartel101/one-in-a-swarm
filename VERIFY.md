@@ -6,8 +6,28 @@ from the JSON. In the v1.0 release audit every flagged answer was checked agains
 the confirmed ones were unflagged, and the ones that could not be confirmed were removed from
 the game and listed in `HUMAN-TODO.md` for a Tech student to rule on.
 
-To flag a new answer, put `?` before its tier letter in `tools/prompts.src.txt` and add
+To flag a new answer, put `?` before its tier letter in its source file under `tools/` and add
 `?? reason` at the end of the line, then run `npm run build:data`.
+
+## Prompt bank v2: what to look at first
+
+The bank was rebuilt in October 2026 (see `PROMPTS-V2.md`). In order of how much a second pair
+of eyes would help:
+
+1. **Held out of the game** (the long section below): 97 answers I was not sure of. Each one is
+   a yes or no. To approve one, delete its leading `~` in the source file and rebuild.
+2. **Three lists with no source** (the last section): Atlanta United players since 2021, the
+   Waffle House menu and the Chick-fil-A menu.
+3. **Lists written from memory**: the 2026 top-ups to films, musicians, Braves, Falcons and Hawks,
+   and the new birds, trees, Georgia wildlife and backpack prompts. Nothing in them is flagged
+   one by one, because I only added what I was confident of, but none was checked line by line.
+4. **Closed lists built from Wikipedia rather than an official register**: Tech players in the
+   NBA (42) and the major leagues (69, which agrees with ramblinwreck.com's count), Falcons
+   first-round picks (61), Georgia governors (77), Atlanta's tallest buildings (125), airlines and
+   nonstop cities at Hartsfield-Jackson. The last two were read in October 2026 and will drift.
+5. **Residence halls and Greek chapters** now follow Tech's current lists (housing.gatech.edu and
+   greek.gatech.edu). A hall or chapter that has closed is no longer accepted.
+6. **Heisman winners and NCAA champions** were taken as already verified and not searched again.
 
 ## Altitude facts
 
@@ -29,8 +49,9 @@ measures altitude from campus, while mountain heights are quoted above sea level
 - **"Past or present" prompts** (dining, pro teams, Greek chapters, residence halls) include places
   and chapters that have closed, moved, been renamed, or been suspended. That is intended, but a
   current student may not recognise some of them.
-- **`bowls` and `dining` sit at exactly 25 answers.** Removing one answer from either drops it
-  below the floor, and the build will refuse it.
+- **Retired prompts** (`bowls`, `dining` and 18 others) are kept only so that days already
+  scheduled still play. `bowls` and `dining` sit at exactly 25 answers; removing one answer from
+  either drops it below the floor, and the build will refuse it.
 - **Rosters keep moving.** NBA, NFL, MLB and coaching lists stop at what I knew when writing; recent
   call-ups and hires are missing, so a correct recent answer may be marked wrong.
 
@@ -46,18 +67,148 @@ measures altitude from campus, while mountain heights are quoted above sea level
 
 ## Held out of the game until approved
 
-These answers are **not in the game**. Each was left out because I was not confident it is right. To approve one, change its leading `~` to nothing in the source file (`tools/prompts.src.txt` or `tools/themed/*.src.txt`) and run `npm run build:data`.
+These answers are **not in the game**. Each was left out because I was not confident it is right, or that it fits the prompt. To approve one, delete its leading `~` in the source file under `tools/` and run `npm run build:data`.
 
-### Name a movie or TV series that was filmed largely in metro Atlanta (`films`)
+### Name an academic or research building on Tech's campus (`buildings`)
+
+- [ ] **Electrical Research Building** (would be Deep Cut): I remember a building by this name near Van Leer but could not find it on the campus map.
+- [ ] **George Tower** (would be Deep Cut): Part of Tech Square's third phase; I could not confirm it has opened.
+
+### Name a Tech football player who went on to the NFL (`nfl`)
+
+- [ ] **Roman Reigns** (would be Deep Cut): The wrestler signed with the Vikings and Jaguars in 2007 but never played in a regular-season game.
+
+### Name a neighborhood in the city of Atlanta (`neighborhoods`)
+
+- [ ] **Glenwood Park** (would be Rare): From my memory of the city's official list of neighborhoods; not on the Wikipedia pages I checked.
+
+### Name another college or university in Georgia (`gacolleges`)
+
+- [ ] **Carver College** (would be Deep Cut): An Atlanta Bible college I named from memory; not on the Wikipedia list I checked.
+
+### Name a movie or series filmed in metro Atlanta (`films`)
 
 - [ ] **Road Trip** (would be Deep Cut): Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.
 - [ ] **Jumanji: Welcome to the Jungle** (would be Deep Cut): Shot in Hawaii and Atlanta; unsure it counts as "largely" Atlanta.
 
-### Name a musician or group that came up in Atlanta or its suburbs (`musicians`)
+### Name a musician or group from the Atlanta area (`musicians`)
 
 - [ ] **Soulja Boy** (would be Deep Cut): Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
 - [ ] **Trinidad James** (would be Deep Cut): Born in Trinidad and raised partly in Atlanta; unsure of the details.
 
-### John Heisman coached at Tech. Name a winner of the trophy that carries his name. (`heisman`)
+### Name a drink made by The Coca-Cola Company (`cokebrands`)
 
-- [ ] **Fernando Mendoza** (would be Solid): I believe he won in 2025, but that is at the edge of what I know for certain.
+- [ ] **Dunkin' Iced Coffee** (would be Rare): Bottled by Coca-Cola under licence from Dunkin'.
+- [ ] **Monster** (would be Rare): Coca-Cola owns a minority stake and distributes it, but does not make it.
+- [ ] **Northern Neck Ginger Ale** (would be Deep Cut): A Virginia regional brand I believe Coca-Cola owned until 2020; not confirmed.
+- [ ] **Canada Dry** (would be Rare): Bottled by Coca-Cola in some countries; owned by Keurig Dr Pepper in the United States.
+- [ ] **Dr Pepper** (would be Rare): Coca-Cola sells it in parts of Europe, but it is not a Coca-Cola brand in the United States.
+- [ ] **Vio** (would be Deep Cut): A German water brand I believe Coca-Cola owns; not confirmed.
+- [ ] **Bibo** (would be Deep Cut): A juice brand I believe Coca-Cola sold in Africa; not confirmed.
+- [ ] **Quatro** (would be Deep Cut): A grapefruit soda I believe Coca-Cola sells in South America; not confirmed.
+- [ ] **Sidral Mundet** (would be Deep Cut): A Mexican apple soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Joya** (would be Deep Cut): A Mexican fruit soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Delaware Punch** (would be Deep Cut): I believe Coca-Cola owns it; not confirmed.
+- [ ] **Santiba** (would be Deep Cut): A mixer line I believe Coca-Cola sold in the 1970s; not confirmed.
+- [ ] **Veep** (would be Deep Cut): A lemon-lime soda I believe Coca-Cola sold in the 1960s; not confirmed.
+- [ ] **Simba** (would be Deep Cut): A citrus soda I believe Coca-Cola sold around 1970; not confirmed.
+- [ ] **Nestea** (would be Rare): A Nestlé brand that Coca-Cola made under a joint venture until 2017.
+- [ ] **Bacardi Mixers** (would be Rare): Sold under licence; not sure it counts as a Coca-Cola drink.
+- [ ] **Royal Tru** (would be Deep Cut): A Philippine orange soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Fioravanti** (would be Deep Cut): An Ecuadorian soda I believe Coca-Cola owns; not confirmed.
+- [ ] **Urge** (would be Deep Cut): The Norwegian name for Surge, as far as I know.
+
+### Name a landmark in the city of Atlanta (`atllandmarks`)
+
+- [ ] **Fernbank Museum** (would be Solid): An Atlanta address, but I believe it sits in unincorporated DeKalb County, outside the city limits.
+- [ ] **Delta Flight Museum** (would be Rare): At Delta's headquarters by the airport; not sure it is inside the city limits.
+- [ ] **Doll's Head Trail** (would be Deep Cut): At Constitution Lakes; I believe it lies just outside the city limits in DeKalb County.
+
+### Name a body of water in Georgia (`georgiawaters`)
+
+- [ ] **Lake Arrowhead** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Lake Varner** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Stone Mountain Lake** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Lake Peachtree** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Lake Spivey** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Lake Trahlyta** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Lake Winfield Scott** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Lake Conasauga** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Grand Bay** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Noonday Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Nickajack Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Rottenwood Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Tanyard Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Clear Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Camp Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Line Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Flat Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Whitewater Creek** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Mulberry River** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Hudson River** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+- [ ] **Coleman River** (would be Rare): A small Georgia water I named from memory; real as far as I know, but not checked.
+
+### Name a player from Atlanta United history (`united`)
+
+- [ ] **Jamal Thiaré** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Daniel Ríos** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Noah Cobb** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Efraín Morales** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Pedro Amador** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Josh Cohen** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Raúl Gudiño** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Erik López** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Ronaldo Cisneros** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Lisandro López** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Mateusz Klich** (would be Rare): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Alex De John** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Matt Edwards** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Will Reilly** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Jayden Hibbert** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Luke Brennan** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Cayman Togashi** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+- [ ] **Leo Afonso** (would be Deep Cut): Signed after Wikipedia's list ends (2021); named from memory and not checked.
+
+### Name something on the Waffle House menu (`wafflehouse`)
+
+- [ ] **Sirloin** (would be Rare): Not sure it is still offered beside the T-bone.
+- [ ] **Texas Chicken Melt** (would be Rare): Not sure this melt is on the current menu.
+- [ ] **Texas Bacon Cheesesteak Melt** (would be Rare): Not sure this exact melt is on the menu.
+- [ ] **Blueberry Waffle** (would be Rare): Not sure this is on the standard menu.
+- [ ] **Papa Joe's Pork Chops** (would be Deep Cut): I believe this is the pork chops' full menu name; not checked.
+- [ ] **Lib's Patty Melt** (would be Deep Cut): I believe this is the patty melt's full menu name; not checked.
+- [ ] **Alice's Iced Tea** (would be Deep Cut): I believe the tea is named this way on the menu; not checked.
+- [ ] **Toddle House Omelet** (would be Deep Cut): I believe a cheese omelet by this name has been on the menu; not checked.
+- [ ] **Walt's Soup** (would be Deep Cut): I believe this was a named menu item; not checked.
+
+### Name something on the Chick-fil-A menu (`chickfila`)
+
+- [ ] **Maple Pepper Bacon Sandwich** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Banana Pudding Milkshake** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Cherry Berry Lemonade** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Cloudberry Sunjoy** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Mocha Cream Cold Brew** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Lemon Pie** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Chargrilled Chicken Garden Salad** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Chick-n-Strips Salad** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Asian Salad** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Superfood Side** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Oatmeal** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Cheesecake** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Frosted Sunrise** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Frosted Caramel Coffee** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Smokehouse BBQ Bacon Sandwich** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Grilled Chicken Burrito** (would be Rare): A limited-time or retired item named from memory; not checked.
+- [ ] **Chilled Grilled Chicken Sub Sandwich** (would be Rare): A limited-time or retired item named from memory; not checked.
+
+### Name an animated Disney movie (`disney`)
+
+- [ ] **Toy Story 5** (would be Rare): Scheduled for June 2026; I could not confirm it was released as planned.
+
+## Lists I could not check against a source
+
+- [ ] **Name a player from Atlanta United history** (`united`, 87 answers): Wikipedia's list of players is complete only to April 2021; later players are from memory
+
+- [ ] **Name something on the Waffle House menu** (`wafflehouse`, 81 answers): written from memory of the menu; not checked against the current one
+
+- [ ] **Name something on the Chick-fil-A menu** (`chickfila`, 82 answers): written from memory of the menu; not checked against the current one

@@ -35,18 +35,18 @@ const httpServer = http.createServer((req, res) => {
     res.writeHead(200, { 'content-type': TYPES['.js'], 'cache-control': 'no-store' });
     return res.end('window.SwarmConfig = ' + JSON.stringify(server.config) + ';');
   }
-  if (rel === 'data/prompts.json' && server.mode === 'badjson') {
+  if (rel === 'data/index.json' && server.mode === 'badjson') {
     res.writeHead(200, { 'content-type': TYPES['.json'] });
     return res.end('{"version": 1, "prompts": [');
   }
-  if (rel === 'data/prompts.json' && server.mode === 'changed') { // two new prompts in front, order reversed
+  if (rel === 'data/index.json' && server.mode === 'changed') { // two new prompts in front, order reversed
     const copy = JSON.parse(fs.readFileSync(file, 'utf8'));
     const extra = (id) => Object.assign({}, copy.prompts[0], { id });
     copy.prompts = [extra('brand-new-one'), extra('another-new-one')].concat(copy.prompts.reverse());
     res.writeHead(200, { 'content-type': TYPES['.json'] });
     return res.end(JSON.stringify(copy));
   }
-  if (rel === 'data/prompts.json' && server.mode === '500') {
+  if (rel === 'data/index.json' && server.mode === '500') {
     res.writeHead(500);
     return res.end('nope');
   }
@@ -756,9 +756,10 @@ async function main() {
       seen.add(prompt);
       await guess(page, answerOf(prompt, 'solid'));
     }
-    assert.equal(seen.size, data.prompts.length);
+    const live = data.prompts.filter((p) => !p.retired).length; // retired prompts are not served in infinite mode
+    assert.equal(seen.size, live);
     assert.equal(await text(page, 'infTitle'), 'YOU EMPTIED THE HIVE');
-    assert.equal(await text(page, 'infScore'), C.formatNumber(30 * data.prompts.length) + ' pts');
+    assert.equal(await text(page, 'infScore'), C.formatNumber(30 * live) + ' pts');
     noProblems(page);
     await page.close();
   });
@@ -783,6 +784,7 @@ async function main() {
       assert.equal(await text(page, 'resScore'), '420 pts');
       assert.equal(await text(page, 'statPlayed'), '1');
       await click(page, 'resInfBtn');
+      await waitPhase(page, 'guess'); // the first prompts of a run are fetched before it starts
       await guess(page, answerOf(await text(page, 'promptText'), 'deep'));
       await click(page, 'endBtn');
       assert.equal(await view(page), 'infover');
@@ -826,12 +828,12 @@ async function main() {
     return bad.length + ' bad payloads rejected';
   });
 
-  await scenario('prompts.json fails to load: friendly error with retry', async () => {
+  await scenario('the prompt index fails to load: friendly error with retry', async () => {
     const expected = /Failed to load resource|prompts\.json/;
     for (const mode of ['badjson', '500', 'blocked']) {
       const page = track(await browser.newPage(calm({ width: 375, height: 667, mobile: true })));
       server.mode = mode;
-      if (mode === 'blocked') await page.send('Network.setBlockedURLs', { urls: ['*prompts.json'] });
+      if (mode === 'blocked') await page.send('Network.setBlockedURLs', { urls: ['*index.json'] });
       await page.goto(base);
       await page.waitFor('!document.querySelector("[data-view=error]").hidden', 5000, 'error view (' + mode + ')');
       assert.equal(await text(page, 'errorText'), 'The game data did not load. Check your connection and try again.');
@@ -1703,7 +1705,7 @@ async function main() {
     for (const date of ['2026-10-12', '2026-12-25', '2027-06-01']) {
       server.mode = 'changed';
       const page = await fresh({ width: 800, height: 700, initScript: fakeClock(date + 'T15:00:00Z') });
-      assert.equal(await page.eval('fetch("data/prompts.json").then((r) => r.json()).then((d) => d.prompts[0].id)'), 'brand-new-one', 'the page is running on a changed bank');
+      assert.equal(await page.eval('fetch("data/index.json").then((r) => r.json()).then((d) => d.prompts[0].id)'), 'brand-new-one', 'the page is running on a changed bank');
       await click(page, 'dailyBtn');
       assert.deepEqual((await saved(page)).promptIds, schedule.days[date], date + ' is exactly what the schedule says');
       noProblems(page);

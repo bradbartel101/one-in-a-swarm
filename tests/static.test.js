@@ -8,7 +8,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 const SCRIPTS = ['config.js', 'js/core.js', 'js/facts.js', 'js/sfx.js', 'js/scene.js', 'js/card.js', 'js/app.js'];
-const SITE = ['index.html', '404.html', 'css/style.css', 'data/prompts.json', 'data/schedule.json', 'assets/fonts/press-start-2p.woff2', 'manifest.webmanifest', 'assets/icons/icon-192.png'].concat(SCRIPTS);
+const SITE = ['index.html', '404.html', 'css/style.css', 'data/index.json', 'data/schedule.json', 'assets/fonts/press-start-2p.woff2', 'manifest.webmanifest', 'assets/icons/icon-192.png'].concat(SCRIPTS);
 const DISCLAIMER = 'Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.';
 
 test('F2: no HTML-string sinks or dynamic code anywhere in the scripts', () => {
@@ -43,7 +43,7 @@ test('F4 / G1: nothing is loaded from another origin, and every path is relative
   [...css.matchAll(/url\(\s*["']?([^"')]+)/g)].forEach((m) => assert.ok(m[1].startsWith('data:') || m[1] === '../assets/fonts/press-start-2p.woff2', 'css loads ' + m[1]));
   assert.ok(!/@import/.test(css));
   const fetches = [...read('js/app.js').matchAll(/fetch\(\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-  assert.deepEqual(fetches.sort(), ['data/prompts.json', 'data/schedule.json']);
+  assert.deepEqual(fetches.sort(), ['data/index.json', 'data/p/', 'data/schedule.json'], 'the index, one prompt at a time, and the schedule');
   const scripts = SCRIPTS.map(read).join('');
   // The only addresses in the scripts are the two that make up the optional visit counter,
   // which loads nothing unless the owner sets a site code in config.js.

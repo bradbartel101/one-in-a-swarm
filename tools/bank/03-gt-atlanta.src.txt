@@ -1,0 +1,2237 @@
+# Prompt bank v2: Atlanta and Georgia prompts for the gt pool.
+
+@atlstreets | ATLANTA | Name a street in Atlanta | pool=gt | type=open | clar=any named road inside the city | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne,sw,se,highway,hwy
+C Peachtree Street | Peachtree
+C North Avenue | North Ave :: Tech's southern edge. "The North Avenue Trade School."
+C Ponce de Leon Avenue | Ponce | Ponce de Leon
+C Techwood Drive | Techwood
+C 10th Street | Tenth Street | 10th | Tenth
+C Spring Street | Spring
+T Bobby Dodd Way | Bobby Dodd :: It runs past the stadium that carries his name.
+T Ferst Drive | Ferst
+S West Peachtree Street | West Peachtree
+S Northside Drive | Northside
+S Marietta Street | Marietta
+S Piedmont Avenue | Piedmont | Piedmont Road
+S Hemphill Avenue | Hemphill
+S 5th Street | Fifth Street | 5th | Fifth
+S 14th Street | Fourteenth Street | 14th
+S 17th Street | Seventeenth Street | 17th
+S Howell Mill Road | Howell Mill
+S Moreland Avenue | Moreland
+S Memorial Drive | Memorial
+S DeKalb Avenue | DeKalb | De Kalb Avenue
+S Edgewood Avenue | Edgewood
+S Auburn Avenue | Auburn | Sweet Auburn
+S Boulevard
+S Monroe Drive | Monroe
+S Juniper Street | Juniper
+S Williams Street | Williams
+S Luckie Street | Luckie
+S Fowler Street | Fowler
+S Cherry Street | Cherry
+S State Street | State
+S Atlantic Drive | Atlantic
+S Roswell Road | Roswell
+S Lenox Road | Lenox
+S Buford Highway | Buford
+S Cheshire Bridge Road | Cheshire Bridge
+S Martin Luther King Jr. Drive | MLK | MLK Drive | Martin Luther King Drive | MLK Jr Drive | Martin Luther King
+S Ralph McGill Boulevard | Ralph McGill
+S Freedom Parkway | Freedom
+S Courtland Street | Courtland
+S Centennial Olympic Park Drive | Centennial Olympic Park | Centennial Park Drive
+S Ivan Allen Jr. Boulevard | Ivan Allen | Ivan Allen Boulevard
+S Donald Lee Hollowell Parkway | Hollowell | Bankhead Highway | Bankhead | Donald Lee Hollowell
+S Joseph E. Lowery Boulevard | Lowery | Ashby Street | Joseph Lowery
+S Joseph E. Boone Boulevard | Boone | Simpson Road | Simpson Street | Joseph Boone
+S Andrew Young International Boulevard | Andrew Young | International Boulevard
+S John Wesley Dobbs Avenue | John Wesley Dobbs | Dobbs | Houston Street
+S Hank Aaron Drive | Hank Aaron | Capitol Avenue
+S Ted Turner Drive | Ted Turner
+R Baker Street | Baker
+R Ellis Street | Ellis
+R Forsyth Street | Forsyth
+R Mitchell Street | Mitchell
+R Pryor Street | Pryor
+R Decatur Street | Decatur
+R Whitehall Street | Whitehall
+R Trinity Avenue | Trinity
+R Walton Street | Walton
+R Broad Street | Broad
+R Nassau Street | Nassau
+R Harris Street | Harris | John Portman Boulevard | Portman
+R Peachtree Center Avenue | Peachtree Center | Ivy Street
+R Linden Avenue | Linden
+R Pine Street | Pine
+R Merritts Avenue | Merritts
+R 3rd Street | Third Street | 3rd
+R 4th Street | Fourth Street | 4th
+R 6th Street | Sixth Street | 6th
+R 8th Street | Eighth Street | 8th
+R 11th Street | Eleventh Street | 11th
+R 12th Street | Twelfth Street | 12th
+R 16th Street | Sixteenth Street | 16th
+R Peachtree Place
+R Peachtree Battle Avenue | Peachtree Battle
+R Peachtree Dunwoody Road | Peachtree Dunwoody
+R Peachtree Hills Avenue | Peachtree Hills
+R Peachtree Circle
+R Peachtree Walk
+R Crescent Avenue | Crescent
+R Cypress Street | Cypress
+R Myrtle Street | Myrtle
+R Argonne Avenue | Argonne
+R Charles Allen Drive | Charles Allen
+R Virginia Avenue | Virginia
+R North Highland Avenue | Highland Avenue | North Highland | Highland
+R Briarcliff Road | Briarcliff
+R Clifton Road | Clifton
+R LaVista Road | La Vista | LaVista
+R Lindbergh Drive | Lindbergh
+R Sidney Marcus Boulevard | Sidney Marcus
+R Wieuca Road | Wieuca
+R West Paces Ferry Road | West Paces Ferry | Paces Ferry
+R East Paces Ferry Road | East Paces Ferry
+R Pharr Road | Pharr
+R Collier Road | Collier
+R Bolton Road | Bolton
+R Huff Road | Huff
+R Chattahoochee Avenue | Chattahoochee
+R Defoor Avenue | Defoor | DeFoors Ferry Road | Defoors Ferry
+R Mount Paran Road | Mount Paran | Mt. Paran
+R Moores Mill Road | Moores Mill
+R Glenwood Avenue | Glenwood
+R Flat Shoals Avenue | Flat Shoals
+R Euclid Avenue | Euclid
+R McLendon Avenue | McLendon
+R Krog Street | Krog
+R Irwin Street | Irwin
+R Randolph Street | Randolph
+R Jackson Street | Jackson
+R Hilliard Street | Hilliard
+R Cascade Road | Cascade | Cascade Avenue
+R Campbellton Road | Campbellton
+R Lee Street | Lee
+R Metropolitan Parkway | Metropolitan | Stewart Avenue
+R Jonesboro Road | Jonesboro
+R McDonough Boulevard | McDonough
+R Lakewood Avenue | Lakewood
+R Cleveland Avenue | Cleveland
+R Sylvan Road | Sylvan
+R Langford Parkway | Arthur Langford Parkway | Lakewood Freeway
+R University Avenue | University
+R Ralph David Abernathy Boulevard | Abernathy | Ralph David Abernathy | Gordon Street
+R Georgia Avenue | Georgia
+R Ormewood Avenue | Ormewood
+D Confederate Avenue | United Avenue | United
+D Cherokee Avenue | Cherokee
+D Hill Street | Hill
+D Fair Street | Fair
+D Chapel Street | Chapel
+D James P. Brawley Drive | Brawley
+D West End Avenue | West End
+D Beecher Street | Beecher
+D Fulton Industrial Boulevard | Fulton Industrial
+D Greenbriar Parkway | Greenbriar
+D Mount Zion Road | Mount Zion
+D Perry Boulevard | Perry
+D Johnson Road | Johnson
+D Habersham Road | Habersham
+D Tuxedo Road | Tuxedo
+D Blackland Road | Blackland
+D Powers Ferry Road | Powers Ferry
+D Lake Forrest Drive | Lake Forrest
+D Means Street | Means
+D Tech Parkway :: The road along Tech's western edge.
+D Dalney Street | Dalney
+D Plum Street | Plum
+D McMillan Street | McMillan
+D Curran Street | Curran
+D Center Street | Center
+D Turner Place | Turner
+D Brittain Drive | Brittain
+X Uncle Heinie Way | Uncle Heinie :: A real street sign on Tech's campus.
+D Ethel Street | Ethel
+D Mecaslin Street | Mecaslin
+D Deering Road | Deering
+D Peachtree Industrial Boulevard | Peachtree Industrial
+D Interstate 75 | I-75 | I75 | 75
+D Interstate 85 | I-85 | I85 | 85
+D Interstate 20 | I-20 | I20 | 20
+D Interstate 285 | I-285 | I285 | 285 | The Perimeter | Perimeter
+D Downtown Connector | The Connector | Connector | 75/85
+D Georgia 400 | GA 400 | 400
+! Broadway :: that is New York (Atlanta's is Broad Street)
+! Bourbon Street :: New Orleans
+! Sesame Street :: no
+! Wall Street :: New York
+
+@atlsuburbs | ATLANTA | Name a suburb of Atlanta | pool=gt | type=open | clar=a city or town in the metro area
+C Marietta
+C Decatur
+C Alpharetta
+C Sandy Springs
+C Roswell
+C Buckhead :: A neighborhood of Atlanta itself, but everyone says it. Accepted, at the lowest score.
+T Dunwoody
+T Smyrna
+S Kennesaw
+S Duluth
+S Lawrenceville
+S Johns Creek
+S Peachtree City
+S Brookhaven
+S Norcross
+S Stone Mountain
+S College Park
+S East Point
+S Douglasville
+S Woodstock
+S Cumming
+S Milton
+S Peachtree Corners
+S Tucker
+S Chamblee
+S Doraville
+S Suwanee
+S Buford
+S Snellville
+S Conyers
+S McDonough
+S Stockbridge
+S Fayetteville
+S Newnan
+S Acworth
+S Canton
+R Vinings
+R Mableton
+R Austell
+R Powder Springs
+R Hiram
+R Dallas
+R Villa Rica
+R Carrollton
+R Lithia Springs
+R Union City
+R Fairburn
+R Palmetto
+R Hapeville
+R Forest Park
+R Jonesboro
+R Riverdale
+R Morrow
+R Lovejoy
+R Hampton
+R Locust Grove
+R Griffin
+R Tyrone
+R Senoia :: Where much of "The Walking Dead" was filmed.
+R Sharpsburg
+R Covington
+R Oxford
+R Social Circle
+R Monroe
+R Loganville
+R Grayson
+R Lilburn
+R Dacula
+R Sugar Hill
+R Flowery Branch :: Where the Falcons train.
+R Braselton
+R Hoschton
+R Winder
+R Auburn
+R Gainesville
+R Oakwood
+R Dawsonville
+R Ball Ground
+R Holly Springs
+R Cartersville
+R Emerson
+R Lithonia
+R Clarkston
+R Avondale Estates :: Where the first Waffle House opened, in 1955.
+R Pine Lake
+R Scottdale
+R North Decatur
+R Druid Hills
+R Stonecrest
+R Ellenwood
+R Rex
+R Mountain Park
+R Berkeley Lake
+R Rest Haven
+R Chattahoochee Hills
+R South Fulton
+R Fair Oaks
+R Sandy Plains
+R East Cobb
+R Lost Mountain
+R Brooks
+R Woolsey
+R Whitesburg
+R Temple
+R Bremen
+D Rockmart
+D Jasper
+D Waleska
+D Nelson
+D Jefferson
+D Bethlehem
+D Statham
+D Porterdale
+D Mansfield
+D Jackson
+D Jenkinsburg
+D Zebulon
+D Barnesville
+D Moreland
+D Grantville
+D Hogansville
+D Turin
+D Haralson
+D Milner
+D Sunny Side
+D Lake City
+D Conley
+D Panthersville
+D Gresham Park
+D Belvedere Park
+D Redan
+D Candler-McAfee | Candler McAfee
+D North Druid Hills
+D Toco Hills
+D Embry Hills
+D Northlake
+D Smoke Rise
+D Centerville
+D Mountain View
+X Between :: A real town in Walton County, named for sitting halfway between Monroe and Loganville.
+! Atlanta :: the city itself
+! Athens :: about seventy miles east, and its own metro area
+! Savannah :: on the coast
+! Macon :: its own metro area
+! Augusta :: its own metro area
+! Chattanooga :: in Tennessee
+! Birmingham :: in Alabama
+! Midtown :: a neighborhood inside Atlanta
+! Virginia-Highland :: a neighborhood inside Atlanta
+
+@gacities | GEORGIA | Name a city or town in Georgia | pool=gt | type=open | clar=anywhere in the state except Atlanta
+C Savannah
+C Athens :: Wrong school, right answer.
+C Augusta
+C Macon
+C Columbus
+C Marietta
+T Valdosta
+T Helen :: A Bavarian village in the Georgia mountains, by decree of 1969.
+S Albany
+S Rome
+S Roswell
+S Alpharetta
+S Sandy Springs
+S Decatur
+S Kennesaw
+S Gainesville
+S Warner Robins
+S Statesboro
+S Dalton
+S Brunswick
+S Peachtree City
+S Lawrenceville
+S Duluth
+S Smyrna
+S Dunwoody
+S Johns Creek
+S Stone Mountain
+S Dahlonega :: Site of the first big American gold rush; its gold is on the state capitol dome.
+S Tybee Island | Tybee
+S LaGrange | La Grange
+S Carrollton
+S Newnan
+S Douglasville
+S Milledgeville :: The state capital until 1868.
+S Covington
+S Conyers
+S Cartersville
+S Canton
+S Woodstock
+S Cumming
+S Buford
+R Tifton
+R Thomasville
+R Waycross
+R Blue Ridge
+R Plains :: Home of Jimmy Carter, who studied at Tech before the Naval Academy.
+R Americus
+R Vidalia :: The onions.
+R Dublin
+R Griffin
+R Hinesville
+R Kingsland
+R St. Marys | Saint Marys
+R Madison
+R Stockbridge
+R McDonough
+R Perry
+R Cordele
+R Bainbridge
+R Moultrie
+R Toccoa
+R Ellijay
+R Calhoun
+R Fayetteville
+R Jonesboro
+R Acworth
+R Norcross
+R Suwanee
+R Snellville
+R Brookhaven
+R Chamblee
+R Doraville
+R Tucker
+R College Park
+R East Point
+R Hapeville
+R Union City
+R Fairburn
+R Villa Rica
+R Winder
+R Monroe
+R Loganville
+R Jefferson
+R Commerce
+R Braselton
+R Flowery Branch
+R Dawsonville
+R Jasper
+R Blairsville
+R Hiawassee
+R Clayton
+R Cleveland
+R Clarkesville
+R Cornelia
+R Elberton
+R Washington
+R Thomson
+R Waynesboro
+R Sandersville
+R Swainsboro
+R Jesup
+R Douglas
+R Fitzgerald
+R Cairo
+R Camilla
+R Thomaston
+R Barnesville
+R Forsyth
+R Fort Valley
+R Eatonton
+R Greensboro
+R Hartwell
+R Lavonia
+R Royston
+R Cedartown
+R Rockmart
+R Summerville
+R LaFayette | La Fayette
+R Ringgold
+R Fort Oglethorpe
+R Chatsworth
+R Pooler
+R Richmond Hill
+R Rincon
+R Darien
+R St. Simons Island | St. Simons | Saint Simons
+R Jekyll Island | Jekyll
+R Senoia
+R Pine Mountain
+R Warm Springs :: Franklin Roosevelt's Little White House.
+R West Point
+R Hogansville
+R Juliette :: The Whistle Stop Cafe from "Fried Green Tomatoes".
+D Social Circle
+D Hahira
+D Adel
+D Nashville
+D Quitman
+D Homerville
+D Folkston
+D Blackshear
+D Alma
+D Baxley
+D Hazlehurst
+D Lyons
+D Reidsville
+D Glennville
+D Claxton :: The fruitcake capital.
+D Metter
+D Millen
+D Sylvania
+D Louisville :: A state capital too, from 1796 to 1806.
+D Wrens
+D Warrenton
+D Sparta
+D Gray
+D Monticello
+D Jackson
+D Zebulon
+D Manchester
+D Talbotton
+D Buena Vista
+D Ellaville
+D Montezuma
+D Oglethorpe
+D Vienna
+D Unadilla
+D Hawkinsville
+D Cochran
+D Eastman
+D McRae-Helena | McRae | Helena
+D Abbeville
+D Ocilla
+D Ashburn
+D Sylvester
+D Dawson
+D Cuthbert
+D Fort Gaines
+D Blakely
+D Colquitt
+D Donalsonville
+D Pelham
+D Leesburg
+D Lumpkin
+D Richland
+D Preston
+D Andersonville
+D Butler
+D Roberta
+D Byron
+D Centerville
+D Jeffersonville
+D Irwinton
+D Gordon
+D Wrightsville
+D Soperton
+D Mount Vernon
+D Alamo
+D Pearson
+D Lakeland
+D Nahunta
+D Woodbine
+D Ludowici
+D Pembroke
+D Springfield
+D Guyton
+D Lincolnton
+D Crawfordville
+D Lexington
+D Danielsville
+D Homer
+D Carnesville
+D Watkinsville
+D Bogart
+D Young Harris
+D Dillard
+D Tallulah Falls
+D Demorest
+D Mount Airy
+D Baldwin
+D Lula
+D Cave Spring
+D Trion
+D Trenton
+D Rossville
+D Chickamauga
+D Adairsville
+D Kingston
+D Euharlee
+D Tallapoosa
+D Buchanan
+D Franklin
+D Greenville
+D Woodbury
+D Santa Claus :: A real town in Toombs County. It answers a lot of mail in December.
+D Experiment :: A real place in Spalding County, named for an agricultural experiment station.
+D Climax
+D Enigma
+D Ty Ty
+D Talking Rock
+D Between
+X Hopeulikit :: A real crossroads in Bulloch County, said just the way it looks.
+! Atlanta :: the prompt excludes it
+! Chattanooga :: in Tennessee
+! Jacksonville :: in Florida
+! Charleston :: in South Carolina
+! Tallahassee :: in Florida
+! Buckhead :: a neighborhood of Atlanta
+! Stone Mountain Park :: the park is not the town
+
+@georgians | GEORGIA | Name a famous person from Georgia | pool=gt | type=open | clar=born or raised in the state
+C Martin Luther King Jr. | MLK | Martin Luther King | Dr. King | MLK Jr
+C Jimmy Carter | Carter :: Plains. He studied at Tech before the Naval Academy.
+C Ray Charles :: Born in Albany.
+C Julia Roberts :: Smyrna.
+C Jackie Robinson :: Born in Cairo, Georgia.
+C James Brown :: Raised in Augusta.
+T Hulk Hogan | Terry Bollea :: Born in Augusta.
+T Kanye West | Kanye | Ye :: Born in Atlanta, raised in Chicago.
+S Ty Cobb | The Georgia Peach
+S Herschel Walker :: Wrightsville.
+S Little Richard :: Macon.
+S Otis Redding :: Born in Dawson, raised in Macon.
+S Gladys Knight
+S Ryan Seacrest :: Dunwoody.
+S Jeff Foxworthy :: An Atlantan, and a Tech man for a while.
+S Luke Bryan :: Leesburg.
+S Alan Jackson :: Newnan.
+S Jason Aldean :: Macon.
+S Usher
+S Ludacris
+S Dwight Howard
+S Cam Newton
+S Bobby Jones :: Atlanta's own, and a Tech graduate.
+S Donald Glover | Childish Gambino :: Stone Mountain.
+S Dakota Fanning :: Conyers.
+S Spike Lee :: Born in Atlanta.
+S Margaret Mitchell
+S Flannery O'Connor | Flannery OConnor :: Savannah, then Milledgeville.
+S Alice Walker :: Eatonton.
+S Juliette Gordon Low :: Savannah. She founded the Girl Scouts.
+S Clarence Thomas :: Pin Point, near Savannah.
+S Trisha Yearwood :: Monticello.
+S Travis Tritt :: Marietta.
+S André 3000 | Andre 3000
+S Big Boi :: Born in Savannah.
+S T.I. | TI
+S Chase Elliott :: Dawsonville.
+S Bill Elliott | Awesome Bill :: "Awesome Bill from Dawsonville."
+S Evander Holyfield :: Raised in Atlanta.
+S Anthony Edwards | Ant Edwards :: Atlanta.
+S Trevor Lawrence :: Cartersville.
+S Calvin Johnson | Megatron :: Tyrone, and then Tech.
+R Elle Fanning
+R Chloë Grace Moretz | Chloe Grace Moretz | Chloe Moretz
+R Kim Basinger :: Athens.
+R Laurence Fishburne :: Born in Augusta.
+R Holly Hunter :: Conyers.
+R Joanne Woodward :: Thomasville.
+R Oliver Hardy :: Harlem, Georgia.
+R Kyle Chandler :: Raised in Loganville.
+R Ed Helms :: Atlanta.
+R Danny McBride :: Born in Statesboro.
+R Walton Goggins :: Raised in Lithia Springs.
+R Raven-Symoné | Raven Symone | Raven
+R Brittany Murphy :: Born in Atlanta.
+R Kenan Thompson :: Raised in Atlanta.
+R Ty Pennington
+R Paula Deen :: Albany, then Savannah.
+R Nancy Grace :: Macon.
+R Thomas Rhett :: Born in Valdosta.
+R Brantley Gilbert :: Jefferson.
+R Sam Hunt :: Cedartown.
+R Zac Brown
+R Jennifer Nettles :: Douglas.
+R Kane Brown
+R Billy Currington
+R Brenda Lee
+R Johnny Mercer :: Savannah.
+R Jessye Norman :: Augusta.
+R Amy Grant :: Born in Augusta.
+R Michael Stipe :: Born in Decatur.
+R CeeLo Green | Cee Lo Green | CeeLo
+R Future
+R Young Thug
+R 2 Chainz | Two Chainz :: College Park.
+R Lil Baby
+R Quavo
+R Offset
+R Takeoff
+R Lil Nas X :: Lithia Springs.
+R Killer Mike
+R Gucci Mane :: Raised in Atlanta.
+R Jeezy | Young Jeezy
+R Monica
+R Kelly Rowland :: Born in Atlanta.
+R Keri Hilson
+R Summer Walker
+R Latto
+R Fran Tarkenton :: Raised in Athens.
+R Jim Brown :: Born on St. Simons Island.
+R Sugar Ray Robinson :: Born in Ailey.
+R Josh Gibson :: Born in Buena Vista.
+R Johnny Mize :: Demorest.
+R Frank Thomas | The Big Hurt :: Columbus.
+R Buster Posey :: Leesburg.
+R Adam Wainwright :: Brunswick.
+R Brian McCann :: Duluth.
+R Jason Heyward :: McDonough.
+R Dansby Swanson :: Kennesaw.
+R Byron Buxton :: Baxley.
+R Champ Bailey :: Folkston.
+R Hines Ward :: Forest Park.
+R Deshaun Watson :: Gainesville.
+R Justin Fields :: Kennesaw.
+R Jaylen Brown :: Marietta.
+R Walt Frazier | Clyde Frazier :: Atlanta.
+R Davis Love III | Davis Love
+R Larry Mize :: Augusta.
+R Wyomia Tyus :: Griffin.
+R Teresa Edwards :: Cairo.
+R Maya Moore
+R Gabby Thomas :: Born in Atlanta.
+R Christian Coleman
+R Doc Holliday :: Born in Griffin.
+R Woodrow Wilson :: He grew up in Augusta.
+R Sam Nunn :: Perry. He started college at Tech.
+R Stacey Abrams
+R Newt Gingrich
+R Carson McCullers :: Columbus.
+R Joel Chandler Harris :: Eatonton.
+R Erskine Caldwell
+R Sidney Lanier :: Macon.
+R Pat Conroy :: Born in Atlanta.
+R Honey Boo Boo | Alana Thompson
+R Kandi Burruss | Kandi
+R Jasmine Guy
+D Rebecca Latimer Felton :: The first woman to sit in the U.S. Senate, for a single day in 1922.
+D Alexander Stephens
+D John C. Frémont | John C. Fremont | John Fremont :: Born in Savannah.
+D Lucius Clay :: Marietta. He ran the Berlin Airlift.
+X Crawford Long :: The Georgia doctor who first used ether as a surgical anaesthetic, in Jefferson in 1842.
+D Fletcher Henderson :: Cuthbert.
+D Harry James :: Born in Albany.
+D James Dickey
+D Conrad Aiken :: Savannah.
+D Jean Toomer
+D Lillian Smith
+D Elijah Muhammad :: Born in Sandersville.
+D Dean Rusk :: Cherokee County.
+D Griffin Bell
+D Hosea Williams
+D Vernon Jordan :: Atlanta.
+D Walter White
+D Alonzo Herndon
+D Asa Candler :: Villa Rica.
+D Robert Woodruff :: Born in Columbus.
+D Truett Cathy :: Born in Eatonton. Chick-fil-A.
+D Bill Terry
+D Luke Appling
+D Spud Chandler
+D Cecil Travis
+D Tim Hudson :: Born in Columbus.
+D Zack Wheeler :: Smyrna and Dallas, Georgia.
+D Matt Olson :: Lilburn.
+D Garrison Hearst :: Lincolnton.
+D Jamal Lewis :: Atlanta.
+D Eric Berry :: Fairburn.
+D Thomas Davis :: Shellman.
+D Roquan Smith :: Montezuma.
+D Nick Chubb :: Cedartown.
+D Derrick Brown :: Sugar Hill.
+D Mecole Hardman :: Bowman.
+D Jake Fromm :: Warner Robins.
+D Stetson Bennett :: Blackshear.
+D Josh Smith :: College Park.
+D Lou Williams :: Snellville.
+D Derrick Favors :: Atlanta, and then Tech.
+D Kentavious Caldwell-Pope | Kentavious Caldwell Pope | KCP :: Greenville, Georgia.
+D Malcolm Brogdon :: Atlanta.
+D Jabari Smith Jr. | Jabari Smith :: Fayetteville.
+D Collin Sexton :: Mableton.
+D Wendell Carter Jr. | Wendell Carter
+D Shareef Abdur-Rahim :: Marietta.
+D Kwame Brown :: Brunswick.
+D Russell Henley :: Macon.
+D Harris English :: Valdosta.
+D Brian Harman :: Savannah.
+D Louise Suggs :: Atlanta. A founder of the LPGA.
+D Mel Blount :: Vidalia.
+D Rayfield Wright :: Griffin.
+D Richard Dent :: Atlanta.
+D Shannon Sharpe :: Glennville.
+D Sterling Sharpe :: Glennville.
+D Jessie Tuggle :: Griffin.
+D Dan Reeves :: Americus.
+D Wally Butts :: Milledgeville.
+D Kirby Smart :: Raised in Bainbridge.
+! Coca-Cola :: a company
+! Elvis Presley :: Mississippi and Tennessee
+! Dolly Parton :: Tennessee
+! Oprah Winfrey :: Mississippi, then Tennessee and Chicago
+! Tyler Perry :: New Orleans; he built his studio in Atlanta later
+! Steve Harvey :: West Virginia and Ohio
+! Matt Ryan :: Pennsylvania
+! Hank Aaron :: Mobile, Alabama; he made Atlanta home later
+! Ted Turner :: born in Ohio, though he grew up partly in Savannah
+! Dominique Wilkins :: born in Paris, raised in North Carolina
+! Chipper Jones :: Florida
+! Burt Reynolds :: born in Michigan and raised in Florida
+! Bulldogs :: a team
+
+@cokebrands | ATLANTA | Name a drink made by The Coca-Cola Company | pool=gt | type=open | clar=any brand it owns or has ever sold
+C Coca-Cola | Coke | Coca Cola | Coke Classic | Coca-Cola Classic
+C Diet Coke | Diet Coca-Cola
+C Sprite
+C Fanta | Fanta Orange
+C Dasani
+C Powerade
+T Coke Zero | Coca-Cola Zero | Coke Zero Sugar | Coca-Cola Zero Sugar
+T Tab | TaB :: The first diet cola from Coke, 1963 to 2020.
+S Minute Maid | Minute Maid Lemonade | Minute Maid Orange Juice
+S Cherry Coke | Coca-Cola Cherry
+S Vanilla Coke | Coca-Cola Vanilla
+S Mello Yello | Mellow Yellow
+S Barq's | Barqs | Barq's Root Beer
+S Fresca
+S Smartwater | Smart Water | Glaceau Smartwater
+S Vitaminwater | Vitamin Water | Glaceau Vitaminwater
+S Simply | Simply Orange | Simply Lemonade | Simply Juice
+S Honest Tea | Honest
+S Gold Peak | Gold Peak Tea
+S Fuze | Fuze Tea | Fuze Iced Tea
+S Topo Chico
+S Pibb | Mr. Pibb | Mr Pibb | Pibb Xtra
+S Seagram's Ginger Ale | Seagram's | Seagrams
+S Hi-C | Hi C
+S Sprite Zero | Sprite Zero Sugar
+S Caffeine-Free Coke | Caffeine Free Coke | Caffeine-Free Diet Coke
+S New Coke | Coke II :: 1985. It lasted 79 days before the original came back.
+S Fairlife | Fairlife Milk
+S Costa Coffee | Costa
+S BodyArmor | Body Armor
+R Surge
+R Coke Vanilla Zero | Vanilla Coke Zero
+R Cherry Coke Zero | Coca-Cola Cherry Zero
+R Coca-Cola Life | Coke Life
+R Coke with Lime | Diet Coke with Lime | Coke Lime
+R Coca-Cola with Lemon | Diet Coke with Lemon | Coke Lemon
+R Coca-Cola Blak | Coke Blak
+R Coca-Cola C2 | C2
+R Coke with Coffee | Coca-Cola with Coffee
+R Coca-Cola Spiced | Coke Spiced
+R Coca-Cola Starlight | Starlight
+R Coca-Cola Dreamworld | Dreamworld
+R Orange Vanilla Coke | Coca-Cola Orange Vanilla
+R Coca-Cola Energy | Coke Energy
+R Diet Cherry Coke
+R Sprite Cranberry | Sprite Winter Spiced Cranberry
+R Sprite Remix
+R Sprite Lymonade
+R Sprite Tropical Mix
+R Fanta Grape | Grape Fanta
+R Fanta Pineapple | Pineapple Fanta
+R Fanta Strawberry | Strawberry Fanta
+R Peace Tea
+R Aha | AHA | Aha Sparkling Water
+R Zico | Zico Coconut Water
+R Odwalla
+R Core Power
+~R Dunkin' Iced Coffee ?? Bottled by Coca-Cola under licence from Dunkin'.
+~R Monster ?? Coca-Cola owns a minority stake and distributes it, but does not make it.
+R Full Throttle
+R NOS
+R Vault
+~D Northern Neck Ginger Ale ?? A Virginia regional brand I believe Coca-Cola owned until 2020; not confirmed.
+R Schweppes :: Coca-Cola's brand in many countries outside the United States.
+~R Canada Dry ?? Bottled by Coca-Cola in some countries; owned by Keurig Dr Pepper in the United States.
+~R Dr Pepper ?? Coca-Cola sells it in parts of Europe, but it is not a Coca-Cola brand in the United States.
+R Inca Kola
+R Thums Up
+R Kinley
+R Limca
+R Maaza
+R Georgia Coffee | Georgia :: Canned coffee, named for Coke's home state, and huge in Japan.
+R Aquarius
+R Ayataka
+R I Lohas
+R Del Valle
+R Ciel
+R Bonaqua | BonAqua
+R Appletiser | Appletizer
+R Lilt
+R Oasis
+R Kia-Ora | Kia Ora
+R Five Alive
+R Fruitopia
+R Powerade Zero
+R Glaceau | Glacéau
+R Innocent | Innocent Smoothies
+D Chaudfontaine
+D Apollinaris
+~D Vio ?? A German water brand I believe Coca-Cola owns; not confirmed.
+D Mezzo Mix :: Cola and orange together. Germany loves it.
+X Beverly :: A bitter Italian aperitif soda. Visitors are dared to taste it at the World of Coca-Cola in Atlanta.
+D Stoney | Stoney Ginger Beer
+D Sparletta
+D Krest
+~D Bibo ?? A juice brand I believe Coca-Cola sold in Africa; not confirmed.
+D Kuat
+D Guaraná Jesus | Guarana Jesus
+~D Quatro ?? A grapefruit soda I believe Coca-Cola sells in South America; not confirmed.
+D Manzana Lift | Lift
+~D Sidral Mundet ?? A Mexican apple soda I believe Coca-Cola owns; not confirmed.
+~D Joya ?? A Mexican fruit soda I believe Coca-Cola owns; not confirmed.
+~D Delaware Punch ?? I believe Coca-Cola owns it; not confirmed.
+D Ramblin' Root Beer | Ramblin Root Beer :: Coke's root beer of the late 1970s, before it bought Barq's.
+~D Santiba ?? A mixer line I believe Coca-Cola sold in the 1970s; not confirmed.
+~D Veep ?? A lemon-lime soda I believe Coca-Cola sold in the 1960s; not confirmed.
+~D Simba ?? A citrus soda I believe Coca-Cola sold around 1970; not confirmed.
+D OK Soda | OK :: A 1993 experiment aimed at Generation X.
+D Diet Coke Plus
+D Diet Coke Feisty Cherry | Feisty Cherry
+D Diet Coke Ginger Lime
+D Coca-Cola Clear
+D Coca-Cola Light | Coke Light
+D Tab Clear
+D Enviga
+~R Nestea ?? A Nestlé brand that Coca-Cola made under a joint venture until 2017.
+D Tum-E Yummies | Tum E Yummies
+D Bright & Early
+~R Bacardi Mixers ?? Sold under licence; not sure it counts as a Coca-Cola drink.
+D Jack & Coke | Jack Daniel's & Coca-Cola | Jack and Coke :: Sold ready-mixed in a can since 2022.
+D Topo Chico Hard Seltzer
+D Simply Spiked | Simply Spiked Lemonade
+D Burn | Burn Energy
+D Relentless
+D Mother | Mother Energy
+~D Royal Tru ?? A Philippine orange soda I believe Coca-Cola owns; not confirmed.
+~D Fioravanti ?? An Ecuadorian soda I believe Coca-Cola owns; not confirmed.
+~D Urge ?? The Norwegian name for Surge, as far as I know.
+! Pepsi :: the other one
+! Mountain Dew :: PepsiCo
+! Gatorade :: PepsiCo
+! 7 Up :: Keurig Dr Pepper in the United States
+! RC Cola :: born in Columbus, Georgia, but never a Coca-Cola brand
+! Red Bull :: its own company
+! Aquafina :: PepsiCo
+! Lipton :: Unilever and PepsiCo
+! Sierra Mist :: PepsiCo
+! Snapple :: Keurig Dr Pepper
+! Starbucks Frappuccino :: bottled with PepsiCo
+! Tropicana :: not Coca-Cola
+! A&W :: Keurig Dr Pepper
+! Budweiser :: beer, and Anheuser-Busch
+
+@cartoonnetwork | ATLANTA | Name a Cartoon Network original show | pool=gt | type=open | clar=Adult Swim counts; both are based in Atlanta
+C The Powerpuff Girls | Powerpuff Girls | PPG
+C Dexter's Laboratory | Dexters Laboratory | Dexter's Lab | Dexter
+C Adventure Time
+C Rick and Morty | Rick & Morty
+C Johnny Bravo
+C Teen Titans | Teen Titans Go | Teen Titans Go!
+T Aqua Teen Hunger Force | ATHF | Aqua Teen :: Set in New Jersey, made on Williams Street in Atlanta.
+T Courage the Cowardly Dog | Courage
+S Ed, Edd n Eddy | Ed Edd and Eddy | Ed Edd n Eddy
+S Regular Show
+S Steven Universe
+S The Amazing World of Gumball | Gumball | Amazing World of Gumball
+S Ben 10 | Ben Ten
+S Samurai Jack
+S Foster's Home for Imaginary Friends | Fosters Home for Imaginary Friends | Foster's
+S Codename: Kids Next Door | Kids Next Door | KND
+S The Grim Adventures of Billy & Mandy | Billy and Mandy | Grim Adventures of Billy and Mandy | Billy & Mandy
+S Cow and Chicken | Cow & Chicken
+S Robot Chicken
+S The Boondocks | Boondocks
+S We Bare Bears
+S Chowder
+S Space Ghost Coast to Coast | Space Ghost
+S Harvey Birdman, Attorney at Law | Harvey Birdman
+S The Venture Bros. | Venture Bros | Venture Brothers
+S Total Drama Island | Total Drama
+S Camp Lazlo
+S Craig of the Creek
+S Clarence
+S Over the Garden Wall
+R I Am Weasel
+R Sheep in the Big City
+R Mike, Lu & Og | Mike Lu and Og | Mike Lu & Og
+R Time Squad
+R Whatever Happened to... Robot Jones? | Robot Jones | Whatever Happened to Robot Jones
+R Megas XLR
+R The Life and Times of Juniper Lee | Juniper Lee
+R My Gym Partner's a Monkey | My Gym Partners a Monkey
+R Squirrel Boy
+R Class of 3000 :: André 3000's cartoon, set at a music school in Atlanta.
+R The Marvelous Misadventures of Flapjack | Flapjack
+R Evil Con Carne
+R Hi Hi Puffy AmiYumi | Puffy AmiYumi
+R Generator Rex
+R The Secret Saturdays | Secret Saturdays
+R Sym-Bionic Titan | Symbionic Titan
+R Uncle Grandpa
+R Mighty Magiswords
+R OK K.O.! Let's Be Heroes | OK KO | OK K.O.
+R Summer Camp Island
+R Infinity Train
+R Victor and Valentino
+R Apple & Onion | Apple and Onion
+R Ben 10: Alien Force | Alien Force
+R Star Wars: Clone Wars | Clone Wars
+R Justice League | Justice League Unlimited
+R Young Justice
+R Batman: The Brave and the Bold | Brave and the Bold
+R The Looney Tunes Show | Looney Tunes Show
+R MAD
+R ThunderCats Roar | ThunderCats
+R Primal
+R Unikitty | Unikitty!
+R Mao Mao: Heroes of Pure Heart | Mao Mao
+R Squidbillies :: Set in the north Georgia mountains.
+R Sealab 2021 | Sealab
+R The Brak Show | Brak Show
+R Metalocalypse
+R Moral Orel
+R Frisky Dingo
+R Home Movies
+R Tim and Eric Awesome Show, Great Job! | Tim and Eric | Tim & Eric
+R The Eric Andre Show | Eric Andre Show | Eric Andre
+R Childrens Hospital | Children's Hospital
+R Black Dynamite
+R Superjail! | Superjail
+R Smiling Friends
+R Mr. Pickles | Mr Pickles
+R 12 oz. Mouse | 12 oz Mouse | Twelve Ounce Mouse
+R Perfect Hair Forever
+R Tom Goes to the Mayor
+R Check It Out! with Dr. Steve Brule | Check It Out | Dr. Steve Brule
+R Xavier: Renegade Angel | Xavier Renegade Angel
+R Assy McGee
+R Stroker and Hoop | Stroker & Hoop
+R Minoriteam
+R Lucy, the Daughter of the Devil | Lucy Daughter of the Devil
+R Titan Maximum
+R Mary Shelley's Frankenhole | Frankenhole
+R China, IL | China IL
+R Your Pretty Face Is Going to Hell
+R The Heart, She Holler
+R Delocated
+R NTSF:SD:SUV:: | NTSF
+R Eagleheart
+R Loiter Squad
+R Off the Air
+R Infomercials | Too Many Cooks :: "Too Many Cooks" was one of them.
+R Tigtone
+R Ballmastrz: 9009 | Ballmastrz
+R Joe Pera Talks with You | Joe Pera
+R Dream Corp LLC | Dream Corp
+R Three Busy Debras
+R YOLO: Crystal Fantasy | YOLO
+R Royal Crackers
+R Unicorn: Warriors Eternal
+R My Adventures with Superman
+R Common Side Effects
+R The Problem Solverz | Problem Solverz
+R Secret Mountain Fort Awesome
+R Out of Jimmy's Head
+R Level Up
+R Tower Prep
+D Dude, What Would Happen
+D Destroy Build Destroy
+X The Moxy Show | Moxy Show | Moxy Pirate Show :: Cartoon Network's first original series, in 1993: a 3-D dog introducing old cartoons.
+R What a Cartoon! | What a Cartoon | World Premiere Toons
+R Cartoon Planet
+R JBVO
+R Toonami :: A programming block, but everyone thinks of it as a show.
+R Mixels
+R Long Live the Royals
+R Steven Universe Future
+R Adventure Time: Distant Lands | Distant Lands
+R Fionna and Cake
+R The Fungies | Fungies
+R Tig n' Seek | Tig n Seek
+R Elliott from Earth
+R Jellystone | Jellystone!
+R We Baby Bears
+! SpongeBob SquarePants :: Nickelodeon
+! Rugrats :: Nickelodeon
+! Avatar: The Last Airbender :: Nickelodeon
+! The Fairly OddParents :: Nickelodeon
+! Kim Possible :: Disney Channel
+! Phineas and Ferb :: Disney Channel
+! Gravity Falls :: Disney Channel
+! The Simpsons :: Fox
+! Family Guy :: Fox, though Adult Swim reran it for years
+! Futurama :: Fox and Comedy Central; Adult Swim only reran it
+! South Park :: Comedy Central
+! Scooby-Doo :: Hanna-Barbera, long before the channel existed
+! Tom and Jerry :: MGM shorts from the 1940s
+! Dragon Ball Z :: Japanese; Toonami only aired it
+! Pokémon :: not a Cartoon Network original
+! Archer :: FX
+! Bob's Burgers :: Fox
+
+@gtathletes | SPORTS | Name a famous Georgia Tech athlete | pool=gt | type=open | clar=any sport, any era
+C Chris Bosh | Bosh
+C Stephon Marbury | Marbury | Starbury
+S Kenny Anderson
+S Mark Price
+S Dennis Scott
+S John Salley
+S Jarrett Jack
+S Thaddeus Young | Thad Young
+S Derrick Favors
+S Iman Shumpert | Shumpert
+S Josh Okogie | Okogie
+T Jose Alvarado | Alvarado
+S Matt Harpring | Harpring
+S Travis Best
+R Brian Oliver
+S Tom Hammonds
+R Duane Ferrell
+S Anthony Morrow
+S Will Bynum
+R Javaris Crittenton
+R Jon Barry
+R Drew Barry
+R Dion Glover
+R Jason Collier
+R Moses Wright
+R Luke Schenscher
+R Malcolm Mackey
+R Gani Lawal
+R Glen Rice Jr. | Glen Rice
+R Marcus Georges-Hunt
+R Mario West
+R Alvin Jones
+R Fred Vinson
+R Craig Neal
+C Calvin Johnson | Megatron
+C Demaryius Thomas
+T Joe Hamilton
+S Harrison Butker | Butker
+S Keith Brooking
+R Jahmyr Gibbs | Gibbs
+R Darren Waller
+R Shaq Mason | Shaquille Mason
+R Morgan Burnett
+R Derrick Morgan
+S Dorsey Levens
+S Pat Swilling
+S Marco Coleman
+R Jordan Mason
+R Michael Johnson
+S Jonathan Dwyer
+S Tashard Choice
+R Stephen Hill
+R Jeremiah Attaochu
+R Adam Gotsis
+R Daryl Smith
+R Philip Wheeler
+R Dawan Landry
+R Kelly Campbell
+R Dez White
+R Gary Guyton
+R Anthony Allen
+R Ken Whisenhunt
+R Bill Curry
+R Billy Shaw
+R Maxie Baughan
+R Larry Morris
+R Eddie Lee Ivery
+R Robert Lavette
+R Willie Clay
+R Coleman Rudolph
+R Pressley Harvin III | Pressley Harvin
+R Tariq Carpenter
+R Keion White
+R Juanyeh Thomas
+R DeAndre Smelter
+R Andrew Gardner
+R Durant Brooks
+R Nick Ferguson
+R Jalen Camp
+R Joe Guyon
+S Haynes King
+S Justin Thomas
+S Reggie Ball
+S Shawn Jones
+R Josh Nesbitt
+R Tevin Washington
+S Jeff Sims
+R TaQuon Marshall
+R Vad Lee
+R George Godsey
+R Taylor Bennett
+R Zach Pyron
+R James Graham
+R Jordan Yates
+R Tobias Oliver
+R A.J. Suggs
+R Matthew Jordan
+R Zach Gibson
+R John Dewberry
+R Kim King
+R Billy Lothridge
+R Pepper Rodgers
+R Eddie McAshan
+R Mike Kelley
+R Donnie Davis
+R Brandon Shaw
+R Darrell Gast
+R Rick Strom
+R Todd Rampley
+R Tommy Luginbill
+R Rudy Allen
+R Gary Lanier
+R Wade Mitchell
+R Stan Gann
+R Darrell Crawford
+R Frank Broyles
+R Jaybo Shaw
+R Lucas Johnson
+S Nomar Garciaparra | Nomar | Garciaparra
+C Mark Teixeira | Teixeira
+S Jason Varitek | Varitek
+R Charlie Blackmon | Blackmon
+S Matt Wieters | Wieters
+R Kevin Brown
+R Joey Bart
+R Jay Payton
+R Derek Dietrich
+R Matt Murton
+R Darren Bragg
+R Deck McGuire
+R Buck Farmer
+R Daniel Palka
+R Eric Patterson
+R Marlon Byrd
+R Micah Owings
+R Brandon Boggs
+R Blake Wood
+R Tyler Greene
+R Jim Poole
+R Doug Creek
+R Kris Wilson
+R Brad Rigby
+R Riccardo Ingram
+R Jed Bradley
+R Xzavion Curry
+D Brant Hurter
+D Kyle McCann
+C Bobby Jones | Bob Jones | Robert Tyre Jones
+S Matt Kuchar | Kuchar
+S Stewart Cink | Cink
+S David Duval | Duval
+D Larry Mize | Mize
+D Bryce Molder
+D Cameron Tringale
+D Chesson Hadley
+D Ollie Schniederjans
+D Andy Ogletree
+D Roberto Castro
+D Troy Matteson
+D Christo Lamprecht
+D Tyler Strafaci
+D Richy Werenski
+D Anders Albertson
+D Vincent Whaley
+D Seth Reeves
+D Nicholas Thompson
+D Charlie Rymer
+D Tripp Isenhour
+D Luke Schniederjans
+D Noah Norton
+D Connor Howe
+D Ross Steelman
+D Hiroshi Tai
+D Angelo Taylor :: Two Olympic golds in the 400-metre hurdles.
+X Derrick Adkins :: Olympic champion in the 400-metre hurdles in 1996, in Atlanta, across town from the campus where he trained.
+D Derek Mills :: Olympic relay gold in Atlanta, 1996.
+D Antonio McKay :: Olympic relay gold in 1984 and 1988.
+D Chaunté Lowe | Chaunte Lowe | Chaunte Howard :: High jumper, four Olympics.
+D Roger Kaiser :: Tech basketball's first consensus All-American.
+D Rich Yunkus
+D Clint Castleberry :: The only football number Tech has retired.
+D Jerry Mays
+D Randy Rhino
+D Ben Lammers
+D Michael Devoe
+D B.J. Elder | BJ Elder
+D James Forrest
+D Bruce Dalrymple
+D Kisha Ford
+D Alex Montgomery
+D Tyaunna Marshall
+D Kevin Parada
+D Kenny Thorne
+D Bryan Shelton :: An ATP player, then Tech's national-champion women's tennis coach.
+D Irina Falconi
+D Amanda McDowell :: NCAA singles champion in 2008.
+D Caio Pumputis
+D Gal Nevo
+D Monique Mead
+D Kele Eveland
+D Jessica Sallinger
+D Teegan Van Gunst
+D Julia Bergmann :: A Tech volleyball All-American and Olympian for Brazil.
+D Mariana Brambilla
+! Herschel Walker :: Georgia
+! Matt Ryan :: Boston College, then the Falcons
+! Hank Aaron :: a Brave, never a Tech student
+! Dominique Wilkins :: Georgia
+! Michael Jordan :: North Carolina
+! Buzz :: the mascot
+! Tiger Woods :: Stanford
+! Trae Young :: Oklahoma, then the Hawks
+! Bobby Cremins :: the coach; he played at South Carolina
+! Paul Johnson :: the coach
+! Deion Sanders :: Florida State
+
+@atllandmarks | ATLANTA | Name a landmark in the city of Atlanta | pool=gt | type=open | clar=buildings, venues, museums, parks and monuments
+C Georgia Aquarium | The Aquarium | Aquarium
+C World of Coca-Cola | World of Coke | Coke Museum | Coca-Cola Museum
+C Mercedes-Benz Stadium | Mercedes Benz Stadium | The Benz | MBS
+C Piedmont Park
+C Centennial Olympic Park | Centennial Park | Olympic Park
+C Fox Theatre | The Fox | Fox Theater | Fabulous Fox
+T The Varsity | Varsity :: "What'll ya have?" The world's largest drive-in, across the Connector from Tech.
+T Tech Tower :: Ours.
+S Atlanta BeltLine | BeltLine | The Beltline | Belt Line
+S Ponce City Market | PCM
+S Krog Street Market | Krog Street Tunnel | Krog
+S State Farm Arena | Philips Arena | Phillips Arena
+S Georgia State Capitol | State Capitol | Capitol | The Capitol | Gold Dome
+S Martin Luther King Jr. National Historical Park | MLK Historic Site | King Center | The King Center | MLK Birth Home | King Birth Home | MLK National Historical Park
+S Ebenezer Baptist Church | Ebenezer
+S Zoo Atlanta | Atlanta Zoo | The Zoo
+S Atlanta Botanical Garden | Botanical Garden | Botanical Gardens
+S High Museum of Art | High Museum | The High
+S Bobby Dodd Stadium | Bobby Dodd | Grant Field
+S CNN Center | CNN | The Center
+S Hartsfield-Jackson Airport | Hartsfield-Jackson | The Airport | ATL | Hartsfield | Hartsfield Jackson
+S College Football Hall of Fame | Hall of Fame
+S National Center for Civil and Human Rights | Center for Civil and Human Rights | Civil Rights Museum
+S Atlantic Station
+S Lenox Square | Lenox Mall | Lenox
+S Westin Peachtree Plaza | Peachtree Plaza | The Westin | Sun Dial
+S Bank of America Plaza | Bank of America Tower | Pencil Building :: The tallest building in Atlanta.
+S Oakland Cemetery | Historic Oakland Cemetery
+S Underground Atlanta | Underground | The Underground
+S Olympic Rings | Olympic Cauldron | Olympic Torch | Cauldron
+S Swan House | Atlanta History Center | History Center
+S Carter Center | Jimmy Carter Presidential Library | Carter Library | Carter Presidential Center
+S Margaret Mitchell House
+~S Fernbank Museum ?? An Atlanta address, but I believe it sits in unincorporated DeKalb County, outside the city limits.
+S Center for Puppetry Arts | Puppetry Arts | Puppet Museum
+S SkyView Atlanta | SkyView | Ferris Wheel | Skyview Ferris Wheel
+S Grant Park
+S Little Five Points | L5P
+S Buckhead
+S Midtown
+R Woodruff Arts Center | Woodruff | Symphony Hall | Alliance Theatre
+R Tabernacle | The Tabernacle
+R Georgia World Congress Center | GWCC | World Congress Center
+R Georgia Dome | The Dome :: Demolished in 2017, but nobody has forgotten it.
+R Turner Field | The Ted | Center Parc Stadium | Centennial Olympic Stadium | Olympic Stadium
+R Atlanta-Fulton County Stadium | Fulton County Stadium | Atlanta Stadium
+R The Omni | Omni Coliseum | Omni
+R McCamish Pavilion | Alexander Memorial Coliseum | The Thrillerdome | Thrillerdome
+R Kessler Campanile | The Campanile | Campanile
+R Clough Commons | CULC
+R Tech Green
+R Technology Square | Tech Square
+R Georgia Tech Hotel
+R Coda | Coda Building
+R Kendeda Building | Kendeda
+R Georgia State University | GSU | Georgia State
+R Morehouse College | Morehouse
+R Spelman College | Spelman
+R Emory University | Emory
+R Atlanta University Center | AUC
+R Flatiron Building | English-American Building :: Finished in 1897, five years before New York's.
+R Candler Building
+R Healey Building
+R Rhodes Hall
+R Rhodes-Haverty Building
+R Hurt Building
+R Equitable Building
+R Georgia-Pacific Tower | Georgia Pacific Tower | Georgia-Pacific Center
+R Truist Plaza | SunTrust Plaza
+R 191 Peachtree | 191 Peachtree Tower
+R One Atlantic Center | IBM Tower
+R Promenade | Promenade II
+R AT&T Midtown Center | BellSouth Center
+R Atlanta Marriott Marquis | Marriott Marquis
+R Hyatt Regency | Polaris | Hyatt Regency Atlanta :: The hotel with the blue flying-saucer restaurant on top.
+R Georgian Terrace | Georgian Terrace Hotel
+R Biltmore | Atlanta Biltmore | Biltmore Hotel
+R Clermont Hotel | Clermont Lounge | Hotel Clermont
+R Plaza Theatre | The Plaza
+R Variety Playhouse
+R Buckhead Theatre
+R The Masquerade | Masquerade
+R Manuel's Tavern | Manuels Tavern
+R Mary Mac's Tea Room | Mary Macs
+R Paschal's | Paschals
+R Busy Bee Cafe | Busy Bee
+R The Vortex | Vortex
+R Majestic Diner | The Majestic
+R Sweet Auburn Curb Market | Municipal Market | Curb Market | Sweet Auburn Market
+R Sweet Auburn | Auburn Avenue
+R APEX Museum | Apex Museum
+R Herndon Home
+R Wren's Nest | Wrens Nest
+R Atlanta Cyclorama | Cyclorama
+R Millennium Gate | The Millennium Gate
+R Pemberton Place
+R Children's Museum of Atlanta | Childrens Museum
+~R Delta Flight Museum ?? At Delta's headquarters by the airport; not sure it is inside the city limits.
+R Michael C. Carlos Museum | Carlos Museum
+R Museum of Design Atlanta | MODA
+R Atlanta Contemporary | Atlanta Contemporary Art Center
+R Trap Music Museum
+R Jackson Street Bridge :: The skyline view from the opening of "The Walking Dead".
+R Historic Fourth Ward Park | Fourth Ward Park | Old Fourth Ward Park
+R Westside Park | Bellwood Quarry
+R Freedom Park
+R Candler Park
+R Chastain Park | Chastain Park Amphitheater | Chastain | Cadence Bank Amphitheatre
+R Lake Clara Meer
+R Woodruff Park
+R Hurt Park
+R Rodney Cook Sr. Park | Cook Park
+R Morningside Nature Preserve
+R Lullwater Preserve | Lullwater
+R Atlanta Memorial Park
+D Bitsy Grant Tennis Center
+D Bobby Jones Golf Course
+D East Lake Golf Club | East Lake
+D Lakewood Amphitheatre | Lakewood | Lakewood Amphitheater
+D Atlanta Dairies
+D Westside Provisions District | Westside Provisions
+D The Works
+D Atlanta City Hall | City Hall
+D Fulton County Courthouse
+D Richard B. Russell Federal Building | Russell Federal Building
+D Federal Reserve Bank of Atlanta | Federal Reserve | The Fed
+D Centers for Disease Control | CDC
+D Grady Memorial Hospital | Grady | Grady Hospital
+D Atlanta Central Library | Central Library
+D Peachtree Center
+D AmericasMart | Americas Mart | Merchandise Mart
+D Five Points
+X Zero Mile Post | Zero Milepost :: The 1850s railroad marker that the city grew up around. Atlanta's first name was Terminus.
+D Peace Monument | Sidney Lanier Monument
+D Atlanta from the Ashes | The Phoenix | Phoenix Statue
+D John Lewis Mural | HERO Mural
+D Hank Aaron Home Run Wall | Home Run Wall | Hank Aaron Wall :: The piece of outfield fence his 715th cleared, still standing in a parking lot.
+D Rainbow Crosswalks | Rainbow Crosswalk
+~D Doll's Head Trail ?? At Constitution Lakes; I believe it lies just outside the city limits in DeKalb County.
+D Tiny Doors ATL | Tiny Doors
+D 54 Columns
+D Noguchi Playscape | Playscapes
+D Folk Art Park
+D Castleberry Hill
+D Cabbagetown
+D Inman Park
+D Virginia-Highland | Virginia Highland
+D West End
+D Vine City
+D Old Fourth Ward | O4W
+D East Atlanta Village | EAV
+D Edgewood
+D Summerhill
+D Ansley Park
+! Stone Mountain :: sixteen miles east, outside the city
+! Six Flags :: in Cobb County, outside the city
+! Truist Park :: in Cobb County, outside the city
+! The Battery :: in Cobb County, outside the city
+! Kennesaw Mountain :: in Cobb County
+! Big Chicken :: in Marietta
+! Lake Lanier :: an hour north
+! Sanford Stadium :: in Athens
+! Atlanta Motor Speedway :: in Hampton, thirty miles south
+! Braves Stadium :: the Braves now play in Cobb County; Turner Field is accepted
+! Gateway Arch :: St. Louis
+! Callaway Gardens :: in Pine Mountain
+! King and Queen Towers :: in Sandy Springs, outside the city
+! Eddie's Attic :: in Decatur
+
+@southernfood | THE SOUTH | Name a Southern food | pool=gt | type=open | clar=dishes, sides, sweets and drinks of the South
+C Fried Chicken
+C Grits | Shrimp and Grits | Cheese Grits
+C Biscuits | Biscuit | Biscuits and Gravy | Buttermilk Biscuits
+C Sweet Tea | Sweet Iced Tea
+C Peach Cobbler | Cobbler
+C Barbecue | BBQ | Pulled Pork | Barbeque
+T Boiled Peanuts :: Sold hot from roadside stands, and the official snack of South Carolina.
+T Pimento Cheese | Pimiento Cheese
+S Collard Greens | Collards | Greens
+S Cornbread | Corn Bread
+S Mac and Cheese | Macaroni and Cheese
+S Fried Okra | Okra
+S Black-Eyed Peas | Black Eyed Peas | Hoppin' John | Hoppin John
+S Pecan Pie
+S Banana Pudding | Nana Pudding
+S Fried Green Tomatoes
+S Chicken and Waffles
+S Gumbo
+S Jambalaya
+S Hush Puppies | Hushpuppies
+S Catfish | Fried Catfish
+S Country Fried Steak | Chicken Fried Steak
+S Sausage Gravy | Gravy | White Gravy
+S Coleslaw | Slaw
+S Deviled Eggs
+S Potato Salad
+S Sweet Potato Pie
+S Sweet Potato Casserole | Candied Yams | Yams
+S Brunswick Stew :: Georgia and Virginia both claim it.
+S Chicken and Dumplings
+S Country Ham | Ham
+S Ribs | Barbecue Ribs
+S Pralines | Praline
+S Red Velvet Cake
+S Key Lime Pie
+S Waffles | Waffle House Waffle
+S Hash Browns | Hashbrowns
+R Crawfish | Crawfish Boil | Crawfish Étouffée | Etouffee
+R Po' Boy | Po Boy | Poboy
+R Beignets | Beignet
+R Red Beans and Rice
+R Dirty Rice
+R Boudin
+R Andouille
+R Muffuletta
+R Bananas Foster
+R King Cake
+R Lowcountry Boil | Low Country Boil | Frogmore Stew
+R She-Crab Soup | She Crab Soup
+R Fried Pickles
+R Fried Shrimp
+R Oysters | Fried Oysters | Raw Oysters
+R Chitterlings | Chitlins
+R Fatback | Salt Pork
+R Ham Hocks | Ham Hock
+R Pork Rinds | Cracklins | Cracklings
+R Livermush | Liver Mush
+R Red-Eye Gravy | Red Eye Gravy | Redeye Gravy
+R Tomato Gravy
+R Squash Casserole
+R Green Bean Casserole | Green Beans
+R Butter Beans | Lima Beans
+R Field Peas | Crowder Peas
+R Succotash
+R Creamed Corn
+R Corn Pudding
+R Spoonbread | Spoon Bread
+R Hoecakes | Hoe Cakes | Johnnycakes | Johnny Cakes
+R Cornbread Dressing | Dressing
+R Turnip Greens | Mustard Greens
+R Pot Likker | Potlikker | Pot Liquor
+R Tomato Sandwich
+R Tomato Pie
+R Vidalia Onions | Vidalia Onion
+R Pecans | Candied Pecans
+R Peaches | Peach
+R Peach Pie
+R Peach Ice Cream
+R Peanut Brittle
+R Divinity
+R Chess Pie
+R Buttermilk Pie
+R Hummingbird Cake
+R Coconut Cake
+R Caramel Cake
+R Pound Cake
+R Lane Cake :: Alabama's own; it turns up in "To Kill a Mockingbird".
+R Moon Pie | MoonPie
+R Goo Goo Cluster | Goo Goo Clusters
+R Fried Pies | Fried Pie | Hand Pies
+R Ambrosia | Ambrosia Salad
+R Congealed Salad | Jello Salad
+R Pear Salad
+R Chicken Salad
+R Cheese Straws
+R Sausage Balls
+R Country Captain :: A curried chicken dish with Savannah roots.
+R Chicken Bog
+R Perloo | Purloo | Pilau
+R Red Rice | Savannah Red Rice
+R Burgoo
+R Hot Brown | Kentucky Hot Brown
+R Derby Pie
+R Benedictine
+R Beer Cheese
+R Nashville Hot Chicken | Hot Chicken
+R Memphis Dry Rub Ribs | Dry Rub Ribs
+R Alabama White Sauce | White Barbecue Sauce
+R Carolina Gold Sauce | Mustard Barbecue Sauce
+R Vinegar Slaw | Red Slaw
+R Smoked Brisket | Brisket
+R Burnt Ends
+R Smoked Sausage
+R Fried Bologna | Fried Bologna Sandwich
+R Pimento Cheese Sandwich
+R Chili Dog | Slaw Dog
+R Frito Pie
+R Tamales | Delta Tamales | Hot Tamales
+R Comeback Sauce
+R Chow-Chow | Chow Chow
+R Pepper Jelly
+R Pickled Okra
+R Watermelon | Watermelon Rind Pickles
+R Muscadines | Scuppernongs
+R Sorghum | Sorghum Syrup
+R Cane Syrup | Molasses
+R Sweet Potato Biscuits
+R Angel Biscuits
+R Beaten Biscuits
+R Cathead Biscuits
+R Country Sausage | Sausage | Sausage Biscuit
+R Bacon
+R Livers | Chicken Livers | Fried Chicken Livers | Gizzards
+D Fried Turkey | Deep-Fried Turkey
+D Smothered Pork Chops | Pork Chops | Fried Pork Chops
+D Oxtails
+D Neck Bones
+D Pig's Feet | Pigs Feet
+D Fried Fish | Fish Fry
+D Salmon Croquettes | Salmon Patties
+D Crab Cakes
+D Deviled Crab
+D Shrimp Creole
+D Seafood Boil
+D Oyster Stew
+D Turtle Soup
+D Peanut Soup
+D Cornmeal Mush
+D Fried Corn
+D Fried Squash
+D Fried Apples
+D Stewed Tomatoes | Stewed Okra and Tomatoes
+D Rice and Gravy
+D Mashed Potatoes
+D Yeast Rolls | Rolls
+D Buttermilk
+D Lemonade
+D Mint Julep
+D Sazerac
+D Hurricane
+D Bourbon
+D Moonshine
+D RC Cola | RC Cola and a Moon Pie
+D Cheerwine
+D Coca-Cola | Coke | Coke and Peanuts :: Invented in Atlanta in 1886. Some pour peanuts straight into the bottle.
+D Ale-8-One | Ale 8
+D Sun Drop
+D Krispy Kreme | Krispy Kreme Doughnuts
+D Chick-fil-A | Chicken Sandwich
+D Pig Pickin' Cake | Pig Pickin Cake
+D Texas Sheet Cake
+D Mississippi Mud Pie | Mud Pie
+D Bread Pudding
+D Rice Pudding
+D Blackberry Cobbler
+D Strawberry Shortcake
+D Tea Cakes
+D Benne Wafers | Benne Seed Wafers
+D Pecan Sandies | Pecan Tassies
+D Bourbon Balls
+D Fudge
+X Kool-Aid Pickles | Koolickles | Koolaid Pickles :: Dill pickles soaked in Kool-Aid until they turn red. A Mississippi Delta original.
+! Pizza :: Italy by way of New York
+! Sushi :: Japan
+! Bagel :: New York
+! Clam Chowder :: New England
+! Cheesesteak :: Philadelphia
+! Tacos :: Mexico and the Southwest
+! Poutine :: Canada
+! Lobster Roll :: New England
+! Deep Dish :: Chicago
+! Hamburger :: everywhere
+
+@georgiawaters | GEORGIA | Name a body of water in Georgia | pool=gt | type=open | clar=rivers, lakes, creeks and swamps in the state | strip=river,lake,creek
+C Chattahoochee River | Chattahoochee | The Hooch | Hooch
+C Lake Lanier | Lanier | Lake Sidney Lanier
+C Savannah River | Savannah
+C Lake Allatoona | Allatoona
+C Okefenokee Swamp | Okefenokee
+T Flint River | Flint
+T Lake Oconee
+S Ocmulgee River | Ocmulgee
+S Oconee River | Oconee
+S Altamaha River | Altamaha
+S Etowah River | Etowah
+S Lake Hartwell | Hartwell
+S Lake Burton | Burton
+S Lake Rabun | Rabun
+S Lake Sinclair | Sinclair
+S West Point Lake | West Point
+S Peachtree Creek | Peachtree
+S Tallulah River | Tallulah | Tallulah Falls Lake
+S Chattooga River | Chattooga :: The river in "Deliverance".
+S Suwannee River | Suwannee | Swanee
+S Lake Seminole | Seminole
+S Lake Blackshear | Blackshear
+S Coosa River | Coosa
+S Ogeechee River | Ogeechee
+S St. Marys River | Saint Marys | St Marys
+S Jackson Lake | Lake Jackson
+S Lake Chatuge | Chatuge
+S Lake Blue Ridge | Blue Ridge Lake
+S Carters Lake | Carters
+S Clarks Hill Lake | Clarks Hill | Lake Strom Thurmond | Thurmond Lake | J. Strom Thurmond Lake
+R Satilla River | Satilla
+R Toccoa River | Toccoa
+R Oostanaula River | Oostanaula
+R Conasauga River | Conasauga
+R Coosawattee River | Coosawattee
+R Withlacoochee River | Withlacoochee
+R Alapaha River | Alapaha
+R Ochlockonee River | Ochlockonee
+R Tugaloo River | Tugaloo | Lake Tugalo | Tugalo
+R Broad River | Broad
+R Yellow River | Yellow
+R South River | South
+R Alcovy River | Alcovy
+R Towaliga River | Towaliga
+R Ohoopee River | Ohoopee
+R Canoochee River | Canoochee
+R Little River | Little
+R Tallapoosa River | Tallapoosa
+R Chestatee River | Chestatee
+R Soque River | Soque
+R Nottely River | Nottely | Lake Nottely
+R Hiwassee River | Hiwassee
+R Cartecay River | Cartecay
+R Ellijay River | Ellijay
+R Apalachee River | Apalachee
+R Nancy Creek | Nancy
+R Proctor Creek | Proctor
+R Sweetwater Creek | Sweetwater
+R Sope Creek | Sope
+R Big Creek | Big
+R Vickery Creek | Vickery
+R Utoy Creek | Utoy
+R Brier Creek | Brier
+R Kinchafoonee Creek | Kinchafoonee
+X Ichawaynochaway Creek | Ichawaynochaway :: A real creek in southwest Georgia, said "itch-away-NOTCH-away".
+R Spring Creek | Spring
+R Walter F. George Lake | Lake Walter F. George | Lake Eufaula | Walter F George | Eufaula
+R Richard B. Russell Lake | Lake Russell | Russell Lake | Russell
+R Lake Juliette | Juliette
+R Lake Tobesofkee | Tobesofkee
+R Lake Yonah | Yonah
+R Lake Seed | Seed Lake | Seed
+R Lake Oliver | Oliver
+R Goat Rock Lake | Goat Rock
+R Bartletts Ferry Lake | Lake Harding | Bartletts Ferry
+R High Falls Lake | High Falls
+R Lake Acworth | Acworth
+~R Lake Arrowhead ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Varner ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Bull Sluice Lake | Bull Sluice | Morgan Falls
+~R Stone Mountain Lake ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Lake Clara Meer | Clara Meer :: The lake in Piedmont Park.
+~R Lake Peachtree ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Spivey ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Trahlyta ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Winfield Scott ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Conasauga ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Lake Chehaw | Lake Worth | Chehaw
+D Banks Lake
+~R Grand Bay ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Ogeechee Canal | Savannah-Ogeechee Canal
+D Augusta Canal
+D Ebenezer Creek | Ebenezer
+D Chickamauga Creek | Chickamauga | West Chickamauga Creek
+D Lookout Creek | Lookout
+D Amicalola Creek | Amicalola
+~R Noonday Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Nickajack Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Rottenwood Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Tanyard Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Clear Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Intrenchment Creek | Entrenchment Creek
+~R Camp Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Line Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Flat Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Whitewater Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Pataula Creek | Pataula
+D Muckalee Creek | Muckalee
+D Little Ocmulgee River | Little Ocmulgee
+D Little Satilla River | Little Satilla
+D Medway River | Medway
+D Wilmington River | Wilmington
+D Brunswick River
+D Turtle River | Turtle
+D Crooked River | Crooked
+D North Oconee River | North Oconee | Middle Oconee River | Middle Oconee
+~R Mulberry River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Hudson River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Coleman River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+D Jacks River | Jacks
+! Mississippi River :: nowhere near
+! Tennessee River :: it comes within about a mile of Georgia's corner, but never enters the state
+! Lake Okeechobee :: Florida
+! Atlantic Ocean :: an ocean
+! Gulf of Mexico :: Georgia has no Gulf coast
+! Lake Michigan :: no
+! Tybee Island :: an island
+! Stone Mountain :: a mountain
+
+@outkast | ATLANTA | Name a song by OutKast | pool=gt | type=open | clar=album tracks and singles by the Atlanta duo
+C Hey Ya! | Hey Ya
+C Ms. Jackson | Ms Jackson | Miss Jackson
+C So Fresh, So Clean | So Fresh So Clean
+C The Way You Move | Way You Move
+C Roses
+C B.O.B | Bombs Over Baghdad | BOB | B.O.B.
+T ATLiens
+T Elevators (Me & You) | Elevators | Elevators Me and You
+S Rosa Parks
+S Player's Ball | Players Ball
+S SpottieOttieDopaliscious | Spottie Ottie Dopaliscious | Spottieottiedopalicious
+S The Whole World | Whole World
+S Southernplayalisticadillacmuzik | Southernplayalistic
+S Aquemini
+S Git Up, Git Out | Git Up Git Out
+S Two Dope Boyz (In a Cadillac) | Two Dope Boyz | 2 Dope Boyz
+S Da Art of Storytellin' (Pt. 1) | Da Art of Storytellin | Art of Storytelling | Da Art of Storytellin' Part 1
+S Prototype
+S GhettoMusick | Ghetto Musick | Ghettomusick
+S Morris Brown :: Named for the Atlanta college, whose marching band plays on it.
+S Idlewild Blue (Don'tchu Worry 'Bout Me) | Idlewild Blue
+S Mighty "O" | Mighty O
+S Jazzy Belle
+S Skew It on the Bar-B | Skew It on the Bar B
+S Gasoline Dreams
+S Humble Mumble
+R Hootie Hoo
+R Ain't No Thang | Aint No Thang
+R Crumblin' Erb | Crumblin Erb
+R Myintrotoletuknow
+R Call of da Wild
+R Funky Ride
+R D.E.E.P. | DEEP
+R Claimin' True | Claimin True
+R Wheelz of Steel | Wheels of Steel
+R Babylon
+R Wailin' | Wailin
+R Mainstream
+R Decatur Psalm
+R Millennium
+R E.T. (Extraterrestrial) | ET | Extraterrestrial
+R 13th Floor/Growing Old | 13th Floor | Growing Old
+R Ova da Wudz
+R Da Art of Storytellin' (Pt. 2) | Da Art of Storytellin Part 2 | Art of Storytelling Part 2
+R Return of the "G" | Return of the G
+R Synthesizer
+R Slump
+R West Savannah
+R Y'All Scared | Yall Scared
+R Nathaniel
+R Liberation
+R Chonkyfire
+R Mamacita
+R Hold On, Be Strong | Hold On Be Strong
+R Spaghetti Junction :: Named for the interchange of I-85 and I-285.
+R Red Velvet
+R Xplosion
+R I'll Call Before I Come | Ill Call Before I Come
+R Toilet Tisha
+R Slum Beautiful
+R Stankonia (Stanklove) | Stanklove | Stankonia
+R Snappin' & Trappin' | Snappin and Trappin
+R Funkin' Around | Funkin Around
+R Movin' Cool (The After Party) | Movin Cool
+R Unhappy
+R Bowtie
+R The Rooster | Rooster
+R Bust
+R War
+R Church
+R Tomb of the Boom
+R Knowing
+R Flip Flop Rock
+R Reset
+R Last Call
+R Happy Valentine's Day | Happy Valentines Day
+R Spread
+R Love Hater
+D She Lives in My Lap
+D Dracula's Wedding | Draculas Wedding
+D Behold a Lady
+D Pink & Blue | Pink and Blue
+D Love in War
+D She's Alive | Shes Alive
+D Take Off Your Cool
+D Vibrate
+D A Life in the Day of Benjamin André (Incomplete) | A Life in the Day of Benjamin Andre | Life in the Day of Benjamin Andre
+D My Favorite Things
+D Hollywood Divorce
+D The Train
+D Chronomentrophobia
+D PJ & Rooster | PJ and Rooster
+D Call the Law
+D Makes No Sense at All
+D Life Is Like a Musical
+D N2U
+D Peaches
+D Buggface
+D Greatest Show on Earth
+D When I Look in Your Eyes
+D Dyin' to Live | Dyin to Live
+D A Bad Note
+D In Your Dreams
+D Mutron Angel
+X Benz or Beamer | Benz or a Beamer :: From the "New Jersey Drive" soundtrack in 1995, between their first two albums.
+! Welcome to Atlanta :: Jermaine Dupri and Ludacris
+! Yeah! :: Usher
+! Crazy :: Gnarls Barkley, with CeeLo Green
+! Shutterbugg :: Big Boi, solo
+! Kryptonite :: Purple Ribbon All-Stars, with Big Boi
+! International Players Anthem :: UGK, featuring OutKast; not an OutKast song
+! Waterfalls :: TLC
+! No Scrubs :: TLC
+! Bad and Boujee :: Migos
+! Black Beatles :: Rae Sremmurd
+! Georgia on My Mind :: Ray Charles
+! Royal Flush :: Big Boi, solo, with André 3000 and Raekwon
+
+@united | ATLANTA SPORTS | Name a player from Atlanta United history | pool=gt | type=open | unverified | source=Wikipedia's list of players is complete only to April 2021; later players are from memory | clar=anyone who has played for the club
+C Josef Martínez | Josef Martinez | Josef :: The King. MVP, Golden Boot and MLS Cup in 2018.
+C Miguel Almirón | Miguel Almiron | Almiron | Miggy
+C Brad Guzan | Guzan
+C Thiago Almada | Almada
+T Michael Parkhurst | Parkhurst :: The captain who lifted MLS Cup in 2018.
+T Darlington Nagbe | Nagbe
+S Ezequiel Barco | Barco
+S Pity Martínez | Pity Martinez | Gonzalo Martinez | Pity
+S Héctor Villalba | Hector Villalba | Tito Villalba | Tito
+S Julian Gressel | Gressel
+S Miles Robinson
+S Leandro González Pírez | Leandro Gonzalez Pirez | LGP | Gonzalez Pirez
+S Jeff Larentowicz | Larentowicz
+S Brooks Lennon
+S George Bello
+S Giorgos Giakoumakis | Giakoumakis
+S Saba Lobjanidze | Lobjanidze
+S Aleksei Miranchuk | Alexey Miranchuk | Miranchuk
+S Luiz Araújo | Luiz Araujo
+S Marcelino Moreno
+S Emmanuel Latte Lath | Latte Lath
+R Franco Escobar
+R Eric Remedi
+R Yamil Asad
+R Greg Garza
+R Kenwyne Jones
+R Carlos Carmona
+R Tyrone Mears
+R Chris McCann
+R Kevin Kratz
+R Brandon Vazquez | Brandon Vázquez
+R Andrew Carleton
+R Romario Williams
+R Emerson Hyndman
+R Mo Adams
+R Jake Mulraney
+R Jon Gallagher
+R Matheus Rossetto
+R Anton Walkes
+R Florentin Pogba
+R Fernando Meza
+R Justin Meram
+R Erick Torres | Cubo Torres | Cubo
+R Jurgen Damm | Jürgen Damm
+R Brek Shea
+R Edgar Castillo
+R Manuel Castro
+R Adam Jahn
+R JJ Williams
+R George Campbell
+R Tyler Wolff
+R Dion Pereira
+R Laurence Wyke
+R Alec Kann
+R Bartosz Slisz | Slisz
+R Tristan Muyumba
+R Caleb Wiley
+R Ronald Hernández | Ronald Hernandez
+R Derrick Williams
+R Stian Gregersen
+R Luis Abram
+R Alan Franco
+R Santiago Sosa
+R Amar Sejdić | Amar Sejdic
+R Osvaldo Alonso | Ozzie Alonso
+R Andrew Gutman
+R Juan José Purata | JuanJo Purata | Juan Jose Purata
+R Miguel Berry
+R Machop Chol
+~R Jamal Thiaré ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Daniel Ríos ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+R Xande Silva
+R Edwin Mosquera
+R Dax McCarty
+R Ajani Fortune
+~R Noah Cobb ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Efraín Morales ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Pedro Amador ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Josh Cohen ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+R Quentin Westberg
+R Rocco Ríos Novo | Rocco Rios Novo
+~R Raúl Gudiño ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Erik López ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Ronaldo Cisneros ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+R Dom Dwyer
+~R Lisandro López ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Mateusz Klich ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+D Mikey Ambrose
+D Mark Bloom
+D Bobby Boswell
+D Harrison Heath
+D José Hernández | Jose Hernandez
+D Jacob Peterson
+D Andrew Wheeler-Omiunu
+D Sal Zizzo
+D Paul Christensen
+D Kyle Reynish
+X Alexandros Tabakis :: The Greek goalkeeper of the club's first season, 2017.
+~D Alex De John ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Matt Edwards ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Will Reilly ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Jayden Hibbert ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Luke Brennan ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Cayman Togashi ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Leo Afonso ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+! Arthur Blank :: the owner
+! Tata Martino :: the coach
+! Frank de Boer :: the coach
+! Gonzalo Pineda :: the coach
+! Matt Ryan :: the Falcons
+! Lionel Messi :: Inter Miami
+! Christian Pulisic :: never an Atlanta United player
+! Carlos Bocanegra :: the technical director; he never played for the club
+
+@wafflehouse | THE SOUTH | Name something on the Waffle House menu | pool=gt | type=open | unverified | source=written from memory of the menu; not checked against the current one | clar=food, drinks and hashbrown toppings, past or present
+C Waffle | Waffles | Classic Waffle
+C Hashbrowns | Hash Browns | Scattered Hashbrowns
+C All-Star Special | All Star Special | All-Star | All Star :: A waffle, eggs, toast, hashbrowns or grits, and bacon or sausage.
+C Eggs | Scrambled Eggs | Fried Eggs | Two Eggs | Egg
+C Bacon
+C Coffee
+T Smothered | Smothered Hashbrowns | Onions :: Hashbrowns with sautéed onions.
+T Covered | Covered Hashbrowns | Cheese :: Hashbrowns with melted cheese.
+S Pecan Waffle
+S Chocolate Chip Waffle | Chocolate Waffle
+S Grits
+S Toast | White Toast | Wheat Toast
+S Sausage | Sausage Patties | Sausage Patty
+S Patty Melt | Texas Patty Melt
+S Texas Bacon Patty Melt | Bacon Patty Melt
+S Cheeseburger | Hamburger | Burger | Quarter Pound Cheeseburger
+S Cheese Eggs | Cheesy Eggs
+S Omelet | Omelette | Cheese Omelet
+S Biscuit | Biscuits | Grilled Biscuit
+S Sausage Gravy | Biscuits and Gravy | Gravy
+S Sweet Tea | Iced Tea | Tea
+S Orange Juice | OJ
+S Chili | Bert's Chili | Berts Chili
+S Scattered | Scattered on the Grill
+S Chunked | Chunked Hashbrowns | Ham Chunks :: Hashbrowns with hickory-smoked ham.
+S Diced | Diced Hashbrowns | Tomatoes :: Hashbrowns with diced tomatoes.
+S Peppered | Peppered Hashbrowns | Jalapeños | Jalapenos :: Hashbrowns with jalapeño peppers.
+X Capped | Capped Hashbrowns | Mushrooms :: Hashbrowns with grilled mushrooms: the topping people forget.
+S Topped | Topped Hashbrowns :: Hashbrowns with Bert's chili.
+S Country | Country Hashbrowns :: Hashbrowns with sausage gravy.
+S All the Way | Hashbrowns All the Way :: Every topping at once.
+R Texas Toast
+R Raisin Toast
+R City Ham | Ham | Grilled Ham
+R Country Ham
+R T-Bone Steak | T-Bone | T Bone Steak | Steak | T-Bone and Eggs | Steak and Eggs
+~R Sirloin ?? Not sure it is still offered beside the T-bone.
+R Pork Chops | Pork Chop | Grilled Pork Chops
+R Grilled Chicken | Chicken Breast | Grilled Chicken Dinner
+R Grilled Chicken Sandwich | Chicken Sandwich
+~R Texas Chicken Melt ?? Not sure this melt is on the current menu.
+R Texas Cheesesteak Melt | Cheesesteak Melt | Texas Cheesesteak | Cheesesteak
+R Texas Bacon Egg & Cheese Melt | Texas Bacon Egg and Cheese Melt | Bacon Egg and Cheese Melt
+R Texas Sausage Egg & Cheese Melt | Texas Sausage Egg and Cheese Melt | Sausage Egg and Cheese Melt
+~R Texas Bacon Cheesesteak Melt ?? Not sure this exact melt is on the menu.
+R Bacon Egg & Cheese Sandwich | Bacon Egg and Cheese
+R Sausage Egg & Cheese Sandwich | Sausage Egg and Cheese
+R Ham Egg & Cheese Sandwich | Ham Egg and Cheese
+R Grilled Cheese | Grilled Cheese Sandwich
+R BLT | Bacon Lettuce and Tomato
+R Ham and Cheese Sandwich | Ham and Cheese
+R Double Cheeseburger | Double Quarter Pound Cheeseburger | Double Burger
+R Bacon Cheeseburger
+R Hashbrown Bowl | Sausage Egg and Cheese Hashbrown Bowl | Bacon Egg and Cheese Hashbrown Bowl | Hashbrown Bowls
+R Cheesesteak Omelet | Cheesesteak Omelette
+R Fiesta Omelet | Fiesta Omelette
+R Ham and Cheese Omelet | Ham & Cheese Omelet
+~R Blueberry Waffle ?? Not sure this is on the standard menu.
+R Peanut Butter Chip Waffle | Peanut Butter Waffle
+R Pecan Pie | Southern Pecan Pie
+R Chocolate Pie | Triple Chocolate Pie
+R Pie | Slice of Pie
+R Sliced Tomatoes
+R Double Hashbrowns | Large Hashbrowns | Triple Hashbrowns
+R Chocolate Milk
+R Milk
+R Hot Chocolate
+R Coca-Cola | Coke | Soda | Cherry Coke | Vanilla Coke
+R Apple Juice
+D Syrup | Maple Syrup
+D Jelly | Grape Jelly | Apple Butter
+D Kids Meal | Kid's Meal | Kids Waffle
+D Dark Roast Coffee | Decaf | Decaf Coffee
+D Grilled Onions
+D Chili with Cheese and Onions | Chili Cheese
+D Sunny Side Up Eggs | Over Easy Eggs | Over Easy | Sunny Side Up
+~D Papa Joe's Pork Chops ?? I believe this is the pork chops' full menu name; not checked.
+~D Lib's Patty Melt ?? I believe this is the patty melt's full menu name; not checked.
+~D Alice's Iced Tea ?? I believe the tea is named this way on the menu; not checked.
+~D Toddle House Omelet ?? I believe a cheese omelet by this name has been on the menu; not checked.
+~D Walt's Soup ?? I believe this was a named menu item; not checked.
+! Pancakes :: Waffle House does not serve them. That is the other house.
+! French Toast :: not on the menu
+! Fried Chicken :: not on the menu
+! French Fries :: not on the menu; the potato here is the hashbrown
+! Milkshake :: not on the menu
+! Chicken and Waffles :: not sold as a dish
+! Latte :: plain coffee only
+! Salad :: only in a few locations, and not on the standard menu
+! Pizza :: no
+! Tacos :: no
+! Beer :: no alcohol
+D Two Egg Breakfast | 2 Egg Breakfast
+D Unsweet Tea | Unsweetened Tea
+D Diet Coke
+D Sprite
+D Sausage Biscuit
+D Grilled Chicken Salad
+D Garden Salad | Side Salad
+D Egg Sandwich
+D Lemonade | Minute Maid Lemonade
+! Pancakes :: Waffle House does not serve pancakes
+! French Toast :: not on the menu
+! Fries :: hashbrowns, not fries
+! French Fries :: hashbrowns, not fries
+! Milkshake :: not on the menu
+! Chicken and Waffles :: not on the menu
+! Onion Rings :: not on the menu
+! Belgian Waffle :: the waffles are the thin classic kind
+! Chicken Biscuit :: that is the other Georgia chain
+! Hot Dog :: not on the menu
+! Pizza :: not on the menu
+! Bagel :: not on the menu
+
+@chickfila | ATLANTA | Name something on the Chick-fil-A menu | pool=gt | type=open | unverified | source=written from memory of the menu; not checked against the current one | clar=food, drinks and sauces, past or present
+C Chicken Sandwich | Chick-fil-A Chicken Sandwich | Original Chicken Sandwich | Sandwich
+C Nuggets | Chicken Nuggets | Chick-fil-A Nuggets
+C Waffle Fries | Waffle Potato Fries | Fries
+C Chick-fil-A Sauce | Chick fil A Sauce
+C Lemonade
+C Spicy Chicken Sandwich | Spicy Sandwich | Spicy Chicken
+T Polynesian Sauce | Polynesian
+T Chick-n-Minis | Chicken Minis | Minis | Chick n Minis
+S Deluxe Sandwich | Chicken Deluxe | Chick-fil-A Deluxe | Deluxe
+S Spicy Deluxe | Spicy Deluxe Sandwich | Spicy Chicken Deluxe
+S Grilled Chicken Sandwich | Grilled Sandwich | Grilled Chicken
+S Grilled Nuggets
+S Chick-n-Strips | Chicken Strips | Strips | Chick n Strips | Tenders
+S Mac & Cheese | Mac and Cheese | Macaroni and Cheese
+S Milkshake | Shake | Milkshakes
+S Cookies & Cream Milkshake | Cookies and Cream Milkshake | Cookies and Cream Shake
+S Chicken Biscuit | Chick-fil-A Chicken Biscuit
+S Sweet Tea | Iced Tea | Sweet Iced Tea | Unsweet Tea
+S Frosted Lemonade
+S Chocolate Chunk Cookie | Cookie | Cookies
+S Icedream | Icedream Cone | Ice Cream | Icedream Cup | Ice Cream Cone
+S Cobb Salad
+S Cool Wrap | Grilled Cool Wrap | Chicken Wrap | Wrap
+S Hash Browns | Hashbrowns
+S Honey Mustard | Honey Mustard Sauce
+S Barbecue Sauce | BBQ Sauce | Barbeque Sauce
+S Ranch | Garden Herb Ranch | Ranch Sauce
+S Zesty Buffalo Sauce | Buffalo Sauce | Zesty Buffalo
+S Sunjoy | Arnold Palmer | Half and Half
+R Grilled Chicken Club | Grilled Club | Chicken Club
+R Spicy Southwest Salad | Southwest Salad
+R Market Salad
+R Side Salad
+R Kale Crunch Side | Kale Crunch | Kale Salad
+R Fruit Cup
+R Chicken Noodle Soup
+R Chicken Tortilla Soup | Tortilla Soup
+R Greek Yogurt Parfait | Yogurt Parfait | Parfait
+R Waffle Potato Chips | Chips
+R Spicy Chicken Biscuit
+R Egg White Grill
+R Hash Brown Scramble | Hash Brown Scramble Bowl | Hash Brown Scramble Burrito | Breakfast Burrito | Breakfast Bowl
+R Bacon, Egg & Cheese Biscuit | Bacon Egg and Cheese Biscuit
+R Sausage, Egg & Cheese Biscuit | Sausage Egg and Cheese Biscuit
+R Chicken, Egg & Cheese Biscuit | Chicken Egg and Cheese Biscuit
+R Buttered Biscuit | Biscuit
+R Bacon, Egg & Cheese Muffin | Egg Muffin | English Muffin | Chicken Egg and Cheese Muffin
+R Chocolate Milkshake | Chocolate Shake
+R Vanilla Milkshake | Vanilla Shake
+R Strawberry Milkshake | Strawberry Shake
+R Peach Milkshake | Peach Shake :: Summer only, and worth the wait.
+R Peppermint Chip Milkshake | Peppermint Chocolate Chip Milkshake | Peppermint Shake | Peppermint Milkshake
+R Frosted Coffee
+R Iced Coffee | Cold Brew | Coffee
+R Diet Lemonade
+R Chocolate Fudge Brownie | Brownie
+R Honey Roasted BBQ Sauce | Honey Roasted BBQ
+R Sweet & Spicy Sriracha Sauce | Sriracha Sauce | Sweet and Spicy Sriracha
+R Coca-Cola | Coke | Soda | Diet Coke | Dr Pepper | Sprite
+R Chocolate Milk | Milk
+R Orange Juice | Simply Orange
+R Apple Juice
+R Bottled Water | Water | Dasani
+R Kids Meal | Kid's Meal
+D Nugget Tray | Catering Tray | Chicken Nugget Tray | Trays
+D Honey Pepper Pimento Chicken Sandwich | Honey Pepper Pimento | Pimento Chicken Sandwich
+~R Maple Pepper Bacon Sandwich ?? A limited-time or retired item named from memory; not checked.
+D Grilled Spicy Deluxe | Spicy Grilled Deluxe | Grilled Spicy Chicken Deluxe
+D Spicy Chick-n-Strips | Spicy Strips | Spicy Chicken Strips
+D Chicken Salad Sandwich | Chicken Salad :: Retired in 2017.
+D Cole Slaw | Coleslaw | Slaw :: Retired in 2016. The company published the recipe on the way out.
+X Carrot & Raisin Salad | Carrot and Raisin Salad | Carrot Raisin Salad :: A side on the old menu for decades, long since retired.
+D Cinnamon Cluster
+D Chicken, Egg & Cheese Bagel | Chicken Egg and Cheese Bagel | Bagel | Sunflower Multigrain Bagel
+D Key Lime Frosted | Frosted Key Lime
+~R Banana Pudding Milkshake ?? A limited-time or retired item named from memory; not checked.
+D Mango Passion Sunjoy | Mango Passion Tea Lemonade | Mango Passion Lemonade
+D Watermelon Mint Lemonade | Watermelon Lemonade
+D White Peach Sunjoy | White Peach Lemonade | White Peach Tea Lemonade
+~R Cherry Berry Lemonade ?? A limited-time or retired item named from memory; not checked.
+~R Cloudberry Sunjoy ?? A limited-time or retired item named from memory; not checked.
+~R Mocha Cream Cold Brew ?? A limited-time or retired item named from memory; not checked.
+~R Lemon Pie ?? A limited-time or retired item named from memory; not checked.
+D Chargrilled Chicken Sandwich | Chargrilled Sandwich | Chargrilled Chicken
+~R Chargrilled Chicken Garden Salad ?? A limited-time or retired item named from memory; not checked.
+~R Chick-n-Strips Salad ?? A limited-time or retired item named from memory; not checked.
+~R Asian Salad ?? A limited-time or retired item named from memory; not checked.
+~R Superfood Side ?? A limited-time or retired item named from memory; not checked.
+~R Oatmeal ?? A limited-time or retired item named from memory; not checked.
+D Yogurt | Greek Yogurt
+~R Cheesecake ?? A limited-time or retired item named from memory; not checked.
+D Ice Dream Sundae | Sundae | Hot Fudge Sundae
+~R Frosted Sunrise ?? A limited-time or retired item named from memory; not checked.
+~R Frosted Caramel Coffee ?? A limited-time or retired item named from memory; not checked.
+~R Smokehouse BBQ Bacon Sandwich ?? A limited-time or retired item named from memory; not checked.
+~R Grilled Chicken Burrito ?? A limited-time or retired item named from memory; not checked.
+~R Chilled Grilled Chicken Sub Sandwich ?? A limited-time or retired item named from memory; not checked.
+D Texas Pete | Hot Sauce
+D Pickles | Pickle | Extra Pickles
+! Hamburger :: the cows have opinions about that
+! Burger :: the cows have opinions about that
+! Popcorn Chicken :: KFC
+! Chicken Wings :: not on the menu
+! Fried Chicken Bucket :: KFC
+! Onion Rings :: not on the menu
+! Frosty :: Wendy's
+! McNuggets :: McDonald's
+! Sunday Special :: closed on Sunday
+! Curly Fries :: Arby's
+! Biscuits and Gravy :: sold only in some markets, and retired

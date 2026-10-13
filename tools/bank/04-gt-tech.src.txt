@@ -1,0 +1,214 @@
+# Prompt bank v2: prompts about Georgia Tech itself.
+
+@fightsong | TRADITIONS | Name a word in the "Ramblin' Wreck" fight song | pool=gt | type=closed | count=75 | source=the three verses of "Ramblin' Wreck from Georgia Tech" as sung today, each different word once | clar=any word from its three verses
+C Wreck
+C Ramblin' | Rambling | Ramblin
+C Engineer
+C Hell
+C Georgia
+C Tech
+T Helluva | Heckuva
+T Whiskey | Whisky
+S Gold
+S White
+S Daughter
+S Son
+S Rum
+S Drink
+S Sugar
+S Barrel
+S Yell
+S Daddy
+S Campus
+S Cheer
+S Good
+S Jolly
+S Fellows | Fellow
+R Gamblin' | Gambling | Gamblin
+R Brave
+R Bold
+R Bell
+R College
+R Thousand
+R Pounds | Pound
+R Three
+R Clear
+R Sir
+R Dress
+R Stir
+R Round | Around
+R Far
+R Near
+R Wish
+R Tell
+R Come
+D I'm | Im | I am
+D I | Me
+D I'd
+D I'll
+D A
+D An
+D And
+D The
+D Of
+D From
+D Like
+D All
+D My
+D Oh
+D If
+D Had
+D Her
+D In
+D Put
+D On
+D To
+D But
+D You
+D What
+D He'd
+D He
+D Do
+D Would
+D With
+D His
+D Used
+D It
+D Who
+X Clapper :: The tongue of a bell. In the third verse, it stirs the rum.
+! Buzz :: the mascot, not in the song
+! Bee :: not in the song
+! Jacket :: the fight song never says "Yellow Jacket"
+! Yellow :: not in the song; the colors named are white and gold
+! Football :: not in the song
+! Beer :: the drinks named are whiskey and rum
+! Dawgs :: the song says "Georgia"
+! Atlanta :: not in the song
+! Win :: not in the song
+! Fight :: not in the song
+! Bulldog :: not in the song
+
+@gameday | GAMEDAY | Name something you'd see at a Tech football game | pool=gt | type=open | clar=people, things and traditions at Bobby Dodd
+C Buzz | The Mascot | Mascot
+C Ramblin' Wreck | Ramblin Wreck | The Wreck | Model A | Wreck :: It leads the team onto the field, every home game since 1961.
+C Football | The Ball | Ball
+C Marching Band | Band | The Band | Yellow Jacket Marching Band
+C Cheerleaders | Cheerleader | Cheer Squad
+C Scoreboard | Jumbotron | Video Board
+T RAT Cap | Rat Caps | RAT Caps | Rat Cap
+T The Whistle | Whistle | Steam Whistle :: It blows after every Tech score.
+S Students | Student Section | Fans | Crowd | Swarm
+S Players | Team | Football Players | The Team
+S Coach | Coaches | Head Coach | Brent Key
+S Referees | Referee | Refs | Officials
+S Goalposts | Goal Posts | Goal Post | Uprights
+S End Zone | Endzone
+S Touchdown | Touchdowns
+S Field | Grant Field | Turf | The Field
+S Helmets | Helmet | Gold Helmets
+S Jerseys | Jersey | Uniforms
+S Pom-Poms | Pom Poms | Pompoms | Shakers
+S Flags | Flag | GT Flag
+S Hot Dogs | Hot Dog
+S Tailgate | Tailgating | Tailgates
+S Skyline | Atlanta Skyline | Downtown Skyline | Midtown Skyline :: Rising over the stands: the best backdrop in college football.
+S Gold | White and Gold | Gold Shirts | Old Gold
+S Yellow Jackets | Yellow Jacket
+S Alumni | Alums
+S Opponent | Visiting Team | Away Team | Visitors | Other Team
+S Tickets | Ticket
+S Stadium | Bobby Dodd Stadium | Stands | Bleachers | Seats
+S Kickoff | Kick Off
+S Halftime Show | Halftime
+S Popcorn
+S Nachos
+S Coke | Coca-Cola | Soda | Drinks
+S Peanuts | Boiled Peanuts
+R Goldrush | Gold Rush | Dance Team
+R Drumline | Drum Line | Drums
+R Tubas | Sousaphones | Tuba
+R Drum Major
+R Majorettes | Twirlers | Feature Twirler
+R Color Guard
+R Reck Club | Ramblin' Reck Club | Ramblin Reck Club
+R Freshmen | RATs | Rats
+R Fight Song | Singing | Up With the White and Gold
+R Budweiser Song | Bud Song | The Budweiser Song :: Sung between the third and fourth quarters.
+R Alma Mater
+R Yellow Jacket Alley | Jacket Alley | Team Walk
+R Coin Toss | Coin Flip
+R First Down | First Down Marker | Chains | Chain Gang
+R Field Goal | Extra Point | Kick | Kicker
+R Punt | Punter
+R Quarterback | QB
+R Interception | Fumble | Turnover
+R Tackle | Sack
+R Huddle
+R Sideline | Sidelines | Bench
+R Yard Lines | Yard Markers | 50 Yard Line | Midfield | Fifty Yard Line
+R Logo | GT Logo | Interlocking GT
+R Tunnel | Smoke | Fireworks | Pyrotechnics
+R Flyover | Jets | Military Flyover
+R National Anthem | Anthem
+R Press Box
+R Cameras | TV Cameras | Camera | Television
+R Replay | Instant Replay
+R Penalty Flag | Yellow Flag | Penalty
+R Water Bottles | Gatorade | Water
+R Trainers | Athletic Trainers | Medical Staff
+R Ball Boys | Ball Kids
+R Security | Police | Ushers
+R Concessions | Concession Stand | Vendors | Food
+R Pizza
+R Chicken Sandwich | Chick-fil-A
+R Pretzel | Pretzels
+R Cotton Candy
+R Ice Cream | Dippin' Dots
+R Beer
+R Lemonade | Frozen Lemonade
+R Foam Finger | Foam Fingers
+R Face Paint | Body Paint
+R Signs | Sign | Posters
+R Sunglasses | Sunscreen | Hats | Hat | Visor
+R Rain | Ponchos | Poncho
+R Block Seating | Greek Section
+R Luxury Boxes | Suites | Club Seats
+R Upper Deck | North Stands | East Stands | West Stands | South Stands
+R Parking | Parking Decks | Traffic
+R Tech Tower | The Tower :: Just up the hill, in view from the stands.
+R The Hill | Freshman Hill
+R Edge Building | Edge Center | Rice Center
+D Heisman | John Heisman | Heisman Statue
+D Bobby Dodd Statue | Bobby Dodd | Dodd Statue
+D Retired Numbers | Ring of Honor | Banners
+D Trophy | Trophies
+D Rival | Georgia | Bulldogs | UGA Fans | Clemson
+D T-Shirts | T-Shirt Toss | Shirts | T-Shirt Cannon
+D Wave | The Wave
+D Chants | Cheers | Chant
+D Good Word | What's the Good Word | To Hell With Georgia | THWG
+D Keys | Key Jingle | Jingling Keys :: Keys out and jingling on kickoffs and big third downs.
+D Push-Ups | Pushups | Buzz Push-Ups | Crowd Surfing
+D Field Rush | Storming the Field | Rushing the Field
+D Mic Man | Announcer | PA Announcer
+D Recruits | Scouts
+D Kids | Families | Children
+D Homecoming Court | Mr. and Ms. Georgia Tech | Homecoming
+D Sting | Stinger | Stingers
+D Bees | Bee
+D Lights | Stadium Lights | Floodlights
+D Clock | Game Clock | Play Clock
+D Pylons | Pylon
+D Kicking Net | Net
+D Headsets | Headset | Clipboard | Play Sheet
+D Megaphone | Megaphones
+D Golf Carts | Cart
+D Ambulance
+D Blimp | Drone
+X Clint Castleberry's 19 | Number 19 | 19 | Castleberry :: The only number Tech football has retired, for the freshman star of 1942 who died in the war.
+! Uga :: the wrong school's dog; only when Georgia visits
+! Sanford Stadium :: that is in Athens
+! Hedges :: those are in Athens
+! Basketball :: wrong building; that is McCamish Pavilion
+! Snow :: almost never
+! Home Run :: wrong sport

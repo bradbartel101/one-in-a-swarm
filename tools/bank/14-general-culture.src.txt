@@ -1,0 +1,774 @@
+# Prompt bank v2: general prompts on food, history, stage and screen.
+
+@kitchentools | THINGS | Name a kitchen tool or utensil | pool=general | easy | type=open | clar=things you cook, serve or eat with
+C Spoon | Spoons
+C Fork | Forks
+C Knife | Knives | Kitchen Knife | Chef's Knife | Chefs Knife
+C Spatula | Turner | Flipper
+C Whisk
+C Pan | Frying Pan | Skillet | Fry Pan
+T Spork
+T Garlic Press
+S Pot | Saucepan | Stockpot
+S Cutting Board | Chopping Board
+S Measuring Cup | Measuring Cups
+S Measuring Spoon | Measuring Spoons
+S Can Opener | Tin Opener
+S Tongs
+S Ladle
+S Peeler | Vegetable Peeler | Potato Peeler
+S Grater | Cheese Grater | Box Grater
+S Colander | Strainer | Sieve
+S Blender
+S Mixing Bowl | Bowl | Bowls
+S Rolling Pin
+S Oven Mitt | Oven Mitts | Pot Holder | Potholder | Oven Glove
+S Toaster
+S Microwave
+S Plate | Plates
+S Cup | Mug | Glass
+S Bottle Opener
+S Corkscrew | Wine Opener
+S Pizza Cutter | Pizza Wheel
+S Wooden Spoon
+S Mixer | Stand Mixer | Hand Mixer | KitchenAid
+S Baking Sheet | Cookie Sheet | Sheet Pan | Baking Tray
+R Slotted Spoon
+R Potato Masher | Masher
+R Ice Cream Scoop | Scoop
+R Kitchen Scissors | Shears | Kitchen Shears | Scissors
+R Thermometer | Meat Thermometer
+R Timer | Kitchen Timer
+R Scale | Kitchen Scale | Food Scale
+R Zester | Microplane
+R Juicer | Citrus Juicer | Reamer | Lemon Squeezer
+R Funnel
+R Basting Brush | Pastry Brush
+R Baster | Turkey Baster
+R Meat Tenderizer | Meat Mallet
+R Mortar and Pestle | Mortar & Pestle | Pestle
+R Salad Spinner
+R Steamer | Steamer Basket
+R Wok
+R Dutch Oven
+R Cast Iron Skillet | Cast Iron | Cast Iron Pan
+R Griddle
+R Slow Cooker | Crock-Pot | Crockpot | Crock Pot
+R Pressure Cooker | Instant Pot
+R Air Fryer
+R Food Processor
+R Rice Cooker
+R Waffle Iron | Waffle Maker
+R Coffee Maker | Coffee Pot | French Press
+R Kettle | Tea Kettle | Teakettle
+R Chopsticks
+R Butter Knife
+R Steak Knife
+R Bread Knife
+R Paring Knife
+R Cleaver
+R Knife Sharpener | Honing Steel | Sharpening Steel | Whetstone
+R Cooling Rack | Wire Rack
+R Muffin Tin | Muffin Pan | Cupcake Pan
+R Cake Pan | Baking Pan | Loaf Pan | Pie Pan | Pie Plate | Baking Dish | Casserole Dish
+R Cookie Cutter | Cookie Cutters
+R Pie Server | Cake Server
+R Rubber Spatula | Scraper | Silicone Spatula
+R Pepper Mill | Pepper Grinder | Salt Shaker | Salt and Pepper Shakers
+R Trivet
+R Apron
+R Dish Towel | Kitchen Towel | Tea Towel
+R Sponge
+R Straw
+R Lid
+R Egg Timer
+R Egg Slicer
+R Apple Corer | Corer
+R Melon Baller
+R Nutcracker
+R Jar Opener
+R Sifter | Flour Sifter
+R Pastry Cutter | Pastry Blender | Dough Blender
+R Bench Scraper | Dough Scraper
+R Piping Bag | Pastry Bag
+R Tea Infuser | Tea Strainer | Tea Ball
+R Skewers | Skewer
+R Grill Pan
+R Roasting Pan | Roaster
+R Double Boiler
+R Mandoline | Mandolin Slicer
+R Immersion Blender | Stick Blender | Hand Blender
+R Spice Rack
+R Toaster Oven
+R Hand Juicer
+R Popsicle Mold
+R Ice Cube Tray | Ice Tray
+R Thermos
+R Tupperware | Food Storage Container | Container
+D Spider | Spider Strainer | Skimmer
+D Fish Spatula | Fish Turner
+D Offset Spatula
+D Chinois
+D Tamis | Drum Sieve
+D Food Mill
+D Ricer | Potato Ricer
+D Spaetzle Maker
+D Pasta Maker | Pasta Machine | Pasta Roller
+D Ravioli Cutter | Pasta Cutter
+D Gnocchi Board
+D Tortilla Press
+D Molcajete
+D Comal
+D Tagine
+D Paella Pan
+D Crêpe Pan | Crepe Pan
+D Springform Pan
+D Bundt Pan
+D Ramekin | Ramekins
+D Soufflé Dish | Souffle Dish
+D Terrine
+D Madeleine Pan
+D Kugelhopf Pan
+D Salamander
+D Sous Vide | Immersion Circulator
+D Blowtorch | Kitchen Torch | Culinary Torch
+D Smoking Gun
+D Oyster Knife | Shucker | Oyster Shucker
+D Boning Knife
+D Fillet Knife
+D Santoku
+D Mezzaluna
+D Cherry Pitter | Olive Pitter
+D Strawberry Huller
+D Avocado Slicer
+D Egg Poacher
+D Egg Separator
+D Butter Churn
+D Butter Curler
+D Honey Dipper
+D Muddler
+D Cocktail Shaker | Shaker
+D Jigger
+D Decanter
+D Fondue Pot
+D Samovar
+D Moka Pot
+D Cezve | Ibrik
+D Bamboo Steamer
+D Sushi Mat | Makisu
+D Donabe
+D Tawa
+D Kadai | Karahi
+D Tandoor
+D Idli Steamer
+D Grapefruit Spoon
+D Marrow Spoon
+D Lobster Cracker | Seafood Cracker | Crab Cracker
+D Escargot Tongs
+D Fat Separator | Gravy Separator
+D Gravy Boat
+D Larding Needle
+D Trussing Needle | Kitchen Twine | Butcher's Twine
+D Dough Docker
+D Lame | Bread Lame
+D Banneton | Proofing Basket
+D Couche
+D Pizza Peel | Peel
+D Pizza Stone | Baking Stone
+D Splatter Screen | Splatter Guard
+D Bain-Marie | Bain Marie
+X Runcible Spoon :: Edward Lear invented the word for "The Owl and the Pussycat", around 1870; it has since been made into a real spoon with a cutting edge.
+! Refrigerator :: an appliance too large to call a tool
+! Oven :: the room's main appliance, not a tool
+! Sink :: plumbing
+! Table :: furniture
+! Chef :: a person
+! Recipe :: instructions
+! Food :: what the tools are for
+
+@nhlteams | SPORTS | Name an NHL team | pool=general | type=closed | count=32 | source=the 32 NHL franchises | clar=city or nickname
+C Boston Bruins | Bruins | Boston
+C New York Rangers | Rangers
+C Chicago Blackhawks | Blackhawks | Chicago | Hawks
+C Toronto Maple Leafs | Maple Leafs | Leafs | Toronto
+C Detroit Red Wings | Red Wings | Detroit | Wings
+C Pittsburgh Penguins | Penguins | Pens | Pittsburgh
+T Seattle Kraken | Kraken | Seattle
+T Winnipeg Jets | Jets | Winnipeg :: Atlanta's Thrashers, since 2011.
+S Montreal Canadiens | Canadiens | Habs | Montreal | Montréal Canadiens
+S Tampa Bay Lightning | Lightning | Bolts | Tampa Bay | Tampa
+S Florida Panthers | Panthers | Florida
+S Vegas Golden Knights | Golden Knights | Vegas | Las Vegas | Knights
+S Colorado Avalanche | Avalanche | Avs | Colorado
+S Edmonton Oilers | Oilers | Edmonton
+S Philadelphia Flyers | Flyers | Philadelphia | Philly
+S Washington Capitals | Capitals | Caps | Washington
+S Los Angeles Kings | Kings | LA Kings | Los Angeles
+S Dallas Stars | Stars | Dallas
+S Nashville Predators | Predators | Preds | Nashville
+S Carolina Hurricanes | Hurricanes | Canes | Carolina
+S St. Louis Blues | Blues | St. Louis | Saint Louis Blues
+S New Jersey Devils | Devils | New Jersey
+S Anaheim Ducks | Ducks | Mighty Ducks | Anaheim
+S San Jose Sharks | Sharks | San Jose
+R New York Islanders | Islanders | Isles
+R Buffalo Sabres | Sabres | Buffalo
+R Minnesota Wild | Wild | Minnesota
+R Vancouver Canucks | Canucks | Vancouver
+D Calgary Flames | Flames | Calgary :: They were the Atlanta Flames until 1980.
+D Ottawa Senators | Senators | Sens | Ottawa
+D Columbus Blue Jackets | Blue Jackets | Columbus | Jackets
+X Utah Mammoth | Mammoth | Utah | Utah Hockey Club :: The league's newest name: the former Arizona Coyotes, in Salt Lake City since 2024.
+! Atlanta Thrashers :: moved to Winnipeg in 2011 and became the Jets
+! Atlanta Flames :: moved to Calgary in 1980
+! Arizona Coyotes :: the team moved to Utah in 2024
+! Hartford Whalers :: became the Carolina Hurricanes in 1997
+! Quebec Nordiques :: became the Colorado Avalanche in 1995
+! New York :: two teams share it; say Rangers or Islanders
+! Minnesota North Stars :: became the Dallas Stars in 1993
+
+@shakespeare | STAGE | Name a play by Shakespeare | pool=general | type=closed | count=38 | source=the 36 plays of the First Folio plus Pericles and The Two Noble Kinsmen
+C Romeo and Juliet | Romeo & Juliet
+C Hamlet
+C Macbeth | The Scottish Play
+C A Midsummer Night's Dream | Midsummer Night's Dream | Midsummer | Midsummer Nights Dream
+C Othello
+C Julius Caesar
+T The Tempest | Tempest
+T Titus Andronicus | Titus
+S King Lear | Lear
+S Much Ado About Nothing | Much Ado
+S Twelfth Night
+S The Merchant of Venice | Merchant of Venice
+S The Taming of the Shrew | Taming of the Shrew
+S As You Like It
+S Richard III | Richard the Third | Richard 3
+S Henry V | Henry the Fifth | Henry 5
+S Antony and Cleopatra | Anthony and Cleopatra
+S The Comedy of Errors | Comedy of Errors
+R The Winter's Tale | Winter's Tale | Winters Tale
+R Measure for Measure
+R Love's Labour's Lost | Love's Labor's Lost | Loves Labours Lost | Loves Labors Lost
+R All's Well That Ends Well | Alls Well That Ends Well
+R The Merry Wives of Windsor | Merry Wives of Windsor | Merry Wives
+R The Two Gentlemen of Verona | Two Gentlemen of Verona
+R Richard II | Richard the Second | Richard 2
+R Henry IV, Part 1 | Henry IV | Henry IV Part 1 | Henry IV Part One | Henry the Fourth | 1 Henry IV
+R Coriolanus
+R Troilus and Cressida
+R Henry VIII | Henry the Eighth | All Is True
+D Henry IV, Part 2 | Henry IV Part 2 | Henry IV Part Two | 2 Henry IV
+D Henry VI, Part 1 | Henry VI | Henry VI Part 1 | Henry the Sixth | 1 Henry VI
+D Henry VI, Part 2 | Henry VI Part 2 | 2 Henry VI
+D Henry VI, Part 3 | Henry VI Part 3 | 3 Henry VI
+D King John
+D Cymbeline
+D Timon of Athens | Timon
+D Pericles | Pericles, Prince of Tyre | Pericles Prince of Tyre
+X The Two Noble Kinsmen | Two Noble Kinsmen :: Written with John Fletcher around 1613, from Chaucer's Knight's Tale. Probably his last play.
+! Doctor Faustus :: by Christopher Marlowe
+! Cardenio :: a lost play; no text survives
+! Love's Labour's Won :: a lost play, if it ever existed
+! Edward III :: often credited to him in part, but outside the 38 used here
+! The Canterbury Tales :: by Chaucer, and not a play
+! Sonnet 18 :: a poem
+! Venus and Adonis :: a poem
+! West Side Story :: a musical based on Romeo and Juliet
+! The Lion King :: a film often compared with Hamlet
+! Rosencrantz and Guildenstern Are Dead :: by Tom Stoppard
+! Waiting for Godot :: by Samuel Beckett
+! Oedipus Rex :: by Sophocles
+! Volpone :: by Ben Jonson
+
+@disney | SCREEN | Name an animated Disney movie | pool=general | type=open | clar=Walt Disney Animation and Pixar features
+C The Lion King | Lion King
+C Frozen
+C Toy Story
+C Aladdin
+C Finding Nemo
+C Moana
+T Encanto
+T The Emperor's New Groove | Emperor's New Groove | Emperors New Groove
+S Snow White and the Seven Dwarfs | Snow White
+S Cinderella
+S Beauty and the Beast
+S The Little Mermaid | Little Mermaid
+S Mulan
+S Tangled
+S Zootopia | Zootropolis
+S Bambi
+S Dumbo
+S Pinocchio
+S Peter Pan
+S Sleeping Beauty
+S The Jungle Book | Jungle Book
+S Tarzan
+S Hercules
+S Pocahontas
+S Lilo & Stitch | Lilo and Stitch
+S Monsters, Inc. | Monsters Inc | Monsters Incorporated
+S The Incredibles | Incredibles
+S Cars
+S Up
+S WALL-E | Wall-E | Wall E | WALLE
+S Ratatouille
+S Coco
+S Inside Out
+S Frozen II | Frozen 2
+S Toy Story 2
+S Toy Story 3
+S Finding Dory
+S Big Hero 6 | Big Hero Six
+S Wreck-It Ralph | Wreck It Ralph
+S The Princess and the Frog | Princess and the Frog
+R Alice in Wonderland
+R Lady and the Tramp
+R One Hundred and One Dalmatians | 101 Dalmatians | One Hundred and One Dalmations
+R The Aristocats | Aristocats
+R Robin Hood
+R The Sword in the Stone | Sword in the Stone
+R The Fox and the Hound | Fox and the Hound
+R The Rescuers | Rescuers
+R The Hunchback of Notre Dame | Hunchback of Notre Dame | Hunchback
+R Fantasia
+R A Bug's Life | Bug's Life | Bugs Life
+R Brave
+R Monsters University
+R Cars 2
+R Cars 3
+R Toy Story 4
+R Incredibles 2 | The Incredibles 2
+R Inside Out 2
+R Soul
+R Luca
+R Turning Red
+R Onward
+R The Good Dinosaur | Good Dinosaur
+R Lightyear
+R Elemental
+R Raya and the Last Dragon | Raya
+R Moana 2
+R Zootopia 2
+R Ralph Breaks the Internet | Wreck-It Ralph 2
+R Bolt
+R Chicken Little
+R Brother Bear
+R Treasure Planet
+R Atlantis: The Lost Empire | Atlantis
+R Wish
+R Strange World
+R Meet the Robinsons
+R Oliver & Company | Oliver and Company
+R The Great Mouse Detective | Great Mouse Detective
+R Winnie the Pooh | The Many Adventures of Winnie the Pooh | Many Adventures of Winnie the Pooh
+D The Black Cauldron | Black Cauldron
+D The Rescuers Down Under | Rescuers Down Under
+D Home on the Range
+D Dinosaur
+D Fantasia 2000
+D Saludos Amigos
+D The Three Caballeros | Three Caballeros
+D Make Mine Music
+D Fun and Fancy Free
+D Melody Time
+D Elio
+D Hoppers
+~R Toy Story 5 ?? Scheduled for June 2026; I could not confirm it was released as planned.
+X The Adventures of Ichabod and Mr. Toad | Ichabod and Mr. Toad | Ichabod and Mr Toad :: 1949: "The Wind in the Willows" and "The Legend of Sleepy Hollow" in one film.
+! Shrek :: DreamWorks
+! Despicable Me :: Illumination
+! Minions :: Illumination
+! Ice Age :: Blue Sky
+! Kung Fu Panda :: DreamWorks
+! How to Train Your Dragon :: DreamWorks
+! Madagascar :: DreamWorks
+! Anastasia :: Fox Animation (owned by Disney now, but not a Disney film)
+! The Land Before Time :: Universal and Don Bluth
+! Spirited Away :: Studio Ghibli
+! The Iron Giant :: Warner Bros.
+! The Prince of Egypt :: DreamWorks
+! Space Jam :: Warner Bros.
+! The Nightmare Before Christmas :: stop-motion from Touchstone, not from either animation studio
+! A Goofy Movie :: Disney, but from its television studio, not the feature studio
+! Mary Poppins :: mostly live action
+! Who Framed Roger Rabbit :: mostly live action
+! The Super Mario Bros. Movie :: Illumination
+! Spider-Man: Into the Spider-Verse :: Sony
+! Star Wars :: live action
+
+@emperors | HISTORY | Name a Roman emperor | pool=general | type=open | clar=Augustus onward, West or East, to Justinian
+C Augustus | Octavian | Caesar Augustus | Octavius
+C Nero
+C Caligula | Gaius
+C Marcus Aurelius
+C Constantine | Constantine the Great | Constantine I
+T Hadrian :: He built the wall.
+T Commodus :: The one in "Gladiator".
+S Tiberius
+S Claudius
+S Trajan
+S Vespasian
+S Titus
+S Domitian
+S Diocletian
+S Justinian | Justinian I | Justinian the Great
+S Caracalla
+S Septimius Severus | Severus
+S Antoninus Pius
+S Nerva
+S Theodosius | Theodosius I | Theodosius the Great
+S Julian | Julian the Apostate
+R Galba
+R Otho
+R Vitellius
+R Lucius Verus
+R Pertinax
+R Didius Julianus :: He bought the throne at auction from the Praetorian Guard.
+R Geta
+R Macrinus
+R Elagabalus | Heliogabalus
+R Severus Alexander | Alexander Severus
+R Maximinus Thrax | Maximinus
+R Philip the Arab | Philip
+R Decius
+R Valerian
+R Gallienus
+R Aurelian
+R Probus
+R Maximian
+R Constantius Chlorus | Constantius I
+R Galerius
+R Maxentius
+R Licinius
+R Constantius II
+R Valens
+R Valentinian | Valentinian I
+R Honorius
+R Arcadius
+R Romulus Augustulus | Romulus Augustus :: The last emperor in the West, deposed in 476.
+D Gordian I
+D Gordian II
+D Gordian III | Gordian
+D Pupienus
+D Balbinus
+D Trebonianus Gallus | Gallus
+D Hostilian
+D Aemilian | Aemilianus
+D Claudius Gothicus | Claudius II
+D Quintillus
+D Tacitus
+D Florianus | Florian
+D Carus
+D Carinus
+D Numerian
+D Severus II | Valerius Severus
+D Maximinus Daia | Maximinus II | Maximinus Daza
+D Constantine II
+D Constans
+D Jovian
+D Gratian
+D Valentinian II
+D Magnus Maximus
+D Eugenius
+D Constantius III
+D Valentinian III
+D Petronius Maximus
+D Avitus
+D Majorian
+D Libius Severus | Severus III
+D Anthemius
+D Olybrius
+D Glycerius
+D Julius Nepos | Nepos
+D Theodosius II
+D Marcian
+D Leo I | Leo the Thracian | Leo
+D Zeno
+D Anastasius | Anastasius I
+D Justin I | Justin
+D Diadumenian
+D Volusianus | Volusian
+D Herennius Etruscus
+D Philip II | Philip the Younger
+D Saloninus
+X Vetranio :: A general acclaimed emperor in 350, who handed the purple back ten months later and retired on a pension.
+! Julius Caesar :: dictator, never emperor; the first emperor was his heir Augustus
+! Pompey :: a general of the Republic
+! Mark Antony :: never emperor
+! Cicero :: a senator
+! Spartacus :: a gladiator
+! Brutus :: an assassin, not an emperor
+! Romulus :: the legendary founder and first king
+! Charlemagne :: crowned "Emperor of the Romans" in 800, but a Frankish king, outside the range here
+! Maximus :: the hero of "Gladiator" is fictional (Magnus Maximus was real)
+! Cleopatra :: queen of Egypt
+! Attila :: king of the Huns
+! Alexander the Great :: Macedonian, three centuries too early
+! Caesar :: a title every emperor used; say which one
+
+@pasta | FOOD | Name a pasta shape | pool=general | type=open | clar=shapes and noodles, not sauces or dishes
+C Spaghetti
+C Penne
+C Macaroni | Elbow Macaroni | Elbows
+C Fettuccine | Fettucine | Fettuccini
+C Lasagna | Lasagne
+C Ravioli
+T Bow Tie | Farfalle | Bowtie | Bow Ties | Bowties
+T Orzo
+S Linguine | Linguini
+S Rigatoni
+S Angel Hair | Capellini
+S Rotini
+S Fusilli
+S Ziti
+S Tortellini
+S Shells | Conchiglie | Shell | Pasta Shells
+S Gnocchi
+S Ramen
+S Egg Noodles | Egg Noodle
+S Udon
+S Manicotti
+R Tagliatelle
+R Pappardelle
+R Bucatini
+R Orecchiette
+R Cavatappi | Corkscrew | Cellentani
+R Gemelli
+R Campanelle
+R Radiatore | Radiatori
+R Wagon Wheels | Rotelle | Ruote
+R Ditalini
+R Pastina
+R Stelline | Stars | Star Pasta
+R Alphabet Pasta | Alphabets | Alphabet
+R Cannelloni
+R Jumbo Shells
+R Tortelloni
+R Vermicelli
+R Spaghettini | Thin Spaghetti
+R Cavatelli
+R Mostaccioli
+R Rice Noodles | Rice Noodle | Pho Noodles
+R Soba
+R Lo Mein
+R Couscous
+R Spätzle | Spaetzle
+R Agnolotti
+R Cappelletti
+R Mafaldine | Mafalda
+R Fideo
+R Acini di Pepe
+R Casarecce
+R Paccheri
+R Strozzapreti
+R Trofie
+R Pici
+R Bigoli
+R Chitarra | Spaghetti alla Chitarra
+D Tagliolini | Taglierini
+D Tonnarelli
+D Maltagliati
+D Garganelli
+D Anelli | Anelletti
+D Calamarata
+D Candele
+D Cencioni
+D Creste di Gallo
+D Croxetti | Corzetti
+D Culurgiones
+D Fregola | Fregula
+D Farfalline
+D Fileja
+D Foglie d'Ulivo
+D Fusilli Lunghi | Fusilli Col Buco
+D Gigli
+D Gomiti
+D Lanterne
+D Lumache
+D Lumaconi
+D Malloreddus | Gnocchetti Sardi
+D Mezze Maniche
+D Mezzelune
+D Occhi di Lupo
+D Pansotti
+D Passatelli
+D Perciatelli
+D Pipe Rigate | Pipe
+D Pizzoccheri
+D Quadretti | Quadrucci
+D Reginette
+D Riccioli
+D Sagnarelli
+D Scialatielli
+D Sedani | Sedanini
+D Spaghettoni
+D Stringozzi | Strangozzi
+D Testaroli
+D Torchio | Torchietti
+D Tortiglioni
+D Trenette
+D Tripoline
+D Trottole
+D Tubetti | Tubettini
+D Vesuvio
+D Zitoni
+D Scarpinocc
+D Caramelle
+D Casoncelli | Casunziei
+D Fagottini
+D Sacchetti | Sacchettini
+D Sorpresine
+D Busiate
+D Lorighittas
+X Su Filindeu | Filindeu :: Sardinian "threads of God": semolina pulled into 256 strands, by only a handful of people.
+D Glass Noodles | Cellophane Noodles | Bean Thread Noodles
+D Somen
+D Shirataki
+D Japchae Noodles | Dangmyeon
+! Marinara :: a sauce
+! Alfredo :: a sauce
+! Carbonara :: a dish
+! Bolognese :: a sauce
+! Pesto :: a sauce
+! Mac and Cheese :: a dish; the shape is macaroni
+! Pizza :: not pasta
+! Meatballs :: not pasta
+! Parmesan :: a cheese
+! Risotto :: rice
+! Polenta :: cornmeal
+! Pierogi :: a filled dumpling from Poland, not usually counted as pasta
+! Dumplings :: a different family of dough
+
+@spicerack | FOOD | Name something on a spice rack | pool=general | type=open | clar=herbs, spices and seasonings
+C Salt | Sea Salt | Kosher Salt | Table Salt
+C Pepper | Black Pepper | Peppercorns
+C Cinnamon
+C Garlic Powder | Garlic
+C Oregano
+C Basil
+T Paprika
+T Saffron :: By weight, worth more than silver.
+S Cumin
+S Chili Powder | Chile Powder
+S Parsley
+S Thyme
+S Rosemary
+S Nutmeg
+S Ginger | Ground Ginger
+S Onion Powder
+S Cayenne | Cayenne Pepper
+S Red Pepper Flakes | Crushed Red Pepper | Chili Flakes
+S Vanilla | Vanilla Extract
+S Bay Leaf | Bay Leaves
+S Italian Seasoning
+S Cilantro | Coriander Leaves
+S Turmeric
+S Curry Powder | Curry
+S Dill
+S Sage
+S Mint
+S Cloves | Clove
+R Coriander | Coriander Seed
+R Allspice
+R Cardamom
+R Mustard | Mustard Seed | Dry Mustard | Mustard Powder
+R Fennel | Fennel Seed
+R Sesame | Sesame Seeds
+R Poppy Seeds | Poppy Seed
+R Celery Salt | Celery Seed
+R White Pepper
+R Smoked Paprika | Pimentón | Pimenton
+R Chives
+R Tarragon
+R Marjoram
+R Lemon Pepper
+R Old Bay :: Maryland's contribution.
+R Cajun Seasoning | Creole Seasoning | Tony Chachere's
+R Taco Seasoning
+R Seasoned Salt | Lawry's | Seasoning Salt
+R Everything Bagel Seasoning | Everything Seasoning
+R Pumpkin Pie Spice | Pumpkin Spice
+R Garlic Salt
+R Star Anise
+R Anise | Aniseed
+R Caraway | Caraway Seeds
+R Garam Masala
+R Five Spice | Chinese Five Spice | Five-Spice Powder
+R Herbes de Provence
+R Poultry Seasoning
+R Steak Seasoning | Montreal Steak Seasoning
+R Chipotle | Chipotle Powder
+R Ancho | Ancho Chili Powder
+R MSG | Accent
+R Cream of Tartar
+R Sugar | Cinnamon Sugar
+R Lavender
+R Lemongrass
+R Wasabi | Wasabi Powder
+R Horseradish
+R Juniper | Juniper Berries
+R Mace
+R Sumac
+R Za'atar | Zaatar
+D Fenugreek
+D Asafoetida | Asafetida | Hing
+D Ajwain | Carom Seeds
+D Amchur | Amchoor | Mango Powder
+D Nigella | Nigella Seeds | Kalonji | Black Cumin
+D Black Cardamom
+D Long Pepper
+X Grains of Paradise | Melegueta Pepper :: A West African relative of ginger with a peppery bite. Medieval Europe prized it, and some gins still use it.
+D Sichuan Peppercorn | Szechuan Peppercorn | Sichuan Pepper
+D Pink Peppercorn | Pink Pepper
+D Green Peppercorn
+D Aleppo Pepper
+D Urfa Biber | Urfa Pepper
+D Gochugaru
+D Shichimi Togarashi | Togarashi
+D Furikake
+D Ras el Hanout
+D Berbere
+D Baharat
+D Dukkah
+D Harissa
+D Jerk Seasoning
+D Adobo | Adobo Seasoning
+D Sazón | Sazon
+D Tajín | Tajin
+D Epazote
+D Mexican Oregano
+D Annatto | Achiote
+D Savory | Summer Savory
+D Lovage
+D Chervil
+D Borage
+D Hyssop
+D Curry Leaf | Curry Leaves
+D Kaffir Lime Leaf | Makrut Lime Leaf | Lime Leaves
+D Galangal
+D Filé Powder | File Powder | Gumbo Filé
+D Sassafras
+D Mahlab | Mahleb
+D Tonka Bean
+D Dried Orange Peel | Orange Zest | Lemon Zest | Lemon Peel
+D Black Salt | Kala Namak
+D Pink Salt | Himalayan Salt | Himalayan Pink Salt
+D Smoked Salt
+D Truffle Salt
+D Fleur de Sel
+D Bouillon | Bouillon Cubes
+D Liquid Smoke
+D Nutritional Yeast
+D Cocoa | Cocoa Powder
+D Arrowroot
+D Cubeb
+D Angelica
+! Silphium :: Rome's favourite seasoning, but it went extinct about two thousand years ago; not on any rack today
+! Ketchup :: a condiment that lives in the fridge
+! Flour :: the pantry, not the spice rack
+! Rice :: the pantry
+! Olive Oil :: an oil
+! Butter :: dairy
+! Soy Sauce :: a sauce
+! Hot Sauce :: a sauce
+! Tomato :: produce

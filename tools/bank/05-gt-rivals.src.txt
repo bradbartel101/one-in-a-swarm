@@ -1,0 +1,381 @@
+# Prompt bank v2: rivals. The Bulldogs prompt started in the rivalry-week set and now also lives in the gt pool.
+
+@bulldogs | RIVALS | Know thy enemy: name a Georgia Bulldogs football great | pool=gt | type=open | clar=anyone who played football at Georgia
+C Herschel Walker
+C Matthew Stafford
+C Stetson Bennett | Stetson Bennett IV
+T Nick Chubb
+T Todd Gurley
+S Brock Bowers
+S Fran Tarkenton
+S Champ Bailey
+S Hines Ward
+S A.J. Green | AJ Green
+S Sony Michel
+S Roquan Smith
+S Jordan Davis
+S Jalen Carter
+S Aaron Murray
+S Terrell Davis
+S Carson Beck
+S Kirby Smart :: A Georgia defensive back before he was Georgia's coach.
+R David Greene
+R David Pollack
+R Knowshon Moreno
+R Garrison Hearst
+R Richard Seymour
+R Thomas Davis
+R Geno Atkins
+R Jake Fromm
+R D'Andre Swift | DAndre Swift
+R Eric Zeier
+R Travon Walker
+R Nakobe Dean
+R George Pickens
+R Ladd McConkey
+R Justin Houston
+R Leonard Floyd
+R Mecole Hardman
+R James Cook
+R Bill Goldberg | Goldberg :: A Georgia defensive lineman before the wrestling ring.
+D Frank Sinkwich
+D Charley Trippi
+D Rodney Hampton
+D Lindsay Scott
+D Buck Belue
+D Kevin Butler
+D Jarvis Jones
+D Alec Ogletree
+D Andrew Thomas
+D Isaiah Wynn
+D Tim Worley
+D Robert Edwards
+D Musa Smith
+D Boss Bailey
+D D.J. Shockley | DJ Shockley
+D Quincy Carter
+D Mike Bobo
+D Ray Goff
+D Bill Stanfill
+D Jake Scott
+D Rodrigo Blankenship | Hot Rod
+D Zamir White
+D Kelee Ringo
+D Malcolm Mitchell
+D Tavarres King
+D Orson Charles
+D Arthur Lynch
+D Cordy Glenn
+D Clint Boling
+D Max Jean-Gilles
+D Jon Stinchcomb
+D Matt Stinchcomb
+D George Foster
+D Johnathan Sullivan
+D Marcus Stroud
+D Charles Grant
+D Phillip Daniels
+D Sean Jones
+D Tim Jennings
+D Brandon Boykin
+D Bacarri Rambo
+D Shawn Williams
+D Reshad Jones
+D Rennie Curran
+D Akeem Dent
+D Dannell Ellerbe
+D Jordan Jenkins
+D Lorenzo Carter
+D D'Andre Walker
+D Azeez Ojulari
+D Jermaine Johnson
+D Quay Walker
+D Channing Tindall
+D Devonte Wyatt
+D Lewis Cine
+D Derion Kendrick
+D Eric Stokes
+D Tyson Campbell
+D Richard LeCounte
+D J.R. Reed
+D Deandre Baker
+D Malik Herring
+D Jonathan Ledbetter
+D Trenton Thompson
+D John Atkins
+D Sedrick Van Pran | Sedrick Van Pran-Granger
+D Broderick Jones
+D Jamaree Salyer
+D Justin Shaffer
+D Solomon Kindley
+D Lamont Gaillard
+D Riley Ridley
+D Terry Godwin
+D Javon Wims
+D Chris Conley
+D Michael Bennett
+D Marlon Brown
+D Fernando Velasco
+D Kregg Lumpkin
+D Danny Ware
+D Verron Haynes
+D Olandis Gary
+D Patrick Pass
+D Brice Hunter
+D Andre Hastings
+D Mack Strong
+D Lars Tate
+D Keith Henderson
+D John Kasay
+D Todd Peterson
+D Billy Bennett
+D Blair Walsh
+D Marshall Morgan
+D Brandon Coutu
+D Cade Mays
+D Kearis Jackson
+D Arian Smith
+D Dominick Blaylock
+D Kendall Milton
+D Daijun Edwards
+D Javon Bullard
+D Tykee Smith
+D Kamari Lassiter
+D Smael Mondon | Smael Mondon Jr.
+D Jalon Walker
+D Mykel Williams
+D Malaki Starks
+D Tate Ratledge
+D Dylan Fairchild
+D Amarius Mims
+D Darnell Washington
+D Christopher Smith
+D Robert Beal
+D Nolan Smith
+D Warren McClendon
+D Gunner Stockton
+D Nate Frazier
+D Trevor Etienne
+D Dillon Bell
+D Dominic Lovett
+D Oscar Delp
+D Lawson Luckie
+D CJ Allen
+D Raylen Wilson
+D Zachariah Branch
+D Peyton Woodring
+D Brett Thorson
+D Jake Camarda
+D Cameron Nizialek
+D Pat Dye :: An All-American guard at Georgia before he coached Auburn.
+D Zeke Bratkowski
+D Johnny Rauch
+D John Lastinger
+D Jeff Pyburn
+D Andy Johnson
+D Matt Robinson
+D James Jackson
+D Wayne Johnson
+D Greg Talley
+D Cory Phillips
+D Joe Tereshinski | Joe Tereshinski III
+D Joe Cox
+D Hutson Mason
+D Greyson Lambert
+D Faton Bauta
+D Brice Ramsey
+D Jacob Eason
+D Justin Fields :: He began at Georgia before Ohio State.
+D JT Daniels
+D D'Wan Mathis
+D Brock Vandagriff
+X Terry Hoage :: A two-time All-American safety in the early 1980s.
+! Vince Dooley :: the coach; he played his football at Auburn
+! Mark Richt :: the coach; he played at Miami
+! Uga :: a very good dog, but not on the roster
+! Tim Tebow :: Florida
+! Bo Jackson :: Auburn
+! Cam Newton :: Auburn
+! Calvin Johnson :: one of ours
+! Demaryius Thomas :: one of ours
+! Trevor Lawrence :: Clemson; he is from Cartersville, but never a Bulldog
+! Deshaun Watson :: Clemson; from Gainesville, Georgia, but never a Bulldog
+! Joe Hamilton :: one of ours
+! Dominique Wilkins :: Georgia basketball, not football
+
+@hbcus | COLLEGES | Name a historically Black college or university | pool=gt | type=closed | count=105 | source=Wikipedia, List of historically black colleges and universities (current institutions) | clar=Atlanta is home to six of them | strip=university,college
+S Alabama A&M University | Alabama A&M | Alabama A and M | AAMU
+S Alabama State University | Alabama State
+S Albany State University | Albany State
+R Alcorn State University | Alcorn State | Alcorn
+R Allen University | Allen
+D American Baptist College
+R University of Arkansas at Pine Bluff | Arkansas-Pine Bluff | UAPB | Arkansas Pine Bluff | Pine Bluff
+D Arkansas Baptist College
+R Barber-Scotia College | Barber-Scotia | Barber Scotia
+R Benedict College | Benedict
+R Bennett College | Bennett
+S Bethune-Cookman University | Bethune-Cookman | Bethune Cookman | BCU
+D Bishop State Community College
+R Bluefield State University | Bluefield State
+R Bowie State University | Bowie State
+R Central State University | Central State
+X Cheyney University of Pennsylvania | Cheyney | Cheyney University :: Founded in 1837, the oldest of them all.
+R Claflin University | Claflin
+C Clark Atlanta University | Clark Atlanta | CAU | Clark | Atlanta University :: Atlanta.
+D Clinton College
+D Coahoma Community College
+R Coppin State University | Coppin State
+S Delaware State University | Delaware State
+D Denmark Technical College
+S Dillard University | Dillard
+R University of the District of Columbia | UDC
+R Edward Waters University | Edward Waters
+R Elizabeth City State University | Elizabeth City State | ECSU
+R Fayetteville State University | Fayetteville State
+S Fisk University | Fisk
+C Florida A&M University | FAMU | Florida A&M | Florida A and M
+R Florida Memorial University | Florida Memorial
+S Fort Valley State University | Fort Valley State | Fort Valley | FVSU
+D Gadsden State Community College
+S Grambling State University | Grambling | Grambling State
+S Hampton University | Hampton
+R Harris-Stowe State University | Harris-Stowe | Harris Stowe
+D Hinds Community College at Utica
+C Howard University | Howard
+R Huston-Tillotson University | Huston-Tillotson | Huston Tillotson
+R Interdenominational Theological Center | ITC :: Atlanta.
+D J. F. Drake State Technical College
+S Jackson State University | Jackson State | JSU
+R Jarvis Christian University | Jarvis Christian
+R Johnson C. Smith University | Johnson C. Smith | JCSU | Johnson C Smith
+R Kentucky State University | Kentucky State
+D Knoxville College
+R Lane College | Lane
+R Langston University | Langston
+D Lawson State Community College
+R LeMoyne-Owen College | LeMoyne-Owen | LeMoyne Owen
+R Lincoln University (Pennsylvania) | Lincoln University | Lincoln | Lincoln University of Pennsylvania
+R Lincoln University of Missouri | Lincoln University Missouri | Lincoln Missouri
+R Livingstone College | Livingstone
+R University of Maryland Eastern Shore | Maryland Eastern Shore | UMES
+S Meharry Medical College | Meharry
+R Miles College | Miles
+R Mississippi Valley State University | Mississippi Valley State | MVSU | Mississippi Valley | Valley
+C Morehouse College | Morehouse :: Tech's neighbour across town, and Martin Luther King Jr.'s college.
+R Morehouse School of Medicine | MSM :: Atlanta.
+S Morgan State University | Morgan State | Morgan
+T Morris Brown College | Morris Brown :: Atlanta.
+D Morris College
+S Norfolk State University | Norfolk State
+S North Carolina Agricultural & Technical State University | North Carolina A&T | NC A&T | A&T | North Carolina A and T | NCAT
+S North Carolina Central University | NC Central | North Carolina Central | NCCU
+R Oakwood University | Oakwood
+R Paine College | Paine
+R Paul Quinn College | Paul Quinn
+D Payne Theological Seminary
+R Philander Smith University | Philander Smith | Philander Smith College
+S Prairie View A&M University | Prairie View | Prairie View A&M | PVAMU
+R Rust College | Rust
+S Savannah State University | Savannah State
+D Selma University
+R Shaw University | Shaw
+D Shorter College
+D Shelton State Community College
+R Simmons College | Simmons College of Kentucky
+S South Carolina State University | South Carolina State | SC State
+R Southern University at New Orleans | SUNO
+R Southern University at Shreveport | SUSLA
+S Southern University and A&M College | Southern University | Southern | Southern University Baton Rouge
+D Southwestern Christian College
+C Spelman College | Spelman :: Atlanta.
+R St. Augustine's University | St. Augustine's | Saint Augustine's | St Augustines
+D St. Philip's College
+R Stillman College | Stillman
+R Talladega College | Talladega
+S Tennessee State University | Tennessee State | TSU
+D Texas College
+S Texas Southern University | Texas Southern | TSU Texas
+R Tougaloo College | Tougaloo
+D Trenholm State Community College
+T Tuskegee University | Tuskegee
+R University of the Virgin Islands | UVI | Virgin Islands
+R Virginia State University | Virginia State
+R Virginia Union University | Virginia Union
+R Virginia University of Lynchburg | VUL
+R Voorhees University | Voorhees
+R West Virginia State University | West Virginia State
+R Wilberforce University | Wilberforce
+R Wiley University | Wiley | Wiley College
+R Winston-Salem State University | Winston-Salem State | WSSU | Winston Salem State
+S Xavier University of Louisiana | Xavier | XULA
+! Georgia Tech :: not an HBCU
+! Georgia State :: not an HBCU
+! Emory :: not an HBCU
+! Harvard :: not an HBCU
+! Kennesaw State :: not an HBCU
+! Atlanta Metropolitan :: a predominantly Black institution, but not a designated HBCU
+! Bishop College :: closed in 1988
+! Saint Paul's College :: closed in 2013
+! Concordia College Alabama :: closed in 2018
+
+@peachbowl | ATLANTA SPORTS | Name a team that has played in the Peach Bowl | pool=gt | type=closed | count=47 | source=Wikipedia, Peach Bowl game results (through January 2026) | clar=also called the Chick-fil-A Bowl
+C LSU | Louisiana State
+S Florida State | FSU | Seminoles
+R West Virginia | WVU
+S South Carolina | Gamecocks
+R Arizona State | ASU
+S North Carolina | UNC | Tar Heels | Carolina
+S Ole Miss | Mississippi
+C Georgia Tech | Tech | GT | Yellow Jackets :: Four trips, the last after the 2008 season.
+S NC State | North Carolina State | N.C. State | Wolfpack
+C Georgia | UGA | Bulldogs
+R Maryland | Terps
+R Texas Tech
+R Vanderbilt | Vandy
+R Kentucky | UK
+R Iowa State
+R Purdue
+R Baylor
+C Clemson
+S Miami | The U | Miami Florida
+S Virginia Tech | VT | Hokies
+S Florida | UF | Gators
+R Iowa | Hawkeyes
+S Tennessee | Vols
+R Virginia | UVA
+R Army | West Point :: The 1985 game, against Illinois.
+R Illinois
+S Indiana | IU :: The most recent winner on the list: a playoff semifinal in January 2026.
+R Syracuse
+C Auburn
+X East Carolina | ECU :: The Pirates won it in 1992, coming back from 17 down in the fourth quarter against NC State.
+D Mississippi State
+D TCU | Texas Christian
+S Texas A&M | Texas A and M | A&M
+D Duke
+D Houston
+C Alabama | Bama | Crimson Tide
+S Washington | UW | Huskies
+T UCF | Central Florida :: The unbeaten 2017 team beat Auburn here and declared itself national champion.
+S Michigan
+S Oklahoma | OU | Sooners
+D Cincinnati
+S Michigan State | MSU
+D Pittsburgh | Pitt
+S Ohio State | OSU | Buckeyes
+S Penn State | PSU
+S Texas | Longhorns
+S Oregon | Ducks
+! Notre Dame :: never in the Peach Bowl
+! Southern California :: never in the Peach Bowl
+! Nebraska :: never in the Peach Bowl
+! Wisconsin :: never in the Peach Bowl
+! Arkansas :: never in the Peach Bowl
+! Missouri :: never in the Peach Bowl
+! Louisville :: never in the Peach Bowl
+! Boston College :: never in the Peach Bowl
+! Wake Forest :: never in the Peach Bowl
+! Stanford :: never in the Peach Bowl
+! Oklahoma State :: never in the Peach Bowl
+! Kansas :: never in the Peach Bowl

@@ -319,6 +319,104 @@
     return out;
   }
 
+  /* ---------- the daily mix ----------
+     Every flight is four Georgia Tech prompts and three general ones, in a fixed order, and
+     the general prompt that opens the flight is always an easy one. Each kind is drawn from
+     its own pool, and a prompt never returns sooner than floor(pool size / slots a day) days. */
+  const MIX_ORDER = ['easy', 'gt', 'gt', 'general', 'gt', 'general', 'gt'];
+  const MIX_MIN_GAP = 14; // days: the bank must be big enough that nothing returns sooner
+
+  // Which pool a prompt is drawn from: 'gt', 'easy' (a general prompt that may open a flight),
+  // 'general' (any other general prompt), or null when it is retired or has no pool.
+  function mixPool(p) {
+    if (!p || p.retired) return null;
+    if (p.pool === 'gt') return 'gt';
+    if (p.pool === 'general') return p.easy ? 'easy' : 'general';
+    return null;
+  }
+
+  // Pool sizes and the repeat gap each one supports. `ok` is false when a pool is too small
+  // for the 14-day rule.
+  function mixPlan(prompts) {
+    const slots = { gt: 0, easy: 0, general: 0 };
+    MIX_ORDER.forEach((k) => { slots[k] += 1; });
+    const plan = { ok: true, pools: {} };
+    Object.keys(slots).forEach((k) => {
+      const ids = prompts.filter((p) => mixPool(p) === k).map((p) => p.id).sort();
+      const gap = Math.floor(ids.length / slots[k]);
+      plan.pools[k] = { ids, slots: slots[k], gap };
+      if (gap < MIX_MIN_GAP) plan.ok = false;
+    });
+    return plan;
+  }
+
+  // Adds every date from `fromKey` for `days` days that the schedule does not already have.
+  // Dates already present are never touched. A prompt is eligible for a day only if its last
+  // use is at least its pool's gap in days behind; among the eligible, the ones that have
+  // waited longest are favoured, with a seeded shuffle so that days do not repeat as sets.
+  function extendMixSchedule(existing, prompts, fromKey, days) {
+    const out = { version: 1, days: Object.assign({}, existing && existing.days) };
+    const plan = mixPlan(prompts);
+    const last = {}; // prompt id -> day number of its latest use
+    Object.keys(out.days).forEach((key) => { const d = dayNumber(key); out.days[key].forEach((id) => { if (!(last[id] >= d)) last[id] = d; }); });
+    const start = dayNumber(fromKey);
+    for (let d = start; d < start + days; d++) {
+      const key = utcDateKey(new Date(d * 86400000));
+      if (out.days[key]) continue;
+      const picked = {};
+      Object.keys(plan.pools).forEach((k) => {
+        const pool = plan.pools[k];
+        const rng = seededRng('one-in-a-swarm:mix:' + k + ':' + key);
+        const waited = (id) => (last[id] === undefined ? 1e6 : d - last[id]);
+        // nearest later use too: a date being filled in before days that already exist
+        const ahead = (id) => { for (let j = 1; j < pool.gap; j++) { const day = out.days[utcDateKey(new Date((d + j) * 86400000))]; if (day && day.indexOf(id) !== -1) return false; } return true; };
+        let eligible = pool.ids.filter((id) => waited(id) >= pool.gap && ahead(id));
+        if (eligible.length < pool.slots) eligible = pool.ids.slice().sort((a, b) => waited(b) - waited(a)).slice(0, pool.slots); // a pool too small for its own rule
+        const longest = shuffle(eligible, rng).sort((a, b) => waited(b) - waited(a)).slice(0, pool.slots * 2);
+        picked[k] = shuffle(longest, rng).slice(0, pool.slots);
+        picked[k].forEach((id) => { last[id] = d; });
+      });
+      out.days[key] = MIX_ORDER.map((k) => picked[k].shift());
+    }
+    const sorted = {};
+    Object.keys(out.days).sort().forEach((k) => { sorted[k] = out.days[k]; });
+    out.days = sorted;
+    return out;
+  }
+
+  // Checks the mix on a range of dates: four gt and three general in the fixed order, an easy
+  // opener, and the repeat rule. Returns { errors, gaps } where gaps is the smallest number of
+  // days between two uses of the same prompt, per pool.
+  function checkMix(schedule, prompts, fromKey, days) {
+    const byId = {};
+    prompts.forEach((p) => { byId[p.id] = p; });
+    const plan = mixPlan(prompts);
+    const errors = [];
+    const gaps = { gt: Infinity, easy: Infinity, general: Infinity };
+    const last = {};
+    const start = dayNumber(fromKey);
+    for (let d = start; d < start + days; d++) {
+      const key = utcDateKey(new Date(d * 86400000));
+      const ids = schedule.days[key];
+      if (!Array.isArray(ids) || ids.length !== MIX_ORDER.length) { errors.push(key + ': not scheduled'); continue; }
+      if (new Set(ids).size !== ids.length) errors.push(key + ': a prompt appears twice');
+      ids.forEach((id, i) => {
+        const k = mixPool(byId[id]);
+        const want = MIX_ORDER[i];
+        if (!k) errors.push(key + ' round ' + (i + 1) + ': "' + id + '" is not a live prompt with a pool');
+        else if (want === 'gt' ? k !== 'gt' : k === 'gt') errors.push(key + ' round ' + (i + 1) + ': expected a ' + (want === 'gt' ? 'gt' : 'general') + ' prompt, found "' + id + '"');
+        else if (want === 'easy' && k !== 'easy') errors.push(key + ' round 1: "' + id + '" is not an easy opener');
+        if (k && last[id] !== undefined) {
+          const gap = d - last[id];
+          if (gap < gaps[k]) gaps[k] = gap;
+          if (gap < Math.max(MIX_MIN_GAP, plan.pools[k].gap)) errors.push(key + ': "' + id + '" returns after ' + gap + ' days (its pool allows ' + plan.pools[k].gap + ', and never under ' + MIX_MIN_GAP + ')');
+        }
+        last[id] = d;
+      });
+    }
+    return { errors, gaps };
+  }
+
   // The scheduled prompts for a date, or null if the date is missing or names a prompt that no longer exists.
   function scheduledIds(schedule, dateKey, knownIds) {
     const ids = schedule && schedule.days && schedule.days[dateKey];
@@ -813,7 +911,7 @@
     ROUNDS, ROUND_MS, SUBMIT_COOLDOWN_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
-    scheduleDay, extendSchedule, scheduledIds,
+    scheduleDay, extendSchedule, scheduledIds, MIX_ORDER, MIX_MIN_GAP, mixPool, mixPlan, extendMixSchedule, checkMix,
     tierPoints, totalScore, altitudeFeet, scoreForFeet, altitudeParts, altitudeText, flightNumber, bandFor, formatNumber, shareGrid, shareText,
     SAVE_VERSION, newDaily, startRound, remainingMs, dailyTick, dailyGuess,
     reviveDaily, reviveBest, previousDateKey, resolveDaily,

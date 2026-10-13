@@ -1,0 +1,972 @@
+# Prompt bank v2: the last general prompts.
+
+@dinosaurs | SCIENCE | Name a dinosaur | pool=general | type=open | clar=true dinosaurs; flying and swimming reptiles don't count
+C Tyrannosaurus rex | T. rex | T-Rex | T Rex | Tyrannosaurus | Trex
+C Triceratops
+C Stegosaurus
+C Velociraptor | Raptor
+C Brachiosaurus
+T Brontosaurus :: Declared invalid for a century, then restored as a real genus in 2015.
+T Spinosaurus
+S Apatosaurus
+S Diplodocus
+S Ankylosaurus
+S Allosaurus
+S Pachycephalosaurus
+S Iguanodon
+S Parasaurolophus
+S Dilophosaurus :: It did not spit venom, and it had no frill.
+S Gallimimus
+S Compsognathus | Compy
+S Archaeopteryx
+S Giganotosaurus
+S Carnotaurus
+S Utahraptor
+S Deinonychus
+R Oviraptor
+R Protoceratops
+R Styracosaurus
+R Pentaceratops
+R Torosaurus
+R Centrosaurus
+R Chasmosaurus
+R Pachyrhinosaurus
+R Maiasaura
+R Edmontosaurus
+R Corythosaurus
+R Lambeosaurus
+R Hadrosaurus
+R Therizinosaurus
+R Baryonyx
+R Suchomimus
+R Carcharodontosaurus
+R Albertosaurus
+R Gorgosaurus
+R Tarbosaurus
+R Daspletosaurus
+R Ceratosaurus
+R Megalosaurus :: The first dinosaur ever named, in 1824.
+R Coelophysis
+R Plateosaurus
+R Herrerasaurus
+R Eoraptor
+R Camarasaurus
+R Argentinosaurus
+R Titanosaurus
+R Dreadnoughtus
+R Patagotitan
+R Mamenchisaurus
+R Supersaurus
+R Barosaurus
+R Kentrosaurus
+R Euoplocephalus
+R Nodosaurus
+R Polacanthus
+R Psittacosaurus
+R Microraptor
+R Troodon
+R Ornithomimus
+R Struthiomimus
+R Dromaeosaurus
+R Hypsilophodon
+R Ouranosaurus
+R Amargasaurus
+R Saltasaurus
+R Yutyrannus
+R Acrocanthosaurus
+R Majungasaurus
+R Cryolophosaurus
+R Mononykus
+R Sinosauropteryx
+R Stygimoloch
+R Dracorex
+D Abelisaurus
+D Rajasaurus
+D Rugops
+D Irritator
+D Sinraptor
+D Yangchuanosaurus
+D Monolophosaurus
+D Guanlong
+D Dilong
+D Nanotyrannus
+D Lythronax
+D Teratophoneus
+D Appalachiosaurus :: Found in Alabama; a tyrannosaur of the old Southeast.
+D Alioramus
+D Qianzhousaurus
+D Deinocheirus
+D Gigantoraptor
+D Citipati
+D Caudipteryx
+D Anchiornis
+D Zhenyuanlong
+D Austroraptor
+D Dakotaraptor
+D Saurornitholestes
+D Bambiraptor
+D Pyroraptor
+D Balaur
+D Shuvuuia
+D Alvarezsaurus
+D Nothronychus
+D Beipiaosaurus
+D Pelecanimimus
+D Sinornithosaurus
+D Massospondylus
+D Riojasaurus
+D Shunosaurus
+D Cetiosaurus
+D Nigersaurus
+D Rebbachisaurus
+D Alamosaurus
+D Futalognkosaurus
+D Puertasaurus
+D Sauroposeidon
+D Giraffatitan
+D Europasaurus
+D Magyarosaurus
+D Scelidosaurus
+D Scutellosaurus
+D Huayangosaurus
+D Tuojiangosaurus
+D Wuerhosaurus
+D Miragaia
+D Gastonia
+D Sauropelta
+D Borealopelta
+D Minmi
+D Zuul
+D Pinacosaurus
+D Leaellynasaura
+D Thescelosaurus
+D Dryosaurus
+D Camptosaurus
+D Tenontosaurus
+D Muttaburrasaurus
+D Shantungosaurus
+D Saurolophus
+D Olorotitan
+D Tsintaosaurus
+D Brachylophosaurus
+D Gryposaurus
+D Kritosaurus
+D Yinlong
+D Leptoceratops
+D Zuniceratops
+D Einiosaurus
+D Diabloceratops
+D Kosmoceratops
+D Nasutoceratops
+D Regaliceratops
+D Sinoceratops
+D Homalocephale
+D Prenocephale
+D Heterodontosaurus
+D Lesothosaurus
+D Pisanosaurus
+D Staurikosaurus
+D Nyasasaurus
+X Scipionyx :: A hatchling found in Italy with its intestines, liver and muscle fibres still visible in the stone.
+! Pterodactyl :: a flying reptile (a pterosaur), not a dinosaur
+! Pteranodon :: a pterosaur, not a dinosaur
+! Quetzalcoatlus :: a pterosaur, not a dinosaur
+! Plesiosaurus :: a marine reptile
+! Mosasaurus :: a marine lizard
+! Ichthyosaurus :: a marine reptile
+! Dimetrodon :: older than the dinosaurs, and closer kin to mammals
+! Woolly Mammoth :: a mammal, sixty million years later
+! Megalodon :: a shark
+! Sabertooth Tiger :: a mammal
+! Godzilla :: fictional
+! Indominus rex :: invented for "Jurassic World"
+! Barney :: a television star
+! Crocodile :: a living relative, not a dinosaur
+! Chicken :: birds are living dinosaurs, but the prompt means the extinct kind
+! Komodo Dragon :: a living lizard
+
+@greekmyth | STORIES | Name a figure from Greek mythology | pool=general | type=open | clar=gods, heroes and monsters; Roman names count
+C Zeus | Jupiter | Jove
+C Poseidon | Neptune
+C Hades | Pluto
+C Athena | Minerva | Athene
+C Hercules | Heracles | Herakles
+C Aphrodite | Venus
+T Medusa
+T Achilles
+S Apollo
+S Ares | Mars
+S Artemis | Diana
+S Hermes | Mercury
+S Hera | Juno
+S Hephaestus | Vulcan | Hephaistos
+S Demeter | Ceres
+S Dionysus | Bacchus
+S Persephone
+S Odysseus | Ulysses
+S Perseus
+S Prometheus
+S Pandora
+S Icarus
+S Atlas
+S Cerberus
+S Minotaur | The Minotaur
+S Pegasus
+S Cyclops | Polyphemus
+S Helen of Troy | Helen
+S Kronos | Cronus | Cronos | Saturn
+S Eros | Cupid
+S Narcissus
+S Theseus
+S Jason
+R Hestia
+R Gaia | Gaea
+R Uranus | Ouranos
+R Rhea
+R Nike :: Victory. The shoes came later.
+R Nemesis
+R Hecate
+R Pan
+R Eris
+R Hypnos
+R Thanatos
+R Morpheus
+R Iris
+R Helios
+R Selene
+R Eos
+R Nyx
+R Chaos
+R Tartarus
+R Charon
+R Orpheus
+R Eurydice
+R Daedalus
+R Midas | King Midas
+R Sisyphus
+R Tantalus
+R Oedipus
+R Antigone
+R Agamemnon
+R Menelaus
+R Paris
+R Hector
+R Priam
+R Ajax
+R Patroclus
+R Cassandra
+R Penelope
+R Telemachus
+R Circe
+R Calypso
+R Medea
+R Ariadne
+R Atalanta
+R Bellerophon
+R Adonis
+R Echo
+R Arachne
+R Psyche
+R Hydra | The Hydra | Lernaean Hydra
+R Chimera | Chimaera
+R Sphinx | The Sphinx
+R Sirens | Siren | The Sirens
+R Centaur | Chiron | Centaurs
+R Typhon
+R Scylla
+R Charybdis
+R The Fates | Fates | Moirai
+R The Furies | Furies | Erinyes
+R The Muses | Muses | Calliope
+R Titans | The Titans
+R Amazons | Hippolyta
+R Argonauts | The Argonauts
+R Asclepius
+R Ganymede
+R Leda
+R Europa
+R Io
+R Callisto
+R Castor | Pollux | Castor and Pollux | Polydeuces
+R Clytemnestra
+R Electra
+R Orestes
+R Iphigenia
+R Andromeda
+R Cassiopeia
+R Hippolytus
+R Phaedra
+R Minos | King Minos
+R Pasiphae
+R Aeneas
+D Oceanus
+D Tethys
+D Hyperion
+D Theia
+D Coeus
+D Phoebe
+D Iapetus
+D Mnemosyne
+D Themis
+D Epimetheus
+D Menoetius
+D Leto
+D Maia
+D Semele
+D Metis
+D Thetis
+D Peleus
+D Nereus
+D Proteus
+D Triton
+D Amphitrite
+D Galatea
+D Pygmalion
+D Daphne
+D Hyacinthus | Hyacinth
+D Endymion
+D Tithonus
+D Actaeon
+D Orion
+D Niobe
+D Ixion
+D Phaethon | Phaeton
+D Deucalion
+D Pyrrha
+D Cadmus
+D Harmonia
+D Pentheus
+D Tiresias | Teiresias
+D Creon
+D Jocasta
+D Laius
+D Eteocles
+D Polynices
+D Ismene
+D Diomedes
+D Nestor
+D Philoctetes
+D Neoptolemus | Pyrrhus
+D Hecuba
+D Andromache
+D Astyanax
+D Laocoon | Laocoön
+D Sarpedon
+D Memnon
+D Penthesilea
+D Briseis
+D Chryseis
+D Eumaeus
+D Nausicaa
+D Alcinous
+D Laertes
+D Argus | Argos | Argus Panoptes
+D Geryon
+D Antaeus
+D Echidna
+D Ladon
+D Python
+D Talos
+D Harpies | Harpy
+D Gorgons | Gorgon | Stheno | Euryale
+D Graeae | Graiai | The Gray Sisters
+D Hecatoncheires | Hundred-Handed Ones | Briareus
+D Nemean Lion
+D Erymanthian Boar
+D Stymphalian Birds
+D Ceryneian Hind
+D Cretan Bull
+D Mares of Diomedes
+D Chrysaor
+D Arion
+D Lycaon
+D Procrustes
+D Sciron
+D Sinis
+D Aegeus
+D Aethra
+D Pirithous
+D Meleager
+D Hylas
+D Iolaus
+D Deianira
+D Alcmene
+D Amphitryon
+D Eurystheus
+D Omphale
+D Phrixus
+D Helle
+D Aeetes
+D Pelias
+D Glauce
+D Alcestis
+D Admetus
+D Philemon
+D Baucis | Baucis and Philemon
+D Hero | Hero and Leander | Leander
+D Pyramus | Thisbe | Pyramus and Thisbe
+D Halcyon | Alcyone | Ceyx
+D Arethusa
+D Syrinx
+D Marsyas
+D Silenus
+D Priapus
+D Momus
+D Tyche
+D Hebe
+D Eileithyia
+D Enyo
+D Deimos
+D Phobos
+D Zephyrus | Zephyr
+D Boreas
+D Aeolus
+D Hesperides
+D Pleiades
+X Erysichthon :: He cut down Demeter's sacred grove, was cursed with endless hunger, and at last ate himself.
+! Thor :: Norse
+! Odin :: Norse
+! Loki :: Norse
+! Romulus :: Roman
+! Ra :: Egyptian
+! Anubis :: Egyptian
+! Gilgamesh :: Mesopotamian
+! Percy Jackson :: a modern novel's hero
+! Socrates :: a real philosopher
+! Alexander the Great :: a real king
+! Homer :: the poet, not a character
+! Xena :: a television character
+
+@collegenicknames | SPORTS | Name a college team nickname | pool=general | type=open | clar=NCAA Division I teams, like Yellow Jackets
+C Yellow Jackets | Jackets | Ramblin' Wreck | Ramblin Wreck :: Georgia Tech. Obviously.
+C Bulldogs | Dawgs | Bulldog :: Georgia, and about a dozen others.
+C Tigers | Tiger
+C Wildcats | Wildcat | Cats
+C Crimson Tide | Tide
+C Gators
+T Fighting Irish | Irish
+T Demon Deacons | Deacons | Deacs
+S Seminoles | Noles
+S Hurricanes | Canes
+S Tar Heels | Tarheels | Heels
+S Blue Devils
+S Volunteers | Vols
+S Buckeyes
+S Wolverines
+S Longhorns | Horns
+S Trojans
+S Bruins
+S Ducks
+S Spartans
+S Nittany Lions
+S Sooners
+S Cornhuskers | Huskers
+S Razorbacks | Hogs
+S Gamecocks
+S Hokies
+S Cavaliers | Wahoos | Hoos
+S Wolfpack | Wolf Pack
+S Cardinals | Cardinal
+S Eagles | Golden Eagles
+S Panthers
+S Aggies
+S Badgers
+S Hawkeyes
+S Jayhawks
+S Huskies
+S Orange | Orangemen
+S Rebels | Runnin' Rebels
+S Mountaineers
+S Commodores
+R Golden Bears | Bears
+R Mustangs
+R Cowboys | Pokes
+R Red Raiders
+R Horned Frogs
+R Cyclones
+R Golden Gophers | Gophers
+R Boilermakers
+R Hoosiers
+R Fighting Illini | Illini
+R Terrapins | Terps
+R Scarlet Knights
+R Knights | Black Knights
+R Midshipmen | Mids
+R Falcons
+R Broncos
+R Cougars | Cougs
+R Utes
+R Sun Devils
+R Buffaloes | Buffs
+R Beavers
+R Rainbow Warriors | Warriors
+R Aztecs
+R Rams
+R Lobos
+R Miners
+R Owls
+R Green Wave
+R Golden Hurricane
+R Mean Green
+R Roadrunners
+R Bobcats
+R Bearcats
+R Musketeers
+R Flyers
+R Hoyas
+R Friars
+R Red Storm | Redmen
+R Pirates
+R Blue Jays | Bluejays
+R Golden Flashes
+R RedHawks | Redhawks | Red Hawks
+R Rockets
+R Zips
+R Chippewas
+R Thundering Herd | Herd
+R Hilltoppers
+R Blazers
+R Jaguars
+R Ragin' Cajuns | Ragin Cajuns | Cajuns
+R Warhawks
+R Red Wolves
+R Chanticleers | Chants
+R Monarchs
+R Dukes
+R Paladins
+R Catamounts
+R Terriers
+R Mocs | Moccasins
+R Phoenix
+R Camels
+R Spiders
+R Minutemen
+R Black Bears
+R Great Danes
+R Seawolves
+R Retrievers
+R Blue Hens | Fightin' Blue Hens
+R Quakers
+R Crimson
+R Big Red
+R Big Green
+R Lions
+R Leopards
+R Mountain Hawks
+R Bison
+R Crusaders
+R Raiders
+R Colonials | Revolutionaries
+R Patriots
+R Flames
+R Highlanders
+R Keydets
+R Hornets
+R Rattlers
+R Privateers
+R Lumberjacks
+R Bearkats
+R Demons
+R Colonels
+R Racers
+R Governors | Govs
+R Skyhawks
+R Redbirds
+R Salukis
+R Sycamores
+R Braves
+R Shockers
+X Billikens :: Saint Louis University. A billiken is a good-luck charm doll from 1908.
+R Ramblers
+R Explorers
+R Bonnies
+R Gaels
+R Dons
+R Toreros
+R Waves
+R Pilots
+R Vandals
+R Grizzlies | Griz
+R Bengals
+R Thunderbirds
+R Antelopes | Lopes
+R Anteaters
+R Gauchos
+R Matadors
+R Titans
+R 49ers | Forty-Niners
+R Tritons
+R Jackrabbits
+R Coyotes
+R Fighting Hawks
+R Penguins
+R Mastodons
+R Norse
+R Golden Grizzlies
+R Leathernecks
+R Kangaroos | Roos
+R Mavericks
+D Tommies
+R Lancers
+R Stags
+R Peacocks
+R Jaspers
+R Purple Eagles
+R Golden Griffins | Griffs
+R Saints
+R Red Foxes
+R Pioneers
+R Blue Hose
+R Fighting Camels
+R Hatters
+R Ospreys
+R Dolphins
+R Buccaneers | Bucs
+R Golden Lions
+R Hawks :: Saint Joseph's and Monmouth, among others.
+R Seahawks
+R Bulls
+R Vikings
+R Pride
+R Greyhounds
+R Dragons
+R Tribe
+R Blue Raiders
+R Purple Aces | Aces
+R Islanders
+R Vaqueros
+R Texans
+R Trailblazers
+R Screaming Eagles
+R Sharks
+D Lakers :: Mercyhurst, in Division I since 2024.
+D Chargers
+R Delta Devils
+! Yankees :: a pro baseball team
+! Packers :: a pro team
+! Buzz :: Tech's mascot, not the team nickname
+! Uga :: Georgia's mascot, not the team nickname
+
+@yellowthings | THINGS | Name something that is yellow | pool=general | type=open | clar=usually or famously yellow
+C Banana | Bananas
+C Sun | The Sun
+C Lemon | Lemons
+C School Bus | Bus
+C Yellow Jacket | Yellowjacket | Yellow Jackets | Buzz :: The correct answer on this campus.
+C Bee | Bumblebee | Honeybee | Bees
+T Rubber Duck | Rubber Ducky | Rubber Duckie
+T Minion | Minions
+S Taxi | Cab | Taxicab | Yellow Cab
+S Corn | Corn on the Cob
+S Mustard
+S Butter
+S Cheese | Cheddar
+S Egg Yolk | Yolk
+S Sunflower | Sunflowers
+S Daffodil | Daffodils
+S Dandelion | Dandelions
+S Pineapple
+S Tennis Ball
+S Pencil | No. 2 Pencil
+S Sticky Note | Post-it | Post-It Note | Sticky Notes
+S Highlighter
+S Gold
+S Honey
+S Lightning
+S Stars | Star
+S Smiley Face | Smiley | Emoji
+S Pikachu
+S SpongeBob | SpongeBob SquarePants | Spongebob
+S Big Bird
+S Duck | Duckling | Ducks | Chick | Baby Chick
+S Canary
+S Raincoat | Rain Jacket | Slicker
+S Caution Tape | Police Tape
+S Traffic Light | Yellow Light | Stoplight
+S Lemonade
+S Squash | Yellow Squash | Summer Squash
+S Bell Pepper | Yellow Pepper
+R Homer Simpson | The Simpsons | Simpsons | Bart Simpson
+R Winnie the Pooh | Pooh
+R Tweety | Tweety Bird
+R Woodstock
+R Pac-Man | Pacman
+R Lego | Lego Head | Lego Minifigure
+R The Man in the Yellow Hat | Man in the Yellow Hat | Yellow Hat
+R Yield Sign | Road Sign | Caution Sign | Warning Sign
+R Fire Hydrant
+R Hard Hat | Construction Helmet
+R Safety Vest
+R Crayon
+R Legal Pad
+R Manila Folder
+R Yellow Pages | Phone Book
+R National Geographic
+R Tonka Truck | Bulldozer | Construction Equipment | Excavator | Caterpillar
+R Submarine | Yellow Submarine
+R Penske Truck
+R DHL
+R McDonald's Arches | Golden Arches | McDonalds
+R Waffle House Sign | Waffle House :: Eleven yellow squares, lit all night.
+R Best Buy
+R Sprint
+R Snapchat
+R Hertz
+R Cheerios Box | Cheerios
+R Popcorn
+R Macaroni and Cheese | Mac and Cheese | Mac & Cheese
+R French Fries | Fries
+R Potato Chips | Chips | Lay's
+R Scrambled Eggs | Eggs | Omelet | Omelette
+R Custard | Pudding | Banana Pudding
+R Cornbread
+R Grits
+R Pasta | Noodles
+R Peeps
+R Starburst
+R M&M | M&Ms | Peanut M&Ms
+R Skittles
+R Lemon Drop | Lemonhead | Lemonheads
+R Gatorade
+R Mountain Dew
+R Beer
+R Champagne
+R Mango
+R Peach
+R Grapefruit
+R Starfruit
+R Golden Delicious | Apple | Yellow Apple
+R Pear
+R Plantain
+R Ginger
+R Turmeric
+R Saffron
+R Curry
+R Olive Oil | Oil | Vegetable Oil
+R Margarine
+R Pollen :: Every April in Atlanta, everything is.
+R Buttercup
+R Marigold
+R Tulip
+R Rose | Yellow Rose
+R Daisy | Daisy Center
+R Goldenrod
+R Forsythia
+R Black-Eyed Susan
+R Autumn Leaves | Leaves | Fall Leaves
+R Hay | Straw
+R Wheat
+R Sand
+R Desert
+R Sulfur | Sulphur
+R Brass
+R Amber
+R Topaz | Citrine
+R Wedding Ring | Gold Ring | Ring
+R Trophy | Medal | Gold Medal
+R Crown
+R Coin | Gold Coin
+R Trumpet
+R Saxophone
+R Tuba
+R Urine | Pee
+R Snot | Mucus
+R Jaundice
+R Bruise
+R Teeth
+R Earwax
+R Fat
+R Bile
+R Flame | Fire | Candle Flame
+R Moon | Harvest Moon
+R Sunlight | Sunshine | Light
+R Light Bulb | Lightbulb
+R Lamp
+R Goldfish
+R Yellow Lab | Labrador | Golden Retriever
+R Lion
+R Giraffe
+R Cheetah | Leopard
+R Tiger
+R Butterfly
+R Goldfinch | Finch
+R Warbler | Yellow Warbler
+R Yellowfin Tuna | Tuna
+R Yellow Tang | Tang
+R Seahorse
+R Snake | Corn Snake | Python
+R Wasp | Hornet
+R Ladybug
+R Firefly | Lightning Bug
+R Banana Slug
+R Rain Boots | Galoshes | Boots
+D Sweater | Yellow Sweater | Shirt | Dress
+D Yellow Brick Road | Brick Road
+D Ramblin' Wreck | Ramblin Wreck | The Wreck :: Old gold and white, since 1930.
+D Ferrari
+D Lamborghini
+D Corvette
+D Bumblebee Camaro | Camaro | Transformers
+D Volkswagen Beetle | VW Bug | Punch Buggy
+D Jeep
+D Kayak
+D Life Raft | Raft
+D Life Jacket | Life Vest
+D Buoy
+D Frisbee
+D Softball
+D Golf Ball
+D Yellow Card
+D Penalty Flag | Flag
+D Goalposts | Goal Post | Uprights
+D First Down Line | First-Down Line
+D Jersey | Yellow Jersey | Maillot Jaune
+D Lakers Jersey | Lakers
+D Steelers Towel | Terrible Towel
+D Packers Helmet | Packers
+D Pittsburgh Pirates | Pirates
+D Michigan Helmet | Maize
+D Banana Peel | Peel
+D Lemon Meringue Pie | Lemon Pie | Lemon Bar
+D Pineapple Upside-Down Cake | Cake | Yellow Cake
+D Twinkie
+D Nilla Wafers | Vanilla Wafer
+D Tortilla Chips | Nachos | Taco Shell
+D Cheez-It | Goldfish Crackers | Cheetos
+D Kraft Singles | American Cheese
+D Egg Noodles
+D Hollandaise
+D Honey Mustard
+D Pickled Ginger
+D Banana Pepper | Pepperoncini
+D Yukon Gold | Potato | Potatoes
+D Onion | Yellow Onion
+D Rutabaga
+D Spaghetti Squash
+D Wax Beans
+D Chickpeas
+D Lentils
+D Rice | Saffron Rice | Yellow Rice
+D Couscous
+D Polenta
+D Cornmeal
+D Custard Apple
+D Quince
+D Durian
+D Jackfruit
+D Yuzu
+D Rainier Cherry
+X Gamboge :: A pigment made from tree resin, the deep yellow of Buddhist monks' robes. In large doses, a strong laxative.
+! Grass :: green
+! Sky :: blue
+! Fire Truck :: red (though some airports paint them lime yellow)
+! Orange :: its own color
+! Carrot :: orange
+! Pumpkin :: orange
+! Georgia Bulldogs :: red and black
+! Stop Sign :: red
+! Snow :: white, ideally
+
+@bowlgames | SPORTS | Name a college football bowl game | pool=general | type=open | clar=past or present; sponsor names not needed | strip=bowl,classic
+C Rose Bowl | Rose | The Granddaddy of Them All
+C Peach Bowl | Peach | Chick-fil-A Bowl | Chick-fil-A Peach Bowl :: Atlanta's own.
+C Orange Bowl | Orange
+C Sugar Bowl | Sugar
+C Cotton Bowl | Cotton
+C Fiesta Bowl | Fiesta
+T Pop-Tarts Bowl | Pop Tarts | Cheez-It Bowl | Champs Sports Bowl | Russell Athletic Bowl | Camping World Bowl :: The winners eat the mascot.
+T Duke's Mayo Bowl | Dukes Mayo | Mayo Bowl | Belk Bowl | Meineke Car Care Bowl | Continental Tire Bowl
+S Citrus Bowl | Citrus | Capital One Bowl | Tangerine Bowl | Florida Citrus Bowl
+S Gator Bowl | Gator | TaxSlayer Bowl
+S Sun Bowl | Sun
+S Liberty Bowl | Liberty
+S Holiday Bowl | Holiday
+S Alamo Bowl | Alamo
+S Outback Bowl | Outback | ReliaQuest Bowl | Hall of Fame Bowl
+S Music City Bowl | Music City
+S Independence Bowl | Independence
+S Las Vegas Bowl | Las Vegas | Vegas Bowl
+S Texas Bowl | Texas
+S Military Bowl | Military
+S Pinstripe Bowl | Pinstripe
+S Birmingham Bowl | Birmingham | BBVA Compass Bowl | PapaJohns.com Bowl
+S New Orleans Bowl | New Orleans
+S Hawaii Bowl | Hawai'i Bowl | Hawaii
+S Armed Forces Bowl | Armed Forces
+S Gasparilla Bowl | Gasparilla | St. Petersburg Bowl
+S Celebration Bowl | Celebration :: Played in Atlanta: the HBCU national championship.
+R Bluebonnet Bowl | Bluebonnet | Astro-Bluebonnet Bowl
+R Aloha Bowl | Aloha
+R Freedom Bowl | Freedom
+R All-American Bowl | All American
+R Copper Bowl | Copper | Insight Bowl | Guaranteed Rate Bowl | Buffalo Wild Wings Bowl | Cactus Bowl | Rate Bowl
+R Humanitarian Bowl | Humanitarian | Famous Idaho Potato Bowl | Potato Bowl | MPC Computers Bowl
+R Emerald Bowl | Emerald | Kraft Fight Hunger Bowl | Fight Hunger Bowl | Foster Farms Bowl | Redbox Bowl | San Francisco Bowl
+R Seattle Bowl | Seattle | Oahu Bowl
+R Silicon Valley Bowl | Silicon Valley | Silicon Valley Football Classic
+R Quick Lane Bowl | Quick Lane | GameAbove Sports Bowl
+R Motor City Bowl | Motor City | Little Caesars Pizza Bowl | Little Caesars Bowl
+R First Responder Bowl | First Responder | Heart of Dallas Bowl | TicketCity Bowl
+R Fenway Bowl | Fenway
+R LA Bowl | Los Angeles Bowl
+R Myrtle Beach Bowl | Myrtle Beach
+R Cure Bowl | Cure
+R Boca Raton Bowl | Boca Raton
+R Bahamas Bowl | Bahamas
+R Camellia Bowl | Camellia | Salute to Veterans Bowl
+R New Mexico Bowl | New Mexico
+R Arizona Bowl | Arizona
+R Frisco Bowl | Frisco
+R 68 Ventures Bowl | Mobile Alabama Bowl | GoDaddy Bowl | GMAC Bowl | LendingTree Bowl | Dollar General Bowl
+R Poinsettia Bowl | Poinsettia
+R International Bowl | International
+R Houston Bowl | Houston | Galleryfurniture.com Bowl
+R Cherry Bowl | Cherry
+R California Bowl | California Raisin Bowl
+R Garden State Bowl | Garden State
+R Oil Bowl | Oil
+R Salad Bowl | Salad
+R Raisin Bowl | Raisin
+R Harbor Bowl | Harbor
+R Dixie Bowl | Dixie
+R Delta Bowl | Delta
+R Great Lakes Bowl | Great Lakes
+R Pineapple Bowl | Pineapple
+R Bacardi Bowl | Bacardi
+D Cigar Bowl | Cigar
+R Presidential Cup Bowl | Presidential Cup
+R Gotham Bowl | Gotham
+R Mercy Bowl | Mercy
+R Aviation Bowl | Aviation
+R Pasadena Bowl | Junior Rose Bowl
+R Heritage Bowl | Heritage
+R Pelican Bowl | Pelican
+R Fort Worth Bowl | Fort Worth
+R Miami Beach Bowl | Miami Beach
+D Los Angeles Christmas Festival | Christmas Festival
+D San Diego East-West Christmas Classic | East-West Christmas Classic
+D Shrine Bowl | East-West Shrine Bowl | Shrine Game
+D Senior Bowl | Senior
+D Hula Bowl | Hula
+D Glass Bowl | Glass
+D Tobacco Bowl | Tobacco
+D Refrigerator Bowl | Refrigerator
+D Boardwalk Bowl | Boardwalk
+D Grantland Rice Bowl | Grantland Rice
+D Pecan Bowl | Pecan
+D Burley Bowl | Burley
+D Cosmopolitan Bowl | Cosmopolitan
+D Vulcan Bowl | Vulcan
+D Fruit Bowl | Fruit
+D Will Rogers Bowl | Will Rogers
+X Poi Bowl | Poi :: Honolulu, 1936 to 1939, before it was renamed the Pineapple Bowl.
+! Super Bowl :: the NFL's championship, not a college bowl
+! Pro Bowl :: the NFL's all-star game
+! Toilet Bowl :: a nickname for a bad game, not a real one
+! Cereal Bowl :: breakfast
+! Fish Bowl :: no
+! Bobby Dodd Stadium :: a stadium, not a bowl game
+! College Football Playoff :: the bracket that the big bowls now host
+! Iron Bowl :: Alabama against Auburn, a rivalry game, not a postseason bowl
+! Egg Bowl :: Ole Miss against Mississippi State, a rivalry game
+! Dust Bowl :: the 1930s, not football

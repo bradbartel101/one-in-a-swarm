@@ -2,7 +2,7 @@
 # Tier letters: C common 10 · T too clever 15 · S solid 30 · R rare 60 · D deep cut 85 · X one in a swarm 100
 # "?" before the tier letter = needs a human to verify.  " :: " = note shown to the player.  " ?? " = why it is flagged.
 
-@majors | Academics | Name an undergraduate major (a B.S. degree) at Georgia Tech
+@majors | ACADEMICS | Name an undergraduate major at Georgia Tech | pool=gt | type=closed | count=42 | source=catalog.gatech.edu/programs, bachelor's degrees | clar=bachelor's degrees in the current catalog
 C Computer Science | CS | Comp Sci | CompSci
 C Mechanical Engineering | ME | MechE | Mechanical
 C Industrial Engineering | IE | ISyE | Industrial and Systems Engineering | Industrial
@@ -46,7 +46,7 @@ D Applied Physics
 R Environmental Science
 D Atmospheric and Oceanic Sciences | AOS
 
-@buildings | Campus | Name an academic or research building on Tech's campus | strip=building,hall,bldg
+@buildings | CAMPUS | Name an academic or research building on Tech's campus | pool=gt | type=open | clar=not dorms, dining or sports venues | strip=building,hall,bldg
 C Tech Tower | Lettie Pate Whitehead Evans Administration Building | Administration Building | Evans Administration Building
 C Clough Undergraduate Learning Commons | CULC | Clough | Clough Commons
 C Klaus Advanced Computing Building | Klaus
@@ -65,7 +65,7 @@ S Manufacturing Related Disciplines Complex | MRDC
 S Ford Environmental Science and Technology Building | Ford ES&T | ES&T | EST | Ford EST | Ford
 R Crosland Tower | Crosland
 R Guggenheim Building | Guggenheim Aerospace Building
-R Engineered Biosystems Building | EBB
+R Engineered Biosystems Building | EBB | Krone Engineered Biosystems Building | Krone
 R Whitaker Building | U.A. Whitaker Biomedical Engineering Building | Whitaker Biomedical Engineering Building
 R Petit Institute for Bioengineering and Bioscience | IBB | Petit Institute | Petit Biotechnology Building | Parker H. Petit Institute | Petit
 R Molecular Science and Engineering Building | MoSE
@@ -96,8 +96,62 @@ D Engineering Science and Mechanics Building | ESM
 D Rich Building | Rich Computer Center
 D French Building | A. French Building
 X Daniel Laboratory | Daniel Lab | J.L. Daniel Laboratory | Daniel
+R Dalney Building
+R West Architecture Building | Architecture West | Architecture Building West
+R Habersham Building | Habersham | 781 Marietta Street | 781 Marietta
+R Global Learning Center | Global Learning and Conference Center | GLC
+R Centergy | Centergy One
+R Chapin Building | OMED
+R O'Keefe Building
+R Couch Building | Couch Music Building
+D Architecture Annex
+D Advanced Wood Products Laboratory | AWPL | Wood Products Lab
+D Ben T. Zinn Combustion Laboratory | Zinn Combustion Lab | Combustion Lab | Aerospace Combustion Laboratory | Zinn
+D Aware Home | Aware Home Research Initiative | Broadband Institute Residential Laboratory
+D Center for Assistive Technology and Environmental Access | CATEA
+D Economic Development Building | EDB
+D Food Processing Technology Building | FPTB
+D GTRI Conference Center
+D 430 Tenth Street | 430 10th Street | GTRI Research
+D Heffernan House | Heffernan
+D ISyE Annex
+D Mechanical Engineering Research Building | MERB
+D Neely Research Center | Neely Nuclear Research Center | Neely
+D Structural Engineering and Materials Research Laboratory | SEMRL | Structures Lab
+D Allen Sustainable Education Building | Sustainable Education Building | SEB | Allen Building
+D Tech Way Building
+D Carbon Neutral Energy Solutions Laboratory | CNES | Carbon Neutral Energy Solutions
+D North Avenue Research Area | NARA
+D Bradley Building
+~D Electrical Research Building ?? I remember a building by this name near Van Leer but could not find it on the campus map.
+~D George Tower ?? Part of Tech Square's third phase; I could not confirm it has opened.
+! Student Center :: not an academic or research building
+! John Lewis Student Center :: not an academic or research building
+! Campus Recreation Center :: a sports venue
+! CRC :: a sports venue
+! Bobby Dodd Stadium :: a sports venue
+! McCamish Pavilion :: a sports venue
+! Ferst Center :: an arts venue
+! Brittain Dining Hall :: dining
+! Exhibition Hall :: an events building
+! Glenn Hall :: a residence hall
+! Towers :: a residence hall
+! North Avenue Apartments :: a residence hall
+! Stamps Health Services :: the health centre, not academic or research
+! Bill Moore Student Success Center :: student services, not academic or research
+! Tech Green :: a lawn, not a building
+! Georgia Tech Hotel :: a hotel
+! Barnes & Noble :: the bookstore
+! Alexander Memorial Coliseum :: a sports venue
+D Technology Enterprise Park | TEP | Science Square
+D Aircraft Prototyping Laboratory | Aircraft Prototyping Lab
+D Digital Fabrication Laboratory | DFL | Digital Fabrication Lab
+D Caddell Building | John and Joyce Caddell Building
+D 575 Fourteenth Street Engineering Center | 575 14th Street | 575 Fourteenth Street
+! Biotech Quad :: a group of four buildings; name one of them
+! Cobb County Research Facility :: a GTRI site in Smyrna, not on campus
 
-@dorms | Campus | Name a Georgia Tech residence hall or campus apartment complex | strip=hall,residence,apartments,apartment,dorm,building
+@dorms | CAMPUS | Name a Georgia Tech residence hall | pool=gt | type=closed | count=35 | source=housing.gatech.edu list of housing options, October 2026; a complex with several wings counts once | clar=halls and apartments in Tech housing today | strip=hall,residence,apartments,apartment,dorm,building
 C Glenn Hall
 C Towers Hall
 C North Avenue Apartments | North Ave | NAA | North Avenue East | North Avenue South | North Avenue West | North Avenue North
@@ -127,11 +181,22 @@ R Eighth Street Apartments | Eighth Street | 8th Street | ESA
 R Maulding Apartments
 R Zbar Apartments
 D Graduate Living Center | GLC
-D Fourth Street Apartments | Fourth Street | 4th Street
+! Fourth Street Apartments :: not on the current housing list
 X Tenth and Home | 10th and Home | Family Housing
 R Nelson-Shell Apartments | NSL
+D Goldin House | Goldin
+D Gray House | Gray
+D Hayes House | Hayes
+D Stein House | Stein
+! Peterson :: on the area-office page, but not on the list of housing options used here
+! Techwood Dorm :: McDaniel Hall, the old Techwood Dorm, was torn down in 2008
+! Undergraduate Living Center :: the old name; it is not on the current list
+! Sixth Street Apartments :: renamed; not on the current list
+! Britt :: Brittain is the dining hall, not a residence hall
+! West Village :: a dining hall
+! Square on Fifth :: private student housing, not Tech housing
 
-@dining | Campus Life | Name a spot to grab a bite or a coffee on or right around campus, past or present
+@dining | Campus Life | Name a spot to grab a bite or a coffee on or right around campus, past or present | retired
 C Brittain Dining Hall | Brittain | Brit
 C North Avenue Dining Hall | North Ave Dining | Nave | North Avenue Dining | North Ave
 C West Village | Willage | West Village Dining Commons
@@ -158,7 +223,7 @@ R Twisted Taco
 S Dunkin' | Dunkin Donuts | Dunkin
 R Carnegie Kitchen
 
-@alumni | People | Name a famous person who studied at Georgia Tech (no pro athletes)
+@alumni | PEOPLE | Name a famous person who studied at Georgia Tech | pool=gt | type=open | clar=not pro athletes; they have their own prompts
 C Jimmy Carter | President Carter | James Earl Carter | Carter :: He studied at Tech before transferring to the Naval Academy.
 S John Young | John W. Young :: Walked on the Moon and commanded the first Space Shuttle flight.
 C Jeff Foxworthy | Foxworthy
@@ -199,8 +264,215 @@ D Tom Fanning | Thomas Fanning
 D Brook Byers
 X Y. Frank Freeman | Frank Freeman :: Paramount Pictures executive and the first winner of the Academy's Jean Hersholt Humanitarian Award.
 D Dennis Hayes
+D Joy Buolamwini
+D David Eger
+D Will Roper
+D Rawi Abdelal
+D Ronald W. Allen | Ronald Allen
+D Charles "Garry" Betty | Charles Betty
+D W. Frank Blount | Frank Blount
+D John F. Brock | John Brock
+D Paul J. Brown | Paul Brown
+D Gary C. Butler | Gary Butler
+R Ben Chestnut :: Co-founded Mailchimp.
+D George G. Crawford | George Crawford
+D David Dorman
+D Walter Ehmer
+D David C. Garrett Jr. | David Garrett
+D Jaime Gilinski
+R Frank Gordy :: Founded The Varsity.
+D James Gulliver
+D Ed Iacobucci
+R Roger Krone
+D Alan J. Lacy | Alan Lacy
+D Mike Levy
+D David S. Lewis Jr. | David Lewis
+D Calvin Mackie
+D Scottie Mayfield
+D Robert Milton
+D Blake Moret
+R David Perdue
+D J. Paul Raines | Paul Raines
+D Hazard E. Reeves | Hazard Reeves
+D Glen P. Robinson | Glen Robinson
+R Joe Rogers Jr. | Joe Rogers :: Longtime chief executive of Waffle House.
+D Chuck Sannipoli
+D Derek V. Smith | Derek Smith
+D Mark C. Smith | Mark Smith
+D E. Roe Stamps | Roe Stamps
+D Henry Grady Weaver
+R George W. Woodruff | George Woodruff
+D Lori Mann Bruce
+D Robert H. Frank | Robert Frank
+D George C. Griffin | George Griffin
+D Evelynn M. Hammonds | Evelynn Hammonds
+D Carolyn Meyers
+D Deepak Hegde
+D Raymond W. Baker | Raymond Baker
+D Timothy Batten
+D Max Burns
+D Charles M. Brown | Charles Brown
+D Howard Callaway
+D Mario Canahuati
+D J. Owen Forrester | Owen Forrester
+R Phil Gingrey
+D Johnny Grant
+D Jack Guynn
+D John W. Keys | John Keys
+D Jon C. Kreitz | Jon Kreitz
+D Tom Moreland
+D Stephen Pace
+D E. Earl Patton | Earl Patton
+D Paul Craig Roberts
+D Chip Rogers
+D Mark D. Sickles | Mark Sickles
+D Orson Swindle
+D Daniel Webster
+D Rufus W. Youngblood | Rufus Youngblood
+D Edward C. Aldridge Jr. | Edward Aldridge
+D William L. Ball | William Ball
+R John Boyd
+D John M. Brown III | John Brown
+D Ray Davis
+D James O. Ellis | James Ellis
+D Pete Geren
+D Russell D. Hale | Russell Hale
+D Haywood S. Hansell | Haywood Hansell
+D Hugh W. Hardy | Hugh Hardy
+D John W. Hendrix | John Hendrix
+D Orlando Llenza
+D James C. McConville | James McConville
+R Thomas McGuire
+D Peter M. Rhee | Peter Rhee
+D Stuart C. Satterwhite | Stuart Satterwhite
+D William G. Thrash | William Thrash
+D Michael R. Clifford | Michael Clifford
+D James Henry Deese
+D Ben T. Epps | Ben Epps
+D Gabriel Georgiades
+D L. Blaine Hammond | Blaine Hammond
+D Charlie Hillard
+D Ellis L. Johnson | Ellis Johnson
+D Charles Kohlhase
+D Yvonne Pendleton
+D Alan G. Poindexter | Alan Poindexter
+D James R. Thompson Jr. | James Thompson
+D Joe F. Thompson | Joe Thompson
+D Sabrina Thompson
+D Bascom S. Deaver | Bascom Deaver
+D Robert V. Gentry | Robert Gentry
+D Arnold Hardy
+D Hagen Kleinert
+D Kenneth Lane
+D Earl W. McDaniel | Earl McDaniel
+D W. Jason Morgan | Jason Morgan
+D Anthony J. Arduengo III | Anthony Arduengo
+D Paul K. Calaway | Paul Calaway
+D Ronald Collé
+D James R. Fair | James Fair
+D Irving Geis
+D Linda Griffith
+D Valerie Montgomery Rice
+D David Rasnick
+D Wyatt C. Whitley | Wyatt Whitley
+D Joe Brooks
+R Wallace H. Coulter | Wallace Coulter
+D Ali Erdemir
+D David Frakes
+D Don Giddens
+D Samuel Graham
+D Paula T. Hammond | Paula Hammond
+D John Calvin Jureit
+D James Lansford
+D Michel G. Malti | Michel Malti
+D Gary S. May | Gary May
+D Tom McDermott
+D Robert C. Michelson | Robert Michelson
+D Lane Mitchell
+D Bryan Nesbitt
+D Sanjay Raman
+D Reisha Raney
+R Herbert Saffir :: The Saffir of the Saffir-Simpson hurricane scale.
+D Jeff S. Shamma | Jeff Shamma
+D John E. Till | John Till
+D W. Harry Vaughan | Harry Vaughan
+D Harrison Wadsworth Jr. | Harrison Wadsworth
+D B. N. Wilson
+D Yaser S. Abu-Mostafa | Yaser Abu-Mostafa
+D Jim Allchin
+D Eric Allender
+D Annie Antón
+D Fabian E. Bustamante | Fabian Bustamante
+D Joe Celko
+D Dorothy M. Crosland | Dorothy Crosland
+D Tom Cross
+D Jim Davies
+D Richard DeMillo
+D Anind Dey
+D W. Keith Edwards | Keith Edwards
+D Chaim Gingold
+D Candace Mitchell Harris
+R D. Richard Hipp | Richard Hipp :: Wrote SQLite.
+D James Mickens
+D Craig Mundie
+D Elizabeth Mynatt
+D James F. O'Brien | James O'Brien
+D Jeff Offutt
+D Shwetak Patel
+R Rosalind Picard
+D Mike Pinkerton
+D Anand Sivasubramaniam
+D Alex Snoeren
+D Gene Spafford
+R Neha Narkhede
+D Hermann Flaschka
+D Herbert Keller
+D Daniel P. Sanders | Daniel Sanders
+D Vernon R. Morris | Vernon Morris
+D Shannon Valley
+D Cecil Alexander
+D Bill Finch
+D Preston Geren Jr. | Preston Geren
+D George T. Heery | George Heery
+D Jan Lorenc
+D L. W. "Chip" Robert Jr. | Chip Robert | L.W. Robert
+D Hugh Stubbins
+R Vern Yip
+D Robert L. Bidez | Robert Bidez
+D Jim Butterworth
+R Jorge Cham
+D Jeff Crouse
+D James Crumley
+D Ed Dodd
+D Lamar Dodd
+R Danny Gonzalez
+D Bones Howe
+D Mark Lee
+R Jarvis Johnson
+D Nicole Jordan
+D Edlyn Lewis
+D Vivek Maddala
+D Matt Moulthrop
+R Arthur Murray :: The dance-studio founder studied at Tech.
+D Wallace Potts
+D Andy Runton
+! Calvin Johnson :: a pro athlete; he is on the NFL prompt
+! Chris Bosh :: a pro athlete; he is on the NBA prompt
+! Bobby Jones :: the golfer is on the athletes prompt
+! Bobby Dodd :: coached at Tech; he played at Tennessee
+! John Heisman :: coached at Tech; he studied at Brown and Penn
+! Dean Kamen :: holds an honorary Tech doctorate only
+! Elon Musk :: did not attend Tech
+! Buzz Aldrin :: studied at West Point and MIT
+! Neil Armstrong :: studied at Purdue
+! Martin Luther King Jr. :: studied at Morehouse
+! Ludacris :: studied at Georgia State
+! Ted Turner :: studied at Brown
+! Bill Gates :: studied at Harvard
+! Steve Wozniak :: studied at Berkeley
+! Raphael Bostic :: leads the Atlanta Fed; studied at Harvard and Stanford
 
-@nba | Sports | Name a Georgia Tech basketball player who went on to the NBA
+@nba | SPORTS | Name a Tech basketball player who reached the NBA | pool=gt | type=closed | count=42 | source=Wikipedia: every player in the category for Tech men's basketball players who is also filed under an NBA team, read October 2026 | clar=played at least one NBA game
 C Chris Bosh | Bosh
 C Stephon Marbury | Marbury | Starbury
 C Kenny Anderson
@@ -235,8 +507,32 @@ D Mario West
 D Alvin Jones
 D Fred Vinson
 X Craig Neal
+D Brook Steppe
+D Ivano Newbill
+D Jim Caldwell
+D Jim Nolan
+R Matt Geiger
+D Miles Kelly
+D Phil Wagner
+D Yvon Joseph
+! Roger Kaiser :: Tech's first All-American played in the ABL, not the NBA
+! Rich Yunkus :: Tech's scoring leader was drafted but never played an NBA game
+! B.J. Elder :: played overseas
+! Ben Lammers :: played overseas
+! James Forrest :: played overseas
+! Michael Devoe :: has not played an NBA game
+! Trae Golden :: played overseas
+! Bruce Dalrymple :: drafted in 1987 but never played an NBA game
+! Tico Brown :: drafted, but never played an NBA game
+! Ed Elisma :: not listed with any NBA team
+! Anthony McHenry :: played in Japan
+! Avi Schafer :: played in Japan
+! Alade Aminu :: played overseas; his brother Al-Farouq played in the NBA
+! Bobby Cremins :: the coach
+! Dominique Wilkins :: played at Georgia
+! Kenny Smith :: played at North Carolina
 
-@nfl | Sports | Name a Georgia Tech football player who went on to play pro football
+@nfl | SPORTS | Name a Tech football player who went on to the NFL | pool=gt | type=open | clar=any era, including the AFL and AAFC
 C Calvin Johnson | Megatron
 C Demaryius Thomas
 T Joe Hamilton
@@ -283,8 +579,188 @@ D Durant Brooks
 D Nick Ferguson
 D Jalen Camp
 X Joe Guyon :: A Pro Football Hall of Famer who starred on Heisman's 1917 national champions.
+D Al Richardson
+D Alfred Malone
+D Andrew Economos
+D Andy Hall
+D Anree Saint-Amour
+D Anthony Hargrove
+D Anthony Harrison
+D Ayinde Eley
+D Ben Utt
+D Bill Chambers
+D Bill Fulcher
+D Bill Giaver
+D Bill Paschal
+D Billy Lothridge
+D Billy Martin
+D Billy Shields
+D Bob Davis
+D Bosh Pritchard
+D Brandon Watts
+D Calvin Tiggle
+D Carl Vereen
+D Charlie Rogers
+D Charlie Thomas
+D Chris Dunlap
+D Chris Reis
+D Chris Young
+D Christopher Milton
+D Clay Matthews Sr.
+D Colin Peek
+D Cordaro Howard
+D Craig Baynham
+D Craig Page
+D Damarius Bilbo
+D Darrell Robertson
+D Darryl Richard
+D Dave Lutz
+D Dave Simmons
+D Dave Watson
+D David Hendrix
+D David Sims
+D Dedrick Mills
+D Derrick Shepard
+D Devin Cochran
+D Don Bessillieu
+D Don Patterson
+D Doug Wycoff
+D Drew Hill
+D E.J. Jenkins
+D Ed Nutting
+D Eddie McAshan
+D Eddie Prokop
+D Ejiro Kuale
+D Elliott Fortune
+D Ellis Gardner
+D Emmanuel Dieke
+D Eric Henderson
+D Euclid Cummings
+D Father Lumpkin
+D Felipe Claybrooks
+D Frank Ziegler
+D Fred Murphy
+D Gary Brown
+D Gary Lee
+D Gary Wilkins
+D George Cooper
+D George Morris
+D Gerris Wilkinson
+D Gordon Watkins
+D Hal Miller
+D Hassan Hall
+D Henry Johnson
+D Ike Williams
+D Isaiah Johnson
+D J.P. Foschi
+D Jack Coco
+D Jack Helms
+D Jack Rudolph
+D Jahi Word-Daniels
+D James Butler
+D Jared Ivey
+D Jason Bostic
+D Jerry Burch
+D Jerry Green
+D Jerry Mays
+D Jim Bob Taylor
+D Jim Still
+D Jimmy Robinson
+D Joe Auer
+D Joe Burns
+D Joe Harris
+D John Brewer
+D John Davis
+D John Steber
+D Jon Carman
+D Jonathan Smith
+D Ken Swilling
+D Kent Hill
+D Kevin Cone
+D Keyaron Fox
+D Kyric McGowan
+D Larry Stallings
+D Lee Williamson
+D Lethon Flowers
+D Lou Young
+D Lucius Sanford
+D Lum Snyder
+D Mansfield Wrotto
+D Mario Butler
+D Mark Pike
+D Michael Cheever
+D Michael Matthews
+D Mike Cox
+D Mike Kelley
+D Mike Mooney
+D Mike Rhodes
+D Najee Mustafaa
+D Nat Dorsey
+D Nathan Cottrell
+D Nick Rogers
+D P.J. Daniels
+D Pat McHugh
+D Pat Moriarty
+D Patrick Carter
+D Patrick Gamble
+D Paul Duke
+D Paul Moala
+D Pete Brown
+D Quayshawn Nealy
+D Quentin Sims
+D Ralph Malone
+D Randy Edmunds
+D Ray Beck
+D Reggie Wilkes
+D Rick Strom
+D Rod Stephens
+D Rod Sweeting
+D Rodney Williams
+D Roy Simmons
+D Rufus Guthrie
+D Russell Freeman
+D Ryan Stewart
+D Sammy Lilly
+D Scott Beavers
+D Scott Sisson
+D Sean Smith
+D Shane Curry
+D Shawn Jones
+D Steve Harkey
+D Steve Raible
+D Stumpy Thomason
+D T.J. Barnes
+D Taz Anderson
+D Ted Davis
+D Tom Bleick
+D Tom Taylor
+D Tony Daykin
+D Tony Hollings
+D Travares Tillman
+D Tre Swilling
+D Tyler Davis
+D Urban Henry
+D Vance Walker
+D Walt Godwin
+D Warner Mizell
+D Will Heller
+D William Bell
+D Willis Crockett
+D Zach Laskey
+D Zach Piller
+~D Roman Reigns | Joe Anoa'i ?? The wrestler signed with the Vikings and Jaguars in 2007 but never played in a regular-season game.
+! Bobby Dodd :: the coach; he never played in the NFL
+! John Heisman :: coached at Tech before the NFL existed
+! Paul Johnson :: the coach
+! Clint Castleberry :: killed in World War II before he could turn pro
+! Matt Ryan :: played at Boston College
+! Julio Jones :: played at Alabama
+! Herschel Walker :: played at Georgia
+! Chris Bosh :: basketball
+! Vad Lee :: played in Canada, not the NFL
+! TaQuon Marshall :: never played in the NFL
 
-@diamond | Sports | Name a Georgia Tech baseball player who reached the major leagues
+@diamond | SPORTS | Name a Tech baseball player who reached the major leagues | pool=gt | type=closed | count=69 | source=Wikipedia's category of Tech baseball players, keeping the major leaguers; the total agrees with ramblinwreck.com's count (Chandler Simpson was the 67th in April 2025, two more followed) | clar=debuted by the end of 2025
 C Nomar Garciaparra | Nomar | Garciaparra
 C Mark Teixeira | Teixeira
 T Jason Varitek | Varitek
@@ -314,8 +790,58 @@ D Jed Bradley
 D Xzavion Curry
 D Brant Hurter
 D Kyle McCann
+R Marty Marion :: The 1944 National League MVP studied at Tech.
+R Bruce Chen
+R Kristian Campbell
+R Chandler Simpson
+D Amos Willingham
+D Bobby Reeves
+D Brandon Cumpton
+D Connor Thomas
+D Cory Vance
+D Dave Elder
+D David Newhan
+D Del Pratt
+D Ed Crowley
+D Ed Lafitte
+D Erskine Mayer
+D Frank Bolick
+D Frank Waddey
+D Horace Allen
+D Jake Esch
+D Jason Perry
+D Jim Hearn
+D Joe Keener
+D Joe Palmisano
+D Justyn-Henry Malloy
+D Kevin Cameron
+D Lew Carpenter
+D Luke Bard
+D Matt Skole
+D Mike Bell
+D Mike Nickeas
+D Ray Blemker
+D Red Barron
+D Russ Lyon
+D Sam Clay
+D Scott Jordan
+D Scrappy Moore
+D Tommy McMillan
+D Tristin English
+D Weldon Henley
+D Zach Maxwell
+! Kevin Parada :: a first-round pick who had not reached the majors by the end of 2025
+! Drew Burress :: had not reached the majors by the end of 2025
+! Kyle Wren :: reached Triple-A, not the majors
+! Wes Hodges :: reached Triple-A, not the majors
+! Danny Hall :: the coach
+! Chipper Jones :: signed out of high school; never played for Tech
+! Brian McCann :: signed out of high school; never played for Tech
+! Dansby Swanson :: played at Vanderbilt
+! Buster Posey :: played at Florida State
+! Gordon Beckham :: played at Georgia
 
-@golf | Sports | Name a golfer who played for Georgia Tech
+@golf | Sports | Name a golfer who played for Georgia Tech | retired
 C Bobby Jones | Bob Jones | Robert Tyre Jones :: A mechanical engineering graduate, and an amateur his whole career.
 C Matt Kuchar | Kuchar
 T Stewart Cink | Cink
@@ -343,7 +869,7 @@ D Connor Howe
 D Ross Steelman :: Runner-up at the 2023 NCAA Championship.
 R Hiroshi Tai :: In 2024 he won the NCAA individual title, Tech's first since 2002.
 
-@traditions | Traditions | Name a Georgia Tech tradition or piece of campus lore
+@traditions | Traditions | Name a Georgia Tech tradition or piece of campus lore | retired
 C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A
 C Buzz
 C The Whistle | Steam Whistle
@@ -381,7 +907,7 @@ D Midnight Breakfast
 D Mock Rock
 D Goldfellas
 
-@neighborhoods | Atlanta | Name an Atlanta neighborhood inside the Perimeter
+@neighborhoods | ATLANTA | Name a neighborhood in the city of Atlanta | pool=gt | type=open | clar=inside the city limits, not suburbs
 C Midtown
 C Buckhead
 C Downtown | Downtown Atlanta
@@ -432,8 +958,119 @@ D Knight Park | Howell Station | Knight Park/Howell Station
 D Centennial Place | Techwood | Techwood Homes :: Built on the site of Techwood Homes, the first federal public housing project in the United States.
 D Loring Heights
 X Marietta Street Artery :: The old industrial corridor along the west edge of campus.
+R Fairlie-Poplar
+R Five Points
+R Peachtree Center
+R South Downtown
+R East Lake
+R Lindbergh | Lindbergh/Morosgo
+R Garden Hills
+R Chastain Park
+R Buckhead Village
+R Peachtree Hills
+R Collier Heights
+R Adamsville
+R Westview
+R Mozley Park
+R Lakewood Heights
+R Oakland City
+R Ben Hill
+R Greenbriar
+R Atlanta University Center | AUC
+~R Glenwood Park ?? From my memory of the city's official list of neighborhoods; not on the Wikipedia pages I checked.
+R Tuxedo Park
+R Bolton
+R Riverside
+R Peachtree Battle | Peachtree Battle Alliance
+D Centennial Hill
+D Atkins Park
+D Lindridge-Martin Manor
+D Benteen Park
+D Chosewood Park
+D High Point
+D Joyland
+D Polar Rock
+D South Atlanta
+D Ashview Heights
+D Capitol View Manor
+D Hunter Hills
+D Midwest Cascade
+D Niskey Lake
+D Perkerson
+D Venetian Hills
+D Center Hill
+D Dixie Hills
+D Whittier Mill Village | Whittier Mill
+D Ardmore | Ardmore Park
+D Argonne Forest
+D Buckhead Forest
+D Brookwood
+D Margaret Mitchell
+D North Buckhead
+D Paces
+D Peachtree Park
+D Pine Hills
+D Boulevard Heights
+D Peachtree Heights West
+D Peachtree Heights East
+D Kingswood
+D Mt. Paran | Mount Paran | Mt. Paran/Northside
+D Wildwood
+D Springlake
+D Channing Valley
+D Hanover West
+D Memorial Park
+D Ridgedale Park
+D Haynes Manor
+D Thomasville Heights
+D Browns Mill Park
+D Carver Hills
+D Scotts Crossing
+D Hills Park
+D Bush Mountain
+D Westhaven
+D Florida Heights
+D Audubon Forest
+D Peyton Forest
+D Beecher Hills
+D Princeton Lakes
+D Fairburn Heights
+D Carroll Heights
+D Baker Hills
+D Wilson Mill Meadows
+D Woodland Hills
+D Leila Valley
+D Norwood Manor
+D Orchard Knob
+D Glenrose Heights
+D Rosedale Heights
+D South River Gardens
+D Poole Creek
+D Harland Terrace
+D West Lake
+D Lenox
+! Decatur :: its own city
+! Sandy Springs :: its own city
+! Brookhaven :: its own city since 2012
+! Marietta :: a suburb
+! Vinings :: in Cobb County, outside the city limits
+! East Point :: its own city
+! College Park :: its own city
+! Dunwoody :: its own city
+! Avondale Estates :: its own city
+! Hapeville :: its own city
+! North Druid Hills :: unincorporated DeKalb County
+! Toco Hills :: unincorporated DeKalb County
+! Smyrna :: its own city
+! Cumberland :: in Cobb County
+! The Battery :: in Cobb County
+! Tucker :: its own city
+! Chamblee :: its own city
+! Georgia Tech :: a campus; the neighborhood beside it is Home Park
+! BeltLine :: a trail, not a neighborhood
+! Ponce City Market :: a building in Old Fourth Ward
 
-@conference | Sports History | Name a school that has shared a conference with Tech (ACC, SEC, Southern, or Metro)
+@conference | SPORTS HISTORY | Name a school that has shared a conference with Tech | pool=gt | type=closed | count=36 | source=Wikipedia membership tables: Southern Conference 1921-32, SEC 1932-64, Metro 1975-78, ACC since 1979 | clar=Southern, SEC, Metro or ACC
 C Clemson
 C Georgia | UGA | University of Georgia :: Charter SEC members together, until Tech walked out in 1964.
 C Duke
@@ -469,8 +1106,27 @@ D Memphis | Memphis State :: Metro Conference, 1975 to 1978.
 D Saint Louis | St. Louis | SLU :: Metro Conference, 1975 to 1978.
 D Washington and Lee | W&L :: Southern Conference mates in the 1920s.
 X Sewanee | University of the South :: A charter member of the SEC alongside Tech in 1932.
+D VMI | Virginia Military Institute :: In the Southern Conference with Tech from 1924 to 1932.
+! Georgia State :: has never shared a conference with Tech
+! Georgia Southern :: joined the Southern Conference long after Tech left
+! Texas :: has never shared a conference with Tech
+! Arkansas :: joined the SEC in 1991, after Tech left
+! Texas A&M :: joined the SEC in 2012
+! Missouri :: joined the SEC in 2012
+! Oklahoma :: joined the SEC in 2024
+! Penn State :: has never shared a conference with Tech
+! Ohio State :: has never shared a conference with Tech
+! Michigan :: has never shared a conference with Tech
+! West Virginia :: joined the Southern Conference in 1950, after Tech left
+! Navy :: has never shared a conference with Tech
+! Army :: has never shared a conference with Tech
+! UCF :: has never shared a conference with Tech
+! Davidson :: joined the Southern Conference in 1936, after Tech left
+! Furman :: joined the Southern Conference in 1936, after Tech left
+! The Citadel :: joined the Southern Conference in 1936, after Tech left
+! Cumberland :: beaten 222-0 in 1916, but never a conference mate in these four leagues
 
-@bowls | Sports History | Name a bowl game Georgia Tech football has played in | strip=bowl,classic
+@bowls | Sports History | Name a bowl game Georgia Tech football has played in | strip=bowl,classic | retired
 C Orange Bowl
 C Rose Bowl :: The 1929 game, famous for Roy "Wrong Way" Riegels.
 C Peach Bowl | Chick-fil-A Bowl | Chick-fil-A Peach Bowl
@@ -497,7 +1153,7 @@ D Hall of Fame Classic | Hall of Fame Bowl | All-American Bowl :: The 1985 win o
 X Oil Bowl :: January 1947, a 41-19 win over Saint Mary's.
 R Pop-Tarts Bowl | Pop Tarts
 
-@cs | Academics | Name a Georgia Tech CS course by its number (like "CS 1234") | lead=cs
+@cs | ACADEMICS | Name a Georgia Tech CS course by its number | pool=gt | type=closed | count=288 | source=catalog.gatech.edu/coursesaz/cs, every numbered course (recitations and XXXX placeholders left out) | clar=like "CS 1234" | lead=cs
 C CS 1301 :: Intro to Computing
 C CS 1331 :: Intro to Object-Oriented Programming
 C CS 1332 :: Data Structures and Algorithms for Applications
@@ -561,8 +1217,233 @@ D CS 3001 :: Computing, Society, and Professionalism
 D CS 4590 :: Principles and Applications of Computer Audio
 D CS 4605 :: Mobile and Ubiquitous Computing
 D CS 4220 :: Programming Embedded Systems
+D CS 1171
+D CS 1803
+D CS 2316
+D CS 2698
+D CS 2699
+D CS 2701
+D CS 2740
+D CS 2801
+D CS 2802
+D CS 2803
+D CS 3101
+D CS 3235
+D CS 3237
+D CS 3300
+D CS 3651
+D CS 3743
+D CS 3744
+D CS 3751
+D CS 3790
+D CS 3801
+D CS 3803
+D CS 3873
+D CS 4002
+D CS 4003
+D CS 4010
+D CS 4057
+D CS 4117
+D CS 4238
+D CS 4239
+D CS 4243
+D CS 4251
+D CS 4262
+D CS 4263
+D CS 4265
+D CS 4267
+D CS 4271
+D CS 4365
+D CS 4392
+D CS 4420
+D CS 4423
+D CS 4440
+D CS 4462
+D CS 4464
+D CS 4470
+D CS 4472
+D CS 4475
+D CS 4488
+D CS 4495
+D CS 4497
+D CS 4615
+D CS 4625
+D CS 4635
+D CS 4644
+D CS 4660
+D CS 4665
+D CS 4670
+D CS 4675
+D CS 4690
+D CS 4698
+D CS 4699
+D CS 4711
+D CS 4723
+D CS 4725
+D CS 4726
+D CS 4741
+D CS 4742
+D CS 4745
+D CS 4770
+D CS 4795
+D CS 4801
+D CS 4816
+D CS 4854
+D CS 4863
+D CS 4873
+D CS 4883
+D CS 4893
+D CS 4901
+D CS 4902
+D CS 4903
+D CS 4980
+D CS 6150
+D CS 6211
+D CS 6220
+D CS 6222
+D CS 6235
+D CS 6238
+D CS 6239
+D CS 6241
+D CS 6245
+D CS 6260
+D CS 6261
+D CS 6262
+D CS 6263
+D CS 6264
+D CS 6265
+D CS 6266
+D CS 6267
+D CS 6268
+D CS 6270
+D CS 6271
+D CS 6291
+D CS 6301
+D CS 6310
+D CS 6340
+D CS 6365
+D CS 6390
+D CS 6400
+D CS 6402
+D CS 6422
+D CS 6423
+D CS 6435
+D CS 6440
+D CS 6441
+D CS 6451
+D CS 6452
+D CS 6454
+D CS 6455
+D CS 6456
+D CS 6457
+D CS 6458
+D CS 6460
+D CS 6461
+D CS 6465
+D CS 6470
+D CS 6471
+D CS 6474
+D CS 6475
+D CS 6491
+D CS 6492
+D CS 6497
+D CS 6520
+D CS 6550
+D CS 6603
+D CS 6604
+D CS 6641
+D CS 6675
+D CS 6705
+D CS 6725
+D CS 6726
+D CS 6727
+D CS 6730
+D CS 6745
+D CS 6747
+D CS 6753
+D CS 6755
+D CS 6756
+D CS 6763
+D CS 6764
+D CS 6770
+D CS 6795
+D CS 6998
+D CS 6999
+D CS 7000
+D CS 7001
+D CS 7210
+D CS 7240
+D CS 7260
+D CS 7263
+D CS 7280
+D CS 7290
+D CS 7292
+D CS 7295
+D CS 7400
+D CS 7450
+D CS 7451
+D CS 7455
+D CS 7462
+D CS 7465
+D CS 7470
+D CS 7476
+D CS 7490
+D CS 7492
+D CS 7496
+D CS 7497
+D CS 7499
+D CS 7510
+D CS 7520
+D CS 7525
+D CS 7530
+D CS 7535
+D CS 7540
+D CS 7545
+D CS 7560
+D CS 7616
+D CS 7626
+D CS 7630
+D CS 7631
+D CS 7632
+D CS 7633
+D CS 7634
+D CS 7636
+D CS 7638
+D CS 7639
+D CS 7644
+D CS 7647
+D CS 7648
+D CS 7649
+D CS 7650
+D CS 7651
+D CS 7652
+D CS 7695
+D CS 7711
+D CS 7741
+D CS 7742
+D CS 7743
+D CS 7750
+D CS 7751
+D CS 7785
+D CS 7790
+D CS 7999
+D CS 8001
+D CS 8740
+D CS 8741
+D CS 8750
+D CS 8751
+D CS 8795
+D CS 8801
+D CS 8813
+D CS 8816
+D CS 8902
+D CS 8903
+D CS 8997
+D CS 8998
+D CS 8999
+D CS 9000
 
-@orgs | Campus Life | Name a Georgia Tech student organization
+@orgs | Campus Life | Name a Georgia Tech student organization | retired
 C Ramblin' Reck Club | Reck Club | Wreck Club | Ramblin Wreck Club
 C Student Government Association | SGA | Student Government
 C Yellow Jacket Marching Band | Marching Band | Band | GT Marching Band
@@ -611,7 +1492,7 @@ D Student Foundation | GTSF | Georgia Tech Student Foundation
 D GTCN | Georgia Tech Cable Network
 X Amateur Radio Club | W4AQL | Ham Radio Club | Georgia Tech Amateur Radio Club :: On the air as W4AQL, and one of the oldest clubs on campus.
 
-@streets | Campus | Name a street on or right beside Tech's campus | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne
+@streets | Campus | Name a street on or right beside Tech's campus | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne | retired
 C North Avenue
 C Tenth Street | 10th
 C Fifth Street | 5th
@@ -653,7 +1534,7 @@ D Ivan Allen Jr. Boulevard | Ivan Allen
 D Centennial Olympic Park Drive
 X Uncle Heinie Way
 
-@marta | Atlanta | Name a MARTA rail station | strip=station
+@marta | ATLANTA | Name a MARTA rail station | pool=gt | type=closed | count=38 | source=itsmarta.com rail station list | strip=station
 C North Avenue | North Ave :: Tech's east-side stop.
 C Midtown :: The Tech Trolley's stop.
 C Airport | Hartsfield-Jackson | Hartsfield Jackson Airport
@@ -693,7 +1574,7 @@ D Hamilton E. Holmes | H.E. Holmes | Holmes | Hightower
 X West Lake
 D SEC District | GWCC/CNN Center | CNN Center | GWCC | Dome | Dome/GWCC/Philips Arena/CNN Center | Omni :: Called GWCC/CNN Center until December 2025.
 
-@landmarks | Atlanta | Name an Atlanta landmark or attraction within a few miles of campus
+@landmarks | Atlanta | Name an Atlanta landmark or attraction within a few miles of campus | retired
 C Georgia Aquarium | Aquarium
 C World of Coca-Cola | World of Coke | Coke Museum
 C Mercedes-Benz Stadium | The Benz | MBS | Mercedes Benz
@@ -738,7 +1619,7 @@ D Fernbank Museum | Fernbank
 D Flatiron Building | Flatiron
 X Millennium Gate | Millennium Gate Museum :: The triumphal arch at Atlantic Station.
 
-@hangouts | Campus | Name a place on Tech's campus that isn't a classroom building
+@hangouts | Campus | Name a place on Tech's campus that isn't a classroom building | retired
 C Bobby Dodd Stadium | Bobby Dodd | Grant Field | Bobby Dodd Stadium at Hyundai Field | Historic Grant Field
 C Campus Recreation Center | CRC
 C Student Center | John Lewis Student Center | Stu Cen | Wenn Student Center
@@ -781,7 +1662,7 @@ D Sideways' Grave | Sideways
 D Academy of Medicine | Historic Academy of Medicine
 X Rose Bowl Field :: The practice field paid for with the proceeds of the 1929 Rose Bowl.
 
-@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games.
+@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games. | retired
 C Swimming :: Raced in Tech's own Aquatic Center.
 C Basketball
 C Gymnastics | Artistic Gymnastics
@@ -815,7 +1696,7 @@ D Rhythmic Gymnastics
 D Handball | Team Handball
 X Modern Pentathlon | Pentathlon
 
-@gacolleges | Rivals | Name another college or university in the state of Georgia | strip=university | lead=university,of
+@gacolleges | RIVALS | Name another college or university in Georgia | pool=gt | type=open | clar=anywhere in the state | strip=university | lead=university,of
 C University of Georgia | UGA | u[sic]GA :: To Hell With Georgia.
 C Georgia State University | GSU
 C Emory University
@@ -864,8 +1745,58 @@ D Thomas University
 D Interdenominational Theological Center | ITC
 D Morehouse School of Medicine | MSM
 X Toccoa Falls College | Toccoa Falls
+R Atlanta Metropolitan State College | Atlanta Metro
+R College of Coastal Georgia | Coastal Georgia
+R Georgia Highlands College
+R South Georgia State College
+R Georgia Military College | GMC
+R Atlanta Technical College | Atlanta Tech
+R Gwinnett Technical College | Gwinnett Tech
+R Chattahoochee Technical College | Chattahoochee Tech
+R Georgia Piedmont Technical College | Georgia Piedmont Tech
+R Savannah Technical College | Savannah Tech
+R Columbia Theological Seminary
+R Atlanta's John Marshall Law School | John Marshall Law School
+R South University
+D Albany Technical College | Albany Tech
+D Athens Technical College | Athens Tech
+D Augusta Technical College | Augusta Tech
+D Central Georgia Technical College | Central Georgia Tech
+D Coastal Pines Technical College
+D Columbus Technical College | Columbus Tech
+D Georgia Northwestern Technical College
+D Lanier Technical College | Lanier Tech
+D North Georgia Technical College | North Georgia Tech
+D Oconee Fall Line Technical College
+D Ogeechee Technical College | Ogeechee Tech
+D South Georgia Technical College | South Georgia Tech
+D Southeastern Technical College
+D Southern Crescent Technical College | Southern Crescent Tech
+D Southern Regional Technical College
+D West Georgia Technical College | West Georgia Tech
+D Wiregrass Georgia Technical College | Wiregrass Tech | Wiregrass
+D Andrew College
+D Brewton-Parker Christian University | Brewton-Parker College | Brewton-Parker
+~D Carver College ?? An Atlanta Bible college I named from memory; not on the Wikipedia list I checked.
+D Luther Rice College and Seminary | Luther Rice
+D Beulah Heights University
+! Georgia Tech :: the prompt asks for another one
+! Auburn :: in Alabama
+! Clemson :: in South Carolina
+! Georgia Perimeter College :: merged into Georgia State in 2016
+! Southern Polytechnic State University :: merged into Kennesaw State in 2015
+! Armstrong State University :: merged into Georgia Southern in 2018
+! Darton State College :: merged into Albany State in 2017
+! Bainbridge State College :: merged into Abraham Baldwin in 2018
+! Macon State College :: now part of Middle Georgia State
+! Atlanta Christian College :: now Point University, which is listed
+! Tuskegee :: in Alabama
+! Florida State :: in Florida
+! Vanderbilt :: in Tennessee
+! Georgetown :: in Washington, D.C.
+! Art Institute of Atlanta :: closed in 2023
 
-@greek | Campus Life | Name a fraternity or sorority that has had a chapter at Georgia Tech
+@greek | CAMPUS LIFE | Name a Greek organization with a chapter at Tech | pool=gt | type=closed | count=55 | source=greek.gatech.edu, Our Chapters and Councils, October 2026 (31 IFC, 9 CPC, 8 NPHC, 7 MPC) | clar=on Tech's current list of chapters
 C Sigma Chi
 C Sigma Nu
 C Alpha Tau Omega | ATO
@@ -912,11 +1843,31 @@ D Phi Beta Sigma
 D Zeta Phi Beta
 X Theta Xi
 D Sigma Gamma Rho
-D Alpha Delta Chi
-D Triangle | Triangle Fraternity
+! Alpha Delta Chi :: not on Tech's current list of chapters
+! Triangle :: has had a Tech chapter, but is not on the current list of chapters
 D Phi Kappa Psi | Phi Psi
+D Alpha Omega Epsilon | AOE
+D Delta Epsilon Psi
+D Delta Phi Lambda
+D Sigma Beta Rho
+D Sigma Sigma Rho
+D Lambda Theta Phi
+D Lambda Upsilon Lambda | La Unidad Latina | LUL
+D Lambda Theta Alpha
+! Kappa Kappa Gamma :: not on Tech's current list of chapters
+! Chi Omega :: not on Tech's current list of chapters
+! Delta Delta Delta :: not on Tech's current list of chapters
+! Kappa Delta :: not on Tech's current list of chapters
+! Pi Beta Phi :: not on Tech's current list of chapters
+! Delta Gamma :: not on Tech's current list of chapters
+! Sigma Pi :: not on Tech's current list of chapters
+! Alpha Kappa Psi :: a business fraternity, not one of the social chapters listed
+! Alpha Phi Omega :: a service fraternity, not one of the social chapters listed
+! Kappa Kappa Psi :: the band fraternity, not one of the social chapters listed
+! Iota Phi Theta :: the one NPHC organization without a Tech chapter
+! Theta Tau :: an engineering fraternity, not one of the social chapters listed
 
-@proteams | Atlanta | Name an Atlanta-area pro sports team, past or present
+@proteams | Atlanta | Name an Atlanta-area pro sports team, past or present | retired
 C Atlanta Braves | Braves
 C Atlanta Falcons | Falcons
 C Atlanta Hawks | Hawks :: They played home games in Tech's Alexander Memorial Coliseum from 1968 to 1972, and again in the late 1990s.
@@ -950,7 +1901,7 @@ D Hawks Talon GC | Hawks Talon
 X Georgia Swarm | Swarm :: Pro box lacrosse, out in Duluth. One in a Swarm, literally.
 D Atlanta Fire Ants | Fire Ants
 
-@coaches | Sports History | Name a Georgia Tech head coach, in any sport and any era
+@coaches | Sports History | Name a Georgia Tech head coach | retired
 C John Heisman | Heisman
 C Bobby Dodd | Dodd
 C Paul Johnson | CPJ
@@ -997,7 +1948,7 @@ X Freddie Lanoue | Fred Lanoue :: The drownproofing legend also coached Tech's s
 D James Ramsey
 D Karen Blair
 
-@qbs | Sports History | Name a quarterback who has started a game for Georgia Tech
+@qbs | Sports History | Name a quarterback who has started a game for Georgia Tech | retired
 C Haynes King
 C Joe Hamilton
 C Justin Thomas
@@ -1038,7 +1989,7 @@ X Frank Broyles :: Better known as Arkansas's coach and athletic director, he qu
 R Jaybo Shaw
 R Lucas Johnson
 
-@corecourses | Academics | Name a non-CS course by subject and number (like "MATH 1554")
+@corecourses | Academics | Name a non-CS course by subject and number (like "MATH 1554") | retired
 C MATH 1554 :: Linear Algebra
 C MATH 1551 :: Differential Calculus
 C MATH 1552 :: Integral Calculus
@@ -1097,7 +2048,7 @@ D ISYE 3133 :: Engineering Optimization
 D CHBE 2100 :: Chemical Process Principles
 X LMC 3403 :: Technical Communication
 
-@hq | Atlanta | Name a company based in metro Atlanta (U.S. headquarters count)
+@hq | Atlanta | Name a company headquartered in metro Atlanta | retired
 C Coca-Cola | Coke | The Coca-Cola Company
 C Delta Air Lines | Delta | Delta Airlines
 C The Home Depot | Home Depot
@@ -1149,7 +2100,7 @@ D EarthLink
 D Manhattan Associates
 X Veritiv
 
-@codes | Academics | Name a subject code from Tech's course catalog (like "ISYE")
+@codes | ACADEMICS | Name a subject code from Tech's course catalog | pool=gt | type=closed | count=90 | source=catalog.gatech.edu/coursesaz | clar=like "ISYE"
 C CS
 C MATH
 C ME
@@ -1169,7 +2120,8 @@ S ECON
 S PSYC
 S HIST
 S GT :: As in GT 1000.
-R BIOL | BIOS
+R BIOL
+R BIOS :: Biological Sciences
 R EAS
 R INTA
 R LMC
@@ -1197,15 +2149,51 @@ D LING
 D SOC
 D BC
 D CP :: City Planning.
-D COA
 D VIP :: Vertically Integrated Projects.
 D MSL :: Military Science and Leadership (Army ROTC).
 D NS :: Naval Science.
 D AS :: Aerospace Studies (Air Force ROTC).
 D MP :: Medical Physics.
 X CETL :: Center for Teaching and Learning courses, mostly taken by teaching assistants.
+D ACCT :: Accounting
+D ASE :: Applied Systems Engineering
+D AECT :: Arts, Entertainment, and Creative Technologies
+D BMEJ :: Biomedical Engineering, joint Emory and Peking
+D BMEM :: Biomedical Engineering, joint Emory
+D CLL :: College of Lifetime Learning
+D COS :: College of Sciences
+D COOP :: Cooperative Work Assignment
+D UCGA :: Cross Enrollment
+D ECEP :: Electrical and Computer Engineering, Professional
+D FS :: Foreign Studies
+D FREE :: Free Elective
+D GTL :: Georgia Tech Lorraine
+D GMC :: Global Media and Cultures
+D HS :: Health Systems
+D HEBW :: Hebrew
+D HIN :: Hindi
+D HUM :: Humanities Elective
+D IL :: International Logistics
+D INTN :: Internship
+D IMBA :: International Executive MBA
+D IAC :: Ivan Allen College
+D LATN :: Latin
+D LS :: Learning Support
+D MOT :: Management of Technology
+D MLDR :: Manufacturing Leadership
+D ML :: Modern Languages
+D PERS :: Persian
+D PTFE :: Polymer, Textile and Fiber Engineering
+D PORT :: Portuguese
+D PUBJ :: Public Policy, joint GSU PhD
+D SCI :: Science
+D SLS :: Serve-Learn-Sustain
+D SS :: Social Science Elective
+D SWAH :: Swahili
+D WOLO :: Wolof
+! COA :: the old College of Architecture code is not in the current catalog
 
-@techs | Rivals | Name another U.S. school that goes by "Tech" or "Institute of Technology"
+@techs | Rivals | Name another U.S. school that goes by "Tech" or "Institute of Technology" | retired
 C Virginia Tech | VT | Virginia Polytechnic Institute | VPI
 C Texas Tech | Texas Tech University | TTU
 T MIT | Massachusetts Institute of Technology
@@ -1242,7 +2230,7 @@ D Texas State Technical College | TSTC
 D Carnegie Tech | Carnegie Institute of Technology :: It merged into Carnegie Mellon in 1967.
 X Southern Tech | Southern Technical Institute | Southern Polytechnic | SPSU :: Founded in 1948 as a division of Georgia Tech. It is now part of Kennesaw State.
 
-@systems | Campus Life | Name a campus app, website, or shuttle that Tech students use
+@systems | Campus Life | Name a campus app, website, or shuttle that Tech students use | retired
 C Canvas
 C OSCAR :: Online Student Computer Assisted Registration.
 C BuzzCard
@@ -1280,7 +2268,7 @@ D Passio GO | Passio :: The bus tracker before TransLoc.
 R TransLoc :: Bus tracking and Stingerette requests in one app.
 D LiveSafe
 
-@nicknames | Rivals | Name the team nickname of a school that has shared a conference with Tech
+@nicknames | Rivals | Name the team nickname of a school that has shared a conference with Tech | retired
 C Tigers :: Clemson, Auburn, LSU and Memphis all answer to it.
 C Bulldogs | Dawgs :: Georgia and Mississippi State.
 C Seminoles | Noles
@@ -1311,7 +2299,7 @@ D Bearcats
 D Generals :: Washington and Lee, a Southern Conference mate in the 1920s.
 X Billikens :: Saint Louis, a Metro Conference mate in the 1970s.
 
-@beaten | Sports History | Name a team from outside today's ACC that Tech football has beaten
+@beaten | Sports History | Name a team from outside today's ACC that Tech football has beaten | retired
 C Georgia | UGA
 C Alabama | Bama
 C Auburn
@@ -1369,7 +2357,7 @@ R Kennesaw State
 # ----- added on the overnight run: twelve more prompts. Lines starting with "~" are held out of
 # ----- the game (not confident enough) and listed in VERIFY.md until the owner approves them.
 
-@films | Atlanta | Name a movie or TV series that was filmed largely in metro Atlanta
+@films | ATLANTA | Name a movie or series filmed in metro Atlanta | pool=gt | type=open | clar=shot mostly in or around Atlanta
 C Stranger Things
 C The Walking Dead | Walking Dead | TWD
 C Black Panther
@@ -1428,8 +2416,147 @@ D Triple 9
 X Sharky's Machine | Sharkys Machine :: Burt Reynolds, 1981: Atlanta cops under the Atlanta skyline.
 ~D Road Trip ?? Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.
 ~D Jumanji: Welcome to the Jungle ?? Shot in Hawaii and Atlanta; unsure it counts as "largely" Atlanta.
+S Black Panther: Wakanda Forever | Wakanda Forever
+S Guardians of the Galaxy Vol. 3 | Guardians 3
+S Ant-Man and the Wasp
+R Fast Five
+R Furious 7 | Fast and Furious 7
+R Zombieland: Double Tap | Zombieland 2
+R Ride Along
+R The Accountant
+R Diary of a Mad Black Woman
+R Madea's Family Reunion
+R Tyler Perry's House of Payne | House of Payne
+R The Real Housewives of Atlanta | RHOA
+R Love & Hip Hop: Atlanta
+R Bad Boys for Life
+R Bad Boys: Ride or Die
+R Coming 2 America
+R Red Notice
+R Godzilla: King of the Monsters
+R Richard Jewell
+R Love, Simon
+R The Hate U Give
+R Pitch Perfect 3
+R Creed III | Creed 3
+R Captain America: Brave New World | Brave New World
+R Thunderbolts
+R She-Hulk: Attorney at Law | She-Hulk
+R Ms. Marvel
+R The Originals
+R Black Lightning
+R Will Trent
+R BMF | Black Mafia Family
+R P-Valley
+D Legacies
+D Stargirl
+D Sweet Magnolias
+D Insatiable
+D Raising Dion
+D The Haves and the Have Nots
+D Sistas
+D The Oval
+D Meet the Browns
+D Being Mary Jane
+D Star
+D Survivor's Remorse
+D Halt and Catch Fire
+D Rectify
+D Necessary Roughness
+D Drop Dead Diva
+D Constantine
+D Red Band Society
+D Devious Maids
+D Finding Carter
+D The Gifted
+D The Passage
+D Echo
+D Ironheart
+D Agatha All Along
+D Found
+D The Wonder Years
+D Heels
+D Creepshow
+D Step Up: High Water | Step Up
+D Teenage Bounty Hunters
+D Lodge 49
+D The Outsider
+D A Man in Full
+D The Staircase
+D Ordinary Joe
+D In the Heat of the Night
+D Family Feud
+D Insurgent
+D Allegiant
+D The 5th Wave | The Fifth Wave
+D Goosebumps
+D Dear Evan Hansen
+D The Tomorrow War
+D Samaritan
+D The Mule
+D Instant Family
+D Life of the Party
+D Blockers
+D Uncle Drew
+D Superfly
+D What Men Want
+D Night School
+D Keeping Up with the Joneses
+D Mother's Day
+D Barbershop: The Next Cut | Barbershop 3
+D The Founder
+D Hall Pass
+D The Change-Up
+D Joyful Noise
+D What to Expect When You're Expecting
+D The Three Stooges
+D Prisoners
+D Kill the Messenger
+D Taken 3
+D The Duff
+D Sleepless
+D Miracles from Heaven
+D The Boss
+D Office Christmas Party
+D Thank You for Your Service
+D First Man
+D Boy Erased
+D The Front Runner
+D Doctor Sleep
+D The Banker
+D Greenland
+D The Conjuring: The Devil Made Me Do It | The Conjuring 3
+D Fear Street
+D Respect
+D Shazam! Fury of the Gods | Shazam 2
+D Megalopolis
+D Fly Me to the Moon
+D Let's Be Cops
+D The Nice Guys
+D Neighbors 2 | Neighbors 2: Sorority Rising
+D Vacation
+D Footloose
+D Million Dollar Arm
+! Gone with the Wind :: set in Georgia, but shot in California
+! Designing Women :: set in Atlanta, shot in Los Angeles
+! Matlock :: set in Atlanta, shot in California and North Carolina
+! Forrest Gump :: shot mostly in South Carolina and Savannah
+! Fried Green Tomatoes :: shot in Juliette, well south of the metro area
+! Deliverance :: shot on the Chattooga River in north Georgia
+! My Cousin Vinny :: shot in Monticello and other small Georgia towns, not metro Atlanta
+! Midnight in the Garden of Good and Evil :: shot in Savannah
+! The Hunger Games :: the first film was shot in North Carolina; the sequels are listed
+! Thor: Ragnarok :: shot in Australia
+! Outer Banks :: shot around Charleston
+! Cocaine Bear :: set in Georgia, shot in Ireland
+! Glory :: shot around Savannah and Jekyll Island
+! Squidbillies :: animated
+! Archer :: animated in Atlanta, but not filmed
+! Iron Man :: the first film was shot in California
+! Juror #2 :: shot in Savannah
+! Teen Wolf :: only its early seasons were shot in Atlanta
 
-@musicians | Atlanta | Name a musician or group that came up in Atlanta or its suburbs
+@musicians | ATLANTA | Name a musician or group from the Atlanta area | pool=gt | type=open | clar=came up in Atlanta or its suburbs
 C OutKast
 C Usher
 C Ludacris | Luda
@@ -1489,8 +2616,149 @@ D Butch Walker
 X Drivin N Cryin | Drivin' N' Cryin' | Drivin and Cryin :: Atlanta rock since 1985.
 ~D Soulja Boy ?? Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
 ~D Trinidad James ?? Born in Trinidad and raised partly in Atlanta; unsure of the details.
+S Quavo
+S Offset
+S Takeoff
+S JID
+S India.Arie
+R EarthGang
+R 6lack | Black
+R Russ
+R Lloyd
+R Jagged Edge
+R 112
+R Kandi Burruss | Kandi
+R Jacquees
+R Lil Scrappy
+R Trillville
+R Bone Crusher
+R Pastor Troy
+R Yung Joc
+R Young Dro
+R Crime Mob
+R Unk | DJ Unk
+R Travis Porter
+R Roscoe Dash
+R Young Nudy
+R Lil Keed
+R Chloe x Halle | Chloe and Halle | Chloe Bailey | Halle Bailey
+R Mariah the Scientist
+R Travis Tritt
+R Alan Jackson :: From Newnan, on the metro area's southern edge.
+R Blackberry Smoke
+R Georgia Satellites
+R Atlanta Rhythm Section | ARS
+R Third Day
+R Brenda Lee
+R Jerry Reed
+R Ray Stevens
+R Sleepy Brown
+R Organized Noize
+R Big Gipp
+R Run the Jewels
+R Faye Webster
+R Cat Power | Chan Marshall
+D Kilo Ali
+D Rocko
+D OJ da Juiceman
+D Raury
+D K Camp
+D Kap G
+D Lil Gotit
+D SahBabii
+D Hoodrich Pablo Juan
+D Bankroll Fresh
+D Peewee Longway
+D Young Scooter
+D Rich Kidz
+D Trouble
+D Ralo
+D Money Man
+D Baby Tate
+D Kodie Shane
+D Gorilla Zoe
+D Boyz n da Hood
+D Shop Boyz
+D V.I.C.
+D Cherish
+D Blaque
+D Another Bad Creation | ABC
+D Tag Team
+D MC Shy D
+D Raheem the Dream
+D Cool Breeze
+D Witchdoctor
+D Silk
+D Bobby V | Bobby Valentino
+D T-Boz | Tionne Watkins
+D Chilli | Rozonda Thomas
+D Left Eye | Lisa Lopes | Lisa Left Eye Lopes
+D Tiny | Tameka Cottle | Tiny Harris
+D Algebra Blessett | Algebra
+D Anthony David
+D Joi
+D Mother's Finest
+D S.O.S. Band
+D Brick
+D The Tams
+D Joe South
+D Tommy Roe
+D Blind Willie McTell
+D Fiddlin' John Carson
+D Mattiwilda Dobbs
+D Black Lips
+D Cartel
+D Norma Jean
+D The Chariot
+D Attila
+D Issues
+D Woe, Is Me
+D Royal Thunder
+D Stuck Mojo
+D Family Force 5
+D Marvelous 3
+D Shawn Mullins
+D Michelle Malone
+D The Producers
+D Swimming Pool Q's
+D Col. Bruce Hampton | Bruce Hampton | Colonel Bruce Hampton
+D Tinsley Ellis
+D Sean Costello
+D Kaki King
+D Mattiel
+D Omni
+D Algiers
+D Microwave
+D The Rock*A*Teens
+D Yung L.A.
+D Jody Breeze
+D Ghetto Mafia
+! R.E.M. :: from Athens, 70 miles east
+! The B-52's :: from Athens
+! Widespread Panic :: from Athens
+! James Brown :: raised in Augusta
+! Ray Charles :: born in Albany, Georgia, and raised in Florida
+! Little Richard :: from Macon
+! Otis Redding :: from Macon
+! The Allman Brothers Band :: based in Macon
+! Jason Aldean :: from Macon
+! Luke Bryan :: from Leesburg, in south Georgia
+! Kanye West :: born in Atlanta, but raised in Chicago
+! Justin Bieber :: from Ontario; he moved to Atlanta after he was signed
+! Elton John :: has a home in Atlanta, but is from England
+! Kelly Rowland :: born in Atlanta, but came up in Houston
+! Lady A :: formed in Nashville; two members are from Augusta
+! Curtis Mayfield :: from Chicago; moved to Atlanta later in life
+! Toni Braxton :: from Maryland; signed to Atlanta's LaFace
+! Metro Boomin :: from St. Louis; moved to Atlanta for college
+! Rae Sremmurd :: from Tupelo, Mississippi
+! Bubba Sparxxx :: from LaGrange, well outside the metro area
+! Lynyrd Skynyrd :: from Jacksonville, Florida
+! Nelly :: from St. Louis
+! Florida Georgia Line :: formed in Nashville
+! Normani :: born in Atlanta, but raised in New Orleans and Houston
 
-@braves | Atlanta | Name a player from Atlanta Braves history (1966 to today)
+@braves | ATLANTA SPORTS | Name a player from Atlanta Braves history | pool=gt | type=open | clar=1966 to today
 C Hank Aaron | Henry Aaron | Hammerin Hank
 C Chipper Jones | Larry Jones
 C Ronald Acuña Jr. | Ronald Acuna Jr | Ronald Acuna | Acuna | Acuna Jr
@@ -1557,8 +2825,207 @@ D Charlie Morton
 D Glenn Hubbard
 D Kent Mercker
 X Biff Pocoroba | Pocoroba :: Braves catcher, 1975 to 1984, and an All-Star in 1978.
+S Marcell Ozuna
+S Chris Sale
+R Eddie Mathews :: Played the Braves' first season in Atlanta, 1966.
+R Joe Torre
+R Felipe Alou
+R Orlando Cepeda
+R Andrés Galarraga | Big Cat
+R Brian Jordan
+R Lonnie Smith
+R Rafael Belliard
+R Denny Neagle
+R Mike Hampton
+R Adam LaRoche
+R Kelly Johnson
+R Edgar Rentería
+R Billy Wagner
+R Justin Upton
+R B.J. Upton | Melvin Upton | Melvin Upton Jr.
+R Kris Medlen
+R Tommy Hanson
+R Ender Inciarte
+R Josh Donaldson
+R Mike Soroka
+R Ian Anderson
+R Travis d'Arnaud
+R Adam Duvall
+R Joc Pederson
+R A.J. Minter
+R Tyler Matzek
+R Kenley Jansen
+R Sean Murphy
+R Orlando Arcia
+R Raisel Iglesias
+R Bartolo Colón
+R Walt Weiss
+R Gaylord Perry
+R Davey Johnson
+R Drake Baldwin
+R Spencer Schwellenbach
+R Jurickson Profar
+D Clete Boyer
+D Félix Millán
+D Tony Cloninger
+D Ron Reed
+D Cecil Upshaw
+D Hoyt Wilhelm
+D Mike Lum
+D Earl Williams
+D Buzz Capra
+D Carl Morton
+D Andy Messersmith
+D Jeff Burroughs
+D Gary Matthews
+D Chris Chambliss
+D Claudell Washington
+D Rafael Ramírez
+D Bruce Benedict
+D Brett Butler
+D Rick Camp
+D Pascual Pérez
+D Rick Mahler
+D Steve Bedrosian
+D Zane Smith
+D Ken Oberkfell
+D Gerald Perry
+D Ozzie Virgil | Ozzie Virgil Jr.
+D Andrés Thomas
+D Oddibe McDowell
+D Jeff Treadway
+D Pete Smith
+D Charlie Leibrandt
+D Greg Olson
+D Brian Hunter
+D Alejandro Peña
+D Mike Stanton
+D Damon Berryhill
+D Jeff Reardon
+D Greg McMichael
+D Jermaine Dye
+D Michael Tucker
+D Bret Boone
+D Quilvio Veras
+D Reggie Sanders
+D John Burkett
+D B.J. Surhoff
+D Vinny Castilla
+D Robert Fick
+D Russ Ortiz
+D Johnny Estrada
+D Jaret Wright
+D Horacio Ramírez
+D Yunel Escobar
+D Matt Diaz
+D Mark Kotsay
+D Derek Lowe
+D Javier Vázquez
+D Jonny Venters
+D Eric O'Flaherty
+D Peter Moylan
+D Rafael Soriano
+D Nate McLouth
+D Michael Bourn
+D Brandon Beachy
+D Mike Minor
+D Alex Wood
+D Chris Johnson
+D Ervin Santana
+D Shelby Miller
+D Adonis García
+D Matt Kemp
+D R.A. Dickey
+D Mike Foltynewicz | Folty
+D Sean Newcomb
+D Johan Camargo
+D Tyler Flowers
+D Kurt Suzuki
+D Dallas Keuchel
+D Will Smith
+D Luke Jackson
+D Kyle Wright
+D Vaughn Grissom
+D Bryce Elder
+D Jarred Kelenic
+D Reynaldo López
+D Tom House :: Caught Hank Aaron's 715th home run in the bullpen.
+D Wilson Betemit
+D Brooks Conrad
+D Eric Hinske
+D David Ross
+D Paul Byrd
+D Mike Remlinger
+D Kerry Ligtenberg
+D Eddie Pérez
+D Keith Lockhart
+D Ozzie Guillén
+D Gerald Williams
+D Mike Devereaux
+D Luis Polonia
+D Charlie O'Brien
+D Jerry Royster
+D Rowland Office
+D Barry Bonnell
+D Joe Niekro
+D Al Hrabosky
+D Terry Forster
+D Donnie Moore
+D Len Barker
+D Bob Watson
+D Graig Nettles
+D Ted Simmons
+D Ken Griffey Sr. | Ken Griffey
+D Dion James
+D Albert Hall
+D Jordan Schafer
+D Gregor Blanco
+D Omar Infante
+D Troy Glaus
+D Garret Anderson
+D Casey Kotchman
+D Charlie Culberson
+D Brandon Phillips
+D Jason Grilli
+D Jim Johnson
+D Arodys Vizcaíno
+D Mark Melancon
+D Pablo Sandoval
+D Guillermo Heredia
+D Drew Smyly
+D Huascar Ynoa
+D Touki Toussaint
+D William Contreras
+D Cristian Pache
+D Kevin Pillar
+D Whit Merrifield
+D Ramón Laureano
+D Grant Holmes
+D Dylan Lee
+D Pierce Johnson
+D Joe Jiménez
+D Collin McHugh
+D Jesse Chavez
+D AJ Smith-Shawver
+D Hurston Waldrep
+D Jason Marquis
+! Babe Ruth :: finished with the Boston Braves in 1935, long before Atlanta
+! Warren Spahn :: pitched for the Braves in Boston and Milwaukee, never in Atlanta
+! Bobby Cox :: the manager; he never played for the Braves
+! Brian Snitker :: the manager; he never reached the majors as a player
+! Al Downing :: the Dodger who gave up Aaron's 715th
+! Skip Caray :: a broadcaster
+! Ted Turner :: the owner, who managed one game in 1977
+! Leo Mazzone :: the pitching coach
+! Mike Trout :: has never played for the Braves
+! Bryce Harper :: has never played for the Braves
+! Johnny Sain :: pitched for the Braves in Boston
+! Lew Burdette :: pitched for the Braves in Milwaukee
+! Joe Adcock :: played for the Braves in Milwaukee
+! Kirby Puckett :: beat the Braves in the 1991 World Series; never played for them
+! Jim Leyritz :: his home run beat the Braves in the 1996 World Series
 
-@falcons | Atlanta | Name a player from Atlanta Falcons history
+@falcons | ATLANTA SPORTS | Name a player from Atlanta Falcons history | pool=gt | type=open
 C Matt Ryan | Matty Ice
 C Julio Jones
 C Michael Vick | Mike Vick
@@ -1624,8 +3091,172 @@ D Harry Douglas
 D Curtis Lofton
 D Jonathan Babineaux
 X Alfred Jenkins :: Falcons wide receiver, 1975 to 1983, and the league's receiving-yards leader in 1981.
+S Brett Favre :: Drafted by Atlanta in 1991 and traded to Green Bay a year later.
+R Billy "White Shoes" Johnson | Billy Johnson | White Shoes Johnson
+R Craig Heyward | Ironhead Heyward | Craig "Ironhead" Heyward
+R Chris Doleman
+R Cornelius Bennett
+R Eugene Robinson
+R Devin Hester
+R Dwight Freeney
+R Joe Horn
+R Peerless Price
+R Ovie Mughelli
+R Jacquizz Rodgers
+R Austin Hooper
+R Desmond Trufant
+R Keanu Neal
+R Robert Alford
+R Ricardo Allen
+R Takkarist McKinley
+R Brent Grimes
+R Sean Weatherspoon
+R Kroy Biermann
+R Matt Bosher
+R Russell Gage
+R Taylor Heinicke
+R Darnell Mooney
+R Kaden Elliss
+R Calais Campbell
+R Matthew Judon
+R Justin Simmons
+R Kaleb McGary
+R Jalon Walker | Jalen Walker
+R James Pearce Jr. | James Pearce
+R Xavier Watts
+R Joey Harrington
+R Lawyer Milloy
+D Bob Berry
+D Harmon Wages
+D Jim Butler | Cannonball Butler
+D Art Malone
+D Dave Hampton
+D John Zook
+D Greg Brezina
+D George Kunz
+D Ken Reaves
+D Jim Mitchell
+D Rolland Lawrence
+D Wallace Francis
+D Bubba Bean
+D Lynn Cain
+D Junior Miller
+D R.C. Thielemann
+D Buddy Curry
+D Al Richardson
+D Fulton Kuykendall
+D Joel Williams
+D Bobby Butler
+D Tom Pridemore
+D Mick Luckhurst
+D Stacey Bailey
+D David Archer
+D Rick Bryan
+D Tony Casillas
+D Mike Gann
+D John Rade
+D Scott Case
+D John Settle
+D Aundray Bruce
+D Michael Haynes
+D Mike Pritchard
+D Tim Green
+D Bruce Pickens
+D Billy Joe Tolliver
+D Erric Pegram
+D Bert Emanuel
+D Eric Metcalf
+D Chuck Smith
+D Lester Archambeau
+D Travis Hall
+D Shane Dronett
+D Bob Whitfield
+D O.J. Santiago
+D Tony Martin
+D Bob Christian
+D Steve DeBerg
+D Ashley Ambrose
+D Brady Smith
+D Rod Coleman
+D Michael Jenkins
+D Jerious Norwood
+D Jason Snelling
+D Todd McClure
+D Tyson Clabo
+D Harvey Dahl
+D Justin Blalock
+D Sam Baker
+D Thomas DeCoud
+D William Moore
+D Dunta Robinson
+D Corey Peters
+D Levine Toilolo
+D Taylor Gabriel
+D Eric Weems
+D Michael Koenen
+D Jay Feely
+D Jason Elam
+D Brian Poole
+D De'Vondre Campbell
+D Foyesade Oluokun
+D Adrian Clayborn
+D Dontari Poe
+D Osi Umenyiora
+D Olamide Zaccheaus
+D Hayden Hurst
+D Ray-Ray McCloud
+D Jonnu Smith
+D KhaDarel Hodge
+D David Onyemata
+D Bud Dupree
+D Arnold Ebiketie
+D Troy Andersen
+D Dee Alford
+D Richie Grant
+D Drew Dalman
+D Matthew Bergeron
+D Isaiah Oliver
+D Dante Fowler | Dante Fowler Jr.
+D Damontae Kazee
+D John James
+D Nick Mike-Mayer
+D Tim Mazzetti
+D Norm Johnson
+D Elbert Shelley
+D Tim McKyer
+D Devin Bush
+D Chris Draft
+D Ed Hartwell
+D Demorrio Williams
+D Michael Boley
+D Allen Rossum
+D Byron Leftwich
+D Chris Redman
+D D.J. Shockley
+D Danny Kanell
+D Hugh Millen
+D Pat Sullivan :: Auburn's Heisman winner spent four seasons as a Falcon.
+D June Jones
+D Kim McQuilken
+D Scott Hunter
+D Bob Lee
+! Arthur Blank :: the owner
+! Dan Reeves :: the coach, not a Falcons player
+! Jerry Glanville :: the coach
+! Mike Smith :: the coach
+! Dan Quinn :: the coach
+! Raheem Morris :: the coach
+! Tom Brady :: beat the Falcons in Super Bowl LI; never played for them
+! Calvin Johnson :: a Tech great, but he played for Detroit
+! Herschel Walker :: never played for the Falcons
+! Champ Bailey :: a Georgia native who played for Washington and Denver
+! Cam Newton :: from Atlanta, but played for Carolina and New England
+! Demaryius Thomas :: a Tech great who played mostly for Denver
+! Freddie Falcon :: the mascot
+! John Elway :: beat the Falcons in Super Bowl XXXIII
+! Terrell Davis :: beat the Falcons in Super Bowl XXXIII
 
-@hawks | Atlanta | Name a player from Atlanta Hawks history (1968 to today)
+@hawks | ATLANTA SPORTS | Name a player from Atlanta Hawks history | pool=gt | type=open | clar=1968 to today
 C Dominique Wilkins | Nique | Human Highlight Film
 C Trae Young
 T Dikembe Mutombo | Mutombo
@@ -1684,8 +3315,135 @@ D Josh Childress
 D Tony Delk
 D Theo Ratliff
 X John Drew :: A two-time All-Star for the Hawks in the 1970s.
+S Zaccharie Risacher
+S Dyson Daniels
+R Tracy McGrady
+R Rasheed Wallace :: Played exactly one game as a Hawk, in 2004.
+R Toni Kukoč
+R Glenn Robinson | Big Dog
+R Stephen Jackson
+R Antoine Walker
+R Al Harrington
+R Boris Diaw
+R Jeremy Lin
+R Rajon Rondo
+R Danilo Gallinari
+R Tim Hardaway Jr.
+R Kirk Hinrich
+R Jon Koncak
+R Danny Manning
+R Craig Ehlo
+R Sidney Moncrief
+R Maurice Cheeks
+R Kenny Smith
+R Connie Hawkins
+R Zelmo Beaty
+R Walt Hazzard
+R Mike Scott
+R Mike Muscala
+R Saddiq Bey
+R Kristaps Porziņģis
+R Nickeil Alexander-Walker
+R Larry Nance Jr.
+R Caris LeVert
+R Devin Harris
+R Elton Brand
+D Paul Silas
+D Herm Gilliam
+D Dwight Jones
+D Tom Van Arsdale
+D Dean Meminger
+D John Brown
+D Tom Henderson
+D Truck Robinson | Leonard Robinson
+D Steve Hawes
+D Armond Hill
+D Charlie Criss
+D Tom McMillen
+D Jack Givens
+D Rory Sparrow
+D Mike Glenn
+D Scott Hastings
+D Johnny Davis
+D John Battle
+D Duane Ferrell
+D Rumeal Robinson
+D Adam Keefe
+D Andrew Lang
+D Ken Norman
+D Grant Long
+D Priest Lauderdale
+D Chris Crawford
+D LaPhonso Ellis
+D Isaiah Rider | J.R. Rider
+D Jim Jackson
+D Lorenzen Wright
+D Dion Glover
+D DerMarr Johnson
+D Nazr Mohammed
+D Darvin Ham
+D Jacque Vaughn
+D Bob Sura
+D Kenny Anderson
+D Tyronn Lue
+D Royal Ivey
+D Salim Stoudamire
+D Speedy Claxton
+D Shelden Williams
+D Acie Law
+D Anthony Johnson
+D Mario West
+D Maurice Evans
+D Joe Smith
+D Jason Collins
+D Jerry Stackhouse
+D Willie Green
+D Ivan Johnson
+D DeShawn Stevenson
+D Pero Antić
+D Shelvin Mack
+D Tiago Splitter
+D Kris Humphries
+D Ersan İlyasova
+D Mike Dunleavy Jr. | Mike Dunleavy
+D José Calderón
+D Marco Belinelli
+D Dewayne Dedmon
+D Alex Len
+D DeAndre' Bembry
+D Jabari Parker
+D Evan Turner
+D Bruno Fernando
+D Kris Dunn
+D Delon Wright
+D Gorgui Dieng
+D AJ Griffin
+D Garrison Mathews
+D Justin Holiday
+D Kobe Bufkin
+D Mouhamed Gueye
+D Wesley Matthews
+D Patty Mills
+D Vit Krejci
+D Georges Niang
+D Terance Mann
+D Luke Kennard
+D Asa Newell
+! Bob Pettit :: a Hawk in Milwaukee and St. Louis, before the move to Atlanta
+! Cliff Hagan :: a St. Louis Hawk
+! Lenny Wilkens :: traded just as the team moved; he later coached the Hawks
+! Ed Macauley :: a St. Louis Hawk
+! Bill Russell :: drafted by the Hawks in 1956 and traded to Boston
+! Larry Bird :: his Celtics beat the Hawks in 1988
+! Michael Jordan :: never a Hawk
+! Luka Dončić :: drafted by Atlanta in 2018 and traded that night for Trae Young
+! Pau Gasol :: drafted by Atlanta in 2001 and traded at once
+! Mike Budenholzer :: the coach
+! Mike Fratello :: the coach
+! Harry the Hawk :: the mascot
+! Ted Turner :: the owner
 
-@collegetowns | Rivals | Name the home city or town of a school that has shared a conference with Tech
+@collegetowns | RIVALS | Name the home city of a school in Tech's conference history | pool=gt | type=closed | count=34 | source=the home cities of the 36 schools on the conference prompt; three of them share Lexington | clar=Southern, SEC, Metro or ACC
 C Athens :: Georgia. Wrong school, right answer.
 C Clemson
 C Chapel Hill
@@ -1720,8 +3478,16 @@ D Memphis
 D Cincinnati
 D St. Louis | Saint Louis :: Saint Louis University, from Tech's Metro Conference years.
 X Sewanee :: The University of the South, a charter member of the SEC with Tech in 1932.
+! Atlanta :: Tech's own home
+! Columbus :: no school in Tech's conference history is there
+! Austin :: Texas has never shared a conference with Tech
+! Fayetteville :: Arkansas joined the SEC after Tech left
+! Statesboro :: Georgia Southern never shared a conference with Tech
+! Greenville :: Furman joined the Southern Conference after Tech left
+! Savannah :: no school in Tech's conference history is there
+! Macon :: Mercer was in the earlier SIAA, which this prompt leaves out
 
-@engineering | Academics | Name a branch of engineering
+@engineering | Science | Name a branch of engineering | retired
 C Mechanical | Mechanical Engineering
 C Electrical | Electrical Engineering
 C Civil | Civil Engineering
@@ -1767,7 +3533,7 @@ D Photonics | Photonics Engineering
 D Water Resources | Water Resources Engineering
 X Ceramic | Ceramic Engineering | Ceramics :: Tech had a School of Ceramic Engineering for much of the twentieth century.
 
-@languages | Academics | Name a programming language
+@languages | TECH | Name a programming language | pool=general | type=open | clar=markup like HTML does not count
 C Python
 C Java
 T C, C++ or C# | C | C++ | C# | CPP | C Plus Plus | C Sharp | CSharp :: Three languages, one answer: typed, they all look like C.
@@ -1822,8 +3588,127 @@ D Delphi
 D Simula
 D Crystal
 X INTERCAL :: A 1972 parody language whose programs must say PLEASE often enough.
+R PowerShell
+R Solidity
+R Visual Basic .NET
+R VBA | Visual Basic for Applications
+R Common Lisp
+R AWK
+R ActionScript
+R CoffeeScript
+R Brainfuck
+R LabVIEW | G
+R SAS
+R Wolfram Language | Mathematica | Wolfram
+D D | Dlang
+D PL/SQL
+D PL/I | PL/1
+D ABAP
+D Apex
+D Elm
+D PureScript
+D Idris
+D Agda
+D Lean
+D Standard ML | SML
+D ML
+D Eiffel
+D Modula-2 | Modula
+D Oberon
+D Miranda
+D Hack
+D Haxe
+D Vala
+D Odin
+D Mojo
+D Carbon
+D Chapel
+D REXX
+D J
+D Icon
+D SNOBOL
+D BCPL
+D B
+D Self
+D PostScript
+D GDScript
+D AutoHotkey | AHK
+D AppleScript
+D VBScript
+D Processing
+D GLSL
+D HLSL
+D Stata
+D Octave | GNU Octave
+D RPG
+D MUMPS
+D Malbolge
+D Whitespace
+D LOLCODE
+D Befunge
+D Piet
+D Gleam
+D ReasonML | Reason
+D Raku | Perl 6
+D Dylan
+D Datalog
+D Mercury
+D Occam
+D Cython
+D WebAssembly | Wasm
+D Hy
+D Janet
+D Fennel
+D Luau
+D ColdFusion | CFML
+D Ladder Logic
+D SuperCollider
+D ChucK
+D Csound
+D Q Sharp | Q#
+D Starlark
+D Nix
+D JScript
+D Turing
+D Alice
+D Squeak
+D Io
+D Factor
+D Pony
+D Ballerina
+D Xojo
+D Pure Data | Pd
+D Structured Text
+D G-code
+D Maple
+D Hare
+D Roc
+! HTML :: a markup language, not a programming language
+! CSS :: a style sheet language
+! XML :: a markup language
+! JSON :: a data format
+! YAML :: a data format
+! Markdown :: a markup language
+! LaTeX :: a typesetting system
+! React :: a JavaScript library
+! Angular :: a JavaScript framework
+! Node.js :: a JavaScript runtime
+! Django :: a Python framework
+! Rails :: a Ruby framework
+! .NET :: a platform, not a language
+! Linux :: an operating system
+! Git :: a version-control tool
+! Excel :: a spreadsheet program
+! Unity :: a game engine
+! Docker :: a container tool
+! MySQL :: a database; the language is SQL
+! jQuery :: a JavaScript library
+! English :: not that kind of language
+! Spanish :: not that kind of language
+! Binary :: a number system
+! Arduino :: a board programmed in C++
 
-@elements | Academics | Name a chemical element
+@elements | SCIENCE | Name a chemical element | pool=general | easy | type=closed | count=118 | source=IUPAC periodic table
 C Hydrogen
 C Oxygen
 C Carbon
@@ -1910,8 +3795,58 @@ D Fermium
 D Nobelium
 D Oganesson
 X Technetium :: The first element to be made artificially. It even starts with Tech.
+D Praseodymium
+D Promethium
+D Samarium
+D Terbium
+D Dysprosium
+D Holmium
+D Erbium
+D Thulium
+D Ytterbium
+D Lutetium
+D Rhenium
+D Actinium
+D Protactinium
+D Neptunium
+D Berkelium
+D Californium
+D Mendelevium
+D Lawrencium
+D Rutherfordium
+D Dubnium
+D Seaborgium
+D Bohrium
+D Hassium
+D Meitnerium
+D Darmstadtium
+D Roentgenium
+D Copernicium
+D Nihonium
+D Flerovium
+D Moscovium
+D Livermorium
+D Tennessine
+! Water :: a compound of hydrogen and oxygen
+! Steel :: an alloy, mostly iron
+! Bronze :: an alloy of copper and tin
+! Brass :: an alloy of copper and zinc
+! Salt :: a compound, sodium chloride
+! Air :: a mixture of gases
+! Fire :: not a chemical element
+! Earth :: not a chemical element
+! Diamond :: a form of carbon
+! Kryptonite :: fictional
+! Vibranium :: fictional
+! Unobtainium :: fictional
+! Adamantium :: fictional
+! Ammonia :: a compound
+! Carbon Dioxide :: a compound
+! Ozone :: a form of oxygen
+! Graphite :: a form of carbon
+! Quartz :: a compound, silicon dioxide
 
-@units | Academics | Name a unit of measurement that is named after a person
+@units | Science | Name a unit of measurement named after a person | retired
 C Watt
 C Volt
 C Newton
@@ -1955,7 +3890,7 @@ D Galileo | Gal
 D Fermi
 X Sverdrup :: An oceanographer's unit: a million cubic metres of water a second.
 
-@hoopschamps | Sports History | Name a school that has won the men's NCAA basketball tournament
+@hoopschamps | SPORTS | Name a school that has won the men's NCAA basketball tournament | pool=general | type=closed | count=37 | source=ncaa.com list of champions, 1939 to 2025 (37 different schools) | clar=champions through 2025
 C Duke
 C North Carolina | UNC | Carolina
 C Kentucky | UK
@@ -1993,8 +3928,28 @@ D CCNY | City College of New York | City College
 D Texas Western | UTEP | Texas El Paso
 D Wyoming
 X Holy Cross :: Champions in 1947.
+! Georgia Tech :: runner-up in 2004; never champion
+! Gonzaga :: runner-up in 2017 and 2021
+! Purdue :: runner-up in 1969 and 2024
+! Houston :: runner-up in 1983, 1984 and 2025; never champion
+! Memphis :: runner-up in 1973 and 2008
+! Butler :: runner-up in 2010 and 2011
+! Illinois :: runner-up in 2005
+! Texas Tech :: runner-up in 2019
+! Oklahoma :: runner-up in 1947 and 1988
+! Texas :: has reached the Final Four but never won
+! Notre Dame :: one Final Four, in 1978
+! Auburn :: Final Fours in 2019 and 2025
+! Tennessee :: never reached the final
+! Alabama :: one Final Four, in 2024
+! Iowa :: runner-up in 1956
+! Seton Hall :: runner-up in 1989
+! St. John's :: runner-up in 1952
+! Dayton :: runner-up in 1967
+! San Diego State :: runner-up in 2023
+! Georgia :: one Final Four, in 1983
 
-@heisman | Sports History | John Heisman coached at Tech. Name a winner of the trophy that carries his name.
+@heisman | SPORTS | Name a Heisman Trophy winner | pool=general | type=closed | count=90 | source=heisman.com winners list, 1935 to 2025 (91 trophies, Archie Griffin twice) | clar=1935 to 2025; Heisman coached at Tech
 C Tim Tebow
 C Lamar Jackson
 C Joe Burrow
@@ -2067,4 +4022,45 @@ D Mike Garrett
 D Gary Beban
 D Steve Owens
 X Jay Berwanger :: The first winner, in 1935.
-~S Fernando Mendoza ?? I believe he won in 2025, but that is at the edge of what I know for certain.
+S Fernando Mendoza :: Indiana, 2025.
+D Larry Kelley :: Yale, 1936.
+D Clint Frank :: Yale, 1937.
+D Davey O'Brien :: TCU, 1938.
+D Bruce Smith :: Minnesota, 1941.
+D Angelo Bertelli :: Notre Dame, 1943.
+D Les Horvath :: Ohio State, 1944.
+D Leon Hart :: Notre Dame, 1949.
+D Vic Janowicz :: Ohio State, 1950.
+D Dick Kazmaier :: Princeton, 1951.
+D Billy Vessels :: Oklahoma, 1952.
+D Johnny Lattner | John Lattner :: Notre Dame, 1953.
+D Alan Ameche :: Wisconsin, 1954.
+D Howard Cassady | Hopalong Cassady :: Ohio State, 1955.
+D John David Crow :: Texas A&M, 1957.
+D Joe Bellino :: Navy, 1960.
+D Terry Baker :: Oregon State, 1962.
+D John Huarte :: Notre Dame, 1964.
+! Peyton Manning :: second in 1997, behind Charles Woodson
+! Tom Brady :: never a finalist
+! Vince Young :: second in 2005
+! Deshaun Watson :: third in 2015 and second in 2016
+! Tua Tagovailoa :: second in 2018
+! Trevor Lawrence :: second in 2020
+! Christian McCaffrey :: second in 2015
+! Andrew Luck :: second in 2010 and 2011
+! Adrian Peterson :: second in 2004
+! Larry Fitzgerald :: second in 2003
+! Michael Vick :: third in 1999
+! Joe Hamilton :: Tech's quarterback was second in 1999
+! Clint Castleberry :: Tech's freshman was third in 1942
+! Billy Lothridge :: Tech's quarterback was second in 1963
+! John Heisman :: the trophy is named for him; he never won it
+! Ndamukong Suh :: fourth in 2009
+! Manti Te'o :: second in 2012
+! Patrick Mahomes :: never a finalist
+! John Elway :: second in 1982
+! Dan Marino :: never won it
+! Emmitt Smith :: never won it
+! Calvin Johnson :: Tech's receiver was never a finalist
+! Saquon Barkley :: fourth in 2017
+! Ashton Jeanty :: second in 2024
