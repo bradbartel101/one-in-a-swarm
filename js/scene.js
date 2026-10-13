@@ -118,8 +118,10 @@
     let dim = 0;
     let trick = null; // { name, start, ms }
     let look = false; // glancing down at the answer box
+    let labels = []; // the ruler labels drawn in the last frame
     let avoid = []; // boxes of text, in canvas pixels, that the sun must never sit behind
     let sunAlpha = 1;
+    let sunSpot = null; // where the sun was drawn last frame
     const inView = new Set(); // sightings with any part on screen in the last frame
     let safeTop = -Infinity;
     let safeBottom = Infinity;
@@ -249,20 +251,44 @@
       // There is one sun. It is drawn once per frame, from one function of the camera.
       const sun = sunAt(cam);
       if (!sun) return;
-      const x = Math.round(W * sun.x);
-      const y = Math.round(H * sun.y);
-      // Text always wins: where the reveal, the tag or a tier label is in the way, the sun is
-      // not drawn at all, and it fades back in once the sky there is clear.
-      const box = { x: x - 13, y: y - 13, w: 26, h: 26 };
-      const blocked = avoid.some((a) => box.x < a.x + a.w && box.x + box.w > a.x && box.y < a.y + a.h && box.y + box.h > a.y);
-      sunAlpha = blocked ? 0 : Math.min(1, sunAlpha + (still() ? 1 : 0.08));
-      if (blocked) return;
+      // Where it wants to be: sinking and warming with altitude, as ever. If the bee, the swarm,
+      // the answer tag, a tier label or the reveal text is there, it moves to the nearest clear
+      // spot in the upper part of the sky instead, and fades in where it lands.
+      const want = { x: Math.round(W * sun.x), y: Math.round(H * sun.y) };
+      const keepOut = avoid.slice();
+      if (boxes.swarm) keepOut.push({ x: boxes.swarm.x - 5, y: boxes.swarm.y - 5, w: boxes.swarm.w + 10, h: boxes.swarm.h + 10 });
+      const R = 16; // the sun's rays reach 13 pixels; the rest is breathing room
+      const clear = (p) => !keepOut.some((a) => p.x - R < a.x + a.w && p.x + R > a.x && p.y - R < a.y + a.h && p.y + R > a.y);
+      let spot = null;
+      if (clear(want)) spot = want;
+      else if (sunSpot && sunSpot.moved && clear(sunSpot)) spot = sunSpot; // stay where it settled
+      else {
+        const top = Math.max(15, Math.ceil(isFinite(safeTop) ? safeTop : 0) + 15);
+        let best = Infinity;
+        for (let y = top; y <= Math.max(top, Math.round(H * 0.45)); y += 4) {
+          for (let x = 15; x <= W - 30; x += 4) {
+            const p = { x, y, moved: true };
+            const d = (x - want.x) * (x - want.x) + (y - want.y) * (y - want.y);
+            if (d < best && clear(p)) { best = d; spot = p; }
+          }
+        }
+      }
+      if (!spot) { // no clear sky at all (a phone-sized reveal): the sun waits out of sight
+        sunSpot = null;
+        sunAlpha = 0;
+        return;
+      }
+      const jumped = !sunSpot || Math.abs(spot.x - sunSpot.x) + Math.abs(spot.y - sunSpot.y) > 6;
+      sunAlpha = jumped && !still() ? 0.08 : Math.min(1, sunAlpha + (still() ? 1 : 0.08));
+      sunSpot = spot;
+      const x = spot.x;
+      const y = spot.y;
       ctx.globalAlpha = sunAlpha;
       disc(x, y, 7, sun.edge);
       disc(x, y, 5, sun.core);
       [[-12, 0], [12, 0], [0, -12], [0, 12], [-9, -9], [9, -9], [-9, 9], [9, 9]].forEach((d) => px(x + d[0], y + d[1], 2, 2, sun.edge));
       ctx.globalAlpha = 1;
-      boxes.sun = box;
+      boxes.sun = { x: x - 13, y: y - 13, w: 26, h: 26 };
     }
 
     /* ----- campus, 0 to 40 ----- */
@@ -944,10 +970,17 @@
         }
       }
       // The swarm trails behind and below, one more bee for every correct answer.
+      let sx0 = mx - 6;
+      let sy0 = my - 12; // room for the cheer hop, the bob and a trick
+      let sx1 = mx + 22;
+      let sy1 = my + 17;
       for (let i = 0; i < followers; i++) {
         const ph = still() ? i : t / 520 + i * 1.7;
         const fx = mx - 11 - (i % 4) * 9 - Math.floor(i / 4) * 4 + Math.round(Math.sin(ph) * 2);
         const fy = my + 10 + Math.floor(i / 4) * 9 + ((i * 5) % 7) + Math.round(Math.cos(ph * 1.3) * 2);
+        sx0 = Math.min(sx0, fx - 3);
+        sx1 = Math.max(sx1, fx + 10);
+        sy1 = Math.max(sy1, fy + 8);
         const flapM = !still() && Math.floor(t / 70 + i) % 2 === 0;
         sprite(flapM ? MINI.map((r, k) => (k === 0 ? '.......' : r)) : MINI, fx, fy, palette);
       }
@@ -980,6 +1013,7 @@
         }
       }
       boxes.bee = { x: mx - 4, y: my - 4, w: 24, h: 19 };
+      boxes.swarm = { x: sx0, y: sy0, w: sx1 - sx0, h: sy1 - sy0 }; // the bee and everyone following it
       particles = particles.filter((p) => t - p.born < p.life);
       particles.forEach((p) => {
         const age = (t - p.born) / 1000;
@@ -1011,6 +1045,7 @@
     /* ----- the ruler: a thin line, ticks and small labels, nothing behind it ----- */
 
     function drawRuler() {
+      labels = [];
       const x = W - 2;
       px(x - 1, 0, 1, H, '#00213d');
       px(x, 0, 1, H, '#f4f1e6');
@@ -1020,12 +1055,17 @@
         const y = rowOf(s);
         const len = s % 10 === 0 ? 6 : s % 5 === 0 ? 4 : 2;
         px(x - len, y, len, 1, '#f4f1e6');
-        if (s % 10 === 0) {
+        if (s % 5 === 0) { // a number every five points, so there is always one near the bee
           px(x - len, y + 1, len, 1, '#00213d'); // a hairline of shadow keeps it readable on any sky
-          if (y - 3 < safeTop || y + 4 > safeBottom) continue; // no label under the HUD, the reveal or the answer bar
+          if (y - 4 < safeTop || y + 5 > safeBottom) continue; // no label under the HUD, the reveal or the answer bar
+          // The label is the HUD's own number for this tick: the same points-to-feet function,
+          // shortened. It sits on a dark plate, because pale digits with an offset shadow on a
+          // pale sky could be misread (a 3 looked like a 9 or an 8).
           const label = compact(feetFor(s));
-          text(label, x - 7, y - 1, '#00213d');
-          text(label, x - 8, y - 2, '#f4f1e6');
+          const wide = label.length * 4 - 1;
+          px(x - 9 - wide, y - 4, wide + 2, 7, '#00213d');
+          text(label, x - 8, y - 3, '#f4f1e6');
+          labels.push({ score: s, feet: feetFor(s), label, y: y * S });
         }
       }
     }
@@ -1082,6 +1122,9 @@
       setLook(on) { look = !!on; },
       setAvoid(rects) { avoid = rects.map((r) => ({ x: r.left / S - 1, y: r.top / S - 1, w: (r.right - r.left) / S + 2, h: (r.bottom - r.top) / S + 2 })); },
       sightingVisible(id) { return inView.has(id); },
+      // The labelled ruler ticks on screen, and the one nearest the bee.
+      rulerLabels() { return labels.slice(); },
+      rulerNearBee() { const by = anchorRow() * S; return labels.slice().sort((a, b) => Math.abs(a.y - by) - Math.abs(b.y - by))[0] || null; },
       // Rows of the canvas that ruler labels may be drawn in.
       setSafe(top, bottom) { safeTop = top; safeBottom = bottom; },
       // A small cloud of pollen left behind as a climb begins.

@@ -69,7 +69,9 @@ const promptOf = (text) => {
 const answerOf = (text, tier) => promptOf(text).answers.find((a) => a.tier === tier).name;
 const view = (page) => page.eval('document.querySelector("[data-view]:not([hidden])").dataset.view');
 const phase = (page) => page.eval('document.body.dataset.phase');
-const text = (page, id) => page.eval('document.getElementById(' + JSON.stringify(id) + ').textContent');
+// (numbers are joined to their units with a non-breaking space; tests compare with an ordinary one)
+const rawText = (page, id) => page.eval('document.getElementById(' + JSON.stringify(id) + ').textContent');
+const text = async (page, id) => String(await rawText(page, id)).replace(/\u00a0/g, ' ');
 const click = (page, id) => page.eval('document.getElementById(' + JSON.stringify(id) + ').click()');
 const saved = (page) => page.eval('JSON.parse(localStorage.getItem("swarm.daily"))');
 const barScale = (page) => page.eval('Number(/scaleX\\(([\\d.]+)\\)/.exec(document.getElementById("barFill").style.transform)[1])');
@@ -251,10 +253,11 @@ async function main() {
         await page.type('second of two'); // typing is never blocked
         await page.enter();
         assert.equal(await page.eval('document.getElementById("guess").value'), 'second of two');
-        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'the submit inside the cooldown did nothing');
-        await page.waitFor('!document.getElementById("guess").dataset.locked', 2000, 'the cooldown to end');
-        await page.enter();
-        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 3, 'and counts once the cooldown is over');
+        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'the submit inside the cooldown is not judged yet');
+        await page.waitFor('document.querySelectorAll("#tried li").length === 3', 2000, 'the queued submit to fire by itself when the cooldown ends');
+        await sleep(450);
+        await page.enter(); // the same text again: a duplicate, ignored
+        assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 3, 'it was judged once, with no second Enter');
         await sleep(400);
         assert.ok(before - (await barScale(page)) < 0.12, 'three wrong guesses, a duplicate and a blocked submit: still only real time gone');
         await page.eval('document.getElementById("guess").value = ""');
@@ -466,12 +469,12 @@ async function main() {
     await page.type('pow');
     assert.equal(await page.eval('document.getElementById("guess").value'), 'pow', 'typing during the lockout replaces the selected wrong text');
     await page.type('erade');
-    await page.enter(); // still inside the lockout: this submit is ignored, at no cost
-    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 1, 're-submitting inside the lockout does nothing');
+    await page.enter(); // still inside the cooldown: this submit waits for it to end
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 1, 'a submit inside the cooldown is not judged at once');
     assert.equal(await page.eval('document.getElementById("guess").value'), 'powerade', 'and the typed text is kept');
-    await page.waitFor('!document.getElementById("guess").dataset.locked', 2000, 'the lock to lift');
-    await page.enter();
-    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'after the cooldown the same Enter goes through');
+    await page.waitFor('document.querySelectorAll("#tried li").length === 2', 2000, 'the queued submit to fire when the cooldown ends');
+    assert.equal(await page.eval('document.querySelector("#tried li:last-child").textContent'), 'powerade', 'judged with the text that was in the box, and no second Enter');
+    await sleep(450);
     // near-miss
     // a one-letter slip that the rules accept as a near miss (some are refused as ambiguous)
     const slip = (a) => a.name.slice(0, 2) + a.name.slice(3);
@@ -1310,6 +1313,8 @@ async function main() {
           const sun = { name: 'sun', l: sb.x + 2, t: sb.y + 2, r: sb.x + sb.w - 2, b: sb.y + sb.h - 2 };
           window.__seen.sun = (window.__seen.sun || 0) + 1;
           ['#reveal > *', '#tag', '#worldLayer .tier-line.on span'].forEach((sel) => document.querySelectorAll(sel).forEach((n) => { if (n.getClientRects().length && hit(sun, box(n, sel))) window.__bad['the sun is behind ' + sel + (n.id ? ' ' + n.id : '') + ' (' + phase + ')'] = 1; }));
+          floats.forEach((f) => { if (hit(sun, f)) window.__bad['the sun is under ' + f.name + ' (' + phase + ')'] = 1; });
+          ['bee', 'swarm'].forEach((name) => { const b = window.__swarm.scene.box(name); if (b && hit(sun, { l: b.x, t: b.y, r: b.x + b.w, b: b.y + b.h })) window.__bad['the sun is on the ' + name + ' (' + phase + ')'] = 1; });
         }
         // a caption never outlives the thing it describes, and tier labels never change size
         const cap = document.getElementById('caption');
@@ -1522,6 +1527,158 @@ async function main() {
         await page.close();
       }
     }
+  });
+
+  // Regression: a guess submitted during the 350 ms cooldown used to be dropped, and needed a second Enter.
+  await scenario('queued submits: Enter during the cooldown is judged when it ends, and a round ending cancels it', async () => {
+    const page = await fresh({ width: 1280, height: 800, initScript: fakeClock(new Date().toISOString()) });
+    await click(page, 'dailyBtn');
+    await waitPhase(page, 'guess');
+    const tried = () => page.eval('Array.from(document.querySelectorAll("#tried li")).map((n) => n.textContent)');
+    const typeEnter = async (value) => {
+      await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.select(); })()');
+      await page.type(value);
+      await page.enter();
+    };
+    await typeEnter('first wrong guess');
+    const t0 = Date.now();
+    await typeEnter('second wrong guess'); // a different guess, well inside the cooldown
+    const gap = Date.now() - t0;
+    assert.deepEqual(await tried(), ['first wrong guess'], 'not judged yet');
+    await page.waitFor('document.querySelectorAll("#tried li").length === 2', 1500, 'the second guess to be judged without another Enter');
+    assert.deepEqual(await tried(), ['first wrong guess', 'second wrong guess']);
+    assert.match(await text(page, 'feedback'), /^'second wrong guess': no buzz/);
+    // only the latest pending submit counts, with whatever is in the box when the cooldown ends
+    await sleep(400);
+    await typeEnter('third wrong guess');
+    await typeEnter('not this one');
+    await typeEnter('nor this');
+    await page.eval('document.getElementById("guess").value = "fourth wrong guess"'); // edited after the last Enter
+    await sleep(700);
+    assert.deepEqual(await tried(), ['first wrong guess', 'second wrong guess', 'third wrong guess', 'fourth wrong guess'], 'one queued submit, judged with the text in the box at that moment');
+    // a queued duplicate is still ignored
+    await sleep(400);
+    await typeEnter('fifth wrong guess');
+    await typeEnter('  FIRST wrong guess!! ');
+    await sleep(700);
+    assert.equal((await tried()).length, 5, 'the queued duplicate was ignored');
+    // the clock running out cancels a pending submit: nothing leaks into the next round
+    await sleep(400);
+    await typeEnter('sixth wrong guess');
+    await typeEnter('this must never be judged');
+    await page.eval('__shiftClock(60000)');
+    await waitPhase(page, 'reveal', 3000);
+    assert.equal(await text(page, 'lastBadge'), 'NOTHING LANDED');
+    assert.equal((await saved(page)).results[0].wrong, 6, 'six wrong guesses were counted, not seven');
+    await startNextRound(page);
+    await sleep(800);
+    assert.deepEqual(await tried(), [], 'the next round starts clean');
+    assert.equal(await text(page, 'feedback'), '');
+    // a correct answer queued during the cooldown is judged too, and ends the round
+    await typeEnter('a wrong guess in round two');
+    await typeEnter(answerOf(await text(page, 'promptText'), 'rare'));
+    await waitPhase(page, 'reveal', 8000);
+    assert.equal(await text(page, 'lastBadge'), 'RARE');
+    assert.equal((await saved(page)).results[1].wrong, 1);
+    noProblems(page);
+    await page.close();
+    return 'second Enter came ' + gap + 'ms after the first and was judged by itself';
+  });
+
+  // Regression: the ruler label beside the bee read "980" while the HUD said 329 ft.
+  await scenario('ruler and HUD agree: the labelled tick nearest the bee is within one tick of the HUD altitude', async () => {
+    const compact = (ft) => (ft < 1000 ? String(ft < 100 ? ft : Math.round(ft / 10) * 10) : ft < 10000 ? (ft / 1000).toFixed(1) + 'K' : ft < 1000000 ? Math.round(ft / 1000) + 'K' : Math.round(ft / 5280) < 1000 ? Math.round(ft / 5280) + 'MI' : Math.round(ft / 5280 / 1000) + 'KMI');
+    const stops = [[], ['solid', 'common'], ['rare', 'common'], ['rare', 'solid', 'clever'], ['rare', 'solid', 'clever', 'common', 'solid'], ['swarm', 'swarm', 'swarm', 'swarm']];
+    const notes = [];
+    for (const size of [{ width: 375, height: 812, mobile: true }, { width: 1440, height: 900 }]) {
+      for (const tiers of stops) {
+        const today = C.utcDateKey(new Date());
+        const ids = dayIds(today);
+        const st = C.newDaily(today, ids);
+        tiers.forEach((tier, i) => {
+          const a = data.prompts.find((p) => p.id === ids[i]).answers.find((x) => x.tier === tier);
+          st.results.push({ tier, answer: a.name, points: C.tierPoints(tier), promptId: ids[i], wrong: 0, fuzzy: false, note: '' });
+        });
+        const score = C.totalScore(st.results);
+        const page = await fresh(size);
+        await page.eval('localStorage.setItem("swarm.daily", ' + JSON.stringify(JSON.stringify(st)) + ')');
+        await page.reload();
+        await ready(page);
+        await click(page, 'dailyBtn');
+        if (!tiers.length) await waitPhase(page, 'guess');
+        await sleep(900); // let the camera settle
+        const hud = (await text(page, 'hudAlt')) + ' ' + (await page.eval('document.getElementById("hudUnit") ? document.getElementById("hudUnit").textContent : ""'));
+        const hudFeet = C.altitudeFeet(score);
+        assert.equal((await text(page, 'hudAlt')).replace(/,/g, ''), C.altitudeParts(score).value.replace(/,/g, ''), 'the HUD shows the curve at ' + score + ' points');
+        const near = await page.eval('window.__swarm.scene.rulerNearBee()');
+        const where = size.width + 'px at ' + score + ' points (' + C.altitudeText(score) + ')';
+        assert.ok(near, where + ': a labelled tick is on screen');
+        assert.equal(near.feet, C.altitudeFeet(near.score), where + ': the tick is placed by the same points-to-feet function as the HUD');
+        assert.equal(near.label, compact(C.altitudeFeet(near.score)), where + ': and its label is that number, shortened');
+        assert.ok(Math.abs(near.score - score) <= 10, where + ': the nearest labelled tick is within one interval (10 points) of the bee: ' + near.score);
+        const interval = Math.max(C.altitudeFeet(score + 10) - hudFeet, hudFeet - C.altitudeFeet(Math.max(0, score - 10)));
+        assert.ok(Math.abs(near.feet - hudFeet) <= interval, where + ': tick reads ' + near.label + ' (' + near.feet + ' ft), HUD reads ' + hud.trim() + ', one interval here is ' + interval + ' ft');
+        const all = await page.eval('window.__swarm.scene.rulerLabels()');
+        all.forEach((l) => assert.equal(l.label, compact(C.altitudeFeet(l.score)), where + ': every label on screen comes from the same function'));
+        if (size.width === 1440) notes.push(C.altitudeText(score) + ' ~ ' + near.label);
+        noProblems(page);
+        await page.close();
+      }
+    }
+    return 'HUD ~ nearest ruler label: ' + notes.join(', ');
+  });
+
+  // Regression: "8,893 ft" wrapped on the results page, leaving "ft" alone on the next line.
+  await scenario('results numbers: a number never parts from its unit, and the stats fit at 320, 375 and 1440', async () => {
+    const today = C.utcDateKey(new Date());
+    const ids = dayIds(today);
+    const run = (tiers) => {
+      const st = C.newDaily(today, ids);
+      tiers.forEach((tier, i) => {
+        const a = tier ? data.prompts.find((p) => p.id === ids[i]).answers.find((x) => x.tier === tier) : null;
+        st.results.push({ tier, answer: a ? a.name : null, points: C.tierPoints(tier), promptId: ids[i], wrong: 14, fuzzy: false, note: '' });
+      });
+      st.finished = true;
+      return st;
+    };
+    const cases = [['8,893 ft', ['rare', 'solid', 'clever', 'common', 'solid', null, null]], ['238,855 mi', ['swarm', 'swarm', 'swarm', 'swarm', 'swarm', 'swarm', 'swarm']]];
+    const notes = [];
+    for (const width of [320, 375, 1440]) {
+      for (const [alt, tiers] of cases) {
+        const page = await fresh({ width, height: 812, mobile: width < 500 });
+        await page.eval('localStorage.setItem("swarm.daily", ' + JSON.stringify(JSON.stringify(run(tiers))) + ')');
+        await page.reload();
+        await ready(page);
+        await click(page, 'dailyBtn');
+        await waitPhase(page, 'results');
+        assert.equal(await rawText(page, 'resAlt'), alt.replace(' ', '\u00a0'), 'the altitude is joined to its unit with a non-breaking space');
+        assert.match(await rawText(page, 'resScore'), /^[\d,]+\u00a0pts$/);
+        const got = await page.eval(`(() => {
+          const cells = Array.from(document.querySelectorAll('[data-view="results"] .numbers > div'));
+          const panel = document.querySelector('[data-view="results"] .panel').getBoundingClientRect();
+          return { cells: cells.map((c) => { const dd = c.querySelector('dd'); const r = dd.getBoundingClientRect(); const cr = c.getBoundingClientRect(); const range = document.createRange(); range.selectNodeContents(dd);
+            return { id: dd.id, lines: range.getClientRects().length, textRight: range.getBoundingClientRect().right, cellRight: cr.right, cellLeft: cr.left, top: Math.round(cr.top), inPanel: cr.left >= panel.left && cr.right <= panel.right + 1, nowrap: getComputedStyle(dd).whiteSpace }; }),
+            scroll: document.documentElement.scrollWidth <= window.innerWidth + 1 };
+        })()`);
+        const where = alt + ' at ' + width + 'px';
+        assert.equal(got.cells.length, 3, where);
+        got.cells.forEach((c) => {
+          assert.equal(c.lines, 1, where + ': ' + c.id + ' is on one line');
+          assert.equal(c.nowrap, 'nowrap', where + ': ' + c.id);
+          assert.ok(c.textRight <= c.cellRight + 1, where + ': ' + c.id + ' fits inside its own cell (' + Math.round(c.textRight) + ' <= ' + Math.round(c.cellRight) + ')');
+          assert.ok(c.inPanel, where + ': ' + c.id + ' stays inside the panel');
+        });
+        const sorted = got.cells.slice().sort((a, b) => a.cellLeft - b.cellLeft);
+        for (let i = 1; i < sorted.length; i++) if (sorted[i].top === sorted[i - 1].top) assert.ok(sorted[i].cellLeft >= sorted[i - 1].textRight - 1, where + ': neighbours do not run into each other');
+        assert.equal(got.scroll, true, where + ': no sideways scroll');
+        const rows = new Set(got.cells.map((c) => c.top)).size;
+        assert.equal(rows, width >= 1440 ? 1 : 2, where + ': one row when wide; two rows when narrow, the altitude on its own');
+        if (alt === '8,893 ft') notes.push(width + 'px: ' + rows + ' row' + (rows > 1 ? 's' : ''));
+        noProblems(page);
+        await page.close();
+      }
+    }
+    return notes.join(', ');
   });
 
   await scenario('captions: one at a time, about three seconds each', async () => {

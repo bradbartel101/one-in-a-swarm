@@ -137,3 +137,23 @@ test('sixteen sightings, with something to find in every zone', () => {
   assert.equal((eggs.match(/\['\w+', /g) || []).length, 26, '16 sightings, 6 secrets, 4 things to do');
   assert.doesNotMatch(found.map((g) => g.caption).join(' '), /Domino|Pizza Hut|Papa John|DJI|Red Bull|NASA|SpaceX/i, 'no brand names');
 });
+
+test('ruler labels: every digit is its own shape, and labels sit on a plate so they cannot be misread', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'scene.js'), 'utf8');
+  const glyphs = {};
+  for (const m of src.slice(src.indexOf('const GLYPHS = {'), src.indexOf('};', src.indexOf('const GLYPHS = {'))).matchAll(/(\d|[A-Z]|'\.'):\s*'([01]{15})'/g)) glyphs[m[1].replace(/'/g, '')] = m[2];
+  const digits = '0123456789'.split('');
+  digits.forEach((d) => assert.ok(glyphs[d], 'a glyph for ' + d));
+  for (let i = 0; i < 10; i++) for (let j = i + 1; j < 10; j++) {
+    let differ = 0;
+    for (let b = 0; b < 15; b++) if (glyphs[i][b] !== glyphs[j][b]) differ++;
+    assert.ok(differ >= 1, i + ' and ' + j + ' are different shapes');
+  }
+  // Regression: "330" was read as "980". The cause was a pale digit with an offset dark shadow on
+  // a pale sky; the label is now pale on a solid dark plate, with no shadow copy of the digits.
+  const ruler = src.slice(src.indexOf('function drawRuler()'), src.indexOf('function draw(t)'));
+  assert.equal((ruler.match(/text\(label/g) || []).length, 1, 'the digits are drawn once, not twice');
+  assert.match(ruler, /px\(x - 9 - wide, y - 4, wide \+ 2, 7, '#00213d'\)/, 'on a dark plate');
+  assert.match(ruler, /compact\(feetFor\(s\)\)/, 'from the same points-to-feet function the HUD uses');
+  assert.match(ruler, /s % 5 === 0/, 'often enough that one is always near the bee');
+});
