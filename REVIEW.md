@@ -278,7 +278,7 @@ No website was visited. One commit per item, each with a regression test.
 
 ## v5 results
 - 110 unit tests pass; content OK.
-- Browser suite: 31 of 32 pass on the test machine. The one failure is "frame rate during a climb on a throttled phone" (30 fps against a floor of 50). The machine was on battery in Low Power Mode, which caps the browser at 30 frames a second; the same test fails the same way on the already-shipped main branch on this machine, and passed at 60 fps earlier the same day on mains power. It is not evidence either way about v5; CI runs it on a normal machine.
+- Browser suite: 31 of 32 pass on the test machine. The one failure is "frame rate during a climb on a throttled phone" (30 fps against a floor of 50). The machine was on battery in Low Power Mode, which caps the browser at 30 frames a second; the same test fails the same way on the already-shipped main branch on this machine, and passed at 60 fps earlier the same day on mains power. So this run says nothing either way about v5's frame rate, and CI does not run the browser suite: the frame rate of v5 is UNVERIFIED until `npm run test:e2e` is run on mains power.
 
 ## Could not fix, or left
 - A front cloud can drift across the bee while it rests in the cumulus deck. It is drawn at 80% so the bee shows through, but it is briefly dimmed.
