@@ -83,6 +83,12 @@
     {"id": "shakespeare", "pool": "general", "category": "STAGE", "text": "Name a play by Shakespeare", "n": 38},
     {"id": "disney", "pool": "general", "category": "SCREEN", "text": "Name an animated Disney movie", "clarifier": "Walt Disney Animation and Pixar features", "n": 93},
     {"id": "emperors", "pool": "general", "category": "HISTORY", "text": "Name a Roman emperor", "clarifier": "Augustus onward, West or East, to Justinian", "n": 95},
-    {"id": "pasta", "pool": "general", "category": "FOOD", "text": "Name a pasta shape", "clarifier": "shapes and noodles, not sauces or dishes", "n": 118}
+    {"id": "pasta", "pool": "general", "category": "FOOD", "text": "Name a pasta shape", "clarifier": "shapes and noodles, not sauces or dishes", "n": 118},
+    {"id": "spicerack", "pool": "general", "category": "FOOD", "text": "Name something on a spice rack", "clarifier": "herbs, spices and seasonings", "n": 123},
+    {"id": "dinosaurs", "pool": "general", "category": "SCIENCE", "text": "Name a dinosaur", "clarifier": "true dinosaurs; flying and swimming reptiles don't count", "n": 167},
+    {"id": "greekmyth", "pool": "general", "category": "STORIES", "text": "Name a figure from Greek mythology", "clarifier": "gods, heroes and monsters; Roman names count", "n": 238},
+    {"id": "collegenicknames", "pool": "general", "category": "SPORTS", "text": "Name a college team nickname", "clarifier": "NCAA Division I teams, like Yellow Jackets", "n": 204},
+    {"id": "yellowthings", "pool": "general", "category": "THINGS", "text": "Name something that is yellow", "clarifier": "usually or famously yellow", "n": 209},
+    {"id": "bowlgames", "pool": "general", "category": "SPORTS", "text": "Name a college football bowl game", "clarifier": "past or present; sponsor names not needed", "strip": ["bowl","classic"], "n": 92}
   ]
 }

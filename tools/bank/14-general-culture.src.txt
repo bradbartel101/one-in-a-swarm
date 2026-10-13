@@ -638,3 +638,137 @@ D Japchae Noodles | Dangmyeon
 ! Polenta :: cornmeal
 ! Pierogi :: a filled dumpling from Poland, not usually counted as pasta
 ! Dumplings :: a different family of dough
+
+@spicerack | FOOD | Name something on a spice rack | pool=general | type=open | clar=herbs, spices and seasonings
+C Salt | Sea Salt | Kosher Salt | Table Salt
+C Pepper | Black Pepper | Peppercorns
+C Cinnamon
+C Garlic Powder | Garlic
+C Oregano
+C Basil
+T Paprika
+T Saffron :: By weight, worth more than silver.
+S Cumin
+S Chili Powder | Chile Powder
+S Parsley
+S Thyme
+S Rosemary
+S Nutmeg
+S Ginger | Ground Ginger
+S Onion Powder
+S Cayenne | Cayenne Pepper
+S Red Pepper Flakes | Crushed Red Pepper | Chili Flakes
+S Vanilla | Vanilla Extract
+S Bay Leaf | Bay Leaves
+S Italian Seasoning
+S Cilantro | Coriander Leaves
+S Turmeric
+S Curry Powder | Curry
+S Dill
+S Sage
+S Mint
+S Cloves | Clove
+R Coriander | Coriander Seed
+R Allspice
+R Cardamom
+R Mustard | Mustard Seed | Dry Mustard | Mustard Powder
+R Fennel | Fennel Seed
+R Sesame | Sesame Seeds
+R Poppy Seeds | Poppy Seed
+R Celery Salt | Celery Seed
+R White Pepper
+R Smoked Paprika | Pimentón | Pimenton
+R Chives
+R Tarragon
+R Marjoram
+R Lemon Pepper
+R Old Bay :: Maryland's contribution.
+R Cajun Seasoning | Creole Seasoning | Tony Chachere's
+R Taco Seasoning
+R Seasoned Salt | Lawry's | Seasoning Salt
+R Everything Bagel Seasoning | Everything Seasoning
+R Pumpkin Pie Spice | Pumpkin Spice
+R Garlic Salt
+R Star Anise
+R Anise | Aniseed
+R Caraway | Caraway Seeds
+R Garam Masala
+R Five Spice | Chinese Five Spice | Five-Spice Powder
+R Herbes de Provence
+R Poultry Seasoning
+R Steak Seasoning | Montreal Steak Seasoning
+R Chipotle | Chipotle Powder
+R Ancho | Ancho Chili Powder
+R MSG | Accent
+R Cream of Tartar
+R Sugar | Cinnamon Sugar
+R Lavender
+R Lemongrass
+R Wasabi | Wasabi Powder
+R Horseradish
+R Juniper | Juniper Berries
+R Mace
+R Sumac
+R Za'atar | Zaatar
+D Fenugreek
+D Asafoetida | Asafetida | Hing
+D Ajwain | Carom Seeds
+D Amchur | Amchoor | Mango Powder
+D Nigella | Nigella Seeds | Kalonji | Black Cumin
+D Black Cardamom
+D Long Pepper
+X Grains of Paradise | Melegueta Pepper :: A West African relative of ginger with a peppery bite. Medieval Europe prized it, and some gins still use it.
+D Sichuan Peppercorn | Szechuan Peppercorn | Sichuan Pepper
+D Pink Peppercorn | Pink Pepper
+D Green Peppercorn
+D Aleppo Pepper
+D Urfa Biber | Urfa Pepper
+D Gochugaru
+D Shichimi Togarashi | Togarashi
+D Furikake
+D Ras el Hanout
+D Berbere
+D Baharat
+D Dukkah
+D Harissa
+D Jerk Seasoning
+D Adobo | Adobo Seasoning
+D Sazón | Sazon
+D Tajín | Tajin
+D Epazote
+D Mexican Oregano
+D Annatto | Achiote
+D Savory | Summer Savory
+D Lovage
+D Chervil
+D Borage
+D Hyssop
+D Curry Leaf | Curry Leaves
+D Kaffir Lime Leaf | Makrut Lime Leaf | Lime Leaves
+D Galangal
+D Filé Powder | File Powder | Gumbo Filé
+D Sassafras
+D Mahlab | Mahleb
+D Tonka Bean
+D Dried Orange Peel | Orange Zest | Lemon Zest | Lemon Peel
+D Black Salt | Kala Namak
+D Pink Salt | Himalayan Salt | Himalayan Pink Salt
+D Smoked Salt
+D Truffle Salt
+D Fleur de Sel
+D Bouillon | Bouillon Cubes
+D Liquid Smoke
+D Nutritional Yeast
+D Cocoa | Cocoa Powder
+D Arrowroot
+D Cubeb
+D Angelica
+! Silphium :: Rome's favourite seasoning, but it went extinct about two thousand years ago; not on any rack today
+! Ketchup :: a condiment that lives in the fridge
+! Flour :: the pantry, not the spice rack
+! Rice :: the pantry
+! Olive Oil :: an oil
+! Butter :: dairy
+! Soy Sauce :: a sauce
+! Hot Sauce :: a sauce
+! Tomato :: produce
