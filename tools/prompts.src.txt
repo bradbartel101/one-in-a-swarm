@@ -1365,3 +1365,706 @@ D South Carolina State
 X Carlisle | Carlisle Indian School :: Heisman's 1917 national champions won this one 98-0.
 R Colorado
 R Kennesaw State
+
+# ----- added on the overnight run: twelve more prompts. Lines starting with "~" are held out of
+# ----- the game (not confident enough) and listed in VERIFY.md until the owner approves them.
+
+@films | Atlanta | Name a movie or TV series that was filmed largely in metro Atlanta
+C Stranger Things
+C The Walking Dead | Walking Dead | TWD
+C Black Panther
+T Avengers: Endgame | Endgame | Avengers Endgame
+T Avengers: Infinity War | Infinity War | Avengers Infinity War
+S Atlanta | Atlanta FX
+S Baby Driver
+S The Hunger Games: Catching Fire | Catching Fire | Hunger Games Catching Fire
+S The Hunger Games: Mockingjay | Mockingjay | Hunger Games Mockingjay
+S Ozark
+S Captain America: Civil War | Civil War
+S Spider-Man: Homecoming | Spiderman Homecoming | Homecoming
+S Guardians of the Galaxy Vol. 2 | Guardians of the Galaxy 2 | Guardians 2
+S Ant-Man | Antman
+S Cobra Kai
+R Spider-Man: No Way Home | No Way Home | Spiderman No Way Home
+R Hidden Figures
+R Driving Miss Daisy
+R Smokey and the Bandit
+R Anchorman 2 | Anchorman 2: The Legend Continues
+R Zombieland
+R The Blind Side | Blind Side
+R Remember the Titans
+R The Vampire Diaries | Vampire Diaries
+R WandaVision | Wanda Vision
+R Loki
+R The Internship | Internship :: Its "Google campus" scenes were shot at Georgia Tech.
+R The Suicide Squad | Suicide Squad
+R Watchmen
+R Hawkeye
+R The Falcon and the Winter Soldier | Falcon and the Winter Soldier | Falcon and Winter Soldier
+R Black Adam
+D Passengers
+D ATL
+D Stomp the Yard
+D Drumline
+D Scream 2
+D Selma
+D Flight
+D Trouble with the Curve
+D Venom
+D Rampage
+D The Resident | Resident
+D Dynasty
+D MacGyver
+D Identity Thief
+D Game Night
+D Tag
+D Logan Lucky
+D I, Tonya | I Tonya
+D Dumb and Dumber To | Dumb and Dumber 2
+D Lovecraft Country
+D Doom Patrol
+D Greenleaf
+D Triple 9
+X Sharky's Machine | Sharkys Machine :: Burt Reynolds, 1981: Atlanta cops under the Atlanta skyline.
+~D Road Trip ?? Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.
+~D Jumanji: Welcome to the Jungle ?? Shot in Hawaii and Atlanta; unsure it counts as "largely" Atlanta.
+
+@musicians | Atlanta | Name a musician or group that came up in Atlanta or its suburbs
+C OutKast
+C Usher
+C Ludacris | Luda
+T T.I. | TI | Tip
+S Migos
+S Future
+S Gucci Mane | Gucci
+S Jeezy | Young Jeezy
+S TLC
+S 2 Chainz | Two Chainz | Tity Boi
+S Lil Jon | Lil Jon and the East Side Boyz
+S Childish Gambino | Donald Glover
+S Lil Baby
+S 21 Savage | Twenty One Savage
+S Young Thug | Thugger
+S André 3000 | Andre 3000 | Andre Benjamin
+S Big Boi
+R Killer Mike
+R CeeLo Green | Cee Lo Green | CeeLo | Cee-Lo
+R Goodie Mob
+R Gladys Knight | Gladys Knight and the Pips
+R The Black Crowes | Black Crowes
+R Indigo Girls
+R Ciara
+R Monica
+R Lil Nas X
+R Playboi Carti | Carti
+R Gunna
+R Jermaine Dupri | JD
+R Kris Kross
+R Lil Yachty | Yachty
+R Janelle Monáe | Janelle Monae
+R Zac Brown Band | Zac Brown
+R Collective Soul
+R John Mayer :: He left Berklee for Atlanta and came up through its club scene.
+D Mastodon
+D Sevendust
+D Manchester Orchestra
+D Deerhunter
+D The Coathangers | Coathangers
+D Xscape
+D Arrested Development
+D Ying Yang Twins
+D Waka Flocka Flame | Waka Flocka
+D B.o.B | BoB | Bobby Ray
+D Summer Walker
+D Latto | Mulatto | Big Latto
+D Sugarland
+D YoungBloodZ | Youngbloodz
+D Dem Franchize Boyz
+D D4L
+D Rich Homie Quan
+D Keri Hilson
+D Shawty Lo
+D Mike Will Made-It | Mike Will Made It | Mike Will
+D Butch Walker
+X Drivin N Cryin | Drivin' N' Cryin' | Drivin and Cryin :: Atlanta rock since 1985.
+~D Soulja Boy ?? Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
+~D Trinidad James ?? Born in Trinidad and raised partly in Atlanta; unsure of the details.
+
+@braves | Atlanta | Name a player from Atlanta Braves history (1966 to today)
+C Hank Aaron | Henry Aaron | Hammerin Hank
+C Chipper Jones | Larry Jones
+C Ronald Acuña Jr. | Ronald Acuna Jr | Ronald Acuna | Acuna | Acuna Jr
+T Freddie Freeman
+T Greg Maddux | Maddux
+S Tom Glavine | Glavine
+S John Smoltz | Smoltz
+S Dale Murphy | Murph
+S Andruw Jones
+S Ozzie Albies
+S Austin Riley
+S Brian McCann
+S David Justice | Dave Justice
+S Fred McGriff | Crime Dog
+S Phil Niekro | Knucksie
+S Matt Olson
+R Javy López | Javy Lopez | Javier Lopez
+R Terry Pendleton
+R Bob Horner
+R Dansby Swanson
+R Max Fried
+R Spencer Strider
+R Craig Kimbrel
+R Tim Hudson
+R Rafael Furcal
+R Deion Sanders | Prime Time
+R Ron Gant
+R Jason Heyward
+R Mark Teixeira | Tex :: A Tech All-American before he was a Brave.
+R Marcus Giles
+R Jeff Francoeur | Frenchy
+R Jorge Soler
+R Michael Harris II | Michael Harris | Money Mike
+D Otis Nixon
+D Mark Lemke
+D Jeff Blauser
+D Steve Avery
+D Kevin Millwood
+D Andrelton Simmons
+D Nick Markakis
+D Sid Bream
+D Francisco Cabrera
+D Marquis Grissom
+D Ryan Klesko
+D Julio Franco
+D Martín Prado | Martin Prado
+D Jair Jurrjens
+D Gary Sheffield
+D J.D. Drew | JD Drew
+D Kenny Lofton
+D Dusty Baker
+D Darrell Evans
+D Rico Carty
+D Ralph Garr
+D Gene Garber
+D Bruce Sutter
+D John Rocker
+D Mark Wohlers
+D Dan Uggla
+D Evan Gattis
+D Julio Teheran
+D Eddie Rosario
+D Charlie Morton
+D Glenn Hubbard
+D Kent Mercker
+X Biff Pocoroba | Pocoroba :: Braves catcher, 1975 to 1984, and an All-Star in 1978.
+
+@falcons | Atlanta | Name a player from Atlanta Falcons history
+C Matt Ryan | Matty Ice
+C Julio Jones
+C Michael Vick | Mike Vick
+T Deion Sanders | Prime Time
+S Roddy White
+S Jamal Anderson
+S Tony Gonzalez
+S Bijan Robinson
+S Kyle Pitts
+S Drake London
+S Devonta Freeman
+S Grady Jarrett
+S Warrick Dunn
+S Calvin Ridley
+S Kirk Cousins
+S Michael Penix Jr. | Michael Penix
+R Steve Bartkowski
+R Tommy Nobis
+R Jessie Tuggle
+R Andre Rison
+R Michael Turner
+R Matt Bryant
+R Morten Andersen
+R John Abraham
+R Keith Brooking
+R Deion Jones
+R Alge Crumpler
+R Younghoe Koo
+R A.J. Terrell | AJ Terrell
+R Jake Matthews
+R Todd Gurley
+R Cordarrelle Patterson
+R Desmond Ridder
+R Marcus Mariota
+D Claude Humphrey
+D Mike Kenn
+D Jeff Van Note
+D William Andrews
+D Gerald Riggs
+D Chris Chandler
+D Terance Mathis
+D Patrick Kerney
+D Chris Miller
+D Jeff George
+D Bill Fralic
+D Tim Dwight
+D DeAngelo Hall
+D Vic Beasley
+D Tevin Coleman
+D Mohamed Sanu
+D Alex Mack
+D Chris Lindstrom
+D Jessie Bates III | Jessie Bates
+D T.J. Duckett | TJ Duckett
+D Brian Finneran
+D Ray Buchanan
+D Bobby Hebert
+D Asante Samuel
+D Steven Jackson
+D Matt Schaub
+D Tyler Allgeier
+D Harry Douglas
+D Curtis Lofton
+D Jonathan Babineaux
+X Alfred Jenkins :: Falcons wide receiver, 1975 to 1983, and the league's receiving-yards leader in 1981.
+
+@hawks | Atlanta | Name a player from Atlanta Hawks history (1968 to today)
+C Dominique Wilkins | Nique | Human Highlight Film
+C Trae Young
+T Dikembe Mutombo | Mutombo
+S Joe Johnson | Iso Joe
+S Al Horford
+S Pete Maravich | Pistol Pete
+S Josh Smith
+S Paul Millsap
+S Kyle Korver
+S Spud Webb
+S John Collins
+S Jalen Johnson
+S Dejounte Murray
+S Vince Carter
+S Dwight Howard
+R Jeff Teague
+R Steve Smith
+R Mookie Blaylock
+R Doc Rivers
+R Kevin Willis
+R Lou Hudson | Sweet Lou
+R Clint Capela
+R Bogdan Bogdanović | Bogdan Bogdanovic | Bogi
+R De'Andre Hunter | DeAndre Hunter
+R Dennis Schröder | Dennis Schroder
+R Mike Bibby
+R Marvin Williams
+R Jason Terry
+R Shareef Abdur-Rahim
+R Kent Bazemore
+R Zaza Pachulia
+D Tree Rollins | Wayne Rollins
+D Dan Roundfield
+D Stacey Augmon | Plastic Man
+D Eddie Johnson | Fast Eddie
+D Christian Laettner
+D Alan Henderson
+D Tyrone Corbin
+D Moses Malone
+D Reggie Theus
+D Antoine Carr
+D Cliff Levingston
+D Randy Wittman
+D Walt Bellamy
+D Joe Caldwell | Pogo Joe
+D Bill Bridges
+D DeMarre Carroll
+D Thabo Sefolosha
+D Taurean Prince
+D Kevin Huerter
+D Onyeka Okongwu
+D Cam Reddish
+D Lou Williams
+D Jamal Crawford
+D Josh Childress
+D Tony Delk
+D Theo Ratliff
+X John Drew :: A two-time All-Star for the Hawks in the 1970s.
+
+@collegetowns | Rivals | Name the home city or town of a school that has shared a conference with Tech
+C Athens :: Georgia. Wrong school, right answer.
+C Clemson
+C Chapel Hill
+T Durham
+T Tallahassee
+S Raleigh
+S Charlottesville
+S Blacksburg
+S Coral Gables | Miami
+S Auburn
+S Tuscaloosa
+S Knoxville
+S Gainesville
+S Baton Rouge
+S Winston-Salem | Winston Salem
+S Syracuse
+S Pittsburgh
+S Louisville
+R South Bend | Notre Dame
+R Nashville
+R Lexington
+R Oxford
+R Starkville
+R Columbia
+R College Park
+R Chestnut Hill | Boston | Newton
+R Berkeley
+R Stanford | Palo Alto
+R Dallas | University Park
+D New Orleans :: Tulane, a fellow charter member of the SEC.
+D Memphis
+D Cincinnati
+D St. Louis | Saint Louis :: Saint Louis University, from Tech's Metro Conference years.
+X Sewanee :: The University of the South, a charter member of the SEC with Tech in 1932.
+
+@engineering | Academics | Name a branch of engineering
+C Mechanical | Mechanical Engineering
+C Electrical | Electrical Engineering
+C Civil | Civil Engineering
+T Aerospace | Aerospace Engineering | Aeronautical | Aeronautical Engineering
+T Chemical | Chemical Engineering
+S Computer | Computer Engineering
+S Biomedical | Biomedical Engineering | Bioengineering
+S Industrial | Industrial Engineering
+S Software | Software Engineering
+S Nuclear | Nuclear Engineering
+S Environmental | Environmental Engineering
+S Materials | Materials Engineering | Materials Science and Engineering
+S Systems | Systems Engineering
+R Structural | Structural Engineering
+R Petroleum | Petroleum Engineering
+R Mining | Mining Engineering
+R Agricultural | Agricultural Engineering
+R Architectural | Architectural Engineering
+R Automotive | Automotive Engineering
+R Robotics | Robotics Engineering
+R Marine | Marine Engineering | Ocean Engineering | Ocean
+R Manufacturing | Manufacturing Engineering
+R Transportation | Transportation Engineering
+R Geotechnical | Geotechnical Engineering
+R Biological | Biological Engineering
+R Electronics | Electronics Engineering | Electronic Engineering
+R Genetic | Genetic Engineering
+D Mechatronics | Mechatronics Engineering
+D Optical | Optical Engineering
+D Acoustical | Acoustical Engineering | Acoustic Engineering | Audio Engineering
+D Metallurgical | Metallurgical Engineering | Metallurgy
+D Polymer | Polymer Engineering
+D Naval Architecture | Naval Engineering | Naval
+D Fire Protection | Fire Protection Engineering
+D Geological | Geological Engineering
+D Telecommunications | Telecommunications Engineering
+D Control | Control Engineering | Controls
+D Sanitary | Sanitary Engineering
+D Railway | Railway Engineering | Railroad Engineering
+D Financial | Financial Engineering
+D Textile | Textile Engineering :: One of Tech's oldest programs.
+D Photonics | Photonics Engineering
+D Water Resources | Water Resources Engineering
+X Ceramic | Ceramic Engineering | Ceramics :: Tech had a School of Ceramic Engineering for much of the twentieth century.
+
+@languages | Academics | Name a programming language
+C Python
+C Java
+T C, C++ or C# | C | C++ | C# | CPP | C Plus Plus | C Sharp | CSharp :: Three languages, one answer: typed, they all look like C.
+T JavaScript | JS
+S Swift
+S Kotlin
+S Go | Golang
+S Rust
+S Ruby
+S PHP
+S SQL
+S TypeScript | TS
+S MATLAB
+S R
+R Assembly | Assembly Language | ASM
+R Fortran
+R COBOL
+R Pascal
+R Lisp
+R Haskell
+R Scala
+R Perl
+R Lua
+R Dart
+R Objective-C | Objective C | ObjC
+R Visual Basic | VB | VB.NET
+R BASIC
+R Bash | Shell
+R Julia
+R Scheme
+R Prolog
+D Erlang
+D Elixir
+D Clojure
+D OCaml
+D F Sharp | FSharp
+D Ada
+D ALGOL
+D Smalltalk
+D APL
+D Forth
+D Racket
+D Zig
+D Nim
+D Groovy
+D Verilog
+D VHDL
+D Scratch
+D Logo
+D Tcl
+D Delphi
+D Simula
+D Crystal
+X INTERCAL :: A 1972 parody language whose programs must say PLEASE often enough.
+
+@elements | Academics | Name a chemical element
+C Hydrogen
+C Oxygen
+C Carbon
+C Gold
+T Helium
+T Iron
+T Silver
+S Nitrogen
+S Sodium
+S Calcium
+S Copper
+S Neon
+S Lithium
+S Uranium
+S Aluminum | Aluminium
+S Silicon
+S Chlorine
+S Potassium
+S Zinc
+S Lead
+S Mercury
+S Titanium
+S Plutonium
+S Platinum
+R Magnesium
+R Sulfur | Sulphur
+R Phosphorus
+R Fluorine
+R Argon
+R Nickel
+R Tin
+R Iodine
+R Cobalt
+R Chromium
+R Boron
+R Beryllium
+R Krypton
+R Xenon
+R Radon
+R Radium
+R Tungsten | Wolfram
+R Arsenic
+R Manganese
+R Bromine
+D Scandium
+D Vanadium
+D Gallium
+D Germanium
+D Selenium
+D Rubidium
+D Strontium
+D Yttrium
+D Zirconium
+D Niobium
+D Molybdenum
+D Ruthenium
+D Rhodium
+D Palladium
+D Cadmium
+D Indium
+D Antimony
+D Tellurium
+D Cesium | Caesium
+D Barium
+D Lanthanum
+D Cerium
+D Neodymium
+D Europium
+D Gadolinium
+D Hafnium
+D Tantalum
+D Osmium
+D Iridium
+D Thallium
+D Bismuth
+D Polonium
+D Astatine
+D Francium
+D Thorium
+D Americium
+D Curium
+D Einsteinium
+D Fermium
+D Nobelium
+D Oganesson
+X Technetium :: The first element to be made artificially. It even starts with Tech.
+
+@units | Academics | Name a unit of measurement that is named after a person
+C Watt
+C Volt
+C Newton
+T Celsius
+T Fahrenheit
+S Kelvin
+S Joule
+S Hertz
+S Ohm
+S Ampere | Amp
+S Pascal
+S Decibel | Bel
+S Tesla
+R Coulomb
+R Farad
+R Henry
+R Curie
+R Angstrom | Ångström
+R Gauss
+R Weber
+R Siemens
+R Rankine
+R Roentgen | Röntgen
+R Becquerel
+R Sievert
+R Gray
+R Torr
+R Dalton
+D Maxwell
+D Oersted
+D Gilbert
+D Poise
+D Stokes
+D Jansky
+D Debye
+D Erlang
+D Neper
+D Baud
+D Rutherford
+D Galileo | Gal
+D Fermi
+X Sverdrup :: An oceanographer's unit: a million cubic metres of water a second.
+
+@hoopschamps | Sports History | Name a school that has won the men's NCAA basketball tournament
+C Duke
+C North Carolina | UNC | Carolina
+C Kentucky | UK
+C UConn | Connecticut :: The team that beat Tech in the 2004 final.
+T Kansas | KU
+T UCLA
+S Villanova | Nova
+S Michigan State | MSU
+S Florida | UF
+S Indiana | IU
+S Louisville
+S Virginia | UVA
+S Syracuse
+S Arizona
+S Michigan
+S Baylor
+S Maryland
+S NC State | North Carolina State | N.C. State
+S Georgetown
+R Arkansas
+R UNLV | Nevada Las Vegas
+R Ohio State | OSU
+R Cincinnati
+R Marquette
+R Oklahoma State | Oklahoma A&M | Oklahoma A and M
+R Stanford
+R Wisconsin
+R California | Cal
+R Oregon
+R Utah
+D Loyola Chicago | Loyola
+D San Francisco | USF
+D La Salle
+D CCNY | City College of New York | City College
+D Texas Western | UTEP | Texas El Paso
+D Wyoming
+X Holy Cross :: Champions in 1947.
+
+@heisman | Sports History | John Heisman coached at Tech. Name a winner of the trophy that carries his name.
+C Tim Tebow
+C Lamar Jackson
+C Joe Burrow
+C Barry Sanders
+T Bo Jackson
+T Herschel Walker
+T Cam Newton
+S Johnny Manziel | Johnny Football
+S Baker Mayfield
+S Kyler Murray
+S Derrick Henry
+S Reggie Bush
+S Robert Griffin III | RG3 | Robert Griffin
+S Marcus Mariota
+S Jameis Winston
+S Caleb Williams
+S Bryce Young
+S Jayden Daniels
+S Travis Hunter
+S DeVonta Smith
+S Mark Ingram | Mark Ingram II
+S Charles Woodson
+S O.J. Simpson | OJ Simpson
+R Sam Bradford
+R Troy Smith
+R Matt Leinart
+R Carson Palmer
+R Ricky Williams
+R Eddie George
+R Desmond Howard
+R Doug Flutie
+R Marcus Allen
+R Earl Campbell
+R Tony Dorsett
+R Archie Griffin :: The only two-time winner.
+R Roger Staubach
+R Tim Brown
+R Steve Spurrier
+R Danny Wuerffel
+R Charlie Ward
+R Ron Dayne
+D Jason White
+D Eric Crouch
+D Chris Weinke
+D Rashaan Salaam
+D Gino Torretta
+D Ty Detmer
+D Andre Ware
+D Vinny Testaverde
+D Mike Rozier
+D George Rogers
+D Charles White
+D Billy Sims
+D Jim Plunkett
+D Pat Sullivan
+D Johnny Rodgers
+D John Cappelletti
+D Ernie Davis
+D Paul Hornung
+D Doak Walker
+D Billy Cannon
+D Frank Sinkwich :: Georgia's first winner, in 1942.
+D Nile Kinnick
+D Tom Harmon
+D Glenn Davis
+D Doc Blanchard | Felix Blanchard
+D Johnny Lujack
+D Pete Dawkins
+D Mike Garrett
+D Gary Beban
+D Steve Owens
+X Jay Berwanger :: The first winner, in 1935.
+~S Fernando Mendoza ?? I believe he won in 2025, but that is at the edge of what I know for certain.

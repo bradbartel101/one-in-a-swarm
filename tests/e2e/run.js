@@ -185,6 +185,8 @@ async function scenario(name, fn) {
 }
 
 const TIERS7 = ['common', 'clever', 'solid', 'rare', 'deep', 'swarm', 'solid'];
+// The seven prompts the game serves on a date: the frozen schedule first, the draw only as a fallback.
+const dayIds = (dateKey) => (schedule.days[dateKey] || C.dailyPromptIds(data.prompts, dateKey)).slice();
 
 /* ---------- scenarios ---------- */
 
@@ -626,8 +628,9 @@ async function main() {
 
   await scenario('midnight UTC rollover mid-run: finish yesterday, then today opens', async () => {
     const page = await fresh({ width: 1280, height: 800, initScript: fakeClock('2026-10-08T23:59:30Z') });
-    const day1 = C.dailyPromptIds(data.prompts, '2026-10-08');
-    const day2 = C.dailyPromptIds(data.prompts, '2026-10-09');
+    // what the game serves is the frozen schedule, whatever has been added to the bank since
+    const day1 = dayIds('2026-10-08');
+    const day2 = dayIds('2026-10-09');
     assert.equal(await text(page, 'flightNo'), 'FLIGHT #1');
     await click(page, 'dailyBtn');
     await playDaily(page, ['solid', 'rare']);
@@ -663,7 +666,7 @@ async function main() {
   });
 
   await scenario('same seven prompts in UTC-12, UTC+14 and New York', async () => {
-    const want = C.dailyPromptIds(data.prompts, '2026-10-08');
+    const want = dayIds('2026-10-08');
     const seen = [];
     for (const tz of ['Etc/GMT+12', 'Pacific/Kiritimati', 'America/New_York']) {
       const page = await fresh({ width: 1024, height: 768, timezone: tz, initScript: fakeClock('2026-10-08T11:30:00Z') });
@@ -789,7 +792,7 @@ async function main() {
   await scenario('corrupted or old-format saves are reset, not fatal', async () => {
     const page = await fresh({ width: 1024, height: 768 });
     const today = C.utcDateKey(new Date());
-    const ids = C.dailyPromptIds(data.prompts, today);
+    const ids = dayIds(today);
     const good = C.newDaily(today, ids);
     const bad = [
       'not json at all',
@@ -1490,7 +1493,7 @@ async function main() {
   await scenario('a perfect 700 reaches the Moon and plants the flag; all eight zones on the way', async () => {
     const page = await fresh({ width: 375, height: 812, mobile: true });
     const day = C.utcDateKey(new Date());
-    const ids7 = C.dailyPromptIds(data.prompts, day);
+    const ids7 = dayIds(day);
     const state = C.newDaily(day, ids7);
     ids7.slice(0, 6).forEach((id) => {
       const a = data.prompts.find((p) => p.id === id).answers.find((x) => x.tier === 'swarm');

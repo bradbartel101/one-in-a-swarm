@@ -92,7 +92,8 @@ test('the validator catches broken data', () => {
 
 test('VERIFY.md lists every answer marked verify, and nothing else', () => {
   const md = fs.readFileSync(path.join(__dirname, '..', 'VERIFY.md'), 'utf8');
-  const listed = (md.match(/^- \[ \] \*\*(.+?)\*\*/gm) || []).length;
+  const flaggedPart = md.split('## Held out of the game until approved')[0]; // held-out answers are a separate list, checked below
+  const listed = (flaggedPart.match(/^- \[ \] \*\*(.+?)\*\*/gm) || []).length;
   const facts = require('../js/facts.js');
   let flagged = 0;
   facts.filter((f) => f.verify).forEach((f) => {
@@ -115,4 +116,63 @@ test('the One in a Swarm answer is never one that still needs verifying', () => 
     const top = p.answers.find((a) => a.tier === 'swarm');
     assert.ok(!top.verify, p.id + ': the swarm answer "' + top.name + '" is unverified');
   });
+});
+
+/* ----- the overnight additions: held-out answers, the themed set, and the redrawn schedule ----- */
+const fsX = require('fs');
+const pathX = require('path');
+const coreX = require('../js/core.js');
+const ROOTX = pathX.join(__dirname, '..');
+const bankX = JSON.parse(fsX.readFileSync(pathX.join(ROOTX, 'data', 'prompts.json'), 'utf8'));
+const rivalryX = JSON.parse(fsX.readFileSync(pathX.join(ROOTX, 'data', 'themed', 'rivalry.json'), 'utf8'));
+const scheduleX = JSON.parse(fsX.readFileSync(pathX.join(ROOTX, 'data', 'schedule.json'), 'utf8'));
+
+test('answers held back for checking are in VERIFY.md and nowhere in the game', () => {
+  const sources = [pathX.join(ROOTX, 'tools', 'prompts.src.txt'), pathX.join(ROOTX, 'tools', 'themed', 'rivalry.src.txt')];
+  const held = [];
+  sources.forEach((f) => fsX.readFileSync(f, 'utf8').split('\n').forEach((line) => { const m = /^~[CTSRDX]\s+([^|?:]+?)\s*(\||\?\?|::|$)/.exec(line.trim()); if (m) held.push(m[1]); }));
+  assert.ok(held.length >= 1, 'the mechanism is in use');
+  const shipped = JSON.stringify(bankX) + JSON.stringify(rivalryX);
+  const verify = fsX.readFileSync(pathX.join(ROOTX, 'VERIFY.md'), 'utf8');
+  held.forEach((name) => {
+    assert.ok(!shipped.includes('"name":"' + name + '"'), name + ' is not in any shipped prompt file');
+    assert.ok(verify.includes('**' + name + '**'), name + ' is listed in VERIFY.md');
+  });
+  assert.match(verify, /## Held out of the game until approved/);
+});
+
+test('rivalry week: seven valid prompts, kept apart from the bank and from the schedule', () => {
+  assert.deepEqual(coreX.validatePrompts(rivalryX), []);
+  assert.equal(rivalryX.prompts.length, 7);
+  const mainIds = new Set(bankX.prompts.map((p) => p.id));
+  rivalryX.prompts.forEach((p) => {
+    assert.ok(p.answers.length >= 25, p.id + ' has ' + p.answers.length + ' answers');
+    assert.equal(p.answers.filter((a) => a.tier === 'swarm').length, 1, p.id + ' has exactly one 100-point answer');
+    assert.ok(!mainIds.has(p.id), p.id + ' is not in the main bank');
+    assert.equal(p.category, 'Rivalry Week');
+    assert.ok(p.answers.every((a) => !a.verify), 'nothing unverified ships in it');
+  });
+  const scheduled = new Set([].concat.apply([], Object.values(scheduleX.days)));
+  rivalryX.prompts.forEach((p) => assert.ok(!scheduled.has(p.id), p.id + ' is not scheduled on any day'));
+  assert.doesNotMatch(fsX.readFileSync(pathX.join(ROOTX, 'js', 'app.js'), 'utf8'), /themed/, 'the game does not load themed sets yet');
+});
+
+test('the bank and the schedule after the additions: 44 prompts, every future day valid, no prompt back within six days', () => {
+  assert.ok(bankX.prompts.length >= 44);
+  bankX.prompts.forEach((p) => assert.ok(p.answers.length >= 25, p.id));
+  const known = new Set(bankX.prompts.map((p) => p.id));
+  const days = Object.keys(scheduleX.days).sort();
+  days.forEach((k) => assert.ok(coreX.scheduledIds(scheduleX, k, known), k + ' names seven known prompts'));
+  // the days published before the additions are exactly as they were
+  const before = { '2026-10-08': ['gacolleges', 'traditions', 'systems', 'buildings', 'cs', 'streets', 'proteams'] };
+  Object.keys(before).forEach((k) => assert.deepEqual(scheduleX.days[k], before[k], k + ' is unchanged'));
+  // from the first redrawn day on, a prompt never returns within six days, and the new prompts are in rotation
+  const firstNew = days.findIndex((k) => scheduleX.days[k].some((id) => ['films', 'heisman', 'elements', 'units'].includes(id)));
+  assert.ok(firstNew > 0, 'the new prompts appear');
+  const last = {};
+  let min = Infinity;
+  days.slice(firstNew).forEach((k, i) => scheduleX.days[k].forEach((id) => { if (last[id] !== undefined) min = Math.min(min, i - last[id]); last[id] = i; }));
+  assert.ok(min >= 6, 'smallest gap between two uses of a prompt: ' + min + ' days');
+  assert.equal(Object.keys(last).length, bankX.prompts.length, 'every prompt is used');
+  assert.ok(days.length - firstNew >= 360, 'about a year ahead');
 });

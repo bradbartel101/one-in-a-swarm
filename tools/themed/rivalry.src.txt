@@ -1,0 +1,418 @@
+# Rivalry week: seven prompts with a Georgia Tech vs Georgia flavour, kept friendly.
+# NOT scheduled. Compiled to data/themed/rivalry.json by tools/build-prompts.js; the game does
+# not load that file until the owner picks dates for it.
+# Same format as tools/prompts.src.txt. Lines starting with "~" are held out and listed in VERIFY.md.
+
+@r-bulldogs | Rivalry Week | Know thy enemy: name a Georgia Bulldogs football great
+C Herschel Walker
+C Matthew Stafford
+C Stetson Bennett | Stetson Bennett IV
+T Nick Chubb
+T Todd Gurley
+S Brock Bowers
+S Fran Tarkenton
+S Champ Bailey
+S Hines Ward
+S A.J. Green | AJ Green
+S Sony Michel
+S Roquan Smith
+S Jordan Davis
+S Jalen Carter
+S Aaron Murray
+S Terrell Davis
+S Carson Beck
+S Kirby Smart :: A Georgia defensive back before he was Georgia's coach.
+R David Greene
+R David Pollack
+R Knowshon Moreno
+R Garrison Hearst
+R Richard Seymour
+R Thomas Davis
+R Geno Atkins
+R Jake Fromm
+R D'Andre Swift | DAndre Swift
+R Eric Zeier
+R Travon Walker
+R Nakobe Dean
+R George Pickens
+R Ladd McConkey
+R Justin Houston
+R Leonard Floyd
+R Mecole Hardman
+R James Cook
+R Bill Goldberg | Goldberg :: A Georgia defensive lineman before the wrestling ring.
+D Frank Sinkwich
+D Charley Trippi
+D Rodney Hampton
+D Lindsay Scott
+D Buck Belue
+D Kevin Butler
+D Jarvis Jones
+D Alec Ogletree
+D Andrew Thomas
+D Isaiah Wynn
+D Tim Worley
+D Robert Edwards
+D Musa Smith
+D Boss Bailey
+D D.J. Shockley | DJ Shockley
+D Quincy Carter
+D Mike Bobo
+D Ray Goff
+D Bill Stanfill
+D Jake Scott
+D Rodrigo Blankenship | Hot Rod
+D Zamir White
+D Kelee Ringo
+X Terry Hoage :: A two-time All-American safety in the early 1980s.
+
+@r-cities | Rivalry Week | Anywhere but Athens: name another city or town in Georgia
+C Atlanta :: Home.
+C Savannah
+C Augusta
+C Macon
+T Columbus
+T Marietta
+S Albany
+S Valdosta
+S Rome
+S Roswell
+S Alpharetta
+S Sandy Springs
+S Decatur
+S Kennesaw
+S Gainesville
+S Warner Robins
+S Statesboro
+S Dalton
+S Brunswick
+R Peachtree City
+R Lawrenceville
+R Duluth
+R Smyrna
+R Dunwoody
+R Johns Creek
+R LaGrange | La Grange
+R Carrollton
+R Newnan
+R Douglasville
+R Milledgeville
+R Tifton
+R Thomasville
+R Waycross
+R Dahlonega
+R Helen
+R Blue Ridge
+R Tybee Island | Tybee
+R Plains :: Home of Jimmy Carter, who studied at Tech before the Naval Academy.
+R Stone Mountain
+R Covington
+R Conyers
+R Cartersville
+D Americus
+D Vidalia
+D Dublin
+D Griffin
+D Canton
+D Woodstock
+D Hinesville
+D Kingsland
+D St. Marys | Saint Marys
+D Madison
+D Stockbridge
+D McDonough
+D Perry
+D Cordele
+D Bainbridge
+D Moultrie
+D Toccoa
+D Ellijay
+D Calhoun
+D Cumming
+D Buford
+D Fayetteville
+D Jonesboro
+D Hahira
+X Social Circle :: A real town in Walton County.
+
+@r-counties | Rivalry Week | The rivalry divides all of them. Name a county in Georgia.
+C Fulton
+C DeKalb | De Kalb
+C Cobb
+C Gwinnett
+T Clarke :: Athens. Noted.
+T Chatham
+S Clayton
+S Cherokee
+S Forsyth
+S Henry
+S Fayette
+S Hall
+S Richmond
+S Muscogee
+S Bibb
+S Douglas
+S Coweta
+S Paulding
+R Bartow
+R Floyd
+R Whitfield
+R Lowndes
+R Dougherty
+R Houston
+R Glynn
+R Camden
+R Bulloch
+R Troup
+R Carroll
+R Rockdale
+R Newton
+R Walton
+R Barrow
+R Jackson
+R Oconee
+R Columbia
+R Lumpkin
+R Dawson
+R Pickens
+R Gilmer
+R Fannin
+R Union
+R Towns
+R Rabun
+R Habersham
+R White
+D Spalding
+D Baldwin
+D Laurens
+D Tift
+D Thomas
+D Ware
+D Liberty
+D Effingham
+D Bryan
+D Sumter
+D Peach
+D Monroe
+D Butts
+D Morgan
+D Greene
+D Putnam
+D Jasper
+D Jones
+D Upson
+D Pike
+D Lamar
+D Meriwether
+D Harris
+D Colquitt
+D Grady
+D Decatur
+D Early
+D Wilkes
+D Burke
+D Emanuel
+D Toombs
+D Wayne
+D Appling
+D Charlton
+D Clinch
+D Echols
+X Taliaferro :: Said "Tolliver", and among the least populous counties in the state.
+
+@r-dogs | Rivalry Week | Georgia's mascot is a dog. Fine. Name a breed of dog.
+C Bulldog | English Bulldog :: Georgia's pick.
+C Labrador Retriever | Lab | Labrador
+C Golden Retriever | Golden
+C German Shepherd
+T Poodle
+T Beagle
+S French Bulldog | Frenchie
+S Rottweiler
+S Dachshund | Wiener Dog
+S Corgi | Pembroke Welsh Corgi | Welsh Corgi
+S Yorkshire Terrier | Yorkie
+S Boxer
+S Siberian Husky | Husky
+S Great Dane
+S Doberman Pinscher | Doberman
+S Chihuahua
+S Pug
+S Pomeranian
+S Border Collie
+S Dalmatian
+S Pit Bull | American Pit Bull Terrier | Pitbull
+S Greyhound
+R Shih Tzu
+R Australian Shepherd | Aussie
+R Cocker Spaniel
+R Boston Terrier
+R Saint Bernard | St. Bernard
+R Bernese Mountain Dog | Bernese
+R Mastiff | English Mastiff
+R Basset Hound
+R Bloodhound
+R Shiba Inu | Shiba
+R Akita
+R Maltese
+R Bichon Frise | Bichon
+R Jack Russell Terrier | Jack Russell
+R Collie | Rough Collie
+R Newfoundland | Newfie
+R Chow Chow | Chow
+R Irish Setter
+R Great Pyrenees
+R Schnauzer | Miniature Schnauzer
+R Scottish Terrier | Scottie
+R Bull Terrier
+D Weimaraner
+D Vizsla
+D Whippet
+D Samoyed
+D Alaskan Malamute | Malamute
+D Shar-Pei | Shar Pei
+D Rhodesian Ridgeback
+D Cavalier King Charles Spaniel | King Charles Spaniel | Cavalier
+D Havanese
+D Papillon
+D West Highland White Terrier | Westie
+D Airedale Terrier | Airedale
+D Belgian Malinois | Malinois
+D Cane Corso
+D Irish Wolfhound
+D Borzoi
+D Saluki
+D Afghan Hound
+D Basenji
+X Xoloitzcuintli | Xolo | Mexican Hairless :: The Mexican hairless dog.
+
+@r-insects | Rivalry Week | Tech's mascot is an insect, and proud of it. Name a kind of insect.
+C Yellow Jacket | Yellowjacket :: The right answer in every sense.
+C Bee | Honeybee | Honey Bee
+C Ant
+C Butterfly
+T Wasp
+T Hornet
+S Mosquito
+S Fly | Housefly | House Fly
+S Beetle
+S Grasshopper
+S Cricket
+S Ladybug | Ladybird | Lady Beetle
+S Dragonfly
+S Moth
+S Cockroach | Roach
+S Firefly | Lightning Bug
+S Termite
+S Flea
+S Bumblebee | Bumble Bee
+R Cicada
+R Praying Mantis | Mantis
+R Locust
+R Gnat
+R Stink Bug | Stinkbug
+R Weevil | Boll Weevil
+R Aphid
+R Earwig
+R Horsefly | Horse Fly
+R Katydid
+R Mayfly
+R Fruit Fly
+R Bed Bug | Bedbug
+R Louse | Lice
+D Damselfly
+D Lacewing
+D Silverfish
+D Stick Insect | Walking Stick
+D Leafhopper
+D Fire Ant
+D Carpenter Ant
+D Monarch | Monarch Butterfly
+D Junebug | June Bug | June Beetle
+D Dung Beetle
+D Scarab | Scarab Beetle
+D Caddisfly
+D Stonefly
+D Thrips
+D Water Strider
+X Antlion | Ant Lion | Doodlebug :: Its larva digs a pit and waits at the bottom.
+
+@r-rivalries | Rivalry Week | Ours is Clean, Old-Fashioned Hate. Name another college football rivalry game or trophy.
+C Iron Bowl
+C The Game | Michigan Ohio State | Ohio State Michigan
+C Army-Navy Game | Army Navy
+T Red River Rivalry | Red River Shootout | Red River Showdown
+T Egg Bowl | Golden Egg
+S Apple Cup
+S Bedlam | Bedlam Series
+S World's Largest Outdoor Cocktail Party | Florida Georgia | Georgia Florida | Cocktail Party
+S Palmetto Bowl
+S Backyard Brawl
+S Holy War
+S Civil War | Oregon Oregon State
+S Big Game | Stanford Axe
+S Third Saturday in October
+R Territorial Cup | Duel in the Desert
+R Paul Bunyan's Axe | Paul Bunyans Axe
+R Floyd of Rosedale
+R Old Oaken Bucket
+R Little Brown Jug
+R Commonwealth Cup
+R Deep South's Oldest Rivalry | Deep Souths Oldest Rivalry
+R Border War
+R Magnolia Bowl
+R Bayou Classic
+R Lone Star Showdown
+R Sunshine Showdown
+R Cy-Hawk Trophy | Cy-Hawk | CyHawk
+R Jeweled Shillelagh
+R Victory Bell
+D Battle for the Golden Boot | Golden Boot
+D Paul Bunyan Trophy
+D Land Grant Trophy
+D Heartland Trophy
+D Governor's Cup | Governors Cup
+D Battle of the Brazos
+D Black Diamond Trophy
+D Textile Bowl
+D Fremont Cannon
+D Brawl of the Wild
+D Iron Skillet
+D Battle Line Rivalry
+X Keg of Nails :: Cincinnati and Louisville play for it.
+
+@r-leagues | Rivalry Week | Tech's league or Georgia's: name a school in today's ACC or SEC
+C Georgia Tech | GT | Tech :: Correct.
+C Georgia | UGA :: Also correct. Moving on.
+C Clemson
+C Alabama | Bama
+T Florida State | FSU
+T Auburn
+T Duke
+S North Carolina | UNC
+S Miami | The U
+S Florida | UF
+S LSU | Louisiana State
+S Tennessee
+S Texas
+S Notre Dame :: In the ACC for everything but football.
+S Virginia Tech | VT
+S NC State | North Carolina State | N.C. State
+S Kentucky
+S Oklahoma
+S Texas A&M | Texas A and M | A&M
+S South Carolina
+S Ole Miss | Mississippi
+R Virginia | UVA
+R Louisville
+R Pittsburgh | Pitt
+R Syracuse
+R Boston College | BC
+R Wake Forest | Wake
+R Arkansas
+R Missouri | Mizzou
+R Mississippi State
+R Vanderbilt | Vandy
+D Stanford
+D California | Cal | Berkeley
+X SMU | Southern Methodist :: Joined the ACC in 2024.
