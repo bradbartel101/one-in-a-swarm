@@ -55,6 +55,13 @@
     {"id": "capitals", "pool": "general", "category": "WORLD", "text": "Name the capital city of a country", "clarifier": "national capitals, not state or provincial ones", "n": 195},
     {"id": "africa", "pool": "general", "category": "WORLD", "text": "Name a country in Africa", "n": 54},
     {"id": "landlocked", "pool": "general", "category": "WORLD", "text": "Name a landlocked country", "clarifier": "no coast on any ocean or open sea", "n": 44},
-    {"id": "endsina", "pool": "general", "category": "WORDS", "text": "Name a country whose name ends in the letter A", "clarifier": "like Canada", "n": 73}
+    {"id": "endsina", "pool": "general", "category": "WORDS", "text": "Name a country whose name ends in the letter A", "clarifier": "like Canada", "n": 73},
+    {"id": "states", "pool": "general", "category": "PLACES", "text": "Name a U.S. state", "easy": true, "n": 50},
+    {"id": "statecapitals", "pool": "general", "category": "PLACES", "text": "Name a U.S. state capital", "n": 50},
+    {"id": "presidents", "pool": "general", "category": "HISTORY", "text": "Name a U.S. president", "clarifier": "a shared last name counts once", "easy": true, "n": 45},
+    {"id": "nflteams", "pool": "general", "category": "SPORTS", "text": "Name an NFL team", "clarifier": "city or nickname", "easy": true, "n": 32},
+    {"id": "nbateams", "pool": "general", "category": "SPORTS", "text": "Name an NBA team", "clarifier": "city or nickname", "n": 30},
+    {"id": "mlbteams", "pool": "general", "category": "SPORTS", "text": "Name a Major League Baseball team", "clarifier": "city or nickname", "n": 30},
+    {"id": "nationalparks", "pool": "general", "category": "PLACES", "text": "Name a U.S. national park", "clarifier": "the 63 with \"National Park\" in the name", "strip": ["national","park"], "n": 63}
   ]
 }
