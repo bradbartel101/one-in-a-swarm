@@ -58,6 +58,16 @@
   const smooth = (v) => { const t = clamp(v); return t * t * (3 - 2 * t); };
   const lerp = (a, b, t) => a + (b - a) * t;
 
+  // The one sun. It hangs far away, so it slides down the screen slowly as the swarm climbs,
+  // warming from pale yellow to orange, and has set for good a little below 30,000 ft.
+  const SUN_SET = 300;
+  function sunAt(score) {
+    const low = Math.max(0, score) / SUN_SET;
+    if (low >= 1) return null;
+    const mix = (a, b) => 'rgb(' + [0, 1, 2].map((k) => Math.round(a[k] + (b[k] - a[k]) * low)).join(',') + ')';
+    return { x: 0.62 + 0.05 * low, y: 0.14 + 0.94 * low, warm: low, core: mix([255, 246, 200], [255, 158, 84]), edge: mix([255, 229, 138], [238, 110, 58]) };
+  }
+
   function zoneAt(score) {
     let z = ZONES[0];
     ZONES.forEach((c) => { if (score >= c[0]) z = c; });
@@ -217,23 +227,22 @@
     }
 
     function drawSun() {
-      const x = Math.round(W * (night ? 0.2 : 0.62));
+      delete boxes.sun;
       if (night) { // a crescent over the title screen in the small hours
+        const x = Math.round(W * 0.2);
         disc(x, Math.round(H * 0.2), 8, '#f4f0d8');
         disc(x + 4, Math.round(H * 0.2) - 2, 7, 'rgb(12,30,70)');
         return;
       }
-      if (cam > 470) return;
-      // The sun sinks toward the horizon as the swarm climbs, and warms as it goes.
-      const low = clamp(cam / 420);
-      const y = Math.round(lerp(H * 0.16, H * 0.66, low));
-      ctx.globalAlpha = 1 - clamp((cam - 430) / 40);
-      const core = low > 0.7 ? '#ffd9a0' : '#fff4c2';
-      const edge = low > 0.7 ? '#ffb070' : '#ffe58a';
-      disc(x, y, 7, edge);
-      disc(x, y, 5, core);
-      [[-12, 0], [12, 0], [0, -12], [0, 12], [-9, -9], [9, -9], [-9, 9], [9, 9]].forEach((d) => px(x + d[0], y + d[1], 2, 2, edge));
-      ctx.globalAlpha = 1;
+      // There is one sun. It is drawn once per frame, from one function of the camera.
+      const sun = sunAt(cam);
+      if (!sun) return;
+      const x = Math.round(W * sun.x);
+      const y = Math.round(H * sun.y);
+      disc(x, y, 7, sun.edge);
+      disc(x, y, 5, sun.core);
+      [[-12, 0], [12, 0], [0, -12], [0, 12], [-9, -9], [9, -9], [-9, 9], [9, 9]].forEach((d) => px(x + d[0], y + d[1], 2, 2, sun.edge));
+      boxes.sun = { x: x - 13, y: y - 13, w: 26, h: 26 };
     }
 
     /* ----- campus, 0 to 40 ----- */
@@ -1008,5 +1017,5 @@
     }
   }
 
-  root.SwarmScene = { create, stamp, zoneAt, BEE, MINI, LAYERS, ZONES, SCREENS_PER_POINT };
+  root.SwarmScene = { create, stamp, zoneAt, sunAt, SUN_SET, BEE, MINI, LAYERS, ZONES, SCREENS_PER_POINT };
 })(typeof self !== 'undefined' ? self : this);

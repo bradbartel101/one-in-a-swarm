@@ -55,3 +55,30 @@ test('facts are in altitude order, inside the world, and land in the right zones
   const zones = new Set(facts.map((f) => zoneOf(f.feet)));
   assert.ok(zones.size >= 7, 'facts appear in ' + zones.size + ' of 8 zones');
 });
+
+const fs = require('fs');
+const path = require('path');
+
+test('there is exactly one sun: it only ever sinks and warms, and once set it never returns', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'scene.js'), 'utf8');
+  assert.equal(src.match(/drawSun\(\);/g).length, 1, 'the sun is drawn once per frame');
+  assert.equal(src.match(/sunAt\(cam\)/g).length, 1, 'and from one place');
+  let prev = Scene.sunAt(0);
+  assert.ok(prev.y > 0.05 && prev.y < 0.25, 'high in the sky over campus');
+  let set = false;
+  for (let s = 1; s <= 3200; s++) {
+    const sun = Scene.sunAt(s);
+    if (!sun) { set = true; continue; }
+    assert.equal(set, false, 'the sun reappeared at ' + s + ' points');
+    assert.ok(sun.y > prev.y, 'it sinks as the swarm climbs (' + s + ')');
+    assert.ok(sun.y - prev.y < 0.01, 'slowly: far less than the world moves');
+    assert.ok(sun.warm >= prev.warm);
+    prev = sun;
+  }
+  assert.ok(set && prev.y > 1, 'it leaves by the bottom edge, at the horizon');
+  // the altitudes from the bug report: lower each time, and gone by 62,000 ft
+  const at = (feet) => Scene.sunAt(C.scoreForFeet(feet));
+  assert.ok(at(500).y < at(9000).y && at(9000).y < at(13000).y && at(13000).y < at(27000).y);
+  assert.equal(at(62000), null);
+  assert.notEqual(Scene.sunAt(0).core, Scene.sunAt(250).core, 'and it changes colour on the way');
+});
