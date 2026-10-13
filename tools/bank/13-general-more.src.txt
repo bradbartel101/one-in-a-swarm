@@ -1,6 +1,6 @@
 # Prompt bank v2: more general prompts (not openers).
 
-@constellations | SCIENCE | Name a constellation | pool=general | type=closed | count=88 | source=the 88 constellations recognized by the International Astronomical Union | clar=the 88 official ones, not the Big Dipper
+@constellations | SCIENCE | Name a constellation | pool=general | type=closed | count=88 | source=the 88 constellations recognized by the International Astronomical Union | clar=the 88 official ones; the Big Dipper counts
 C Orion | The Hunter
 C Ursa Major | Big Dipper | Great Bear | The Big Dipper | Plough
 C Ursa Minor | Little Dipper | Little Bear | The Little Dipper

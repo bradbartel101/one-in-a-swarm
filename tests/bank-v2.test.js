@@ -148,3 +148,54 @@ test('v2: no two live prompts ask the same question', () => {
     seen.set(key, p.id);
   });
 });
+
+/* ----- the schedule after the v2 redraw ----- */
+const schedule = require('../data/schedule.json');
+const FIRST_MIX_DAY = '2026-10-17';
+// The days that were published before the redraw. They may never change again.
+const PUBLISHED = {
+  '2026-10-08': ['gacolleges', 'traditions', 'systems', 'buildings', 'cs', 'streets', 'proteams'],
+  '2026-10-09': ['hangouts', 'nicknames', 'hq', 'beaten', 'dorms', 'coaches', 'olympics'],
+  '2026-10-10': ['bowls', 'dining', 'golf', 'orgs', 'corecourses', 'marta', 'nba'],
+  '2026-10-11': ['alumni', 'majors', 'diamond', 'neighborhoods', 'conference', 'techs', 'codes'],
+  '2026-10-12': ['gacolleges', 'systems', 'proteams', 'cs', 'qbs', 'buildings', 'greek'],
+  '2026-10-13': ['olympics', 'nicknames', 'coaches', 'streets', 'nfl', 'beaten', 'landmarks'],
+  '2026-10-14': ['films', 'falcons', 'units', 'musicians', 'heisman', 'collegetowns', 'hawks'],
+  '2026-10-15': ['languages', 'braves', 'traditions', 'engineering', 'dorms', 'elements', 'hangouts'],
+  '2026-10-16': ['marta', 'corecourses', 'dining', 'golf', 'orgs', 'hq', 'nba'],
+};
+
+test('v2 schedule: the days published before the redraw are exactly as they were', () => {
+  Object.keys(PUBLISHED).forEach((d) => assert.deepEqual(schedule.days[d], PUBLISHED[d], d + ' changed'));
+  // retired prompts on those days still exist, so the days still play
+  const known = new Set(bank.map((p) => p.id));
+  Object.keys(PUBLISHED).forEach((d) => assert.ok(C.scheduledIds(schedule, d, known), d + ' names a prompt that no longer exists'));
+});
+
+test('v2 schedule: from the first mix day on, every day is 4 gt + 3 general in order, with no retired prompt', () => {
+  const days = Object.keys(schedule.days).filter((d) => d >= FIRST_MIX_DAY);
+  assert.ok(days.length >= 360, 'about a year of mix days: ' + days.length);
+  const check = C.checkMix(schedule, live, FIRST_MIX_DAY, days.length);
+  assert.deepEqual(check.errors, []);
+  days.forEach((d) => {
+    const day = schedule.days[d].map((id) => byId[id]);
+    assert.ok(day.every((p) => p && !p.retired), d + ' uses a retired or missing prompt');
+    assert.deepEqual(day.map((p) => p.pool), ['general', 'gt', 'gt', 'general', 'gt', 'general', 'gt'], d);
+    assert.equal(day[0].easy, true, d + ' opens with an easy general prompt');
+  });
+});
+
+test('v2 schedule: no prompt returns within 14 days, and every live prompt is used', () => {
+  const days = Object.keys(schedule.days).filter((d) => d >= FIRST_MIX_DAY);
+  const { gaps } = C.checkMix(schedule, live, FIRST_MIX_DAY, days.length);
+  assert.ok(gaps.gt >= C.MIX_MIN_GAP && gaps.easy >= C.MIX_MIN_GAP && gaps.general >= C.MIX_MIN_GAP, JSON.stringify(gaps));
+  const used = new Set(days.flatMap((d) => schedule.days[d]));
+  live.forEach((p) => assert.ok(used.has(p.id), p.id + ' is never scheduled'));
+  // a prompt scheduled before the redraw does not come straight back after it
+  const all = Object.keys(schedule.days);
+  const last = {};
+  all.forEach((d, i) => schedule.days[d].forEach((id) => {
+    if (last[id] !== undefined && d >= FIRST_MIX_DAY) assert.ok(i - last[id] >= C.MIX_MIN_GAP, id + ' returns after ' + (i - last[id]) + ' days on ' + d);
+    last[id] = i;
+  }));
+});

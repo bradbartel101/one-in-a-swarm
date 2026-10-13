@@ -106,7 +106,7 @@
     {"id": "instruments", "pool": "general", "category": "MUSIC", "text": "Name a musical instrument", "easy": true, "n": 151},
     {"id": "carbrands", "pool": "general", "category": "THINGS", "text": "Name a car brand", "clarifier": "makes, not models; past or present", "easy": true, "n": 150},
     {"id": "boardgames", "pool": "general", "category": "GAMES", "text": "Name a board game", "clarifier": "games played on a board or tabletop", "easy": true, "n": 169},
-    {"id": "constellations", "pool": "general", "category": "SCIENCE", "text": "Name a constellation", "clarifier": "the 88 official ones, not the Big Dipper", "n": 88},
+    {"id": "constellations", "pool": "general", "category": "SCIENCE", "text": "Name a constellation", "clarifier": "the 88 official ones; the Big Dipper counts", "n": 88},
     {"id": "cheeses", "pool": "general", "category": "FOOD", "text": "Name a kind of cheese", "n": 129},
     {"id": "ologies", "pool": "general", "category": "WORDS", "text": "Name a word that ends in \"-ology\"", "clarifier": "a real field of study or English word", "n": 208},
     {"id": "toolbox", "pool": "general", "category": "THINGS", "text": "Name something you'd find in a toolbox", "clarifier": "hand tools, power tools and hardware", "n": 136},
