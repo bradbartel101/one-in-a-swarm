@@ -517,6 +517,8 @@
       lastVars = vars;
       root.setProperty('--win-top', winTop + 'px');
       root.setProperty('--win-bottom', Math.max(0, Math.round(h - winBottom)) + 'px');
+      // the world layer is offset by the same number: move both together, never one frame apart
+      $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
     }
   }
 

@@ -321,6 +321,8 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
 .numbers, .stats { margin: 0.8rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: 0.8rem; }
 .numbers dt, .stats dt { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .numbers dd, .stats dd { margin: 0.2rem 0 0; }
+/* four numbers never share a row narrower than they are: two columns */
+[data-view="infover"] .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .numbers dd { font-size: clamp(0.8rem, 4.2vw, 1.4rem); overflow-wrap: anywhere; }
 .stats { grid-template-columns: repeat(4, 1fr); }
 .stats dd { font-size: 0.85rem; }

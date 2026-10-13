@@ -695,6 +695,8 @@ async function main() {
     assert.equal(await text(page, 'infScore'), '100 pts');
     assert.equal(await text(page, 'infAlt'), feet(100));
     assert.equal(await text(page, 'infTitle'), 'NEW BEST RUN');
+    // Regression: the four numbers used to wrap ("190" over "pts") on a wide screen.
+    assert.deepEqual(await page.eval('Array.from(document.querySelectorAll("[data-view=infover] .numbers dd")).filter((n) => n.offsetHeight > parseFloat(getComputedStyle(n).lineHeight) * 1.5 || n.scrollWidth > n.clientWidth + 1).map((n) => n.id)'), [], 'each number sits on one line and fits its column');
     await sleep(500);
     assert.equal(await view(page), 'infover', 'stays ended');
     await page.reload();

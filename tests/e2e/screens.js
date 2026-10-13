@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 /* Plays three flights in headless Chrome at phone and desktop size and saves screenshots into
-   screenshots/v4/: one of about 150 points, one of about 350, and a perfect 700, plus every
+   screenshots/v5/: one of about 150 points, one of about 350, and a perfect 700, plus every
    zone, some easter eggs, a secret answer, the One in a Swarm moment and the results screen.
    Tiers are forced by looking answers up by tier in the prompt bank. Run with: npm run screens */
 const http = require('http');
@@ -12,7 +12,7 @@ const C = require('../../js/core.js');
 const data = require('../../data/prompts.json');
 
 const ROOT = path.join(__dirname, '..', '..');
-const OUT = path.join(ROOT, 'screenshots', 'v4');
+const OUT = path.join(ROOT, 'screenshots', 'v5');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.woff2': 'font/woff2' };
 
 const server = http.createServer((req, res) => {
@@ -43,7 +43,13 @@ function seed(tiers) {
 
 async function run(browser, base, name, width, height, mobile) {
   const fakeClock = `(() => { const R = Date; let off = 0; class D extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } } window.Date = D; window.__shiftClock = (ms) => { off += ms; }; })();`;
-  const page = await browser.newPage({ width, height, mobile, initScript: fakeClock });
+  // lets a test hide the page: frames stop and the page is told, as when a tab goes to the background
+  const hideable = `(() => { const raf = window.requestAnimationFrame.bind(window); let hidden = false; let waiting = [];
+    window.requestAnimationFrame = (cb) => { if (hidden) { waiting.push(cb); return 0; } return raf(cb); };
+    Object.defineProperty(document, 'hidden', { configurable: true, get: () => hidden });
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => (hidden ? 'hidden' : 'visible') });
+    window.__setHidden = (v) => { hidden = v; document.dispatchEvent(new Event('visibilitychange')); if (!v) { const w = waiting; waiting = []; w.forEach((cb) => raf(cb)); } }; })();`;
+  const page = await browser.newPage({ width, height, mobile, initScript: fakeClock + hideable });
   const shot = async (label) => {
     const file = path.join(OUT, name + '-' + label + '.png');
     for (let attempt = 1; ; attempt++) {
@@ -173,6 +179,37 @@ async function run(browser, base, name, width, height, mobile) {
   await page.eval('document.querySelector("#resSightGrid").scrollIntoView({ block: "center" })');
   await sleep(300);
   await shot('25-results-sightings-panel');
+  // the page is hidden in the middle of a climb, and comes back
+  await load(seed(['swarm', 'solid']));
+  await next();
+  await play('deep');
+  await phase('climb');
+  await sleep(900);
+  await page.eval('__setHidden(true)');
+  await sleep(2500);
+  await page.eval('__setHidden(false)');
+  await phase('reveal', 3000);
+  await sleep(900);
+  await shot('26-hidden-mid-climb-recovered');
+
+  // infinite mode, until the clock runs out
+  await load(null);
+  await page.eval('document.getElementById("infBtn").click()');
+  await phase('guess');
+  const infAnswer = async (tier) => {
+    const text = await page.eval('document.getElementById("promptText").textContent');
+    const p = data.prompts.find((q) => q.text === text);
+    await submit(p.answers.find((a) => a.tier === tier).name);
+    await sleep(900);
+  };
+  await infAnswer('rare');
+  await infAnswer('swarm');
+  await infAnswer('solid');
+  await shot('27-infinite-mid-run');
+  for (let i = 0; i < 40 && (await page.eval('document.body.dataset.phase')) === 'guess'; i++) await submit('wrong guess ' + i).catch(() => {});
+  await phase('infover', 20000);
+  await sleep(600);
+  await shot('28-infinite-clock-ran-out');
   const problems = page.problems.slice();
   await page.close();
   return problems;
