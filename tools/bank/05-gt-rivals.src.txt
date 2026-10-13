@@ -1,0 +1,204 @@
+# Prompt bank v2: rivals. The Bulldogs prompt started in the rivalry-week set and now also lives in the gt pool.
+
+@bulldogs | RIVALS | Know thy enemy: name a Georgia Bulldogs football great | pool=gt | type=open | clar=anyone who played football at Georgia
+C Herschel Walker
+C Matthew Stafford
+C Stetson Bennett | Stetson Bennett IV
+T Nick Chubb
+T Todd Gurley
+S Brock Bowers
+S Fran Tarkenton
+S Champ Bailey
+S Hines Ward
+S A.J. Green | AJ Green
+S Sony Michel
+S Roquan Smith
+S Jordan Davis
+S Jalen Carter
+S Aaron Murray
+S Terrell Davis
+S Carson Beck
+S Kirby Smart :: A Georgia defensive back before he was Georgia's coach.
+R David Greene
+R David Pollack
+R Knowshon Moreno
+R Garrison Hearst
+R Richard Seymour
+R Thomas Davis
+R Geno Atkins
+R Jake Fromm
+R D'Andre Swift | DAndre Swift
+R Eric Zeier
+R Travon Walker
+R Nakobe Dean
+R George Pickens
+R Ladd McConkey
+R Justin Houston
+R Leonard Floyd
+R Mecole Hardman
+R James Cook
+R Bill Goldberg | Goldberg :: A Georgia defensive lineman before the wrestling ring.
+D Frank Sinkwich
+D Charley Trippi
+D Rodney Hampton
+D Lindsay Scott
+D Buck Belue
+D Kevin Butler
+D Jarvis Jones
+D Alec Ogletree
+D Andrew Thomas
+D Isaiah Wynn
+D Tim Worley
+D Robert Edwards
+D Musa Smith
+D Boss Bailey
+D D.J. Shockley | DJ Shockley
+D Quincy Carter
+D Mike Bobo
+D Ray Goff
+D Bill Stanfill
+D Jake Scott
+D Rodrigo Blankenship | Hot Rod
+D Zamir White
+D Kelee Ringo
+D Malcolm Mitchell
+D Tavarres King
+D Orson Charles
+D Arthur Lynch
+D Cordy Glenn
+D Clint Boling
+D Max Jean-Gilles
+D Jon Stinchcomb
+D Matt Stinchcomb
+D George Foster
+D Johnathan Sullivan
+D Marcus Stroud
+D Charles Grant
+D Phillip Daniels
+D Sean Jones
+D Tim Jennings
+D Brandon Boykin
+D Bacarri Rambo
+D Shawn Williams
+D Reshad Jones
+D Rennie Curran
+D Akeem Dent
+D Dannell Ellerbe
+D Jordan Jenkins
+D Lorenzo Carter
+D D'Andre Walker
+D Azeez Ojulari
+D Jermaine Johnson
+D Quay Walker
+D Channing Tindall
+D Devonte Wyatt
+D Lewis Cine
+D Derion Kendrick
+D Eric Stokes
+D Tyson Campbell
+D Richard LeCounte
+D J.R. Reed
+D Deandre Baker
+D Malik Herring
+D Jonathan Ledbetter
+D Trenton Thompson
+D John Atkins
+D Sedrick Van Pran | Sedrick Van Pran-Granger
+D Broderick Jones
+D Jamaree Salyer
+D Justin Shaffer
+D Solomon Kindley
+D Lamont Gaillard
+D Riley Ridley
+D Terry Godwin
+D Javon Wims
+D Chris Conley
+D Michael Bennett
+D Marlon Brown
+D Fernando Velasco
+D Kregg Lumpkin
+D Danny Ware
+D Verron Haynes
+D Olandis Gary
+D Patrick Pass
+D Brice Hunter
+D Andre Hastings
+D Mack Strong
+D Lars Tate
+D Keith Henderson
+D John Kasay
+D Todd Peterson
+D Billy Bennett
+D Blair Walsh
+D Marshall Morgan
+D Brandon Coutu
+D Cade Mays
+D Kearis Jackson
+D Arian Smith
+D Dominick Blaylock
+D Kendall Milton
+D Daijun Edwards
+D Javon Bullard
+D Tykee Smith
+D Kamari Lassiter
+D Smael Mondon | Smael Mondon Jr.
+D Jalon Walker
+D Mykel Williams
+D Malaki Starks
+D Tate Ratledge
+D Dylan Fairchild
+D Amarius Mims
+D Darnell Washington
+D Christopher Smith
+D Robert Beal
+D Nolan Smith
+D Warren McClendon
+D Gunner Stockton
+D Nate Frazier
+D Trevor Etienne
+D Dillon Bell
+D Dominic Lovett
+D Oscar Delp
+D Lawson Luckie
+D CJ Allen
+D Raylen Wilson
+D Zachariah Branch
+D Peyton Woodring
+D Brett Thorson
+D Jake Camarda
+D Cameron Nizialek
+D Pat Dye :: An All-American guard at Georgia before he coached Auburn.
+D Zeke Bratkowski
+D Johnny Rauch
+D John Lastinger
+D Jeff Pyburn
+D Andy Johnson
+D Matt Robinson
+D James Jackson
+D Wayne Johnson
+D Greg Talley
+D Cory Phillips
+D Joe Tereshinski | Joe Tereshinski III
+D Joe Cox
+D Hutson Mason
+D Greyson Lambert
+D Faton Bauta
+D Brice Ramsey
+D Jacob Eason
+D Justin Fields :: He began at Georgia before Ohio State.
+D JT Daniels
+D D'Wan Mathis
+D Brock Vandagriff
+X Terry Hoage :: A two-time All-American safety in the early 1980s.
+! Vince Dooley :: the coach; he played his football at Auburn
+! Mark Richt :: the coach; he played at Miami
+! Uga :: a very good dog, but not on the roster
+! Tim Tebow :: Florida
+! Bo Jackson :: Auburn
+! Cam Newton :: Auburn
+! Calvin Johnson :: one of ours
+! Demaryius Thomas :: one of ours
+! Trevor Lawrence :: Clemson; he is from Cartersville, but never a Bulldog
+! Deshaun Watson :: Clemson; from Gainesville, Georgia, but never a Bulldog
+! Joe Hamilton :: one of ours
+! Dominique Wilkins :: Georgia basketball, not football
