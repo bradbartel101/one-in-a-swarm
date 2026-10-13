@@ -144,7 +144,7 @@
       { id: 'wballoon', score: at(95000), x: 0.62, caption: 'A weather balloon. The tag says: lost & found.' },
       { id: 'jumper', score: at(120000), x: 0.56, caption: 'Somebody is taking the long way down.' },
       { id: 'astronaut', score: at(300 * 5280), x: 0.6, caption: 'Tech alumni have flown up here. This one waves.' },
-      { id: 'teapot', score: at(5000 * 5280), x: 0.5, caption: "A teapot, in orbit. Nobody can prove it isn't." },
+      { id: 'teapot', score: at(1000 * 5280), x: 0.5, caption: "A teapot, in orbit. Nobody can prove it isn't." },
       { id: 'satellite', score: at(22236 * 5280), x: 0.56, caption: 'Somebody insisted on honeycomb solar panels.' },
       { id: 'flag', score: 700, x: 0.5, caption: 'Planted: gold and navy, 238,855 miles from campus.', hidden: true },
     ];

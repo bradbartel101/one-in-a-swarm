@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 /* Plays three flights in headless Chrome at phone and desktop size and saves screenshots into
-   screenshots/v5/: one of about 150 points, one of about 350, and a perfect 700, plus every
+   screenshots/overnight/: one of about 150 points, one of about 350, and a perfect 700, plus every
    zone, some easter eggs, a secret answer, the One in a Swarm moment and the results screen.
    Tiers are forced by looking answers up by tier in the prompt bank. Run with: npm run screens */
 const http = require('http');
@@ -12,7 +12,7 @@ const C = require('../../js/core.js');
 const data = require('../../data/prompts.json');
 
 const ROOT = path.join(__dirname, '..', '..');
-const OUT = path.join(ROOT, 'screenshots', 'v5');
+const OUT = path.join(ROOT, 'screenshots', 'overnight');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.woff2': 'font/woff2' };
 
 const server = http.createServer((req, res) => {
@@ -26,6 +26,8 @@ const server = http.createServer((req, res) => {
   res.end(fs.readFileSync(file));
 });
 
+// The title screen has a night look in the small hours; pictures are always taken in daylight.
+const MIDDAY = 'Date.prototype.getHours = function () { return 12; };';
 const day = C.utcDateKey(new Date());
 const order = ['majors', 'nba', 'marta', 'nfl', 'cs', 'codes', 'qbs']; // prompts where no secret answer is a real one
 const answer = (id, tier) => data.prompts.find((p) => p.id === id).answers.find((a) => a.tier === tier);
@@ -35,12 +37,13 @@ function seed(tiers) {
   const state = C.newDaily(day, order);
   tiers.forEach((tier, i) => {
     const a = tier ? answer(order[i], tier) : null;
-    state.results.push({ tier: tier || null, answer: a ? a.name : null, points: C.tierPoints(tier), promptId: order[i], wrong: 0, fuzzy: false, note: '' });
+    state.results.push({ tier: tier || null, answer: a ? a.name : null, points: C.tierPoints(tier), promptId: order[i], wrong: [2, 0, 1, 0, 0, 3, 0][i], fuzzy: false, note: '' });
   });
   state.finished = state.results.length === 7;
   return state;
 }
 
+const notes = [];
 async function run(browser, base, name, width, height, mobile) {
   const fakeClock = `(() => { const R = Date; let off = 0; class D extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } } window.Date = D; window.__shiftClock = (ms) => { off += ms; }; })();`;
   // lets a test hide the page: frames stop and the page is told, as when a tab goes to the background
@@ -49,7 +52,7 @@ async function run(browser, base, name, width, height, mobile) {
     Object.defineProperty(document, 'hidden', { configurable: true, get: () => hidden });
     Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => (hidden ? 'hidden' : 'visible') });
     window.__setHidden = (v) => { hidden = v; document.dispatchEvent(new Event('visibilitychange')); if (!v) { const w = waiting; waiting = []; w.forEach((cb) => raf(cb)); } }; })();`;
-  const page = await browser.newPage({ width, height, mobile, initScript: fakeClock + hideable });
+  const page = await browser.newPage({ width, height, mobile, initScript: MIDDAY + fakeClock + hideable });
   const shot = async (label) => {
     const file = path.join(OUT, name + '-' + label + '.png');
     for (let attempt = 1; ; attempt++) {
@@ -109,10 +112,17 @@ async function run(browser, base, name, width, height, mobile) {
   await submit('Buzz');
   await sleep(250);
   await shot('09-secret-answer-buzz');
+  const bar = () => page.eval('Number(/scaleX\\(([\\d.]+)\\)/.exec(document.getElementById("barFill").style.transform)[1]) * 25');
+  const before = await bar();
+  const t0 = Date.now();
   await submit('gatorade');
   await sleep(200);
   await shot('10-wrong-guess');
   await submit('alpha bravo'); // nothing close: another wrong guess, to show the chips
+  await submit('charlie delta');
+  await sleep(100);
+  const after = await bar();
+  notes.push(name + ': three wrong guesses took ' + (before - after).toFixed(1) + 's off the clock in ' + ((Date.now() - t0) / 1000).toFixed(1) + 's of real time (no penalty)');
   await play('solid');
   await phase('climb');
   await sleep(1100);
@@ -142,6 +152,15 @@ async function run(browser, base, name, width, height, mobile) {
   await shot('16-timeout');
   await load(seed(['rare', 'solid', 'clever', 'common', 'solid', null, null]));
   await shot('17-flight150-results-flight-log');
+  await page.eval('document.querySelector("#breakdown").scrollIntoView({ block: "start" })');
+  await sleep(300);
+  await shot('17b-results-misses-per-round');
+  await page.eval('document.querySelector("#histBars").scrollIntoView({ block: "center" })');
+  await sleep(300);
+  await shot('17c-results-your-flights');
+  const card = await page.eval('window.__swarm.card()');
+  fs.writeFileSync(path.join(OUT, name + '-17d-share-card.png'), Buffer.from(card.split(',')[1], 'base64'));
+  process.stdout.write('17d-share-card ');
 
   // flight two: about 350 points
   await load(seed(['swarm', 'deep', 'rare', 'solid', 'clever']));
@@ -210,6 +229,17 @@ async function run(browser, base, name, width, height, mobile) {
   await phase('infover', 20000);
   await sleep(600);
   await shot('28-infinite-clock-ran-out');
+  // the four sightings added overnight, each at rest in its zone
+  for (const [label, tiers] of [['drone', ['rare', 'common']], ['paper-airplane', ['swarm', 'swarm', 'swarm', 'rare']], ['skydiver', ['swarm', 'swarm', 'swarm', 'swarm', 'rare', 'clever']]]) {
+    await load(seed(tiers));
+    await shot('29-new-sighting-' + label);
+  }
+  await load(seed(['swarm', 'swarm', 'swarm', 'swarm', 'swarm', 'swarm'])); // 600 points; a Too Clever answer stops beside the teapot
+  await next();
+  await play('clever');
+  await phase('reveal');
+  await sleep(1200);
+  await shot('29-new-sighting-teapot');
   const problems = page.problems.slice();
   await page.close();
   return problems;
@@ -226,7 +256,7 @@ async function run(browser, base, name, width, height, mobile) {
     console.log('\nsaved ' + name + ' screenshots');
   }
   // The link-preview image is the real title screen, without the corner buttons.
-  const og = await browser.newPage({ width: 1200, height: 630 });
+  const og = await browser.newPage({ width: 1200, height: 630, initScript: MIDDAY });
   await og.goto(base);
   await og.waitFor('document.body.dataset.phase === "home"', 12000, 'title screen');
   await og.eval('document.fonts.ready');
@@ -235,6 +265,7 @@ async function run(browser, base, name, width, height, mobile) {
   await og.screenshot(path.join(ROOT, 'assets', 'og.png'));
   await og.close();
   console.log('saved assets/og.png');
+  notes.forEach((n) => console.log(n));
   await browser.close();
   server.close();
   if (bad.length) {

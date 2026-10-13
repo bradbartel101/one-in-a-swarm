@@ -67,8 +67,8 @@ canvas, .art, .pip-icon { image-rendering: pixelated; }
 /* The safe area: the clear band of screen between the HUD (or prompt) and the answer bar (or
    reveal button). Tier lines are cut off at its edges. A fact is shown only when the whole of
    it is inside, so no text is ever half under a panel. */
-#worldWindow {
-  position: fixed; left: 0; right: 0; top: var(--win-top, 0px); bottom: var(--win-bottom, 0px); z-index: 1;
+#worldWindow { /* the box never moves or resizes (no layout shift); only what shows through it does */
+  position: fixed; inset: 0; z-index: 1; clip-path: inset(var(--win-top, 0px) 0 var(--win-bottom, 0px) 0);
   overflow: hidden; pointer-events: none;
 }
 #worldLayer { position: absolute; left: 0; right: 0; top: 0; height: 0; will-change: transform; }

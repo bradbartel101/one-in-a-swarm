@@ -543,8 +543,8 @@
       lastVars = vars;
       root.setProperty('--win-top', winTop + 'px');
       root.setProperty('--win-bottom', Math.max(0, Math.round(h - winBottom)) + 'px');
-      // the world layer is offset by the same number: move both together, never one frame apart
-      $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
+      // (the world layer is placed from the top of the screen, so a change here moves nothing)
+      $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
     }
   }
 
@@ -651,7 +651,7 @@
     anchor += (anchorTarget - anchor) * 0.14;
     scene.setAnchor(anchor);
     scene.setCamera(cam);
-    $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
+    $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb

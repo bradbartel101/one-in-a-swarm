@@ -10,4 +10,4 @@ Branch `overnight` only. Never push to main, never merge.
 - [x] 5. (120-day target NOT reached: 44 prompts cover 6 days; see MORNING-REPORT) Content: count days covered, extend to 120+ days, schedule future dates only, rivalry-week set in data/themed/rivalry.json
 - [x] 6. Stats for players: "Your flights" on the results page
 - [x] 7. More easter eggs: 4 sightings, 1 secret (only if everything above is done)
-- [ ] 8. Final check: all tests, screenshots in screenshots/overnight/, Lighthouse, pull request "Overnight improvements" (do not merge)
+- [x] 8. Final check: all tests, screenshots in screenshots/overnight/, Lighthouse, pull request "Overnight improvements" (do not merge)
