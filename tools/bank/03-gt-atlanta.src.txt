@@ -1,0 +1,319 @@
+# Prompt bank v2: Atlanta and Georgia prompts for the gt pool.
+
+@atlstreets | ATLANTA | Name a street in Atlanta | pool=gt | type=open | clar=any named road inside the city | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne,sw,se,highway,hwy
+C Peachtree Street | Peachtree
+C North Avenue | North Ave :: Tech's southern edge. "The North Avenue Trade School."
+C Ponce de Leon Avenue | Ponce | Ponce de Leon
+C Techwood Drive | Techwood
+C 10th Street | Tenth Street | 10th | Tenth
+C Spring Street | Spring
+T Bobby Dodd Way | Bobby Dodd :: It runs past the stadium that carries his name.
+T Ferst Drive | Ferst
+S West Peachtree Street | West Peachtree
+S Northside Drive | Northside
+S Marietta Street | Marietta
+S Piedmont Avenue | Piedmont | Piedmont Road
+S Hemphill Avenue | Hemphill
+S 5th Street | Fifth Street | 5th | Fifth
+S 14th Street | Fourteenth Street | 14th
+S 17th Street | Seventeenth Street | 17th
+S Howell Mill Road | Howell Mill
+S Moreland Avenue | Moreland
+S Memorial Drive | Memorial
+S DeKalb Avenue | DeKalb | De Kalb Avenue
+S Edgewood Avenue | Edgewood
+S Auburn Avenue | Auburn | Sweet Auburn
+S Boulevard
+S Monroe Drive | Monroe
+S Juniper Street | Juniper
+S Williams Street | Williams
+S Luckie Street | Luckie
+S Fowler Street | Fowler
+S Cherry Street | Cherry
+S State Street | State
+S Atlantic Drive | Atlantic
+S Roswell Road | Roswell
+S Lenox Road | Lenox
+S Buford Highway | Buford
+S Cheshire Bridge Road | Cheshire Bridge
+S Martin Luther King Jr. Drive | MLK | MLK Drive | Martin Luther King Drive | MLK Jr Drive | Martin Luther King
+S Ralph McGill Boulevard | Ralph McGill
+S Freedom Parkway | Freedom
+S Courtland Street | Courtland
+S Centennial Olympic Park Drive | Centennial Olympic Park | Centennial Park Drive
+S Ivan Allen Jr. Boulevard | Ivan Allen | Ivan Allen Boulevard
+S Donald Lee Hollowell Parkway | Hollowell | Bankhead Highway | Bankhead | Donald Lee Hollowell
+S Joseph E. Lowery Boulevard | Lowery | Ashby Street | Joseph Lowery
+S Joseph E. Boone Boulevard | Boone | Simpson Road | Simpson Street | Joseph Boone
+S Andrew Young International Boulevard | Andrew Young | International Boulevard
+S John Wesley Dobbs Avenue | John Wesley Dobbs | Dobbs | Houston Street
+S Hank Aaron Drive | Hank Aaron | Capitol Avenue
+S Ted Turner Drive | Ted Turner
+R Baker Street | Baker
+R Ellis Street | Ellis
+R Forsyth Street | Forsyth
+R Mitchell Street | Mitchell
+R Pryor Street | Pryor
+R Decatur Street | Decatur
+R Whitehall Street | Whitehall
+R Trinity Avenue | Trinity
+R Walton Street | Walton
+R Broad Street | Broad
+R Nassau Street | Nassau
+R Harris Street | Harris | John Portman Boulevard | Portman
+R Peachtree Center Avenue | Peachtree Center | Ivy Street
+R Linden Avenue | Linden
+R Pine Street | Pine
+R Merritts Avenue | Merritts
+R 3rd Street | Third Street | 3rd
+R 4th Street | Fourth Street | 4th
+R 6th Street | Sixth Street | 6th
+R 8th Street | Eighth Street | 8th
+R 11th Street | Eleventh Street | 11th
+R 12th Street | Twelfth Street | 12th
+R 16th Street | Sixteenth Street | 16th
+R Peachtree Place
+R Peachtree Battle Avenue | Peachtree Battle
+R Peachtree Dunwoody Road | Peachtree Dunwoody
+R Peachtree Hills Avenue | Peachtree Hills
+R Peachtree Circle
+R Peachtree Walk
+R Crescent Avenue | Crescent
+R Cypress Street | Cypress
+R Myrtle Street | Myrtle
+R Argonne Avenue | Argonne
+R Charles Allen Drive | Charles Allen
+R Virginia Avenue | Virginia
+R North Highland Avenue | Highland Avenue | North Highland | Highland
+R Briarcliff Road | Briarcliff
+R Clifton Road | Clifton
+R LaVista Road | La Vista | LaVista
+R Lindbergh Drive | Lindbergh
+R Sidney Marcus Boulevard | Sidney Marcus
+R Wieuca Road | Wieuca
+R West Paces Ferry Road | West Paces Ferry | Paces Ferry
+R East Paces Ferry Road | East Paces Ferry
+R Pharr Road | Pharr
+R Collier Road | Collier
+R Bolton Road | Bolton
+R Huff Road | Huff
+R Chattahoochee Avenue | Chattahoochee
+R Defoor Avenue | Defoor | DeFoors Ferry Road | Defoors Ferry
+R Mount Paran Road | Mount Paran | Mt. Paran
+R Moores Mill Road | Moores Mill
+R Glenwood Avenue | Glenwood
+R Flat Shoals Avenue | Flat Shoals
+R Euclid Avenue | Euclid
+R McLendon Avenue | McLendon
+R Krog Street | Krog
+R Irwin Street | Irwin
+R Randolph Street | Randolph
+R Jackson Street | Jackson
+R Hilliard Street | Hilliard
+R Cascade Road | Cascade | Cascade Avenue
+R Campbellton Road | Campbellton
+R Lee Street | Lee
+R Metropolitan Parkway | Metropolitan | Stewart Avenue
+R Jonesboro Road | Jonesboro
+R McDonough Boulevard | McDonough
+R Lakewood Avenue | Lakewood
+R Cleveland Avenue | Cleveland
+R Sylvan Road | Sylvan
+R Langford Parkway | Arthur Langford Parkway | Lakewood Freeway
+R University Avenue | University
+R Ralph David Abernathy Boulevard | Abernathy | Ralph David Abernathy | Gordon Street
+R Georgia Avenue | Georgia
+R Ormewood Avenue | Ormewood
+R Confederate Avenue | United Avenue | United
+R Cherokee Avenue | Cherokee
+R Hill Street | Hill
+R Fair Street | Fair
+R Chapel Street | Chapel
+R James P. Brawley Drive | Brawley
+R West End Avenue | West End
+R Beecher Street | Beecher
+R Fulton Industrial Boulevard | Fulton Industrial
+R Greenbriar Parkway | Greenbriar
+R Mount Zion Road | Mount Zion
+R Perry Boulevard | Perry
+R Johnson Road | Johnson
+R Habersham Road | Habersham
+R Tuxedo Road | Tuxedo
+R Blackland Road | Blackland
+R Powers Ferry Road | Powers Ferry
+R Lake Forrest Drive | Lake Forrest
+R Means Street | Means
+R Tech Parkway :: The road along Tech's western edge.
+R Dalney Street | Dalney
+R Plum Street | Plum
+R McMillan Street | McMillan
+R Curran Street | Curran
+R Center Street | Center
+R Turner Place | Turner
+R Brittain Drive | Brittain
+X Uncle Heinie Way | Uncle Heinie :: A real street sign on Tech's campus.
+R Ethel Street | Ethel
+R Mecaslin Street | Mecaslin
+R Deering Road | Deering
+R Peachtree Industrial Boulevard | Peachtree Industrial
+R Interstate 75 | I-75 | I75 | 75
+R Interstate 85 | I-85 | I85 | 85
+R Interstate 20 | I-20 | I20 | 20
+R Interstate 285 | I-285 | I285 | 285 | The Perimeter | Perimeter
+R Downtown Connector | The Connector | Connector | 75/85
+R Georgia 400 | GA 400 | 400
+! Broadway :: that is New York (Atlanta's is Broad Street)
+! Bourbon Street :: New Orleans
+! Sesame Street :: no
+! Wall Street :: New York
+
+@atlsuburbs | ATLANTA | Name a suburb of Atlanta | pool=gt | type=open | clar=a city or town in the metro area
+C Marietta
+C Decatur
+C Alpharetta
+C Sandy Springs
+C Roswell
+C Buckhead :: A neighborhood of Atlanta itself, but everyone says it. Accepted, at the lowest score.
+T Dunwoody
+T Smyrna
+S Kennesaw
+S Duluth
+S Lawrenceville
+S Johns Creek
+S Peachtree City
+S Brookhaven
+S Norcross
+S Stone Mountain
+S College Park
+S East Point
+S Douglasville
+S Woodstock
+S Cumming
+S Milton
+S Peachtree Corners
+S Tucker
+S Chamblee
+S Doraville
+S Suwanee
+S Buford
+S Snellville
+S Conyers
+S McDonough
+S Stockbridge
+S Fayetteville
+S Newnan
+S Acworth
+S Canton
+R Vinings
+R Mableton
+R Austell
+R Powder Springs
+R Hiram
+R Dallas
+R Villa Rica
+R Carrollton
+R Lithia Springs
+R Union City
+R Fairburn
+R Palmetto
+R Hapeville
+R Forest Park
+R Jonesboro
+R Riverdale
+R Morrow
+R Lovejoy
+R Hampton
+R Locust Grove
+R Griffin
+R Tyrone
+R Senoia :: Where much of "The Walking Dead" was filmed.
+R Sharpsburg
+R Covington
+R Oxford
+R Social Circle
+R Monroe
+R Loganville
+R Grayson
+R Lilburn
+R Dacula
+R Sugar Hill
+R Flowery Branch :: Where the Falcons train.
+R Braselton
+R Hoschton
+R Winder
+R Auburn
+R Gainesville
+R Oakwood
+R Dawsonville
+R Ball Ground
+R Holly Springs
+R Cartersville
+R Emerson
+R Lithonia
+R Clarkston
+R Avondale Estates :: Where the first Waffle House opened, in 1955.
+R Pine Lake
+R Scottdale
+R North Decatur
+R Druid Hills
+R Stonecrest
+R Ellenwood
+R Rex
+R Mountain Park
+R Berkeley Lake
+R Rest Haven
+R Chattahoochee Hills
+R South Fulton
+R Fair Oaks
+R Sandy Plains
+R East Cobb
+R Lost Mountain
+R Brooks
+R Woolsey
+R Whitesburg
+R Temple
+R Bremen
+R Rockmart
+R Jasper
+R Waleska
+R Nelson
+R Jefferson
+R Bethlehem
+R Statham
+R Porterdale
+R Mansfield
+R Jackson
+R Jenkinsburg
+R Zebulon
+R Barnesville
+R Moreland
+R Grantville
+R Hogansville
+R Turin
+R Haralson
+R Milner
+R Sunny Side
+R Lake City
+R Conley
+R Panthersville
+R Gresham Park
+R Belvedere Park
+R Redan
+R Candler-McAfee | Candler McAfee
+R North Druid Hills
+R Toco Hills
+R Embry Hills
+R Northlake
+R Smoke Rise
+R Centerville
+R Mountain View
+X Between :: A real town in Walton County, named for sitting halfway between Monroe and Loganville.
+! Atlanta :: the city itself
+! Athens :: about seventy miles east, and its own metro area
+! Savannah :: on the coast
+! Macon :: its own metro area
+! Augusta :: its own metro area
+! Chattanooga :: in Tennessee
+! Birmingham :: in Alabama
+! Midtown :: a neighborhood inside Atlanta
+! Virginia-Highland :: a neighborhood inside Atlanta
