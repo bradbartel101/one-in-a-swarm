@@ -7,12 +7,12 @@
   'use strict';
 
   const TIERS = {
-    common: { points: 10, label: 'Common', emoji: '⬜', bonusMs: 8000, climbMs: 2500, quip: 'Everybody said that one. A short hop.' },
-    clever: { points: 15, label: 'Too Clever', emoji: '🟩', bonusMs: 8000, climbMs: 2800, quip: 'You and every other clever Jacket.' },
-    solid: { points: 30, label: 'Solid', emoji: '🟧', bonusMs: 9000, climbMs: 3100, quip: 'A good answer. The swarm picks up speed.' },
-    rare: { points: 60, label: 'Rare', emoji: '🟦', bonusMs: 10000, climbMs: 3400, quip: 'Not many think of that one. Up you go.' },
-    deep: { points: 85, label: 'Deep Cut', emoji: '🟪', bonusMs: 12000, climbMs: 3700, quip: 'A deep cut. The air is getting thin.' },
-    swarm: { points: 100, label: 'One in a Swarm', emoji: '🐝', bonusMs: 16000, climbMs: 4000, quip: 'The one answer hidden in the hive. Helluva pull.' },
+    common: { points: 10, label: 'Common', emoji: '⬜', bonusMs: 8000, quip: 'Everybody said that one. A short hop.' },
+    clever: { points: 15, label: 'Too Clever', emoji: '🟩', bonusMs: 8000, quip: 'You and every other clever Jacket.' },
+    solid: { points: 30, label: 'Solid', emoji: '🟧', bonusMs: 9000, quip: 'A good answer. The swarm picks up speed.' },
+    rare: { points: 60, label: 'Rare', emoji: '🟦', bonusMs: 10000, quip: 'Not many think of that one. Up you go.' },
+    deep: { points: 85, label: 'Deep Cut', emoji: '🟪', bonusMs: 12000, quip: 'A deep cut. The air is getting thin.' },
+    swarm: { points: 100, label: 'One in a Swarm', emoji: '🐝', bonusMs: 16000, quip: 'The one answer hidden in the hive. Helluva pull.' },
   };
   const TIER_ORDER = ['common', 'clever', 'solid', 'rare', 'deep', 'swarm'];
   const MISS_EMOJI = '⬛';
@@ -324,6 +324,41 @@
   }
 
   /* ---------- scoring ---------- */
+
+  // How long a climb takes: 2.5 s plus 12 ms a point, between 2.5 and 4.5 seconds.
+  function climbMs(points) {
+    return Math.round(Math.max(2500, Math.min(4500, 2500 + 12 * (Number(points) || 0))));
+  }
+
+  // The shape of a climb: returns progress (0 to 1) for elapsed time (0 to 1). It starts at
+  // full speed and eases out, and it lingers a little where it passes a `mark` (the score of a
+  // fact or a sighting) so that there is time to read it.
+  function climbCurve(from, to, marks) {
+    const N = 240;
+    const span = to - from;
+    const near = (marks || []).filter((m) => m > Math.min(from, to) && m < Math.max(from, to));
+    const acc = [0];
+    for (let i = 0; i < N; i++) {
+      const x = (i + 0.5) / N;
+      const at = from + span * x;
+      let cost = 1 / (Math.sqrt(1 - x) + 0.12); // time spent per step of distance: ease-out
+      near.forEach((m) => { const k = (at - m) / 3; cost *= 1 + 1.4 * Math.exp(-k * k); });
+      acc.push(acc[i] + cost);
+    }
+    const total = acc[N];
+    return function (t) {
+      if (!(t > 0)) return 0;
+      if (t >= 1) return 1;
+      const want = t * total;
+      let lo = 0;
+      let hi = N;
+      while (hi - lo > 1) {
+        const mid = (lo + hi) >> 1;
+        if (acc[mid] <= want) lo = mid; else hi = mid;
+      }
+      return (lo + (want - acc[lo]) / (acc[lo + 1] - acc[lo])) / N;
+    };
+  }
 
   function tierPoints(tier) {
     return TIERS[tier] ? TIERS[tier].points : 0;
@@ -700,6 +735,7 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
+    climbMs, climbCurve,
     ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,

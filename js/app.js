@@ -573,14 +573,14 @@
   // Moves the camera. The game never waits on the animation alone: a timer ends the move a
   // moment after it should have finished, so a hidden tab or a stalled frame loop cannot leave
   // the score half counted and the reveal unshown.
-  function moveCamera(to, ms, done, lines) {
+  function moveCamera(to, ms, done, lines, curve) {
     finishMove();
     if (reducedMotion() || ms <= 0 || to === cam) {
       anim = { to, done, lines };
       finishMove();
       return;
     }
-    anim = { from: cam, to, start: performance.now(), ms, done, lines, timer: window.setTimeout(finishMove, ms + MOVE_GRACE_MS) };
+    anim = { from: cam, to, start: performance.now(), ms, done, lines, curve, timer: window.setTimeout(finishMove, ms + MOVE_GRACE_MS) };
   }
 
   function step(now) {
@@ -589,7 +589,7 @@
       const t = (now - anim.start) / anim.ms;
       if (t >= 1) finishMove();
       else {
-        cam = anim.from + (anim.to - anim.from) * (1 - Math.pow(1 - t, 3)); // fast start, slow settle
+        cam = anim.from + (anim.to - anim.from) * (anim.curve ? anim.curve(t) : 1 - Math.pow(1 - t, 3)); // fast start, slow settle
         if (anim.lines) anim.lines.forEach((l) => l.node.classList.toggle('on', cam >= l.score - 0.2));
       }
     }
@@ -916,7 +916,8 @@
     tag.hidden = false;
     scene.setMood('happy');
     const lines = buildTierLines(base, result.points);
-    const ms = reducedMotion() ? 0 : tier.climbMs;
+    const ms = reducedMotion() ? 0 : C.climbMs(result.points);
+    const curve = C.climbCurve(base, base + result.points, climbMarks(base, base + result.points));
     if (ms) {
       Sfx.rise(ms / 1000);
       scene.pollen(performance.now()); // even a short hop leaves a puff behind
@@ -941,7 +942,16 @@
       // The top answer gets a beat to itself before the card comes up.
       if (result.tier === 'swarm' && !reducedMotion()) window.setTimeout(() => showReveal(true), 750);
       else showReveal(true);
-    }, lines);
+    }, lines, curve);
+  }
+
+  // What a climb should slow down for: sightings first, then facts, a few and well apart.
+  function climbMarks(from, to) {
+    const picked = [];
+    scene.sightings.map((g) => g.score).concat(FACTS.map((f) => C.scoreForFeet(f.feet))).forEach((score) => {
+      if (picked.length < 3 && score > from + 3 && score < to - 3 && picked.every((p) => Math.abs(p - score) >= 12)) picked.push(score);
+    });
+    return picked;
   }
 
   function quake() {
