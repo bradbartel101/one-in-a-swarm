@@ -17,6 +17,8 @@
   const K_STATS = 'swarm.stats';
   const K_SIGHT = 'swarm.sightings';
   const TOAST_MS = 2400;
+  const CAPTION_MS = 3000;
+  const MOVE_GRACE_MS = 400; // how long after a move should have ended before a timer ends it
   const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   // Everything there is to find: twelve sightings in the world, five secret answers, four things to do.
   const EGGS = [
@@ -105,6 +107,13 @@
   let shownAlt = '';
   let tierColors = {};
   let winTop = 0;
+  let winBottom = 0;
+  let lastFrameAt = 0;
+  let hiddenPause = false; // the page is hidden and a clock was stopped for it
+  let capQueue = [];
+  let capTimer = 0;
+  let captioned = new Set(); // sightings already captioned on this flight
+  let schedule = null;
   let countFrom = null; // while a daily climb runs, the score the HUD counts up from
   let frames = 0;
   let found = new Set();
@@ -175,12 +184,39 @@
     const toast = $('toast');
     toast.textContent = 'NEW SIGHTING\n' + name;
     toast.hidden = false;
+    // The panels may have just grown a line (a status message, the sightings count): measure again.
+    aimCamera();
+    window.setTimeout(aimCamera, 0);
     announce('New sighting: ' + name + '.');
     toastTimer = window.setTimeout(() => {
       toast.hidden = true;
       toastTimer = 0;
       flushToasts();
     }, TOAST_MS);
+  }
+
+  // Captions for sightings: one at a time, each for about three seconds, in one fixed place.
+  function queueCaption(id) {
+    if (captioned.has(id)) return;
+    captioned.add(id);
+    capQueue.push(scene.sightings.filter((g) => g.id === id)[0].caption);
+    nextCaption();
+  }
+
+  function nextCaption() {
+    if (capTimer || !capQueue.length) return;
+    const node = $('caption');
+    node.textContent = capQueue.shift();
+    node.classList.remove('out');
+    node.hidden = false;
+    capTimer = window.setTimeout(() => {
+      node.classList.add('out'); // fade
+      capTimer = window.setTimeout(() => {
+        node.hidden = true;
+        capTimer = 0;
+        nextCaption();
+      }, 300);
+    }, CAPTION_MS);
   }
 
   function goldFlash() {
@@ -194,14 +230,16 @@
   function popBalloon() {
     if (!scene.pop(performance.now())) return;
     Sfx.pop();
-    $('cap-balloon').hidden = false;
+    queueCaption('balloon');
     markFound('balloon');
   }
 
   // A secret answer: a reaction, and nothing else. The round carries on untouched.
   function onSecret(id) {
     const now = performance.now();
-    $('guess').value = '';
+    // The secret stays in the box, selected: the next keystroke replaces it, and nothing typed
+    // afterwards is ever cleared.
+    $('guess').select();
     if (id === 'burdell') setFeedback('George P. Burdell is enrolled in every class. Try again.', '');
     else if (id === 'buzz') {
       scene.trick('flip', now);
@@ -310,8 +348,8 @@
   function drawTierArt(canvas, tier, now) {
     const g = canvas.getContext('2d');
     const t = reducedMotion() ? 0 : now || 0;
-    const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d' };
-    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00' };
+    const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d', f: '#f6dc7a' };
+    const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00', f: '#fff0a8' };
     const box = (x, y, w, h, color) => {
       g.fillStyle = color;
       g.fillRect(Math.round(x), Math.round(y), w, h);
@@ -437,15 +475,22 @@
     const phase = document.body.dataset.phase;
     let top = $('hud').hidden ? 56 : $('hud').getBoundingClientRect().bottom + 4;
     let bottom = h;
-    if (view === 'play' && phase !== 'climb') {
-      top = $('promptCard').getBoundingClientRect().bottom + 4;
-      bottom = $('dock').getBoundingClientRect().top - 4;
-    } else if (view === 'between') {
-      bottom = $('reveal').getBoundingClientRect().top - 4;
+    if (view === 'play') {
+      if (phase !== 'climb') top = $('promptCard').getBoundingClientRect().bottom + 4;
+      if ($('dock').getClientRects().length) bottom = $('dock').getBoundingClientRect().top - 4;
+    } else if (view === 'between') { // between the reveal text and the button
+      top = $('reveal').getBoundingClientRect().bottom - 14;
+      bottom = $('revealFoot').getBoundingClientRect().top - 4;
+    }
+    if (view === 'home') { // the open sky between the title and the start panel
+      top = document.querySelector('.title-block').getBoundingClientRect().bottom + 4;
+      bottom = document.querySelector('.start-panel').getBoundingClientRect().top - 4;
     }
     winTop = Math.max(0, Math.round(top));
+    winBottom = Math.max(winTop, Math.round(bottom));
+    if (scene) scene.setSafe(winTop / scene.size().S, winBottom / scene.size().S);
     root.setProperty('--win-top', winTop + 'px');
-    root.setProperty('--win-bottom', Math.max(0, Math.round(h - bottom)) + 'px');
+    root.setProperty('--win-bottom', Math.max(0, Math.round(h - winBottom)) + 'px');
     if (view === 'play') {
       // The bee rides about 60% of the way down the visible screen, so the sky ahead is in view.
       // With a keyboard up it is kept inside the gap between the prompt and the answer bar.
@@ -455,8 +500,10 @@
       const ceiling = phase === 'climb' ? 60 : $('promptCard').getBoundingClientRect().bottom + 34;
       anchorTarget = Math.max(ceiling, Math.min(floor, want)) / h;
     } else if (view === 'between') {
-      // The card is short and sits at the bottom; the bee stays where it was unless the card needs the room.
-      anchorTarget = Math.max(0.2, Math.min(BEE_DOWN * h, $('reveal').getBoundingClientRect().top - 70) / h);
+      // The reveal sits above and the button below; the bee keeps its place between them.
+      const roomTop = $('reveal').getBoundingClientRect().bottom + 26;
+      const roomBottom = $('revealFoot').getBoundingClientRect().top - 40;
+      anchorTarget = Math.max(roomTop, Math.min(roomBottom, BEE_DOWN * h)) / h;
     } else if (view === 'home') {
       anchorTarget = BEE_DOWN; // with the bee hovering HOVER points up, the lawn fills about the bottom quarter
     } else {
@@ -478,13 +525,6 @@
     FACTS.forEach((f, i) => {
       const node = el('p', 'fact ' + (i % 2 ? 'left' : 'right'), f.text); // alternating sides
       node.dataset.score = String(C.scoreForFeet(f.feet));
-      layer.appendChild(node);
-    });
-    scene.sightings.forEach((g) => { // a caption beside each sighting, on the side it is not
-      const node = el('p', 'fact sight ' + g.side, g.caption);
-      node.id = 'cap-' + g.id;
-      node.dataset.score = String(g.id === 'flag' ? g.score + 3 : g.score < 1 ? 1.6 : g.score);
-      node.hidden = g.hidden;
       layer.appendChild(node);
     });
     layoutWorld();
@@ -514,27 +554,36 @@
     return lines;
   }
 
-  function moveCamera(to, ms, done, lines) {
-    if (reducedMotion() || ms <= 0 || to === cam) {
-      anim = null;
-      cam = to;
-      if (lines) lines.forEach((l) => l.node.classList.add('on'));
-      if (done) done();
-      return;
-    }
-    anim = { from: cam, to, start: performance.now(), ms, done, lines };
+  // Ends the current camera move now: final position, final lines, and whatever was waiting on it.
+  function finishMove() {
+    if (!anim) return;
+    const finished = anim;
+    anim = null;
+    window.clearTimeout(finished.timer);
+    cam = finished.to;
+    if (finished.lines) finished.lines.forEach((l) => l.node.classList.add('on'));
+    if (finished.done) finished.done();
   }
 
-  function frame(now) {
+  // Moves the camera. The game never waits on the animation alone: a timer ends the move a
+  // moment after it should have finished, so a hidden tab or a stalled frame loop cannot leave
+  // the score half counted and the reveal unshown.
+  function moveCamera(to, ms, done, lines) {
+    finishMove();
+    if (reducedMotion() || ms <= 0 || to === cam) {
+      anim = { to, done, lines };
+      finishMove();
+      return;
+    }
+    anim = { from: cam, to, start: performance.now(), ms, done, lines, timer: window.setTimeout(finishMove, ms + MOVE_GRACE_MS) };
+  }
+
+  function step(now) {
+    lastFrameAt = now;
     if (anim) {
       const t = (now - anim.start) / anim.ms;
-      if (t >= 1) {
-        const finished = anim;
-        cam = finished.to;
-        anim = null;
-        if (finished.lines) finished.lines.forEach((l) => l.node.classList.add('on'));
-        if (finished.done) finished.done();
-      } else {
+      if (t >= 1) finishMove();
+      else {
         cam = anim.from + (anim.to - anim.from) * (1 - Math.pow(1 - t, 3)); // fast start, slow settle
         if (anim.lines) anim.lines.forEach((l) => l.node.classList.toggle('on', cam >= l.score - 0.2));
       }
@@ -547,11 +596,19 @@
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
-    if (++frames % 4 === 0) dodgeTag();
+    if (++frames % 4 === 0) placeFacts();
+    // The bee glances down at the answer box while something is being typed.
+    scene.setLook(document.body.dataset.phase === 'guess' && $('guess').value.length > 0);
     if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
     if (frames % 8 === 0) {
       const seenNow = scene.drainSeen(); // only counted during a flight, not from the title screen
-      if (view === 'play' || view === 'between') seenNow.forEach((id) => { if (id !== 'balloon' && id !== 'flag') markFound(id); });
+      if (view === 'play' || view === 'between') {
+        seenNow.forEach((id) => {
+          if (id === 'balloon' || id === 'flag') return; // these two are earned, not just seen
+          markFound(id);
+          queueCaption(id);
+        });
+      }
     }
     const alt = C.altitudeParts(cam);
     if (alt.value !== shownAlt) {
@@ -559,11 +616,23 @@
       $('hudAlt').textContent = alt.value;
       $('hudUnit').textContent = ' ' + alt.unit.toUpperCase();
     }
+  }
+
+  function frame(now) {
+    step(now);
     window.requestAnimationFrame(frame);
   }
 
-  // A fact that would sit under the answer tag or a tier label steps aside while they are there.
-  function dodgeTag() {
+  // Some browsers starve requestAnimationFrame (embedded views, throttled tabs). If no frame has
+  // arrived for a while and the page is showing, draw one from a timer so the world keeps moving.
+  function pump() {
+    const now = performance.now();
+    if (!document.hidden && now - lastFrameAt > 90) step(now);
+  }
+
+  // A fact is shown only when all of it is inside the safe area (below the HUD and prompt, above
+  // the answer bar or the reveal button), and steps aside for the tag, the bee and tier labels.
+  function placeFacts() {
     const tag = $('tag');
     const blockers = tag.hidden ? [] : [tag.getBoundingClientRect()];
     const bee = scene.box('bee');
@@ -571,8 +640,9 @@
     document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => blockers.push(n.getBoundingClientRect()));
     document.querySelectorAll('#worldLayer .fact').forEach((node) => {
       const r = node.getBoundingClientRect();
+      const inside = r.top >= winTop + 2 && r.bottom <= winBottom - 2;
       const hit = blockers.some((b) => r.bottom > b.top - 6 && r.top < b.bottom + 6 && r.right > b.left - 6 && r.left < b.right + 6);
-      node.classList.toggle('yield', hit);
+      node.classList.toggle('yield', hit || !inside);
     });
   }
 
@@ -646,7 +716,7 @@
 
   function dailyEnter() {
     if (!daily) {
-      daily = C.newDaily(today(), C.dailyPromptIds(prompts, today()));
+      daily = C.newDaily(today(), C.scheduledIds(schedule, today(), knownIds) || C.dailyPromptIds(prompts, today()));
       saveDaily();
     }
     if (daily.finished) return showResults();
@@ -740,15 +810,14 @@
 
   function newFlight() {
     scene.newFlight();
-    $('cap-balloon').hidden = true;
-    $('cap-flag').hidden = true;
+    captioned = new Set();
   }
 
   // A perfect day: the swarm is on the Moon, and leaves a flag.
   function maybePlantFlag() {
     if (!daily.finished || C.totalScore(daily.results) < C.TOP_SCORE) return;
     scene.plantFlag();
-    $('cap-flag').hidden = false;
+    queueCaption('flag');
     markFound('flag');
   }
 
@@ -787,7 +856,7 @@
   }
 
   function onWrong(text) {
-    setFeedback('no buzz. try again. −3s', 'bad');
+    setFeedback("'" + String(text).trim().slice(0, 24) + "': no buzz. try again. −3s", 'bad');
     shake();
     lockInput();
     Sfx.wrong();
@@ -795,7 +864,7 @@
   }
 
   function onNear(typed, suggestion) {
-    setFeedback("'" + typed.trim().slice(0, 30) + "' → '" + suggestion + "'. submit again to confirm", 'good');
+    setFeedback("'" + typed.trim().slice(0, 30) + "' → '" + suggestion + "' · submit again to confirm · or edit", 'good');
     $('guess').select();
   }
 
@@ -842,10 +911,14 @@
     scene.setMood('happy');
     const lines = buildTierLines(base, result.points);
     const ms = reducedMotion() ? 0 : tier.climbMs;
-    if (ms) Sfx.rise(ms / 1000);
+    if (ms) {
+      Sfx.rise(ms / 1000);
+      scene.pollen(performance.now()); // even a short hop leaves a puff behind
+    }
     moveCamera(base + result.points, ms, () => {
       countFrom = null;
       $('hudScore').textContent = C.formatNumber(base + result.points);
+      if (lines.length) lines[lines.length - 1].node.classList.add('won'); // the line it stopped on turns solid
       scene.setFollowers(daily.results.filter((x) => x.points).length);
       if (result.tier === 'swarm') {
         scene.setMood('gold');
@@ -855,7 +928,8 @@
           quake();
         }
       } else {
-        scene.setMood('idle');
+        scene.setMood('cheer');
+        window.setTimeout(() => { if (document.body.dataset.phase === 'reveal') scene.setMood('idle'); }, 1600);
       }
       Sfx.correct(C.TIER_ORDER.indexOf(result.tier));
       // The top answer gets a beat to itself before the card comes up.
@@ -890,7 +964,7 @@
     const score = C.totalScore(daily.results);
     const p = byId[last.promptId];
     const card = $('reveal');
-    card.className = 'panel reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
+    card.className = 'reveal' + (last.tier === 'swarm' ? ' is-swarm' : '') + (last.tier ? '' : ' is-miss');
     card.style.setProperty('--tier', last.tier ? tierColors[last.tier] : '#c3ccd6');
     cardTier = last.tier;
     drawTierArt($('lastIcon'), cardTier, performance.now());
@@ -899,10 +973,10 @@
     $('lastAnswer').textContent = last.tier ? last.answer : 'the clock beat you.';
     $('lastPoints').textContent = last.tier ? '+' + last.points + ' PTS · now at ' + feet(score) : '+0 PTS · holding at ' + feet(score);
     const bits = [];
-    if (last.tier) bits.push(C.TIERS[last.tier].quip);
     if (last.note) bits.push(last.note);
-    if (last.wrong) bits.push(last.wrong + (last.wrong === 1 ? ' wrong guess first.' : ' wrong guesses first.'));
-    $('lastNote').textContent = bits.join(' ');
+    if (last.wrong) bits.push(last.wrong + (last.wrong === 1 ? ' wrong guess first' : ' wrong guesses first'));
+    // one line of quip; anything else sits on its own line beneath it
+    $('lastNote').textContent = (last.tier ? C.TIERS[last.tier].quip : '') + (bits.length ? '\n' + bits.join(' · ') : '');
     $('lastPrompt').textContent = p.text;
     const btn = $('nextBtn');
     if (daily.finished) {
@@ -964,15 +1038,29 @@
     $('resScore').textContent = C.formatNumber(score) + ' pts';
     $('resAlt').textContent = feet(score);
 
-    // Flight log: each round's mark at the height its tier earned, on a stem from the ground.
+    // Flight log: one column per round, each mark at the altitude the flight had reached by
+    // then, on a line from the ground, with the zones behind.
+    const bands = $('logBands');
+    bands.textContent = '';
+    Scene.ZONES.forEach((z, i) => {
+      const end = i + 1 < Scene.ZONES.length ? Scene.ZONES[i + 1][0] : C.TOP_SCORE;
+      const li = el('li');
+      li.style.flex = String(end - z[0]);
+      li.style.background = scene.skyColor((z[0] + end) / 2);
+      li.appendChild(el('span', '', z[2].replace(' skyline', '')));
+      bands.appendChild(li);
+    });
     const log = $('flightLog');
     log.textContent = '';
+    let reached = 0;
     daily.results.forEach((r, i) => {
+      reached += r.points;
       const li = el('li');
-      li.setAttribute('aria-label', 'Round ' + (i + 1) + ': ' + tierLabel(r.tier) + ', ' + r.points + ' points');
+      li.setAttribute('aria-label', 'Round ' + (i + 1) + ': ' + tierLabel(r.tier) + ', ' + r.points + ' points, reaching ' + feet(reached));
+      li.dataset.reached = String(reached);
       li.appendChild(pipIcon(r.tier));
       const stem = el('span', 'stem');
-      stem.style.height = (r.points / C.TIERS.swarm.points) * 130 + 'px';
+      stem.style.height = 'calc(' + (reached / C.TOP_SCORE) * 100 + '% - 22px)';
       li.appendChild(stem);
       li.appendChild(el('span', 'round', String(i + 1)));
       log.appendChild(li);
@@ -1279,9 +1367,9 @@
       }
       if (view === 'play' && document.body.dataset.phase !== 'climb') $('guess').focus();
     });
-    // Bank the clock before the page is hidden or unloaded.
+    // Bank the clock before the page unloads: closing or reloading never pauses a round.
     const bank = () => {
-      if (daily && daily.round) {
+      if (daily && daily.round && !hiddenPause) {
         const ended = tickDaily();
         saveDaily();
         if (ended && mode === 'daily') {
@@ -1291,9 +1379,31 @@
         }
       }
     };
+    // A hidden page gets no animation frames, so the game stops with it: the round clock is
+    // paused, and on return any climb that was under way is taken straight to its end.
+    const onVisibility = () => {
+      if (document.hidden) {
+        if (!mode) return;
+        bank();
+        if (!mode) return; // the round ran out at that moment
+        stopLoop();
+        hiddenPause = true;
+      } else {
+        if (hiddenPause) {
+          hiddenPause = false;
+          if (mode === 'daily' && daily && daily.round) {
+            daily.round.seenAt = Date.now(); // time spent hidden is not charged
+            monoAt = performance.now();
+            saveDaily();
+          }
+          startLoop();
+        }
+        finishMove();
+      }
+    };
     document.addEventListener('pointerdown', onTap);
     document.addEventListener('keydown', onKey);
-    document.addEventListener('visibilitychange', bank);
+    document.addEventListener('visibilitychange', onVisibility);
     window.addEventListener('pagehide', bank);
   }
 
@@ -1313,14 +1423,20 @@
     renderSightings();
     trackKeyboard();
     window.requestAnimationFrame(frame);
+    window.setInterval(pump, 60);
     window.__swarm = { scene, camera: () => cam }; // read-only handle for the browser tests
 
-    fetch('data/prompts.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      })
-      .then((data) => {
+    // The schedule pins each date to its seven prompts. If it cannot be read the game still
+    // runs, working the day out the old way.
+    const loadSchedule = fetch('data/schedule.json').then((res) => (res.ok ? res.json() : null)).catch(() => null);
+    const loadPrompts = fetch('data/prompts.json').then((res) => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    });
+    Promise.all([loadPrompts, loadSchedule])
+      .then((loaded) => {
+        const data = loaded[0];
+        schedule = loaded[1];
         const problems = C.validatePrompts(data);
         if (problems.length) throw new Error('Prompt bank failed validation: ' + problems[0]);
         prompts = data.prompts;

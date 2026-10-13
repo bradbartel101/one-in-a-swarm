@@ -145,3 +145,15 @@ test('every tier has its own label, points, quip and climb time', () => {
   tiers.forEach((t) => assert.ok(t.quip.length > 15 && t.climbMs >= 2500 && t.climbMs <= 4000, t.label));
   for (let i = 1; i < tiers.length; i++) assert.ok(tiers[i].climbMs > tiers[i - 1].climbMs, 'rarer answers climb for longer');
 });
+
+test('points to feet: the five checkpoints of the one curve', () => {
+  // One function, C.altitudeFeet, is the only place points become feet.
+  assert.equal(C.altitudeFeet(0), 0);
+  assert.ok(Math.abs(C.altitudeFeet(150) - 10000) <= 1, '150 points is about 10,000 ft: ' + C.altitudeFeet(150));
+  assert.ok(Math.abs(C.altitudeFeet(350) - 40000) <= 1, '350 points is about 40,000 ft: ' + C.altitudeFeet(350));
+  assert.ok(Math.abs(C.altitudeFeet(550) - 330000) < 2000, '550 points is the edge of space: ' + C.altitudeFeet(550));
+  assert.equal(C.altitudeText(700), '238,855 mi', '700 points is the Moon');
+  // between checkpoints it is still the same function: 60 points is 242 ft, not whatever a half-finished count shows
+  assert.equal(C.altitudeFeet(60), 242);
+  assert.equal(C.altitudeParts(60).value, '242');
+});

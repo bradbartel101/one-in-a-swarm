@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 /* Plays three flights in headless Chrome at phone and desktop size and saves screenshots into
-   screenshots/v3/: one of about 150 points, one of about 350, and a perfect 700, plus every
+   screenshots/v4/: one of about 150 points, one of about 350, and a perfect 700, plus every
    zone, some easter eggs, a secret answer, the One in a Swarm moment and the results screen.
    Tiers are forced by looking answers up by tier in the prompt bank. Run with: npm run screens */
 const http = require('http');
@@ -12,7 +12,7 @@ const C = require('../../js/core.js');
 const data = require('../../data/prompts.json');
 
 const ROOT = path.join(__dirname, '..', '..');
-const OUT = path.join(ROOT, 'screenshots', 'v3');
+const OUT = path.join(ROOT, 'screenshots', 'v4');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.woff2': 'font/woff2' };
 
 const server = http.createServer((req, res) => {
@@ -42,7 +42,8 @@ function seed(tiers) {
 }
 
 async function run(browser, base, name, width, height, mobile) {
-  const page = await browser.newPage({ width, height, mobile });
+  const fakeClock = `(() => { const R = Date; let off = 0; class D extends R { constructor(...a) { if (a.length) super(...a); else super(R.now() + off); } static now() { return R.now() + off; } } window.Date = D; window.__shiftClock = (ms) => { off += ms; }; })();`;
+  const page = await browser.newPage({ width, height, mobile, initScript: fakeClock });
   const shot = async (label) => {
     const file = path.join(OUT, name + '-' + label + '.png');
     for (let attempt = 1; ; attempt++) {
@@ -84,7 +85,7 @@ async function run(browser, base, name, width, height, mobile) {
   await shot('01-start-campus');
   for (let i = 0; i < 5; i++) await tap('tower');
   await sleep(500);
-  await shot('02-egg-tower-chime');
+  await shot('02-sighting-tower-chime');
 
   // every zone, at rest on the reveal card
   const stops = [['midtown', ['rare', 'clever']], ['clouds', ['swarm', 'solid', 'common', 'common']], ['weather', ['swarm', 'swarm', 'rare']],
@@ -95,30 +96,46 @@ async function run(browser, base, name, width, height, mobile) {
     await shot(String(n++).padStart(2, '0') + '-zone-' + zone);
   }
 
-  // flight one: about 150 points. A secret answer, a real climb, and where it ends up.
+  // flight one: about 150 points. A secret answer, a near-miss, a real climb, and where it ends up.
   await load(seed(['rare', 'solid', 'clever', 'common']));
   await next();
   await phase('guess');
   await submit('Buzz');
   await sleep(250);
   await shot('09-secret-answer-buzz');
-  await submit('UGA');
+  await submit('gatorade');
   await sleep(200);
-  await shot('10-secret-answer-wrong-school');
+  await shot('10-wrong-guess');
+  await submit('alpha bravo'); // nothing close: another wrong guess, to show the chips
   await play('solid');
   await phase('climb');
   await sleep(1100);
   await shot('11-flight150-mid-climb');
   await phase('reveal');
-  await sleep(900);
-  await shot('12-flight150-ends-here');
+  await sleep(1000);
+  await shot('12-reveal-and-where-150-ends');
   await load(seed(['swarm', 'clever'])); // 115 points: the red-and-black balloon is just overhead
   if (await tap('balloon')) {
-    await sleep(300);
-    await shot('13-egg-balloon-popped');
+    await sleep(500);
+    await shot('13-sighting-balloon-popped');
   }
+  // a near-miss, on a prompt with long names
+  await load(seed([]));
+  await page.eval('document.getElementById("dailyBtn").click()');
+  await phase('guess');
+  await sleep(300);
+  await shot('14-sightings-on-the-lawn');
+  const maj = answer('majors', 'solid').name;
+  await submit(maj.slice(0, 3) + maj.slice(4));
+  await sleep(250);
+  await shot('15-near-miss');
+  // a timeout
+  await page.eval('__shiftClock(60000)');
+  await phase('reveal');
+  await sleep(700);
+  await shot('16-timeout');
   await load(seed(['rare', 'solid', 'clever', 'common', 'solid', null, null]));
-  await shot('14-flight150-results');
+  await shot('17-flight150-results-flight-log');
 
   // flight two: about 350 points
   await load(seed(['swarm', 'deep', 'rare', 'solid', 'clever']));
@@ -126,10 +143,10 @@ async function run(browser, base, name, width, height, mobile) {
   await play('rare');
   await phase('climb');
   await sleep(1400);
-  await shot('15-flight350-mid-climb');
+  await shot('18-flight350-mid-climb');
   await phase('reveal');
   await sleep(900);
-  await shot('16-flight350-ends-here');
+  await shot('19-where-350-ends');
 
   // flight three: a perfect 700
   await load(seed(['swarm', 'swarm', 'swarm', 'swarm', 'swarm']));
@@ -137,25 +154,25 @@ async function run(browser, base, name, width, height, mobile) {
   await play('swarm');
   await page.waitFor('document.getElementById("flash").classList.contains("go")', 9000, 'the gold flash');
   await sleep(140);
-  await shot('17-one-in-a-swarm-moment');
+  await shot('20-one-in-a-swarm-moment');
   await phase('reveal');
   await sleep(900);
-  await shot('18-egg-astronaut-in-space');
+  await shot('21-sighting-astronaut');
   await next();
   await play('swarm');
   await phase('climb');
   await sleep(2600);
-  await shot('19-moon-approach');
+  await shot('22-moon-approach');
   await phase('reveal');
   await sleep(1200);
-  await shot('20-zone-moon-landed-with-flag');
+  await shot('23-zone-moon-with-flag');
   await next();
   await phase('results');
   await sleep(500);
-  await shot('21-flight700-results');
+  await shot('24-flight700-results');
   await page.eval('document.querySelector("#resSightGrid").scrollIntoView({ block: "center" })');
   await sleep(300);
-  await shot('22-results-sightings-panel');
+  await shot('25-results-sightings-panel');
   const problems = page.problems.slice();
   await page.close();
   return problems;

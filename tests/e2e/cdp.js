@@ -74,7 +74,12 @@ async function launch() {
     const payload = { id, method, params: params || {} };
     if (sessionId) payload.sessionId = sessionId;
     return new Promise((resolve, reject) => {
-      pending.set(id, { resolve, reject, method });
+      // No command may hang the suite: a page that stops answering is reported, with the command.
+      const timer = setTimeout(() => {
+        pending.delete(id);
+        reject(new Error(method + ': no reply in 30s' + (params && params.expression ? ' for ' + String(params.expression).slice(0, 120) : '')));
+      }, 30000);
+      pending.set(id, { resolve: (v) => { clearTimeout(timer); resolve(v); }, reject: (e) => { clearTimeout(timer); reject(e); }, method });
       ws.send(JSON.stringify(payload));
     });
   }

@@ -277,6 +277,52 @@
     return chain[target].slice();
   }
 
+  /* ---------- the frozen schedule ----------
+     data/schedule.json pins each date to its seven prompt ids. Once a date is in it, that day
+     never changes, whatever happens to the prompt bank. New dates are only ever appended. */
+
+  // Seven prompts for a new date, avoiding the days just before it.
+  function scheduleDay(ids, recentDays, dateKey, count) {
+    const n = count || ROUNDS;
+    const recent = new Set([].concat.apply([], recentDays));
+    let pool = ids.filter((id) => !recent.has(id)).sort();
+    if (pool.length < n) pool = ids.slice().sort();
+    return shuffle(pool, seededRng('one-in-a-swarm:schedule:' + dateKey)).slice(0, n);
+  }
+
+  // Returns a schedule with every date from `fromKey` for `days` days. Dates already present
+  // are kept exactly as they are; `firstFill` supplies ids for a schedule that starts empty.
+  function extendSchedule(existing, promptIds, fromKey, days, firstFill) {
+    const out = { version: 1, days: Object.assign({}, existing && existing.days) };
+    const lookBack = rotationCoverDays(promptIds.length, ROUNDS) - 1;
+    const start = dayNumber(fromKey);
+    for (let d = start; d < start + days; d++) {
+      const key = utcDateKey(new Date(d * 86400000));
+      if (out.days[key]) continue;
+      if (firstFill) {
+        out.days[key] = firstFill(key);
+        continue;
+      }
+      const recent = [];
+      for (let k = 1; k <= lookBack; k++) {
+        const prev = out.days[utcDateKey(new Date((d - k) * 86400000))];
+        if (prev) recent.push(prev);
+      }
+      out.days[key] = scheduleDay(promptIds, recent, key);
+    }
+    const sorted = {};
+    Object.keys(out.days).sort().forEach((k) => { sorted[k] = out.days[k]; });
+    out.days = sorted;
+    return out;
+  }
+
+  // The scheduled prompts for a date, or null if the date is missing or names a prompt that no longer exists.
+  function scheduledIds(schedule, dateKey, knownIds) {
+    const ids = schedule && schedule.days && schedule.days[dateKey];
+    if (!Array.isArray(ids) || ids.length !== ROUNDS || new Set(ids).size !== ROUNDS) return null;
+    return ids.every((id) => knownIds.has(id)) ? ids.slice() : null;
+  }
+
   /* ---------- scoring ---------- */
 
   function tierPoints(tier) {
@@ -657,6 +703,7 @@
     ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
+    scheduleDay, extendSchedule, scheduledIds,
     tierPoints, totalScore, altitudeFeet, scoreForFeet, altitudeParts, altitudeText, flightNumber, bandFor, formatNumber, shareGrid, shareText,
     SAVE_VERSION, newDaily, startRound, remainingMs, dailyTick, dailyGuess,
     reviveDaily, reviveBest, previousDateKey, resolveDaily,

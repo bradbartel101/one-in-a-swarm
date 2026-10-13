@@ -9,6 +9,7 @@ const assert = require('node:assert/strict');
 const { launch, sleep } = require('./cdp.js');
 const C = require('../../js/core.js');
 const data = require('../../data/prompts.json');
+const schedule = require('../../data/schedule.json');
 
 const ROOT = path.join(__dirname, '..', '..');
 const SUBPATH = '/some-user-repo/';
@@ -33,6 +34,13 @@ const httpServer = http.createServer((req, res) => {
   if (rel === 'data/prompts.json' && server.mode === 'badjson') {
     res.writeHead(200, { 'content-type': TYPES['.json'] });
     return res.end('{"version": 1, "prompts": [');
+  }
+  if (rel === 'data/prompts.json' && server.mode === 'changed') { // two new prompts in front, order reversed
+    const copy = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const extra = (id) => Object.assign({}, copy.prompts[0], { id });
+    copy.prompts = [extra('brand-new-one'), extra('another-new-one')].concat(copy.prompts.reverse());
+    res.writeHead(200, { 'content-type': TYPES['.json'] });
+    return res.end(JSON.stringify(copy));
   }
   if (rel === 'data/prompts.json' && server.mode === '500') {
     res.writeHead(500);
@@ -83,12 +91,30 @@ const fakeClock = (iso) => `(() => {
   window.__shiftClock = (ms) => { off += ms; sessionStorage.setItem('__off', off); };
 })();`;
 
+// Lets a test hide the page the way a browser does: document.hidden turns true, visibilitychange
+// fires, and requestAnimationFrame stops delivering frames until the page is shown again.
+const hideable = `(() => {
+  const raf = window.requestAnimationFrame.bind(window);
+  let hidden = false;
+  let waiting = [];
+  window.requestAnimationFrame = (cb) => { if (hidden) { waiting.push(cb); return 0; } return raf(cb); };
+  Object.defineProperty(document, 'hidden', { configurable: true, get: () => hidden });
+  Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => (hidden ? 'hidden' : 'visible') });
+  window.__setHidden = (v) => { hidden = v; document.dispatchEvent(new Event('visibilitychange')); if (!v) { const w = waiting; waiting = []; w.forEach((cb) => raf(cb)); } };
+  window.__stallFrames = () => { hidden = true; }; // frames stop, but the page is never told
+})();`;
+
 // Most scenarios run with reduced motion, which skips the long climb and keeps the suite quick.
 // The ones that test the animation pass { reducedMotion: false }.
-const calm = (opts) => Object.assign({ reducedMotion: true }, opts);
+// Pages also believe it is midday unless a test says otherwise, so the small-hours easter egg
+// cannot fire just because the suite happens to run at night.
+const MIDDAY = 'Date.prototype.getHours = function () { return 12; };';
+const calm = (opts) => Object.assign({ reducedMotion: true }, opts, { initScript: (opts && opts.realHours ? '' : MIDDAY) + ((opts && opts.initScript) || '') });
+const openPages = [];
+const track = (page) => { openPages.push(page); return page; };
 
 async function open(opts, url) {
-  const page = await browser.newPage(calm(opts));
+  const page = track(await browser.newPage(calm(opts)));
   await page.goto(url || base);
   return page;
 }
@@ -99,7 +125,7 @@ async function ready(page) {
 
 async function fresh(opts) {
   // A page whose first-visit rules have already been seen.
-  const page = await browser.newPage(calm(opts));
+  const page = track(await browser.newPage(calm(opts)));
   await page.goto(base + '404-probe-for-origin');
   await page.eval(SEEN);
   page.problems.length = 0; // the probe page is a deliberate 404
@@ -140,7 +166,7 @@ async function land(page) {
 }
 
 async function scenario(name, fn) {
-  if (only && !name.toLowerCase().includes(only.toLowerCase())) return;
+  if (only && !only.toLowerCase().split('|').some((part) => name.toLowerCase().includes(part))) return;
   const started = Date.now();
   try {
     const note = await fn();
@@ -150,6 +176,8 @@ async function scenario(name, fn) {
     results.push({ name, ok: false });
     console.log('✖ ' + name + '\n    ' + String(err && err.stack ? err.stack : err).split('\n').slice(0, 6).join('\n    '));
   }
+  // A failed scenario must not leave its pages running behind the next one.
+  while (openPages.length) await openPages.pop().close().catch(() => {});
 }
 
 const TIERS7 = ['common', 'clever', 'solid', 'rare', 'deep', 'swarm', 'solid'];
@@ -221,6 +249,7 @@ async function main() {
       await page.enter();
     }
     await waitPhase(page, 'results');
+    assert.equal(await page.eval('document.getElementById("caption").getClientRects().length'), 0, 'no caption floats over the results');
     assert.equal(await text(page, 'resScore'), '330 pts');
     assert.equal(await text(page, 'resAlt'), feet(330));
     assert.equal(await text(page, 'resBand'), C.bandFor(330).name.toUpperCase());
@@ -281,10 +310,17 @@ async function main() {
 
     // round 1: a rare answer. Watch the climb.
     const answer = answerOf(await text(page, 'promptText'), 'rare');
+    // Regression: the climb starts at once. Timed inside the page: from the submit to the first
+    // frame in which the answer is a tag and the camera has moved.
+    await page.eval(`window.__start = null; (function watch() { const s = window.__swarm; if (window.__t0 && !window.__start && s.camera() > 0.05 && !document.getElementById('tag').hidden) window.__start = performance.now() - window.__t0; if (!window.__start) setTimeout(watch, 8); })();
+      document.getElementById('guessForm').addEventListener('submit', () => { window.__t0 = performance.now(); }, true);`);
     const sent = Date.now();
     await guess(page, answer);
     await waitPhase(page, 'climb', 1000);
-    await sleep(500);
+    await page.waitFor('window.__start !== null', 1500, 'the climb to start');
+    const startedIn = Math.round(await page.eval('window.__start'));
+    assert.ok(startedIn <= 200, 'the answer becomes a tag and the world starts moving ' + startedIn + 'ms after the submit');
+    await sleep(Math.max(0, 500 - (Date.now() - sent)));
     const mid = await page.eval(`({
       tag: document.getElementById('tag').textContent, tagHidden: document.getElementById('tag').hidden,
       alt: Number(document.getElementById('hudAlt').textContent.replace(/,/g, '')), y0: window.__swarm.scene.cssY(0), vh: window.innerHeight,
@@ -305,10 +341,12 @@ async function main() {
       const last = lines[lines.length - 1].getBoundingClientRect();
       return { on: lines.filter((n) => n.classList.contains('on')).length, gap: Math.round(last.top - tag.bottom), tagTop: tag.top }; })()`);
     assert.equal(end.on, 4, 'all four lines are showing');
-    // Regression: facts and tier lines are confined to the clear band above the reveal card.
-    const band = await page.eval(`(() => { const r = (id) => document.getElementById(id).getBoundingClientRect(); const w = r('worldWindow');
-      return { top: Math.round(w.top), bottom: Math.round(w.bottom), hud: Math.round(r('hud').bottom), card: Math.round(r('reveal').top) }; })()`);
-    assert.ok(band.top >= band.hud && band.bottom <= band.card, 'facts are drawn only between the HUD and the reveal card: ' + JSON.stringify(band));
+    assert.deepEqual(await page.eval('[...document.querySelectorAll(".tier-line.won")].map((n) => n.textContent + " " + getComputedStyle(n).borderTopStyle)'), ['RARE · 60 solid'], 'the line it stopped on is the one solid, highlighted line');
+    // Regression: no fact is ever partly under the HUD, the reveal text or the button. A fact is
+    // visible only when all of it is inside the safe area.
+    const stray = await page.eval(`(() => { const hud = document.getElementById('hud').getBoundingClientRect().bottom; const floor = document.getElementById('nextBtn').getBoundingClientRect().top;
+      return [...document.querySelectorAll('#worldLayer .fact')].filter((n) => getComputedStyle(n).opacity > 0.05).map((n) => n.getBoundingClientRect()).filter((r) => r.top < hud || r.bottom > floor).length; })()`);
+    assert.equal(stray, 0, 'no visible fact crosses the HUD or the button');
     // Regression: the answer tag never sits on a fact or a tier label.
     const clash = await page.eval(`(() => { const t = document.getElementById('tag').getBoundingClientRect();
       const hits = (r) => r.bottom > t.top && r.top < t.bottom && r.right > t.left && r.left < t.right;
@@ -325,8 +363,9 @@ async function main() {
     assert.ok(end.gap >= 0 && end.gap < 60, 'the tag has stopped just above its own tier line (gap ' + end.gap + 'px)');
     const beeAt = await page.eval('(() => { const b = window.__swarm.scene.box("bee"); return (b.y + b.h / 2) / window.innerHeight; })()');
     assert.ok(beeAt > 0.45 && beeAt < 0.68, 'the bee rides about 60% down the screen, with the sky ahead in view: ' + (beeAt * 100).toFixed(0) + '%');
-    const cardBox = await page.eval('(() => { const r = document.getElementById("reveal").getBoundingClientRect(); return { top: r.top / window.innerHeight, h: r.height / window.innerHeight }; })()');
-    assert.ok(cardBox.h < 0.4 && cardBox.top > 0.6, 'the reveal card is small and low: ' + JSON.stringify(cardBox));
+    const overBee = await page.eval('(() => { const r = document.getElementById("reveal").getBoundingClientRect(); const b = window.__swarm.scene.box("bee"); return r.bottom > b.y + 4 && r.top < b.y + b.h; })()');
+    assert.equal(overBee, false, 'the reveal text does not cover the bee');
+    assert.equal(await page.eval('getComputedStyle(document.getElementById("reveal")).clipPath'), 'none', 'the reveal is not a panel');
     assert.deepEqual(await hud(), { alt: altNum(60), score: '60' });
     assert.equal(await text(page, 'lastBadge'), 'RARE');
     assert.equal(await text(page, 'lastAnswer'), answer);
@@ -371,11 +410,16 @@ async function main() {
     await land(page);
     assert.equal(await text(page, 'resScore'), '475 pts');
     assert.equal(await page.eval('document.querySelectorAll("#flightLog li").length'), 7);
+    // the flight log: one column per round at the altitude reached, on eight zone bands
+    assert.deepEqual(await page.eval('[...document.querySelectorAll("#flightLog li")].map((n) => Number(n.dataset.reached))'), [60, 160, 175, 260, 275, 375, 475]);
+    assert.equal(await page.eval('document.querySelectorAll("#logBands li").length'), 8);
+    const heights = await page.eval('[...document.querySelectorAll("#flightLog .pip-icon")].map((n) => Math.round(n.getBoundingClientRect().top))');
+    for (let i = 1; i < heights.length; i++) assert.ok(heights[i] < heights[i - 1], 'each round sits higher than the one before: ' + heights.join(', '));
     const body = await page.eval('document.querySelector("[data-view=results]").innerText');
     assert.ok(!/%|players|percentile|better than/i.test(body), 'no invented player statistics on the results screen');
     noProblems(page);
     await page.close();
-    return 'ground sky rgb(' + groundSky + '), top sky rgb(' + spaceSky + '); rare climb took ' + took + 'ms';
+    return 'climb began ' + startedIn + 'ms after submit; ground sky rgb(' + groundSky + '), top sky rgb(' + spaceSky + '); rare climb took ' + took + 'ms';
   });
 
   await scenario('wrong guess, near-miss and timeout all behave and look intentional', async () => {
@@ -388,7 +432,7 @@ async function main() {
     const wrong = await page.eval(`({ msg: document.getElementById('feedback').textContent, readOnly: document.getElementById('guess').readOnly,
       focused: document.activeElement.id, shaking: getComputedStyle(document.getElementById('entry')).animationName, value: document.getElementById('guess').value,
       selected: document.getElementById('guess').selectionEnd - document.getElementById('guess').selectionStart })`);
-    assert.deepEqual(wrong, { msg: 'no buzz. try again. −3s', readOnly: false, focused: 'guess', shaking: 'shake', value: 'gatorade', selected: 8 }, 'input shakes, stays focused and typeable, and keeps its text selected');
+    assert.deepEqual(wrong, { msg: "'gatorade': no buzz. try again. −3s", readOnly: false, focused: 'guess', shaking: 'shake', value: 'gatorade', selected: 8 }, 'input shakes, stays focused and typeable, and keeps its text selected');
     // Regression: keys typed during the 400ms lockout used to be dropped. They must land.
     await page.type('pow');
     assert.equal(await page.eval('document.getElementById("guess").value'), 'pow', 'typing during the lockout replaces the selected wrong text');
@@ -400,13 +444,15 @@ async function main() {
     await page.enter();
     assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 2, 'after 400ms the same Enter goes through');
     // near-miss
-    const target = p.answers.find((a) => !/\d/.test(a.name) && a.name.length >= 8);
-    const typo = target.name.slice(0, 2) + target.name.slice(3);
+    // a one-letter slip that the rules accept as a near miss (some are refused as ambiguous)
+    const slip = (a) => a.name.slice(0, 2) + a.name.slice(3);
+    const target = p.answers.find((a) => { if (/\d/.test(a.name) || a.name.length < 8) return false; const m = C.matchAnswer(p, slip(a)); return m.fuzzy && m.answer && m.answer.name === a.name; });
+    const typo = slip(target);
     await page.waitFor('!document.getElementById("guess").dataset.locked', 3000, 'the lock to lift');
     const before = await barScale(page);
     await guess(page, typo);
     const near = await text(page, 'feedback');
-    assert.ok(near.startsWith("'" + typo + "' → '") && near.endsWith("'. submit again to confirm"), 'near-miss message: ' + near);
+    assert.ok(near.startsWith("'" + typo + "' → '") && near.endsWith("' · submit again to confirm · or edit"), 'near-miss message: ' + near);
     assert.equal(await phase(page), 'guess', 'a near-miss does not end the round');
     await sleep(120);
     assert.ok(before - (await barScale(page)) < 0.03, 'and costs no time');
@@ -478,8 +524,8 @@ async function main() {
     return 'before reload ' + Math.round(before) + 'ms left, after ' + Math.round(after) + 'ms';
   });
 
-  await scenario('timer cannot be gamed: clock set back, clock set forward, frozen tab', async () => {
-    const page = await fresh({ width: 1280, height: 800, initScript: fakeClock(new Date().toISOString()) });
+  await scenario('timer: clock set back or forward gains nothing; a hidden page pauses; a closed one does not', async () => {
+    const page = await fresh({ width: 1280, height: 800, initScript: fakeClock(new Date().toISOString()) + hideable });
     await click(page, 'dailyBtn');
     await startNextRound(page);
     await sleep(1000);
@@ -493,20 +539,28 @@ async function main() {
     await ready(page);
     const c = (await barScale(page)) * 25000;
     assert.ok(c <= b + 50, 'a reload after setting the clock back grants nothing: ' + b + ' -> ' + c);
-    // frozen tab (what a phone does to a backgrounded page): timers stop, the clock does not
-    await page.send('Page.setWebLifecycleState', { state: 'frozen' });
+    // a hidden page pauses the round (v4): three seconds out of sight cost nothing...
+    await page.eval('__setHidden(true)');
     await sleep(3000);
-    await page.send('Page.setWebLifecycleState', { state: 'active' });
+    await page.eval('__setHidden(false)');
     await sleep(400);
     const d = (await barScale(page)) * 25000;
-    assert.ok(c - d > 2800, 'time passed while the tab was frozen is charged: ' + c + ' -> ' + d);
+    assert.ok(c - d < 1200, 'time spent hidden is not charged: ' + c + ' -> ' + d);
+    // ...but closing or reloading is not hiding: that time is charged as before
+    await sleep(600);
+    const e0 = (await saved(page)).round.leftMs;
+    await page.eval('__shiftClock(4000)');
+    await page.reload();
+    await ready(page);
+    const e = (await barScale(page)) * 25000;
+    assert.ok(e0 - e > 3500, 'four seconds away with the page closed are charged: ' + e0 + ' -> ' + e);
     await page.eval('__shiftClock(3600000 * 5)'); // clock far forward: the round simply ends
     await waitPhase(page, 'reveal', 3000);
     assert.equal(await text(page, 'lastBadge'), 'NOTHING LANDED');
     assert.equal((await saved(page)).results[0].points, 0);
     noProblems(page);
     await page.close();
-    return 'left: ' + [a, b, c, d].map(Math.round).join(' -> ') + ' ms';
+    return 'left: ' + [a, b, c, d, e].map(Math.round).join(' -> ') + ' ms';
   });
 
   await scenario('midnight UTC rollover mid-run: finish yesterday, then today opens', async () => {
@@ -700,7 +754,7 @@ async function main() {
   await scenario('prompts.json fails to load: friendly error with retry', async () => {
     const expected = /Failed to load resource|prompts\.json/;
     for (const mode of ['badjson', '500', 'blocked']) {
-      const page = await browser.newPage(calm({ width: 375, height: 667, mobile: true }));
+      const page = track(await browser.newPage(calm({ width: 375, height: 667, mobile: true })));
       server.mode = mode;
       if (mode === 'blocked') await page.send('Network.setBlockedURLs', { urls: ['*prompts.json'] });
       await page.goto(base);
@@ -864,7 +918,7 @@ async function main() {
     await page.eval('window.__said = []; new MutationObserver(() => window.__said.push(document.getElementById("clockLive").textContent)).observe(document.getElementById("clockLive"), { childList: true, characterData: true, subtree: true })');
     await sleep(1000);
     await guess(page, 'nope nope');
-    assert.equal(await text(page, 'feedback'), 'no buzz. try again. −3s');
+    assert.equal(await text(page, 'feedback'), "'nope nope': no buzz. try again. −3s");
     await page.eval('__shiftClock(10000)');
     await sleep(1200);
     await page.eval('__shiftClock(4000)');
@@ -993,6 +1047,10 @@ async function main() {
     assert.deepEqual(await found(), ['tower']);
     await page.waitFor('!document.getElementById("toast").hidden', 2000, 'the new-sighting toast');
     assert.equal(await text(page, 'toast'), 'NEW SIGHTING\nThe tower chimes');
+    // Regression: the toast has its own spot and never sits on the title or the start panel.
+    const clear = (others) => page.eval(`(() => { const t = document.getElementById('toast').getBoundingClientRect();
+      return ${JSON.stringify(others)}.filter((sel) => { const n = document.querySelector(sel); if (!n || !n.getClientRects().length) return false; const r = n.getBoundingClientRect(); return r.bottom > t.top && r.top < t.bottom && r.right > t.left && r.left < t.right; }); })()`);
+    assert.deepEqual(await clear(['.title-block', '.start-panel', '#tools']), [], 'toast is clear of the title screen panels');
     // the bee
     await sleep(900); // let the camera settle
     await tapOn('bee');
@@ -1028,6 +1086,17 @@ async function main() {
       assert.equal(await page.eval('document.getElementById("toast").hidden'), true, 'no toast while the clock runs (' + id + ')');
     }
     assert.equal(lines.burdell, 'George P. Burdell is enrolled in every class. Try again.');
+    // Regression: the message is there the instant the secret is submitted, and whatever the
+    // player types next is theirs to keep.
+    await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.value = "George P. Burdell"; document.getElementById("feedback").textContent = ""; document.getElementById("guessForm").requestSubmit(); window.__msgAtOnce = document.getElementById("feedback").textContent; })()');
+    assert.equal(await page.eval('window.__msgAtOnce'), 'George P. Burdell is enrolled in every class. Try again.', 'shown in the same tick as the submit');
+    assert.equal(await page.eval('(() => { const g = document.getElementById("guess"); return g.value === "George P. Burdell" && g.selectionEnd - g.selectionStart === g.value.length; })()'), true, 'the secret stays in the box, selected');
+    await page.type('Kla');
+    await sleep(700);
+    await page.type('us');
+    await sleep(700);
+    assert.equal(await page.eval('document.getElementById("guess").value'), 'Klaus', 'typing after a secret is never cleared');
+    await page.eval('document.getElementById("guess").value = ""');
     assert.equal(lines.wrongschool, 'Wrong school.');
     assert.equal(await page.eval('document.getElementById("flash").classList.contains("go")'), true, 'THWG flashes gold');
     assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 0, 'none of them counts as a wrong guess');
@@ -1038,6 +1107,7 @@ async function main() {
     // answer: 75 -> 105 points climbs past the window washer at about 620 ft
     await guess(page, answerOf(await text(page, 'promptText'), 'solid'));
     await page.waitFor('!document.getElementById("toast").hidden', 3000, 'queued toasts appear once the clock stops');
+    assert.deepEqual(await clear(['#hud', '#promptCard', '#dock', '#nextBtn', '#reveal']), [], 'toast is clear of the HUD, prompt, input and reveal');
     await waitPhase(page, 'reveal', 8000);
     assert.equal((await found()).includes('washer'), true, 'the window washer was sighted on the way up');
     // the balloon: 115 points puts it just above the bee. Tap it.
@@ -1050,25 +1120,127 @@ async function main() {
     await page.reload();
     await ready(page);
     await sleep(900);
-    assert.equal(await page.eval('document.getElementById("cap-balloon").hidden'), true, 'no caption until it pops');
+    assert.notEqual(await text(page, 'caption'), 'Sorry, Athens.', 'no caption until it pops');
     await tapOn('balloon');
-    assert.equal(await page.eval('document.getElementById("cap-balloon").hidden'), false);
-    assert.equal(await text(page, 'cap-balloon'), 'Sorry, Athens.');
+    await page.waitFor('!document.getElementById("caption").hidden && document.getElementById("caption").textContent === "Sorry, Athens."', 5000, 'the balloon caption');
     assert.equal(await page.eval('window.__swarm.scene.box("balloon")'), null, 'the balloon is gone');
     assert.equal((await found()).includes('balloon'), true);
     noProblems(page);
     await page.close();
 
     // a night owl: 2am local time
-    const night = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', initScript: fakeClock('2026-10-09T02:10:00Z') });
+    const night = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', realHours: true, initScript: fakeClock('2026-10-09T02:10:00Z') });
     assert.equal(await night.eval('document.getElementById("nightLine").hidden'), false);
     assert.equal(await text(night, 'nightLine'), 'studying late? classic Tech.');
     assert.deepEqual(await night.eval('JSON.parse(localStorage.getItem("swarm.sightings")).found'), ['night']);
     noProblems(night);
     await night.close();
-    const day2 = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', initScript: fakeClock('2026-10-09T14:10:00Z') });
+    const day2 = await fresh({ width: 375, height: 812, mobile: true, timezone: 'UTC', realHours: true, initScript: fakeClock('2026-10-09T14:10:00Z') });
     assert.equal(await day2.eval('document.getElementById("nightLine").hidden'), true, 'not in the afternoon');
     await day2.close();
+  });
+
+  await scenario('page hidden mid-climb: the game never freezes, and the reveal always arrives', async () => {
+    // 1. Hidden mid-climb, then shown again: straight to the end state.
+    let page = await fresh({ width: 375, height: 812, mobile: true, reducedMotion: false, initScript: hideable });
+    await click(page, 'dailyBtn');
+    await waitPhase(page, 'guess');
+    await guess(page, answerOf(await text(page, 'promptText'), 'rare'));
+    await waitPhase(page, 'climb', 1000);
+    await sleep(700);
+    await page.eval('__setHidden(true)');
+    const stuck = await page.eval('({ score: document.getElementById("hudScore").textContent, cam: window.__swarm.camera() })');
+    assert.ok(stuck.cam > 0 && stuck.cam < 60, 'hidden part-way up: ' + JSON.stringify(stuck));
+    await sleep(500);
+    await page.eval('__setHidden(false)');
+    await waitPhase(page, 'reveal', 600);
+    await page.waitFor('document.getElementById("hudAlt").textContent === "' + altNum(60) + '"', 1500, 'the altimeter to show the full 60 points');
+    assert.equal(await text(page, 'hudScore'), '60', 'the score is whole, not stuck at 59');
+    assert.equal(await page.eval('document.activeElement.id'), 'nextBtn', 'and the button is there');
+    assert.equal((await saved(page)).results[0].points, 60);
+    noProblems(page);
+    await page.close();
+
+    // 2. Hidden and never shown again: a timer still finishes the climb and puts up the reveal.
+    page = await fresh({ width: 375, height: 812, mobile: true, reducedMotion: false, initScript: hideable });
+    await click(page, 'dailyBtn');
+    await waitPhase(page, 'guess');
+    await guess(page, answerOf(await text(page, 'promptText'), 'common'));
+    await waitPhase(page, 'climb', 1000);
+    await sleep(300);
+    await page.eval('__setHidden(true)');
+    await waitPhase(page, 'reveal', 4500);
+    assert.equal(await text(page, 'hudScore'), '10');
+    assert.equal(await page.eval('window.__swarm.camera()'), 10);
+    await page.close();
+
+    // 3. The frame loop simply dies (no event at all): a frame pump and the timer carry it home.
+    page = await fresh({ width: 375, height: 812, mobile: true, reducedMotion: false, initScript: hideable });
+    await click(page, 'dailyBtn');
+    await waitPhase(page, 'guess');
+    await page.eval('__stallFrames(); Object.defineProperty(document, "hidden", { get: () => false })');
+    const t0 = Date.now();
+    await guess(page, answerOf(await text(page, 'promptText'), 'solid'));
+    await sleep(600);
+    const moving = await page.eval('window.__swarm.camera()');
+    assert.ok(moving > 3 && moving < 30, 'with no animation frames at all the climb still moves: ' + moving);
+    await waitPhase(page, 'reveal', 5000);
+    assert.ok(Date.now() - t0 < 4200, 'and ends on time');
+    assert.equal(await text(page, 'hudScore'), '30');
+    await page.close();
+
+    // 4. Hidden during a round: the clock stops, and starts again on return.
+    page = await fresh({ width: 375, height: 812, mobile: true, initScript: hideable });
+    await click(page, 'dailyBtn');
+    await waitPhase(page, 'guess');
+    await sleep(500);
+    await page.eval('__setHidden(true)');
+    const before = (await saved(page)).round.leftMs;
+    await sleep(2500);
+    await page.eval('__setHidden(false)');
+    await sleep(300);
+    const after = (await barScale(page)) * 25000;
+    assert.ok(before - after < 900, 'the round clock was paused while hidden: ' + before + ' -> ' + after);
+    await sleep(1200);
+    assert.ok((await barScale(page)) * 25000 < after - 800, 'and is running again');
+    noProblems(page);
+    await page.close();
+  });
+
+  await scenario('captions: one at a time, about three seconds each', async () => {
+    const page = await fresh({ width: 375, height: 812, mobile: true });
+    await click(page, 'dailyBtn');
+    // On the lawn both the jalopy and the squirrel are in view. Watch the caption for nine seconds.
+    await page.eval(`window.__caps = []; setInterval(() => { const c = document.getElementById('caption'); window.__caps.push(c.hidden || c.classList.contains('out') ? '' : c.textContent); }, 100)`);
+    await sleep(9000);
+    const log = await page.eval('window.__caps');
+    const runs = [];
+    log.forEach((t) => { if (!runs.length || runs[runs.length - 1].text !== t) runs.push({ text: t, n: 1 }); else runs[runs.length - 1].n++; });
+    const shown = runs.filter((r) => r.text);
+    assert.deepEqual(shown.map((r) => r.text).sort(), ['Campus squirrels remain undefeated.', 'The old gold jalopy, out for a lap.'], 'both captions were shown, one after the other');
+    shown.forEach((r) => assert.ok(r.n >= 26 && r.n <= 34, '"' + r.text + '" stayed about three seconds (' + r.n / 10 + 's)'));
+    assert.equal(log[log.length - 1], '', 'and then the caption is gone, not left up for the round');
+    assert.equal(await page.eval('document.querySelectorAll("#caption, .sight").length'), 1, 'there is only one caption element, so two can never overlap');
+    noProblems(page);
+    await page.close();
+  });
+
+  await scenario('daily schedule is frozen by date, even when the prompt bank changes', async () => {
+    for (const date of ['2026-10-12', '2026-12-25', '2027-06-01']) {
+      server.mode = 'changed';
+      const page = await fresh({ width: 800, height: 700, initScript: fakeClock(date + 'T15:00:00Z') });
+      assert.equal(await page.eval('fetch("data/prompts.json").then((r) => r.json()).then((d) => d.prompts[0].id)'), 'brand-new-one', 'the page is running on a changed bank');
+      await click(page, 'dailyBtn');
+      assert.deepEqual((await saved(page)).promptIds, schedule.days[date], date + ' is exactly what the schedule says');
+      noProblems(page);
+      await page.close();
+    }
+    server.mode = 'ok';
+    // a date beyond the schedule still gets seven prompts
+    const far = await fresh({ width: 800, height: 700, initScript: fakeClock('2031-03-03T15:00:00Z') });
+    await click(far, 'dailyBtn');
+    assert.equal((await saved(far)).promptIds.length, 7);
+    await far.close();
   });
 
   await scenario('a perfect 700 reaches the Moon and plants the flag; all eight zones on the way', async () => {
@@ -1089,7 +1261,7 @@ async function main() {
     await waitPhase(page, 'reveal');
     await page.waitFor('document.getElementById("hudAlt").textContent === "238,855"', 3000, 'the altimeter to read the distance to the Moon');
     assert.equal(await text(page, 'hudScore'), '700');
-    assert.equal(await page.eval('document.getElementById("cap-flag").hidden'), false, 'the flag caption is showing');
+    await page.waitFor('document.getElementById("caption").textContent.startsWith("Planted")', 8000, 'the flag caption');
     assert.equal((await page.eval('JSON.parse(localStorage.getItem("swarm.sightings")).found')).includes('flag'), true);
     await land(page);
     assert.equal(await text(page, 'resAlt'), '238,855 mi');
@@ -1131,7 +1303,7 @@ async function main() {
   });
 
   await scenario('page weight, slow 3G load, nothing external, share metadata, 404', async () => {
-    const page = await browser.newPage(calm({ width: 375, height: 667, mobile: true }));
+    const page = track(await browser.newPage(calm({ width: 375, height: 667, mobile: true })));
     await page.send('Network.setCacheDisabled', { cacheDisabled: true });
     await page.send('Network.emulateNetworkConditions', { offline: false, latency: 400, downloadThroughput: 50000, uploadThroughput: 50000 });
     const t0 = Date.now();

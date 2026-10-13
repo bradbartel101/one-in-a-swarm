@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -20,3 +22,11 @@ jobs:
         run: |
           npm run build:data
           git diff --exit-code -- data/prompts.json VERIFY.md
+      - name: No published day in the schedule has changed
+        run: |
+          git fetch origin main --depth=1 || true
+          if git show origin/main:data/schedule.json > /tmp/published-schedule.json 2>/dev/null; then
+            node tools/build-schedule.js --check /tmp/published-schedule.json
+          else
+            echo "No schedule on main yet; nothing to compare."
+          fi

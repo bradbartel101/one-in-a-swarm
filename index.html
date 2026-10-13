@@ -32,6 +32,7 @@
   <div id="tag" class="tag" aria-hidden="true" hidden></div>
   <div id="flash" aria-hidden="true"></div>
   <p id="toast" class="toast pixel" aria-hidden="true" hidden></p>
+  <p id="caption" class="caption" aria-hidden="true" hidden></p>
   <div id="scan" aria-hidden="true"></div>
 
   <a class="skip" href="#app">Skip to game</a>
@@ -143,17 +144,19 @@
     </section>
 
     <section data-view="between" hidden>
-      <div class="panel reveal" id="reveal">
+      <div class="reveal" id="reveal">
         <canvas class="art" id="lastIcon" width="24" height="20" aria-hidden="true"></canvas>
         <p class="eyebrow" id="lastRoundLabel"></p>
         <h1 class="tier-name pixel" id="lastBadge" tabindex="-1"></h1>
         <p class="reveal-answer" id="lastAnswer"></p>
         <p class="reveal-points pixel" id="lastPoints"></p>
         <p class="reveal-quip" id="lastNote"></p>
-        <p class="muted small" id="lastPrompt"></p>
-        <button type="button" class="btn btn-big" id="nextBtn">CLIMB ▲</button>
-        <p class="muted small" id="nextLabel"></p>
+        <p class="sr-only" id="lastPrompt"></p>
         <p class="sr-only" id="runningScore"></p>
+      </div>
+      <div class="reveal-foot" id="revealFoot">
+        <p class="reveal-next" id="nextLabel"></p>
+        <button type="button" class="btn btn-big" id="nextBtn">CLIMB ▲</button>
       </div>
     </section>
 
@@ -168,7 +171,10 @@
         </dl>
 
         <h2 class="pixel">FLIGHT LOG</h2>
-        <ol class="log" id="flightLog" aria-label="Each round's tier, drawn at its height"></ol>
+        <div class="log-wrap">
+          <ul class="log-bands" id="logBands" aria-hidden="true"></ul>
+          <ol class="log" id="flightLog" aria-label="Each round's tier, at the altitude the flight had reached"></ol>
+        </div>
 
         <h2 class="pixel">BANDS</h2>
         <ol class="ladder" id="ladder" aria-label="Score bands"></ol>

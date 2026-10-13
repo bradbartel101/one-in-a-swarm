@@ -41,9 +41,24 @@ Headless Chrome cannot show a real on-screen keyboard, real frame rates, VoiceOv
       red-and-black balloon (it drifts by at about 2,400 ft), and try the secret answers. They are
       tested in headless Chrome, but taps on a small canvas deserve a real thumb.
 - [ ] **Konami code** needs a keyboard, so it cannot be entered on a phone. Decide whether that matters.
-- [ ] **Taste:** look at `screenshots/v3/` and play it. This rebuild was made without being able to
+- [ ] **Taste:** look at `screenshots/v4/` and play it. This rebuild was made without being able to
       see krillion.io's game screens (they render in script and did not load here), so it follows
       your written spec, not that site's look. Say what feels off.
+
+## 4b. Decide whether a hidden page should pause the round
+
+From v4, hiding the page (switching tabs, locking the phone) pauses the round clock, as the v4 brief
+asked, because a hidden page gets no animation frames and the game was freezing. This reverses the
+v1 rule that tabbing away was charged. The cost: a player can now see a prompt, switch tabs, and
+think for as long as they like. Closing or reloading the page is still charged. If you would rather
+keep the clock running while hidden, it is one branch in `onVisibility` in `js/app.js` and one
+test; say so and I will switch it back. Climbs will still finish either way.
+
+## 4c. Once a year: extend the schedule
+
+Run `npm run build:schedule` and commit the result before October 2027. It appends a year of days
+and never changes an existing one. If it is forgotten the game keeps working: days beyond the file
+are drawn the old way, but are no longer protected from changes to the prompt bank.
 
 ## 5. Have a Georgia Tech student or alum review the content
 
