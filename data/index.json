@@ -50,6 +50,11 @@
     {"id": "gacounties", "pool": "gt", "category": "GEORGIA", "text": "Name a county in Georgia", "strip": ["county"], "n": 159},
     {"id": "masters", "pool": "gt", "category": "GEORGIA SPORTS", "text": "Name a golfer who has won the Masters", "clarifier": "Tech's Bobby Jones co-founded the tournament", "n": 57},
     {"id": "gold96", "pool": "gt", "category": "ATLANTA", "text": "Name a country that won gold at the 1996 Atlanta Olympics", "clarifier": "Tech's campus was the Olympic Village", "n": 53},
-    {"id": "stateparks", "pool": "gt", "category": "GEORGIA", "text": "Name a Georgia state park", "clarifier": "state parks only, not historic sites", "strip": ["state","park","lodge"], "n": 45}
+    {"id": "stateparks", "pool": "gt", "category": "GEORGIA", "text": "Name a Georgia state park", "clarifier": "state parks only, not historic sites", "strip": ["state","park","lodge"], "n": 45},
+    {"id": "countries", "pool": "general", "category": "WORLD", "text": "Name a country", "clarifier": "one of the 195 sovereign states", "easy": true, "n": 195},
+    {"id": "capitals", "pool": "general", "category": "WORLD", "text": "Name the capital city of a country", "clarifier": "national capitals, not state or provincial ones", "n": 195},
+    {"id": "africa", "pool": "general", "category": "WORLD", "text": "Name a country in Africa", "n": 54},
+    {"id": "landlocked", "pool": "general", "category": "WORLD", "text": "Name a landlocked country", "clarifier": "no coast on any ocean or open sea", "n": 44},
+    {"id": "endsina", "pool": "general", "category": "WORDS", "text": "Name a country whose name ends in the letter A", "clarifier": "like Canada", "n": 73}
   ]
 }
