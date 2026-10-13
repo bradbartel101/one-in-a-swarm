@@ -3,7 +3,7 @@
   "pool": "general",
   "category": "SCIENCE",
   "text": "Name a constellation",
-  "clarifier": "the 88 official ones; Big Dipper is Ursa Major",
+  "clarifier": "the 88 official ones, not the Big Dipper",
   "answers": [
 {"name":"Orion","tier":"common","aliases":["The Hunter"]},
 {"name":"Ursa Major","tier":"common","aliases":["Big Dipper","Great Bear","Plough"]},

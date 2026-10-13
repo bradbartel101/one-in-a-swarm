@@ -20,7 +20,7 @@ Tiers are estimates until there is real player data.
 - [x] D10b. Older GT prompts topped up from knowledge to 80+: films, musicians, Braves, Falcons, Hawks
 - [x] D10c. Older GT prompts checked against published lists: dorms, Greek chapters, NBA/NFL/MLB alumni, conference history and its college towns, Atlanta neighborhoods, buildings, Georgia colleges, alumni
 - [x] D10d. Traditions, head coaches and Atlanta headquarters retired (reasons in G); new GT prompts to bring the pool to 60
-- [ ] E. Validation in the test suite (section 7 of the brief)
+- [x] E. Validation in the test suite (section 7 of the brief)
 - [ ] F. Schedule regenerated for future dates only; repeat gap per pool reported
 - [ ] G. This file completed: counts, gaps, table of every prompt, drops, ten strongest
 - [ ] H. One daily flight played and screenshotted (a gt round and a general round); PR "Prompt bank v2" opened with VERIFY.md at the top
