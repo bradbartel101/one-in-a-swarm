@@ -3,7 +3,7 @@
   "pool": "gt",
   "category": "CAMPUS",
   "text": "Name a Georgia Tech residence hall",
-  "clarifier": "halls and campus apartments, past or present",
+  "clarifier": "halls and apartments in Tech housing today",
   "strip": ["hall","residence","apartments","apartment","dorm","building"],
   "answers": [
 {"name":"Glenn Hall","tier":"common"},
@@ -35,8 +35,11 @@
 {"name":"Maulding Apartments","tier":"rare"},
 {"name":"Zbar Apartments","tier":"rare"},
 {"name":"Graduate Living Center","tier":"deep","aliases":["GLC"]},
-{"name":"Fourth Street Apartments","tier":"deep","aliases":["4th Street"]},
 {"name":"Tenth and Home","tier":"swarm","aliases":["10th and Home","Family Housing"]},
-{"name":"Nelson-Shell Apartments","tier":"rare","aliases":["NSL"]}
+{"name":"Nelson-Shell Apartments","tier":"rare","aliases":["NSL"]},
+{"name":"Goldin House","tier":"deep","aliases":["Goldin"]},
+{"name":"Gray House","tier":"deep","aliases":["Gray"]},
+{"name":"Hayes House","tier":"deep","aliases":["Hayes"]},
+{"name":"Stein House","tier":"deep","aliases":["Stein"]}
   ]
 }

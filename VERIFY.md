@@ -48,6 +48,23 @@ measures altitude from campus, while mountain heights are quoted above sea level
 
 These answers are **not in the game**. Each was left out because I was not confident it is right, or that it fits the prompt. To approve one, delete its leading `~` in the source file under `tools/` and run `npm run build:data`.
 
+### Name an academic or research building on Tech's campus (`buildings`)
+
+- [ ] **Electrical Research Building** (would be Deep Cut): I remember a building by this name near Van Leer but could not find it on the campus map.
+- [ ] **George Tower** (would be Deep Cut): Part of Tech Square's third phase; I could not confirm it has opened.
+
+### Name a Tech football player who went on to the NFL (`nfl`)
+
+- [ ] **Roman Reigns** (would be Deep Cut): The wrestler signed with the Vikings and Jaguars in 2007 but never played in a regular-season game.
+
+### Name a neighborhood in the city of Atlanta (`neighborhoods`)
+
+- [ ] **Glenwood Park** (would be Rare): From my memory of the city's official list of neighborhoods; not on the Wikipedia pages I checked.
+
+### Name another college or university in Georgia (`gacolleges`)
+
+- [ ] **Carver College** (would be Deep Cut): An Atlanta Bible college I named from memory; not on the Wikipedia list I checked.
+
 ### Name a movie or series filmed in metro Atlanta (`films`)
 
 - [ ] **Road Trip** (would be Deep Cut): Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.

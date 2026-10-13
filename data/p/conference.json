@@ -39,6 +39,7 @@
 {"name":"Memphis","tier":"deep","aliases":["Memphis State"],"note":"Metro Conference, 1975 to 1978."},
 {"name":"Saint Louis","tier":"deep","aliases":["St. Louis","SLU"],"note":"Metro Conference, 1975 to 1978."},
 {"name":"Washington and Lee","tier":"deep","aliases":["W&L"],"note":"Southern Conference mates in the 1920s."},
-{"name":"Sewanee","tier":"swarm","aliases":["University of the South"],"note":"A charter member of the SEC alongside Tech in 1932."}
+{"name":"Sewanee","tier":"swarm","aliases":["University of the South"],"note":"A charter member of the SEC alongside Tech in 1932."},
+{"name":"VMI","tier":"deep","aliases":["Virginia Military Institute"],"note":"In the Southern Conference with Tech from 1924 to 1932."}
   ]
 }

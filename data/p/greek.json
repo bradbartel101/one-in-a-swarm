@@ -3,7 +3,7 @@
   "pool": "gt",
   "category": "CAMPUS LIFE",
   "text": "Name a Greek organization with a chapter at Tech",
-  "clarifier": "fraternities and sororities, past or present",
+  "clarifier": "on Tech's current list of chapters",
   "answers": [
 {"name":"Sigma Chi","tier":"common"},
 {"name":"Sigma Nu","tier":"common"},
@@ -51,8 +51,14 @@
 {"name":"Zeta Phi Beta","tier":"deep"},
 {"name":"Theta Xi","tier":"swarm"},
 {"name":"Sigma Gamma Rho","tier":"deep"},
-{"name":"Alpha Delta Chi","tier":"deep"},
-{"name":"Triangle","tier":"deep","aliases":["Triangle Fraternity"]},
-{"name":"Phi Kappa Psi","tier":"deep","aliases":["Phi Psi"]}
+{"name":"Phi Kappa Psi","tier":"deep","aliases":["Phi Psi"]},
+{"name":"Alpha Omega Epsilon","tier":"deep","aliases":["AOE"]},
+{"name":"Delta Epsilon Psi","tier":"deep"},
+{"name":"Delta Phi Lambda","tier":"deep"},
+{"name":"Sigma Beta Rho","tier":"deep"},
+{"name":"Sigma Sigma Rho","tier":"deep"},
+{"name":"Lambda Theta Phi","tier":"deep"},
+{"name":"Lambda Upsilon Lambda","tier":"deep","aliases":["La Unidad Latina","LUL"]},
+{"name":"Lambda Theta Alpha","tier":"deep"}
   ]
 }
