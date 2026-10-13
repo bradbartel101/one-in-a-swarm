@@ -1,0 +1,852 @@
+# Prompt bank v2: more general prompts (not openers).
+
+@constellations | SCIENCE | Name a constellation | pool=general | type=closed | count=88 | source=the 88 constellations recognized by the International Astronomical Union | clar=the 88 official ones; the Big Dipper counts as Ursa Major
+C Orion | The Hunter
+C Ursa Major | Big Dipper | Great Bear | The Big Dipper | Plough
+C Ursa Minor | Little Dipper | Little Bear | The Little Dipper
+C Leo | The Lion
+C Scorpius | Scorpio | The Scorpion
+C Gemini | The Twins
+T Cassiopeia
+T Ophiuchus | The Serpent Bearer :: The thirteenth sign that the zodiac leaves out.
+S Taurus | The Bull
+S Aries | The Ram
+S Cancer | The Crab
+S Virgo
+S Libra | The Scales
+S Sagittarius | The Archer
+S Capricornus | Capricorn
+S Aquarius
+S Pisces
+S Andromeda
+S Pegasus
+S Draco | The Dragon
+S Hercules
+S Cygnus | The Swan | Northern Cross
+S Canis Major | Big Dog | Great Dog
+S Crux | Southern Cross | The Southern Cross
+S Perseus
+R Canis Minor | Little Dog
+R Lyra | The Lyre
+R Aquila | The Eagle
+R Centaurus | The Centaur
+R Cepheus
+R Boötes | Bootes
+R Hydra
+R Cetus | The Whale
+R Corona Borealis | Northern Crown
+R Delphinus | The Dolphin
+R Phoenix
+R Lupus | The Wolf
+R Lepus | The Hare
+R Corvus | The Crow
+R Auriga | The Charioteer
+R Eridanus
+R Monoceros | The Unicorn
+R Serpens | The Serpent
+R Triangulum
+R Carina
+R Vela
+R Puppis
+R Columba | The Dove
+R Lynx
+R Pavo | The Peacock
+D Antlia
+D Apus
+D Ara
+D Caelum
+D Camelopardalis
+D Canes Venatici
+D Chamaeleon
+D Circinus
+D Coma Berenices
+D Corona Australis | Southern Crown
+D Crater
+D Dorado
+D Equuleus
+D Fornax
+D Grus
+D Horologium
+D Hydrus
+D Indus
+D Lacerta
+D Leo Minor
+D Mensa
+D Microscopium
+D Musca
+D Norma
+D Octans
+D Pictor
+D Piscis Austrinus | Southern Fish
+D Pyxis
+D Reticulum
+D Sagitta
+D Scutum
+D Sextans
+D Telescopium
+D Triangulum Australe | Southern Triangle
+D Tucana
+D Volans
+D Vulpecula
+X Sculptor :: Short for "the sculptor's workshop". The galaxy's south pole lies in it.
+! North Star :: a star (Polaris), in Ursa Minor
+! Polaris :: a star, in Ursa Minor
+! Milky Way :: a galaxy
+! Pleiades :: a star cluster, in Taurus
+! Orion's Belt :: three stars within Orion
+! Sirius :: a star, in Canis Major
+! Argo Navis :: split into Carina, Puppis and Vela in the 1700s
+! Summer Triangle :: an asterism made of three stars in three constellations
+! Betelgeuse :: a star, in Orion
+! Venus :: a planet
+! Zodiac :: a band of twelve constellations, not one
+
+@cheeses | FOOD | Name a kind of cheese | pool=general | type=open
+C Cheddar
+C Mozzarella | Mozz
+C Swiss | Swiss Cheese
+C American | American Cheese
+C Parmesan | Parmigiano-Reggiano | Parmigiano Reggiano | Parm | Parmigiano
+C Pepper Jack | Pepperjack
+T Brie
+T Gouda
+S Provolone
+S Feta
+S Blue Cheese | Bleu Cheese | Blue
+S Goat Cheese | Chèvre | Chevre
+S Cream Cheese
+S Ricotta
+S Monterey Jack | Jack
+S Colby | Colby Jack | Colby-Jack | Cojack
+S Cottage Cheese
+S String Cheese
+S Muenster | Munster
+S Havarti
+S Gruyère | Gruyere
+S Pimento Cheese | Pimiento Cheese :: The South's own.
+S Queso | Queso Fresco | Queso Blanco
+S Nacho Cheese
+S Velveeta
+R Camembert
+R Gorgonzola
+R Roquefort
+R Stilton
+R Asiago
+R Romano | Pecorino Romano | Pecorino
+R Mascarpone
+R Burrata
+R Manchego
+R Halloumi
+R Paneer
+R Cotija
+R Oaxaca | Queso Oaxaca | Quesillo
+R Emmental | Emmentaler | Emmenthal
+R Edam
+R Fontina
+R Limburger
+R Jarlsberg
+R Boursin
+R Neufchâtel | Neufchatel
+R Cheese Curds | Curds
+R Smoked Gouda
+R Sharp Cheddar | White Cheddar
+R Fresh Mozzarella | Buffalo Mozzarella | Mozzarella di Bufala
+R Raclette
+R Provel :: St. Louis puts it on pizza.
+R Babybel
+R Laughing Cow
+R Cheez Whiz | Cheese Whiz
+R Vegan Cheese
+D Taleggio
+D Comté | Comte
+D Époisses | Epoisses
+D Reblochon
+D Morbier
+D Mimolette
+D Cantal
+D Tomme | Tomme de Savoie
+D Brillat-Savarin | Brillat Savarin
+D Saint-André | Saint Andre | St. Andre
+D Pont-l'Évêque | Pont l'Eveque
+D Livarot
+D Munster-Géromé | Munster Gerome
+D Bleu d'Auvergne
+D Fourme d'Ambert
+D Cambozola
+D Danish Blue | Danablu
+D Maytag Blue | Maytag
+D Cabrales
+D Idiazabal
+D Mahón | Mahon
+D Tetilla
+D Grana Padano
+D Provolone Piccante
+D Caciocavallo
+D Scamorza
+D Stracchino | Crescenza
+D Robiola
+D Ricotta Salata
+D Fiore Sardo
+D Castelmagno
+D Kasseri
+D Kefalotyri
+D Graviera
+D Labneh
+D Akkawi
+D Nabulsi
+D Chhena | Chhana
+D Tilsit | Tilsiter
+D Appenzeller
+D Tête de Moine | Tete de Moine
+D Vacherin | Vacherin Mont d'Or
+D Sbrinz
+D Leyden | Leiden
+D Maasdam
+D Leerdammer
+D Gjetost | Brunost | Brown Cheese
+D Juustoleipä | Bread Cheese | Juustoleipa
+D Cheshire
+D Wensleydale
+D Red Leicester | Leicester
+D Double Gloucester | Gloucester
+D Lancashire
+D Caerphilly
+D Derby | Sage Derby
+D Stinking Bishop
+D Cornish Yarg | Yarg
+D Dubliner
+D Cashel Blue
+D Humboldt Fog
+D Brick Cheese | Brick
+D Farmer Cheese | Farmer's Cheese
+D Pot Cheese
+D Quark
+D Requesón | Requeson
+D Panela | Queso Panela
+D Chihuahua Cheese | Queso Chihuahua | Queso Menonita
+D Añejo | Queso Anejo
+D Port Salut
+D Bel Paese
+D Ossau-Iraty | Ossau Iraty
+D P'tit Basque | Petit Basque
+D Pule :: Made from donkey milk in Serbia, and among the most expensive cheeses in the world.
+X Casu Marzu | Casu Martzu :: The Sardinian cheese that is served with live maggots in it. It is illegal to sell.
+! Butter :: dairy, but not a cheese
+! Yogurt :: dairy, but not a cheese
+! Milk :: what it is made from
+! Sour Cream :: not a cheese
+! Tofu :: bean curd, not cheese
+! Cheesecake :: a dessert
+! Cheetos :: a snack
+! Mac and Cheese :: a dish
+
+@ologies | WORDS | Name a word that ends in "-ology" | pool=general | type=open | clar=a real field of study or English word
+C Biology
+C Psychology
+C Technology :: The middle name of this whole enterprise.
+C Geology
+C Zoology
+C Sociology
+T Scientology
+T Astrology
+S Ecology
+S Mythology
+S Theology
+S Archaeology | Archeology
+S Anthropology
+S Neurology
+S Cardiology
+S Dermatology
+S Radiology
+S Pathology
+S Physiology
+S Terminology
+S Ideology
+S Methodology
+S Chronology
+S Apology
+S Meteorology
+S Criminology
+S Microbiology
+R Epidemiology
+R Immunology
+R Oncology
+R Pharmacology
+R Toxicology
+R Anesthesiology | Anaesthesiology
+R Ophthalmology
+R Urology
+R Gynecology | Gynaecology
+R Hematology | Haematology
+R Endocrinology
+R Gastroenterology
+R Rheumatology
+R Nephrology
+R Pulmonology
+R Kinesiology
+R Audiology
+R Cosmetology
+R Paleontology | Palaeontology
+R Entomology :: The study of insects. Yellow jackets included.
+R Ornithology
+R Etymology
+R Morphology
+R Phonology
+R Ontology
+R Epistemology
+R Cosmology
+R Seismology
+R Volcanology | Vulcanology
+R Hydrology
+R Climatology
+R Oceanology
+R Numerology
+R Mixology
+R Reflexology
+R Musicology
+R Egyptology
+R Typology
+R Topology
+R Tautology
+R Anthology
+R Doxology
+R Histology
+R Cytology
+R Embryology
+R Virology
+R Bacteriology
+R Parasitology
+R Herpetology
+R Ichthyology
+R Primatology
+R Ethology
+R Graphology
+R Phrenology
+R Penology
+R Victimology
+R Futurology
+R Ufology
+R Cryptozoology
+R Demonology
+R Angelology
+R Eschatology
+R Christology
+R Biotechnology
+R Nanotechnology :: Tech has a whole building for it.
+D Mycology
+D Lichenology
+D Bryology
+D Dendrology
+D Pomology
+D Agrostology
+D Palynology
+D Phycology | Algology
+D Limnology
+D Glaciology
+D Speleology
+D Petrology
+D Sedimentology
+D Geomorphology
+D Pedology
+D Edaphology
+D Selenology
+D Areology
+D Heliology
+D Astrobiology
+D Exobiology
+D Gerontology
+D Thanatology
+D Teratology
+D Nosology
+D Etiology | Aetiology
+D Symptomatology
+D Semiology
+D Otology
+D Rhinology
+D Laryngology
+D Otolaryngology | Otorhinolaryngology
+D Proctology
+D Hepatology
+D Osteology
+D Myology
+D Angiology
+D Phlebology
+D Neonatology
+D Perinatology
+D Andrology
+D Sexology
+D Trichology
+D Odontology
+D Posology
+D Enology | Oenology
+D Zymology
+D Garbology
+D Vexillology :: The study of flags.
+D Campanology :: The study of bells, and of ringing them.
+D Horology
+D Heortology
+D Hagiology
+D Mariology
+D Soteriology
+D Pneumatology
+D Ecclesiology
+D Missiology
+D Sinology
+D Indology
+D Assyriology
+D Iranology
+D Kremlinology
+D Philology
+D Lexicology
+D Dialectology
+D Narratology
+D Deontology
+D Axiology
+D Teleology
+D Phenomenology
+D Praxeology
+D Nomology
+D Aerology
+D Nephology
+D Hypnology
+D Oneirology :: The study of dreams.
+D Somnology
+D Chronobiology
+D Sociobiology
+D Psychobiology
+D Neurobiology
+D Radiobiology
+D Photobiology
+D Cryobiology
+D Paleoclimatology
+D Dendrochronology
+D Geochronology
+D Tribology :: The study of friction and wear. Mechanical engineers take it seriously.
+D Rheology
+D Metrology
+D Coprology | Scatology
+D Malacology
+D Conchology
+D Carcinology
+D Arachnology
+D Myrmecology
+D Apiology | Melittology :: The study of bees.
+D Lepidopterology
+D Coleopterology
+D Nematology
+D Helminthology
+D Protozoology
+D Cetology
+D Hippology
+D Cynology
+D Felinology
+D Oology
+D Nidology
+D Batrachology
+D Ophiology
+D Saurology
+D Planktology
+D Biometeorology
+D Agrology
+X Piphilology :: The making and memorising of mnemonics for the digits of pi.
+! Trilogy :: ends in "-logy", not "-ology"
+! Genealogy :: ends in "-alogy", not "-ology"
+! Analogy :: ends in "-alogy", not "-ology"
+! Eulogy :: ends in "-logy", not "-ology"
+! Mineralogy :: ends in "-alogy", not "-ology"
+! Mammalogy :: ends in "-alogy", not "-ology"
+! Biography :: ends in "-graphy"
+! Astronomy :: ends in "-onomy"
+! Georgiaology :: not a word, though the course would be short
+
+@toolbox | THINGS | Name something you'd find in a toolbox | pool=general | type=open | clar=hand tools, power tools and hardware
+C Hammer | Claw Hammer
+C Screwdriver | Flathead Screwdriver | Phillips Screwdriver | Phillips Head | Flathead
+C Wrench | Spanner
+C Pliers
+C Nails | Nail
+C Screws | Screw
+T Duct Tape
+T Level | Spirit Level | Bubble Level
+S Tape Measure | Measuring Tape
+S Drill | Power Drill | Cordless Drill
+S Saw | Hand Saw | Handsaw
+S Socket Wrench | Ratchet | Socket Set | Sockets
+S Allen Wrench | Allen Key | Hex Key | Hex Wrench
+S Utility Knife | Box Cutter | Razor Knife | Boxcutter
+S Flashlight | Torch
+S Drill Bits | Drill Bit | Bits
+S Adjustable Wrench | Crescent Wrench
+S Needle-Nose Pliers | Needle Nose Pliers | Needlenose Pliers
+S Wire Cutters | Wire Cutter | Snips
+S Nuts | Nut
+S Bolts | Bolt
+S Washers | Washer
+S Sandpaper
+S Chisel
+S Electrical Tape
+S WD-40 | WD40
+S Glue | Super Glue | Wood Glue
+S Pencil | Carpenter's Pencil
+R Vise Grips | Vise-Grips | Locking Pliers
+R Channel Locks | Channellocks | Tongue-and-Groove Pliers
+R Wire Strippers | Wire Stripper
+R Hacksaw
+R Mallet | Rubber Mallet
+R Pry Bar | Crowbar | Prybar
+R Stud Finder
+R Putty Knife | Scraper
+R Clamp | Clamps | C-Clamp
+R File | Rasp
+R Square | Speed Square | Carpenter's Square | Framing Square
+R Staple Gun | Stapler
+R Caulk Gun | Caulking Gun | Caulk
+R Zip Ties | Cable Ties
+R Safety Glasses | Goggles | Safety Goggles
+R Work Gloves | Gloves
+R Multimeter | Voltmeter
+R Soldering Iron | Solder
+R Tin Snips
+R Pipe Wrench | Monkey Wrench
+R Torque Wrench
+R Wood Screws
+R Anchors | Drywall Anchors | Wall Anchors
+R Wire Nuts | Wire Nut
+R Extension Cord
+R Paint Brush | Paintbrush
+R Scissors
+R Tweezers
+R Punch | Center Punch | Nail Set
+R Awl
+R Plane | Hand Plane | Block Plane
+R Circular Saw | Skil Saw
+R Jigsaw
+R Sander | Orbital Sander
+R Impact Driver
+R Chalk Line
+R Plumb Bob
+R Calipers | Caliper
+R Ruler | Straightedge
+R Teflon Tape | Plumber's Tape | Thread Tape
+R Masking Tape | Painter's Tape
+R Hex Nuts
+R Rivets | Rivet Gun
+R Hose Clamp
+R Bungee Cord
+R Rope | Twine | String
+R Magnet | Magnetic Tray
+R Ear Plugs | Earplugs | Ear Protection
+R Dust Mask | Respirator
+R Oil | Machine Oil | 3-in-One Oil
+R Rag | Rags | Shop Towel
+D Coping Saw
+D Keyhole Saw | Drywall Saw | Jab Saw
+D Miter Box
+D Bradawl
+X Spokeshave :: A blade with two handles, for shaving wood into curves. It was made for wheel spokes.
+D Bevel Gauge | Sliding Bevel | T-Bevel
+D Feeler Gauge | Feeler Gauges
+D Micrometer
+D Tap and Die | Tap | Die
+D Reamer
+D Countersink
+D Hole Saw
+D Spade Bit | Paddle Bit
+D Forstner Bit
+D Auger
+D Brace | Brace and Bit
+D Nut Driver
+D Torx Driver | Torx | Star Bit
+D Offset Screwdriver
+D Stubby Screwdriver
+D Precision Screwdrivers | Jeweler's Screwdriver
+D Snap Ring Pliers | Circlip Pliers
+D Lineman's Pliers | Linesman Pliers
+D Crimper | Crimping Tool
+D Fish Tape
+D Voltage Tester | Circuit Tester
+D Heat Gun
+D Rotary Tool | Dremel
+D Oscillating Tool | Multi-Tool
+D Cold Chisel
+D Brick Trowel | Trowel
+D Float
+D Putty | Wood Filler | Spackle
+D Cotter Pin | Cotter Pins
+D Lock Washer
+D Wing Nut | Wingnut
+D Carriage Bolt
+D Lag Bolt | Lag Screw
+D Set Screw
+D O-Ring | O-Rings
+D Shims | Shim
+D Deburring Tool
+D Scribe
+D Combination Square
+D Dial Indicator
+D Pop Rivet
+D Easy Out | Screw Extractor
+D Basin Wrench
+D Strap Wrench
+D Pipe Cutter | Tubing Cutter
+D Flaring Tool
+D Nail Puller | Cat's Paw
+D Sledgehammer | Sledge
+D Ball-Peen Hammer | Ball Peen Hammer
+D Dead Blow Hammer
+D Tack Hammer
+D Slide Rule :: In a Tech alum's toolbox, quite possibly.
+! Left-Handed Screwdriver :: it does not exist; apprentices get sent to fetch one
+! Refrigerator :: too big for the box
+! Car :: what the tools are for
+! Sandwich :: that is a lunchbox
+! Lawn Mower :: lives in the shed
+! Ladder :: does not fit
+! Toolbox :: the thing itself
+
+@wheels | THINGS | Name something that has wheels | pool=general | type=open
+C Car | Automobile
+C Bicycle | Bike
+C Bus | School Bus
+C Truck | Pickup Truck | Pickup
+C Skateboard
+C Train
+T Ramblin' Wreck | Ramblin Wreck | Rambling Wreck | The Wreck | Model A | 1930 Ford Model A :: Tech's 1930 Ford Model A Sport Coupe, on four wheels since before Bobby Dodd.
+T Shopping Cart | Grocery Cart | Buggy
+S Motorcycle | Motorbike
+S Scooter | Electric Scooter | Kick Scooter
+S Wagon | Red Wagon
+S Stroller | Baby Stroller | Pram
+S Wheelchair
+S Roller Skates | Skates | Rollerskates
+S Rollerblades | Inline Skates | Roller Blades
+S Suitcase | Luggage | Rolling Suitcase
+S Airplane | Plane | Jet
+S Tractor
+S Van | Minivan
+S Taxi | Cab
+S Golf Cart
+S Wheelbarrow
+S Tricycle | Trike
+S Unicycle
+S Office Chair | Desk Chair | Rolling Chair
+S Lawn Mower | Lawnmower
+S Go-Kart | Go Kart | Kart
+S Ambulance
+S Fire Truck | Fire Engine
+S RV | Motorhome | Camper
+S Trailer
+R Semi | Semi Truck | Tractor-Trailer | 18-Wheeler | Big Rig
+R Dolly | Hand Truck
+R Forklift
+R Limo | Limousine
+R SUV
+R Jeep
+R ATV | Four-Wheeler | Quad
+R Dirt Bike
+R Moped
+R Segway
+R Hoverboard
+R Longboard
+R Heelys | Wheelies | Roller Shoes
+R Trash Can | Garbage Can | Trash Bin | Dumpster
+R Cart | Pushcart
+R Hospital Bed | Gurney | Stretcher
+R Walker | Rollator
+R Rolling Backpack | Backpack
+R Toy Car | Hot Wheels | Matchbox Car
+R Race Car | Racecar | Stock Car | Formula 1 Car
+R Monster Truck
+R Garbage Truck
+R Dump Truck
+R Cement Mixer | Concrete Mixer
+R Bulldozer :: Most run on tracks, but wheeled dozers exist.
+R Tank :: Road wheels inside the tracks.
+R Stagecoach | Carriage | Horse-Drawn Carriage | Buggy Carriage
+R Chariot
+R Rickshaw | Pedicab
+R Tram | Streetcar | Trolley
+R Subway | Subway Car | Metro | MARTA Train
+R Roller Coaster | Rollercoaster
+R Ferris Wheel :: It is one, and it runs on several.
+R Covered Wagon
+R Baby Walker
+R Vacuum | Vacuum Cleaner
+R Grill | Barbecue Grill
+R Piano | Grand Piano :: On casters.
+R Cooler | Rolling Cooler
+R Mars Rover | Rover | Curiosity | Perseverance
+R Space Shuttle :: Landing gear.
+R Helicopter :: Many land on wheels.
+R Tandem Bike | Tandem Bicycle
+R E-Bike | Electric Bike
+R Mountain Bike
+R Pizza Cutter :: One wheel, very sharp.
+R Watch | Clock | Wristwatch :: Full of them.
+R Pulley
+R Gear | Gears | Cog
+R Hamster Wheel
+R Wheel of Fortune
+R Steering Wheel
+R Spinning Wheel
+R Pottery Wheel | Potter's Wheel
+R Water Wheel | Mill
+R Cassette | Cassette Tape
+R Mouse | Computer Mouse | Scroll Wheel
+D Penny-Farthing | Penny Farthing | High Wheeler
+D Velocipede
+D Recumbent Bike | Recumbent
+D Handcar | Pump Trolley
+D Caboose
+D Locomotive
+D Cable Car
+D Funicular
+D Monorail
+D Zamboni
+D Combine | Combine Harvester
+D Road Roller | Steamroller
+D Backhoe
+D Excavator
+D Crane | Mobile Crane
+D Cherry Picker | Bucket Truck
+D Scissor Lift
+D Pallet Jack
+D Hand Cart | Handcart
+D Creeper | Mechanic's Creeper
+D Furniture Dolly
+D Shopping Trolley
+D Bar Cart
+D Tea Trolley | Serving Cart
+D Book Cart | Library Cart
+D Mail Cart
+D IV Pole | IV Stand
+D Camera Dolly
+D Soapbox Car | Soap Box Derby Car
+D Pinewood Derby Car
+D Land Yacht | Land Sailer
+D Dune Buggy
+D Sidecar
+D Rollerski | Roller Skis
+D Caster Board | Ripstik | RipStik
+D Onewheel
+D Electric Unicycle
+D Mobility Scooter
+D Knee Scooter
+D Gun Carriage | Cannon
+D Siege Tower
+D Trojan Horse :: On rollers, in most tellings.
+D Wheelie Bin
+D Rolling Pin :: A stretch. It rolls; it is not a wheel.
+X Lunar Rover | Moon Buggy | Lunar Roving Vehicle :: Three of them are still parked on the Moon.
+D Pulley Block
+D Odometer
+D Rotary Phone | Rotary Dial
+D Roulette Wheel | Roulette
+D Prayer Wheel
+D Color Wheel
+D Cheese Wheel
+D Stinger | Stinger Bus | Tech Trolley | Stingerette :: The buses that circle Tech's campus.
+! Boat :: no wheels (though a paddle steamer has one)
+! Sled :: runners
+! Horse :: legs
+! Snake :: none at all
+! Skis :: no wheels
+! Hovercraft :: rides on air
+
+@olympicsports | SPORTS | Name a sport at the Summer Olympics | pool=general | type=open | clar=any Summer Games, past or present
+C Swimming
+C Gymnastics | Artistic Gymnastics
+C Track and Field | Athletics | Track | Track & Field
+C Basketball
+C Soccer | Football | Association Football
+C Volleyball
+T Breaking | Breakdancing :: On the programme once, in Paris in 2024.
+T Skateboarding
+S Diving
+S Tennis
+S Boxing
+S Wrestling | Freestyle Wrestling | Greco-Roman Wrestling
+S Cycling | Road Cycling | Track Cycling | BMX | Mountain Biking
+S Rowing
+S Fencing
+S Weightlifting
+S Archery
+S Golf
+S Beach Volleyball
+S Water Polo
+S Judo
+S Taekwondo
+S Table Tennis | Ping Pong
+S Badminton
+S Surfing
+S Marathon | Marathon Swimming
+S Equestrian | Dressage | Show Jumping | Eventing | Horseback Riding
+S Sailing | Yachting
+S Baseball
+S Softball
+R Field Hockey | Hockey
+R Handball | Team Handball
+R Rugby | Rugby Sevens | Rugby Union
+R Triathlon
+R Canoeing | Kayaking | Canoe | Canoe Sprint | Canoe Slalom
+R Shooting
+R Rhythmic Gymnastics
+R Trampoline | Trampolining
+R Synchronized Swimming | Artistic Swimming
+R Modern Pentathlon | Pentathlon
+R Sport Climbing | Climbing | Rock Climbing
+R Karate :: Tokyo 2020 only.
+R 3x3 Basketball | 3 on 3 Basketball
+R Decathlon
+R Lacrosse :: Back for Los Angeles in 2028.
+R Cricket :: Played once, in 1900, and due back in 2028.
+R Flag Football :: New for Los Angeles in 2028.
+R Squash :: New for Los Angeles in 2028.
+R Polo
+R Tug of War :: A medal event from 1900 to 1920.
+D Croquet :: 1900 only.
+D Jeu de Paume | Real Tennis :: 1908 only.
+D Rackets | Racquets :: 1908 only.
+D Roque :: 1904 only: croquet on a hard court.
+D Basque Pelota | Pelota :: A medal event in 1900.
+D Motorboating | Water Motorsports | Powerboating :: 1908 only.
+D Art Competitions | Art :: Medals for painting, sculpture, music, literature and architecture, from 1912 to 1948.
+D Live Pigeon Shooting | Pigeon Shooting :: 1900 only.
+D Rope Climb | Rope Climbing
+D Club Swinging | Indian Clubs
+D Plunge for Distance :: 1904 only.
+D Solo Synchronized Swimming
+D Tandem Cycling
+D Standing Long Jump | Standing High Jump
+D Obstacle Swimming | Obstacle Race :: 1900 only.
+D Underwater Swimming :: 1900 only.
+D Racewalking | Race Walk | Race Walking
+D Steeplechase
+D Hammer Throw
+D Pole Vault
+D Javelin
+D Shot Put
+D Discus
+D Hurdles
+D Heptathlon
+D Long Jump
+D High Jump
+D Triple Jump
+D Relay | Relays | 4x100 Relay
+D Sprint | 100 Meters | 100m | 100 Metres
+D Figure Skating :: A Winter sport now, but it was held at the Summer Games of 1908 and 1920.
+D Ice Hockey :: A Winter sport now, but its Olympic debut was at the Summer Games of 1920.
+X Singlestick :: Fencing with a wooden stick. A medal event exactly once, in 1904.
+! Skiing :: a Winter sport
+! Curling :: a Winter sport
+! Bobsled :: a Winter sport
+! Snowboarding :: a Winter sport
+! American Football :: never a medal sport; flag football arrives in 2028
+! Bowling :: only ever a demonstration
+! Chess :: never on the programme
+! Cheerleading :: never on the programme
+! Esports :: never on the programme
+! Ultimate Frisbee :: never on the programme
+! Pickleball :: never on the programme
+! Darts :: never on the programme
+! Racquetball :: never on the programme

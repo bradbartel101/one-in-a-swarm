@@ -124,6 +124,7 @@
 {"name":"Modern Pentathlon","tier":"deep","aliases":["Pentathlon"]},
 {"name":"Decathlon","tier":"deep"},
 {"name":"Orienteering","tier":"deep"},
+{"name":"Hiking","tier":"deep","aliases":["Trekking","Backpacking","Speed Hiking"]},
 {"name":"Parkour","tier":"deep","aliases":["Freerunning"]},
 {"name":"Skydiving","tier":"deep"},
 {"name":"Hang Gliding","tier":"deep"},

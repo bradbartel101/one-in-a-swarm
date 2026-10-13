@@ -67,8 +67,16 @@
     {"id": "vegetables", "pool": "general", "category": "FOOD", "text": "Name a vegetable", "clarifier": "what a grocer would call a vegetable", "easy": true, "n": 104},
     {"id": "colors", "pool": "general", "category": "THINGS", "text": "Name a color", "clarifier": "any named shade counts", "easy": true, "n": 126},
     {"id": "dogbreeds", "pool": "general", "category": "ANIMALS", "text": "Name a breed of dog", "clarifier": "recognized breeds and well-known crosses", "easy": true, "n": 174},
-    {"id": "sports", "pool": "general", "category": "SPORTS", "text": "Name a sport", "clarifier": "anything played or raced for sport", "easy": true, "n": 152},
+    {"id": "sports", "pool": "general", "category": "SPORTS", "text": "Name a sport", "clarifier": "anything played or raced for sport", "easy": true, "n": 153},
     {"id": "pizzatoppings", "pool": "general", "category": "FOOD", "text": "Name a pizza topping", "clarifier": "anything you could order on a pizza", "easy": true, "n": 133},
-    {"id": "instruments", "pool": "general", "category": "MUSIC", "text": "Name a musical instrument", "easy": true, "n": 151}
+    {"id": "instruments", "pool": "general", "category": "MUSIC", "text": "Name a musical instrument", "easy": true, "n": 151},
+    {"id": "carbrands", "pool": "general", "category": "THINGS", "text": "Name a car brand", "clarifier": "makes, not models; past or present", "easy": true, "n": 150},
+    {"id": "boardgames", "pool": "general", "category": "GAMES", "text": "Name a board game", "clarifier": "games played on a board or tabletop", "easy": true, "n": 169},
+    {"id": "constellations", "pool": "general", "category": "SCIENCE", "text": "Name a constellation", "clarifier": "the 88 official ones; the Big Dipper counts as Ursa Major", "n": 88},
+    {"id": "cheeses", "pool": "general", "category": "FOOD", "text": "Name a kind of cheese", "n": 129},
+    {"id": "ologies", "pool": "general", "category": "WORDS", "text": "Name a word that ends in \"-ology\"", "clarifier": "a real field of study or English word", "n": 208},
+    {"id": "toolbox", "pool": "general", "category": "THINGS", "text": "Name something you'd find in a toolbox", "clarifier": "hand tools, power tools and hardware", "n": 136},
+    {"id": "wheels", "pool": "general", "category": "THINGS", "text": "Name something that has wheels", "n": 141},
+    {"id": "olympicsports", "pool": "general", "category": "SPORTS", "text": "Name a sport at the Summer Olympics", "clarifier": "any Summer Games, past or present", "n": 83}
   ]
 }

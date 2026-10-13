@@ -675,6 +675,7 @@ D Sambo
 D Modern Pentathlon | Pentathlon
 D Decathlon
 D Orienteering
+D Hiking | Trekking | Backpacking | Speed Hiking
 D Parkour | Freerunning
 D Skydiving
 D Hang Gliding
@@ -715,7 +716,6 @@ X Chess Boxing | Chessboxing :: Alternating rounds of chess and boxing. It is re
 ! Yoga :: a practice, not a competitive sport
 ! Studying :: it only feels like one
 ! Dancing :: accepted only in its competitive forms, such as Breaking
-! Hiking :: recreation, not a sport with competition
 ! Hunting :: recreation; the sport forms here are Shooting and Archery
 
 @pizzatoppings | FOOD | Name a pizza topping | pool=general | easy | type=open | clar=anything you could order on a pizza
@@ -1017,3 +1017,349 @@ X Stroh Violin | Stroh Fiddle :: A violin with a metal horn in place of a wooden
 ! Conductor :: a person
 ! Band :: a group of them
 ! iPod :: a player
+
+@carbrands | THINGS | Name a car brand | pool=general | easy | type=open | clar=makes, not models; past or present
+C Toyota
+C Ford
+C Honda
+C Chevrolet | Chevy
+C Tesla
+C BMW
+T Ferrari
+T Lamborghini | Lambo
+S Mercedes-Benz | Mercedes | Benz | Mercedes Benz
+S Audi
+S Volkswagen | VW
+S Nissan | Datsun
+S Hyundai
+S Kia
+S Jeep
+S Subaru
+S Mazda
+S Dodge
+S Lexus
+S Porsche :: Its North American headquarters is in Atlanta.
+S GMC
+S Cadillac
+S Volvo
+S Buick
+S Chrysler
+S Ram
+S Acura
+S Infiniti
+S Lincoln
+S Mini | Mini Cooper
+S Land Rover | Range Rover
+S Jaguar
+S Mitsubishi
+R Rivian
+R Lucid
+R Polestar
+R Genesis
+R Fiat
+R Alfa Romeo
+R Maserati
+R Bentley
+R Rolls-Royce | Rolls Royce
+R Aston Martin
+R McLaren
+R Bugatti
+R Lotus
+R Pontiac
+R Saturn
+R Oldsmobile
+R Mercury
+R Hummer
+R Saab
+R Suzuki
+R Peugeot
+R Renault
+R Citroën | Citroen
+R Scion
+R Plymouth
+R Smart
+R Isuzu
+R BYD
+R Škoda | Skoda
+R SEAT
+R Opel
+R Vauxhall
+R Koenigsegg
+R Pagani
+R DeLorean | De Lorean | DMC
+R Studebaker
+R Packard
+R Shelby
+R Maybach
+R Daewoo
+R Geo
+R Eagle
+R AMC | American Motors
+D Edsel
+D DeSoto | De Soto
+D Hudson
+D Nash
+D Duesenberg
+D Tucker
+D Stutz
+D Pierce-Arrow | Pierce Arrow
+D Cord
+D Auburn
+D Kaiser
+D Willys
+D Checker
+D Fisker
+D Karma
+D VinFast
+D Nio | NIO
+D Xpeng
+D Geely
+D Chery
+D Great Wall
+D Li Auto
+D Zeekr
+D Tata
+D Mahindra
+D Maruti | Maruti Suzuki
+D Proton
+D Perodua
+D Holden
+D Lada
+D Dacia
+D Lancia
+D Abarth
+D Cupra
+D DS | DS Automobiles
+D Alpine
+D MG
+D Triumph
+D Austin-Healey | Austin Healey | Austin
+D Morris
+D Rover
+D Morgan
+D TVR
+D Caterham
+D Bristol
+D Jensen
+D Sunbeam
+D Hillman
+D Reliant
+D Noble
+D Spyker
+D Rimac
+D Pininfarina
+D De Tomaso | DeTomaso
+D Iso
+D Bizzarrini
+D Hispano-Suiza | Hispano Suiza
+D Borgward
+D NSU
+D Trabant
+D Wartburg
+D Tatra
+D Zastava | Yugo
+D Hennessey
+D Saleen
+D SSC | Shelby SuperCars
+D Panoz :: Built in Georgia, in Hoschton and Braselton.
+D Ineos
+D Scout
+D Daihatsu
+D SsangYong | KGM
+D Hino
+D Mack
+X Vector :: An American supercar maker of the 1980s and 90s; the W8 had 625 horsepower and aircraft switches.
+! Mustang :: a Ford model
+! Corvette :: a Chevrolet model
+! Camry :: a Toyota model
+! Civic :: a Honda model
+! Prius :: a Toyota model
+! Wrangler :: a Jeep model
+! F-150 :: a Ford model
+! Harley-Davidson :: motorcycles
+! Yamaha :: motorcycles, not cars
+! Uber :: a ride, not a make
+! Hot Wheels :: toys
+! Goodyear :: tires
+
+@boardgames | GAMES | Name a board game | pool=general | easy | type=open | clar=games played on a board or tabletop
+C Monopoly
+C Chess
+C Checkers | Draughts
+C Scrabble
+C Clue | Cluedo
+C Catan | Settlers of Catan
+T Candy Land | Candyland
+T Risk
+S Sorry | Sorry!
+S Life | The Game of Life | Game of Life
+S Trivial Pursuit
+S Battleship
+S Connect Four | Connect 4
+S Operation
+S Chutes and Ladders | Snakes and Ladders
+S Trouble
+S Pictionary
+S Scattergories
+S Ticket to Ride
+S Mouse Trap | Mousetrap
+S Jenga
+S Twister
+S Backgammon
+S Guess Who | Guess Who?
+S Stratego
+S Yahtzee
+R Pandemic
+R Carcassonne
+R Codenames
+R Dominion
+R Azul
+R Wingspan
+R Splendor
+R 7 Wonders | Seven Wonders
+R Terraforming Mars
+R Gloomhaven
+R Betrayal at House on the Hill | Betrayal
+R Axis and Allies | Axis & Allies
+R Diplomacy
+R Othello | Reversi
+R Go
+R Chinese Checkers
+R Parcheesi | Parchisi | Ludo
+R Mancala
+R Cranium
+R Taboo
+R Balderdash
+R Boggle
+R Apples to Apples
+R Cards Against Humanity
+R Hungry Hungry Hippos
+R Don't Break the Ice
+R Kerplunk | KerPlunk
+R Perfection
+R Aggravation
+R Mastermind
+R Blokus
+R Qwirkle
+R Sequence
+R Rummikub
+R Dominoes
+R Mahjong | Mah Jongg
+R Tic-Tac-Toe | Tic Tac Toe | Noughts and Crosses
+R Hedbanz | Headbanz
+R Upwords
+R Bananagrams
+R Dungeons & Dragons | Dungeons and Dragons | D&D | DnD
+R King of Tokyo
+R Sushi Go
+R Exploding Kittens
+R Root
+R Scythe
+R Agricola
+R Puerto Rico
+R Power Grid
+R Twilight Imperium
+R Small World
+R Forbidden Island
+R Love Letter
+R Secret Hitler
+R The Resistance | Resistance | Avalon
+R Werewolf | One Night Ultimate Werewolf | Mafia
+R Telestrations
+R Wits & Wagers | Wits and Wagers
+R Dixit
+R Mysterium
+R Clank | Clank!
+R Everdell
+R Cascadia
+R Patchwork
+R Kingdomino
+R Photosynthesis
+D Brass | Brass: Birmingham
+D Spirit Island
+D Ark Nova
+D Great Western Trail
+D Concordia
+D Castles of Burgundy | The Castles of Burgundy
+D Tigris & Euphrates | Tigris and Euphrates
+D El Grande
+D Ra
+D Acquire
+D Hive
+D Santorini
+D Onitama
+D Tak
+D Abalone
+D Quoridor
+D Pente
+D Hex
+D Shogi
+D Xiangqi | Chinese Chess
+D Nine Men's Morris | Nine Mens Morris
+D Fox and Geese
+D Senet :: Played in ancient Egypt five thousand years ago.
+D Royal Game of Ur | Game of Ur
+D Hnefatafl
+D Pachisi
+D Carrom
+D Crokinole
+D Cribbage
+D Mall Madness
+D Dream Phone
+D Pay Day | Payday
+D Careers
+D Masterpiece
+D Stock Ticker
+D Hotels
+D Fireball Island
+D HeroQuest | Hero Quest
+D Talisman
+D Arkham Horror
+D Eldritch Horror
+D Mansions of Madness
+D Cosmic Encounter
+D Dune
+D Twilight Struggle
+D Memoir '44 | Memoir 44
+D Squad Leader | Advanced Squad Leader
+D Kingsburg
+D Lords of Waterdeep
+D Viticulture
+D Tapestry
+D Dead of Winter
+D Blood Rage
+D Mice and Mystics
+D Sheriff of Nottingham
+D Coup
+D Bang | Bang!
+D Munchkin
+D Fluxx
+D Machi Koro
+D Tsuro
+D Labyrinth
+D Rush Hour
+D Thurn and Taxis
+D Alhambra
+D Stone Age
+D Lost Cities
+D Jaipur
+D Camel Up
+D Tokaido
+D Takenoko
+D Colt Express
+D Flamme Rouge
+D Formula D | Formula De
+D Heat | Heat: Pedal to the Metal
+D Crossbows and Catapults
+X The Landlord's Game | Landlords Game :: Lizzie Magie's 1904 game about the evils of monopoly, which Monopoly was later built on.
+! Poker :: a card game with no board
+! Uno :: a card game with no board
+! Go Fish :: a card game
+! Solitaire :: a card game
+! Fortnite :: a video game
+! Minecraft :: a video game
+! Tag :: no board
+! Hide and Seek :: no board
+! Hangman :: pencil and paper
+! Charades :: no board
+! Football :: a sport
