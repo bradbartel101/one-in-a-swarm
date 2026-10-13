@@ -46,6 +46,10 @@
     {"id": "hoopschamps", "pool": "general", "category": "SPORTS", "text": "Name a school that has won the men's NCAA basketball tournament", "clarifier": "champions through 2025", "n": 37},
     {"id": "heisman", "pool": "general", "category": "SPORTS", "text": "Name a Heisman Trophy winner", "clarifier": "John Heisman coached at Tech", "n": 72},
     {"id": "minors", "pool": "gt", "category": "ACADEMICS", "text": "Name a minor offered at Georgia Tech", "n": 87},
-    {"id": "mathcourses", "pool": "gt", "category": "ACADEMICS", "text": "Name a Georgia Tech MATH course by its number", "clarifier": "like \"MATH 1554\"", "lead": ["math"], "n": 136}
+    {"id": "mathcourses", "pool": "gt", "category": "ACADEMICS", "text": "Name a Georgia Tech MATH course by its number", "clarifier": "like \"MATH 1554\"", "lead": ["math"], "n": 136},
+    {"id": "gacounties", "pool": "gt", "category": "GEORGIA", "text": "Name a county in Georgia", "strip": ["county"], "n": 159},
+    {"id": "masters", "pool": "gt", "category": "GEORGIA SPORTS", "text": "Name a golfer who has won the Masters", "clarifier": "Tech's Bobby Jones co-founded the tournament", "n": 57},
+    {"id": "gold96", "pool": "gt", "category": "ATLANTA", "text": "Name a country that won gold at the 1996 Atlanta Olympics", "clarifier": "Tech's campus was the Olympic Village", "n": 53},
+    {"id": "stateparks", "pool": "gt", "category": "GEORGIA", "text": "Name a Georgia state park", "clarifier": "state parks only, not historic sites", "strip": ["state","park","lodge"], "n": 45}
   ]
 }

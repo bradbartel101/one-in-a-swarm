@@ -1,0 +1,370 @@
+# Prompt bank v2, batch 2: Georgia and Atlanta lists checked against published sources.
+
+@gacounties | GEORGIA | Name a county in Georgia | pool=gt | type=closed | count=159 | source=Wikipedia, List of counties in Georgia | strip=county
+D Appling
+D Atkinson
+D Bacon
+D Baker
+R Baldwin
+D Banks
+R Barrow
+R Bartow
+D Ben Hill | Benhill
+D Berrien
+S Bibb :: Macon.
+D Bleckley
+D Brantley
+D Brooks
+R Bryan
+R Bulloch
+D Burke
+D Butts
+D Calhoun
+R Camden
+D Candler
+R Carroll
+R Catoosa
+D Charlton
+S Chatham :: Savannah.
+D Chattahoochee
+D Chattooga
+S Cherokee
+T Clarke :: Athens. Noted.
+D Clay
+S Clayton
+D Clinch
+C Cobb
+D Coffee
+D Colquitt
+R Columbia
+D Cook
+S Coweta
+D Crawford
+D Crisp
+D Dade
+R Dawson
+D Decatur
+C DeKalb | De Kalb
+D Dodge
+D Dooly
+R Dougherty
+S Douglas
+D Early
+D Echols
+R Effingham
+D Elbert
+D Emanuel
+D Evans
+R Fannin
+S Fayette
+R Floyd
+S Forsyth
+D Franklin
+C Fulton :: Home: Tech sits in Fulton County.
+R Gilmer
+D Glascock
+R Glynn
+R Gordon
+D Grady
+D Greene
+C Gwinnett
+R Habersham
+S Hall
+D Hancock
+D Haralson
+D Harris
+D Hart
+D Heard
+S Henry
+R Houston
+D Irwin
+R Jackson
+D Jasper
+D Jeff Davis | Jefferson Davis
+D Jefferson
+D Jenkins
+D Johnson
+D Jones
+D Lamar
+D Lanier
+R Laurens
+D Lee
+R Liberty
+D Lincoln
+D Long
+R Lowndes
+R Lumpkin
+D Macon
+D Madison
+D Marion
+D McDuffie | Mc Duffie
+D McIntosh | Mc Intosh
+D Meriwether
+D Miller
+D Mitchell
+D Monroe
+D Montgomery
+D Morgan
+D Murray
+S Muscogee :: Columbus.
+S Newton
+R Oconee
+D Oglethorpe
+S Paulding
+R Peach
+R Pickens
+D Pierce
+D Pike
+D Polk
+D Pulaski
+D Putnam
+D Quitman
+R Rabun
+D Randolph
+S Richmond :: Augusta.
+S Rockdale
+D Schley
+D Screven
+D Seminole
+R Spalding
+D Stephens
+D Stewart
+R Sumter
+D Talbot
+X Taliaferro :: Said "Tolliver", and the least populous county in the state.
+D Tattnall
+D Taylor
+D Telfair
+D Terrell
+R Thomas
+R Tift
+D Toombs
+R Towns
+D Treutlen
+R Troup
+D Turner
+D Twiggs
+R Union
+D Upson
+R Walker
+R Walton
+R Ware
+D Warren
+D Washington
+D Wayne
+D Webster
+D Wheeler
+R White
+R Whitfield
+D Wilcox
+D Wilkes
+D Wilkinson
+D Worth
+! Atlanta :: a city, not a county (it sits in Fulton and DeKalb)
+! Savannah :: a city; its county is Chatham
+! Athens :: a city; its county is Clarke
+! Augusta :: a city; its county is Richmond
+! Columbus :: a city; its county is Muscogee
+! Campbell :: merged into Fulton County in 1932
+! Milton :: merged into Fulton County in 1932
+
+@masters | GEORGIA SPORTS | Name a golfer who has won the Masters | pool=gt | type=closed | count=57 | source=Wikipedia, List of Masters Tournament champions (through 2026) | clar=Tech's Bobby Jones co-founded the tournament
+C Tiger Woods | Tiger | Eldrick Woods
+C Jack Nicklaus | Nicklaus | The Golden Bear
+C Arnold Palmer | Arnie
+C Phil Mickelson | Lefty
+C Scottie Scheffler | Scheffler
+C Rory McIlroy | Rory | McIlroy
+T Bubba Watson | Bubba :: A Georgia Bulldog. It happens.
+S Jordan Spieth | Spieth
+S Dustin Johnson | DJ
+S Jon Rahm | Rahm
+S Sergio García | Sergio Garcia | Sergio
+S Gary Player
+S Tom Watson
+S Hideki Matsuyama | Matsuyama
+S Adam Scott
+S Ben Hogan | Hogan
+S Sam Snead | Snead
+S Seve Ballesteros | Seve | Severiano Ballesteros
+S Nick Faldo | Faldo
+S Fred Couples | Freddie Couples
+S Patrick Reed
+S Bernhard Langer | Langer
+S Vijay Singh
+S Ben Crenshaw | Crenshaw
+R Zach Johnson
+R Mike Weir
+R Danny Willett
+R Trevor Immelman
+R Ángel Cabrera | Angel Cabrera
+R Charl Schwartzel
+R José María Olazábal | Jose Maria Olazabal | Olazabal
+R Mark O'Meara | Mark OMeara
+R Larry Mize :: An Augusta native who played his college golf at Georgia Tech.
+R Fuzzy Zoeller
+R Craig Stadler | The Walrus
+R Sandy Lyle
+R Ian Woosnam | Woosie
+R Raymond Floyd | Ray Floyd
+R Gene Sarazen
+R Byron Nelson
+R Billy Casper
+D Henry Picard
+D Ralph Guldahl
+D Jimmy Demaret
+D Craig Wood
+D Herman Keiser
+D Claude Harmon
+D Cary Middlecoff
+D Jack Burke Jr. | Jack Burke | Jackie Burke
+D Doug Ford
+D Art Wall Jr. | Art Wall
+D Gay Brewer
+D Bob Goalby
+D George Archer
+D Charles Coody
+D Tommy Aaron :: A Georgian, from Gainesville.
+X Horton Smith :: He won the very first one, in 1934, and again in 1936.
+! Bobby Jones :: he co-founded the Masters and played in it, but never won it
+! Greg Norman :: runner-up three times, never the winner
+! Ernie Els :: never won the Masters
+! Lee Trevino :: never won the Masters
+! Brooks Koepka :: never won the Masters
+! Justin Thomas :: never won the Masters
+! Xander Schauffele :: never won the Masters
+! Collin Morikawa :: never won the Masters
+! Tom Kite :: never won the Masters
+! Johnny Miller :: never won the Masters
+! David Duval :: a Tech great, but never a Masters champion
+! Stewart Cink :: a Tech great who won the Open, not the Masters
+! Matt Kuchar :: a Tech great, but never a Masters champion
+! Payne Stewart :: never won the Masters
+! Justin Rose :: runner-up, never the winner
+! Bryson DeChambeau :: never won the Masters
+
+@gold96 | ATLANTA | Name a country that won gold at the 1996 Atlanta Olympics | pool=gt | type=closed | count=53 | source=Wikipedia, 1996 Summer Olympics medal table | clar=Tech's campus was the Olympic Village
+C United States | USA | US | America | United States of America
+C Russia | Russian Federation
+C Germany
+C China | People's Republic of China
+T Hong Kong :: Its first Olympic gold ever, in windsurfing.
+S France
+S Italy
+S Australia
+S Cuba
+S Japan
+S Canada
+S Great Britain | UK | United Kingdom | Britain | England | GB | Team GB :: One gold, in rowing. A famously lean Games.
+S Brazil
+S Spain
+S South Korea | Korea | Republic of Korea
+S Jamaica
+S Kenya
+R Ukraine
+R Poland
+R Hungary
+R Romania
+R Netherlands | Holland | The Netherlands
+R Greece
+R Ethiopia
+R Nigeria :: Men's football: the "Dream Team" that beat Brazil and Argentina.
+R Sweden
+R Norway
+R Turkey | Türkiye
+R South Africa
+R New Zealand
+R Ireland
+R Switzerland
+R Denmark
+R Bulgaria
+R Czech Republic | Czechia
+R Belgium
+R Finland
+D Kazakhstan
+D North Korea | DPRK
+D Algeria
+D Belarus
+D FR Yugoslavia | Yugoslavia | Serbia | Serbia and Montenegro | Federal Republic of Yugoslavia
+D Indonesia
+D Iran
+D Slovakia
+D Armenia
+D Croatia
+D Portugal
+D Thailand
+D Costa Rica
+D Ecuador
+D Syria
+X Burundi :: Its first Olympics, and a gold in the men's 5,000 metres.
+! Mexico :: won a medal in Atlanta, but no gold
+! Argentina :: silver in football, but no gold
+! India :: one bronze, no gold
+! Israel :: one bronze, no gold
+! Austria :: medals but no gold
+! Georgia :: the country won two bronzes; the state hosted
+! Morocco :: medals but no gold
+! Bahamas :: a silver, no gold
+! Egypt :: no medals in Atlanta
+! Soviet Union :: dissolved in 1991; its republics competed separately
+! Argentina :: no gold in 1996
+! Colombia :: no medals in Atlanta
+! Trinidad and Tobago :: two bronzes, no gold
+
+@stateparks | GEORGIA | Name a Georgia state park | pool=gt | type=closed | count=45 | source=Wikipedia, List of Georgia state parks | clar=state parks only, not historic sites | strip=state,park,lodge
+C Amicalola Falls | Amicalola | Amicalola Falls State Park & Lodge
+C Tallulah Gorge | Tallulah Falls | Tallulah
+C Cloudland Canyon | Cloudland
+C Sweetwater Creek | Sweetwater
+T Providence Canyon | Providence | Little Grand Canyon | Providence Canyon State Outdoor Recreation Area
+S Red Top Mountain | Red Top
+S Vogel
+S Unicoi | Unicoi State Park & Lodge
+S Fort Yargo | Ft Yargo
+S F. D. Roosevelt | FDR | F.D. Roosevelt | Franklin D. Roosevelt | Roosevelt
+S Panola Mountain | Panola
+S Black Rock Mountain | Black Rock
+S Fort Mountain | Ft Mountain
+S Hard Labor Creek | Hard Labor
+S Skidaway Island | Skidaway
+S High Falls
+S Indian Springs
+S Don Carter
+S Stephen C. Foster | Stephen Foster | Stephen C Foster :: The state park inside the Okefenokee.
+R Fort McAllister | Ft McAllister
+R Chattahoochee Bend
+R Crooked River
+R Smithgall Woods
+R Tugaloo
+R Moccasin Creek
+R Victoria Bryant
+R Watson Mill Bridge | Watson Mill
+R Mistletoe
+R Elijah Clark
+R Richard B. Russell | Richard Russell | Richard B Russell
+R James H. Floyd | James H Floyd | Sloppy Floyd | James Floyd
+R Georgia Veterans | Georgia Veterans Memorial | Lake Blackshear
+R Seminole
+R Reed Bingham
+R General Coffee
+R Laura S. Walker | Laura S Walker | Laura Walker
+R Magnolia Springs
+D A.H. Stephens | AH Stephens | Alexander H. Stephens | Alexander Stephens
+D George L. Smith | George L Smith
+D George T. Bagby | George T Bagby | George Bagby
+D Hamburg
+D Jack Hill | Gordonia-Alatamaha | Gordonia Alatamaha :: Called Gordonia-Alatamaha until it was renamed.
+D Kolomoki Mounds | Kolomoki
+D Little Ocmulgee | Little Ocmulgee State Park & Lodge
+X Florence Marina :: On Lake Walter F. George, at the Alabama line.
+! Stone Mountain :: run by its own state authority; not part of the state park system
+! Okefenokee :: a national wildlife refuge; the state park inside it is Stephen C. Foster
+! Jekyll Island :: run by a state authority, not a state park
+! Cumberland Island :: a national seashore
+! Kennesaw Mountain :: a national battlefield park
+! Chattahoochee River :: a national recreation area
+! Brasstown Bald :: in a national forest
+! Lake Lanier :: not a state park (Don Carter State Park is on it)
+! Etowah Indian Mounds :: a state historic site, not a state park
+! Piedmont Park :: a city park in Atlanta
+! Wormsloe :: a state historic site, not a state park
