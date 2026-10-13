@@ -1290,6 +1290,17 @@ async function main() {
           fixed.forEach((x) => { if (hit(f, x)) window.__bad[f.name + ' overlaps ' + x.name + ' (' + phase + ')'] = 1; });
           floats.slice(i + 1).forEach((g) => { if (hit(f, g)) window.__bad[f.name + ' overlaps ' + g.name + ' (' + phase + ')'] = 1; });
         });
+        // the sun never sits behind the reveal text, the answer tag or a tier label
+        const sb = window.__swarm.scene.box('sun');
+        if (sb) {
+          const sun = { name: 'sun', l: sb.x + 2, t: sb.y + 2, r: sb.x + sb.w - 2, b: sb.y + sb.h - 2 };
+          window.__seen.sun = (window.__seen.sun || 0) + 1;
+          ['#reveal > *', '#tag', '#worldLayer .tier-line.on span'].forEach((sel) => document.querySelectorAll(sel).forEach((n) => { if (n.getClientRects().length && hit(sun, box(n, sel))) window.__bad['the sun is behind ' + sel + (n.id ? ' ' + n.id : '') + ' (' + phase + ')'] = 1; }));
+        }
+        // a caption never outlives the thing it describes, and tier labels never change size
+        const cap = document.getElementById('caption');
+        if (vis(cap) && cap.dataset.sight && cap.dataset.sight !== 'flag' && !window.__swarm.scene.sightingVisible(cap.dataset.sight)) window.__bad['caption for ' + cap.dataset.sight + ' is up after it scrolled away (' + phase + ')'] = 1;
+        document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => { const r = n.getBoundingClientRect(); if (Math.abs(r.height - n.offsetHeight) > 1 || Math.abs(r.width - n.offsetWidth) > 1) window.__bad['tier label drawn at ' + Math.round(r.height) + 'px instead of ' + n.offsetHeight + 'px'] = 1; });
         window.__checks++;
       }, 50);`;
     const notes = [];
@@ -1316,6 +1327,7 @@ async function main() {
       const checks = await page.eval('window.__checks');
       assert.deepEqual(bad, [], size.width + 'px: ' + bad.join('; '));
       assert.ok(checks > 300, 'the boxes were checked all the way up: ' + checks);
+      assert.ok(seen.sun > 20, 'the sun was on screen to be checked: ' + JSON.stringify(seen));
       assert.ok(seen.fact > 20 && seen.caption > 5 && seen.toast > 5, 'facts, captions and toasts were all on screen to be checked: ' + JSON.stringify(seen));
       notes.push(size.width + 'px: ' + checks + ' checks, ' + JSON.stringify(seen));
       noProblems(page);

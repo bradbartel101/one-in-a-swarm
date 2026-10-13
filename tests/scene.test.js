@@ -81,6 +81,8 @@ test('there is exactly one sun: it only ever sinks and warms, and once set it ne
   assert.ok(at(500).y < at(9000).y && at(9000).y < at(13000).y && at(13000).y < at(27000).y);
   assert.equal(at(62000), null);
   assert.notEqual(Scene.sunAt(0).core, Scene.sunAt(250).core, 'and it changes colour on the way');
+  // it keeps to the left of the sky: the answer tag is in the middle and the tier labels on the right
+  for (let p = 0; p < Scene.SUN_SET; p += 5) assert.ok(Scene.sunAt(p).x > 0.08 && Scene.sunAt(p).x < 0.2, 'left of the sky at ' + p);
 });
 
 test('the lower sky changes: it deepens every few thousand feet, and there is a cloud deck to fly through', () => {
@@ -98,4 +100,11 @@ test('the lower sky changes: it deepens every few thousand feet, and there is a 
   const order = ['drawCumulus(t, false);', 'drawBees(t);', 'drawCumulus(t, true);'].map((call) => src.indexOf(call));
   assert.ok(order[0] > 0 && order[0] < order[1] && order[1] < order[2], 'clouds behind the bee, the bee, then clouds in front');
   assert.match(src, /drawMorning\(\);/);
+});
+
+test('tier lines glow as the answer passes; nothing about them changes size', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'css', 'style.css'), 'utf8');
+  const pulse = css.slice(css.indexOf('@keyframes line-pulse'), css.indexOf('}', css.indexOf('100%', css.indexOf('@keyframes line-pulse'))) + 1);
+  assert.match(pulse, /box-shadow/);
+  assert.doesNotMatch(pulse, /scale|transform|font-size|zoom/, 'Regression: the pulse used to scale the line, and its label with it');
 });

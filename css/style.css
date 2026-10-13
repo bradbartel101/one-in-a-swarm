@@ -105,7 +105,8 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
 .tier-line.on { opacity: 1; animation: line-pulse 0.5s ease-out; } /* a pulse as the answer passes */
 .tier-line.won { border-top: 5px solid var(--line, var(--edge)); margin-top: -1px; box-shadow: 0 0 12px var(--line, var(--edge)); } /* where it stopped */
 .tier-line.won span { outline: 2px solid #ffffff; }
-@keyframes line-pulse { 0% { opacity: 0; transform: scaleY(1); } 30% { opacity: 1; transform: scaleY(3.5); } 100% { opacity: 1; transform: scaleY(1); } }
+/* a glow, never a change of size: the label is a child of the line and must stay one size */
+@keyframes line-pulse { 0% { opacity: 0; box-shadow: 0 0 0 0 var(--line, var(--edge)); filter: brightness(1); } 30% { opacity: 1; box-shadow: 0 0 16px 4px var(--line, var(--edge)); filter: brightness(1.5); } 100% { opacity: 1; box-shadow: 0 0 0 0 transparent; filter: brightness(1); } }
 .tier-line span { position: absolute; right: 6px; top: -13px; padding: 0.1rem 0.45rem; font-family: var(--pixel); font-size: 0.6rem; line-height: 1.6; background: var(--line, var(--panel)); color: var(--tier-ink); border-color: var(--tier-ink); }
 .tag {
   position: fixed; z-index: 2; left: 50%; max-width: 46vw; padding: 0.35rem 0.6rem; font-size: 0.95rem; line-height: 1.2;

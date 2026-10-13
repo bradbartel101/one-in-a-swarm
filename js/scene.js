@@ -69,7 +69,8 @@
     const low = Math.max(0, score) / SUN_SET;
     if (low >= 1) return null;
     const mix = (a, b) => 'rgb(' + [0, 1, 2].map((k) => Math.round(a[k] + (b[k] - a[k]) * low)).join(',') + ')';
-    return { x: 0.62 + 0.05 * low, y: 0.14 + 0.94 * low, warm: low, core: mix([255, 246, 200], [255, 158, 84]), edge: mix([255, 229, 138], [238, 110, 58]) };
+    // It keeps to the left of the sky, clear of the answer tag (centre) and the tier labels (right).
+    return { x: 0.15 - 0.04 * low, y: 0.14 + 0.94 * low, warm: low, core: mix([255, 246, 200], [255, 158, 84]), edge: mix([255, 229, 138], [238, 110, 58]) };
   }
 
   function zoneAt(score) {
@@ -117,6 +118,9 @@
     let dim = 0;
     let trick = null; // { name, start, ms }
     let look = false; // glancing down at the answer box
+    let avoid = []; // boxes of text, in canvas pixels, that the sun must never sit behind
+    let sunAlpha = 1;
+    const inView = new Set(); // sightings with any part on screen in the last frame
     let safeTop = -Infinity;
     let safeBottom = Infinity;
     let popped = false;
@@ -243,10 +247,18 @@
       if (!sun) return;
       const x = Math.round(W * sun.x);
       const y = Math.round(H * sun.y);
+      // Text always wins: where the reveal, the tag or a tier label is in the way, the sun is
+      // not drawn at all, and it fades back in once the sky there is clear.
+      const box = { x: x - 13, y: y - 13, w: 26, h: 26 };
+      const blocked = avoid.some((a) => box.x < a.x + a.w && box.x + box.w > a.x && box.y < a.y + a.h && box.y + box.h > a.y);
+      sunAlpha = blocked ? 0 : Math.min(1, sunAlpha + (still() ? 1 : 0.08));
+      if (blocked) return;
+      ctx.globalAlpha = sunAlpha;
       disc(x, y, 7, sun.edge);
       disc(x, y, 5, sun.core);
       [[-12, 0], [12, 0], [0, -12], [0, 12], [-9, -9], [9, -9], [-9, 9], [9, 9]].forEach((d) => px(x + d[0], y + d[1], 2, 2, sun.edge));
-      boxes.sun = { x: x - 13, y: y - 13, w: 26, h: 26 };
+      ctx.globalAlpha = 1;
+      boxes.sun = box;
     }
 
     /* ----- campus, 0 to 40 ----- */
@@ -837,11 +849,13 @@
 
     function drawSightings(t) {
       delete boxes.balloon;
+      inView.clear();
       SIGHTINGS.forEach((g) => {
         const y = rowOf(g.score);
         if (g.id !== 'flag' && !onScreen(y, 70)) return;
         const box = ART[g.id](g, X(g.x), y, t);
         // "Seen" means properly in view: inside the middle of the screen, not just clipping an edge.
+        if (box && box.y + box.h > 0 && box.y < H) inView.add(g.id);
         if (box && box.y > H * 0.08 && box.y + box.h < H * 0.92) seen.add(g.id);
       });
     }
@@ -1008,6 +1022,8 @@
       setAnchor(frac) { anchor = frac; },
       setMood(m) { mood = m; },
       setLook(on) { look = !!on; },
+      setAvoid(rects) { avoid = rects.map((r) => ({ x: r.left / S - 1, y: r.top / S - 1, w: (r.right - r.left) / S + 2, h: (r.bottom - r.top) / S + 2 })); },
+      sightingVisible(id) { return inView.has(id); },
       // Rows of the canvas that ruler labels may be drawn in.
       setSafe(top, bottom) { safeTop = top; safeBottom = bottom; },
       // A small cloud of pollen left behind as a climb begins.

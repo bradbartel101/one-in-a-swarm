@@ -99,6 +99,7 @@
   let introTimer = 0;
   let lockUntil = 0;
   let lockTimer = 0;
+  let capId = null; // the sighting the caption on screen belongs to
 
   let scene = null;
   let cam = 0; // the score the camera sits on
@@ -150,6 +151,7 @@
     if (g.disabled) g.value = '';
     aimCamera();
     layoutFloating(true);
+    if (scene) scene.draw(performance.now()); // never a frame of the old picture under new text
     flushToasts();
   }
 
@@ -205,30 +207,48 @@
     }, TOAST_MS);
   }
 
-  // Captions for sightings: one at a time, each for about three seconds, in one fixed place.
+  // Captions for sightings: one at a time, each for about three seconds, then a fade. A caption
+  // belongs to the thing it describes: once that has scrolled off the screen the caption goes
+  // with it, and captions still waiting for things that are no longer in view are dropped.
   function queueCaption(id) {
     if (captioned.has(id)) return;
     captioned.add(id);
-    capQueue.push(scene.sightings.filter((g) => g.id === id)[0].caption);
+    capQueue.push({ id, text: scene.sightings.filter((g) => g.id === id)[0].caption });
     nextCaption();
   }
 
+  // The flag is planted where the flight ended, so it is in view from the moment it is earned.
+  function captionSubjectInView(id) {
+    return id === 'flag' || scene.sightingVisible(id);
+  }
+
   function nextCaption() {
-    if (capTimer || !capQueue.length) return;
+    if (capTimer) return;
+    while (capQueue.length && !captionSubjectInView(capQueue[0].id)) capQueue.shift();
+    if (!capQueue.length) return;
     const node = $('caption');
-    node.textContent = capQueue.shift();
+    const next = capQueue.shift();
+    capId = next.id;
+    node.textContent = next.text;
+    node.dataset.sight = next.id;
     node.classList.remove('out');
     node.hidden = false;
     delete node.dataset.corner;
     layoutFloating(true);
+    capTimer = window.setTimeout(fadeCaption, CAPTION_MS);
+  }
+
+  function fadeCaption() {
+    if (!capId) return;
+    capId = null;
+    const node = $('caption');
+    node.classList.add('out'); // fade
+    window.clearTimeout(capTimer);
     capTimer = window.setTimeout(() => {
-      node.classList.add('out'); // fade
-      capTimer = window.setTimeout(() => {
-        node.hidden = true;
-        capTimer = 0;
-        nextCaption();
-      }, 300);
-    }, CAPTION_MS);
+      node.hidden = true;
+      capTimer = 0;
+      nextCaption();
+    }, 300);
   }
 
   function goldFlash() {
@@ -309,7 +329,6 @@
       s.hidden = s.getAttribute('data-view') !== name;
     });
     document.body.classList.toggle('playing', name === 'play' || name === 'between');
-    scene.drainSeen(); // whatever was in view on the last screen does not count on this one
     $('hud').hidden = !(name === 'play' || name === 'between');
     if (name !== 'play' && name !== 'between') window.scrollTo(0, 0);
     const late = name === 'home' && new Date().getHours() < 4; // the small hours get a night sky
@@ -318,6 +337,8 @@
     if (late) markFound('night');
     aimCamera();
     layoutFloating(true);
+    scene.draw(performance.now());
+    scene.drainSeen(); // whatever was in view on the last screen does not count on this one
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
 
@@ -626,12 +647,13 @@
     anchor += (anchorTarget - anchor) * 0.14;
     scene.setAnchor(anchor);
     scene.setCamera(cam);
-    scene.draw(now);
     $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
     layoutFloating(++frames % 4 === 0); // facts every frame, since the world moves under them
+    scene.draw(now); // after the layout pass, so the sun knows this frame's text
+    if (capId && !captionSubjectInView(capId)) fadeCaption(); // its subject has scrolled away
     // The bee glances down at the answer box while something is being typed.
     scene.setLook(document.body.dataset.phase === 'guess' && $('guess').value.length > 0);
     if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
@@ -710,6 +732,7 @@
   let floatArea0 = null; // the last measured area, fixed boxes and placed toast and caption
   let floatFixed = [];
   let floatPlaced = [];
+  let revealBoxes = [];
 
   // `full` measures everything again and places the toast and the caption; it runs on every
   // change of screen and a few times a second. The pass in between is cheap and runs on every
@@ -746,6 +769,18 @@
       taken.push({ left: tag._m.left, right: tag._m.right, top, bottom: top + tag._m.h });
     }
     document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => taken.push(worldBox(n, Number(n.parentNode.dataset.score))));
+    // the sun stays out from behind the reveal text, the tag and the tier labels
+    // (the reveal is measured on every frame while it is up: it animates in, and it is the
+    // one place where a stale box would put the sun behind words)
+    revealBoxes = [];
+    if (view === 'between') {
+      document.querySelectorAll('#reveal > *').forEach((n) => {
+        if (!n.getClientRects().length) return;
+        revealBoxes.push(n.getBoundingClientRect());
+        revealBoxes.push(layoutBox(n)); // and where it is heading
+      });
+    }
+    scene.setAvoid(revealBoxes.concat(taken.slice(floatFixed.length)));
     const bee = scene.box('bee');
     if (bee) taken.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
     const free = (r) => r.left >= area.left && r.right <= area.right && r.top >= area.top && r.bottom <= area.bottom && !taken.some((b) => hits(r, b, 6));
