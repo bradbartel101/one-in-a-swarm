@@ -1690,6 +1690,145 @@ D Triple 9
 X Sharky's Machine | Sharkys Machine :: Burt Reynolds, 1981: Atlanta cops under the Atlanta skyline.
 ~D Road Trip ?? Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.
 ~D Jumanji: Welcome to the Jungle ?? Shot in Hawaii and Atlanta; unsure it counts as "largely" Atlanta.
+S Black Panther: Wakanda Forever | Wakanda Forever
+S Guardians of the Galaxy Vol. 3 | Guardians 3
+S Ant-Man and the Wasp
+R Fast Five
+R Furious 7 | Fast and Furious 7
+R Zombieland: Double Tap | Zombieland 2
+R Ride Along
+R The Accountant
+R Diary of a Mad Black Woman
+R Madea's Family Reunion
+R Tyler Perry's House of Payne | House of Payne
+R The Real Housewives of Atlanta | RHOA
+R Love & Hip Hop: Atlanta
+R Bad Boys for Life
+R Bad Boys: Ride or Die
+R Coming 2 America
+R Red Notice
+R Godzilla: King of the Monsters
+R Richard Jewell
+R Love, Simon
+R The Hate U Give
+R Pitch Perfect 3
+R Creed III | Creed 3
+R Captain America: Brave New World | Brave New World
+R Thunderbolts
+R She-Hulk: Attorney at Law | She-Hulk
+R Ms. Marvel
+R The Originals
+R Black Lightning
+R Will Trent
+R BMF | Black Mafia Family
+R P-Valley
+D Legacies
+D Stargirl
+D Sweet Magnolias
+D Insatiable
+D Raising Dion
+D The Haves and the Have Nots
+D Sistas
+D The Oval
+D Meet the Browns
+D Being Mary Jane
+D Star
+D Survivor's Remorse
+D Halt and Catch Fire
+D Rectify
+D Necessary Roughness
+D Drop Dead Diva
+D Constantine
+D Red Band Society
+D Devious Maids
+D Finding Carter
+D The Gifted
+D The Passage
+D Echo
+D Ironheart
+D Agatha All Along
+D Found
+D The Wonder Years
+D Heels
+D Creepshow
+D Step Up: High Water | Step Up
+D Teenage Bounty Hunters
+D Lodge 49
+D The Outsider
+D A Man in Full
+D The Staircase
+D Ordinary Joe
+D In the Heat of the Night
+D Family Feud
+D Insurgent
+D Allegiant
+D The 5th Wave | The Fifth Wave
+D Goosebumps
+D Dear Evan Hansen
+D The Tomorrow War
+D Samaritan
+D The Mule
+D Instant Family
+D Life of the Party
+D Blockers
+D Uncle Drew
+D Superfly
+D What Men Want
+D Night School
+D Keeping Up with the Joneses
+D Mother's Day
+D Barbershop: The Next Cut | Barbershop 3
+D The Founder
+D Hall Pass
+D The Change-Up
+D Joyful Noise
+D What to Expect When You're Expecting
+D The Three Stooges
+D Prisoners
+D Kill the Messenger
+D Taken 3
+D The Duff
+D Sleepless
+D Miracles from Heaven
+D The Boss
+D Office Christmas Party
+D Thank You for Your Service
+D First Man
+D Boy Erased
+D The Front Runner
+D Doctor Sleep
+D The Banker
+D Greenland
+D The Conjuring: The Devil Made Me Do It | The Conjuring 3
+D Fear Street
+D Respect
+D Shazam! Fury of the Gods | Shazam 2
+D Megalopolis
+D Fly Me to the Moon
+D Let's Be Cops
+D The Nice Guys
+D Neighbors 2 | Neighbors 2: Sorority Rising
+D Vacation
+D Footloose
+D Million Dollar Arm
+! Gone with the Wind :: set in Georgia, but shot in California
+! Designing Women :: set in Atlanta, shot in Los Angeles
+! Matlock :: set in Atlanta, shot in California and North Carolina
+! Forrest Gump :: shot mostly in South Carolina and Savannah
+! Fried Green Tomatoes :: shot in Juliette, well south of the metro area
+! Deliverance :: shot on the Chattooga River in north Georgia
+! My Cousin Vinny :: shot in Monticello and other small Georgia towns, not metro Atlanta
+! Midnight in the Garden of Good and Evil :: shot in Savannah
+! The Hunger Games :: the first film was shot in North Carolina; the sequels are listed
+! Thor: Ragnarok :: shot in Australia
+! Outer Banks :: shot around Charleston
+! Cocaine Bear :: set in Georgia, shot in Ireland
+! Glory :: shot around Savannah and Jekyll Island
+! Squidbillies :: animated
+! Archer :: animated in Atlanta, but not filmed
+! Iron Man :: the first film was shot in California
+! Juror #2 :: shot in Savannah
+! Teen Wolf :: only its early seasons were shot in Atlanta
 
 @musicians | ATLANTA | Name a musician or group from the Atlanta area | pool=gt | type=open | clar=came up in Atlanta or its suburbs
 C OutKast
@@ -1751,6 +1890,147 @@ D Butch Walker
 X Drivin N Cryin | Drivin' N' Cryin' | Drivin and Cryin :: Atlanta rock since 1985.
 ~D Soulja Boy ?? Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
 ~D Trinidad James ?? Born in Trinidad and raised partly in Atlanta; unsure of the details.
+S Quavo
+S Offset
+S Takeoff
+S JID
+S India.Arie
+R EarthGang
+R 6lack | Black
+R Russ
+R Lloyd
+R Jagged Edge
+R 112
+R Kandi Burruss | Kandi
+R Jacquees
+R Lil Scrappy
+R Trillville
+R Bone Crusher
+R Pastor Troy
+R Yung Joc
+R Young Dro
+R Crime Mob
+R Unk | DJ Unk
+R Travis Porter
+R Roscoe Dash
+R Young Nudy
+R Lil Keed
+R Chloe x Halle | Chloe and Halle | Chloe Bailey | Halle Bailey
+R Mariah the Scientist
+R Travis Tritt
+R Alan Jackson :: From Newnan, on the metro area's southern edge.
+R Blackberry Smoke
+R Georgia Satellites
+R Atlanta Rhythm Section | ARS
+R Third Day
+R Brenda Lee
+R Jerry Reed
+R Ray Stevens
+R Sleepy Brown
+R Organized Noize
+R Big Gipp
+R Run the Jewels
+R Faye Webster
+R Cat Power | Chan Marshall
+D Kilo Ali
+D Rocko
+D OJ da Juiceman
+D Raury
+D K Camp
+D Kap G
+D Lil Gotit
+D SahBabii
+D Hoodrich Pablo Juan
+D Bankroll Fresh
+D Peewee Longway
+D Young Scooter
+D Rich Kidz
+D Trouble
+D Ralo
+D Money Man
+D Baby Tate
+D Kodie Shane
+D Gorilla Zoe
+D Boyz n da Hood
+D Shop Boyz
+D V.I.C.
+D Cherish
+D Blaque
+D Another Bad Creation | ABC
+D Tag Team
+D MC Shy D
+D Raheem the Dream
+D Cool Breeze
+D Witchdoctor
+D Silk
+D Bobby V | Bobby Valentino
+D T-Boz | Tionne Watkins
+D Chilli | Rozonda Thomas
+D Left Eye | Lisa Lopes | Lisa Left Eye Lopes
+D Tiny | Tameka Cottle | Tiny Harris
+D Algebra Blessett | Algebra
+D Anthony David
+D Joi
+D Mother's Finest
+D S.O.S. Band
+D Brick
+D The Tams
+D Joe South
+D Tommy Roe
+D Blind Willie McTell
+D Fiddlin' John Carson
+D Mattiwilda Dobbs
+D Black Lips
+D Cartel
+D Norma Jean
+D The Chariot
+D Attila
+D Issues
+D Woe, Is Me
+D Royal Thunder
+D Stuck Mojo
+D Family Force 5
+D Marvelous 3
+D Shawn Mullins
+D Michelle Malone
+D The Producers
+D Swimming Pool Q's
+D Col. Bruce Hampton | Bruce Hampton | Colonel Bruce Hampton
+D Tinsley Ellis
+D Sean Costello
+D Kaki King
+D Mattiel
+D Omni
+D Algiers
+D Microwave
+D The Rock*A*Teens
+D Yung L.A.
+D Jody Breeze
+D Ghetto Mafia
+! R.E.M. :: from Athens, 70 miles east
+! The B-52's :: from Athens
+! Widespread Panic :: from Athens
+! James Brown :: raised in Augusta
+! Ray Charles :: born in Albany, Georgia, and raised in Florida
+! Little Richard :: from Macon
+! Otis Redding :: from Macon
+! The Allman Brothers Band :: based in Macon
+! Jason Aldean :: from Macon
+! Luke Bryan :: from Leesburg, in south Georgia
+! Kanye West :: born in Atlanta, but raised in Chicago
+! Justin Bieber :: from Ontario; he moved to Atlanta after he was signed
+! Elton John :: has a home in Atlanta, but is from England
+! Kelly Rowland :: born in Atlanta, but came up in Houston
+! Lady A :: formed in Nashville; two members are from Augusta
+! Curtis Mayfield :: from Chicago; moved to Atlanta later in life
+! Toni Braxton :: from Maryland; signed to Atlanta's LaFace
+! Metro Boomin :: from St. Louis; moved to Atlanta for college
+! Rae Sremmurd :: from Tupelo, Mississippi
+! Bubba Sparxxx :: from LaGrange, well outside the metro area
+! Lynyrd Skynyrd :: from Jacksonville, Florida
+! Nelly :: from St. Louis
+! Florida Georgia Line :: formed in Nashville
+! Normani :: born in Atlanta, but raised in New Orleans and Houston
 
 @braves | ATLANTA SPORTS | Name a player from Atlanta Braves history | pool=gt | type=open | clar=1966 to today
 C Hank Aaron | Henry Aaron | Hammerin Hank
@@ -1819,6 +2099,205 @@ D Charlie Morton
 D Glenn Hubbard
 D Kent Mercker
 X Biff Pocoroba | Pocoroba :: Braves catcher, 1975 to 1984, and an All-Star in 1978.
+S Marcell Ozuna
+S Chris Sale
+R Eddie Mathews :: Played the Braves' first season in Atlanta, 1966.
+R Joe Torre
+R Felipe Alou
+R Orlando Cepeda
+R Andrés Galarraga | Big Cat
+R Brian Jordan
+R Lonnie Smith
+R Rafael Belliard
+R Denny Neagle
+R Mike Hampton
+R Adam LaRoche
+R Kelly Johnson
+R Edgar Rentería
+R Billy Wagner
+R Justin Upton
+R B.J. Upton | Melvin Upton | Melvin Upton Jr.
+R Kris Medlen
+R Tommy Hanson
+R Ender Inciarte
+R Josh Donaldson
+R Mike Soroka
+R Ian Anderson
+R Travis d'Arnaud
+R Adam Duvall
+R Joc Pederson
+R A.J. Minter
+R Tyler Matzek
+R Kenley Jansen
+R Sean Murphy
+R Orlando Arcia
+R Raisel Iglesias
+R Bartolo Colón
+R Walt Weiss
+R Gaylord Perry
+R Davey Johnson
+R Drake Baldwin
+R Spencer Schwellenbach
+R Jurickson Profar
+D Clete Boyer
+D Félix Millán
+D Tony Cloninger
+D Ron Reed
+D Cecil Upshaw
+D Hoyt Wilhelm
+D Mike Lum
+D Earl Williams
+D Buzz Capra
+D Carl Morton
+D Andy Messersmith
+D Jeff Burroughs
+D Gary Matthews
+D Chris Chambliss
+D Claudell Washington
+D Rafael Ramírez
+D Bruce Benedict
+D Brett Butler
+D Rick Camp
+D Pascual Pérez
+D Rick Mahler
+D Steve Bedrosian
+D Zane Smith
+D Ken Oberkfell
+D Gerald Perry
+D Ozzie Virgil | Ozzie Virgil Jr.
+D Andrés Thomas
+D Oddibe McDowell
+D Jeff Treadway
+D Pete Smith
+D Charlie Leibrandt
+D Greg Olson
+D Brian Hunter
+D Alejandro Peña
+D Mike Stanton
+D Damon Berryhill
+D Jeff Reardon
+D Greg McMichael
+D Jermaine Dye
+D Michael Tucker
+D Bret Boone
+D Quilvio Veras
+D Reggie Sanders
+D John Burkett
+D B.J. Surhoff
+D Vinny Castilla
+D Robert Fick
+D Russ Ortiz
+D Johnny Estrada
+D Jaret Wright
+D Horacio Ramírez
+D Yunel Escobar
+D Matt Diaz
+D Mark Kotsay
+D Derek Lowe
+D Javier Vázquez
+D Jonny Venters
+D Eric O'Flaherty
+D Peter Moylan
+D Rafael Soriano
+D Nate McLouth
+D Michael Bourn
+D Brandon Beachy
+D Mike Minor
+D Alex Wood
+D Chris Johnson
+D Ervin Santana
+D Shelby Miller
+D Adonis García
+D Matt Kemp
+D R.A. Dickey
+D Mike Foltynewicz | Folty
+D Sean Newcomb
+D Johan Camargo
+D Tyler Flowers
+D Kurt Suzuki
+D Dallas Keuchel
+D Will Smith
+D Luke Jackson
+D Kyle Wright
+D Vaughn Grissom
+D Bryce Elder
+D Jarred Kelenic
+D Reynaldo López
+D Tom House :: Caught Hank Aaron's 715th home run in the bullpen.
+D Wilson Betemit
+D Brooks Conrad
+D Eric Hinske
+D David Ross
+D Paul Byrd
+D Mike Remlinger
+D Kerry Ligtenberg
+D Eddie Pérez
+D Keith Lockhart
+D Ozzie Guillén
+D Gerald Williams
+D Mike Devereaux
+D Luis Polonia
+D Charlie O'Brien
+D Jerry Royster
+D Rowland Office
+D Barry Bonnell
+D Joe Niekro
+D Al Hrabosky
+D Terry Forster
+D Donnie Moore
+D Len Barker
+D Bob Watson
+D Graig Nettles
+D Ted Simmons
+D Ken Griffey Sr. | Ken Griffey
+D Dion James
+D Albert Hall
+D Jordan Schafer
+D Gregor Blanco
+D Omar Infante
+D Troy Glaus
+D Garret Anderson
+D Casey Kotchman
+D Charlie Culberson
+D Brandon Phillips
+D Jason Grilli
+D Jim Johnson
+D Arodys Vizcaíno
+D Mark Melancon
+D Pablo Sandoval
+D Guillermo Heredia
+D Drew Smyly
+D Huascar Ynoa
+D Touki Toussaint
+D William Contreras
+D Cristian Pache
+D Kevin Pillar
+D Whit Merrifield
+D Ramón Laureano
+D Grant Holmes
+D Dylan Lee
+D Pierce Johnson
+D Joe Jiménez
+D Collin McHugh
+D Jesse Chavez
+D AJ Smith-Shawver
+D Hurston Waldrep
+D Jason Marquis
+! Babe Ruth :: finished with the Boston Braves in 1935, long before Atlanta
+! Warren Spahn :: pitched for the Braves in Boston and Milwaukee, never in Atlanta
+! Bobby Cox :: the manager; he never played for the Braves
+! Brian Snitker :: the manager; he never reached the majors as a player
+! Al Downing :: the Dodger who gave up Aaron's 715th
+! Skip Caray :: a broadcaster
+! Ted Turner :: the owner, who managed one game in 1977
+! Leo Mazzone :: the pitching coach
+! Mike Trout :: has never played for the Braves
+! Bryce Harper :: has never played for the Braves
+! Johnny Sain :: pitched for the Braves in Boston
+! Lew Burdette :: pitched for the Braves in Milwaukee
+! Joe Adcock :: played for the Braves in Milwaukee
+! Kirby Puckett :: beat the Braves in the 1991 World Series; never played for them
+! Jim Leyritz :: his home run beat the Braves in the 1996 World Series
 
 @falcons | ATLANTA SPORTS | Name a player from Atlanta Falcons history | pool=gt | type=open
 C Matt Ryan | Matty Ice
@@ -1886,6 +2365,170 @@ D Harry Douglas
 D Curtis Lofton
 D Jonathan Babineaux
 X Alfred Jenkins :: Falcons wide receiver, 1975 to 1983, and the league's receiving-yards leader in 1981.
+S Brett Favre :: Drafted by Atlanta in 1991 and traded to Green Bay a year later.
+R Billy "White Shoes" Johnson | Billy Johnson | White Shoes Johnson
+R Craig Heyward | Ironhead Heyward | Craig "Ironhead" Heyward
+R Chris Doleman
+R Cornelius Bennett
+R Eugene Robinson
+R Devin Hester
+R Dwight Freeney
+R Joe Horn
+R Peerless Price
+R Ovie Mughelli
+R Jacquizz Rodgers
+R Austin Hooper
+R Desmond Trufant
+R Keanu Neal
+R Robert Alford
+R Ricardo Allen
+R Takkarist McKinley
+R Brent Grimes
+R Sean Weatherspoon
+R Kroy Biermann
+R Matt Bosher
+R Russell Gage
+R Taylor Heinicke
+R Darnell Mooney
+R Kaden Elliss
+R Calais Campbell
+R Matthew Judon
+R Justin Simmons
+R Kaleb McGary
+R Jalen Walker
+R James Pearce Jr. | James Pearce
+R Xavier Watts
+R Joey Harrington
+R Lawyer Milloy
+D Bob Berry
+D Harmon Wages
+D Jim Butler | Cannonball Butler
+D Art Malone
+D Dave Hampton
+D John Zook
+D Greg Brezina
+D George Kunz
+D Ken Reaves
+D Jim Mitchell
+D Rolland Lawrence
+D Wallace Francis
+D Bubba Bean
+D Lynn Cain
+D Junior Miller
+D R.C. Thielemann
+D Buddy Curry
+D Al Richardson
+D Fulton Kuykendall
+D Joel Williams
+D Bobby Butler
+D Tom Pridemore
+D Mick Luckhurst
+D Stacey Bailey
+D David Archer
+D Rick Bryan
+D Tony Casillas
+D Mike Gann
+D John Rade
+D Scott Case
+D John Settle
+D Aundray Bruce
+D Michael Haynes
+D Mike Pritchard
+D Tim Green
+D Bruce Pickens
+D Billy Joe Tolliver
+D Erric Pegram
+D Bert Emanuel
+D Eric Metcalf
+D Chuck Smith
+D Lester Archambeau
+D Travis Hall
+D Shane Dronett
+D Bob Whitfield
+D O.J. Santiago
+D Tony Martin
+D Bob Christian
+D Steve DeBerg
+D Ashley Ambrose
+D Brady Smith
+D Rod Coleman
+D Michael Jenkins
+D Jerious Norwood
+D Jason Snelling
+D Todd McClure
+D Tyson Clabo
+D Harvey Dahl
+D Justin Blalock
+D Sam Baker
+D Thomas DeCoud
+D William Moore
+D Dunta Robinson
+D Corey Peters
+D Levine Toilolo
+D Taylor Gabriel
+D Eric Weems
+D Michael Koenen
+D Jay Feely
+D Jason Elam
+D Brian Poole
+D De'Vondre Campbell
+D Foyesade Oluokun
+D Adrian Clayborn
+D Dontari Poe
+D Osi Umenyiora
+D Olamide Zaccheaus
+D Hayden Hurst
+D Ray-Ray McCloud
+D Jonnu Smith
+D KhaDarel Hodge
+D David Onyemata
+D Bud Dupree
+D Arnold Ebiketie
+D Troy Andersen
+D Dee Alford
+D Richie Grant
+D Drew Dalman
+D Matthew Bergeron
+D Isaiah Oliver
+D Dante Fowler | Dante Fowler Jr.
+D Damontae Kazee
+D John James
+D Nick Mike-Mayer
+D Tim Mazzetti
+D Norm Johnson
+D Elbert Shelley
+D Tim McKyer
+D Devin Bush
+D Chris Draft
+D Ed Hartwell
+D Demorrio Williams
+D Michael Boley
+D Allen Rossum
+D Byron Leftwich
+D Chris Redman
+D D.J. Shockley
+D Danny Kanell
+D Hugh Millen
+D Pat Sullivan :: Auburn's Heisman winner spent four seasons as a Falcon.
+D June Jones
+D Kim McQuilken
+D Scott Hunter
+D Bob Lee
+! Arthur Blank :: the owner
+! Dan Reeves :: the coach, not a Falcons player
+! Jerry Glanville :: the coach
+! Mike Smith :: the coach
+! Dan Quinn :: the coach
+! Raheem Morris :: the coach
+! Tom Brady :: beat the Falcons in Super Bowl LI; never played for them
+! Calvin Johnson :: a Tech great, but he played for Detroit
+! Herschel Walker :: never played for the Falcons
+! Champ Bailey :: a Georgia native who played for Washington and Denver
+! Cam Newton :: from Atlanta, but played for Carolina and New England
+! Demaryius Thomas :: a Tech great who played mostly for Denver
+! Freddie Falcon :: the mascot
+! John Elway :: beat the Falcons in Super Bowl XXXIII
+! Terrell Davis :: beat the Falcons in Super Bowl XXXIII
 
 @hawks | ATLANTA SPORTS | Name a player from Atlanta Hawks history | pool=gt | type=open | clar=1968 to today
 C Dominique Wilkins | Nique | Human Highlight Film
@@ -1946,6 +2589,133 @@ D Josh Childress
 D Tony Delk
 D Theo Ratliff
 X John Drew :: A two-time All-Star for the Hawks in the 1970s.
+S Zaccharie Risacher
+S Dyson Daniels
+R Tracy McGrady
+R Rasheed Wallace :: Played exactly one game as a Hawk, in 2004.
+R Toni Kukoč
+R Glenn Robinson | Big Dog
+R Stephen Jackson
+R Antoine Walker
+R Al Harrington
+R Boris Diaw
+R Jeremy Lin
+R Rajon Rondo
+R Danilo Gallinari
+R Tim Hardaway Jr.
+R Kirk Hinrich
+R Jon Koncak
+R Danny Manning
+R Craig Ehlo
+R Sidney Moncrief
+R Maurice Cheeks
+R Kenny Smith
+R Connie Hawkins
+R Zelmo Beaty
+R Walt Hazzard
+R Mike Scott
+R Mike Muscala
+R Saddiq Bey
+R Kristaps Porziņģis
+R Nickeil Alexander-Walker
+R Larry Nance Jr.
+R Caris LeVert
+R Devin Harris
+R Elton Brand
+D Paul Silas
+D Herm Gilliam
+D Dwight Jones
+D Tom Van Arsdale
+D Dean Meminger
+D John Brown
+D Tom Henderson
+D Truck Robinson | Leonard Robinson
+D Steve Hawes
+D Armond Hill
+D Charlie Criss
+D Tom McMillen
+D Jack Givens
+D Rory Sparrow
+D Mike Glenn
+D Scott Hastings
+D Johnny Davis
+D John Battle
+D Duane Ferrell
+D Rumeal Robinson
+D Adam Keefe
+D Andrew Lang
+D Ken Norman
+D Grant Long
+D Priest Lauderdale
+D Chris Crawford
+D LaPhonso Ellis
+D Isaiah Rider | J.R. Rider
+D Jim Jackson
+D Lorenzen Wright
+D Dion Glover
+D DerMarr Johnson
+D Nazr Mohammed
+D Darvin Ham
+D Jacque Vaughn
+D Bob Sura
+D Kenny Anderson
+D Tyronn Lue
+D Royal Ivey
+D Salim Stoudamire
+D Speedy Claxton
+D Shelden Williams
+D Acie Law
+D Anthony Johnson
+D Mario West
+D Maurice Evans
+D Joe Smith
+D Jason Collins
+D Jerry Stackhouse
+D Willie Green
+D Ivan Johnson
+D DeShawn Stevenson
+D Pero Antić
+D Shelvin Mack
+D Tiago Splitter
+D Kris Humphries
+D Ersan İlyasova
+D Mike Dunleavy Jr. | Mike Dunleavy
+D José Calderón
+D Marco Belinelli
+D Dewayne Dedmon
+D Alex Len
+D DeAndre' Bembry
+D Jabari Parker
+D Evan Turner
+D Bruno Fernando
+D Kris Dunn
+D Delon Wright
+D Gorgui Dieng
+D AJ Griffin
+D Garrison Mathews
+D Justin Holiday
+D Kobe Bufkin
+D Mouhamed Gueye
+D Wesley Matthews
+D Patty Mills
+D Vit Krejci
+D Georges Niang
+D Terance Mann
+D Luke Kennard
+D Asa Newell
+! Bob Pettit :: a Hawk in Milwaukee and St. Louis, before the move to Atlanta
+! Cliff Hagan :: a St. Louis Hawk
+! Lenny Wilkens :: traded just as the team moved; he later coached the Hawks
+! Ed Macauley :: a St. Louis Hawk
+! Bill Russell :: drafted by the Hawks in 1956 and traded to Boston
+! Larry Bird :: his Celtics beat the Hawks in 1988
+! Michael Jordan :: never a Hawk
+! Luka Dončić :: drafted by Atlanta in 2018 and traded that night for Trae Young
+! Pau Gasol :: drafted by Atlanta in 2001 and traded at once
+! Mike Budenholzer :: the coach
+! Mike Fratello :: the coach
+! Harry the Hawk :: the mascot
+! Ted Turner :: the owner
 
 @collegetowns | RIVALS | Name the home city of a school in Tech's conference history | pool=gt | type=closed | clar=Southern, SEC, Metro or ACC
 C Athens :: Georgia. Wrong school, right answer.

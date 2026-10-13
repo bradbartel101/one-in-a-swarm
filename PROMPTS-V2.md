@@ -17,7 +17,7 @@ Tiers are estimates until there is real player data.
 - [x] D8. General prompts (kitchen tools, NHL, Shakespeare, Disney, emperors, pasta)
 - [x] D9. General prompts (spice rack, dinosaurs, Greek myth, college nicknames, yellow things, bowl games)
 - [x] D10a. Older general prompts brought up to the rules: elements to all 118, Heisman and NCAA champions complete with counts, programming languages to 80+; engineering and units retired and replaced
-- [ ] D10b. Older GT prompts topped up from knowledge to 80+: films, musicians, Braves, Falcons, Hawks
+- [x] D10b. Older GT prompts topped up from knowledge to 80+: films, musicians, Braves, Falcons, Hawks
 - [ ] D10c. Older GT prompts checked against published lists: dorms, Greek chapters, NBA/NFL/MLB alumni, conference history and its college towns, Atlanta neighborhoods, buildings, Georgia colleges, alumni
 - [ ] D10d. Traditions, head coaches and Atlanta headquarters retired (reasons in G); new GT prompts to bring the pool to 60
 - [ ] E. Validation in the test suite (section 7 of the brief)
