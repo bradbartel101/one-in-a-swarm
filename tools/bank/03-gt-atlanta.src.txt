@@ -1644,3 +1644,573 @@ X Kool-Aid Pickles | Koolickles | Koolaid Pickles :: Dill pickles soaked in Kool
 ! Lobster Roll :: New England
 ! Deep Dish :: Chicago
 ! Hamburger :: everywhere
+
+@georgiawaters | GEORGIA | Name a body of water in Georgia | pool=gt | type=open | clar=rivers, lakes, creeks and swamps in the state | strip=river,lake,creek
+C Chattahoochee River | Chattahoochee | The Hooch | Hooch
+C Lake Lanier | Lanier | Lake Sidney Lanier
+C Savannah River | Savannah
+C Lake Allatoona | Allatoona
+C Okefenokee Swamp | Okefenokee
+T Flint River | Flint
+T Lake Oconee
+S Ocmulgee River | Ocmulgee
+S Oconee River | Oconee
+S Altamaha River | Altamaha
+S Etowah River | Etowah
+S Lake Hartwell | Hartwell
+S Lake Burton | Burton
+S Lake Rabun | Rabun
+S Lake Sinclair | Sinclair
+S West Point Lake | West Point
+S Peachtree Creek | Peachtree
+S Tallulah River | Tallulah | Tallulah Falls Lake
+S Chattooga River | Chattooga :: The river in "Deliverance".
+S Suwannee River | Suwannee | Swanee
+S Lake Seminole | Seminole
+S Lake Blackshear | Blackshear
+S Coosa River | Coosa
+S Ogeechee River | Ogeechee
+S St. Marys River | Saint Marys | St Marys
+S Jackson Lake | Lake Jackson
+S Lake Chatuge | Chatuge
+S Lake Blue Ridge | Blue Ridge Lake
+S Carters Lake | Carters
+S Clarks Hill Lake | Clarks Hill | Lake Strom Thurmond | Thurmond Lake | J. Strom Thurmond Lake
+R Satilla River | Satilla
+R Toccoa River | Toccoa
+R Oostanaula River | Oostanaula
+R Conasauga River | Conasauga
+R Coosawattee River | Coosawattee
+R Withlacoochee River | Withlacoochee
+R Alapaha River | Alapaha
+R Ochlockonee River | Ochlockonee
+R Tugaloo River | Tugaloo | Lake Tugalo | Tugalo
+R Broad River | Broad
+R Yellow River | Yellow
+R South River | South
+R Alcovy River | Alcovy
+R Towaliga River | Towaliga
+R Ohoopee River | Ohoopee
+R Canoochee River | Canoochee
+R Little River | Little
+R Tallapoosa River | Tallapoosa
+R Chestatee River | Chestatee
+R Soque River | Soque
+R Nottely River | Nottely | Lake Nottely
+R Hiwassee River | Hiwassee
+R Cartecay River | Cartecay
+R Ellijay River | Ellijay
+R Apalachee River | Apalachee
+R Nancy Creek | Nancy
+R Proctor Creek | Proctor
+R Sweetwater Creek | Sweetwater
+R Sope Creek | Sope
+R Big Creek | Big
+R Vickery Creek | Vickery
+R Utoy Creek | Utoy
+R Brier Creek | Brier
+R Kinchafoonee Creek | Kinchafoonee
+X Ichawaynochaway Creek | Ichawaynochaway :: A real creek in southwest Georgia, said "itch-away-NOTCH-away".
+R Spring Creek | Spring
+R Walter F. George Lake | Lake Walter F. George | Lake Eufaula | Walter F George | Eufaula
+R Richard B. Russell Lake | Lake Russell | Russell Lake | Russell
+R Lake Juliette | Juliette
+R Lake Tobesofkee | Tobesofkee
+R Lake Yonah | Yonah
+R Lake Seed | Seed Lake | Seed
+R Lake Oliver | Oliver
+R Goat Rock Lake | Goat Rock
+R Bartletts Ferry Lake | Lake Harding | Bartletts Ferry
+R High Falls Lake | High Falls
+R Lake Acworth | Acworth
+~R Lake Arrowhead ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Varner ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Bull Sluice Lake | Bull Sluice | Morgan Falls
+~R Stone Mountain Lake ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Lake Clara Meer | Clara Meer :: The lake in Piedmont Park.
+~R Lake Peachtree ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Spivey ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Trahlyta ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Winfield Scott ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Lake Conasauga ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Lake Chehaw | Lake Worth | Chehaw
+R Banks Lake
+~R Grand Bay ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Ogeechee Canal | Savannah-Ogeechee Canal
+R Augusta Canal
+R Ebenezer Creek | Ebenezer
+R Chickamauga Creek | Chickamauga | West Chickamauga Creek
+R Lookout Creek | Lookout
+R Amicalola Creek | Amicalola
+~R Noonday Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Nickajack Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Rottenwood Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Tanyard Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Clear Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Intrenchment Creek | Entrenchment Creek
+~R Camp Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Line Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Flat Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Whitewater Creek ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Pataula Creek | Pataula
+R Muckalee Creek | Muckalee
+R Little Ocmulgee River | Little Ocmulgee
+R Little Satilla River | Little Satilla
+R Medway River | Medway
+R Wilmington River | Wilmington
+R Brunswick River
+R Turtle River | Turtle
+R Crooked River | Crooked
+R North Oconee River | North Oconee | Middle Oconee River | Middle Oconee
+~R Mulberry River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Hudson River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+~R Coleman River ?? A small Georgia water I named from memory; real as far as I know, but not checked.
+R Jacks River | Jacks
+! Mississippi River :: nowhere near
+! Tennessee River :: it comes within about a mile of Georgia's corner, but never enters the state
+! Lake Okeechobee :: Florida
+! Atlantic Ocean :: an ocean
+! Gulf of Mexico :: Georgia has no Gulf coast
+! Lake Michigan :: no
+! Tybee Island :: an island
+! Stone Mountain :: a mountain
+
+@outkast | ATLANTA | Name a song by OutKast | pool=gt | type=open | clar=album tracks and singles by the Atlanta duo
+C Hey Ya! | Hey Ya
+C Ms. Jackson | Ms Jackson | Miss Jackson
+C So Fresh, So Clean | So Fresh So Clean
+C The Way You Move | Way You Move
+C Roses
+C B.O.B | Bombs Over Baghdad | BOB | B.O.B.
+T ATLiens
+T Elevators (Me & You) | Elevators | Elevators Me and You
+S Rosa Parks
+S Player's Ball | Players Ball
+S SpottieOttieDopaliscious | Spottie Ottie Dopaliscious | Spottieottiedopalicious
+S The Whole World | Whole World
+S Southernplayalisticadillacmuzik | Southernplayalistic
+S Aquemini
+S Git Up, Git Out | Git Up Git Out
+S Two Dope Boyz (In a Cadillac) | Two Dope Boyz | 2 Dope Boyz
+S Da Art of Storytellin' (Pt. 1) | Da Art of Storytellin | Art of Storytelling | Da Art of Storytellin' Part 1
+S Prototype
+S GhettoMusick | Ghetto Musick | Ghettomusick
+S Morris Brown :: Named for the Atlanta college, whose marching band plays on it.
+S Idlewild Blue (Don'tchu Worry 'Bout Me) | Idlewild Blue
+S Mighty "O" | Mighty O
+S Jazzy Belle
+S Skew It on the Bar-B | Skew It on the Bar B
+S Gasoline Dreams
+S Humble Mumble
+R Hootie Hoo
+R Ain't No Thang | Aint No Thang
+R Crumblin' Erb | Crumblin Erb
+R Myintrotoletuknow
+R Call of da Wild
+R Funky Ride
+R D.E.E.P. | DEEP
+R Claimin' True | Claimin True
+R Wheelz of Steel | Wheels of Steel
+R Babylon
+R Wailin' | Wailin
+R Mainstream
+R Decatur Psalm
+R Millennium
+R E.T. (Extraterrestrial) | ET | Extraterrestrial
+R 13th Floor/Growing Old | 13th Floor | Growing Old
+R Ova da Wudz
+R Da Art of Storytellin' (Pt. 2) | Da Art of Storytellin Part 2 | Art of Storytelling Part 2
+R Return of the "G" | Return of the G
+R Synthesizer
+R Slump
+R West Savannah
+R Y'All Scared | Yall Scared
+R Nathaniel
+R Liberation
+R Chonkyfire
+R Mamacita
+R Hold On, Be Strong | Hold On Be Strong
+R Spaghetti Junction :: Named for the interchange of I-85 and I-285.
+R Red Velvet
+R Xplosion
+R I'll Call Before I Come | Ill Call Before I Come
+R Toilet Tisha
+R Slum Beautiful
+R Stankonia (Stanklove) | Stanklove | Stankonia
+R Snappin' & Trappin' | Snappin and Trappin
+R Funkin' Around | Funkin Around
+R Movin' Cool (The After Party) | Movin Cool
+R Unhappy
+R Bowtie
+R The Rooster | Rooster
+R Bust
+R War
+R Church
+R Tomb of the Boom
+R Knowing
+R Flip Flop Rock
+R Reset
+R Last Call
+R Happy Valentine's Day | Happy Valentines Day
+R Spread
+R Love Hater
+R She Lives in My Lap
+R Dracula's Wedding | Draculas Wedding
+R Behold a Lady
+R Pink & Blue | Pink and Blue
+R Love in War
+R She's Alive | Shes Alive
+R Take Off Your Cool
+R Vibrate
+R A Life in the Day of Benjamin André (Incomplete) | A Life in the Day of Benjamin Andre | Life in the Day of Benjamin Andre
+R My Favorite Things
+R Hollywood Divorce
+R The Train
+R Chronomentrophobia
+R PJ & Rooster | PJ and Rooster
+R Call the Law
+R Makes No Sense at All
+R Life Is Like a Musical
+R N2U
+R Peaches
+R Buggface
+R Greatest Show on Earth
+R When I Look in Your Eyes
+R Dyin' to Live | Dyin to Live
+R A Bad Note
+R In Your Dreams
+R Mutron Angel
+X Benz or Beamer | Benz or a Beamer :: From the "New Jersey Drive" soundtrack in 1995, between their first two albums.
+! Welcome to Atlanta :: Jermaine Dupri and Ludacris
+! Yeah! :: Usher
+! Crazy :: Gnarls Barkley, with CeeLo Green
+! Shutterbugg :: Big Boi, solo
+! Kryptonite :: Purple Ribbon All-Stars, with Big Boi
+! International Players Anthem :: UGK, featuring OutKast; not an OutKast song
+! Waterfalls :: TLC
+! No Scrubs :: TLC
+! Bad and Boujee :: Migos
+! Black Beatles :: Rae Sremmurd
+! Georgia on My Mind :: Ray Charles
+! Royal Flush :: Big Boi, solo, with André 3000 and Raekwon
+
+@united | ATLANTA SPORTS | Name a player from Atlanta United history | pool=gt | type=open | unverified | source=Wikipedia's list of players is complete only to April 2021; later players are from memory | clar=anyone who has played for the club since 2017
+C Josef Martínez | Josef Martinez | Josef :: The King. MVP, Golden Boot and MLS Cup in 2018.
+C Miguel Almirón | Miguel Almiron | Almiron | Miggy
+C Brad Guzan | Guzan
+C Thiago Almada | Almada
+T Michael Parkhurst | Parkhurst :: The captain who lifted MLS Cup in 2018.
+T Darlington Nagbe | Nagbe
+S Ezequiel Barco | Barco
+S Pity Martínez | Pity Martinez | Gonzalo Martinez | Pity
+S Héctor Villalba | Hector Villalba | Tito Villalba | Tito
+S Julian Gressel | Gressel
+S Miles Robinson
+S Leandro González Pírez | Leandro Gonzalez Pirez | LGP | Gonzalez Pirez
+S Jeff Larentowicz | Larentowicz
+S Brooks Lennon
+S George Bello
+S Giorgos Giakoumakis | Giakoumakis
+S Saba Lobjanidze | Lobjanidze
+S Aleksei Miranchuk | Alexey Miranchuk | Miranchuk
+S Luiz Araújo | Luiz Araujo
+S Marcelino Moreno
+S Emmanuel Latte Lath | Latte Lath
+R Franco Escobar
+R Eric Remedi
+R Yamil Asad
+R Greg Garza
+R Kenwyne Jones
+R Carlos Carmona
+R Tyrone Mears
+R Chris McCann
+R Kevin Kratz
+R Brandon Vazquez | Brandon Vázquez
+R Andrew Carleton
+R Romario Williams
+R Emerson Hyndman
+R Mo Adams
+R Jake Mulraney
+R Jon Gallagher
+R Matheus Rossetto
+R Anton Walkes
+R Florentin Pogba
+R Fernando Meza
+R Justin Meram
+R Erick Torres | Cubo Torres | Cubo
+R Jurgen Damm | Jürgen Damm
+R Brek Shea
+R Edgar Castillo
+R Manuel Castro
+R Adam Jahn
+R JJ Williams
+R George Campbell
+R Tyler Wolff
+R Dion Pereira
+R Laurence Wyke
+R Alec Kann
+R Bartosz Slisz | Slisz
+R Tristan Muyumba
+R Caleb Wiley
+R Ronald Hernández | Ronald Hernandez
+R Derrick Williams
+R Stian Gregersen
+R Luis Abram
+R Alan Franco
+R Santiago Sosa
+R Amar Sejdić | Amar Sejdic
+R Osvaldo Alonso | Ozzie Alonso
+R Andrew Gutman
+R Juan José Purata | JuanJo Purata | Juan Jose Purata
+R Miguel Berry
+R Machop Chol
+~R Jamal Thiaré ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Daniel Ríos ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+R Xande Silva
+R Edwin Mosquera
+R Dax McCarty
+R Ajani Fortune
+~R Noah Cobb ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Efraín Morales ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Pedro Amador ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Josh Cohen ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+R Quentin Westberg
+R Rocco Ríos Novo | Rocco Rios Novo
+~R Raúl Gudiño ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Erik López ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Ronaldo Cisneros ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+R Dom Dwyer
+~R Lisandro López ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~R Mateusz Klich ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+D Mikey Ambrose
+D Mark Bloom
+D Bobby Boswell
+D Harrison Heath
+D José Hernández | Jose Hernandez
+D Jacob Peterson
+D Andrew Wheeler-Omiunu
+D Sal Zizzo
+D Paul Christensen
+D Kyle Reynish
+X Alexandros Tabakis :: The Greek goalkeeper of the club's first season, 2017.
+~D Alex De John ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Matt Edwards ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Will Reilly ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Jayden Hibbert ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Luke Brennan ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Cayman Togashi ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+~D Leo Afonso ?? Signed after Wikipedia's list ends (2021); named from memory and not checked.
+! Arthur Blank :: the owner
+! Tata Martino :: the coach
+! Frank de Boer :: the coach
+! Gonzalo Pineda :: the coach
+! Matt Ryan :: the Falcons
+! Lionel Messi :: Inter Miami
+! Christian Pulisic :: never an Atlanta United player
+! Carlos Bocanegra :: the technical director; he never played for the club
+
+@wafflehouse | THE SOUTH | Name something on the Waffle House menu | pool=gt | type=open | unverified | source=written from memory of the menu; not checked against the current one | clar=food, drinks and hashbrown toppings, past or present
+C Waffle | Waffles | Classic Waffle
+C Hashbrowns | Hash Browns | Scattered Hashbrowns
+C All-Star Special | All Star Special | All-Star | All Star :: A waffle, eggs, toast, hashbrowns or grits, and bacon or sausage.
+C Eggs | Scrambled Eggs | Fried Eggs | Two Eggs | Egg
+C Bacon
+C Coffee
+T Smothered | Smothered Hashbrowns | Onions :: Hashbrowns with sautéed onions.
+T Covered | Covered Hashbrowns | Cheese :: Hashbrowns with melted cheese.
+S Pecan Waffle
+S Chocolate Chip Waffle | Chocolate Waffle
+S Grits
+S Toast | White Toast | Wheat Toast
+S Sausage | Sausage Patties | Sausage Patty
+S Patty Melt | Texas Patty Melt
+S Texas Bacon Patty Melt | Bacon Patty Melt
+S Cheeseburger | Hamburger | Burger | Quarter Pound Cheeseburger
+S Cheese Eggs | Cheesy Eggs
+S Omelet | Omelette | Cheese Omelet
+S Biscuit | Biscuits | Grilled Biscuit
+S Sausage Gravy | Biscuits and Gravy | Gravy
+S Sweet Tea | Iced Tea | Tea
+S Orange Juice | OJ
+S Chili | Bert's Chili | Berts Chili
+S Scattered | Scattered on the Grill
+S Chunked | Chunked Hashbrowns | Ham Chunks :: Hashbrowns with hickory-smoked ham.
+S Diced | Diced Hashbrowns | Tomatoes :: Hashbrowns with diced tomatoes.
+S Peppered | Peppered Hashbrowns | Jalapeños | Jalapenos :: Hashbrowns with jalapeño peppers.
+X Capped | Capped Hashbrowns | Mushrooms :: Hashbrowns with grilled mushrooms: the topping people forget.
+S Topped | Topped Hashbrowns :: Hashbrowns with Bert's chili.
+S Country | Country Hashbrowns :: Hashbrowns with sausage gravy.
+S All the Way | Hashbrowns All the Way :: Every topping at once.
+R Texas Toast
+R Raisin Toast
+R City Ham | Ham | Grilled Ham
+R Country Ham
+R T-Bone Steak | T-Bone | T Bone Steak | Steak | T-Bone and Eggs | Steak and Eggs
+~R Sirloin ?? Not sure it is still offered beside the T-bone.
+R Pork Chops | Pork Chop | Grilled Pork Chops
+R Grilled Chicken | Chicken Breast | Grilled Chicken Dinner
+R Grilled Chicken Sandwich | Chicken Sandwich
+~R Texas Chicken Melt ?? Not sure this melt is on the current menu.
+R Texas Cheesesteak Melt | Cheesesteak Melt | Texas Cheesesteak | Cheesesteak
+R Texas Bacon Egg & Cheese Melt | Texas Bacon Egg and Cheese Melt | Bacon Egg and Cheese Melt
+R Texas Sausage Egg & Cheese Melt | Texas Sausage Egg and Cheese Melt | Sausage Egg and Cheese Melt
+~R Texas Bacon Cheesesteak Melt ?? Not sure this exact melt is on the menu.
+R Bacon Egg & Cheese Sandwich | Bacon Egg and Cheese
+R Sausage Egg & Cheese Sandwich | Sausage Egg and Cheese
+R Ham Egg & Cheese Sandwich | Ham Egg and Cheese
+R Grilled Cheese | Grilled Cheese Sandwich
+R BLT | Bacon Lettuce and Tomato
+R Ham and Cheese Sandwich | Ham and Cheese
+R Double Cheeseburger | Double Quarter Pound Cheeseburger | Double Burger
+R Bacon Cheeseburger
+R Hashbrown Bowl | Sausage Egg and Cheese Hashbrown Bowl | Bacon Egg and Cheese Hashbrown Bowl | Hashbrown Bowls
+R Cheesesteak Omelet | Cheesesteak Omelette
+R Fiesta Omelet | Fiesta Omelette
+R Ham and Cheese Omelet | Ham & Cheese Omelet
+~R Blueberry Waffle ?? Not sure this is on the standard menu.
+R Peanut Butter Chip Waffle | Peanut Butter Waffle
+R Pecan Pie | Southern Pecan Pie
+R Chocolate Pie | Triple Chocolate Pie
+R Pie | Slice of Pie
+R Sliced Tomatoes
+R Double Hashbrowns | Large Hashbrowns | Triple Hashbrowns
+R Chocolate Milk
+R Milk
+R Hot Chocolate
+R Coca-Cola | Coke | Soda | Cherry Coke | Vanilla Coke
+R Apple Juice
+R Syrup | Maple Syrup
+R Jelly | Grape Jelly | Apple Butter
+R Kids Meal | Kid's Meal | Kids Waffle
+R Dark Roast Coffee | Decaf | Decaf Coffee
+R Grilled Onions
+R Chili with Cheese and Onions | Chili Cheese
+R Sunny Side Up Eggs | Over Easy Eggs | Over Easy | Sunny Side Up
+~D Papa Joe's Pork Chops ?? I believe this is the pork chops' full menu name; not checked.
+~D Lib's Patty Melt ?? I believe this is the patty melt's full menu name; not checked.
+~D Alice's Iced Tea ?? I believe the tea is named this way on the menu; not checked.
+~D Toddle House Omelet ?? I believe a cheese omelet by this name has been on the menu; not checked.
+~D Walt's Soup ?? I believe this was a named menu item; not checked.
+! Pancakes :: Waffle House does not serve them. That is the other house.
+! French Toast :: not on the menu
+! Fried Chicken :: not on the menu
+! French Fries :: not on the menu; the potato here is the hashbrown
+! Milkshake :: not on the menu
+! Chicken and Waffles :: not sold as a dish
+! Latte :: plain coffee only
+! Salad :: only in a few locations, and not on the standard menu
+! Pizza :: no
+! Tacos :: no
+! Beer :: no alcohol
+
+@chickfila | ATLANTA | Name something on the Chick-fil-A menu | pool=gt | type=open | unverified | source=written from memory of the menu; not checked against the current one | clar=food, drinks and sauces, past or present
+C Chicken Sandwich | Chick-fil-A Chicken Sandwich | Original Chicken Sandwich | Sandwich
+C Nuggets | Chicken Nuggets | Chick-fil-A Nuggets
+C Waffle Fries | Waffle Potato Fries | Fries
+C Chick-fil-A Sauce | Chick fil A Sauce
+C Lemonade
+C Spicy Chicken Sandwich | Spicy Sandwich | Spicy Chicken
+T Polynesian Sauce | Polynesian
+T Chick-n-Minis | Chicken Minis | Minis | Chick n Minis
+S Deluxe Sandwich | Chicken Deluxe | Chick-fil-A Deluxe | Deluxe
+S Spicy Deluxe | Spicy Deluxe Sandwich | Spicy Chicken Deluxe
+S Grilled Chicken Sandwich | Grilled Sandwich | Grilled Chicken
+S Grilled Nuggets
+S Chick-n-Strips | Chicken Strips | Strips | Chick n Strips | Tenders
+S Mac & Cheese | Mac and Cheese | Macaroni and Cheese
+S Milkshake | Shake | Milkshakes
+S Cookies & Cream Milkshake | Cookies and Cream Milkshake | Cookies and Cream Shake
+S Chicken Biscuit | Chick-fil-A Chicken Biscuit
+S Sweet Tea | Iced Tea | Sweet Iced Tea | Unsweet Tea
+S Frosted Lemonade
+S Chocolate Chunk Cookie | Cookie | Cookies
+S Icedream | Icedream Cone | Ice Cream | Icedream Cup | Ice Cream Cone
+S Cobb Salad
+S Cool Wrap | Grilled Cool Wrap | Chicken Wrap | Wrap
+S Hash Browns | Hashbrowns
+S Honey Mustard | Honey Mustard Sauce
+S Barbecue Sauce | BBQ Sauce | Barbeque Sauce
+S Ranch | Garden Herb Ranch | Ranch Sauce
+S Zesty Buffalo Sauce | Buffalo Sauce | Zesty Buffalo
+S Sunjoy | Arnold Palmer | Half and Half
+R Grilled Chicken Club | Grilled Club | Chicken Club
+R Spicy Southwest Salad | Southwest Salad
+R Market Salad
+R Side Salad
+R Kale Crunch Side | Kale Crunch | Kale Salad
+R Fruit Cup
+R Chicken Noodle Soup
+R Chicken Tortilla Soup | Tortilla Soup
+R Greek Yogurt Parfait | Yogurt Parfait | Parfait
+R Waffle Potato Chips | Chips
+R Spicy Chicken Biscuit
+R Egg White Grill
+R Hash Brown Scramble | Hash Brown Scramble Bowl | Hash Brown Scramble Burrito | Breakfast Burrito | Breakfast Bowl
+R Bacon, Egg & Cheese Biscuit | Bacon Egg and Cheese Biscuit
+R Sausage, Egg & Cheese Biscuit | Sausage Egg and Cheese Biscuit
+R Chicken, Egg & Cheese Biscuit | Chicken Egg and Cheese Biscuit
+R Buttered Biscuit | Biscuit
+R Bacon, Egg & Cheese Muffin | Egg Muffin | English Muffin | Chicken Egg and Cheese Muffin
+R Chocolate Milkshake | Chocolate Shake
+R Vanilla Milkshake | Vanilla Shake
+R Strawberry Milkshake | Strawberry Shake
+R Peach Milkshake | Peach Shake :: Summer only, and worth the wait.
+R Peppermint Chip Milkshake | Peppermint Chocolate Chip Milkshake | Peppermint Shake | Peppermint Milkshake
+R Frosted Coffee
+R Iced Coffee | Cold Brew | Coffee
+R Diet Lemonade
+R Chocolate Fudge Brownie | Brownie
+R Honey Roasted BBQ Sauce | Honey Roasted BBQ
+R Sweet & Spicy Sriracha Sauce | Sriracha Sauce | Sweet and Spicy Sriracha
+R Coca-Cola | Coke | Soda | Diet Coke | Dr Pepper | Sprite
+R Chocolate Milk | Milk
+R Orange Juice | Simply Orange
+R Apple Juice
+R Bottled Water | Water | Dasani
+R Kids Meal | Kid's Meal
+R Nugget Tray | Catering Tray | Chicken Nugget Tray | Trays
+R Honey Pepper Pimento Chicken Sandwich | Honey Pepper Pimento | Pimento Chicken Sandwich
+~R Maple Pepper Bacon Sandwich ?? A limited-time or retired item named from memory; not checked.
+R Grilled Spicy Deluxe | Spicy Grilled Deluxe | Grilled Spicy Chicken Deluxe
+R Spicy Chick-n-Strips | Spicy Strips | Spicy Chicken Strips
+R Chicken Salad Sandwich | Chicken Salad :: Retired in 2017.
+R Cole Slaw | Coleslaw | Slaw :: Retired in 2016. The company published the recipe on the way out.
+X Carrot & Raisin Salad | Carrot and Raisin Salad | Carrot Raisin Salad :: A side on the old menu for decades, long since retired.
+R Cinnamon Cluster
+R Chicken, Egg & Cheese Bagel | Chicken Egg and Cheese Bagel | Bagel | Sunflower Multigrain Bagel
+R Key Lime Frosted | Frosted Key Lime
+~R Banana Pudding Milkshake ?? A limited-time or retired item named from memory; not checked.
+R Mango Passion Sunjoy | Mango Passion Tea Lemonade | Mango Passion Lemonade
+R Watermelon Mint Lemonade | Watermelon Lemonade
+R White Peach Sunjoy | White Peach Lemonade | White Peach Tea Lemonade
+~R Cherry Berry Lemonade ?? A limited-time or retired item named from memory; not checked.
+~R Cloudberry Sunjoy ?? A limited-time or retired item named from memory; not checked.
+~R Mocha Cream Cold Brew ?? A limited-time or retired item named from memory; not checked.
+~R Lemon Pie ?? A limited-time or retired item named from memory; not checked.
+R Chargrilled Chicken Sandwich | Chargrilled Sandwich | Chargrilled Chicken
+~R Chargrilled Chicken Garden Salad ?? A limited-time or retired item named from memory; not checked.
+~R Chick-n-Strips Salad ?? A limited-time or retired item named from memory; not checked.
+~R Asian Salad ?? A limited-time or retired item named from memory; not checked.
+~R Superfood Side ?? A limited-time or retired item named from memory; not checked.
+~R Oatmeal ?? A limited-time or retired item named from memory; not checked.
+R Yogurt | Greek Yogurt
+~R Cheesecake ?? A limited-time or retired item named from memory; not checked.
+R Ice Dream Sundae | Sundae | Hot Fudge Sundae
+~R Frosted Sunrise ?? A limited-time or retired item named from memory; not checked.
+~R Frosted Caramel Coffee ?? A limited-time or retired item named from memory; not checked.
+~R Smokehouse BBQ Bacon Sandwich ?? A limited-time or retired item named from memory; not checked.
+~R Grilled Chicken Burrito ?? A limited-time or retired item named from memory; not checked.
+~R Chilled Grilled Chicken Sub Sandwich ?? A limited-time or retired item named from memory; not checked.
+R Texas Pete | Hot Sauce
+R Pickles | Pickle | Extra Pickles
+! Hamburger :: the cows have opinions about that
+! Burger :: the cows have opinions about that
+! Popcorn Chicken :: KFC
+! Chicken Wings :: not on the menu
+! Fried Chicken Bucket :: KFC
+! Onion Rings :: not on the menu
+! Frosty :: Wendy's
+! McNuggets :: McDonald's
+! Sunday Special :: closed on Sunday
+! Curly Fries :: Arby's
+! Biscuits and Gravy :: sold only in some markets, and retired
