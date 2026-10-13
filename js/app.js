@@ -106,6 +106,8 @@
   let anchorTarget = 0.6;
   let shownAlt = '';
   let tierColors = {};
+  let lastVars = '';
+  let lastHudH = -1;
   let winTop = 0;
   let winBottom = 0;
   let lastFrameAt = 0;
@@ -140,7 +142,13 @@
 
   function setPhase(name) {
     document.body.dataset.phase = name;
+    // The answer box only exists while a prompt is on screen. During a climb, on the reveal and
+    // on the end screens it is switched off, so nothing typed there can reach the next round.
+    const g = $('guess');
+    g.disabled = !(name === 'intro' || name === 'guess');
+    if (g.disabled) g.value = '';
     aimCamera();
+    layoutFloating(true);
     flushToasts();
   }
 
@@ -185,8 +193,9 @@
     toast.textContent = 'NEW SIGHTING\n' + name;
     toast.hidden = false;
     // The panels may have just grown a line (a status message, the sightings count): measure again.
+    delete toast.dataset.corner;
     aimCamera();
-    window.setTimeout(aimCamera, 0);
+    layoutFloating(true);
     announce('New sighting: ' + name + '.');
     toastTimer = window.setTimeout(() => {
       toast.hidden = true;
@@ -209,6 +218,8 @@
     node.textContent = capQueue.shift();
     node.classList.remove('out');
     node.hidden = false;
+    delete node.dataset.corner;
+    layoutFloating(true);
     capTimer = window.setTimeout(() => {
       node.classList.add('out'); // fade
       capTimer = window.setTimeout(() => {
@@ -305,6 +316,7 @@
     $('nightLine').hidden = !late;
     if (late) markFound('night');
     aimCamera();
+    layoutFloating(true);
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
 
@@ -468,15 +480,26 @@
   // Where the bee sits on screen (0 = top, 1 = bottom) depends on what is covering the view.
   function aimCamera() {
     if (!scene) return;
+    measureSafe();
+    const h = window.innerHeight;
+    aimBee(h);
+  }
+
+  // The clear band of screen between the fixed interface above and below.
+  function measureSafe() {
+    if (!scene) return;
     const h = window.innerHeight;
     const root = document.documentElement.style;
-    if (!$('hud').hidden) root.setProperty('--hud-h', $('hud').offsetHeight + 'px');
+    if (!$('hud').hidden && $('hud').offsetHeight !== lastHudH) {
+      lastHudH = $('hud').offsetHeight;
+      root.setProperty('--hud-h', lastHudH + 'px');
+    }
     // The clear band of screen that facts and tier lines may be drawn in.
     const phase = document.body.dataset.phase;
     let top = $('hud').hidden ? 56 : $('hud').getBoundingClientRect().bottom + 4;
     let bottom = h;
     if (view === 'play') {
-      if (phase !== 'climb') top = $('promptCard').getBoundingClientRect().bottom + 4;
+      if (phase !== 'climb') top = layoutBox($('promptCard')).bottom + 4; // where the card will be, even while it slides in
       if ($('dock').getClientRects().length) bottom = $('dock').getBoundingClientRect().top - 4;
     } else if (view === 'between') { // between the reveal text and the button
       top = $('reveal').getBoundingClientRect().bottom - 14;
@@ -489,8 +512,19 @@
     winTop = Math.max(0, Math.round(top));
     winBottom = Math.max(winTop, Math.round(bottom));
     if (scene) scene.setSafe(winTop / scene.size().S, winBottom / scene.size().S);
-    root.setProperty('--win-top', winTop + 'px');
-    root.setProperty('--win-bottom', Math.max(0, Math.round(h - winBottom)) + 'px');
+    const vars = winTop + ' ' + winBottom + ' ' + h;
+    if (vars !== lastVars) { // writing a custom property restyles the page: only when it changed
+      lastVars = vars;
+      root.setProperty('--win-top', winTop + 'px');
+      root.setProperty('--win-bottom', Math.max(0, Math.round(h - winBottom)) + 'px');
+      // the world layer is offset by the same number: move both together, never one frame apart
+      $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
+    }
+  }
+
+  function aimBee(h) {
+    const root = document.documentElement.style;
+    const phase = document.body.dataset.phase;
     if (view === 'play') {
       // The bee rides about 60% of the way down the visible screen, so the sky ahead is in view.
       // With a keyboard up it is kept inside the gap between the prompt and the answer bar.
@@ -568,14 +602,14 @@
   // Moves the camera. The game never waits on the animation alone: a timer ends the move a
   // moment after it should have finished, so a hidden tab or a stalled frame loop cannot leave
   // the score half counted and the reveal unshown.
-  function moveCamera(to, ms, done, lines) {
+  function moveCamera(to, ms, done, lines, curve) {
     finishMove();
     if (reducedMotion() || ms <= 0 || to === cam) {
       anim = { to, done, lines };
       finishMove();
       return;
     }
-    anim = { from: cam, to, start: performance.now(), ms, done, lines, timer: window.setTimeout(finishMove, ms + MOVE_GRACE_MS) };
+    anim = { from: cam, to, start: performance.now(), ms, done, lines, curve, timer: window.setTimeout(finishMove, ms + MOVE_GRACE_MS) };
   }
 
   function step(now) {
@@ -584,7 +618,7 @@
       const t = (now - anim.start) / anim.ms;
       if (t >= 1) finishMove();
       else {
-        cam = anim.from + (anim.to - anim.from) * (1 - Math.pow(1 - t, 3)); // fast start, slow settle
+        cam = anim.from + (anim.to - anim.from) * (anim.curve ? anim.curve(t) : 1 - Math.pow(1 - t, 3)); // fast start, slow settle
         if (anim.lines) anim.lines.forEach((l) => l.node.classList.toggle('on', cam >= l.score - 0.2));
       }
     }
@@ -596,7 +630,7 @@
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
-    if (++frames % 4 === 0) placeFacts();
+    layoutFloating(++frames % 4 === 0); // facts every frame, since the world moves under them
     // The bee glances down at the answer box while something is being typed.
     scene.setLook(document.body.dataset.phase === 'guess' && $('guess').value.length > 0);
     if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
@@ -630,19 +664,133 @@
     if (!document.hidden && now - lastFrameAt > 90) step(now);
   }
 
-  // A fact is shown only when all of it is inside the safe area (below the HUD and prompt, above
-  // the answer bar or the reveal button), and steps aside for the tag, the bee and tier labels.
-  function placeFacts() {
+  /* ---------- floating text: one layout manager ----------
+     Facts, captions and toasts are the only text that floats over the world. All three are
+     placed here, in one pass, against the same list of things they must not touch: the HUD,
+     the prompt, the answer bar, the reveal text, the button and its line, the tag, the bee,
+     tier labels, the screen edges, and each other. Anything with no free spot waits unseen. */
+
+  // Where an element sits in the layout, ignoring any slide-in transform that is still playing.
+  function layoutBox(node) {
+    let x = 0;
+    let y = 0;
+    let n = node;
+    while (n.offsetParent) {
+      x += n.offsetLeft;
+      y += n.offsetTop;
+      n = n.offsetParent;
+    }
+    if (n !== node && n !== document.body && n !== document.documentElement) {
+      const r = n.getBoundingClientRect(); // a fixed container
+      x += r.left;
+      y += r.top;
+    } else if (n === node) {
+      return node.getBoundingClientRect();
+    } else {
+      x -= window.scrollX;
+      y -= window.scrollY;
+    }
+    return { left: x, top: y, right: x + node.offsetWidth, bottom: y + node.offsetHeight };
+  }
+
+  const FIXED_TEXT = ['#hud', '#promptCard', '#dock', '#tools', '#reveal > *', '#revealFoot > *', '#tag', '#worldLayer .tier-line.on span', '.title-block', '.start-panel', '.fine'];
+  const hits = (a, b, pad) => a.bottom > b.top - pad && a.top < b.bottom + pad && a.right > b.left - pad && a.left < b.right + pad;
+
+  function floatArea() {
+    const flight = view === 'play' || view === 'between' || view === 'home';
+    return {
+      left: 6,
+      right: window.innerWidth - (scene ? scene.size().S * 36 : 0) - 6, // clear of the ruler
+      top: flight ? winTop + 4 : 6,
+      bottom: flight ? winBottom - 4 : window.innerHeight - 6,
+    };
+  }
+
+  let floatArea0 = null; // the last measured area, fixed boxes and placed toast and caption
+  let floatFixed = [];
+  let floatPlaced = [];
+
+  // `full` measures everything again and places the toast and the caption; it runs on every
+  // change of screen and a few times a second. The pass in between is cheap and runs on every
+  // frame: it only decides which facts may show, since they are what moves with the world.
+  function layoutFloating(full) {
+    if (!scene) return;
+    if (full || !floatArea0) {
+      measureSafe();
+      floatArea0 = floatArea();
+      floatFixed = [];
+      FIXED_TEXT.forEach((sel) => document.querySelectorAll(sel).forEach((n) => {
+        if (n.getClientRects().length) floatFixed.push(sel === '#promptCard' ? layoutBox(n) : n.getBoundingClientRect());
+      }));
+    }
+    const area = floatArea0;
+    const taken = floatFixed.slice();
+    const per = scene.cssPerPoint();
+    const ground = scene.cssY(0);
+    // Things that ride with the world are measured on the full pass only; in between, their
+    // boxes are worked out from the camera, so that no frame has to wait for a page layout.
+    const worldBox = (node, score) => {
+      const y = ground - score * per;
+      if (full || !node._m) {
+        const r = node.getBoundingClientRect();
+        node._m = { left: r.left, right: r.right, h: r.height, dy: r.top - y };
+      }
+      const m = node._m;
+      return { left: m.left, right: m.right, top: y + m.dy, bottom: y + m.dy + m.h, width: m.right - m.left };
+    };
     const tag = $('tag');
-    const blockers = tag.hidden ? [] : [tag.getBoundingClientRect()];
+    if (!tag.hidden) {
+      if (full || !tag._m) { const r = tag.getBoundingClientRect(); tag._m = { left: r.left, right: r.right, h: r.height }; }
+      const top = parseFloat(tag.style.top) || 0;
+      taken.push({ left: tag._m.left, right: tag._m.right, top, bottom: top + tag._m.h });
+    }
+    document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => taken.push(worldBox(n, Number(n.parentNode.dataset.score))));
     const bee = scene.box('bee');
-    if (bee) blockers.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
-    document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => blockers.push(n.getBoundingClientRect()));
+    if (bee) taken.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
+    const free = (r) => r.left >= area.left && r.right <= area.right && r.top >= area.top && r.bottom <= area.bottom && !taken.some((b) => hits(r, b, 6));
+
+    if (full) {
+      // toasts and captions pick the first free corner, and stay put while it remains free
+      floatPlaced = [];
+      const place = (node, corners) => {
+        if (node.hidden) return;
+        node.style.maxWidth = Math.max(120, Math.min(area.right - area.left, 360)) + 'px';
+        const w = node.offsetWidth;
+        const h = node.offsetHeight;
+        const at = (c) => {
+          const left = c[0] === 'l' ? area.left : c[0] === 'r' ? area.right - w : Math.round((area.left + area.right - w) / 2);
+          const top = c[1] === 't' ? area.top : c[1] === 'b' ? area.bottom - h : Math.round((area.top + area.bottom - h) / 2);
+          return { left, top, right: left + w, bottom: top + h };
+        };
+        const order = node.dataset.corner ? [node.dataset.corner].concat(corners) : corners;
+        const corner = order.filter((c) => free(at(c)))[0];
+        node.classList.toggle('yield', !corner);
+        if (!corner) return;
+        const r = at(corner);
+        node.dataset.corner = corner;
+        node.style.left = r.left + 'px';
+        node.style.top = r.top + 'px';
+        taken.push(r);
+        floatPlaced.push(r);
+      };
+      place($('toast'), ['rb', 'lb', 'rt', 'lt', 'cb', 'ct', 'rm', 'lm']);
+      place($('caption'), ['lt', 'lm', 'rt', 'lb', 'ct', 'cb', 'rm']);
+    } else {
+      floatPlaced.forEach((r) => taken.push(r));
+    }
+
+    // facts belong to the world: they cannot move, so they show only where they are free
     document.querySelectorAll('#worldLayer .fact').forEach((node) => {
-      const r = node.getBoundingClientRect();
-      const inside = r.top >= winTop + 2 && r.bottom <= winBottom - 2;
-      const hit = blockers.some((b) => r.bottom > b.top - 6 && r.top < b.bottom + 6 && r.right > b.left - 6 && r.left < b.right + 6);
-      node.classList.toggle('yield', hit || !inside);
+      const score = Number(node.dataset.score);
+      const y = ground - score * per; // cheap test first: most facts are far off screen
+      if (y < area.top - 80 || y > area.bottom + 80) {
+        if (!node.classList.contains('yield')) node.classList.add('yield');
+        return;
+      }
+      const r = worldBox(node, score);
+      const ok = r.width > 0 && free(r);
+      if (node.classList.contains('yield') === ok) node.classList.toggle('yield', !ok);
+      if (ok) taken.push(r);
     });
   }
 
@@ -778,7 +926,8 @@
     renderDailyHud(index);
     renderTried([]);
     setFeedback('', '');
-    $('guess').value = '';
+    $('guess').value = ''; // every round starts with an empty box and no submit waiting
+    lockUntil = 0;
     $('clockLive').textContent = '';
     renderClock(C.ROUND_MS, C.ROUND_MS, true);
     setPhase('intro');
@@ -910,7 +1059,8 @@
     tag.hidden = false;
     scene.setMood('happy');
     const lines = buildTierLines(base, result.points);
-    const ms = reducedMotion() ? 0 : tier.climbMs;
+    const ms = reducedMotion() ? 0 : C.climbMs(result.points);
+    const curve = C.climbCurve(base, base + result.points, climbMarks(base, base + result.points));
     if (ms) {
       Sfx.rise(ms / 1000);
       scene.pollen(performance.now()); // even a short hop leaves a puff behind
@@ -935,7 +1085,16 @@
       // The top answer gets a beat to itself before the card comes up.
       if (result.tier === 'swarm' && !reducedMotion()) window.setTimeout(() => showReveal(true), 750);
       else showReveal(true);
-    }, lines);
+    }, lines, curve);
+  }
+
+  // What a climb should slow down for: sightings first, then facts, a few and well apart.
+  function climbMarks(from, to) {
+    const picked = [];
+    scene.sightings.map((g) => g.score).concat(FACTS.map((f) => C.scoreForFeet(f.feet))).forEach((score) => {
+      if (picked.length < 3 && score > from + 3 && score < to - 3 && picked.every((p) => Math.abs(p - score) >= 12)) picked.push(score);
+    });
+    return picked;
   }
 
   function quake() {
@@ -976,7 +1135,7 @@
     if (last.note) bits.push(last.note);
     if (last.wrong) bits.push(last.wrong + (last.wrong === 1 ? ' wrong guess first' : ' wrong guesses first'));
     // one line of quip; anything else sits on its own line beneath it
-    $('lastNote').textContent = (last.tier ? C.TIERS[last.tier].quip : '') + (bits.length ? '\n' + bits.join(' · ') : '');
+    $('lastNote').textContent = (last.tier ? C.quipFor(last.tier, score) : '') + (bits.length ? '\n' + bits.join(' · ') : '');
     $('lastPrompt').textContent = p.text;
     const btn = $('nextBtn');
     if (daily.finished) {
@@ -1356,8 +1515,11 @@
     $('guessForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const text = $('guess').value;
-      if (document.body.dataset.phase === 'intro') {
+      const phase = document.body.dataset.phase;
+      if (phase === 'intro') {
         setFeedback('hold on. still lifting off.', '');
+      } else if (phase !== 'guess' || $('guess').disabled) {
+        return; // a submit only counts while a prompt is live
       } else if (performance.now() < lockUntil) {
         return;
       } else if (mode === 'daily' && daily && daily.round) {

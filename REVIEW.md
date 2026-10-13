@@ -263,3 +263,24 @@ Differences from the reference, and what was done:
 - PASS — no console errors, reduced motion works, all tests pass: every scenario ends with a console check; "reduced motion" scenario; npm run test:all.
 
 Open decision for the owner: the round clock now pauses while the page is hidden, as the v4 brief asks. That reverses the v1 rule that switching tabs gains nothing (HUMAN-TODO 4b).
+
+# v5 — last fixes before shipping
+
+No website was visited. One commit per item, each with a regression test.
+
+1. Input leak. The answer box is disabled and emptied whenever no prompt is live (climb, reveal, end screens), every round starts empty with no submit waiting, and a submit only counts in the guess phase. Test: browser scenario "input leak: nothing typed on a reveal reaches the next round".
+2. Sun. One function, `sunAt(score)`, drawn once per frame. It sinks slowly, warms from pale yellow to orange, leaves by the bottom edge a little below 30,000 ft and never returns. Test: unit test "there is exactly one sun".
+3. Climb pacing. `climbMs(points)` = clamp(2.5 s + 12 ms x points, 2.5 s, 4.5 s), a gentler ease-out, and a slow-down where the climb passes a sighting or fact (at most three, well apart). Measured start: 26 ms after submit. Test: unit test "climb pacing".
+4. Lower sky. The gradient deepens at 1,000 / 3,000 / 6,000 / 9,000 / 13,000 / 20,000 ft; golden haze and birds over campus; a cumulus deck at 3,000-6,000 ft drawn half behind and half in front of the bee; distant hills in a hazy horizon. Test: unit test "the lower sky changes".
+5. Layout. One layout manager places facts, captions and toasts against the HUD, prompt, answer bar, reveal text, the button and its line, the tag, the bee, tier labels, the screen edges and each other. The prompt card is measured where it will land, so nothing shows in the HUD during the countdown. Test: browser scenario "floating text", which checks bounding boxes every 50 ms through a whole flight at 375 and 1440 px (about 985 checks each, no collisions).
+6. Quips. `quipFor(tier, score)`: no thin air below 15,000 ft, no space below the edge of space. Test: unit test "quips fit the altitude".
+7. Verify. `npm run screens` writes 56 screenshots to screenshots/v5/ at 375x812 and 1440x900: a perfect 700 with the Moon and the flag (-20 to -25), the One in a Swarm moment (-20), page hidden mid-climb and recovered (-26), and an Infinite run until the clock runs out (-27, -28). Found and fixed from the screenshots: the four numbers on the Infinite end screen wrapped on a wide screen (now two columns, with a check).
+
+## v5 results
+- 110 unit tests pass; content OK.
+- Browser suite: 31 of 32 pass on the test machine. The one failure is "frame rate during a climb on a throttled phone" (30 fps against a floor of 50). The machine was on battery in Low Power Mode, which caps the browser at 30 frames a second; the same test fails the same way on the already-shipped main branch on this machine, and passed at 60 fps earlier the same day on mains power. So this run says nothing either way about v5's frame rate, and CI does not run the browser suite: the frame rate of v5 is UNVERIFIED until `npm run test:e2e` is run on mains power.
+
+## Could not fix, or left
+- A front cloud can drift across the bee while it rests in the cumulus deck. It is drawn at 80% so the bee shows through, but it is briefly dimmed.
+- On a phone the reveal note can still sit over a bright cloud; it is outlined and readable, not boxed.
+- The leak in item 1 could not be reproduced exactly as reported (text auto-submitting unseen). Every route found is closed and tested, but the original trigger was not observed.

@@ -370,7 +370,7 @@ async function main() {
     assert.equal(await text(page, 'lastBadge'), 'RARE');
     assert.equal(await text(page, 'lastAnswer'), answer);
     assert.equal(await text(page, 'lastPoints'), '+60 PTS · now at ' + feet(60));
-    assert.ok((await text(page, 'lastNote')).startsWith(C.TIERS.rare.quip));
+    assert.ok((await text(page, 'lastNote')).startsWith(C.TIERS.rare.quip.split('.')[0]));
     assert.ok(await page.eval('Array.from(document.getElementById("lastIcon").getContext("2d").getImageData(0, 0, 24, 20).data).some((v) => v > 0)'), 'the tier artwork is drawn');
     assert.equal(await page.eval('document.querySelector("#pips li").dataset.tier'), 'rare');
 
@@ -472,6 +472,39 @@ async function main() {
     assert.equal(miss.shake, true, 'the screen shakes');
     assert.match(miss.said, /time's up/, 'and screen readers hear it');
     assert.equal(await page.eval('document.querySelectorAll("#pips li")[1].dataset.tier'), 'miss');
+    noProblems(page);
+    await page.close();
+  });
+
+  await scenario('input leak: nothing typed on a reveal reaches the next round', async () => {
+    const page = await fresh({ width: 1280, height: 800 });
+    await click(page, 'dailyBtn');
+    await playDaily(page, ['solid']);
+    assert.equal(await phase(page), 'reveal');
+    assert.equal(await page.eval('document.getElementById("guess").disabled'), true, 'the answer box is off while the reveal shows');
+    // a player who keeps typing, and a script that writes straight into the hidden box
+    await page.type('leaked answer');
+    await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.value = "leaked answer"; document.getElementById("guessForm").requestSubmit(); })()');
+    assert.equal(await phase(page), 'reveal', 'a submit on the reveal does nothing');
+    await sleep(650);
+    await page.enter(); // Enter on the reveal only continues
+    await page.waitFor('document.body.dataset.phase === "intro"', 3000, 'the next round to begin');
+    assert.equal(await page.eval('document.getElementById("guess").value'), '', 'the next round starts with an empty box');
+    await waitPhase(page, 'guess');
+    assert.equal(await text(page, 'hudText'), 'Round 2 of 7');
+    assert.equal(await page.eval('document.getElementById("guess").value'), '');
+    assert.equal(await page.eval('document.getElementById("guess").disabled'), false);
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 0, 'nothing was submitted for the player');
+    assert.equal(await text(page, 'feedback'), '');
+    await sleep(1000);
+    const left = await barScale(page);
+    assert.ok(left > 0.9 && left < 0.99, 'the timer runs normally, with no penalty: ' + left);
+    assert.equal(await phase(page), 'guess', 'and the prompt is still there to be read');
+    assert.equal((await saved(page)).results.length, 1);
+    // the same during a climb
+    await guess(page, answerOf(await text(page, 'promptText'), 'rare'));
+    assert.match(await phase(page), /^(climb|reveal)$/);
+    assert.equal(await page.eval('document.getElementById("guess").disabled'), true, 'and it is off from the moment the climb begins');
     noProblems(page);
     await page.close();
   });
@@ -662,6 +695,8 @@ async function main() {
     assert.equal(await text(page, 'infScore'), '100 pts');
     assert.equal(await text(page, 'infAlt'), feet(100));
     assert.equal(await text(page, 'infTitle'), 'NEW BEST RUN');
+    // Regression: the four numbers used to wrap ("190" over "pts") on a wide screen.
+    assert.deepEqual(await page.eval('Array.from(document.querySelectorAll("[data-view=infover] .numbers dd")).filter((n) => n.offsetHeight > parseFloat(getComputedStyle(n).lineHeight) * 1.5 || n.scrollWidth > n.clientWidth + 1).map((n) => n.id)'), [], 'each number sits on one line and fits its column');
     await sleep(500);
     assert.equal(await view(page), 'infover', 'stays ended');
     await page.reload();
@@ -951,7 +986,7 @@ async function main() {
         art: document.getElementById('lastIcon').toDataURL(), pip: [...document.querySelectorAll('#pips li canvas')].pop().toDataURL() })`));
     }
     assert.deepEqual(seen.map((s) => s.name), C.TIER_ORDER.map((t) => C.TIERS[t].label.toUpperCase()));
-    seen.forEach((s, i) => assert.ok(s.quip.startsWith(C.TIERS[C.TIER_ORDER[i]].quip), 'quip for ' + s.name));
+    seen.forEach((s, i) => assert.ok(s.quip.startsWith(C.TIERS[C.TIER_ORDER[i]].quip.split('.')[0]), 'quip for ' + s.name + ': ' + s.quip));
     assert.equal(new Set(seen.map((s) => s.art)).size, 6, 'six different reveal-card pictures');
     assert.equal(new Set(seen.map((s) => s.pip)).size, 6, 'six different pip marks');
     noProblems(page);
@@ -1205,6 +1240,61 @@ async function main() {
     assert.ok((await barScale(page)) * 25000 < after - 800, 'and is running again');
     noProblems(page);
     await page.close();
+  });
+
+  // Regression: facts, captions and toasts used to land on each other, on the reveal text, on
+  // the "Flight complete" line, off the edge of the screen, and inside the HUD during the countdown.
+  await scenario('floating text: bounding boxes never collide or leave the screen, at 375 and 1440', async () => {
+    const WATCH = `window.__bad = {}; window.__seen = { fact: 0, caption: 0, toast: 0 }; window.__checks = 0;
+      setInterval(() => {
+        const vis = (n) => n && !n.hidden && n.getClientRects().length && !n.classList.contains('yield') && !n.classList.contains('out');
+        const box = (n, name) => { const r = n.getBoundingClientRect(); return { name, l: r.left, t: r.top, r: r.right, b: r.bottom }; };
+        const floats = [];
+        document.querySelectorAll('#worldLayer .fact').forEach((n) => { if (vis(n)) floats.push(box(n, 'fact "' + n.textContent.slice(0, 24) + '"')); });
+        if (vis(document.getElementById('caption'))) floats.push(box(document.getElementById('caption'), 'caption'));
+        if (vis(document.getElementById('toast'))) floats.push(box(document.getElementById('toast'), 'toast'));
+        const fixed = [];
+        ['#hud', '#promptCard', '#dock', '#tools', '#reveal > *', '#revealFoot > *', '#tag', '.title-block', '.start-panel'].forEach((sel) => document.querySelectorAll(sel).forEach((n) => { if (n.getClientRects().length) fixed.push(box(n, sel + (n.id ? ' ' + n.id : ''))); }));
+        const hit = (a, b) => a.b > b.t + 1 && a.t < b.b - 1 && a.r > b.l + 1 && a.l < b.r - 1;
+        const phase = document.body.dataset.phase;
+        floats.forEach((f, i) => {
+          window.__seen[f.name.split(' ')[0]]++;
+          if (f.l < 0 || f.t < 0 || f.r > window.innerWidth || f.b > window.innerHeight) window.__bad[f.name + ' leaves the screen (' + phase + ')'] = 1;
+          fixed.forEach((x) => { if (hit(f, x)) window.__bad[f.name + ' overlaps ' + x.name + ' (' + phase + ')'] = 1; });
+          floats.slice(i + 1).forEach((g) => { if (hit(f, g)) window.__bad[f.name + ' overlaps ' + g.name + ' (' + phase + ')'] = 1; });
+        });
+        window.__checks++;
+      }, 50);`;
+    const notes = [];
+    for (const size of [{ width: 375, height: 812, mobile: true }, { width: 1440, height: 900 }]) {
+      const page = await fresh(Object.assign({ reducedMotion: false }, size));
+      await page.eval(WATCH);
+      // sightings on the title screen: a toast beside the title and the start panel
+      await page.eval('(() => { const b = window.__swarm.scene.box("bee"); const o = { bubbles: true, clientX: b.x + b.w / 2, clientY: b.y + b.h / 2 }; document.elementFromPoint(o.clientX, o.clientY).dispatchEvent(new PointerEvent("pointerdown", o)); })()');
+      await sleep(600);
+      await click(page, 'dailyBtn');
+      const tiers = ['swarm', 'deep', 'rare', 'swarm', 'swarm', 'swarm', 'solid'];
+      for (let i = 0; i < 7; i++) {
+        await page.waitFor('document.body.dataset.phase === "intro" || document.body.dataset.phase === "guess"', 8000, 'the countdown');
+        await waitPhase(page, 'guess');
+        await guess(page, answerOf(await text(page, 'promptText'), tiers[i]));
+        await waitPhase(page, 'reveal', 12000);
+        await sleep(900); // the reveal, with whatever caption or toast came with it
+        await click(page, 'nextBtn');
+      }
+      await waitPhase(page, 'results');
+      await sleep(300);
+      const bad = await page.eval('Object.keys(window.__bad)');
+      const seen = await page.eval('window.__seen');
+      const checks = await page.eval('window.__checks');
+      assert.deepEqual(bad, [], size.width + 'px: ' + bad.join('; '));
+      assert.ok(checks > 300, 'the boxes were checked all the way up: ' + checks);
+      assert.ok(seen.fact > 20 && seen.caption > 5 && seen.toast > 5, 'facts, captions and toasts were all on screen to be checked: ' + JSON.stringify(seen));
+      notes.push(size.width + 'px: ' + checks + ' checks, ' + JSON.stringify(seen));
+      noProblems(page);
+      await page.close();
+    }
+    return notes.join('; ');
   });
 
   await scenario('captions: one at a time, about three seconds each', async () => {

@@ -115,7 +115,7 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
 
 /* A small notice in the open sky, clear of the prompt and the answer bar. */
 .toast {
-  position: fixed; z-index: 7; bottom: calc(var(--win-bottom, 120px) + 8px); right: calc(var(--ruler, 108px) + 8px); margin: 0;
+  position: fixed; z-index: 7; left: 8px; top: 40vh; margin: 0; /* placed by the layout manager in app.js */
   padding: 0.35rem 0.5rem; max-width: 60vw; font-size: 0.5rem; line-height: 1.7; pointer-events: none; white-space: pre-line;
   background: var(--accent); color: var(--accent-ink); border: 2px solid var(--accent-ink);
 }
@@ -126,7 +126,7 @@ body.shake #world, body.shake .reveal { animation: quake 0.45s linear; }
   text-shadow: 1px 1px 0 #00213d, -1px 1px 0 #00213d, 1px -1px 0 #00213d, -1px -1px 0 #00213d, 0 2px 0 #00213d;
   transition: opacity 0.3s linear;
 }
-.caption.out { opacity: 0; }
+.caption.out, .caption.yield, .toast.yield { opacity: 0; }
 /* captions belong to the flight: never over the title screen panels' text or the results */
 body[data-phase="results"] .caption, body[data-phase="infover"] .caption, body[data-phase="error"] .caption { display: none; }
 .toast::first-line { font-size: 0.55rem; }
@@ -321,6 +321,8 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
 .numbers, .stats { margin: 0.8rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); gap: 0.8rem; }
 .numbers dt, .stats dt { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .numbers dd, .stats dd { margin: 0.2rem 0 0; }
+/* four numbers never share a row narrower than they are: two columns */
+[data-view="infover"] .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .numbers dd { font-size: clamp(0.8rem, 4.2vw, 1.4rem); overflow-wrap: anywhere; }
 .stats { grid-template-columns: repeat(4, 1fr); }
 .stats dd { font-size: 0.85rem; }

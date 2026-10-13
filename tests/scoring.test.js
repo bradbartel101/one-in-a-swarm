@@ -138,12 +138,39 @@ test('number formatting', () => {
   assert.equal(C.formatNumber(1234567), '1,234,567');
 });
 
-test('every tier has its own label, points, quip and climb time', () => {
+test('every tier has its own label, points and quip', () => {
   const tiers = C.TIER_ORDER.map((t) => C.TIERS[t]);
   assert.equal(new Set(tiers.map((t) => t.label)).size, 6);
   assert.equal(new Set(tiers.map((t) => t.quip)).size, 6);
-  tiers.forEach((t) => assert.ok(t.quip.length > 15 && t.climbMs >= 2500 && t.climbMs <= 4000, t.label));
-  for (let i = 1; i < tiers.length; i++) assert.ok(tiers[i].climbMs > tiers[i - 1].climbMs, 'rarer answers climb for longer');
+  tiers.forEach((t) => assert.ok(t.quip.length > 15, t.label));
+});
+
+test('climb pacing: 2.5 s plus 12 ms a point, clamped, eased out, slower past things worth reading', () => {
+  assert.deepEqual([0, 10, 15, 30, 60, 85, 100, 500].map(C.climbMs), [2500, 2620, 2680, 2860, 3220, 3520, 3700, 4500]);
+  assert.equal(C.climbMs(-5), 2500);
+  const plain = C.climbCurve(100, 160, []);
+  assert.equal(plain(0), 0);
+  assert.equal(plain(1), 1);
+  let prev = 0;
+  let prevStep = Infinity;
+  for (let i = 1; i <= 100; i++) {
+    const p = plain(i / 100);
+    assert.ok(p > prev, 'always rising');
+    assert.ok(p - prev <= prevStep + 1e-9, 'never speeding up: eased out');
+    prevStep = p - prev;
+    prev = p;
+  }
+  // Regression: a low climb used to cover almost all its distance in the first 1.5 seconds.
+  const half = C.climbCurve(40, 100, [])(1.5 / (C.climbMs(60) / 1000));
+  assert.ok(half < 0.72, 'after 1.5 s a 60-point climb is still well short: ' + half.toFixed(2));
+  // but it does start at once: within 200 ms it has moved a visible amount (over a tenth of a point)
+  assert.ok(C.climbCurve(0, 10, [])(200 / C.climbMs(10)) * 10 > 0.5);
+  // passing a mark: more time is spent within a few points of it than without it
+  const timeNear = (curve, from, to, m) => { let n = 0; for (let i = 0; i < 2000; i++) { const at = from + (to - from) * curve(i / 2000); if (Math.abs(at - m) < 3) n++; } return n / 2000; };
+  const marked = C.climbCurve(100, 200, [150]);
+  assert.ok(timeNear(marked, 100, 200, 150) > timeNear(C.climbCurve(100, 200, []), 100, 200, 150) * 1.5, 'it lingers at the mark');
+  assert.equal(marked(1), 1);
+  assert.equal(C.climbCurve(100, 200, [50, 400])(0.5), C.climbCurve(100, 200, [])(0.5), 'marks outside the climb change nothing');
 });
 
 test('points to feet: the five checkpoints of the one curve', () => {
@@ -156,4 +183,22 @@ test('points to feet: the five checkpoints of the one curve', () => {
   // between checkpoints it is still the same function: 60 points is 242 ft, not whatever a half-finished count shows
   assert.equal(C.altitudeFeet(60), 242);
   assert.equal(C.altitudeParts(60).value, '242');
+});
+
+test('quips fit the altitude: no thin air below 15,000 ft, no space below the edge of space', () => {
+  const lowTop = C.scoreForFeet(C.THIN_AIR_FT);
+  const spaceFrom = C.scoreForFeet(328084);
+  for (const tier of C.TIER_ORDER) {
+    for (let s = 0; s <= 760; s += 1) {
+      const q = C.quipFor(tier, s);
+      assert.ok(q.length > 15, tier + ' at ' + s);
+      if (s < lowTop - 0.5) assert.doesNotMatch(q, /\b(thin|air|space|orbit|stars?|dark|vacuum)\b/i, tier + ' at ' + s + ' points (' + C.altitudeText(s) + '): ' + q);
+      if (s < spaceFrom - 0.5) assert.doesNotMatch(q, /\b(space|orbit|no air|dark|vacuum)\b/i, tier + ' at ' + s + ': ' + q);
+    }
+  }
+  // Regression: a Deep Cut at 600 ft used to say the air was getting thin.
+  assert.equal(C.quipFor('deep', 95), 'A deep cut. The ground is a long way down.');
+  assert.equal(C.quipFor('deep', 320), 'A deep cut. The air is getting thin.');
+  assert.equal(C.quipFor('deep', 640), 'A deep cut. No air up here at all.');
+  assert.equal(C.quipFor('nonsense', 10), '');
 });
