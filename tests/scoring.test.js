@@ -202,3 +202,52 @@ test('quips fit the altitude: no thin air below 15,000 ft, no space below the ed
   assert.equal(C.quipFor('deep', 640), 'A deep cut. No air up here at all.');
   assert.equal(C.quipFor('nonsense', 10), '');
 });
+
+test('your flights: the last 30 scores, tier counts and the longest streak are kept, and old saves survive', () => {
+  const day = (n) => C.utcDateKey(new Date((C.dayNumber('2026-10-08') + n) * 86400000));
+  const rounds = (tiers) => tiers.map((t) => ({ tier: t, points: C.tierPoints(t) }));
+  let s = null;
+  s = C.recordFlight(s, day(0), 200, rounds(['common', 'rare', null, 'swarm', 'solid', 'clever', 'deep']));
+  assert.deepEqual(s.tiers, { common: 1, clever: 1, solid: 1, rare: 1, deep: 1, swarm: 1, miss: 1 });
+  assert.deepEqual(s.history, [{ d: day(0), s: 200 }]);
+  assert.equal(s.longest, 1);
+  s = C.recordFlight(s, day(1), 300, rounds(['swarm', 'swarm', 'rare', null, null, 'nonsense', 'common']));
+  s = C.recordFlight(s, day(2), 100, rounds(['common']));
+  assert.deepEqual(s.tiers, { common: 3, clever: 1, solid: 1, rare: 2, deep: 1, swarm: 3, miss: 4 }, 'an unknown tier counts as a miss');
+  assert.deepEqual([s.streak, s.longest], [3, 3]);
+  s = C.recordFlight(s, day(5), 50); // two days missed: the streak restarts, the longest stays
+  assert.deepEqual([s.streak, s.longest, C.currentStreak(s, day(5))], [1, 3, 1]);
+  assert.deepEqual(s.history.map((h) => h.s), [200, 300, 100, 50]);
+  assert.deepEqual(C.recordFlight(s, day(5), 700, rounds(['swarm'])), s, 'the same day twice changes nothing, tier counts included');
+  for (let n = 6; n < 46; n++) s = C.recordFlight(s, day(n), n * 10 > 700 ? 700 : n * 10);
+  assert.equal(s.history.length, 30, 'only the last 30 flights are kept');
+  assert.equal(s.history[29].d, day(45));
+  assert.equal(s.history[0].d, day(16));
+  assert.deepEqual([s.played, s.streak, s.longest], [44, 41, 41]);
+  assert.deepEqual(C.reviveStats(JSON.parse(JSON.stringify(s))), s, 'survives a round trip through storage');
+
+  // a record saved before these fields existed keeps its numbers and gains empty extras
+  const old = { v: C.SAVE_VERSION, played: 9, total: 2700, best: 520, streak: 4, lastDate: day(3) };
+  const revived = C.reviveStats(old);
+  assert.deepEqual(revived, Object.assign({}, old, { longest: 4, history: [], tiers: { common: 0, clever: 0, solid: 0, rare: 0, deep: 0, swarm: 0, miss: 0 } }));
+  const next = C.recordFlight(revived, day(4), 300, rounds(['rare']));
+  assert.deepEqual([next.played, next.streak, next.longest, next.history.length, next.tiers.rare], [10, 5, 5, 1, 1]);
+
+  // damaged extras are reset one by one; the sound core numbers are kept
+  const good = C.reviveStats(JSON.parse(JSON.stringify(next)));
+  const damaged = [
+    { history: 'x' }, { history: [{ d: 'soon', s: 5 }] }, { history: [{ d: day(4), s: 9999 }] }, { history: [{ d: day(4), s: 1 }, { d: day(2), s: 1 }] },
+    { history: new Array(40).fill(0).map((_, i) => ({ d: day(i), s: 10 })) }, { history: [null] },
+    { tiers: 'x' }, { tiers: { common: -1 } }, { tiers: { common: 1e9, clever: 0, solid: 0, rare: 0, deep: 0, swarm: 0, miss: 0 } }, { tiers: null },
+    { longest: -4 }, { longest: 'many' }, { longest: 99999 }, { longest: 1 },
+  ];
+  damaged.forEach((d) => {
+    const r = C.reviveStats(Object.assign(JSON.parse(JSON.stringify(next)), d));
+    assert.ok(r, 'still a usable record: ' + JSON.stringify(d).slice(0, 60));
+    assert.deepEqual([r.played, r.total, r.best, r.streak, r.lastDate], [good.played, good.total, good.best, good.streak, good.lastDate]);
+    assert.ok(Array.isArray(r.history) && r.history.length <= 30 && r.history.length <= r.played);
+    assert.ok(r.longest >= r.streak && r.longest <= r.played);
+    assert.ok(Object.values(r.tiers).every((n) => Number.isInteger(n) && n >= 0));
+  });
+  assert.equal(C.reviveStats(Object.assign({}, next, { played: -1 })), null, 'broken core numbers still reject the whole record');
+});

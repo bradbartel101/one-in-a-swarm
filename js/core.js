@@ -19,7 +19,9 @@
 
   const ROUNDS = 7;
   const ROUND_MS = 25000;
-  const PENALTY_MS = 3000;
+  // A wrong guess costs no time. What keeps guessing honest instead: a guess already made this
+  // round is ignored, and submits are accepted at most once every 350 ms.
+  const SUBMIT_COOLDOWN_MS = 350;
   const INFINITE_START_MS = 45000;
   const SKIP_MS = 5000;
   const MIN_ANSWERS = 25;
@@ -193,6 +195,7 @@
     tohellwithgeorgia: 'thwg', thwg: 'thwg',
     helluvaengineer: 'helluva', ahelluvaengineer: 'helluva',
     uga: 'wrongschool', georgia: 'wrongschool', universityofgeorgia: 'wrongschool',
+    whatsthegoodword: 'goodword', thegoodword: 'goodword', goodword: 'goodword',
   };
 
   function secretFor(input) {
@@ -376,6 +379,37 @@
     return set[feet < THIN_AIR_FT ? 0 : feet < SPACE_FT ? 1 : 2];
   }
 
+  // Wrong guesses made in a finished run, round by round and in all. Old saves count as zero.
+  function missCounts(results) {
+    const perRound = (results || []).map((r) => (r && isFinite(r.wrong) && r.wrong > 0 ? Math.floor(r.wrong) : 0));
+    return { perRound, total: perRound.reduce((a, b) => a + b, 0) };
+  }
+
+  /* ---------- launch settings (config.js) ---------- */
+
+  // The visit counter. Returns what to load for a GoatCounter site code, or null when the
+  // code is empty or is not a plain site code (so a typo can never load some other script).
+  function goatCounter(code) {
+    const c = String(code == null ? '' : code).trim().toLowerCase();
+    if (!/^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/.test(c)) return null;
+    return { src: 'https://gc.zgo.at/count.js', endpoint: 'https://' + c + '.goatcounter.com/count' };
+  }
+
+  // "Wrong tier? Tell us": the owner's link with the date and the day's prompt ids added, so
+  // a report says which round it means. Returns '' (no link) for an empty or unsafe address.
+  function feedbackLink(url, dateKey, promptIds) {
+    const u = String(url == null ? '' : url).trim();
+    const ids = (promptIds || []).filter((id) => /^[a-z0-9-]+$/i.test(id)).join(',');
+    const date = /^\d{4}-\d{2}-\d{2}$/.test(dateKey) ? dateKey : '';
+    if (/^mailto:[^\s?]+@[^\s?]+$/i.test(u)) {
+      return u + '?subject=' + encodeURIComponent('One in a Swarm: wrong tier? (' + date + ')') + '&body=' + encodeURIComponent('Date: ' + date + '\nPrompts: ' + ids + '\n\nWhich answer, and what tier should it be?\n');
+    }
+    if (!/^https:\/\/[^\s]+$/i.test(u)) return '';
+    const hash = u.indexOf('#') === -1 ? '' : u.slice(u.indexOf('#'));
+    const bare = hash ? u.slice(0, u.indexOf('#')) : u;
+    return bare + (bare.indexOf('?') === -1 ? '?' : '&') + 'date=' + encodeURIComponent(date) + '&prompts=' + encodeURIComponent(ids) + hash;
+  }
+
   function tierPoints(tier) {
     return TIERS[tier] ? TIERS[tier].points : 0;
   }
@@ -538,12 +572,7 @@
     }
     if (state.round.tried.some((t) => sameGuess(t.key, m.key))) return { status: 'duplicate' };
     state.round.tried.push({ key: m.key.slice(0, 80), text: String(input).trim().slice(0, 60) });
-    state.round.leftMs = Math.max(0, state.round.leftMs - PENALTY_MS);
-    if (state.round.leftMs === 0) {
-      closeRound(state, { tier: null, answer: null, points: 0 });
-      return { status: 'timeout', lastWrong: true };
-    }
-    return { status: 'wrong', remainingMs: state.round.leftMs };
+    return { status: 'wrong', remainingMs: state.round.leftMs, misses: state.round.tried.length };
   }
 
   /* ---------- saved data ---------- */
@@ -610,25 +639,54 @@
   }
 
   // Adds a finished flight. Recording the same date twice changes nothing.
-  function recordFlight(stats, dateKey, score) {
+  const HISTORY_DAYS = 30;
+  const emptyTierCounts = () => ({ common: 0, clever: 0, solid: 0, rare: 0, deep: 0, swarm: 0, miss: 0 });
+
+  // Adds a finished flight to the lifetime record: totals, streaks, the last 30 scores and how
+  // many answers of each tier the player has found. `results` is the day's rounds (optional).
+  function recordFlight(stats, dateKey, score, results) {
     const s = stats || newStats();
     if (s.lastDate && dayNumber(dateKey) <= dayNumber(s.lastDate)) return s;
+    const streak = s.lastDate === previousDateKey(dateKey) ? s.streak + 1 : 1;
+    const tiers = Object.assign(emptyTierCounts(), s.tiers);
+    (results || []).forEach((r) => { tiers[r && TIERS[r.tier] ? r.tier : 'miss'] += 1; });
     return {
       v: SAVE_VERSION,
       played: s.played + 1,
       total: s.total + score,
       best: Math.max(s.best, score),
-      streak: s.lastDate === previousDateKey(dateKey) ? s.streak + 1 : 1,
+      streak,
       lastDate: dateKey,
+      longest: Math.max(s.longest || s.streak || 0, streak),
+      history: (s.history || []).concat([{ d: dateKey, s: score }]).slice(-HISTORY_DAYS),
+      tiers,
     };
   }
 
+  // Rebuilds the record from untrusted storage. The core numbers must be sound or the whole
+  // record is dropped. The newer parts (longest streak, history, tier counts) are each kept
+  // if they are sound and quietly reset if they are missing or damaged, so a save from before
+  // they existed keeps its streak and totals.
   function reviveStats(raw) {
     if (!raw || typeof raw !== 'object' || raw.v !== SAVE_VERSION) return null;
     if (!isCount(raw.played, 1e6) || !isCount(raw.total, 1e9) || !isCount(raw.best, TOP_SCORE) || !isCount(raw.streak, 1e6)) return null;
     if (typeof raw.lastDate !== 'string' || (raw.lastDate && isNaN(dayNumber(raw.lastDate)))) return null;
     if (raw.streak > raw.played || raw.total > raw.played * TOP_SCORE) return null;
-    return { v: SAVE_VERSION, played: raw.played, total: raw.total, best: raw.best, streak: raw.streak, lastDate: raw.lastDate };
+    const longest = isCount(raw.longest, 1e6) && raw.longest >= raw.streak && raw.longest <= raw.played ? raw.longest : raw.streak;
+    let history = [];
+    if (Array.isArray(raw.history)) {
+      history = raw.history.filter((h) => h && typeof h === 'object' && typeof h.d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(h.d) && !isNaN(dayNumber(h.d)) && isCount(h.s, TOP_SCORE)).map((h) => ({ d: h.d, s: h.s }));
+      const ordered = history.every((h, i) => i === 0 || dayNumber(h.d) > dayNumber(history[i - 1].d));
+      if (!ordered || history.length !== raw.history.length || history.length > raw.played) history = [];
+      history = history.slice(-HISTORY_DAYS);
+    }
+    const tiers = emptyTierCounts();
+    if (raw.tiers && typeof raw.tiers === 'object') {
+      const keys = Object.keys(tiers);
+      const sound = keys.every((k) => isCount(raw.tiers[k], 1e7)) && keys.reduce((n, k) => n + raw.tiers[k], 0) <= raw.played * ROUNDS;
+      if (sound) keys.forEach((k) => { tiers[k] = raw.tiers[k]; });
+    }
+    return { v: SAVE_VERSION, played: raw.played, total: raw.total, best: raw.best, streak: raw.streak, lastDate: raw.lastDate, longest, history, tiers };
   }
 
   // A streak only counts if the last flight was today or yesterday.
@@ -702,7 +760,7 @@
     }
     if (state.tried.some((k) => sameGuess(k, m.key))) return { status: 'duplicate' };
     state.tried.push(m.key);
-    infiniteSpend(state, PENALTY_MS);
+    state.misses = (state.misses || 0) + 1;
     return { status: 'wrong' };
   }
 
@@ -751,8 +809,8 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    climbMs, climbCurve, quipFor, THIN_AIR_FT,
-    ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
+    climbMs, climbCurve, quipFor, THIN_AIR_FT, missCounts, goatCounter, feedbackLink,
+    ROUNDS, ROUND_MS, SUBMIT_COOLDOWN_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,
     scheduleDay, extendSchedule, scheduledIds,

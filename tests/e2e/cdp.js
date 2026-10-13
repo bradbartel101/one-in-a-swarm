@@ -120,6 +120,7 @@ async function launch() {
     if (o.reducedMotion) features.push({ name: 'prefers-reduced-motion', value: 'reduce' });
     if (features.length) await s('Emulation.setEmulatedMedia', { features });
     await send('Browser.grantPermissions', { permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'], browserContextId }).catch(() => {});
+    if (o.blockUrls) await s('Network.setBlockedURLs', { urls: o.blockUrls }); // before any page loads
     if (o.initScript) await s('Page.addScriptToEvaluateOnNewDocument', { source: o.initScript });
 
     page.eval = async (expression) => {

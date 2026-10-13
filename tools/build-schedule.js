@@ -2,7 +2,10 @@
 /* Extends data/schedule.json, which pins every date to its seven prompts.
    Days already in the file are never changed; new days are appended, a year ahead of today.
    Run: npm run build:schedule            (extend)
-        node tools/build-schedule.js --check old.json   (fail if any day in old.json changed) */
+        node tools/build-schedule.js --redraw-future    (keep every day up to and including today,
+                                                         draw every later day again from the current
+                                                         prompt bank: use after adding prompts)
+        node tools/build-schedule.js --check old.json   (fail if a day up to today in old.json changed) */
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -14,17 +17,26 @@ const ids = prompts.map((p) => p.id);
 const existing = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : null;
 
 if (process.argv[2] === '--check') {
+  // A day that has been played, or is being played, may never change. Days still in the future
+  // may be drawn again (when prompts are added), so they are reported but do not fail the check.
   const old = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
-  const changed = Object.keys(old.days || {}).filter((d) => JSON.stringify(old.days[d]) !== JSON.stringify(existing && existing.days[d]));
+  const now = core.utcDateKey(new Date());
+  const differs = Object.keys(old.days || {}).filter((d) => JSON.stringify(old.days[d]) !== JSON.stringify(existing && existing.days[d]));
+  const changed = differs.filter((d) => d <= now);
+  if (differs.length > changed.length) console.log((differs.length - changed.length) + ' future days were drawn again (allowed: nobody has played them).');
   if (changed.length) {
     console.error('Schedule changed for dates that were already published: ' + changed.slice(0, 5).join(', ') + (changed.length > 5 ? ' and ' + (changed.length - 5) + ' more' : ''));
     process.exit(1);
   }
-  console.log('Schedule OK: all ' + Object.keys(old.days || {}).length + ' published days are unchanged.');
+  console.log('Schedule OK: every day up to today (' + now + ') is unchanged.');
   process.exit(0);
 }
 
 const today = core.utcDateKey(new Date());
+const redraw = process.argv[2] === '--redraw-future';
+if (redraw && existing) {
+  Object.keys(existing.days).forEach((k) => { if (k > today) delete existing.days[k]; });
+}
 const span = core.dayNumber(today) - core.dayNumber(core.LAUNCH_DATE) + 366;
 // The first time, the file is filled with exactly what the game was already serving, so nothing
 // changes for anyone on the day this ships. After that, new days are drawn fresh and appended.

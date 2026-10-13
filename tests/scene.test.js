@@ -81,6 +81,8 @@ test('there is exactly one sun: it only ever sinks and warms, and once set it ne
   assert.ok(at(500).y < at(9000).y && at(9000).y < at(13000).y && at(13000).y < at(27000).y);
   assert.equal(at(62000), null);
   assert.notEqual(Scene.sunAt(0).core, Scene.sunAt(250).core, 'and it changes colour on the way');
+  // it keeps to the left of the sky: the answer tag is in the middle and the tier labels on the right
+  for (let p = 0; p < Scene.SUN_SET; p += 5) assert.ok(Scene.sunAt(p).x > 0.08 && Scene.sunAt(p).x < 0.2, 'left of the sky at ' + p);
 });
 
 test('the lower sky changes: it deepens every few thousand feet, and there is a cloud deck to fly through', () => {
@@ -98,4 +100,40 @@ test('the lower sky changes: it deepens every few thousand feet, and there is a 
   const order = ['drawCumulus(t, false);', 'drawBees(t);', 'drawCumulus(t, true);'].map((call) => src.indexOf(call));
   assert.ok(order[0] > 0 && order[0] < order[1] && order[1] < order[2], 'clouds behind the bee, the bee, then clouds in front');
   assert.match(src, /drawMorning\(\);/);
+});
+
+test('tier lines glow as the answer passes; nothing about them changes size', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'css', 'style.css'), 'utf8');
+  const pulse = css.slice(css.indexOf('@keyframes line-pulse'), css.indexOf('}', css.indexOf('100%', css.indexOf('@keyframes line-pulse'))) + 1);
+  assert.match(pulse, /box-shadow/);
+  assert.doesNotMatch(pulse, /scale|transform|font-size|zoom/, 'Regression: the pulse used to scale the line, and its label with it');
+});
+
+test('sixteen sightings, with something to find in every zone', () => {
+  const src = fs.readFileSync(path.join(__dirname, '..', 'js', 'scene.js'), 'utf8');
+  const block = src.slice(src.indexOf('const SIGHTINGS = ['), src.indexOf('];', src.indexOf('const SIGHTINGS = [')));
+  const found = [...block.matchAll(/\{ id: '(\w+)', score: ([^,]+(?:\([^)]*\))?), x: ([\d.]+), caption: (['"])(.+?)\4/g)].map((m) => {
+    const feet = /^at\((.+)\)$/.exec(m[2]);
+    const score = feet ? C.scoreForFeet(Function('return ' + feet[1])()) : Number(m[2]);
+    return { id: m[1], score, x: Number(m[3]), caption: m[5], zone: Scene.zoneAt(score).id };
+  });
+  assert.equal(found.length, 16);
+  assert.equal(new Set(found.map((g) => g.id)).size, 16);
+  const perZone = {};
+  found.forEach((g) => { perZone[g.zone] = (perZone[g.zone] || 0) + 1; });
+  Scene.ZONES.forEach((z) => assert.ok(perZone[z[1]] >= 1, 'something to find in ' + z[1] + ': ' + JSON.stringify(perZone)));
+  // the four added overnight went where there was least: midtown, high sky, stratosphere, space
+  const added = { drone: 'midtown', paperplane: 'highsky', jumper: 'stratosphere', teapot: 'space' };
+  Object.keys(added).forEach((id) => assert.equal(found.filter((g) => g.id === id)[0].zone, added[id], id));
+  found.forEach((g) => {
+    assert.ok(g.caption.length >= 10 && g.caption.length <= 60, g.id + ' caption fits one or two lines');
+    assert.ok(g.x >= 0 && g.x <= 0.8, g.id + ' keeps clear of the ruler');
+    assert.match(src, new RegExp('\\n      ' + g.id + '\\('), g.id + ' has art');
+  });
+  // every sighting is in the player's log, and the log's total matches
+  const app = fs.readFileSync(path.join(__dirname, '..', 'js', 'app.js'), 'utf8');
+  const eggs = app.slice(app.indexOf('const EGGS = ['), app.indexOf('];', app.indexOf('const EGGS = [')));
+  found.forEach((g) => assert.ok(eggs.includes("['" + g.id + "'"), g.id + ' is in the sightings log'));
+  assert.equal((eggs.match(/\['\w+', /g) || []).length, 26, '16 sightings, 6 secrets, 4 things to do');
+  assert.doesNotMatch(found.map((g) => g.caption).join(' '), /Domino|Pizza Hut|Papa John|DJI|Red Bull|NASA|SpaceX/i, 'no brand names');
 });

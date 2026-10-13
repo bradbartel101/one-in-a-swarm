@@ -11,6 +11,8 @@
     "screens": "node tests/e2e/screens.js",
     "test:all": "npm test && npm run validate && npm run test:e2e",
     "build:data": "node tools/build-prompts.js",
-    "build:schedule": "node tools/build-schedule.js"
+    "build:schedule": "node tools/build-schedule.js",
+    "build:icons": "node tools/build-icons.js",
+    "build:schedule:redraw": "node tools/build-schedule.js --redraw-future"
   }
 }

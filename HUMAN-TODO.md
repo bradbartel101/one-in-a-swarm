@@ -116,7 +116,7 @@ that I can't make for you. If in doubt, ask Georgia Tech's licensing office befo
 - Everything runs in the browser, so a determined player can read `data/prompts.json` or edit their
   saved score. The timer resists refreshes, tab switching and clock changes, but someone who sets
   their device clock back *while the page is closed* pauses the clock for that long.
-- A correct answer that is not in the bank is marked wrong and costs 3 seconds. This will happen,
+- A correct answer that is not in the bank is marked wrong (it no longer costs time). This will happen,
   most often with recent athletes and coaches and with course numbers.
 - The prompt bank covers 4 days without a repeat. After that prompts recur, in new combinations.
 - CI runs the unit tests and the validator. The headless-Chrome suite runs locally

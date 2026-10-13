@@ -20,18 +20,18 @@
   const CAPTION_MS = 3000;
   const MOVE_GRACE_MS = 400; // how long after a move should have ended before a timer ends it
   const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  // Everything there is to find: twelve sightings in the world, five secret answers, four things to do.
+  // Everything there is to find: sixteen sightings in the world, six secret answers, four things to do.
   const EGGS = [
-    ['car', 'The gold jalopy'], ['squirrel', 'The lunch thief'], ['washer', 'The window washer'], ['balloon', 'Sorry, Athens'],
+    ['car', 'The gold jalopy'], ['squirrel', 'The lunch thief'], ['drone', 'The pizza drone'], ['washer', 'The window washer'], ['balloon', 'Sorry, Athens'],
     ['geese', 'The wrong-way goose'], ['exam', 'CS 1331, 34/100'], ['jet', 'The busiest airport'], ['cap', 'The cap that never came down'],
-    ['wballoon', 'Lost & found'], ['astronaut', 'An alum in orbit'], ['satellite', 'The honeycomb satellite'], ['flag', 'A flag on the Moon'],
-    ['burdell', 'George P. Burdell'], ['buzz', 'Buzz does a flip'], ['thwg', 'THWG'], ['helluva', 'Helluva Engineer'], ['wrongschool', 'Wrong school'],
+    ['paperplane', 'The paper airplane'], ['wballoon', 'Lost & found'], ['jumper', 'The long way down'], ['astronaut', 'An alum in orbit'], ['teapot', 'The teapot'], ['satellite', 'The honeycomb satellite'], ['flag', 'A flag on the Moon'],
+    ['burdell', 'George P. Burdell'], ['buzz', 'Buzz does a flip'], ['thwg', 'THWG'], ['helluva', 'Helluva Engineer'], ['wrongschool', 'Wrong school'], ['goodword', "What's the good word?"],
     ['beetap', 'The loop'], ['tower', 'The tower chimes'], ['night', 'Studying late'], ['konami', 'The gold swarm'],
   ];
   const TICK_MS = 100;
   const NEXT_GUARD_MS = 600; // stops a double-tapped Enter from skipping the reveal card
   const LIFTOFF_MS = 2000;
-  const WRONG_LOCK_MS = 400;
+  const COOLDOWN_MS = C.SUBMIT_COOLDOWN_MS; // the gap between submits; typing is never blocked
   const GLIDE_MS = 900; // the short climb used in infinite mode
   const HOVER = 2.5; // on the title screen the bee idles this many points above the lawn
   const BEE_DOWN = 0.6; // how far down the screen the bee rides
@@ -98,6 +98,8 @@
   let revealShownAt = 0;
   let introTimer = 0;
   let lockUntil = 0;
+  let lockTimer = 0;
+  let capId = null; // the sighting the caption on screen belongs to
 
   let scene = null;
   let cam = 0; // the score the camera sits on
@@ -149,6 +151,7 @@
     if (g.disabled) g.value = '';
     aimCamera();
     layoutFloating(true);
+    if (scene) scene.draw(performance.now()); // never a frame of the old picture under new text
     flushToasts();
   }
 
@@ -204,30 +207,48 @@
     }, TOAST_MS);
   }
 
-  // Captions for sightings: one at a time, each for about three seconds, in one fixed place.
+  // Captions for sightings: one at a time, each for about three seconds, then a fade. A caption
+  // belongs to the thing it describes: once that has scrolled off the screen the caption goes
+  // with it, and captions still waiting for things that are no longer in view are dropped.
   function queueCaption(id) {
     if (captioned.has(id)) return;
     captioned.add(id);
-    capQueue.push(scene.sightings.filter((g) => g.id === id)[0].caption);
+    capQueue.push({ id, text: scene.sightings.filter((g) => g.id === id)[0].caption });
     nextCaption();
   }
 
+  // The flag is planted where the flight ended, so it is in view from the moment it is earned.
+  function captionSubjectInView(id) {
+    return id === 'flag' || scene.sightingVisible(id);
+  }
+
   function nextCaption() {
-    if (capTimer || !capQueue.length) return;
+    if (capTimer) return;
+    while (capQueue.length && !captionSubjectInView(capQueue[0].id)) capQueue.shift();
+    if (!capQueue.length) return;
     const node = $('caption');
-    node.textContent = capQueue.shift();
+    const next = capQueue.shift();
+    capId = next.id;
+    node.textContent = next.text;
+    node.dataset.sight = next.id;
     node.classList.remove('out');
     node.hidden = false;
     delete node.dataset.corner;
     layoutFloating(true);
+    capTimer = window.setTimeout(fadeCaption, CAPTION_MS);
+  }
+
+  function fadeCaption() {
+    if (!capId) return;
+    capId = null;
+    const node = $('caption');
+    node.classList.add('out'); // fade
+    window.clearTimeout(capTimer);
     capTimer = window.setTimeout(() => {
-      node.classList.add('out'); // fade
-      capTimer = window.setTimeout(() => {
-        node.hidden = true;
-        capTimer = 0;
-        nextCaption();
-      }, 300);
-    }, CAPTION_MS);
+      node.hidden = true;
+      capTimer = 0;
+      nextCaption();
+    }, 300);
   }
 
   function goldFlash() {
@@ -263,6 +284,10 @@
     } else if (id === 'helluva') {
       Sfx.jingle(); // silent unless sound is on
       setFeedback("That's the spirit.", 'good');
+    } else if (id === 'goodword') {
+      goldFlash(); // the old call, and its answer
+      Sfx.jingle();
+      setFeedback('To hell with Georgia!', 'good');
     } else setFeedback('Wrong school.', '');
     markFound(id);
   }
@@ -308,7 +333,6 @@
       s.hidden = s.getAttribute('data-view') !== name;
     });
     document.body.classList.toggle('playing', name === 'play' || name === 'between');
-    scene.drainSeen(); // whatever was in view on the last screen does not count on this one
     $('hud').hidden = !(name === 'play' || name === 'between');
     if (name !== 'play' && name !== 'between') window.scrollTo(0, 0);
     const late = name === 'home' && new Date().getHours() < 4; // the small hours get a night sky
@@ -317,6 +341,8 @@
     if (late) markFound('night');
     aimCamera();
     layoutFloating(true);
+    scene.draw(performance.now());
+    scene.drainSeen(); // whatever was in view on the last screen does not count on this one
     if (focusTarget) focusTarget.focus({ preventScroll: true });
   }
 
@@ -357,9 +383,9 @@
 
   // The creature on the reveal card. It moves: one bee drifts, a small swarm bobs, a rare
   // answer sends bees spiralling up, and the hive has bees in orbit. Still under reduced motion.
-  function drawTierArt(canvas, tier, now) {
+  function drawTierArt(canvas, tier, now, frozen) {
     const g = canvas.getContext('2d');
-    const t = reducedMotion() ? 0 : now || 0;
+    const t = frozen || reducedMotion() ? 0 : now || 0;
     const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d', f: '#f6dc7a' };
     const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00', f: '#fff0a8' };
     const box = (x, y, w, h, color) => {
@@ -517,8 +543,8 @@
       lastVars = vars;
       root.setProperty('--win-top', winTop + 'px');
       root.setProperty('--win-bottom', Math.max(0, Math.round(h - winBottom)) + 'px');
-      // the world layer is offset by the same number: move both together, never one frame apart
-      $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
+      // (the world layer is placed from the top of the screen, so a change here moves nothing)
+      $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
     }
   }
 
@@ -625,12 +651,13 @@
     anchor += (anchorTarget - anchor) * 0.14;
     scene.setAnchor(anchor);
     scene.setCamera(cam);
-    scene.draw(now);
-    $('worldLayer').style.transform = 'translateY(' + (scene.cssY(0) - winTop) + 'px)';
+    $('worldLayer').style.transform = 'translateY(' + scene.cssY(0) + 'px)';
     const tag = $('tag');
     if (!tag.hidden) tag.style.top = scene.cssY(cam) - tag.offsetHeight - 26 + 'px';
     if (countFrom !== null) $('hudScore').textContent = C.formatNumber(Math.round(cam)); // counts up with the climb
     layoutFloating(++frames % 4 === 0); // facts every frame, since the world moves under them
+    scene.draw(now); // after the layout pass, so the sun knows this frame's text
+    if (capId && !captionSubjectInView(capId)) fadeCaption(); // its subject has scrolled away
     // The bee glances down at the answer box while something is being typed.
     scene.setLook(document.body.dataset.phase === 'guess' && $('guess').value.length > 0);
     if (view === 'between' && frames % 3 === 0) drawTierArt($('lastIcon'), cardTier, now);
@@ -709,6 +736,7 @@
   let floatArea0 = null; // the last measured area, fixed boxes and placed toast and caption
   let floatFixed = [];
   let floatPlaced = [];
+  let revealBoxes = [];
 
   // `full` measures everything again and places the toast and the caption; it runs on every
   // change of screen and a few times a second. The pass in between is cheap and runs on every
@@ -745,6 +773,18 @@
       taken.push({ left: tag._m.left, right: tag._m.right, top, bottom: top + tag._m.h });
     }
     document.querySelectorAll('#worldLayer .tier-line.on span').forEach((n) => taken.push(worldBox(n, Number(n.parentNode.dataset.score))));
+    // the sun stays out from behind the reveal text, the tag and the tier labels
+    // (the reveal is measured on every frame while it is up: it animates in, and it is the
+    // one place where a stale box would put the sun behind words)
+    revealBoxes = [];
+    if (view === 'between') {
+      document.querySelectorAll('#reveal > *').forEach((n) => {
+        if (!n.getClientRects().length) return;
+        revealBoxes.push(n.getBoundingClientRect());
+        revealBoxes.push(layoutBox(n)); // and where it is heading
+      });
+    }
+    scene.setAvoid(revealBoxes.concat(taken.slice(floatFixed.length)));
     const bee = scene.box('bee');
     if (bee) taken.push({ left: bee.x, right: bee.x + bee.w, top: bee.y, bottom: bee.y + bee.h });
     const free = (r) => r.left >= area.left && r.right <= area.right && r.top >= area.top && r.bottom <= area.bottom && !taken.some((b) => hits(r, b, 6));
@@ -928,6 +968,7 @@
     setFeedback('', '');
     $('guess').value = ''; // every round starts with an empty box and no submit waiting
     lockUntil = 0;
+    delete $('guess').dataset.locked;
     $('clockLive').textContent = '';
     renderClock(C.ROUND_MS, C.ROUND_MS, true);
     setPhase('intro');
@@ -991,23 +1032,26 @@
     startLoop();
   }
 
-  function lockInput() {
+  // Every submit starts a short cooldown before the next one counts. Typing is never blocked,
+  // only submitting, so a double tap or a held Enter cannot fire a burst of guesses.
+  function startCooldown() {
     const g = $('guess');
-    // Typing is never blocked. Only submitting again is, briefly, so a double tap cannot cost
-    // two penalties. The wrong text stays selected, so the next keystroke replaces it.
-    lockUntil = performance.now() + WRONG_LOCK_MS;
+    lockUntil = performance.now() + COOLDOWN_MS;
     g.dataset.locked = '1';
-    g.focus();
-    g.select();
-    window.setTimeout(() => {
+    window.clearTimeout(lockTimer);
+    lockTimer = window.setTimeout(() => {
       delete g.dataset.locked;
-    }, WRONG_LOCK_MS);
+    }, COOLDOWN_MS);
   }
 
+  // A wrong guess costs no time. The box shakes, and the text stays selected so the next
+  // keystroke replaces it.
   function onWrong(text) {
-    setFeedback("'" + String(text).trim().slice(0, 24) + "': no buzz. try again. −3s", 'bad');
+    setFeedback("'" + String(text).trim().slice(0, 24) + "': no buzz. try again.", 'bad');
     shake();
-    lockInput();
+    const g = $('guess');
+    g.focus();
+    g.select();
     Sfx.wrong();
     return text;
   }
@@ -1024,8 +1068,7 @@
     monoAt = performance.now();
     const r = C.dailyGuess(daily, p, text, Date.now(), mono);
     if (r.status === 'empty') return;
-    if (r.status === 'duplicate') {
-      setFeedback('already tried that. no time lost.', 'bad');
+    if (r.status === 'duplicate') { // already guessed this round: ignored, with no message and no count
       $('guess').select();
       return;
     }
@@ -1164,15 +1207,19 @@
 
   function onNext() {
     if (Date.now() - revealShownAt < NEXT_GUARD_MS) return;
-    if (daily.finished) return showResults();
+    if (daily.finished) {
+      countEvent('flight-finished', 'Daily flight finished'); // once, when the flight really ends; not on a reload
+      return showResults();
+    }
     startIntro();
   }
 
   /* ---------- results ---------- */
 
-  function resultRow(index, promptText, answerText, tier, points) {
+  function resultRow(index, promptText, answerText, tier, points, misses) {
     const li = el('li');
     li.appendChild(el('span', 'q', index + '. ' + promptText));
+    if (misses) li.appendChild(el('span', 'misses', 'Round ' + index + ' · ' + misses + (misses === 1 ? ' miss' : ' misses')));
     const a = el('span', 'a');
     a.appendChild(el('span', 'ans', answerText));
     const meta = el('span', 'meta');
@@ -1181,6 +1228,59 @@
     a.appendChild(meta);
     li.appendChild(a);
     return li;
+  }
+
+  /* ---------- launch settings: the visit counter and the feedback link (config.js) ---------- */
+
+  const CONFIG = window.SwarmConfig || {};
+
+  // Loads GoatCounter only when the owner has set a site code. It counts page views by itself,
+  // uses no cookies and stores nothing on the device. With no code, nothing is loaded at all.
+  function loadCounter() {
+    const gc = C.goatCounter(CONFIG.GOATCOUNTER_CODE);
+    if (!gc) return;
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = gc.src;
+    tag.setAttribute('data-goatcounter', gc.endpoint);
+    tag.id = 'visitCounter';
+    document.head.appendChild(tag);
+  }
+
+  function countEvent(path, title) {
+    try {
+      if (C.goatCounter(CONFIG.GOATCOUNTER_CODE) && window.goatcounter && typeof window.goatcounter.count === 'function') {
+        window.goatcounter.count({ path, title, event: true });
+      }
+    } catch (e) { /* counting must never break the game */ }
+  }
+
+  // "Your flights": a bar for each of the last 30 flights, and how many answers of each tier
+  // have been found. Everything comes from this device's own storage.
+  function renderFlights(stats) {
+    const bars = $('histBars');
+    bars.textContent = '';
+    const top = stats.history.reduce((m, h) => Math.max(m, h.s), 0);
+    stats.history.forEach((h) => {
+      const li = el('li', (h.d === daily.date ? 'today ' : '') + (h.s === top && top > 0 ? 'best' : ''));
+      li.style.height = Math.max(3, Math.round((h.s / C.TOP_SCORE) * 100)) + '%';
+      li.title = prettyDate(h.d) + ': ' + C.formatNumber(h.s) + ' pts';
+      li.setAttribute('aria-label', li.title);
+      bars.appendChild(li);
+    });
+    const n = stats.history.length;
+    $('histNote').textContent = n < stats.played
+      ? 'Your last ' + n + ' of ' + stats.played + ' flights, oldest first. Today is the pale bar.'
+      : n === 1 ? 'One flight so far. Come back tomorrow and this becomes a chart.' : 'Your last ' + n + ' flights, oldest first. Today is the pale bar.';
+    const counts = $('tierCounts');
+    counts.textContent = '';
+    C.TIER_ORDER.slice().reverse().concat('miss').forEach((t) => {
+      const li = el('li');
+      li.appendChild(pipIcon(t === 'miss' ? null : t));
+      li.appendChild(el('span', '', t === 'miss' ? 'Nothing landed' : C.TIERS[t].label));
+      li.appendChild(el('strong', '', C.formatNumber(stats.tiers[t])));
+      counts.appendChild(li);
+    });
   }
 
   function showResults() {
@@ -1229,13 +1329,20 @@
     ladder.textContent = '';
     C.BANDS.forEach((b) => ladder.appendChild(el('li', b === band ? 'on' : '', b.min + '+ pts · ' + b.name)));
 
+    const report = C.feedbackLink(CONFIG.FEEDBACK_URL, daily.date, daily.promptIds);
+    $('feedbackRow').hidden = !report;
+    if (report) $('feedbackLink').href = report;
+    else $('feedbackLink').removeAttribute('href');
+
     const list = $('breakdown');
     const spoilers = $('spoilerList');
     list.textContent = '';
     spoilers.textContent = '';
+    const misses = C.missCounts(daily.results);
+    $('resMisses').textContent = String(misses.total);
     daily.results.forEach((r, i) => {
       const p = byId[r.promptId];
-      list.appendChild(resultRow(i + 1, p.text, r.answer || 'No answer', r.tier, r.points));
+      list.appendChild(resultRow(i + 1, p.text, r.answer || 'No answer', r.tier, r.points, misses.perRound[i]));
       spoilers.appendChild(resultRow(i + 1, p.text, p.answers.filter((a) => a.tier === 'swarm')[0].name, 'swarm', null));
     });
 
@@ -1245,12 +1352,14 @@
     $('copyStatus').textContent = '';
 
     // Lifetime record. Recording the same date twice changes nothing.
-    const stats = C.recordFlight(C.reviveStats(store.get(K_STATS, null)), daily.date, score);
+    const stats = C.recordFlight(C.reviveStats(store.get(K_STATS, null)), daily.date, score, daily.results);
     store.set(K_STATS, stats);
     $('statStreak').textContent = String(C.currentStreak(stats, today()));
     $('statPlayed').textContent = String(stats.played);
     $('statAvg').textContent = String(Math.round(stats.total / stats.played));
     $('statBest').textContent = String(stats.best);
+    $('statLongest').textContent = String(stats.longest);
+    renderFlights(stats);
 
     // After finishing yesterday's run past midnight UTC, today's is already open.
     const todayOpen = daily.date !== today();
@@ -1294,6 +1403,100 @@
     };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(box.value).then(done, fallback);
     else fallback();
+  }
+
+  /* ---------- the share card (js/card.js) ---------- */
+
+  // What the card shows. No answers: only tiers and the altitude reached after each round.
+  function cardData() {
+    const score = C.totalScore(daily.results);
+    const here = window.location;
+    let reached = 0;
+    return {
+      flight: C.flightNumber(daily.date),
+      date: prettyDate(daily.date),
+      score: C.formatNumber(score),
+      altitude: feet(score),
+      band: C.bandFor(score).name,
+      top: C.TOP_SCORE,
+      rounds: daily.results.map((r) => { reached += r.points; return { tier: r.tier || null, reached, color: tierColors[r.tier || 'miss'] }; }),
+      url: /^https?:$/.test(here.protocol) ? here.origin + here.pathname.replace(/index\.html$/, '') : '',
+    };
+  }
+
+  // The drawing code is only fetched when someone asks for a picture, to keep the first load small.
+  let cardScript = null;
+  function loadCardScript() {
+    if (window.SwarmCard) return Promise.resolve();
+    if (!cardScript) {
+      cardScript = new Promise((resolve, reject) => {
+        const tag = document.createElement('script');
+        tag.src = 'js/card.js';
+        tag.onload = resolve;
+        tag.onerror = () => { cardScript = null; reject(new Error('card script did not load')); };
+        document.head.appendChild(tag);
+      });
+    }
+    return cardScript;
+  }
+
+  function buildCard() {
+    const look = {
+      zones: Scene.ZONES.map((z, i) => {
+        const to = i + 1 < Scene.ZONES.length ? Scene.ZONES[i + 1][0] : C.TOP_SCORE;
+        return { label: z[2].replace(' skyline', ''), from: z[0], to, color: Scene.skyAt((z[0] + to) / 2) };
+      }),
+      art: (tier) => {
+        const c = document.createElement('canvas');
+        c.width = 24;
+        c.height = 20;
+        drawTierArt(c, tier, 0, true);
+        return c;
+      },
+    };
+    const fonts = document.fonts && document.fonts.load ? document.fonts.load('20px "Press Start 2P"').catch(() => {}) : Promise.resolve();
+    return Promise.all([fonts, loadCardScript()]).then(() => window.SwarmCard.draw(document.createElement('canvas'), cardData(), look));
+  }
+
+  // Phones get the native share sheet when it can take a picture; everything else downloads.
+  function saveCard() {
+    const status = $('copyStatus');
+    const name = 'one-in-a-swarm-flight-' + C.flightNumber(daily.date) + '.png';
+    const say = (text, good) => {
+      status.className = 'feedback ' + (good ? 'good' : 'bad');
+      status.textContent = text;
+    };
+    const download = (blob) => {
+      const link = document.createElement('a');
+      const href = URL.createObjectURL(blob);
+      link.href = href;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(href), 4000);
+      say('Image saved.', true);
+    };
+    buildCard().then((canvas) => {
+      canvas.toBlob((blob) => {
+        if (!blob) return say('Could not make the image.', false);
+        const phone = navigator.maxTouchPoints > 0 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        let file = null;
+        try {
+          file = new File([blob], name, { type: 'image/png' });
+        } catch (e) {
+          file = null;
+        }
+        if (phone && file && navigator.canShare && navigator.share && navigator.canShare({ files: [file] })) {
+          navigator.share({ files: [file], title: 'One in a Swarm' }).then(() => say('Shared.', true), (err) => {
+            if (err && err.name === 'AbortError') return say('', true); // the player closed the sheet
+            download(blob);
+          });
+        } else {
+          download(blob);
+        }
+      }, 'image/png');
+    }, () => say('Could not make the image.', false));
   }
 
   /* ---------- infinite ---------- */
@@ -1343,8 +1546,7 @@
   function infSubmit(text) {
     const r = C.infiniteGuess(inf, infPrompt() || {}, text);
     if (r.status === 'empty' || r.status === 'idle') return;
-    if (r.status === 'duplicate') {
-      setFeedback('already tried that. no time lost.', 'bad');
+    if (r.status === 'duplicate') { // already guessed this round: ignored, with no message and no count
       $('guess').select();
       return;
     }
@@ -1382,6 +1584,7 @@
     $('infScore').textContent = C.formatNumber(inf.score) + ' pts';
     $('infAlt').textContent = feet(inf.score);
     $('infCount').textContent = String(inf.answered);
+    $('infMisses').textContent = String(inf.misses || 0);
     $('infBest').textContent = C.formatNumber(Math.max(best ? best.score : 0, inf.score)) + ' pts';
     announce('Run over. ' + inf.score + ' points across ' + inf.answered + ' prompts.');
     const list = $('infLog');
@@ -1488,6 +1691,7 @@
     $('resHomeBtn').addEventListener('click', goHome);
     $('infHomeBtn').addEventListener('click', goHome);
     $('copyBtn').addEventListener('click', copyShare);
+    $('saveBtn').addEventListener('click', saveCard);
     $('endBtn').addEventListener('click', endInfinite);
     $('retryBtn').addEventListener('click', () => window.location.reload());
     $('skipStaleBtn').addEventListener('click', startToday);
@@ -1523,8 +1727,10 @@
       } else if (performance.now() < lockUntil) {
         return;
       } else if (mode === 'daily' && daily && daily.round) {
+        startCooldown();
         dailySubmit(text);
       } else if (mode === 'infinite' && inf) {
+        startCooldown();
         infSubmit(text);
       }
       if (view === 'play' && document.body.dataset.phase !== 'climb') $('guess').focus();
@@ -1576,6 +1782,7 @@
     });
     scene = Scene.create($('world'), { altitudeFeet: C.altitudeFeet, scoreForFeet: C.scoreForFeet, reducedMotion });
     wire();
+    loadCounter();
     const sound = store.get(K_SOUND, null);
     applySound(!!(sound && sound.on === true)); // off until the player turns it on
     const scan = store.get(K_SCAN, null);
@@ -1586,7 +1793,7 @@
     trackKeyboard();
     window.requestAnimationFrame(frame);
     window.setInterval(pump, 60);
-    window.__swarm = { scene, camera: () => cam }; // read-only handle for the browser tests
+    window.__swarm = { scene, camera: () => cam, card: () => buildCard().then((c) => c.toDataURL('image/png')), cardData: () => cardData() }; // read-only handle for the browser tests
 
     // The schedule pins each date to its seven prompts. If it cannot be read the game still
     // runs, working the day out the old way.

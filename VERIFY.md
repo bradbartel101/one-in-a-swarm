@@ -43,3 +43,21 @@ measures altitude from campus, while mountain heights are quoted above sea level
 - [ ] **Around 36,000 ft the stratosphere begins. The weather is below you now.** The standard-atmosphere figure; the real boundary moves with latitude and season.
 - [ ] **Weather balloons burst at around 100,000 ft. The sky overhead is nearly black.** Burst height varies by balloon; "nearly black" is a description, not a measurement.
 - [ ] **The International Space Station orbits about 250 miles up.** Its altitude drifts between roughly 230 and 260 miles.
+
+## Held out of the game until approved
+
+These answers are **not in the game**. Each was left out because I was not confident it is right. To approve one, change its leading `~` to nothing in the source file (`tools/prompts.src.txt` or `tools/themed/*.src.txt`) and run `npm run build:data`.
+
+### Name a movie or TV series that was filmed largely in metro Atlanta (`films`)
+
+- [ ] **Road Trip** (would be Deep Cut): Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.
+- [ ] **Jumanji: Welcome to the Jungle** (would be Deep Cut): Shot in Hawaii and Atlanta; unsure it counts as "largely" Atlanta.
+
+### Name a musician or group that came up in Atlanta or its suburbs (`musicians`)
+
+- [ ] **Soulja Boy** (would be Deep Cut): Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
+- [ ] **Trinidad James** (would be Deep Cut): Born in Trinidad and raised partly in Atlanta; unsure of the details.
+
+### John Heisman coached at Tech. Name a winner of the trophy that carries his name. (`heisman`)
+
+- [ ] **Fernando Mendoza** (would be Solid): I believe he won in 2025, but that is at the edge of what I know for certain.

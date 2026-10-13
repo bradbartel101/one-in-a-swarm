@@ -9,11 +9,15 @@ const core = require('../js/core.js');
 const ROOT = path.join(__dirname, '..');
 const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'prompts.json'), 'utf8'));
 const errors = core.validatePrompts(data);
+// Themed sets (data/themed/*.json) wait to be scheduled; they are held to the same rules.
+const themedDir = path.join(ROOT, 'data', 'themed');
+const themed = fs.existsSync(themedDir) ? fs.readdirSync(themedDir).filter((f) => f.endsWith('.json')).map((f) => ({ name: f, data: JSON.parse(fs.readFileSync(path.join(themedDir, f), 'utf8')) })) : [];
+themed.forEach((t) => core.validatePrompts(t.data).forEach((e) => errors.push('themed/' + t.name + ': ' + e)));
 const TIERS = Object.keys(core.TIERS);
 const blank = (s) => typeof s !== 'string' || s.trim() === '' || s !== s.trim();
 
 if ((data.prompts || []).length < 30) errors.push('only ' + (data.prompts || []).length + ' prompts (need 30)');
-(data.prompts || []).forEach((p) => {
+(data.prompts || []).concat([].concat.apply([], themed.map((t) => t.data.prompts || []))).forEach((p) => {
   ['id', 'category', 'text'].forEach((k) => {
     if (blank(p[k])) errors.push(p.id + ': "' + k + '" is empty or has stray whitespace');
   });
@@ -36,4 +40,5 @@ if (errors.length) {
   console.error('Content validation FAILED:\n  ' + errors.join('\n  '));
   process.exit(1);
 }
+if (themed.length) console.log('Themed sets OK: ' + themed.map((t) => t.name + ' (' + t.data.prompts.length + ' prompts)').join(', ') + '.');
 console.log('Content OK: ' + data.prompts.length + ' prompts, ' + total + ' answers, exactly one 100-point answer each, ' + flagged + ' still flagged "verify".');

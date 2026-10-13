@@ -11,7 +11,7 @@ Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Techn
 
 **Daily flight.** Seven prompts, new at 00:00 UTC. Each round a prompt slides in, the swarm takes
 two seconds to lift off, and then you have 25 seconds. A correct answer ends the round. A wrong
-answer costs 3 seconds and you keep guessing. A near-miss ("clugh") asks you to submit again to
+answer costs no time and you keep guessing (a repeat of a guess is ignored, and submits are accepted at most every 350 ms). A near-miss ("clugh") asks you to submit again to
 confirm it ("Clough") and costs nothing. Answers score by rarity:
 
 | Tier | Points | |
@@ -39,15 +39,15 @@ curve (`altitudeFeet()` in `js/core.js`) pinned so that real altitudes land in t
 | 550 | Space | the Karman line, 100 km |
 | 650 to 700 | The Moon | 238,855 miles |
 
-Real altitude facts slide past on the way up, and there are 21 sightings to find: twelve odd things
-drawn into the world at their real altitudes, five secret answers, and four things to do. Found
+Real altitude facts slide past on the way up, and there are 26 sightings to find: sixteen odd things
+drawn into the world at their real altitudes, six secret answers, and four things to do. Found
 ones are kept in the browser and listed on the title and results screens.
 
 A finished day cannot be replayed. If you are mid-run when the day rolls over, you finish
 yesterday's flight first. Streak, flights, average and best are kept in the browser.
 
 **Infinite mode.** One 45-second clock for the whole run, draining only while the answer box is
-active or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs 3, a skip costs 5.
+active or has text in it. Correct answers add 8 to 16 seconds; a wrong guess costs nothing, a skip costs 5.
 
 Spelling is forgiving: case, accents, punctuation and plurals don't matter, and short names count
 ("CULC" is the Clough Undergraduate Learning Commons).
@@ -57,8 +57,8 @@ Sound is off until you turn it on with the speaker button. Scanlines can be swit
 
 ## Run it locally
 
-It is a static site: HTML, CSS and vanilla JavaScript, with no build step, backend, dependencies,
-analytics or tracking. All artwork is drawn in code on a canvas and all sound is synthesised; the
+It is a static site: HTML, CSS and vanilla JavaScript, with no build step, backend or dependencies.
+Nothing is loaded from another site unless you switch on the visit counter in `config.js` (below). All artwork is drawn in code on a canvas and all sound is synthesised; the
 only asset is one self-hosted open-licence font (Press Start 2P, SIL OFL, in `assets/fonts/`). It has to be served over HTTP, because browsers block `fetch` on `file://`.
 
 ```bash
@@ -80,7 +80,7 @@ That one command runs all three of these:
 |---|---|
 | `npm test` | Unit tests: matching, daily seed and rotation, timers, scoring, saved data, colour contrast, file checks |
 | `npm run validate` | Content validator for `data/prompts.json` |
-| `npm run test:e2e` | 30 scenarios in headless Chrome: full daily and infinite runs, the climb (starting within 200ms) and the reveal, a page hidden mid-climb, a frame loop that dies, captions one at a time, the frozen schedule against a changed prompt bank, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
+| `npm run test:e2e` | 35 scenarios in headless Chrome: full daily and infinite runs, the climb (starting within 200ms) and the reveal, a page hidden mid-climb, a frame loop that dies, captions one at a time, the frozen schedule against a changed prompt bank, equal points climbing equal distance, a perfect 700 to the Moon, easter eggs and the sightings log, wrong guess, near-miss and timeout, refresh and midnight rollover, time zones, blocked storage, bad saves, load failure, layout at four widths with the keyboard up, keyboard-only play, screen-reader announcements, reduced motion, sound, sharing, and frame rate on a throttled phone |
 
 `npm run screens` plays flights of about 150, about 350 and a perfect 700 at 375x812 and 1440x900
 and saves screenshots of every zone, some sightings, a secret answer, the One in a Swarm moment and
@@ -126,7 +126,7 @@ unscheduled draw on those days. CI checks that no published day has changed.
 
 Only include answers you are sure are real.
 
-The daily rotation never repeats a prompt within `floor(prompts / 7)` days (4 days with 32 prompts).
+The daily rotation never repeats a prompt within `floor(prompts / 7)` days (6 days with 44 prompts).
 
 ## Deploying to GitHub Pages
 
@@ -159,3 +159,19 @@ SWARM-V3.md, SWARM-V4.md the v3 and v4 checklists with evidence
 SHIP.md                  release checklist with evidence
 HUMAN-TODO.md            what still needs a person
 ```
+
+## Launch settings (`config.js`)
+
+Two values, both empty (off) as shipped:
+
+- `GOATCOUNTER_CODE` — your GoatCounter site code (`myswarm` for `myswarm.goatcounter.com`). When set, the page
+  loads GoatCounter's script, which counts page views; the game adds one event, `flight-finished`, each time a
+  daily flight is completed. GoatCounter uses no cookies and collects no personal data, and the game stores
+  nothing for it. When empty, no script is loaded and nothing leaves the page.
+- `FEEDBACK_URL` — where "Wrong tier? Tell us" on the results page points: an `https:` form or page, or a
+  `mailto:` address. The link carries `date=` and `prompts=` (the day's prompt ids) so a report says which
+  round it means. When empty, the link is hidden.
+
+The site can be added to a phone's home screen (`manifest.webmanifest`, icons in `assets/icons/`, drawn by
+`npm run build:icons`). There is no service worker, so the daily puzzle is always fetched fresh and the game
+needs a connection to load.

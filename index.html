@@ -9,11 +9,13 @@
   <!-- Link previews need absolute URLs. Update these four if the site moves (see README.md). -->
   <link rel="canonical" href="https://bradbartel101.github.io/one-in-a-swarm/">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="One in a Swarm">
   <meta property="og:title" content="One in a Swarm — the Georgia Tech rare-answer game">
   <meta property="og:description" content="Seven Georgia Tech prompts a day. The obvious answer barely leaves the lawn. The rare one reaches space.">
   <meta property="og:url" content="https://bradbartel101.github.io/one-in-a-swarm/">
   <meta property="og:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="One in a Swarm: a pixel-art bee climbing from a college campus into space.">
@@ -21,7 +23,14 @@
   <meta name="twitter:title" content="One in a Swarm — the Georgia Tech rare-answer game">
   <meta name="twitter:description" content="Seven Georgia Tech prompts a day. The obvious answer barely leaves the lawn.">
   <meta name="twitter:image" content="https://bradbartel101.github.io/one-in-a-swarm/assets/og.png">
+  <meta name="twitter:image:alt" content="One in a Swarm: a pixel-art bee climbing from a college campus into space.">
   <meta name="theme-color" content="#003057">
+  <!-- Add to home screen -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Swarm">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Cpath d='M3 4h10v8H3z' fill='%23d9b84a'/%3E%3Cpath d='M5 4h2v8H5zM9 4h2v8H9zM2 5h1v6H2zM13 5h1v6h-1z' fill='%2300213d'/%3E%3Cpath d='M4 1h3v3H4zM9 1h3v3H9z' fill='%23f4f9ff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/press-start-2p.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
@@ -99,11 +108,11 @@
             <summary>RULES</summary>
             <ul class="rules">
               <li><strong>Daily flight:</strong> seven prompts, the same for everyone, new at 00:00 UTC. You get 25 seconds a round.</li>
-              <li>A correct answer ends the round and lifts the swarm. A wrong one costs 3 seconds, and you keep guessing.</li>
+              <li>A correct answer ends the round and lifts the swarm. A wrong one costs no time: the box shakes and you keep guessing. Repeats of a guess are ignored.</li>
               <li><strong>Rarer is better.</strong> The obvious answer scores 10. The one hidden One in a Swarm answer scores 100.</li>
               <li>Every answer climbs the same distance per point. Ten points is a little over half a screen; a hundred is six screens. A perfect 700 lands on the Moon.</li>
               <li>Spelling is forgiving: capitals, accents, punctuation and plurals don't matter, short names count (CULC is Clough), and a near-miss asks you to confirm.</li>
-              <li><strong>Infinite mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs 3, a skip costs 5.</li>
+              <li><strong>Infinite mode:</strong> one 45-second clock for the whole run. It only drains while the answer box is active or has text in it. Correct answers add 8 to 16 seconds. A wrong guess costs nothing; a skip costs 5.</li>
             </ul>
             <p class="muted small">Rarity tiers are editorial guesses, not measured from real players.</p>
           </details>
@@ -168,6 +177,7 @@
         <dl class="numbers">
           <div><dt>Score</dt><dd class="pixel" id="resScore"></dd></div>
           <div><dt>Final altitude</dt><dd class="pixel" id="resAlt"></dd></div>
+          <div><dt>Wrong guesses</dt><dd class="pixel" id="resMisses"></dd></div>
         </dl>
 
         <h2 class="pixel">FLIGHT LOG</h2>
@@ -186,24 +196,32 @@
           <ol class="breakdown" id="spoilerList"></ol>
         </details>
 
+        <p class="small" id="feedbackRow" hidden><a id="feedbackLink" target="_blank" rel="noopener noreferrer">Wrong tier? Tell us</a></p>
+
         <h2 class="pixel">SHARE</h2>
         <label for="shareBox" class="sr-only">Share text</label>
         <textarea id="shareBox" class="share" rows="4" readonly></textarea>
         <div class="row">
           <button type="button" class="btn" id="copyBtn">COPY RESULT</button>
+          <button type="button" class="btn btn-ghost" id="saveBtn">SAVE IMAGE</button>
           <p class="feedback" id="copyStatus" role="status" aria-live="polite"></p>
         </div>
 
         <h2 class="pixel">SIGHTINGS <span id="resSightCount"></span></h2>
         <ul class="sight-grid" id="resSightGrid"></ul>
 
-        <h2 class="pixel">YOUR RECORD</h2>
+        <h2 class="pixel">YOUR FLIGHTS</h2>
+        <p class="small muted" id="histNote"></p>
+        <ol class="hist" id="histBars" aria-label="Your last 30 flights, oldest first"></ol>
         <dl class="stats" id="stats">
           <div><dt>Streak</dt><dd class="pixel" id="statStreak">0</dd></div>
+          <div><dt>Longest</dt><dd class="pixel" id="statLongest">0</dd></div>
           <div><dt>Flights</dt><dd class="pixel" id="statPlayed">0</dd></div>
           <div><dt>Average</dt><dd class="pixel" id="statAvg">0</dd></div>
           <div><dt>Best</dt><dd class="pixel" id="statBest">0</dd></div>
         </dl>
+        <h3 class="pixel sub">ANSWERS FOUND, ALL TIME</h3>
+        <ul class="tier-counts" id="tierCounts"></ul>
 
         <p class="muted" id="resNext">Next flight in <strong class="js-countdown">--:--:--</strong></p>
         <div class="row">
@@ -223,6 +241,7 @@
           <div><dt>Score</dt><dd class="pixel" id="infScore"></dd></div>
           <div><dt>Altitude</dt><dd class="pixel" id="infAlt"></dd></div>
           <div><dt>Prompts</dt><dd class="pixel" id="infCount"></dd></div>
+          <div><dt>Wrong guesses</dt><dd class="pixel" id="infMisses"></dd></div>
           <div><dt>Best run</dt><dd class="pixel" id="infBest"></dd></div>
         </dl>
         <div class="row">
@@ -237,6 +256,7 @@
     </section>
   </main>
 
+  <script src="config.js"></script>
   <script src="js/core.js"></script>
   <script src="js/facts.js"></script>
   <script src="js/sfx.js"></script>
