@@ -62,6 +62,10 @@ These answers are **not in the game**. Each was left out because I was not confi
 
 - [ ] **Fernando Mendoza** (would be Solid): I believe he won in 2025, but that is at the edge of what I know for certain.
 
+### Name an animated Disney movie (`disney`)
+
+- [ ] **Toy Story 5** (would be Rare): Scheduled for June 2026; I could not confirm it was released as planned.
+
 ## Lists I could not check against a source
 
 None.

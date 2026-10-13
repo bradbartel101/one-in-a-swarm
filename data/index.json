@@ -77,6 +77,12 @@
     {"id": "ologies", "pool": "general", "category": "WORDS", "text": "Name a word that ends in \"-ology\"", "clarifier": "a real field of study or English word", "n": 208},
     {"id": "toolbox", "pool": "general", "category": "THINGS", "text": "Name something you'd find in a toolbox", "clarifier": "hand tools, power tools and hardware", "n": 136},
     {"id": "wheels", "pool": "general", "category": "THINGS", "text": "Name something that has wheels", "n": 141},
-    {"id": "olympicsports", "pool": "general", "category": "SPORTS", "text": "Name a sport at the Summer Olympics", "clarifier": "any Summer Games, past or present", "n": 83}
+    {"id": "olympicsports", "pool": "general", "category": "SPORTS", "text": "Name a sport at the Summer Olympics", "clarifier": "any Summer Games, past or present", "n": 83},
+    {"id": "kitchentools", "pool": "general", "category": "THINGS", "text": "Name a kitchen tool or utensil", "clarifier": "things you cook, serve or eat with", "easy": true, "n": 177},
+    {"id": "nhlteams", "pool": "general", "category": "SPORTS", "text": "Name an NHL team", "clarifier": "city or nickname", "n": 32},
+    {"id": "shakespeare", "pool": "general", "category": "STAGE", "text": "Name a play by Shakespeare", "n": 38},
+    {"id": "disney", "pool": "general", "category": "SCREEN", "text": "Name an animated Disney movie", "clarifier": "Walt Disney Animation and Pixar features", "n": 93},
+    {"id": "emperors", "pool": "general", "category": "HISTORY", "text": "Name a Roman emperor", "clarifier": "Augustus onward, West or East, to Justinian", "n": 95},
+    {"id": "pasta", "pool": "general", "category": "FOOD", "text": "Name a pasta shape", "clarifier": "shapes and noodles, not sauces or dishes", "n": 118}
   ]
 }
