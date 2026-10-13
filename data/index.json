@@ -62,6 +62,13 @@
     {"id": "nflteams", "pool": "general", "category": "SPORTS", "text": "Name an NFL team", "clarifier": "city or nickname", "easy": true, "n": 32},
     {"id": "nbateams", "pool": "general", "category": "SPORTS", "text": "Name an NBA team", "clarifier": "city or nickname", "n": 30},
     {"id": "mlbteams", "pool": "general", "category": "SPORTS", "text": "Name a Major League Baseball team", "clarifier": "city or nickname", "n": 30},
-    {"id": "nationalparks", "pool": "general", "category": "PLACES", "text": "Name a U.S. national park", "clarifier": "the 63 with \"National Park\" in the name", "strip": ["national","park"], "n": 63}
+    {"id": "nationalparks", "pool": "general", "category": "PLACES", "text": "Name a U.S. national park", "clarifier": "the 63 with \"National Park\" in the name", "strip": ["national","park"], "n": 63},
+    {"id": "fruits", "pool": "general", "category": "FOOD", "text": "Name a fruit", "clarifier": "what a grocer would call a fruit", "easy": true, "n": 103},
+    {"id": "vegetables", "pool": "general", "category": "FOOD", "text": "Name a vegetable", "clarifier": "what a grocer would call a vegetable", "easy": true, "n": 104},
+    {"id": "colors", "pool": "general", "category": "THINGS", "text": "Name a color", "clarifier": "any named shade counts", "easy": true, "n": 126},
+    {"id": "dogbreeds", "pool": "general", "category": "ANIMALS", "text": "Name a breed of dog", "clarifier": "recognized breeds and well-known crosses", "easy": true, "n": 174},
+    {"id": "sports", "pool": "general", "category": "SPORTS", "text": "Name a sport", "clarifier": "anything played or raced for sport", "easy": true, "n": 152},
+    {"id": "pizzatoppings", "pool": "general", "category": "FOOD", "text": "Name a pizza topping", "clarifier": "anything you could order on a pizza", "easy": true, "n": 133},
+    {"id": "instruments", "pool": "general", "category": "MUSIC", "text": "Name a musical instrument", "easy": true, "n": 151}
   ]
 }

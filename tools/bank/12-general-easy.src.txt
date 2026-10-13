@@ -1,0 +1,1019 @@
+# Prompt bank v2: easy general prompts. Any of these may open a flight.
+
+@fruits | FOOD | Name a fruit | pool=general | easy | type=open | clar=what a grocer would call a fruit
+C Apple | Apples
+C Banana | Bananas
+C Orange | Oranges
+C Strawberry | Strawberries
+C Grape | Grapes
+C Peach | Peaches :: The Georgia answer.
+T Tomato | Tomatoes :: Botanically, yes.
+T Dragon Fruit | Dragonfruit | Pitaya | Pitahaya
+S Watermelon
+S Pineapple
+S Mango | Mangoes | Mangos
+S Blueberry | Blueberries
+S Lemon | Lemons
+S Lime | Limes
+S Cherry | Cherries
+S Pear | Pears
+S Kiwi | Kiwifruit | Kiwi Fruit
+S Raspberry | Raspberries
+S Blackberry | Blackberries
+S Grapefruit
+S Cantaloupe | Muskmelon | Rockmelon
+S Plum | Plums
+S Coconut
+S Avocado | Avocados
+S Pomegranate
+R Honeydew | Honeydew Melon
+R Apricot | Apricots
+R Nectarine | Nectarines
+R Tangerine | Tangerines
+R Clementine | Clementines | Cutie
+R Mandarin | Mandarin Orange
+R Papaya
+R Fig | Figs
+R Cranberry | Cranberries
+R Guava
+R Passion Fruit | Passionfruit
+R Lychee | Litchi
+R Date | Dates
+R Persimmon
+R Plantain | Plantains
+R Blood Orange
+R Kumquat
+R Starfruit | Star Fruit | Carambola
+R Melon
+R Olive | Olives
+R Currant | Currants | Blackcurrant | Black Currant | Redcurrant
+R Gooseberry | Gooseberries
+R Elderberry | Elderberries
+R Mulberry | Mulberries
+R Boysenberry | Boysenberries
+R Raisin | Raisins
+R Prune | Prunes
+R Pumpkin
+R Cucumber :: Botanically a fruit, and accepted here.
+R Jackfruit
+R Durian
+R Quince
+R Pomelo | Pummelo
+R Acai | Açaí | Acai Berry
+D Tangelo
+D Satsuma
+D Yuzu
+D Bergamot
+D Citron
+D Ugli Fruit | Ugli | Uglifruit
+D Huckleberry | Huckleberries
+D Lingonberry | Lingonberries
+D Cloudberry | Cloudberries
+D Loganberry
+D Marionberry
+D Goji Berry | Goji | Wolfberry
+D Crabapple | Crab Apple
+D Muscadine | Scuppernong :: A grape native to the South.
+D Pawpaw | Paw Paw
+D Loquat
+D Medlar
+D Rambutan
+D Longan
+D Mangosteen
+D Soursop | Guanabana
+D Cherimoya | Custard Apple
+D Sapodilla
+D Breadfruit
+D Tamarind
+D Jujube
+D Prickly Pear | Cactus Pear | Tuna
+D Kiwano | Horned Melon
+D Feijoa | Pineapple Guava
+D Salak | Snake Fruit
+D Ackee
+D Jabuticaba
+D Barberry
+D Chokeberry | Aronia
+D Serviceberry | Juneberry | Saskatoon
+D Damson
+D Greengage
+D Canary Melon
+D Casaba | Casaba Melon
+D Plumcot | Pluot
+D Key Lime
+D Meyer Lemon
+D Rose Hip | Rosehip
+X Miracle Fruit | Miracle Berry :: Eat one, and lemons taste sweet for an hour.
+! Carrot :: a root vegetable
+! Potato :: a tuber
+! Broccoli :: a vegetable
+! Rhubarb :: a vegetable (a leaf stalk), whatever the pie says
+! Lettuce :: a leaf vegetable
+! Almond :: sold as a nut
+! Peanut :: a legume
+! Corn :: sold as a vegetable or a grain
+! Celery :: a vegetable
+! Onion :: a vegetable
+! Mushroom :: a fungus
+! Fruit Loops :: a cereal
+
+@vegetables | FOOD | Name a vegetable | pool=general | easy | type=open | clar=what a grocer would call a vegetable
+C Carrot | Carrots
+C Broccoli
+C Potato | Potatoes
+C Corn | Sweet Corn | Maize
+C Lettuce
+C Tomato | Tomatoes :: A fruit to a botanist, a vegetable at the store. Accepted both ways.
+T Brussels Sprouts | Brussel Sprouts | Brussels Sprout
+T Kale
+S Onion | Onions
+S Cucumber | Cucumbers
+S Spinach
+S Celery
+S Cauliflower
+S Green Bean | Green Beans | String Bean | String Beans | Snap Beans
+S Pea | Peas | Green Peas
+S Bell Pepper | Pepper | Peppers | Green Pepper | Red Pepper
+S Cabbage
+S Asparagus
+S Zucchini | Courgette
+S Squash
+S Sweet Potato | Sweet Potatoes
+S Mushroom | Mushrooms
+S Garlic
+S Eggplant | Aubergine
+S Pumpkin
+S Beet | Beets | Beetroot
+S Radish | Radishes
+R Okra :: A Southern staple.
+R Collard Greens | Collards
+R Turnip | Turnips
+R Artichoke | Artichokes
+R Leek | Leeks
+R Green Onion | Scallion | Scallions | Spring Onion
+R Shallot | Shallots
+R Yam | Yams
+R Butternut Squash
+R Acorn Squash
+R Spaghetti Squash
+R Arugula | Rocket
+R Bok Choy | Pak Choi
+R Chard | Swiss Chard
+R Parsnip | Parsnips
+R Rutabaga | Swede
+R Jalapeño | Jalapeno
+R Chili Pepper | Chile | Chili | Chilli
+R Edamame | Soybean | Soybeans
+R Lima Bean | Lima Beans | Butter Beans
+R Black-Eyed Pea | Black Eyed Peas | Black-Eyed Peas
+R Snow Pea | Snow Peas
+R Sugar Snap Pea | Snap Peas | Sugar Snap Peas
+R Ginger
+R Romaine | Romaine Lettuce
+R Iceberg Lettuce | Iceberg
+R Vidalia Onion | Vidalia :: Georgia's state vegetable.
+R Watercress
+R Fennel
+R Endive
+R Radicchio
+R Kohlrabi
+R Mustard Greens
+R Turnip Greens
+R Bean Sprouts | Sprouts
+R Chickpea | Chickpeas | Garbanzo | Garbanzo Beans
+R Lentil | Lentils
+R Rhubarb
+D Jicama
+D Daikon
+D Celeriac | Celery Root
+D Salsify
+D Sunchoke | Jerusalem Artichoke
+D Taro
+D Cassava | Yuca | Manioc
+D Water Chestnut | Water Chestnuts
+D Bamboo Shoots | Bamboo Shoot
+D Lotus Root
+D Broccolini
+D Broccoli Rabe | Rapini
+D Napa Cabbage
+D Escarole
+D Frisée | Frisee
+D Mizuna
+D Tatsoi
+D Nopales | Nopal | Cactus
+D Chayote
+D Tomatillo | Tomatillos
+D Poblano
+D Habanero
+D Serrano
+D Fava Bean | Fava Beans | Broad Beans
+D Wax Bean | Wax Beans
+D Fiddlehead | Fiddleheads | Fiddlehead Fern
+D Ramps | Ramp | Wild Leek
+D Horseradish
+D Wasabi
+D Seaweed | Nori | Kelp
+D Sorrel
+D Purslane
+D Dandelion Greens
+D Hearts of Palm | Heart of Palm
+D Pattypan Squash | Pattypan
+D Delicata Squash | Delicata
+D Kabocha
+D Cardoon
+X Romanesco | Romanesco Broccoli | Roman Cauliflower :: The green one that grows in fractal spirals.
+! Apple :: a fruit
+! Banana :: a fruit
+! Strawberry :: a fruit
+! Rice :: a grain
+! Wheat :: a grain
+! Peanut :: sold as a nut
+! Basil :: a herb
+! Parsley :: a herb
+! Watermelon :: a fruit
+! Pasta :: not a plant
+! Tofu :: made from soybeans, but not a vegetable itself
+
+@colors | THINGS | Name a color | pool=general | easy | type=open | clar=any named shade counts
+C Red
+C Blue
+C Green
+C Yellow
+C Gold :: Old Gold, to be exact.
+C White
+T Navy | Navy Blue :: The other half of Tech's colors.
+T Chartreuse
+S Orange
+S Purple
+S Black
+S Pink
+S Brown
+S Gray | Grey
+S Silver
+S Teal
+S Turquoise
+S Maroon
+S Violet
+S Indigo
+S Tan
+S Beige
+S Magenta
+S Cyan
+S Lavender
+R Burgundy
+R Crimson
+R Scarlet
+R Aqua | Aquamarine
+R Olive | Olive Green
+R Lime | Lime Green
+R Mint | Mint Green
+R Coral
+R Salmon
+R Peach
+R Ivory
+R Cream
+R Khaki
+R Bronze
+R Copper
+R Rose
+R Fuchsia | Fuschia
+R Mauve
+R Lilac
+R Plum
+R Periwinkle
+R Sky Blue | Baby Blue | Light Blue
+R Royal Blue
+R Forest Green | Hunter Green | Dark Green
+R Emerald | Emerald Green
+R Jade
+R Mustard
+R Amber
+R Rust
+R Charcoal
+R Taupe
+R Hot Pink
+R Neon Green
+R Ruby
+R Sapphire
+R Sage | Sage Green
+R Seafoam | Seafoam Green | Sea Green
+D Vermilion | Vermillion
+D Cerulean
+D Azure
+D Cobalt | Cobalt Blue
+D Ultramarine
+D Cornflower | Cornflower Blue
+D Sienna | Burnt Sienna
+D Umber | Burnt Umber
+D Ochre | Ocher
+D Sepia
+D Puce
+D Ecru
+D Mahogany
+D Chestnut
+D Auburn
+D Russet
+D Carmine
+D Cerise
+D Saffron
+D Goldenrod
+D Lemon | Lemon Yellow
+D Canary | Canary Yellow
+D Buff
+D Fawn
+D Celadon
+D Viridian
+D Kelly Green
+D Pistachio
+D Orchid
+D Amethyst
+D Heliotrope
+D Wisteria
+D Eggplant | Aubergine
+D Oxblood
+D Brick | Brick Red
+D Terracotta | Terra Cotta
+D Tangerine
+D Apricot
+D Champagne
+D Pewter
+D Slate | Slate Gray
+D Gunmetal
+D Midnight Blue
+D Prussian Blue
+D Cadet Blue
+D Steel Blue
+D Powder Blue
+D Robin's Egg Blue | Robin Egg Blue
+D Tiffany Blue
+D Carolina Blue
+D Burnt Orange
+D Tech Gold | Old Gold :: Georgia Tech's own.
+D Zaffre
+D Gamboge
+D Fallow
+D Smalt
+D Xanadu
+D Fulvous
+D Glaucous
+D Wenge
+D Falu Red
+D Razzmatazz
+D Mikado Yellow | Mikado
+X Vantablack :: Not quite a pigment: a coating that absorbs 99.96 percent of light.
+! Rainbow :: all of them at once, which is not one
+! Clear :: the absence of one
+! Dark :: not a color by itself
+! Light :: not a color by itself
+! Shiny :: a finish
+! Plaid :: a pattern
+! Striped :: a pattern
+
+@dogbreeds | ANIMALS | Name a breed of dog | pool=general | easy | type=open | clar=recognized breeds and well-known crosses
+C Labrador Retriever | Lab | Labrador | Black Lab | Yellow Lab | Chocolate Lab
+C Golden Retriever | Golden
+C German Shepherd | German Shepherd Dog | Alsatian | GSD
+C Bulldog | English Bulldog :: Georgia's pick. We do not hold it against the dog.
+C Poodle | Standard Poodle | Toy Poodle | Miniature Poodle
+C Chihuahua
+T Shiba Inu | Shiba
+T Corgi | Pembroke Welsh Corgi | Welsh Corgi | Cardigan Welsh Corgi | Pembroke Corgi
+S Beagle
+S French Bulldog | Frenchie
+S Rottweiler | Rottie
+S Dachshund | Wiener Dog | Weiner Dog | Sausage Dog | Doxie
+S Yorkshire Terrier | Yorkie
+S Boxer
+S Siberian Husky | Husky
+S Great Dane
+S Doberman Pinscher | Doberman | Dobermann
+S Pug
+S Pomeranian | Pom
+S Border Collie
+S Dalmatian | Dalmation
+S Pit Bull | American Pit Bull Terrier | Pitbull | Pittie
+S Greyhound
+S Shih Tzu
+S Australian Shepherd | Aussie
+S Cocker Spaniel
+S Boston Terrier
+S Saint Bernard | St. Bernard | St Bernard
+S Goldendoodle | Golden Doodle
+S Labradoodle
+R Bernese Mountain Dog | Bernese | Berner
+R Mastiff | English Mastiff
+R Basset Hound
+R Bloodhound
+R Akita
+R Maltese
+R Bichon Frise | Bichon
+R Jack Russell Terrier | Jack Russell | Parson Russell Terrier | Russell Terrier
+R Collie | Rough Collie | Lassie
+R Newfoundland | Newfie
+R Chow Chow | Chow
+R Irish Setter
+R Great Pyrenees | Pyrenees
+R Schnauzer | Miniature Schnauzer | Giant Schnauzer | Standard Schnauzer
+R Scottish Terrier | Scottie
+R Bull Terrier
+R Weimaraner
+R Vizsla
+R Whippet
+R Samoyed
+R Alaskan Malamute | Malamute
+R Shar-Pei | Shar Pei | Chinese Shar-Pei
+R Rhodesian Ridgeback | Ridgeback
+R Cavalier King Charles Spaniel | King Charles Spaniel | Cavalier
+R Havanese
+R Papillon
+R West Highland White Terrier | Westie
+R Airedale Terrier | Airedale
+R Belgian Malinois | Malinois
+R Cane Corso
+R Irish Wolfhound
+R Australian Cattle Dog | Blue Heeler | Heeler | Cattle Dog | Red Heeler
+R Shetland Sheepdog | Sheltie
+R Old English Sheepdog | Sheepdog
+R English Springer Spaniel | Springer Spaniel
+R Brittany | Brittany Spaniel
+R German Shorthaired Pointer | GSP | Pointer
+R Pekingese
+R Lhasa Apso
+R Miniature Pinscher | Min Pin
+R Staffordshire Bull Terrier | Staffy | Staffordshire Terrier | American Staffordshire Terrier | AmStaff
+R Cockapoo
+R Bullmastiff
+R Chesapeake Bay Retriever | Chessie
+R Basenji
+R Afghan Hound
+R Borzoi | Russian Wolfhound
+R Saluki
+R American Bulldog
+R Cairn Terrier :: Toto.
+R Rat Terrier
+R Fox Terrier | Wire Fox Terrier | Smooth Fox Terrier
+R Italian Greyhound
+R Coonhound | Black and Tan Coonhound | Redbone Coonhound | Bluetick Coonhound | Treeing Walker Coonhound
+R Foxhound | American Foxhound | English Foxhound
+R Dogo Argentino
+R Mutt | Mixed Breed | Mix :: Not a breed, strictly, but the best answer anyway.
+D Keeshond
+D Leonberger
+D Komondor
+D Puli
+D Kuvasz
+D Anatolian Shepherd
+D Tibetan Mastiff
+D Tibetan Terrier
+D Neapolitan Mastiff
+D Dogue de Bordeaux | French Mastiff
+D Bouvier des Flandres | Bouvier
+D Briard
+D Beauceron
+D Belgian Tervuren | Tervuren
+D Belgian Sheepdog | Groenendael
+D Bearded Collie
+D Border Terrier
+D Norfolk Terrier
+D Norwich Terrier
+D Welsh Terrier
+D Kerry Blue Terrier
+D Soft Coated Wheaten Terrier | Wheaten Terrier | Wheaten
+D Bedlington Terrier
+D Dandie Dinmont Terrier
+D Skye Terrier
+D Sealyham Terrier
+D Irish Terrier
+D Lakeland Terrier
+D Manchester Terrier
+D Affenpinscher
+D Brussels Griffon
+D Japanese Chin
+D Chinese Crested
+D Toy Fox Terrier
+D Silky Terrier
+D English Setter
+D Gordon Setter
+D English Cocker Spaniel
+D Clumber Spaniel
+D Field Spaniel
+D Irish Water Spaniel
+D Boykin Spaniel
+D Welsh Springer Spaniel
+D Flat-Coated Retriever | Flat Coated Retriever
+D Curly-Coated Retriever | Curly Coated Retriever
+D Nova Scotia Duck Tolling Retriever | Toller
+D Portuguese Water Dog
+D Spanish Water Dog
+D Lagotto Romagnolo
+D Wirehaired Pointing Griffon
+D German Wirehaired Pointer
+D Spinone Italiano
+D Pharaoh Hound
+D Ibizan Hound
+D Scottish Deerhound | Deerhound
+D Otterhound
+D Harrier
+D Plott Hound | Plott
+D Norwegian Elkhound | Elkhound
+D Finnish Spitz
+D American Eskimo Dog | Eskie
+D Schipperke
+D Swedish Vallhund
+D Icelandic Sheepdog
+D Greater Swiss Mountain Dog
+D Entlebucher Mountain Dog | Entlebucher
+D Black Russian Terrier
+D Catahoula Leopard Dog | Catahoula
+D Carolina Dog
+D Xoloitzcuintli | Xolo | Mexican Hairless
+D Peruvian Inca Orchid
+D Thai Ridgeback
+D Kai Ken
+D Jindo | Korean Jindo
+D Kangal
+D Boerboel
+D Löwchen | Lowchen
+D Coton de Tulear
+D Bolognese
+D Petit Basset Griffon Vendéen | PBGV
+D Puggle
+D Maltipoo
+D Bernedoodle
+D Pomsky
+D Sheepadoodle
+D Chiweenie
+X Norwegian Lundehund | Lundehund :: Bred to hunt puffins on cliffs, with six toes on every foot.
+! Wolf :: a wild species, not a breed
+! Coyote :: a wild species
+! Fox :: not a dog
+! Dingo :: a wild dog, not a breed
+! Hyena :: not a dog at all
+! Puppy :: an age, not a breed
+! Scooby-Doo :: a Great Dane, but the name is not the breed
+! Hot Dog :: lunch
+! Uga :: Georgia's mascot is a Bulldog; the name is not the breed
+! Police Dog :: a job, not a breed
+! Sled Dog :: a job, not a breed
+
+@sports | SPORTS | Name a sport | pool=general | easy | type=open | clar=anything played or raced for sport
+C Football | American Football
+C Basketball
+C Baseball
+C Soccer | Association Football
+C Tennis
+C Golf
+T Curling
+T Pickleball
+S Hockey | Ice Hockey
+S Volleyball
+S Swimming
+S Track and Field | Track | Athletics | Track & Field
+S Softball
+S Lacrosse
+S Wrestling
+S Boxing
+S Gymnastics
+S Cross Country | Cross-Country
+S Rugby | Rugby Union | Rugby League
+S Cricket
+S Bowling
+S Skiing | Alpine Skiing | Downhill Skiing
+S Snowboarding
+S Surfing
+S Skateboarding
+S Cycling | Biking | Bike Racing
+S Rowing | Crew
+S Fencing
+S Diving
+S Badminton
+S Table Tennis | Ping Pong | Ping-Pong
+S Cheerleading | Cheer
+S Ultimate | Ultimate Frisbee
+R Water Polo
+R Field Hockey
+R Archery
+R Figure Skating | Ice Skating
+R Speed Skating
+R Karate
+R Judo
+R Taekwondo | Tae Kwon Do
+R Mixed Martial Arts | MMA | UFC
+R Racquetball
+R Squash
+R Handball | Team Handball
+R Sailing
+R Equestrian | Horseback Riding | Horse Riding | Dressage | Show Jumping
+R Horse Racing
+R Auto Racing | NASCAR | Racing | Car Racing | Motorsport | Formula 1 | F1 | IndyCar
+R Rock Climbing | Climbing | Sport Climbing | Bouldering
+R Weightlifting | Weight Lifting | Powerlifting
+R Triathlon
+R Marathon | Running | Distance Running
+R Disc Golf | Frisbee Golf
+R Dodgeball
+R Kickball
+R Polo
+R Rodeo
+R Bobsled | Bobsleigh
+R Luge
+R Skeleton
+R Biathlon
+R Ski Jumping
+R Cross-Country Skiing | Nordic Skiing
+R Kayaking | Canoeing | Canoe
+R Darts
+R Pool | Billiards | Snooker
+R Shooting | Skeet | Trap Shooting
+R Fishing | Angling | Bass Fishing
+R Esports | E-Sports | Gaming
+R Flag Football
+R Beach Volleyball
+R Synchronized Swimming | Artistic Swimming
+R Trampoline
+R Breaking | Breakdancing
+R Motocross | Motorcycle Racing | Supercross
+R Wakeboarding
+R Water Skiing | Waterskiing
+R Paddleboarding | Stand Up Paddleboarding | SUP
+R Roller Derby
+R Arm Wrestling
+R Chess :: The International Olympic Committee recognises it as a sport.
+R Cornhole
+R Quidditch | Quadball
+D Jai Alai
+D Hurling
+D Gaelic Football
+D Australian Rules Football | Aussie Rules | AFL
+D Netball
+D Kabaddi
+D Sepak Takraw
+D Pelota | Basque Pelota
+D Bandy
+D Ringette
+D Broomball
+D Floorball
+D Korfball
+D Tchoukball
+D Padel
+D Real Tennis | Court Tennis
+D Croquet
+D Bocce | Bocce Ball
+D Pétanque | Petanque | Boules
+D Lawn Bowls | Bowls
+D Shuffleboard
+D Horseshoes
+D Tug of War
+D Sumo | Sumo Wrestling
+D Kendo
+D Aikido
+D Muay Thai | Thai Boxing
+D Kickboxing
+D Jiu-Jitsu | Jiu Jitsu | Brazilian Jiu-Jitsu | BJJ
+D Capoeira
+D Sambo
+D Modern Pentathlon | Pentathlon
+D Decathlon
+D Orienteering
+D Parkour | Freerunning
+D Skydiving
+D Hang Gliding
+D Paragliding
+D Bungee Jumping
+D Drag Racing
+D Rallying | Rally | Rally Racing
+D Karting | Go-Karting | Go Kart Racing
+D Powerboat Racing
+D Dragon Boat Racing | Dragon Boat
+D Canoe Slalom
+D Windsurfing
+D Kitesurfing | Kiteboarding
+D Bodyboarding
+D Freediving
+D Underwater Hockey
+D Fistball
+D Lumberjack Sports | Timbersports | Log Rolling
+D Dog Sledding | Mushing | Sled Dog Racing
+D Skijoring
+D Speedway
+D Caber Toss | Highland Games
+D Cup Stacking | Sport Stacking
+D Wiffle Ball
+D Spikeball | Roundnet
+D Footgolf
+D Bossaball
+D Buzkashi
+D Camel Racing
+D Greyhound Racing | Dog Racing
+D Pigeon Racing
+D Competitive Eating
+D Drone Racing
+X Chess Boxing | Chessboxing :: Alternating rounds of chess and boxing. It is real, and it has world champions.
+! Monopoly :: a board game
+! Poker :: a card game
+! Video Games :: accepted as Esports
+! Yoga :: a practice, not a competitive sport
+! Studying :: it only feels like one
+! Dancing :: accepted only in its competitive forms, such as Breaking
+! Hiking :: recreation, not a sport with competition
+! Hunting :: recreation; the sport forms here are Shooting and Archery
+
+@pizzatoppings | FOOD | Name a pizza topping | pool=general | easy | type=open | clar=anything you could order on a pizza
+C Pepperoni
+C Cheese | Extra Cheese | Mozzarella | Mozz
+C Sausage | Italian Sausage
+C Mushrooms | Mushroom
+C Pineapple
+T Anchovies | Anchovy
+S Onions | Onion | Red Onion | Red Onions
+S Green Peppers | Bell Peppers | Peppers | Green Pepper | Bell Pepper
+S Black Olives | Olives | Olive
+S Bacon
+S Ham
+S Chicken | Grilled Chicken
+S Tomatoes | Tomato | Sliced Tomato
+S Spinach
+S Basil | Fresh Basil
+S Jalapeños | Jalapenos | Jalapeno
+S Garlic | Roasted Garlic
+S Beef | Ground Beef | Hamburger
+S Canadian Bacon
+R Banana Peppers | Banana Pepper | Pepperoncini
+R Meatballs | Meatball
+R Salami | Genoa Salami
+R Prosciutto
+R Feta | Feta Cheese
+R Ricotta
+R Parmesan | Parm
+R Goat Cheese
+R Artichokes | Artichoke | Artichoke Hearts
+R Sun-Dried Tomatoes | Sun Dried Tomatoes
+R Roasted Red Peppers | Red Peppers
+R Green Olives
+R Kalamata Olives
+R Arugula
+R Broccoli
+R Eggplant
+R Zucchini
+R Buffalo Chicken
+R BBQ Chicken | Barbecue Chicken
+R Pesto
+R Barbecue Sauce | BBQ Sauce
+R Ranch
+R Hot Honey
+R Pulled Pork
+R Steak | Philly Steak
+R Chorizo
+R Pancetta
+R Capicola | Capocollo | Gabagool
+R Soppressata
+R Shrimp
+R Corn
+R Egg | Fried Egg
+R Truffle | Truffle Oil
+R Caramelized Onions
+R Fresh Mozzarella | Buffalo Mozzarella
+R Provolone
+R Cheddar
+R Oregano
+R Red Pepper Flakes | Crushed Red Pepper
+R Olive Oil
+R Tomato Sauce | Marinara | Red Sauce | Sauce
+R Alfredo Sauce | White Sauce | Alfredo
+R Gyro Meat | Gyro
+R Turkey
+R Vegan Cheese
+D Clams | Clam :: New Haven's white clam pie.
+D Tuna
+D Potato | Potatoes :: Common in Rome, and in New Haven.
+D Capers
+D Pine Nuts
+D Walnuts
+D Figs | Fig
+D Pear
+D Peaches | Peach
+D Apple
+D Gorgonzola | Blue Cheese
+D Burrata
+D Fontina
+D Gouda | Smoked Gouda
+D Brie
+D Asiago
+D Pecorino | Pecorino Romano
+D Mascarpone
+D Stracciatella
+D Nduja | 'Nduja
+D Guanciale
+D Mortadella
+D Bresaola
+D Speck
+D Duck
+D Lamb
+D Crab
+D Lobster
+D Smoked Salmon | Salmon | Lox
+D Squid | Calamari
+D Mussels
+D Broccoli Rabe | Rapini
+D Kale
+D Leeks | Leek
+D Shallots
+D Scallions | Green Onions
+D Fennel
+D Asparagus
+D Brussels Sprouts
+D Butternut Squash | Squash
+D Sweet Potato
+D Beets
+D Radicchio
+D Cherry Tomatoes
+D Pickles | Pickle :: A dill pickle pizza is a real menu item.
+D Sauerkraut
+D Kimchi
+D Avocado
+D Cilantro
+D Rosemary
+D Thyme
+D Balsamic Glaze | Balsamic
+D Sriracha
+D Honey
+D Mac and Cheese | Macaroni and Cheese
+D French Fries | Fries
+D Hot Dog | Hot Dogs
+D Tater Tots
+D Chicken Tikka | Tikka Masala
+D Paneer
+D Tofu
+D Tempeh
+D Plant-Based Sausage | Vegan Sausage | Beyond Sausage
+D Nutella
+D Mayonnaise | Mayo :: Standard in Japan.
+D Squid Ink
+D Peas :: Popular in Brazil.
+D Banana :: Sweden puts it on with curry powder.
+X Reindeer | Reindeer Meat :: Finland's smoked-reindeer pizza beat Italy's entry in a 2008 contest.
+! Crust :: the pizza itself
+! Dough :: the pizza itself
+! Box :: what it comes in
+! Fork :: not in polite company
+! Cardboard :: only at certain dining halls
+
+@instruments | MUSIC | Name a musical instrument | pool=general | easy | type=open
+C Guitar | Acoustic Guitar
+C Piano
+C Drums | Drum | Drum Set | Drum Kit
+C Violin | Fiddle
+C Trumpet
+C Flute
+T Triangle
+T Kazoo
+S Saxophone | Sax | Alto Saxophone | Tenor Saxophone
+S Clarinet
+S Trombone
+S Cello
+S Bass | Bass Guitar | Electric Bass
+S Electric Guitar
+S Tuba
+S Harp
+S Banjo
+S Ukulele | Uke
+S Harmonica
+S Keyboard | Synthesizer | Synth | Electric Piano
+S Viola
+S French Horn | Horn
+S Oboe
+S Organ | Pipe Organ
+S Xylophone
+S Accordion
+S Tambourine
+S Voice | Vocals | Singing
+R Double Bass | Upright Bass | String Bass | Contrabass
+R Bassoon
+R Piccolo
+R Recorder
+R Mandolin
+R Bagpipes | Bagpipe
+R Cymbals | Cymbal
+R Snare Drum | Snare
+R Bass Drum
+R Timpani | Kettledrum | Kettle Drums
+R Bongos | Bongo
+R Congas | Conga
+R Maracas | Maraca
+R Cowbell
+R Gong
+R Marimba
+R Vibraphone | Vibes
+R Glockenspiel | Bells
+R Chimes | Tubular Bells
+R Sousaphone
+R Euphonium | Baritone | Baritone Horn
+R Cornet
+R Bugle
+R Flugelhorn
+R Steel Drum | Steel Pan | Steelpan
+R Sitar
+R Lute
+R Harpsichord
+R Didgeridoo
+R Pan Flute | Panpipes
+R Ocarina
+R Whistle | Tin Whistle | Penny Whistle :: Tech has a famous one, but it is steam-powered.
+R Melodica
+R Theremin
+R Turntable | Turntables
+R Castanets
+R Washboard
+R Spoons
+R Jaw Harp | Jew's Harp | Mouth Harp
+R Dulcimer | Hammered Dulcimer | Appalachian Dulcimer
+R Zither
+R Bass Clarinet
+R English Horn | Cor Anglais
+R Contrabassoon
+R Tabla
+R Djembe
+R Cajón | Cajon
+R Steel Guitar | Pedal Steel | Lap Steel
+R Dobro | Resonator Guitar
+R Keytar
+D Erhu
+D Koto
+D Shamisen
+D Pipa
+D Guzheng
+D Shakuhachi
+D Oud
+D Bouzouki
+D Balalaika
+D Charango
+D Cuatro
+D Banjolele
+D Autoharp
+D Lyre
+D Kora
+D Mbira | Kalimba | Thumb Piano
+D Balafon
+D Udu
+D Talking Drum
+D Bodhrán | Bodhran
+D Uilleann Pipes
+D Hurdy-Gurdy | Hurdy Gurdy
+D Nyckelharpa
+D Concertina
+D Bandoneon
+D Harmonium
+D Celesta | Celeste
+D Clavichord
+D Mellotron
+D Ondes Martenot
+D Glass Harmonica | Glass Armonica :: Benjamin Franklin's invention.
+D Singing Bowl
+D Hang | Handpan | Hang Drum
+D Rainstick | Rain Stick
+D Guiro | Güiro
+D Claves
+D Vibraslap
+D Cabasa
+D Agogo | Agogô
+D Cuica | Cuíca
+D Berimbau
+D Timbales
+D Tom-Tom | Tom Tom | Toms
+D Hi-Hat | Hi Hat
+D Wood Block | Woodblock
+D Temple Blocks
+D Slide Whistle
+D Vuvuzela
+D Shofar
+D Alphorn | Alpenhorn
+D Serpent
+D Sackbut
+D Crumhorn | Krummhorn
+D Shawm
+D Viola da Gamba | Viol
+D Theorbo
+D Bass Flute | Alto Flute
+D Soprano Saxophone | Baritone Saxophone | Bari Sax
+D Mellophone
+D Wagner Tuba
+D Bass Trombone
+D Piccolo Trumpet
+D Duduk
+D Zurna
+D Bansuri
+D Sarod
+D Veena
+D Santoor | Santur
+D Gamelan
+D Angklung
+D Stylophone
+D Otamatone
+X Stroh Violin | Stroh Fiddle :: A violin with a metal horn in place of a wooden body, built for early recording.
+! Microphone :: it carries sound; it does not make music
+! Speaker :: equipment
+! Radio :: equipment
+! Sheet Music :: the instructions
+! Conductor :: a person
+! Band :: a group of them
+! iPod :: a player
