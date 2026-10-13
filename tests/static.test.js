@@ -7,7 +7,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
-const SCRIPTS = ['config.js', 'js/core.js', 'js/facts.js', 'js/sfx.js', 'js/scene.js', 'js/app.js'];
+const SCRIPTS = ['config.js', 'js/core.js', 'js/facts.js', 'js/sfx.js', 'js/scene.js', 'js/card.js', 'js/app.js'];
 const SITE = ['index.html', '404.html', 'css/style.css', 'data/prompts.json', 'data/schedule.json', 'assets/fonts/press-start-2p.woff2', 'manifest.webmanifest', 'assets/icons/icon-192.png'].concat(SCRIPTS);
 const DISCLAIMER = 'Fan-made game. Not affiliated with or endorsed by the Georgia Institute of Technology.';
 
@@ -49,7 +49,7 @@ test('F4 / G1: nothing is loaded from another origin, and every path is relative
   // which loads nothing unless the owner sets a site code in config.js.
   const urls = (scripts.match(/https?:\/\/[^\s'"`)]*/g) || []).filter((u) => u !== 'https://gc.zgo.at/count.js' && u !== 'https://');
   assert.deepEqual(urls, [], 'scripts mention no other URLs');
-  assert.ok(!/\.(mp3|ogg|wav|m4a|png|jpg|gif|webp)\b/.test(scripts + read('index.html').replace(/assets\/og\.png|assets\/icons\/apple-touch-icon\.png/g, '')), 'art and sound are made in code, not downloaded');
+  assert.ok(!/\.(mp3|ogg|wav|m4a|png|jpg|gif|webp)\b/.test(scripts.replace(/\+ '\.png';/, ';') /* the name of the share card the player saves */ + read('index.html').replace(/assets\/og\.png|assets\/icons\/apple-touch-icon\.png/g, '')), 'art and sound are made in code, not downloaded');
   assert.match(read('assets/fonts/OFL.txt'), /SIL Open Font License/, 'the self-hosted font ships with its licence');
   assert.ok(!/google-analytics|googletagmanager|gtag\(|sentry|facebook|fbq\(/i.test(read('index.html') + read('js/app.js')), 'no analytics or tracking');
 });

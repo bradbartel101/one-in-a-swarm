@@ -1376,6 +1376,81 @@ async function main() {
     }
   });
 
+  await scenario('share card: the same 1080x1350 picture at 375 and 1440, saved on desktop, shared on phones, no answers in it', async () => {
+    const tiers = ['rare', 'solid', 'swarm', 'miss', 'deep', 'common', 'clever'];
+    const finished = (ids) => {
+      const st = C.newDaily(C.utcDateKey(new Date()), ids);
+      tiers.forEach((t, i) => {
+        const tier = t === 'miss' ? null : t;
+        const a = tier ? data.prompts.find((p) => p.id === ids[i]).answers.find((x) => x.tier === tier) : null;
+        st.results.push({ tier, answer: a ? a.name : null, points: C.tierPoints(tier), promptId: ids[i], wrong: 0, fuzzy: false, note: '' });
+      });
+      st.finished = true;
+      return st;
+    };
+    const ids = (schedule.days[C.utcDateKey(new Date())] || C.dailyPromptIds(data.prompts, C.utcDateKey(new Date()))).slice(0, 7);
+    const state = finished(ids);
+    // records what the page would hand to the download or to the share sheet
+    const spy = `window.__saved = []; window.__shared = [];
+      const click = HTMLAnchorElement.prototype.click;
+      HTMLAnchorElement.prototype.click = function () { if (this.download) window.__saved.push({ name: this.download, blob: this.href.slice(0, 5) }); else click.call(this); };`;
+    const shareStub = `Object.defineProperty(navigator, 'canShare', { configurable: true, value: (d) => !!(d && d.files && d.files.length) });
+      Object.defineProperty(navigator, 'share', { configurable: true, value: (d) => { window.__shared.push({ n: d.files.length, name: d.files[0].name, type: d.files[0].type, size: d.files[0].size }); return Promise.resolve(); } });`;
+    const cards = [];
+    for (const size of [{ width: 375, height: 812, mobile: true, initScript: spy + shareStub }, { width: 1440, height: 900, initScript: spy }]) {
+      const page = await fresh(size);
+      await page.eval('localStorage.setItem("swarm.daily", ' + JSON.stringify(JSON.stringify(state)) + ')');
+      await page.reload();
+      await ready(page);
+      await click(page, 'dailyBtn');
+      await waitPhase(page, 'results');
+      const card = await page.eval('window.__swarm.card()');
+      assert.ok(card.startsWith('data:image/png;base64,') && card.length > 40000, 'a real picture: ' + card.length + ' characters');
+      const png = Buffer.from(card.split(',')[1], 'base64');
+      assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [1080, 1350]);
+      cards.push(card);
+      // what goes on the card: tiers and altitudes, never an answer
+      const shown = JSON.stringify(await page.eval('window.__swarm.cardData()'));
+      state.results.forEach((r) => { if (r.answer) assert.ok(!shown.includes(r.answer), 'the card data does not hold the answer "' + r.answer + '"'); });
+      assert.match(shown, /"flight":\d+/);
+      assert.match(shown, /"band":"/);
+      assert.equal(JSON.parse(shown).rounds.length, 7);
+      assert.equal(await text(page, 'saveBtn'), 'SAVE IMAGE');
+      await click(page, 'saveBtn');
+      if (size.mobile) {
+        await page.waitFor('window.__shared.length === 1', 4000, 'the share sheet');
+        const sent = (await page.eval('window.__shared'))[0];
+        assert.equal(sent.n, 1);
+        assert.match(sent.name, /^one-in-a-swarm-flight-\d+\.png$/);
+        assert.equal(sent.type, 'image/png');
+        assert.ok(sent.size > 20000);
+        assert.deepEqual(await page.eval('window.__saved'), [], 'a phone with a share sheet does not also download');
+      } else {
+        await page.waitFor('window.__saved.length === 1', 4000, 'the download');
+        const got = (await page.eval('window.__saved'))[0];
+        assert.match(got.name, /^one-in-a-swarm-flight-\d+\.png$/);
+        assert.equal(got.blob, 'blob:');
+        assert.equal(await text(page, 'copyStatus'), 'Image saved.');
+      }
+      assert.equal(await page.eval('document.getElementById("shareBox").value.length > 20'), true, 'the text share is still there');
+      noProblems(page);
+      await page.close();
+    }
+    assert.equal(cards[0] === cards[1], true, 'the picture made on a 375px phone and on a 1440px desktop is identical, byte for byte');
+    // a phone whose browser has no share sheet falls back to a download
+    const page = await fresh({ width: 375, height: 812, mobile: true, initScript: spy });
+    await page.eval('localStorage.setItem("swarm.daily", ' + JSON.stringify(JSON.stringify(state)) + ')');
+    await page.reload();
+    await ready(page);
+    await click(page, 'dailyBtn');
+    await waitPhase(page, 'results');
+    await page.eval('Object.defineProperty(navigator, "canShare", { configurable: true, value: undefined })');
+    await click(page, 'saveBtn');
+    await page.waitFor('window.__saved.length === 1', 4000, 'the download on a phone without a share sheet');
+    await page.close();
+    return 'card is ' + Math.round(Buffer.from(cards[0].split(',')[1], 'base64').length / 1024) + ' KB, identical at both sizes';
+  });
+
   await scenario('captions: one at a time, about three seconds each', async () => {
     const page = await fresh({ width: 375, height: 812, mobile: true });
     await click(page, 'dailyBtn');

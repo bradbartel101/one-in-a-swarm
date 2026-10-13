@@ -379,9 +379,9 @@
 
   // The creature on the reveal card. It moves: one bee drifts, a small swarm bobs, a rare
   // answer sends bees spiralling up, and the hive has bees in orbit. Still under reduced motion.
-  function drawTierArt(canvas, tier, now) {
+  function drawTierArt(canvas, tier, now, frozen) {
     const g = canvas.getContext('2d');
-    const t = reducedMotion() ? 0 : now || 0;
+    const t = frozen || reducedMotion() ? 0 : now || 0;
     const bee = { b: '#e0b93a', k: '#00213d', w: '#dff0ff', h: '#f6dc7a', e: '#00213d', f: '#f6dc7a' };
     const gold = { b: '#ffd23f', k: '#3a2f00', w: '#fff7d1', h: '#fff0a8', e: '#3a2f00', f: '#fff0a8' };
     const box = (x, y, w, h, color) => {
@@ -1371,6 +1371,84 @@
     else fallback();
   }
 
+  /* ---------- the share card (js/card.js) ---------- */
+
+  // What the card shows. No answers: only tiers and the altitude reached after each round.
+  function cardData() {
+    const score = C.totalScore(daily.results);
+    const here = window.location;
+    let reached = 0;
+    return {
+      flight: C.flightNumber(daily.date),
+      date: prettyDate(daily.date),
+      score: C.formatNumber(score),
+      altitude: feet(score),
+      band: C.bandFor(score).name,
+      top: C.TOP_SCORE,
+      rounds: daily.results.map((r) => { reached += r.points; return { tier: r.tier || null, reached, color: tierColors[r.tier || 'miss'] }; }),
+      url: /^https?:$/.test(here.protocol) ? here.origin + here.pathname.replace(/index\.html$/, '') : '',
+    };
+  }
+
+  function buildCard() {
+    const look = {
+      zones: Scene.ZONES.map((z, i) => {
+        const to = i + 1 < Scene.ZONES.length ? Scene.ZONES[i + 1][0] : C.TOP_SCORE;
+        return { label: z[2].replace(' skyline', ''), from: z[0], to, color: Scene.skyAt((z[0] + to) / 2) };
+      }),
+      art: (tier) => {
+        const c = document.createElement('canvas');
+        c.width = 24;
+        c.height = 20;
+        drawTierArt(c, tier, 0, true);
+        return c;
+      },
+    };
+    const ready = document.fonts && document.fonts.load ? document.fonts.load('20px "Press Start 2P"').catch(() => {}) : Promise.resolve();
+    return ready.then(() => window.SwarmCard.draw(document.createElement('canvas'), cardData(), look));
+  }
+
+  // Phones get the native share sheet when it can take a picture; everything else downloads.
+  function saveCard() {
+    const status = $('copyStatus');
+    const name = 'one-in-a-swarm-flight-' + C.flightNumber(daily.date) + '.png';
+    const say = (text, good) => {
+      status.className = 'feedback ' + (good ? 'good' : 'bad');
+      status.textContent = text;
+    };
+    const download = (blob) => {
+      const link = document.createElement('a');
+      const href = URL.createObjectURL(blob);
+      link.href = href;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(href), 4000);
+      say('Image saved.', true);
+    };
+    buildCard().then((canvas) => {
+      canvas.toBlob((blob) => {
+        if (!blob) return say('Could not make the image.', false);
+        const phone = navigator.maxTouchPoints > 0 && window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+        let file = null;
+        try {
+          file = new File([blob], name, { type: 'image/png' });
+        } catch (e) {
+          file = null;
+        }
+        if (phone && file && navigator.canShare && navigator.share && navigator.canShare({ files: [file] })) {
+          navigator.share({ files: [file], title: 'One in a Swarm' }).then(() => say('Shared.', true), (err) => {
+            if (err && err.name === 'AbortError') return say('', true); // the player closed the sheet
+            download(blob);
+          });
+        } else {
+          download(blob);
+        }
+      }, 'image/png');
+    }, () => say('Could not make the image.', false));
+  }
+
   /* ---------- infinite ---------- */
 
   function infPrompt() {
@@ -1563,6 +1641,7 @@
     $('resHomeBtn').addEventListener('click', goHome);
     $('infHomeBtn').addEventListener('click', goHome);
     $('copyBtn').addEventListener('click', copyShare);
+    $('saveBtn').addEventListener('click', saveCard);
     $('endBtn').addEventListener('click', endInfinite);
     $('retryBtn').addEventListener('click', () => window.location.reload());
     $('skipStaleBtn').addEventListener('click', startToday);
@@ -1664,7 +1743,7 @@
     trackKeyboard();
     window.requestAnimationFrame(frame);
     window.setInterval(pump, 60);
-    window.__swarm = { scene, camera: () => cam }; // read-only handle for the browser tests
+    window.__swarm = { scene, camera: () => cam, card: () => buildCard().then((c) => c.toDataURL('image/png')), cardData: () => cardData() }; // read-only handle for the browser tests
 
     // The schedule pins each date to its seven prompts. If it cannot be read the game still
     // runs, working the day out the old way.

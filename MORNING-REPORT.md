@@ -9,6 +9,7 @@ Branch: `overnight`. Nothing was pushed to main and nothing was merged; the live
 1. **No time penalty for wrong answers.** Wrong guesses cost nothing in both modes. The box still shakes and says "'x': no buzz. try again." with the text selected. A repeat of a guess (after normalizing) is ignored with no message and no count. Submits are accepted at most once every 350 ms; typing is never blocked. The results show "Round 3 · 2 misses" under the round and a "Wrong guesses" total; neither is in the share text. Rules text, README and tests updated; new tests for duplicates and the cooldown.
 2. **Polish.** The sun now keeps to the left of the sky, away from the answer tag (centre) and tier labels (right), and is not drawn at all wherever the reveal text, the tag or a tier label would be in front of it; it fades back in when the sky there is clear. Captions show for about 3 seconds, fade, and are removed the moment their subject scrolls off screen; captions queued for things no longer in view are dropped. Tier lines glow as the answer passes instead of scaling, so their labels stay one size.
 3. **Launch essentials.** `config.js` holds `GOATCOUNTER_CODE` and `FEEDBACK_URL`, both empty. With a site code, the page loads GoatCounter (page views) and sends one `flight-finished` event per completed daily flight; with none, nothing is loaded. "Wrong tier? Tell us" appears on the results page only when `FEEDBACK_URL` is set, and carries `date=` and `prompts=`. The link preview tags were checked against the GitHub Pages URL (added `og:image:type`, `og:locale`, `twitter:image:alt`), and the 1200x630 image is verified by a test. A web app manifest and four icons (drawn from the game's own bee by `npm run build:icons`) make it installable to a home screen.
+4. **Better sharing.** The text share is unchanged. A new "SAVE IMAGE" button draws a 1080x1350 PNG: title, flight number, date, score, final altitude, band name, the flight log chart and the site address, with no answers. On a phone with a share sheet that accepts files it opens the share sheet; everywhere else it downloads `one-in-a-swarm-flight-N.png`. A test renders the card at 375 px and 1440 px and requires the two pictures to be identical byte for byte.
 
 ## Skipped
 
@@ -23,6 +24,7 @@ Branch: `overnight`. Nothing was pushed to main and nothing was merged; the live
 - **`config.js` lives at the top of the site**, next to `index.html`, so it is easy to find.
 - **The feedback link accepts only `https:` or `mailto:` addresses**; anything else is treated as empty.
 - **The finished-flight event fires once, when you land**, not when the results are reopened after a reload.
+- **The share card uses the pixel font only**, so it looks the same on every device; it shows each round's tier mark at the altitude reached, like the flight log, and never an answer.
 
 ## For you to check or decide
 - **Set your two launch values in `config.js`**: the GoatCounter site code (you need to create the free account) and the feedback address. Both are empty, so neither feature is live yet.
