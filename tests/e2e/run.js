@@ -476,6 +476,39 @@ async function main() {
     await page.close();
   });
 
+  await scenario('input leak: nothing typed on a reveal reaches the next round', async () => {
+    const page = await fresh({ width: 1280, height: 800 });
+    await click(page, 'dailyBtn');
+    await playDaily(page, ['solid']);
+    assert.equal(await phase(page), 'reveal');
+    assert.equal(await page.eval('document.getElementById("guess").disabled'), true, 'the answer box is off while the reveal shows');
+    // a player who keeps typing, and a script that writes straight into the hidden box
+    await page.type('leaked answer');
+    await page.eval('(() => { const g = document.getElementById("guess"); g.focus(); g.value = "leaked answer"; document.getElementById("guessForm").requestSubmit(); })()');
+    assert.equal(await phase(page), 'reveal', 'a submit on the reveal does nothing');
+    await sleep(650);
+    await page.enter(); // Enter on the reveal only continues
+    await page.waitFor('document.body.dataset.phase === "intro"', 3000, 'the next round to begin');
+    assert.equal(await page.eval('document.getElementById("guess").value'), '', 'the next round starts with an empty box');
+    await waitPhase(page, 'guess');
+    assert.equal(await text(page, 'hudText'), 'Round 2 of 7');
+    assert.equal(await page.eval('document.getElementById("guess").value'), '');
+    assert.equal(await page.eval('document.getElementById("guess").disabled'), false);
+    assert.equal(await page.eval('document.querySelectorAll("#tried li").length'), 0, 'nothing was submitted for the player');
+    assert.equal(await text(page, 'feedback'), '');
+    await sleep(1000);
+    const left = await barScale(page);
+    assert.ok(left > 0.9 && left < 0.99, 'the timer runs normally, with no penalty: ' + left);
+    assert.equal(await phase(page), 'guess', 'and the prompt is still there to be read');
+    assert.equal((await saved(page)).results.length, 1);
+    // the same during a climb
+    await guess(page, answerOf(await text(page, 'promptText'), 'rare'));
+    assert.match(await phase(page), /^(climb|reveal)$/);
+    assert.equal(await page.eval('document.getElementById("guess").disabled'), true, 'and it is off from the moment the climb begins');
+    noProblems(page);
+    await page.close();
+  });
+
   await scenario('daily run on a phone (375x812, touch): no problems', async () => {
     const page = await fresh({ width: 375, height: 812, mobile: true });
     await click(page, 'dailyBtn');

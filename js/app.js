@@ -140,6 +140,11 @@
 
   function setPhase(name) {
     document.body.dataset.phase = name;
+    // The answer box only exists while a prompt is on screen. During a climb, on the reveal and
+    // on the end screens it is switched off, so nothing typed there can reach the next round.
+    const g = $('guess');
+    g.disabled = !(name === 'intro' || name === 'guess');
+    if (g.disabled) g.value = '';
     aimCamera();
     flushToasts();
   }
@@ -778,7 +783,8 @@
     renderDailyHud(index);
     renderTried([]);
     setFeedback('', '');
-    $('guess').value = '';
+    $('guess').value = ''; // every round starts with an empty box and no submit waiting
+    lockUntil = 0;
     $('clockLive').textContent = '';
     renderClock(C.ROUND_MS, C.ROUND_MS, true);
     setPhase('intro');
@@ -1356,8 +1362,11 @@
     $('guessForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const text = $('guess').value;
-      if (document.body.dataset.phase === 'intro') {
+      const phase = document.body.dataset.phase;
+      if (phase === 'intro') {
         setFeedback('hold on. still lifting off.', '');
+      } else if (phase !== 'guess' || $('guess').disabled) {
+        return; // a submit only counts while a prompt is live
       } else if (performance.now() < lockUntil) {
         return;
       } else if (mode === 'daily' && daily && daily.round) {
