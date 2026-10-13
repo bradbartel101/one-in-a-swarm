@@ -1983,7 +1983,7 @@ D Cincinnati
 D St. Louis | Saint Louis :: Saint Louis University, from Tech's Metro Conference years.
 X Sewanee :: The University of the South, a charter member of the SEC with Tech in 1932.
 
-@engineering | SCIENCE | Name a branch of engineering | pool=general | type=open
+@engineering | Science | Name a branch of engineering | retired
 C Mechanical | Mechanical Engineering
 C Electrical | Electrical Engineering
 C Civil | Civil Engineering
@@ -2029,7 +2029,7 @@ D Photonics | Photonics Engineering
 D Water Resources | Water Resources Engineering
 X Ceramic | Ceramic Engineering | Ceramics :: Tech had a School of Ceramic Engineering for much of the twentieth century.
 
-@languages | TECH | Name a programming language | pool=general | type=open
+@languages | TECH | Name a programming language | pool=general | type=open | clar=markup like HTML does not count
 C Python
 C Java
 T C, C++ or C# | C | C++ | C# | CPP | C Plus Plus | C Sharp | CSharp :: Three languages, one answer: typed, they all look like C.
@@ -2084,6 +2084,125 @@ D Delphi
 D Simula
 D Crystal
 X INTERCAL :: A 1972 parody language whose programs must say PLEASE often enough.
+R PowerShell
+R Solidity
+R Visual Basic .NET
+R VBA | Visual Basic for Applications
+R Common Lisp
+R AWK
+R ActionScript
+R CoffeeScript
+R Brainfuck
+R LabVIEW | G
+R SAS
+R Wolfram Language | Mathematica | Wolfram
+D D | Dlang
+D PL/SQL
+D PL/I | PL/1
+D ABAP
+D Apex
+D Elm
+D PureScript
+D Idris
+D Agda
+D Lean
+D Standard ML | SML
+D ML
+D Eiffel
+D Modula-2 | Modula
+D Oberon
+D Miranda
+D Hack
+D Haxe
+D Vala
+D Odin
+D Mojo
+D Carbon
+D Chapel
+D REXX
+D J
+D Icon
+D SNOBOL
+D BCPL
+D B
+D Self
+D PostScript
+D GDScript
+D AutoHotkey | AHK
+D AppleScript
+D VBScript
+D Processing
+D GLSL
+D HLSL
+D Stata
+D Octave | GNU Octave
+D RPG
+D MUMPS
+D Malbolge
+D Whitespace
+D LOLCODE
+D Befunge
+D Piet
+D Gleam
+D ReasonML | Reason
+D Raku | Perl 6
+D Dylan
+D Datalog
+D Mercury
+D Occam
+D Cython
+D WebAssembly | Wasm
+D Hy
+D Janet
+D Fennel
+D Luau
+D ColdFusion | CFML
+D Ladder Logic
+D SuperCollider
+D ChucK
+D Csound
+D Q Sharp | Q#
+D Starlark
+D Nix
+D JScript
+D Turing
+D Alice
+D Squeak
+D Io
+D Factor
+D Pony
+D Ballerina
+D Xojo
+D Pure Data | Pd
+D Structured Text
+D G-code
+D Maple
+D Hare
+D Roc
+! HTML :: a markup language, not a programming language
+! CSS :: a style sheet language
+! XML :: a markup language
+! JSON :: a data format
+! YAML :: a data format
+! Markdown :: a markup language
+! LaTeX :: a typesetting system
+! React :: a JavaScript library
+! Angular :: a JavaScript framework
+! Node.js :: a JavaScript runtime
+! Django :: a Python framework
+! Rails :: a Ruby framework
+! .NET :: a platform, not a language
+! Linux :: an operating system
+! Git :: a version-control tool
+! Excel :: a spreadsheet program
+! Unity :: a game engine
+! Docker :: a container tool
+! MySQL :: a database; the language is SQL
+! jQuery :: a JavaScript library
+! English :: not that kind of language
+! Spanish :: not that kind of language
+! Binary :: a number system
+! Arduino :: a board programmed in C++
 
 @elements | SCIENCE | Name a chemical element | pool=general | easy | type=closed | count=118 | source=IUPAC periodic table
 C Hydrogen
@@ -2172,8 +2291,58 @@ D Fermium
 D Nobelium
 D Oganesson
 X Technetium :: The first element to be made artificially. It even starts with Tech.
+D Praseodymium
+D Promethium
+D Samarium
+D Terbium
+D Dysprosium
+D Holmium
+D Erbium
+D Thulium
+D Ytterbium
+D Lutetium
+D Rhenium
+D Actinium
+D Protactinium
+D Neptunium
+D Berkelium
+D Californium
+D Mendelevium
+D Lawrencium
+D Rutherfordium
+D Dubnium
+D Seaborgium
+D Bohrium
+D Hassium
+D Meitnerium
+D Darmstadtium
+D Roentgenium
+D Copernicium
+D Nihonium
+D Flerovium
+D Moscovium
+D Livermorium
+D Tennessine
+! Water :: a compound of hydrogen and oxygen
+! Steel :: an alloy, mostly iron
+! Bronze :: an alloy of copper and tin
+! Brass :: an alloy of copper and zinc
+! Salt :: a compound, sodium chloride
+! Air :: a mixture of gases
+! Fire :: not a chemical element
+! Earth :: not a chemical element
+! Diamond :: a form of carbon
+! Kryptonite :: fictional
+! Vibranium :: fictional
+! Unobtainium :: fictional
+! Adamantium :: fictional
+! Ammonia :: a compound
+! Carbon Dioxide :: a compound
+! Ozone :: a form of oxygen
+! Graphite :: a form of carbon
+! Quartz :: a compound, silicon dioxide
 
-@units | SCIENCE | Name a unit of measurement named after a person | pool=general | type=open
+@units | Science | Name a unit of measurement named after a person | retired
 C Watt
 C Volt
 C Newton
@@ -2217,7 +2386,7 @@ D Galileo | Gal
 D Fermi
 X Sverdrup :: An oceanographer's unit: a million cubic metres of water a second.
 
-@hoopschamps | SPORTS | Name a school that has won the men's NCAA basketball tournament | pool=general | type=closed | clar=champions through 2025
+@hoopschamps | SPORTS | Name a school that has won the men's NCAA basketball tournament | pool=general | type=closed | count=37 | source=ncaa.com list of champions, 1939 to 2025 (37 different schools) | clar=champions through 2025
 C Duke
 C North Carolina | UNC | Carolina
 C Kentucky | UK
@@ -2255,8 +2424,29 @@ D CCNY | City College of New York | City College
 D Texas Western | UTEP | Texas El Paso
 D Wyoming
 X Holy Cross :: Champions in 1947.
+! Georgia Tech :: runner-up in 2004; never champion
+! Gonzaga :: runner-up in 2017 and 2021
+! Purdue :: runner-up in 1969 and 2024
+! Houston :: runner-up in 1983, 1984 and 2025; never champion
+! Memphis :: runner-up in 1973 and 2008
+! Butler :: runner-up in 2010 and 2011
+! Illinois :: runner-up in 2005
+! Texas Tech :: runner-up in 2019
+! Oklahoma :: runner-up in 1947 and 1988
+! Texas :: has reached the Final Four but never won
+! Notre Dame :: one Final Four, in 1978
+! Auburn :: Final Fours in 2019 and 2025
+! Tennessee :: never reached the final
+! Alabama :: one Final Four, in 2024
+! Iowa :: runner-up in 1956
+! Seton Hall :: runner-up in 1989
+! St. John's :: runner-up in 1952
+! Dayton :: runner-up in 1967
+! San Diego State :: runner-up in 2023
+! Georgia :: one Final Four, in 1983
+! UTEP :: accepted under Texas Western, its name when it won
 
-@heisman | SPORTS | Name a Heisman Trophy winner | pool=general | type=closed | clar=John Heisman coached at Tech
+@heisman | SPORTS | Name a Heisman Trophy winner | pool=general | type=closed | count=90 | source=heisman.com winners list, 1935 to 2025 (91 trophies, Archie Griffin twice) | clar=1935 to 2025; Heisman coached at Tech
 C Tim Tebow
 C Lamar Jackson
 C Joe Burrow
@@ -2329,4 +2519,45 @@ D Mike Garrett
 D Gary Beban
 D Steve Owens
 X Jay Berwanger :: The first winner, in 1935.
-~S Fernando Mendoza ?? I believe he won in 2025, but that is at the edge of what I know for certain.
+S Fernando Mendoza :: Indiana, 2025.
+D Larry Kelley :: Yale, 1936.
+D Clint Frank :: Yale, 1937.
+D Davey O'Brien :: TCU, 1938.
+D Bruce Smith :: Minnesota, 1941.
+D Angelo Bertelli :: Notre Dame, 1943.
+D Les Horvath :: Ohio State, 1944.
+D Leon Hart :: Notre Dame, 1949.
+D Vic Janowicz :: Ohio State, 1950.
+D Dick Kazmaier :: Princeton, 1951.
+D Billy Vessels :: Oklahoma, 1952.
+D Johnny Lattner | John Lattner :: Notre Dame, 1953.
+D Alan Ameche :: Wisconsin, 1954.
+D Howard Cassady | Hopalong Cassady :: Ohio State, 1955.
+D John David Crow :: Texas A&M, 1957.
+D Joe Bellino :: Navy, 1960.
+D Terry Baker :: Oregon State, 1962.
+D John Huarte :: Notre Dame, 1964.
+! Peyton Manning :: second in 1997, behind Charles Woodson
+! Tom Brady :: never a finalist
+! Vince Young :: second in 2005
+! Deshaun Watson :: third in 2015 and second in 2016
+! Tua Tagovailoa :: second in 2018
+! Trevor Lawrence :: second in 2020
+! Christian McCaffrey :: second in 2015
+! Andrew Luck :: second in 2010 and 2011
+! Adrian Peterson :: second in 2004
+! Larry Fitzgerald :: second in 2003
+! Michael Vick :: third in 1999
+! Joe Hamilton :: Tech's quarterback was second in 1999
+! Clint Castleberry :: Tech's freshman was third in 1942
+! Billy Lothridge :: Tech's quarterback was second in 1963
+! John Heisman :: the trophy is named for him; he never won it
+! Ndamukong Suh :: fourth in 2009
+! Manti Te'o :: second in 2012
+! Patrick Mahomes :: never a finalist
+! John Elway :: second in 1982
+! Dan Marino :: never won it
+! Emmitt Smith :: never won it
+! Calvin Johnson :: Tech's receiver was never a finalist
+! Saquon Barkley :: fourth in 2017
+! Ashton Jeanty :: second in 2024

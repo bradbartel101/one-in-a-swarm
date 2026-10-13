@@ -58,10 +58,6 @@ These answers are **not in the game**. Each was left out because I was not confi
 - [ ] **Soulja Boy** (would be Deep Cut): Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
 - [ ] **Trinidad James** (would be Deep Cut): Born in Trinidad and raised partly in Atlanta; unsure of the details.
 
-### Name a Heisman Trophy winner (`heisman`)
-
-- [ ] **Fernando Mendoza** (would be Solid): I believe he won in 2025, but that is at the edge of what I know for certain.
-
 ### Name a drink made by The Coca-Cola Company (`cokebrands`)
 
 - [ ] **Dunkin' Iced Coffee** (would be Rare): Bottled by Coca-Cola under licence from Dunkin'.

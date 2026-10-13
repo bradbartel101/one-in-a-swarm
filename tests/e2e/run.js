@@ -756,9 +756,10 @@ async function main() {
       seen.add(prompt);
       await guess(page, answerOf(prompt, 'solid'));
     }
-    assert.equal(seen.size, data.prompts.length);
+    const live = data.prompts.filter((p) => !p.retired).length; // retired prompts are not served in infinite mode
+    assert.equal(seen.size, live);
     assert.equal(await text(page, 'infTitle'), 'YOU EMPTIED THE HIVE');
-    assert.equal(await text(page, 'infScore'), C.formatNumber(30 * data.prompts.length) + ' pts');
+    assert.equal(await text(page, 'infScore'), C.formatNumber(30 * live) + ' pts');
     noProblems(page);
     await page.close();
   });

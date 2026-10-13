@@ -39,12 +39,12 @@
     {"id": "falcons", "pool": "gt", "category": "ATLANTA SPORTS", "text": "Name a player from Atlanta Falcons history", "n": 65},
     {"id": "hawks", "pool": "gt", "category": "ATLANTA SPORTS", "text": "Name a player from Atlanta Hawks history", "clarifier": "1968 to today", "n": 58},
     {"id": "collegetowns", "pool": "gt", "category": "RIVALS", "text": "Name the home city of a school in Tech's conference history", "clarifier": "Southern, SEC, Metro or ACC", "n": 34},
-    {"id": "engineering", "pool": "general", "category": "SCIENCE", "text": "Name a branch of engineering", "n": 44},
-    {"id": "languages", "pool": "general", "category": "TECH", "text": "Name a programming language", "n": 54},
-    {"id": "elements", "pool": "general", "category": "SCIENCE", "text": "Name a chemical element", "easy": true, "n": 86},
-    {"id": "units", "pool": "general", "category": "SCIENCE", "text": "Name a unit of measurement named after a person", "n": 42},
+    {"id": "engineering", "category": "Science", "text": "Name a branch of engineering", "retired": true, "n": 44},
+    {"id": "languages", "pool": "general", "category": "TECH", "text": "Name a programming language", "clarifier": "markup like HTML does not count", "n": 149},
+    {"id": "elements", "pool": "general", "category": "SCIENCE", "text": "Name a chemical element", "easy": true, "n": 118},
+    {"id": "units", "category": "Science", "text": "Name a unit of measurement named after a person", "retired": true, "n": 42},
     {"id": "hoopschamps", "pool": "general", "category": "SPORTS", "text": "Name a school that has won the men's NCAA basketball tournament", "clarifier": "champions through 2025", "n": 37},
-    {"id": "heisman", "pool": "general", "category": "SPORTS", "text": "Name a Heisman Trophy winner", "clarifier": "John Heisman coached at Tech", "n": 72},
+    {"id": "heisman", "pool": "general", "category": "SPORTS", "text": "Name a Heisman Trophy winner", "clarifier": "1935 to 2025; Heisman coached at Tech", "n": 90},
     {"id": "minors", "pool": "gt", "category": "ACADEMICS", "text": "Name a minor offered at Georgia Tech", "n": 87},
     {"id": "mathcourses", "pool": "gt", "category": "ACADEMICS", "text": "Name a Georgia Tech MATH course by its number", "clarifier": "like \"MATH 1554\"", "lead": ["math"], "n": 136},
     {"id": "gtmasters", "pool": "gt", "category": "ACADEMICS", "text": "Name a master's degree offered at Georgia Tech", "clarifier": "the field is enough, like \"Analytics\"", "n": 59},
@@ -116,6 +116,8 @@
     {"id": "greekmyth", "pool": "general", "category": "STORIES", "text": "Name a figure from Greek mythology", "clarifier": "gods, heroes and monsters; Roman names count", "n": 238},
     {"id": "collegenicknames", "pool": "general", "category": "SPORTS", "text": "Name a college team nickname", "clarifier": "NCAA Division I teams, like Yellow Jackets", "n": 204},
     {"id": "yellowthings", "pool": "general", "category": "THINGS", "text": "Name something that is yellow", "clarifier": "usually or famously yellow", "n": 209},
-    {"id": "bowlgames", "pool": "general", "category": "SPORTS", "text": "Name a college football bowl game", "clarifier": "past or present; sponsor names not needed", "strip": ["bowl","classic"], "n": 92}
+    {"id": "bowlgames", "pool": "general", "category": "SPORTS", "text": "Name a college football bowl game", "clarifier": "past or present; sponsor names not needed", "strip": ["bowl","classic"], "n": 92},
+    {"id": "birds", "pool": "general", "category": "NATURE", "text": "Name a kind of bird", "clarifier": "real birds, living or extinct", "n": 196},
+    {"id": "trees", "pool": "general", "category": "NATURE", "text": "Name a kind of tree", "clarifier": "fruit and nut trees count", "n": 142}
   ]
 }

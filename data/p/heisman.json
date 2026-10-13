@@ -3,7 +3,7 @@
   "pool": "general",
   "category": "SPORTS",
   "text": "Name a Heisman Trophy winner",
-  "clarifier": "John Heisman coached at Tech",
+  "clarifier": "1935 to 2025; Heisman coached at Tech",
   "answers": [
 {"name":"Tim Tebow","tier":"common"},
 {"name":"Lamar Jackson","tier":"common"},
@@ -76,6 +76,24 @@
 {"name":"Mike Garrett","tier":"deep"},
 {"name":"Gary Beban","tier":"deep"},
 {"name":"Steve Owens","tier":"deep"},
-{"name":"Jay Berwanger","tier":"swarm","note":"The first winner, in 1935."}
+{"name":"Jay Berwanger","tier":"swarm","note":"The first winner, in 1935."},
+{"name":"Fernando Mendoza","tier":"solid","note":"Indiana, 2025."},
+{"name":"Larry Kelley","tier":"deep","note":"Yale, 1936."},
+{"name":"Clint Frank","tier":"deep","note":"Yale, 1937."},
+{"name":"Davey O'Brien","tier":"deep","note":"TCU, 1938."},
+{"name":"Bruce Smith","tier":"deep","note":"Minnesota, 1941."},
+{"name":"Angelo Bertelli","tier":"deep","note":"Notre Dame, 1943."},
+{"name":"Les Horvath","tier":"deep","note":"Ohio State, 1944."},
+{"name":"Leon Hart","tier":"deep","note":"Notre Dame, 1949."},
+{"name":"Vic Janowicz","tier":"deep","note":"Ohio State, 1950."},
+{"name":"Dick Kazmaier","tier":"deep","note":"Princeton, 1951."},
+{"name":"Billy Vessels","tier":"deep","note":"Oklahoma, 1952."},
+{"name":"Johnny Lattner","tier":"deep","aliases":["John Lattner"],"note":"Notre Dame, 1953."},
+{"name":"Alan Ameche","tier":"deep","note":"Wisconsin, 1954."},
+{"name":"Howard Cassady","tier":"deep","aliases":["Hopalong Cassady"],"note":"Ohio State, 1955."},
+{"name":"John David Crow","tier":"deep","note":"Texas A&M, 1957."},
+{"name":"Joe Bellino","tier":"deep","note":"Navy, 1960."},
+{"name":"Terry Baker","tier":"deep","note":"Oregon State, 1962."},
+{"name":"John Huarte","tier":"deep","note":"Notre Dame, 1964."}
   ]
 }

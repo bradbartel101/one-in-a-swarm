@@ -1,0 +1,373 @@
+# Prompt bank v2: two general prompts that replace "branch of engineering" and "unit named after a person".
+
+@birds | NATURE | Name a kind of bird | pool=general | type=open | clar=real birds, living or extinct
+C Eagle | Bald Eagle | Golden Eagle
+C Robin | American Robin
+C Blue Jay | Jay | Bluejay
+C Cardinal | Northern Cardinal | Redbird
+C Pigeon | Rock Dove
+C Chicken | Rooster | Hen
+C Owl | Barn Owl | Great Horned Owl | Snowy Owl | Screech Owl | Barred Owl
+C Duck | Mallard
+C Penguin | Emperor Penguin
+C Parrot
+T Hawk | Red-tailed Hawk | Cooper's Hawk
+T Crow
+T Seagull | Gull | Sea Gull
+T Flamingo
+T Hummingbird
+S Sparrow | House Sparrow
+S Turkey | Wild Turkey
+S Goose | Canada Goose | Geese
+S Swan
+S Ostrich
+S Peacock | Peafowl | Peahen
+S Woodpecker
+S Dove | Mourning Dove
+S Falcon | Peregrine Falcon | Peregrine
+S Vulture | Turkey Vulture | Black Vulture
+S Pelican
+S Raven
+S Bluebird | Eastern Bluebird
+S Finch | House Finch
+S Canary
+S Parakeet | Budgie | Budgerigar
+S Toucan
+S Heron | Great Blue Heron | Blue Heron
+S Stork
+S Crane | Sandhill Crane | Whooping Crane
+S Mockingbird
+S Emu
+S Kiwi
+S Macaw
+S Puffin
+S Quail
+S Pheasant
+S Swallow | Barn Swallow
+S Oriole | Baltimore Oriole
+R Cockatoo
+R Albatross
+R Starling
+R Wren | Carolina Wren
+R Chickadee
+R Magpie
+R Condor | California Condor
+R Osprey
+R Kingfisher
+R Cuckoo
+R Roadrunner
+R Loon
+R Egret
+R Ibis
+R Cormorant
+R Sandpiper
+R Goldfinch
+R Kite
+R Nuthatch
+R Titmouse | Tufted Titmouse
+R Warbler
+R Thrush | Wood Thrush
+R Grackle
+R Blackbird | Red-winged Blackbird
+R Meadowlark
+R Lark | Skylark
+R Nightingale
+R Grouse
+R Partridge
+R Dodo
+R Cockatiel
+R Lovebird
+R Kookaburra
+R Cassowary
+R Kestrel
+R Buzzard
+R Tern
+R Plover
+R Killdeer
+R Spoonbill
+R Whip-poor-will | Whippoorwill
+R Bobwhite
+R Wood Duck
+R Teal
+R Catbird
+R Junco
+R Bunting | Indigo Bunting | Painted Bunting
+R Tanager | Scarlet Tanager
+R Waxwing | Cedar Waxwing
+R Martin | Purple Martin
+R Swift | Chimney Swift
+R Guinea Fowl | Guineafowl | Guinea Hen
+D Cowbird
+D Grosbeak
+D Towhee
+D Flycatcher
+D Phoebe
+D Kingbird
+D Vireo
+D Nighthawk
+D Ptarmigan
+D Rhea
+D Lyrebird
+D Hornbill
+D Hoopoe
+D Bee-eater
+D Secretary Bird | Secretarybird
+D Shoebill
+D Booby | Blue-footed Booby
+D Gannet
+D Frigatebird | Frigate Bird
+D Petrel
+D Shearwater
+D Auk
+D Murre
+D Skua
+D Coot
+D Rail
+D Gallinule
+D Grebe
+D Anhinga
+D Bittern
+D Avocet
+D Stilt
+D Oystercatcher
+D Curlew
+D Godwit
+D Snipe
+D Woodcock
+D Turnstone
+D Skimmer | Black Skimmer
+D Wigeon
+D Merganser
+D Eider
+D Pintail
+D Myna | Mynah
+D Weaver | Weaverbird
+D Sunbird
+D Bird of Paradise
+D Bowerbird
+D Quetzal
+D Trogon
+D Motmot
+D Jacana
+D Hoatzin
+D Kea
+D Kakapo
+D Tui
+D Bulbul
+D Oxpecker
+D Dipper
+D Pipit
+D Wagtail
+D Shrike
+D Jackdaw
+D Rook
+D Crossbill
+D Siskin
+D Linnet
+D Bobolink
+D Ovenbird
+D Redstart
+D Kinglet
+D Gnatcatcher
+D Sapsucker
+D Flicker | Northern Flicker
+D Caracara
+D Merlin
+D Goshawk
+D Harrier
+D Limpkin
+D Sanderling
+D Willet
+D Whimbrel
+D Bufflehead
+D Canvasback
+D Scaup
+D Scoter
+D Goldeneye
+D Gadwall
+D Shoveler
+D Passenger Pigeon
+D Moa
+D Tinamou
+D Curassow
+D Nutcracker
+D Chough
+D Creeper | Brown Creeper | Treecreeper
+D Veery
+D Dunlin
+D Phalarope
+X Brown Thrasher | Thrasher :: Georgia's state bird, and once the name of Atlanta's hockey team.
+! Bat :: a mammal
+! Pterodactyl :: a flying reptile, not a bird
+! Butterfly :: an insect
+! Bee :: an insect
+! Yellow Jacket :: a wasp, even at Tech
+! Phoenix :: mythical
+! Thunderbird :: mythical
+! Big Bird :: a character, not a kind of bird
+! Tweety :: a character, not a kind of bird
+! Larry Bird :: a basketball player
+! Flying Squirrel :: a mammal
+! Dragonfly :: an insect
+! Griffin :: mythical
+! Jaybird :: not a kind of bird on its own
+! Archaeopteryx :: usually classed as a feathered dinosaur
+
+@trees | NATURE | Name a kind of tree | pool=general | type=open | clar=fruit and nut trees count
+C Oak | Live Oak | White Oak | Red Oak | Water Oak
+C Pine | Loblolly Pine | Longleaf Pine | White Pine | Loblolly | Bristlecone Pine
+C Maple | Sugar Maple | Red Maple | Japanese Maple
+C Palm | Palm Tree | Date Palm
+C Apple
+T Birch | River Birch | Paper Birch
+T Willow | Weeping Willow
+T Redwood | Coast Redwood | Dawn Redwood
+S Cedar | Red Cedar
+S Elm
+S Spruce | Blue Spruce
+S Fir | Douglas Fir | Fraser Fir
+S Cherry | Cherry Blossom
+S Magnolia | Southern Magnolia
+S Dogwood
+S Peach
+S Pecan
+S Walnut | Black Walnut
+S Hickory
+S Ash
+S Aspen | Quaking Aspen
+S Poplar | Tulip Poplar | Tulip Tree
+S Sycamore
+S Cypress | Bald Cypress
+S Sequoia | Giant Sequoia
+S Orange
+S Lemon
+S Coconut | Coconut Palm
+S Olive
+S Fig
+S Pear
+R Beech
+R Chestnut
+R Hemlock
+R Juniper
+R Mahogany
+R Eucalyptus | Gum Tree
+R Banyan
+R Baobab
+R Teak
+R Ebony
+R Plum
+R Mango
+R Lime
+R Avocado
+R Almond
+R Holly
+R Crape Myrtle | Crepe Myrtle
+R Redbud
+R Sweetgum | Sweet Gum
+R Cottonwood
+R Ginkgo | Gingko
+R Buckeye | Horse Chestnut
+R Mimosa
+R Persimmon
+R Mulberry
+R Joshua Tree
+R Mangrove
+R Rubber Tree
+R Acacia
+R Grapefruit
+R Apricot
+R Yew
+R Palmetto | Sabal Palm | Cabbage Palm
+R Locust | Black Locust | Honey Locust
+R Balsa
+R Sassafras
+R Larch | Tamarack
+D Alder
+D Linden | Basswood
+D Hawthorn
+D Hazel | Hazelnut | Filbert
+D Cashew
+D Pistachio
+D Pawpaw | Paw Paw
+D Catalpa
+D Boxelder | Box Elder
+D Hornbeam
+D Osage Orange
+D Tupelo | Black Gum
+D Sourwood
+D Monkey Puzzle
+D Kapok
+D Sandalwood
+D Rosewood
+D Cacao | Cocoa
+D Jacaranda
+D Tamarind
+D Neem
+D Breadfruit
+D Jackfruit
+D Durian
+D Lychee
+D Pomegranate
+D Quince
+D Crabapple | Crab Apple
+D Serviceberry
+D Elder | Elderberry
+D Rowan | Mountain Ash
+D Laurel | Bay Laurel | Bay
+D Zelkova
+D Paulownia | Empress Tree
+D Tree of Heaven | Ailanthus
+D Chinaberry
+D Bradford Pear | Callery Pear
+D Arborvitae | Thuja
+D Kauri
+D Bodhi Tree | Bodhi | Peepal
+D Ironwood
+D Butternut
+D Chinquapin | Chinkapin
+D Witch Hazel
+D Fringe Tree | Fringetree
+D Kentucky Coffeetree | Coffeetree
+D Hackberry
+D Madrone
+D Mesquite
+D Palo Verde
+D Camphor
+D Loquat
+D Kumquat
+D Tangerine | Mandarin
+D Nectarine
+D Guava
+D Papaya
+D Macadamia
+D Brazil Nut
+D Kola | Kola Nut | Cola :: The nut that put the cola in Coca-Cola.
+D Dragon Tree | Dragon Blood Tree
+D Yellowwood
+D Silverbell
+D Golden Rain Tree | Goldenrain Tree
+D Smoke Tree | Smoketree
+D Tallow | Chinese Tallow
+D Russian Olive
+D Cork Oak | Cork
+D Nutmeg
+D Clove
+D Cinnamon
+D Plane | London Plane | Plane Tree
+D Wollemi Pine | Wollemi
+X Franklinia | Franklin Tree :: Found beside Georgia's Altamaha River in 1765 and not seen in the wild since 1803.
+! Bamboo :: a grass
+! Bonsai :: a way of growing a tree, not a kind of tree
+! Christmas Tree :: a use for a tree; name the fir, spruce or pine
+! Family Tree :: not that kind of tree
+! Saguaro :: a cactus
+! Cactus :: not a tree
+! Banana :: a giant herb, not a tree
+! Rose :: a shrub
+! Ivy :: a vine
+! Kudzu :: a vine
+! Binary Tree :: a data structure
+! Evergreen :: a group of trees, not a kind
+! Shoe Tree :: not that kind of tree
+! Money Tree :: a houseplant by that name is not a kind of tree most would count
+! Peachtree :: a street, and the tree is listed as Peach

@@ -1,8 +1,8 @@
 {
   "id": "engineering",
-  "pool": "general",
-  "category": "SCIENCE",
+  "category": "Science",
   "text": "Name a branch of engineering",
+  "retired": true,
   "answers": [
 {"name":"Mechanical","tier":"common","aliases":["Mechanical Engineering"]},
 {"name":"Electrical","tier":"common","aliases":["Electrical Engineering"]},
