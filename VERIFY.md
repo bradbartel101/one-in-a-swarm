@@ -6,8 +6,28 @@ from the JSON. In the v1.0 release audit every flagged answer was checked agains
 the confirmed ones were unflagged, and the ones that could not be confirmed were removed from
 the game and listed in `HUMAN-TODO.md` for a Tech student to rule on.
 
-To flag a new answer, put `?` before its tier letter in `tools/prompts.src.txt` and add
+To flag a new answer, put `?` before its tier letter in its source file under `tools/` and add
 `?? reason` at the end of the line, then run `npm run build:data`.
+
+## Prompt bank v2: what to look at first
+
+The bank was rebuilt in October 2026 (see `PROMPTS-V2.md`). In order of how much a second pair
+of eyes would help:
+
+1. **Held out of the game** (the long section below): 97 answers I was not sure of. Each one is
+   a yes or no. To approve one, delete its leading `~` in the source file and rebuild.
+2. **Three lists with no source** (the last section): Atlanta United players since 2021, the
+   Waffle House menu and the Chick-fil-A menu.
+3. **Lists written from memory**: the 2026 top-ups to films, musicians, Braves, Falcons and Hawks,
+   and the new birds, trees, Georgia wildlife and backpack prompts. Nothing in them is flagged
+   one by one, because I only added what I was confident of, but none was checked line by line.
+4. **Closed lists built from Wikipedia rather than an official register**: Tech players in the
+   NBA (42) and the major leagues (69, which agrees with ramblinwreck.com's count), Falcons
+   first-round picks (61), Georgia governors (77), Atlanta's tallest buildings (125), airlines and
+   nonstop cities at Hartsfield-Jackson. The last two were read in October 2026 and will drift.
+5. **Residence halls and Greek chapters** now follow Tech's current lists (housing.gatech.edu and
+   greek.gatech.edu). A hall or chapter that has closed is no longer accepted.
+6. **Heisman winners and NCAA champions** were taken as already verified and not searched again.
 
 ## Altitude facts
 
@@ -29,8 +49,9 @@ measures altitude from campus, while mountain heights are quoted above sea level
 - **"Past or present" prompts** (dining, pro teams, Greek chapters, residence halls) include places
   and chapters that have closed, moved, been renamed, or been suspended. That is intended, but a
   current student may not recognise some of them.
-- **`bowls` and `dining` sit at exactly 25 answers.** Removing one answer from either drops it
-  below the floor, and the build will refuse it.
+- **Retired prompts** (`bowls`, `dining` and 18 others) are kept only so that days already
+  scheduled still play. `bowls` and `dining` sit at exactly 25 answers; removing one answer from
+  either drops it below the floor, and the build will refuse it.
 - **Rosters keep moving.** NBA, NFL, MLB and coaching lists stop at what I knew when writing; recent
   call-ups and hires are missing, so a correct recent answer may be marked wrong.
 
