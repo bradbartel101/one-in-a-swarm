@@ -992,7 +992,7 @@
     if (last.note) bits.push(last.note);
     if (last.wrong) bits.push(last.wrong + (last.wrong === 1 ? ' wrong guess first' : ' wrong guesses first'));
     // one line of quip; anything else sits on its own line beneath it
-    $('lastNote').textContent = (last.tier ? C.TIERS[last.tier].quip : '') + (bits.length ? '\n' + bits.join(' · ') : '');
+    $('lastNote').textContent = (last.tier ? C.quipFor(last.tier, score) : '') + (bits.length ? '\n' + bits.join(' · ') : '');
     $('lastPrompt').textContent = p.text;
     const btn = $('nextBtn');
     if (daily.finished) {

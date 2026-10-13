@@ -184,3 +184,21 @@ test('points to feet: the five checkpoints of the one curve', () => {
   assert.equal(C.altitudeFeet(60), 242);
   assert.equal(C.altitudeParts(60).value, '242');
 });
+
+test('quips fit the altitude: no thin air below 15,000 ft, no space below the edge of space', () => {
+  const lowTop = C.scoreForFeet(C.THIN_AIR_FT);
+  const spaceFrom = C.scoreForFeet(328084);
+  for (const tier of C.TIER_ORDER) {
+    for (let s = 0; s <= 760; s += 1) {
+      const q = C.quipFor(tier, s);
+      assert.ok(q.length > 15, tier + ' at ' + s);
+      if (s < lowTop - 0.5) assert.doesNotMatch(q, /\b(thin|air|space|orbit|stars?|dark|vacuum)\b/i, tier + ' at ' + s + ' points (' + C.altitudeText(s) + '): ' + q);
+      if (s < spaceFrom - 0.5) assert.doesNotMatch(q, /\b(space|orbit|no air|dark|vacuum)\b/i, tier + ' at ' + s + ': ' + q);
+    }
+  }
+  // Regression: a Deep Cut at 600 ft used to say the air was getting thin.
+  assert.equal(C.quipFor('deep', 95), 'A deep cut. The ground is a long way down.');
+  assert.equal(C.quipFor('deep', 320), 'A deep cut. The air is getting thin.');
+  assert.equal(C.quipFor('deep', 640), 'A deep cut. No air up here at all.');
+  assert.equal(C.quipFor('nonsense', 10), '');
+});

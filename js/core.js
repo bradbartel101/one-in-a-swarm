@@ -11,7 +11,7 @@
     clever: { points: 15, label: 'Too Clever', emoji: '🟩', bonusMs: 8000, quip: 'You and every other clever Jacket.' },
     solid: { points: 30, label: 'Solid', emoji: '🟧', bonusMs: 9000, quip: 'A good answer. The swarm picks up speed.' },
     rare: { points: 60, label: 'Rare', emoji: '🟦', bonusMs: 10000, quip: 'Not many think of that one. Up you go.' },
-    deep: { points: 85, label: 'Deep Cut', emoji: '🟪', bonusMs: 12000, quip: 'A deep cut. The air is getting thin.' },
+    deep: { points: 85, label: 'Deep Cut', emoji: '🟪', bonusMs: 12000, quip: 'A deep cut. The ground is a long way down.' },
     swarm: { points: 100, label: 'One in a Swarm', emoji: '🐝', bonusMs: 16000, quip: 'The one answer hidden in the hive. Helluva pull.' },
   };
   const TIER_ORDER = ['common', 'clever', 'solid', 'rare', 'deep', 'swarm'];
@@ -358,6 +358,22 @@
       }
       return (lo + (want - acc[lo]) / (acc[lo + 1] - acc[lo])) / N;
     };
+  }
+
+  // The line under a reveal. It has to be true where the swarm is: nothing about thin air
+  // until it really is thin (15,000 ft), nothing about space until there is no air at all.
+  const THIN_AIR_FT = 15000;
+  const SPACE_FT = 328084;
+  const HIGH_QUIPS = {
+    deep: ['A deep cut. The ground is a long way down.', 'A deep cut. The air is getting thin.', 'A deep cut. No air up here at all.'],
+    rare: ['Not many think of that one. Up you go.', 'Not many think of that one. Higher still.', 'Not many think of that one. Onward, into the dark.'],
+  };
+  function quipFor(tier, score) {
+    if (!TIERS[tier]) return '';
+    const set = HIGH_QUIPS[tier];
+    if (!set) return TIERS[tier].quip;
+    const feet = altitudeFeet(score);
+    return set[feet < THIN_AIR_FT ? 0 : feet < SPACE_FT ? 1 : 2];
   }
 
   function tierPoints(tier) {
@@ -735,7 +751,7 @@
 
   return {
     TIERS, TIER_ORDER, MISS_EMOJI, BANDS,
-    climbMs, climbCurve,
+    climbMs, climbCurve, quipFor, THIN_AIR_FT,
     ROUNDS, ROUND_MS, PENALTY_MS, INFINITE_START_MS, SKIP_MS, MIN_ANSWERS, LAUNCH_DATE, TOP_SCORE, SPACE_FEET, MOON_MILES, ALTITUDE_ANCHORS,
     tokenize, normalize, variants, editDistance, buildIndex, matchAnswer, secretFor,
     hashString, seededRng, shuffle, utcDateKey, dayNumber, msUntilNextUtcDay, dailyPromptIds, rotationCoverDays,

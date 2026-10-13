@@ -370,7 +370,7 @@ async function main() {
     assert.equal(await text(page, 'lastBadge'), 'RARE');
     assert.equal(await text(page, 'lastAnswer'), answer);
     assert.equal(await text(page, 'lastPoints'), '+60 PTS · now at ' + feet(60));
-    assert.ok((await text(page, 'lastNote')).startsWith(C.TIERS.rare.quip));
+    assert.ok((await text(page, 'lastNote')).startsWith(C.TIERS.rare.quip.split('.')[0]));
     assert.ok(await page.eval('Array.from(document.getElementById("lastIcon").getContext("2d").getImageData(0, 0, 24, 20).data).some((v) => v > 0)'), 'the tier artwork is drawn');
     assert.equal(await page.eval('document.querySelector("#pips li").dataset.tier'), 'rare');
 
@@ -984,7 +984,7 @@ async function main() {
         art: document.getElementById('lastIcon').toDataURL(), pip: [...document.querySelectorAll('#pips li canvas')].pop().toDataURL() })`));
     }
     assert.deepEqual(seen.map((s) => s.name), C.TIER_ORDER.map((t) => C.TIERS[t].label.toUpperCase()));
-    seen.forEach((s, i) => assert.ok(s.quip.startsWith(C.TIERS[C.TIER_ORDER[i]].quip), 'quip for ' + s.name));
+    seen.forEach((s, i) => assert.ok(s.quip.startsWith(C.TIERS[C.TIER_ORDER[i]].quip.split('.')[0]), 'quip for ' + s.name + ': ' + s.quip));
     assert.equal(new Set(seen.map((s) => s.art)).size, 6, 'six different reveal-card pictures');
     assert.equal(new Set(seen.map((s) => s.pip)).size, 6, 'six different pip marks');
     noProblems(page);
