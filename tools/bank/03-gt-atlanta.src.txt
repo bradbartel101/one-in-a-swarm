@@ -317,3 +317,456 @@ X Between :: A real town in Walton County, named for sitting halfway between Mon
 ! Birmingham :: in Alabama
 ! Midtown :: a neighborhood inside Atlanta
 ! Virginia-Highland :: a neighborhood inside Atlanta
+
+@gacities | GEORGIA | Name a city or town in Georgia | pool=gt | type=open | clar=anywhere in the state except Atlanta
+C Savannah
+C Athens :: Wrong school, right answer.
+C Augusta
+C Macon
+C Columbus
+C Marietta
+T Valdosta
+T Helen :: A Bavarian village in the Georgia mountains, by decree of 1969.
+S Albany
+S Rome
+S Roswell
+S Alpharetta
+S Sandy Springs
+S Decatur
+S Kennesaw
+S Gainesville
+S Warner Robins
+S Statesboro
+S Dalton
+S Brunswick
+S Peachtree City
+S Lawrenceville
+S Duluth
+S Smyrna
+S Dunwoody
+S Johns Creek
+S Stone Mountain
+S Dahlonega :: Site of the first big American gold rush; its gold is on the state capitol dome.
+S Tybee Island | Tybee
+S LaGrange | La Grange
+S Carrollton
+S Newnan
+S Douglasville
+S Milledgeville :: The state capital until 1868.
+S Covington
+S Conyers
+S Cartersville
+S Canton
+S Woodstock
+S Cumming
+S Buford
+R Tifton
+R Thomasville
+R Waycross
+R Blue Ridge
+R Plains :: Home of Jimmy Carter, who studied at Tech before the Naval Academy.
+R Americus
+R Vidalia :: The onions.
+R Dublin
+R Griffin
+R Hinesville
+R Kingsland
+R St. Marys | Saint Marys
+R Madison
+R Stockbridge
+R McDonough
+R Perry
+R Cordele
+R Bainbridge
+R Moultrie
+R Toccoa
+R Ellijay
+R Calhoun
+R Fayetteville
+R Jonesboro
+R Acworth
+R Norcross
+R Suwanee
+R Snellville
+R Brookhaven
+R Chamblee
+R Doraville
+R Tucker
+R College Park
+R East Point
+R Hapeville
+R Union City
+R Fairburn
+R Villa Rica
+R Winder
+R Monroe
+R Loganville
+R Jefferson
+R Commerce
+R Braselton
+R Flowery Branch
+R Dawsonville
+R Jasper
+R Blairsville
+R Hiawassee
+R Clayton
+R Cleveland
+R Clarkesville
+R Cornelia
+R Elberton
+R Washington
+R Thomson
+R Waynesboro
+R Sandersville
+R Swainsboro
+R Jesup
+R Douglas
+R Fitzgerald
+R Cairo
+R Camilla
+R Thomaston
+R Barnesville
+R Forsyth
+R Fort Valley
+R Eatonton
+R Greensboro
+R Hartwell
+R Lavonia
+R Royston
+R Cedartown
+R Rockmart
+R Summerville
+R LaFayette | La Fayette
+R Ringgold
+R Fort Oglethorpe
+R Chatsworth
+R Pooler
+R Richmond Hill
+R Rincon
+R Darien
+R St. Simons Island | St. Simons | Saint Simons
+R Jekyll Island | Jekyll
+R Senoia
+R Pine Mountain
+R Warm Springs :: Franklin Roosevelt's Little White House.
+R West Point
+R Hogansville
+R Juliette :: The Whistle Stop Cafe from "Fried Green Tomatoes".
+D Social Circle
+D Hahira
+D Adel
+D Nashville
+D Quitman
+D Homerville
+D Folkston
+D Blackshear
+D Alma
+D Baxley
+D Hazlehurst
+D Lyons
+D Reidsville
+D Glennville
+D Claxton :: The fruitcake capital.
+D Metter
+D Millen
+D Sylvania
+D Louisville :: A state capital too, from 1796 to 1806.
+D Wrens
+D Warrenton
+D Sparta
+D Gray
+D Monticello
+D Jackson
+D Zebulon
+D Manchester
+D Talbotton
+D Buena Vista
+D Ellaville
+D Montezuma
+D Oglethorpe
+D Vienna
+D Unadilla
+D Hawkinsville
+D Cochran
+D Eastman
+D McRae-Helena | McRae | Helena
+D Abbeville
+D Ocilla
+D Ashburn
+D Sylvester
+D Dawson
+D Cuthbert
+D Fort Gaines
+D Blakely
+D Colquitt
+D Donalsonville
+D Pelham
+D Leesburg
+D Lumpkin
+D Richland
+D Preston
+D Andersonville
+D Butler
+D Roberta
+D Byron
+D Centerville
+D Jeffersonville
+D Irwinton
+D Gordon
+D Wrightsville
+D Soperton
+D Mount Vernon
+D Alamo
+D Pearson
+D Lakeland
+D Nahunta
+D Woodbine
+D Ludowici
+D Pembroke
+D Springfield
+D Guyton
+D Lincolnton
+D Crawfordville
+D Lexington
+D Danielsville
+D Homer
+D Carnesville
+D Watkinsville
+D Bogart
+D Young Harris
+D Dillard
+D Tallulah Falls
+D Demorest
+D Mount Airy
+D Baldwin
+D Lula
+D Cave Spring
+D Trion
+D Trenton
+D Rossville
+D Chickamauga
+D Adairsville
+D Kingston
+D Euharlee
+D Tallapoosa
+D Buchanan
+D Franklin
+D Greenville
+D Woodbury
+D Santa Claus :: A real town in Toombs County. It answers a lot of mail in December.
+D Experiment :: A real place in Spalding County, named for an agricultural experiment station.
+D Climax
+D Enigma
+D Ty Ty
+D Talking Rock
+D Between
+X Hopeulikit :: A real crossroads in Bulloch County, said just the way it looks.
+! Atlanta :: the prompt excludes it
+! Chattanooga :: in Tennessee
+! Jacksonville :: in Florida
+! Charleston :: in South Carolina
+! Tallahassee :: in Florida
+! Buckhead :: a neighborhood of Atlanta
+! Stone Mountain Park :: the park is not the town
+
+@georgians | GEORGIA | Name a famous person from Georgia | pool=gt | type=open | clar=born or raised in the state
+C Martin Luther King Jr. | MLK | Martin Luther King | Dr. King | MLK Jr
+C Jimmy Carter | Carter :: Plains. He studied at Tech before the Naval Academy.
+C Ray Charles :: Born in Albany.
+C Julia Roberts :: Smyrna.
+C Jackie Robinson :: Born in Cairo, Georgia.
+C James Brown :: Raised in Augusta.
+T Hulk Hogan | Terry Bollea :: Born in Augusta.
+T Kanye West | Kanye | Ye :: Born in Atlanta, raised in Chicago.
+S Ty Cobb | The Georgia Peach
+S Herschel Walker :: Wrightsville.
+S Little Richard :: Macon.
+S Otis Redding :: Born in Dawson, raised in Macon.
+S Gladys Knight
+S Ryan Seacrest :: Dunwoody.
+S Jeff Foxworthy :: An Atlantan, and a Tech man for a while.
+S Luke Bryan :: Leesburg.
+S Alan Jackson :: Newnan.
+S Jason Aldean :: Macon.
+S Usher
+S Ludacris
+S Dwight Howard
+S Cam Newton
+S Bobby Jones :: Atlanta's own, and a Tech graduate.
+S Donald Glover | Childish Gambino :: Stone Mountain.
+S Dakota Fanning :: Conyers.
+S Spike Lee :: Born in Atlanta.
+S Margaret Mitchell
+S Flannery O'Connor | Flannery OConnor :: Savannah, then Milledgeville.
+S Alice Walker :: Eatonton.
+S Juliette Gordon Low :: Savannah. She founded the Girl Scouts.
+S Clarence Thomas :: Pin Point, near Savannah.
+S Trisha Yearwood :: Monticello.
+S Travis Tritt :: Marietta.
+S André 3000 | Andre 3000
+S Big Boi :: Born in Savannah.
+S T.I. | TI
+S Chase Elliott :: Dawsonville.
+S Bill Elliott | Awesome Bill :: "Awesome Bill from Dawsonville."
+S Evander Holyfield :: Raised in Atlanta.
+S Anthony Edwards | Ant Edwards :: Atlanta.
+S Trevor Lawrence :: Cartersville.
+S Calvin Johnson | Megatron :: Tyrone, and then Tech.
+R Elle Fanning
+R Chloë Grace Moretz | Chloe Grace Moretz | Chloe Moretz
+R Kim Basinger :: Athens.
+R Laurence Fishburne :: Born in Augusta.
+R Holly Hunter :: Conyers.
+R Joanne Woodward :: Thomasville.
+R Oliver Hardy :: Harlem, Georgia.
+R Kyle Chandler :: Raised in Loganville.
+R Ed Helms :: Atlanta.
+R Danny McBride :: Born in Statesboro.
+R Walton Goggins :: Raised in Lithia Springs.
+R Raven-Symoné | Raven Symone | Raven
+R Brittany Murphy :: Born in Atlanta.
+R Kenan Thompson :: Raised in Atlanta.
+R Ty Pennington
+R Paula Deen :: Albany, then Savannah.
+R Nancy Grace :: Macon.
+R Thomas Rhett :: Born in Valdosta.
+R Brantley Gilbert :: Jefferson.
+R Sam Hunt :: Cedartown.
+R Zac Brown
+R Jennifer Nettles :: Douglas.
+R Kane Brown
+R Billy Currington
+R Brenda Lee
+R Johnny Mercer :: Savannah.
+R Jessye Norman :: Augusta.
+R Amy Grant :: Born in Augusta.
+R Michael Stipe :: Born in Decatur.
+R CeeLo Green | Cee Lo Green | CeeLo
+R Future
+R Young Thug
+R 2 Chainz | Two Chainz :: College Park.
+R Lil Baby
+R Quavo
+R Offset
+R Takeoff
+R Lil Nas X :: Lithia Springs.
+R Killer Mike
+R Gucci Mane :: Raised in Atlanta.
+R Jeezy | Young Jeezy
+R Monica
+R Kelly Rowland :: Born in Atlanta.
+R Keri Hilson
+R Summer Walker
+R Latto
+R Fran Tarkenton :: Raised in Athens.
+R Jim Brown :: Born on St. Simons Island.
+R Sugar Ray Robinson :: Born in Ailey.
+R Josh Gibson :: Born in Buena Vista.
+R Johnny Mize :: Demorest.
+R Frank Thomas | The Big Hurt :: Columbus.
+R Buster Posey :: Leesburg.
+R Adam Wainwright :: Brunswick.
+R Brian McCann :: Duluth.
+R Jason Heyward :: McDonough.
+R Dansby Swanson :: Kennesaw.
+R Byron Buxton :: Baxley.
+R Champ Bailey :: Folkston.
+R Hines Ward :: Forest Park.
+R Deshaun Watson :: Gainesville.
+R Justin Fields :: Kennesaw.
+R Jaylen Brown :: Marietta.
+R Walt Frazier | Clyde Frazier :: Atlanta.
+R Davis Love III | Davis Love
+R Larry Mize :: Augusta.
+R Wyomia Tyus :: Griffin.
+R Teresa Edwards :: Cairo.
+R Maya Moore
+R Gabby Thomas :: Born in Atlanta.
+R Christian Coleman
+R Doc Holliday :: Born in Griffin.
+R Woodrow Wilson :: He grew up in Augusta.
+R Sam Nunn :: Perry. He started college at Tech.
+R Stacey Abrams
+R Newt Gingrich
+R Carson McCullers :: Columbus.
+R Joel Chandler Harris :: Eatonton.
+R Erskine Caldwell
+R Sidney Lanier :: Macon.
+R Pat Conroy :: Born in Atlanta.
+R Honey Boo Boo | Alana Thompson
+R Kandi Burruss | Kandi
+R Jasmine Guy
+D Rebecca Latimer Felton :: The first woman to sit in the U.S. Senate, for a single day in 1922.
+D Alexander Stephens
+D John C. Frémont | John C. Fremont | John Fremont :: Born in Savannah.
+D Lucius Clay :: Marietta. He ran the Berlin Airlift.
+X Crawford Long :: The Georgia doctor who first used ether as a surgical anaesthetic, in Jefferson in 1842.
+D Fletcher Henderson :: Cuthbert.
+D Harry James :: Born in Albany.
+D James Dickey
+D Conrad Aiken :: Savannah.
+D Jean Toomer
+D Lillian Smith
+D Elijah Muhammad :: Born in Sandersville.
+D Dean Rusk :: Cherokee County.
+D Griffin Bell
+D Hosea Williams
+D Vernon Jordan :: Atlanta.
+D Walter White
+D Alonzo Herndon
+D Asa Candler :: Villa Rica.
+D Robert Woodruff :: Born in Columbus.
+D Truett Cathy :: Born in Eatonton. Chick-fil-A.
+D Bill Terry
+D Luke Appling
+D Spud Chandler
+D Cecil Travis
+D Tim Hudson :: Born in Columbus.
+D Zack Wheeler :: Smyrna and Dallas, Georgia.
+D Matt Olson :: Lilburn.
+D Garrison Hearst :: Lincolnton.
+D Jamal Lewis :: Atlanta.
+D Eric Berry :: Fairburn.
+D Thomas Davis :: Shellman.
+D Roquan Smith :: Montezuma.
+D Nick Chubb :: Cedartown.
+D Derrick Brown :: Sugar Hill.
+D Mecole Hardman :: Bowman.
+D Jake Fromm :: Warner Robins.
+D Stetson Bennett :: Blackshear.
+D Josh Smith :: College Park.
+D Lou Williams :: Snellville.
+D Derrick Favors :: Atlanta, and then Tech.
+D Kentavious Caldwell-Pope | Kentavious Caldwell Pope | KCP :: Greenville, Georgia.
+D Malcolm Brogdon :: Atlanta.
+D Jabari Smith Jr. | Jabari Smith :: Fayetteville.
+D Collin Sexton :: Mableton.
+D Wendell Carter Jr. | Wendell Carter
+D Shareef Abdur-Rahim :: Marietta.
+D Kwame Brown :: Brunswick.
+D Russell Henley :: Macon.
+D Harris English :: Valdosta.
+D Brian Harman :: Savannah.
+D Louise Suggs :: Atlanta. A founder of the LPGA.
+D Mel Blount :: Vidalia.
+D Rayfield Wright :: Griffin.
+D Richard Dent :: Atlanta.
+D Shannon Sharpe :: Glennville.
+D Sterling Sharpe :: Glennville.
+D Jessie Tuggle :: Griffin.
+D Dan Reeves :: Americus.
+D Wally Butts :: Milledgeville.
+D Kirby Smart :: Raised in Bainbridge.
+! Coca-Cola :: a company
+! Elvis Presley :: Mississippi and Tennessee
+! Dolly Parton :: Tennessee
+! Oprah Winfrey :: Mississippi, then Tennessee and Chicago
+! Tyler Perry :: New Orleans; he built his studio in Atlanta later
+! Steve Harvey :: West Virginia and Ohio
+! Matt Ryan :: Pennsylvania
+! Hank Aaron :: Mobile, Alabama; he made Atlanta home later
+! Ted Turner :: born in Ohio, though he grew up partly in Savannah
+! Dominique Wilkins :: born in Paris, raised in North Carolina
+! Chipper Jones :: Florida
+! Burt Reynolds :: born in Michigan and raised in Florida
+! Bulldogs :: a team

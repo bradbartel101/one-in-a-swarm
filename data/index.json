@@ -53,6 +53,8 @@
     {"id": "stateparks", "pool": "gt", "category": "GEORGIA", "text": "Name a Georgia state park", "clarifier": "state parks only, not historic sites", "strip": ["state","park","lodge"], "n": 45},
     {"id": "atlstreets", "pool": "gt", "category": "ATLANTA", "text": "Name a street in Atlanta", "clarifier": "any named road inside the city", "strip": ["street","st","avenue","ave","drive","dr","way","parkway","pkwy","road","rd","boulevard","blvd","nw","ne","sw","se","highway","hwy"], "n": 161},
     {"id": "atlsuburbs", "pool": "gt", "category": "ATLANTA", "text": "Name a suburb of Atlanta", "clarifier": "a city or town in the metro area", "n": 140},
+    {"id": "gacities", "pool": "gt", "category": "GEORGIA", "text": "Name a city or town in Georgia", "clarifier": "anywhere in the state except Atlanta", "n": 242},
+    {"id": "georgians", "pool": "gt", "category": "GEORGIA", "text": "Name a famous person from Georgia", "clarifier": "born or raised in the state", "n": 187},
     {"id": "fightsong", "pool": "gt", "category": "TRADITIONS", "text": "Name a word in the \"Ramblin' Wreck\" fight song", "clarifier": "any word from its three verses", "n": 75},
     {"id": "gameday", "pool": "gt", "category": "GAMEDAY", "text": "Name something you'd see at a Tech football game", "clarifier": "people, things and traditions at Bobby Dodd", "n": 117},
     {"id": "bulldogs", "pool": "gt", "category": "RIVALS", "text": "Know thy enemy: name a Georgia Bulldogs football great", "clarifier": "anyone who played football at Georgia", "n": 189},
