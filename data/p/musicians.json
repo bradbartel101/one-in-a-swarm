@@ -1,7 +1,9 @@
 {
   "id": "musicians",
-  "category": "Atlanta",
-  "text": "Name a musician or group that came up in Atlanta or its suburbs",
+  "pool": "gt",
+  "category": "ATLANTA",
+  "text": "Name a musician or group from the Atlanta area",
+  "clarifier": "came up in Atlanta or its suburbs",
   "answers": [
 {"name":"OutKast","tier":"common"},
 {"name":"Usher","tier":"common"},

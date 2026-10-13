@@ -2,6 +2,7 @@
   "id": "systems",
   "category": "Campus Life",
   "text": "Name a campus app, website, or shuttle that Tech students use",
+  "retired": true,
   "answers": [
 {"name":"Canvas","tier":"common"},
 {"name":"OSCAR","tier":"common","note":"Online Student Computer Assisted Registration."},

@@ -1,7 +1,9 @@
 {
   "id": "braves",
-  "category": "Atlanta",
-  "text": "Name a player from Atlanta Braves history (1966 to today)",
+  "pool": "gt",
+  "category": "ATLANTA SPORTS",
+  "text": "Name a player from Atlanta Braves history",
+  "clarifier": "1966 to today",
   "answers": [
 {"name":"Hank Aaron","tier":"common","aliases":["Henry Aaron","Hammerin Hank"]},
 {"name":"Chipper Jones","tier":"common","aliases":["Larry Jones"]},

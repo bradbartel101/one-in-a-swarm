@@ -2,6 +2,7 @@
   "id": "golf",
   "category": "Sports",
   "text": "Name a golfer who played for Georgia Tech",
+  "retired": true,
   "answers": [
 {"name":"Bobby Jones","tier":"common","aliases":["Bob Jones","Robert Tyre Jones"],"note":"A mechanical engineering graduate, and an amateur his whole career."},
 {"name":"Matt Kuchar","tier":"common","aliases":["Kuchar"]},

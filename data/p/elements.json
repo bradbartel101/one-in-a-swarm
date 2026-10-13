@@ -1,7 +1,9 @@
 {
   "id": "elements",
-  "category": "Academics",
+  "pool": "general",
+  "category": "SCIENCE",
   "text": "Name a chemical element",
+  "easy": true,
   "answers": [
 {"name":"Hydrogen","tier":"common"},
 {"name":"Oxygen","tier":"common"},

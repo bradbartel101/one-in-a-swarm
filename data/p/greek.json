@@ -1,7 +1,9 @@
 {
   "id": "greek",
-  "category": "Campus Life",
-  "text": "Name a fraternity or sorority that has had a chapter at Georgia Tech",
+  "pool": "gt",
+  "category": "CAMPUS LIFE",
+  "text": "Name a Greek organization with a chapter at Tech",
+  "clarifier": "fraternities and sororities, past or present",
   "answers": [
 {"name":"Sigma Chi","tier":"common"},
 {"name":"Sigma Nu","tier":"common"},

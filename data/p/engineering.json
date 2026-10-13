@@ -1,6 +1,7 @@
 {
   "id": "engineering",
-  "category": "Academics",
+  "pool": "general",
+  "category": "SCIENCE",
   "text": "Name a branch of engineering",
   "answers": [
 {"name":"Mechanical","tier":"common","aliases":["Mechanical Engineering"]},

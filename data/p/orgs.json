@@ -2,6 +2,7 @@
   "id": "orgs",
   "category": "Campus Life",
   "text": "Name a Georgia Tech student organization",
+  "retired": true,
   "answers": [
 {"name":"Ramblin' Reck Club","tier":"common","aliases":["Reck Club","Wreck Club","Ramblin Wreck Club"]},
 {"name":"Student Government Association","tier":"common","aliases":["SGA","Student Government"]},

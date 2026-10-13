@@ -2,7 +2,7 @@
 # Tier letters: C common 10 · T too clever 15 · S solid 30 · R rare 60 · D deep cut 85 · X one in a swarm 100
 # "?" before the tier letter = needs a human to verify.  " :: " = note shown to the player.  " ?? " = why it is flagged.
 
-@majors | Academics | Name an undergraduate major (a B.S. degree) at Georgia Tech
+@majors | ACADEMICS | Name an undergraduate major at Georgia Tech | pool=gt | type=closed | count=42 | source=catalog.gatech.edu/programs, bachelor's degrees | clar=bachelor's degrees in the current catalog
 C Computer Science | CS | Comp Sci | CompSci
 C Mechanical Engineering | ME | MechE | Mechanical
 C Industrial Engineering | IE | ISyE | Industrial and Systems Engineering | Industrial
@@ -46,7 +46,7 @@ D Applied Physics
 R Environmental Science
 D Atmospheric and Oceanic Sciences | AOS
 
-@buildings | Campus | Name an academic or research building on Tech's campus | strip=building,hall,bldg
+@buildings | CAMPUS | Name an academic or research building on Tech's campus | pool=gt | type=open | clar=not dorms, dining or sports venues | strip=building,hall,bldg
 C Tech Tower | Lettie Pate Whitehead Evans Administration Building | Administration Building | Evans Administration Building
 C Clough Undergraduate Learning Commons | CULC | Clough | Clough Commons
 C Klaus Advanced Computing Building | Klaus
@@ -97,7 +97,7 @@ D Rich Building | Rich Computer Center
 D French Building | A. French Building
 X Daniel Laboratory | Daniel Lab | J.L. Daniel Laboratory | Daniel
 
-@dorms | Campus | Name a Georgia Tech residence hall or campus apartment complex | strip=hall,residence,apartments,apartment,dorm,building
+@dorms | CAMPUS | Name a Georgia Tech residence hall | pool=gt | type=open | clar=halls and campus apartments, past or present | strip=hall,residence,apartments,apartment,dorm,building
 C Glenn Hall
 C Towers Hall
 C North Avenue Apartments | North Ave | NAA | North Avenue East | North Avenue South | North Avenue West | North Avenue North
@@ -131,7 +131,7 @@ D Fourth Street Apartments | Fourth Street | 4th Street
 X Tenth and Home | 10th and Home | Family Housing
 R Nelson-Shell Apartments | NSL
 
-@dining | Campus Life | Name a spot to grab a bite or a coffee on or right around campus, past or present
+@dining | Campus Life | Name a spot to grab a bite or a coffee on or right around campus, past or present | retired
 C Brittain Dining Hall | Brittain | Brit
 C North Avenue Dining Hall | North Ave Dining | Nave | North Avenue Dining | North Ave
 C West Village | Willage | West Village Dining Commons
@@ -158,7 +158,7 @@ R Twisted Taco
 S Dunkin' | Dunkin Donuts | Dunkin
 R Carnegie Kitchen
 
-@alumni | People | Name a famous person who studied at Georgia Tech (no pro athletes)
+@alumni | PEOPLE | Name a famous person who studied at Georgia Tech | pool=gt | type=open | clar=not pro athletes; they have their own prompts
 C Jimmy Carter | President Carter | James Earl Carter | Carter :: He studied at Tech before transferring to the Naval Academy.
 S John Young | John W. Young :: Walked on the Moon and commanded the first Space Shuttle flight.
 C Jeff Foxworthy | Foxworthy
@@ -200,7 +200,7 @@ D Brook Byers
 X Y. Frank Freeman | Frank Freeman :: Paramount Pictures executive and the first winner of the Academy's Jean Hersholt Humanitarian Award.
 D Dennis Hayes
 
-@nba | Sports | Name a Georgia Tech basketball player who went on to the NBA
+@nba | SPORTS | Name a Tech basketball player who reached the NBA | pool=gt | type=open | clar=played at least one NBA game
 C Chris Bosh | Bosh
 C Stephon Marbury | Marbury | Starbury
 C Kenny Anderson
@@ -236,7 +236,7 @@ D Alvin Jones
 D Fred Vinson
 X Craig Neal
 
-@nfl | Sports | Name a Georgia Tech football player who went on to play pro football
+@nfl | SPORTS | Name a Tech football player who went on to the NFL | pool=gt | type=open | clar=any era, including the AFL
 C Calvin Johnson | Megatron
 C Demaryius Thomas
 T Joe Hamilton
@@ -284,7 +284,7 @@ D Nick Ferguson
 D Jalen Camp
 X Joe Guyon :: A Pro Football Hall of Famer who starred on Heisman's 1917 national champions.
 
-@diamond | Sports | Name a Georgia Tech baseball player who reached the major leagues
+@diamond | SPORTS | Name a Tech baseball player who reached the major leagues | pool=gt | type=open
 C Nomar Garciaparra | Nomar | Garciaparra
 C Mark Teixeira | Teixeira
 T Jason Varitek | Varitek
@@ -315,7 +315,7 @@ D Xzavion Curry
 D Brant Hurter
 D Kyle McCann
 
-@golf | Sports | Name a golfer who played for Georgia Tech
+@golf | Sports | Name a golfer who played for Georgia Tech | retired
 C Bobby Jones | Bob Jones | Robert Tyre Jones :: A mechanical engineering graduate, and an amateur his whole career.
 C Matt Kuchar | Kuchar
 T Stewart Cink | Cink
@@ -343,7 +343,7 @@ D Connor Howe
 D Ross Steelman :: Runner-up at the 2023 NCAA Championship.
 R Hiroshi Tai :: In 2024 he won the NCAA individual title, Tech's first since 2002.
 
-@traditions | Traditions | Name a Georgia Tech tradition or piece of campus lore
+@traditions | TRADITIONS | Name a Georgia Tech tradition or piece of campus lore | pool=gt | type=open
 C Ramblin' Wreck | Ramblin Reck | Wreck | Reck | 1930 Ford Model A | Model A
 C Buzz
 C The Whistle | Steam Whistle
@@ -381,7 +381,7 @@ D Midnight Breakfast
 D Mock Rock
 D Goldfellas
 
-@neighborhoods | Atlanta | Name an Atlanta neighborhood inside the Perimeter
+@neighborhoods | ATLANTA | Name a neighborhood in the city of Atlanta | pool=gt | type=open | clar=inside the city limits, not suburbs
 C Midtown
 C Buckhead
 C Downtown | Downtown Atlanta
@@ -433,7 +433,7 @@ D Centennial Place | Techwood | Techwood Homes :: Built on the site of Techwood 
 D Loring Heights
 X Marietta Street Artery :: The old industrial corridor along the west edge of campus.
 
-@conference | Sports History | Name a school that has shared a conference with Tech (ACC, SEC, Southern, or Metro)
+@conference | SPORTS HISTORY | Name a school that has shared a conference with Tech | pool=gt | type=open | clar=Southern, SEC, Metro or ACC
 C Clemson
 C Georgia | UGA | University of Georgia :: Charter SEC members together, until Tech walked out in 1964.
 C Duke
@@ -470,7 +470,7 @@ D Saint Louis | St. Louis | SLU :: Metro Conference, 1975 to 1978.
 D Washington and Lee | W&L :: Southern Conference mates in the 1920s.
 X Sewanee | University of the South :: A charter member of the SEC alongside Tech in 1932.
 
-@bowls | Sports History | Name a bowl game Georgia Tech football has played in | strip=bowl,classic
+@bowls | Sports History | Name a bowl game Georgia Tech football has played in | strip=bowl,classic | retired
 C Orange Bowl
 C Rose Bowl :: The 1929 game, famous for Roy "Wrong Way" Riegels.
 C Peach Bowl | Chick-fil-A Bowl | Chick-fil-A Peach Bowl
@@ -497,7 +497,7 @@ D Hall of Fame Classic | Hall of Fame Bowl | All-American Bowl :: The 1985 win o
 X Oil Bowl :: January 1947, a 41-19 win over Saint Mary's.
 R Pop-Tarts Bowl | Pop Tarts
 
-@cs | Academics | Name a Georgia Tech CS course by its number (like "CS 1234") | lead=cs
+@cs | ACADEMICS | Name a Georgia Tech CS course by its number | pool=gt | type=closed | count=288 | source=catalog.gatech.edu/coursesaz/cs, every numbered course (recitations and XXXX placeholders left out) | clar=like "CS 1234" | lead=cs
 C CS 1301 :: Intro to Computing
 C CS 1331 :: Intro to Object-Oriented Programming
 C CS 1332 :: Data Structures and Algorithms for Applications
@@ -561,8 +561,233 @@ D CS 3001 :: Computing, Society, and Professionalism
 D CS 4590 :: Principles and Applications of Computer Audio
 D CS 4605 :: Mobile and Ubiquitous Computing
 D CS 4220 :: Programming Embedded Systems
+D CS 1171
+D CS 1803
+D CS 2316
+D CS 2698
+D CS 2699
+D CS 2701
+D CS 2740
+D CS 2801
+D CS 2802
+D CS 2803
+D CS 3101
+D CS 3235
+D CS 3237
+D CS 3300
+D CS 3651
+D CS 3743
+D CS 3744
+D CS 3751
+D CS 3790
+D CS 3801
+D CS 3803
+D CS 3873
+D CS 4002
+D CS 4003
+D CS 4010
+D CS 4057
+D CS 4117
+D CS 4238
+D CS 4239
+D CS 4243
+D CS 4251
+D CS 4262
+D CS 4263
+D CS 4265
+D CS 4267
+D CS 4271
+D CS 4365
+D CS 4392
+D CS 4420
+D CS 4423
+D CS 4440
+D CS 4462
+D CS 4464
+D CS 4470
+D CS 4472
+D CS 4475
+D CS 4488
+D CS 4495
+D CS 4497
+D CS 4615
+D CS 4625
+D CS 4635
+D CS 4644
+D CS 4660
+D CS 4665
+D CS 4670
+D CS 4675
+D CS 4690
+D CS 4698
+D CS 4699
+D CS 4711
+D CS 4723
+D CS 4725
+D CS 4726
+D CS 4741
+D CS 4742
+D CS 4745
+D CS 4770
+D CS 4795
+D CS 4801
+D CS 4816
+D CS 4854
+D CS 4863
+D CS 4873
+D CS 4883
+D CS 4893
+D CS 4901
+D CS 4902
+D CS 4903
+D CS 4980
+D CS 6150
+D CS 6211
+D CS 6220
+D CS 6222
+D CS 6235
+D CS 6238
+D CS 6239
+D CS 6241
+D CS 6245
+D CS 6260
+D CS 6261
+D CS 6262
+D CS 6263
+D CS 6264
+D CS 6265
+D CS 6266
+D CS 6267
+D CS 6268
+D CS 6270
+D CS 6271
+D CS 6291
+D CS 6301
+D CS 6310
+D CS 6340
+D CS 6365
+D CS 6390
+D CS 6400
+D CS 6402
+D CS 6422
+D CS 6423
+D CS 6435
+D CS 6440
+D CS 6441
+D CS 6451
+D CS 6452
+D CS 6454
+D CS 6455
+D CS 6456
+D CS 6457
+D CS 6458
+D CS 6460
+D CS 6461
+D CS 6465
+D CS 6470
+D CS 6471
+D CS 6474
+D CS 6475
+D CS 6491
+D CS 6492
+D CS 6497
+D CS 6520
+D CS 6550
+D CS 6603
+D CS 6604
+D CS 6641
+D CS 6675
+D CS 6705
+D CS 6725
+D CS 6726
+D CS 6727
+D CS 6730
+D CS 6745
+D CS 6747
+D CS 6753
+D CS 6755
+D CS 6756
+D CS 6763
+D CS 6764
+D CS 6770
+D CS 6795
+D CS 6998
+D CS 6999
+D CS 7000
+D CS 7001
+D CS 7210
+D CS 7240
+D CS 7260
+D CS 7263
+D CS 7280
+D CS 7290
+D CS 7292
+D CS 7295
+D CS 7400
+D CS 7450
+D CS 7451
+D CS 7455
+D CS 7462
+D CS 7465
+D CS 7470
+D CS 7476
+D CS 7490
+D CS 7492
+D CS 7496
+D CS 7497
+D CS 7499
+D CS 7510
+D CS 7520
+D CS 7525
+D CS 7530
+D CS 7535
+D CS 7540
+D CS 7545
+D CS 7560
+D CS 7616
+D CS 7626
+D CS 7630
+D CS 7631
+D CS 7632
+D CS 7633
+D CS 7634
+D CS 7636
+D CS 7638
+D CS 7639
+D CS 7644
+D CS 7647
+D CS 7648
+D CS 7649
+D CS 7650
+D CS 7651
+D CS 7652
+D CS 7695
+D CS 7711
+D CS 7741
+D CS 7742
+D CS 7743
+D CS 7750
+D CS 7751
+D CS 7785
+D CS 7790
+D CS 7999
+D CS 8001
+D CS 8740
+D CS 8741
+D CS 8750
+D CS 8751
+D CS 8795
+D CS 8801
+D CS 8813
+D CS 8816
+D CS 8902
+D CS 8903
+D CS 8997
+D CS 8998
+D CS 8999
+D CS 9000
 
-@orgs | Campus Life | Name a Georgia Tech student organization
+@orgs | Campus Life | Name a Georgia Tech student organization | retired
 C Ramblin' Reck Club | Reck Club | Wreck Club | Ramblin Wreck Club
 C Student Government Association | SGA | Student Government
 C Yellow Jacket Marching Band | Marching Band | Band | GT Marching Band
@@ -611,7 +836,7 @@ D Student Foundation | GTSF | Georgia Tech Student Foundation
 D GTCN | Georgia Tech Cable Network
 X Amateur Radio Club | W4AQL | Ham Radio Club | Georgia Tech Amateur Radio Club :: On the air as W4AQL, and one of the oldest clubs on campus.
 
-@streets | Campus | Name a street on or right beside Tech's campus | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne
+@streets | Campus | Name a street on or right beside Tech's campus | strip=street,st,avenue,ave,drive,dr,way,parkway,pkwy,road,rd,boulevard,blvd,nw,ne | retired
 C North Avenue
 C Tenth Street | 10th
 C Fifth Street | 5th
@@ -653,7 +878,7 @@ D Ivan Allen Jr. Boulevard | Ivan Allen
 D Centennial Olympic Park Drive
 X Uncle Heinie Way
 
-@marta | Atlanta | Name a MARTA rail station | strip=station
+@marta | ATLANTA | Name a MARTA rail station | pool=gt | type=closed | count=38 | source=itsmarta.com rail station list | strip=station
 C North Avenue | North Ave :: Tech's east-side stop.
 C Midtown :: The Tech Trolley's stop.
 C Airport | Hartsfield-Jackson | Hartsfield Jackson Airport
@@ -693,7 +918,7 @@ D Hamilton E. Holmes | H.E. Holmes | Holmes | Hightower
 X West Lake
 D SEC District | GWCC/CNN Center | CNN Center | GWCC | Dome | Dome/GWCC/Philips Arena/CNN Center | Omni :: Called GWCC/CNN Center until December 2025.
 
-@landmarks | Atlanta | Name an Atlanta landmark or attraction within a few miles of campus
+@landmarks | Atlanta | Name an Atlanta landmark or attraction within a few miles of campus | retired
 C Georgia Aquarium | Aquarium
 C World of Coca-Cola | World of Coke | Coke Museum
 C Mercedes-Benz Stadium | The Benz | MBS | Mercedes Benz
@@ -738,7 +963,7 @@ D Fernbank Museum | Fernbank
 D Flatiron Building | Flatiron
 X Millennium Gate | Millennium Gate Museum :: The triumphal arch at Atlantic Station.
 
-@hangouts | Campus | Name a place on Tech's campus that isn't a classroom building
+@hangouts | Campus | Name a place on Tech's campus that isn't a classroom building | retired
 C Bobby Dodd Stadium | Bobby Dodd | Grant Field | Bobby Dodd Stadium at Hyundai Field | Historic Grant Field
 C Campus Recreation Center | CRC
 C Student Center | John Lewis Student Center | Stu Cen | Wenn Student Center
@@ -781,7 +1006,7 @@ D Sideways' Grave | Sideways
 D Academy of Medicine | Historic Academy of Medicine
 X Rose Bowl Field :: The practice field paid for with the proceeds of the 1929 Rose Bowl.
 
-@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games.
+@olympics | Sports History | Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games. | retired
 C Swimming :: Raced in Tech's own Aquatic Center.
 C Basketball
 C Gymnastics | Artistic Gymnastics
@@ -815,7 +1040,7 @@ D Rhythmic Gymnastics
 D Handball | Team Handball
 X Modern Pentathlon | Pentathlon
 
-@gacolleges | Rivals | Name another college or university in the state of Georgia | strip=university | lead=university,of
+@gacolleges | RIVALS | Name another college or university in Georgia | pool=gt | type=open | clar=anywhere in the state | strip=university | lead=university,of
 C University of Georgia | UGA | u[sic]GA :: To Hell With Georgia.
 C Georgia State University | GSU
 C Emory University
@@ -865,7 +1090,7 @@ D Interdenominational Theological Center | ITC
 D Morehouse School of Medicine | MSM
 X Toccoa Falls College | Toccoa Falls
 
-@greek | Campus Life | Name a fraternity or sorority that has had a chapter at Georgia Tech
+@greek | CAMPUS LIFE | Name a Greek organization with a chapter at Tech | pool=gt | type=open | clar=fraternities and sororities, past or present
 C Sigma Chi
 C Sigma Nu
 C Alpha Tau Omega | ATO
@@ -916,7 +1141,7 @@ D Alpha Delta Chi
 D Triangle | Triangle Fraternity
 D Phi Kappa Psi | Phi Psi
 
-@proteams | Atlanta | Name an Atlanta-area pro sports team, past or present
+@proteams | Atlanta | Name an Atlanta-area pro sports team, past or present | retired
 C Atlanta Braves | Braves
 C Atlanta Falcons | Falcons
 C Atlanta Hawks | Hawks :: They played home games in Tech's Alexander Memorial Coliseum from 1968 to 1972, and again in the late 1990s.
@@ -950,7 +1175,7 @@ D Hawks Talon GC | Hawks Talon
 X Georgia Swarm | Swarm :: Pro box lacrosse, out in Duluth. One in a Swarm, literally.
 D Atlanta Fire Ants | Fire Ants
 
-@coaches | Sports History | Name a Georgia Tech head coach, in any sport and any era
+@coaches | SPORTS HISTORY | Name a Georgia Tech head coach | pool=gt | type=open | clar=any sport, any era
 C John Heisman | Heisman
 C Bobby Dodd | Dodd
 C Paul Johnson | CPJ
@@ -997,7 +1222,7 @@ X Freddie Lanoue | Fred Lanoue :: The drownproofing legend also coached Tech's s
 D James Ramsey
 D Karen Blair
 
-@qbs | Sports History | Name a quarterback who has started a game for Georgia Tech
+@qbs | Sports History | Name a quarterback who has started a game for Georgia Tech | retired
 C Haynes King
 C Joe Hamilton
 C Justin Thomas
@@ -1038,7 +1263,7 @@ X Frank Broyles :: Better known as Arkansas's coach and athletic director, he qu
 R Jaybo Shaw
 R Lucas Johnson
 
-@corecourses | Academics | Name a non-CS course by subject and number (like "MATH 1554")
+@corecourses | Academics | Name a non-CS course by subject and number (like "MATH 1554") | retired
 C MATH 1554 :: Linear Algebra
 C MATH 1551 :: Differential Calculus
 C MATH 1552 :: Integral Calculus
@@ -1097,7 +1322,7 @@ D ISYE 3133 :: Engineering Optimization
 D CHBE 2100 :: Chemical Process Principles
 X LMC 3403 :: Technical Communication
 
-@hq | Atlanta | Name a company based in metro Atlanta (U.S. headquarters count)
+@hq | ATLANTA | Name a company headquartered in metro Atlanta | pool=gt | type=open | clar=U.S. headquarters count
 C Coca-Cola | Coke | The Coca-Cola Company
 C Delta Air Lines | Delta | Delta Airlines
 C The Home Depot | Home Depot
@@ -1149,7 +1374,7 @@ D EarthLink
 D Manhattan Associates
 X Veritiv
 
-@codes | Academics | Name a subject code from Tech's course catalog (like "ISYE")
+@codes | ACADEMICS | Name a subject code from Tech's course catalog | pool=gt | type=closed | count=90 | source=catalog.gatech.edu/coursesaz | clar=like "ISYE"
 C CS
 C MATH
 C ME
@@ -1169,7 +1394,8 @@ S ECON
 S PSYC
 S HIST
 S GT :: As in GT 1000.
-R BIOL | BIOS
+R BIOL
+R BIOS :: Biological Sciences
 R EAS
 R INTA
 R LMC
@@ -1197,15 +1423,51 @@ D LING
 D SOC
 D BC
 D CP :: City Planning.
-D COA
 D VIP :: Vertically Integrated Projects.
 D MSL :: Military Science and Leadership (Army ROTC).
 D NS :: Naval Science.
 D AS :: Aerospace Studies (Air Force ROTC).
 D MP :: Medical Physics.
 X CETL :: Center for Teaching and Learning courses, mostly taken by teaching assistants.
+D ACCT :: Accounting
+D ASE :: Applied Systems Engineering
+D AECT :: Arts, Entertainment, and Creative Technologies
+D BMEJ :: Biomedical Engineering, joint Emory and Peking
+D BMEM :: Biomedical Engineering, joint Emory
+D CLL :: College of Lifetime Learning
+D COS :: College of Sciences
+D COOP :: Cooperative Work Assignment
+D UCGA :: Cross Enrollment
+D ECEP :: Electrical and Computer Engineering, Professional
+D FS :: Foreign Studies
+D FREE :: Free Elective
+D GTL :: Georgia Tech Lorraine
+D GMC :: Global Media and Cultures
+D HS :: Health Systems
+D HEBW :: Hebrew
+D HIN :: Hindi
+D HUM :: Humanities Elective
+D IL :: International Logistics
+D INTN :: Internship
+D IMBA :: International Executive MBA
+D IAC :: Ivan Allen College
+D LATN :: Latin
+D LS :: Learning Support
+D MOT :: Management of Technology
+D MLDR :: Manufacturing Leadership
+D ML :: Modern Languages
+D PERS :: Persian
+D PTFE :: Polymer, Textile and Fiber Engineering
+D PORT :: Portuguese
+D PUBJ :: Public Policy, joint GSU PhD
+D SCI :: Science
+D SLS :: Serve-Learn-Sustain
+D SS :: Social Science Elective
+D SWAH :: Swahili
+D WOLO :: Wolof
+! COA :: the old College of Architecture code is not in the current catalog
 
-@techs | Rivals | Name another U.S. school that goes by "Tech" or "Institute of Technology"
+@techs | Rivals | Name another U.S. school that goes by "Tech" or "Institute of Technology" | retired
 C Virginia Tech | VT | Virginia Polytechnic Institute | VPI
 C Texas Tech | Texas Tech University | TTU
 T MIT | Massachusetts Institute of Technology
@@ -1242,7 +1504,7 @@ D Texas State Technical College | TSTC
 D Carnegie Tech | Carnegie Institute of Technology :: It merged into Carnegie Mellon in 1967.
 X Southern Tech | Southern Technical Institute | Southern Polytechnic | SPSU :: Founded in 1948 as a division of Georgia Tech. It is now part of Kennesaw State.
 
-@systems | Campus Life | Name a campus app, website, or shuttle that Tech students use
+@systems | Campus Life | Name a campus app, website, or shuttle that Tech students use | retired
 C Canvas
 C OSCAR :: Online Student Computer Assisted Registration.
 C BuzzCard
@@ -1280,7 +1542,7 @@ D Passio GO | Passio :: The bus tracker before TransLoc.
 R TransLoc :: Bus tracking and Stingerette requests in one app.
 D LiveSafe
 
-@nicknames | Rivals | Name the team nickname of a school that has shared a conference with Tech
+@nicknames | Rivals | Name the team nickname of a school that has shared a conference with Tech | retired
 C Tigers :: Clemson, Auburn, LSU and Memphis all answer to it.
 C Bulldogs | Dawgs :: Georgia and Mississippi State.
 C Seminoles | Noles
@@ -1311,7 +1573,7 @@ D Bearcats
 D Generals :: Washington and Lee, a Southern Conference mate in the 1920s.
 X Billikens :: Saint Louis, a Metro Conference mate in the 1970s.
 
-@beaten | Sports History | Name a team from outside today's ACC that Tech football has beaten
+@beaten | Sports History | Name a team from outside today's ACC that Tech football has beaten | retired
 C Georgia | UGA
 C Alabama | Bama
 C Auburn
@@ -1369,7 +1631,7 @@ R Kennesaw State
 # ----- added on the overnight run: twelve more prompts. Lines starting with "~" are held out of
 # ----- the game (not confident enough) and listed in VERIFY.md until the owner approves them.
 
-@films | Atlanta | Name a movie or TV series that was filmed largely in metro Atlanta
+@films | ATLANTA | Name a movie or series filmed in metro Atlanta | pool=gt | type=open | clar=shot mostly in or around Atlanta
 C Stranger Things
 C The Walking Dead | Walking Dead | TWD
 C Black Panther
@@ -1429,7 +1691,7 @@ X Sharky's Machine | Sharkys Machine :: Burt Reynolds, 1981: Atlanta cops under 
 ~D Road Trip ?? Widely said to have been shot partly at Georgia Tech and UGA; I could not confirm how much.
 ~D Jumanji: Welcome to the Jungle ?? Shot in Hawaii and Atlanta; unsure it counts as "largely" Atlanta.
 
-@musicians | Atlanta | Name a musician or group that came up in Atlanta or its suburbs
+@musicians | ATLANTA | Name a musician or group from the Atlanta area | pool=gt | type=open | clar=came up in Atlanta or its suburbs
 C OutKast
 C Usher
 C Ludacris | Luda
@@ -1490,7 +1752,7 @@ X Drivin N Cryin | Drivin' N' Cryin' | Drivin and Cryin :: Atlanta rock since 19
 ~D Soulja Boy ?? Born in Chicago, lived in Atlanta as a child, broke out from Mississippi; "came up in Atlanta" is arguable.
 ~D Trinidad James ?? Born in Trinidad and raised partly in Atlanta; unsure of the details.
 
-@braves | Atlanta | Name a player from Atlanta Braves history (1966 to today)
+@braves | ATLANTA SPORTS | Name a player from Atlanta Braves history | pool=gt | type=open | clar=1966 to today
 C Hank Aaron | Henry Aaron | Hammerin Hank
 C Chipper Jones | Larry Jones
 C Ronald Acuña Jr. | Ronald Acuna Jr | Ronald Acuna | Acuna | Acuna Jr
@@ -1558,7 +1820,7 @@ D Glenn Hubbard
 D Kent Mercker
 X Biff Pocoroba | Pocoroba :: Braves catcher, 1975 to 1984, and an All-Star in 1978.
 
-@falcons | Atlanta | Name a player from Atlanta Falcons history
+@falcons | ATLANTA SPORTS | Name a player from Atlanta Falcons history | pool=gt | type=open
 C Matt Ryan | Matty Ice
 C Julio Jones
 C Michael Vick | Mike Vick
@@ -1625,7 +1887,7 @@ D Curtis Lofton
 D Jonathan Babineaux
 X Alfred Jenkins :: Falcons wide receiver, 1975 to 1983, and the league's receiving-yards leader in 1981.
 
-@hawks | Atlanta | Name a player from Atlanta Hawks history (1968 to today)
+@hawks | ATLANTA SPORTS | Name a player from Atlanta Hawks history | pool=gt | type=open | clar=1968 to today
 C Dominique Wilkins | Nique | Human Highlight Film
 C Trae Young
 T Dikembe Mutombo | Mutombo
@@ -1685,7 +1947,7 @@ D Tony Delk
 D Theo Ratliff
 X John Drew :: A two-time All-Star for the Hawks in the 1970s.
 
-@collegetowns | Rivals | Name the home city or town of a school that has shared a conference with Tech
+@collegetowns | RIVALS | Name the home city of a school in Tech's conference history | pool=gt | type=closed | clar=Southern, SEC, Metro or ACC
 C Athens :: Georgia. Wrong school, right answer.
 C Clemson
 C Chapel Hill
@@ -1721,7 +1983,7 @@ D Cincinnati
 D St. Louis | Saint Louis :: Saint Louis University, from Tech's Metro Conference years.
 X Sewanee :: The University of the South, a charter member of the SEC with Tech in 1932.
 
-@engineering | Academics | Name a branch of engineering
+@engineering | SCIENCE | Name a branch of engineering | pool=general | type=open
 C Mechanical | Mechanical Engineering
 C Electrical | Electrical Engineering
 C Civil | Civil Engineering
@@ -1767,7 +2029,7 @@ D Photonics | Photonics Engineering
 D Water Resources | Water Resources Engineering
 X Ceramic | Ceramic Engineering | Ceramics :: Tech had a School of Ceramic Engineering for much of the twentieth century.
 
-@languages | Academics | Name a programming language
+@languages | TECH | Name a programming language | pool=general | type=open
 C Python
 C Java
 T C, C++ or C# | C | C++ | C# | CPP | C Plus Plus | C Sharp | CSharp :: Three languages, one answer: typed, they all look like C.
@@ -1823,7 +2085,7 @@ D Simula
 D Crystal
 X INTERCAL :: A 1972 parody language whose programs must say PLEASE often enough.
 
-@elements | Academics | Name a chemical element
+@elements | SCIENCE | Name a chemical element | pool=general | easy | type=closed | count=118 | source=IUPAC periodic table
 C Hydrogen
 C Oxygen
 C Carbon
@@ -1911,7 +2173,7 @@ D Nobelium
 D Oganesson
 X Technetium :: The first element to be made artificially. It even starts with Tech.
 
-@units | Academics | Name a unit of measurement that is named after a person
+@units | SCIENCE | Name a unit of measurement named after a person | pool=general | type=open
 C Watt
 C Volt
 C Newton
@@ -1955,7 +2217,7 @@ D Galileo | Gal
 D Fermi
 X Sverdrup :: An oceanographer's unit: a million cubic metres of water a second.
 
-@hoopschamps | Sports History | Name a school that has won the men's NCAA basketball tournament
+@hoopschamps | SPORTS | Name a school that has won the men's NCAA basketball tournament | pool=general | type=closed | clar=champions through 2025
 C Duke
 C North Carolina | UNC | Carolina
 C Kentucky | UK
@@ -1994,7 +2256,7 @@ D Texas Western | UTEP | Texas El Paso
 D Wyoming
 X Holy Cross :: Champions in 1947.
 
-@heisman | Sports History | John Heisman coached at Tech. Name a winner of the trophy that carries his name.
+@heisman | SPORTS | Name a Heisman Trophy winner | pool=general | type=closed | clar=John Heisman coached at Tech
 C Tim Tebow
 C Lamar Jackson
 C Joe Burrow

@@ -2,6 +2,7 @@
   "id": "dining",
   "category": "Campus Life",
   "text": "Name a spot to grab a bite or a coffee on or right around campus, past or present",
+  "retired": true,
   "answers": [
 {"name":"Brittain Dining Hall","tier":"common","aliases":["Brittain","Brit"]},
 {"name":"North Avenue Dining Hall","tier":"common","aliases":["North Ave Dining","Nave","North Avenue Dining","North Ave"]},

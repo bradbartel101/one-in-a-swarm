@@ -2,6 +2,7 @@
   "id": "bowls",
   "category": "Sports History",
   "text": "Name a bowl game Georgia Tech football has played in",
+  "retired": true,
   "strip": ["bowl","classic"],
   "answers": [
 {"name":"Orange Bowl","tier":"common"},

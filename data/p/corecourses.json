@@ -2,6 +2,7 @@
   "id": "corecourses",
   "category": "Academics",
   "text": "Name a non-CS course by subject and number (like \"MATH 1554\")",
+  "retired": true,
   "answers": [
 {"name":"MATH 1554","tier":"common","note":"Linear Algebra"},
 {"name":"MATH 1551","tier":"common","note":"Differential Calculus"},

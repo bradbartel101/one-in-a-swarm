@@ -1,7 +1,9 @@
 {
   "id": "collegetowns",
-  "category": "Rivals",
-  "text": "Name the home city or town of a school that has shared a conference with Tech",
+  "pool": "gt",
+  "category": "RIVALS",
+  "text": "Name the home city of a school in Tech's conference history",
+  "clarifier": "Southern, SEC, Metro or ACC",
   "answers": [
 {"name":"Athens","tier":"common","note":"Georgia. Wrong school, right answer."},
 {"name":"Clemson","tier":"common"},

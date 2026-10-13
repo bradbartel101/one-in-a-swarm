@@ -2,6 +2,7 @@
   "id": "olympics",
   "category": "Sports History",
   "text": "Tech was the 1996 Olympic Village. Name a sport contested at the Atlanta Summer Games.",
+  "retired": true,
   "answers": [
 {"name":"Swimming","tier":"common","note":"Raced in Tech's own Aquatic Center."},
 {"name":"Basketball","tier":"common"},

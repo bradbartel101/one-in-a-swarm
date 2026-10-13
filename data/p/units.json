@@ -1,7 +1,8 @@
 {
   "id": "units",
-  "category": "Academics",
-  "text": "Name a unit of measurement that is named after a person",
+  "pool": "general",
+  "category": "SCIENCE",
+  "text": "Name a unit of measurement named after a person",
   "answers": [
 {"name":"Watt","tier":"common"},
 {"name":"Volt","tier":"common"},

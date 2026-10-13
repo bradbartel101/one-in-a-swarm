@@ -1,7 +1,9 @@
 {
   "id": "buildings",
-  "category": "Campus",
+  "pool": "gt",
+  "category": "CAMPUS",
   "text": "Name an academic or research building on Tech's campus",
+  "clarifier": "not dorms, dining or sports venues",
   "strip": ["building","hall","bldg"],
   "answers": [
 {"name":"Tech Tower","tier":"common","aliases":["Lettie Pate Whitehead Evans Administration Building","Administration Building","Evans Administration Building"]},

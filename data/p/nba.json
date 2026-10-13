@@ -1,7 +1,9 @@
 {
   "id": "nba",
-  "category": "Sports",
-  "text": "Name a Georgia Tech basketball player who went on to the NBA",
+  "pool": "gt",
+  "category": "SPORTS",
+  "text": "Name a Tech basketball player who reached the NBA",
+  "clarifier": "played at least one NBA game",
   "answers": [
 {"name":"Chris Bosh","tier":"common","aliases":["Bosh"]},
 {"name":"Stephon Marbury","tier":"common","aliases":["Marbury","Starbury"]},

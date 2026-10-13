@@ -1,7 +1,9 @@
 {
   "id": "alumni",
-  "category": "People",
-  "text": "Name a famous person who studied at Georgia Tech (no pro athletes)",
+  "pool": "gt",
+  "category": "PEOPLE",
+  "text": "Name a famous person who studied at Georgia Tech",
+  "clarifier": "not pro athletes; they have their own prompts",
   "answers": [
 {"name":"Jimmy Carter","tier":"common","aliases":["President Carter","James Earl Carter","Carter"],"note":"He studied at Tech before transferring to the Naval Academy."},
 {"name":"John Young","tier":"solid","aliases":["John W. Young"],"note":"Walked on the Moon and commanded the first Space Shuttle flight."},

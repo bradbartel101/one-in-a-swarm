@@ -2,6 +2,7 @@
   "id": "proteams",
   "category": "Atlanta",
   "text": "Name an Atlanta-area pro sports team, past or present",
+  "retired": true,
   "answers": [
 {"name":"Atlanta Braves","tier":"common","aliases":["Braves"]},
 {"name":"Atlanta Falcons","tier":"common","aliases":["Falcons"]},

@@ -1,7 +1,9 @@
 {
   "id": "coaches",
-  "category": "Sports History",
-  "text": "Name a Georgia Tech head coach, in any sport and any era",
+  "pool": "gt",
+  "category": "SPORTS HISTORY",
+  "text": "Name a Georgia Tech head coach",
+  "clarifier": "any sport, any era",
   "answers": [
 {"name":"John Heisman","tier":"common","aliases":["Heisman"]},
 {"name":"Bobby Dodd","tier":"common","aliases":["Dodd"]},

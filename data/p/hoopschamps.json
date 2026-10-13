@@ -1,7 +1,9 @@
 {
   "id": "hoopschamps",
-  "category": "Sports History",
+  "pool": "general",
+  "category": "SPORTS",
   "text": "Name a school that has won the men's NCAA basketball tournament",
+  "clarifier": "champions through 2025",
   "answers": [
 {"name":"Duke","tier":"common"},
 {"name":"North Carolina","tier":"common","aliases":["UNC","Carolina"]},

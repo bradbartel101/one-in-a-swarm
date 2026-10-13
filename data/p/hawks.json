@@ -1,7 +1,9 @@
 {
   "id": "hawks",
-  "category": "Atlanta",
-  "text": "Name a player from Atlanta Hawks history (1968 to today)",
+  "pool": "gt",
+  "category": "ATLANTA SPORTS",
+  "text": "Name a player from Atlanta Hawks history",
+  "clarifier": "1968 to today",
   "answers": [
 {"name":"Dominique Wilkins","tier":"common","aliases":["Nique","Human Highlight Film"]},
 {"name":"Trae Young","tier":"common"},

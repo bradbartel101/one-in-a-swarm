@@ -1,7 +1,9 @@
 {
   "id": "conference",
-  "category": "Sports History",
-  "text": "Name a school that has shared a conference with Tech (ACC, SEC, Southern, or Metro)",
+  "pool": "gt",
+  "category": "SPORTS HISTORY",
+  "text": "Name a school that has shared a conference with Tech",
+  "clarifier": "Southern, SEC, Metro or ACC",
   "answers": [
 {"name":"Clemson","tier":"common"},
 {"name":"Georgia","tier":"common","aliases":["UGA","University of Georgia"],"note":"Charter SEC members together, until Tech walked out in 1964."},

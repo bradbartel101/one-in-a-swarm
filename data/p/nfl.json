@@ -1,7 +1,9 @@
 {
   "id": "nfl",
-  "category": "Sports",
-  "text": "Name a Georgia Tech football player who went on to play pro football",
+  "pool": "gt",
+  "category": "SPORTS",
+  "text": "Name a Tech football player who went on to the NFL",
+  "clarifier": "any era, including the AFL",
   "answers": [
 {"name":"Calvin Johnson","tier":"common","aliases":["Megatron"]},
 {"name":"Demaryius Thomas","tier":"common"},

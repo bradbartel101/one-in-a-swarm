@@ -1,7 +1,9 @@
 {
   "id": "gacolleges",
-  "category": "Rivals",
-  "text": "Name another college or university in the state of Georgia",
+  "pool": "gt",
+  "category": "RIVALS",
+  "text": "Name another college or university in Georgia",
+  "clarifier": "anywhere in the state",
   "strip": ["university"],
   "lead": ["university","of"],
   "answers": [

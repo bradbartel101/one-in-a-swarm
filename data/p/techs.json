@@ -2,6 +2,7 @@
   "id": "techs",
   "category": "Rivals",
   "text": "Name another U.S. school that goes by \"Tech\" or \"Institute of Technology\"",
+  "retired": true,
   "answers": [
 {"name":"Virginia Tech","tier":"common","aliases":["VT","Virginia Polytechnic Institute","VPI"]},
 {"name":"Texas Tech","tier":"common","aliases":["Texas Tech University","TTU"]},

@@ -1,7 +1,9 @@
 {
   "id": "heisman",
-  "category": "Sports History",
-  "text": "John Heisman coached at Tech. Name a winner of the trophy that carries his name.",
+  "pool": "general",
+  "category": "SPORTS",
+  "text": "Name a Heisman Trophy winner",
+  "clarifier": "John Heisman coached at Tech",
   "answers": [
 {"name":"Tim Tebow","tier":"common"},
 {"name":"Lamar Jackson","tier":"common"},

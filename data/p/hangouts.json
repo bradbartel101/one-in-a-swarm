@@ -2,6 +2,7 @@
   "id": "hangouts",
   "category": "Campus",
   "text": "Name a place on Tech's campus that isn't a classroom building",
+  "retired": true,
   "answers": [
 {"name":"Bobby Dodd Stadium","tier":"common","aliases":["Bobby Dodd","Grant Field","Bobby Dodd Stadium at Hyundai Field","Historic Grant Field"]},
 {"name":"Campus Recreation Center","tier":"common","aliases":["CRC"]},

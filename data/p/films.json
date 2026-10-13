@@ -1,7 +1,9 @@
 {
   "id": "films",
-  "category": "Atlanta",
-  "text": "Name a movie or TV series that was filmed largely in metro Atlanta",
+  "pool": "gt",
+  "category": "ATLANTA",
+  "text": "Name a movie or series filmed in metro Atlanta",
+  "clarifier": "shot mostly in or around Atlanta",
   "answers": [
 {"name":"Stranger Things","tier":"common"},
 {"name":"The Walking Dead","tier":"common","aliases":["TWD"]},

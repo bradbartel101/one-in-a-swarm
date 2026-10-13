@@ -1,7 +1,9 @@
 {
   "id": "dorms",
-  "category": "Campus",
-  "text": "Name a Georgia Tech residence hall or campus apartment complex",
+  "pool": "gt",
+  "category": "CAMPUS",
+  "text": "Name a Georgia Tech residence hall",
+  "clarifier": "halls and campus apartments, past or present",
   "strip": ["hall","residence","apartments","apartment","dorm","building"],
   "answers": [
 {"name":"Glenn Hall","tier":"common"},

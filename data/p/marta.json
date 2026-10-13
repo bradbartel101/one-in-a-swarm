@@ -1,6 +1,7 @@
 {
   "id": "marta",
-  "category": "Atlanta",
+  "pool": "gt",
+  "category": "ATLANTA",
   "text": "Name a MARTA rail station",
   "strip": ["station"],
   "answers": [

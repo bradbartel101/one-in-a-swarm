@@ -1,7 +1,9 @@
 {
   "id": "majors",
-  "category": "Academics",
-  "text": "Name an undergraduate major (a B.S. degree) at Georgia Tech",
+  "pool": "gt",
+  "category": "ACADEMICS",
+  "text": "Name an undergraduate major at Georgia Tech",
+  "clarifier": "bachelor's degrees in the current catalog",
   "answers": [
 {"name":"Computer Science","tier":"common","aliases":["CS","Comp Sci"]},
 {"name":"Mechanical Engineering","tier":"common","aliases":["ME","MechE","Mechanical"]},

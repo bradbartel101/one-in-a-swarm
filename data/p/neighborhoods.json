@@ -1,7 +1,9 @@
 {
   "id": "neighborhoods",
-  "category": "Atlanta",
-  "text": "Name an Atlanta neighborhood inside the Perimeter",
+  "pool": "gt",
+  "category": "ATLANTA",
+  "text": "Name a neighborhood in the city of Atlanta",
+  "clarifier": "inside the city limits, not suburbs",
   "answers": [
 {"name":"Midtown","tier":"common"},
 {"name":"Buckhead","tier":"common"},

@@ -2,6 +2,7 @@
   "id": "beaten",
   "category": "Sports History",
   "text": "Name a team from outside today's ACC that Tech football has beaten",
+  "retired": true,
   "answers": [
 {"name":"Georgia","tier":"common","aliases":["UGA"]},
 {"name":"Alabama","tier":"common","aliases":["Bama"]},

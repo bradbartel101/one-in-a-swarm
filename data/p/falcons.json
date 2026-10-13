@@ -1,6 +1,7 @@
 {
   "id": "falcons",
-  "category": "Atlanta",
+  "pool": "gt",
+  "category": "ATLANTA SPORTS",
   "text": "Name a player from Atlanta Falcons history",
   "answers": [
 {"name":"Matt Ryan","tier":"common","aliases":["Matty Ice"]},

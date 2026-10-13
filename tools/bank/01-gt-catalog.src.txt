@@ -1,0 +1,240 @@
+# Prompt bank v2, batch 1: Georgia Tech lists taken from the official catalog.
+
+@minors | ACADEMICS | Name a minor offered at Georgia Tech | pool=gt | type=closed | count=87 | source=catalog.gatech.edu/programs, minors
+C Computing and Theory | Computing & Theory | Computer Science | CS | Computing :: Tech's computing minor comes in eight threads; plain "Computer Science" is counted as this one.
+C Economics | Econ
+C Mathematics | Math
+C Spanish
+T Entrepreneurship
+S Psychology | Psych
+S Physics
+S Biology | Bio
+S Industrial Design | ID
+S Robotics
+S Leadership Studies | Leadership
+S French
+S German
+S Japanese
+S Chinese
+S Korean
+S History
+S Aerospace Engineering | Aerospace | AE
+S Biomedical Engineering | BME | Biomedical
+S Computing and Artificial Intelligence | Computing and AI | Artificial Intelligence | AI
+S Computing and Business | Computing & Business
+S Technology and Business | Technology & Business | T&M | Technology and Management | Denning
+S Engineering and Business | Engineering & Business
+S Film and Media Studies | Film | Film Studies | Film & Media Studies
+S Public Policy
+S International Affairs | INTA
+S Philosophy
+S Neuroscience | Neuro
+S Architecture
+R Russian
+R Linguistics
+R Sociology
+R Political Science | Poli Sci | Polisci
+R Creative Writing
+R Materials Science and Engineering | Materials Science | MSE
+R Nuclear and Radiological Engineering | Nuclear Engineering | NRE | Nuclear
+R Chemistry and Biochemistry | Chemistry | Biochemistry | Chem
+R Earth and Atmospheric Sciences | EAS | Earth and Atmospheric Science
+R Astrophysics
+R Energy Systems | Energy
+R Fintech | FinTech | Financial Technology
+R Real Estate
+R Sustainable Cities
+R Health and Medical Sciences | Health & Medical Sciences | Pre-Health
+R Physiology
+R Law, Science, and Technology | Law Science and Technology | Pre-Law | Law
+T Science Fiction Studies | Science Fiction | Sci-Fi | Sci Fi
+R Computational Data Analysis | Data Analysis
+R Computing and People | Computing & People
+R Computing and Media | Computing & Media
+R Computing and Systems and Architecture | Computing and Systems & Architecture | Systems and Architecture
+R Computing and Information Internetworks | Information Internetworks
+R Computing and Embedded Devices | Computing and Devices | Embedded Devices
+R Applications of Artificial Intelligence and Machine Learning | Applications of AI and ML | Applications of AI and Machine Learning | AI and Machine Learning | Machine Learning
+R Naval Science | Navy ROTC | NROTC
+R Air Force Leadership Studies | Air Force ROTC | AFROTC | Air Force
+R Business of Sports and Entertainment | Sports and Entertainment | Sports Business
+R Sports, Society, and Technology | Sports Society and Technology
+R East Asian Studies
+R European Studies
+R Global Development
+R Women, Science, and Technology | Women Science and Technology | WST
+R Science, Technology, and Society | Science Technology and Society | STS
+D African Studies
+D Archaeology
+D Astrobiology
+D Black Media Studies
+D Collaborative Social Innovation | Social Innovation
+D Computation and Cognition | Computation & Cognition
+D Economics and Policy of Environmental Sustainability | Environmental Sustainability
+D Health, Medicine, and Society | Health Medicine and Society
+D Health Policy and Economics | Health Policy & Economics
+D Health Systems
+D International Business, Language, and Culture | International Business Language and Culture | IBLC
+D Latin American and LatinX Studies | Latin American Studies | Latin American and Latinx Studies | LatinX Studies
+D Learning
+X Microeconomics of Strategic Analysis | Strategic Analysis :: A real minor, from the School of Economics.
+D Middle Eastern and North African Studies | Middle East and North African Studies | MENA | Middle Eastern Studies
+D People Analytics
+D Quantum Sciences and Technology | Quantum Science and Technology | Quantum
+D Real Estate Development and Finance
+D Science Communication Policy | Science Communication
+D Science of Mental Health and Well-Being | Mental Health and Well-Being | Mental Health
+D Scientific and Engineering Computing | Scientific Computing
+D Social Justice
+D Sustainable Business
+D Sustainable Development and Construction
+! Mechanical Engineering :: a major, but the catalog lists no minor in it
+! Electrical Engineering :: a major, but the catalog lists no minor in it
+! Business :: no plain "Business" minor; the catalog has Technology and Business, Engineering and Business, Computing and Business
+! Music :: the catalog lists no Music minor (Music Technology is a major and a certificate)
+! Statistics :: not in the catalog's list of minors
+! Data Science :: not in the catalog's list; the nearest is Computational Data Analysis
+! Arabic :: Arabic courses exist, but the catalog lists no Arabic minor
+
+@mathcourses | ACADEMICS | Name a Georgia Tech MATH course by its number | pool=gt | type=closed | count=136 | source=catalog.gatech.edu/coursesaz/math, every numbered course (placeholders left out) | clar=like "MATH 1554" | lead=math
+D MATH 0399
+X MATH 0999 :: A real catalog number, below the 1000 level.
+S MATH 1111 :: College Algebra
+S MATH 1113 :: Precalculus
+D MATH 1499
+S MATH 1550 :: Introduction to Differential Calculus
+C MATH 1551 :: Differential Calculus
+C MATH 1552 :: Integral Calculus
+T MATH 1553 :: Introduction to Linear Algebra
+C MATH 1554 :: Linear Algebra
+R MATH 1564
+R MATH 1711
+R MATH 1712
+D MATH 1803
+R MATH 2106 :: Foundations of Mathematical Proof
+S MATH 2550 :: Introduction to Multivariable Calculus
+C MATH 2551 :: Multivariable Calculus
+T MATH 2552 :: Differential Equations
+R MATH 2561
+R MATH 2562
+R MATH 2603
+D MATH 2698
+D MATH 2699
+D MATH 2740
+D MATH 2801
+S MATH 3012 :: Applied Combinatorics
+S MATH 3215 :: Introduction to Probability and Statistics
+R MATH 3235
+R MATH 3236
+R MATH 3406 :: A Second Course in Linear Algebra
+S MATH 3670 :: Probability and Statistics with Applications
+D MATH 3740
+R MATH 4012
+R MATH 4022
+D MATH 4032
+R MATH 4107 :: Abstract Algebra I
+D MATH 4108
+R MATH 4150
+D MATH 4210
+D MATH 4221
+D MATH 4222
+D MATH 4261
+D MATH 4262
+D MATH 4280
+R MATH 4305
+R MATH 4317 :: Analysis I
+D MATH 4318
+R MATH 4320
+D MATH 4347
+D MATH 4431
+D MATH 4432
+D MATH 4441
+D MATH 4541
+D MATH 4580
+D MATH 4581
+D MATH 4640
+D MATH 4641
+D MATH 4698
+D MATH 4699
+D MATH 4740
+D MATH 4755
+D MATH 4782
+D MATH 4801
+D MATH 4802
+D MATH 4803
+D MATH 4873
+D MATH 4999
+D MATH 6001
+D MATH 6014
+D MATH 6112
+D MATH 6121
+D MATH 6122
+D MATH 6221
+D MATH 6241
+D MATH 6242
+D MATH 6262
+D MATH 6263
+D MATH 6266
+D MATH 6267
+D MATH 6307
+D MATH 6308
+D MATH 6321
+D MATH 6337
+D MATH 6338
+D MATH 6341
+D MATH 6342
+D MATH 6421
+D MATH 6422
+D MATH 6441
+D MATH 6452
+D MATH 6455
+D MATH 6456
+D MATH 6514
+D MATH 6579
+D MATH 6580
+D MATH 6635
+D MATH 6640
+D MATH 6641
+D MATH 6643
+D MATH 6644
+D MATH 6645
+D MATH 6646
+D MATH 6647
+D MATH 6701
+D MATH 6702
+D MATH 6759
+D MATH 6761
+D MATH 6762
+D MATH 6767
+D MATH 6769
+D MATH 6783
+D MATH 6785
+D MATH 7000
+D MATH 7012
+D MATH 7014
+D MATH 7016
+D MATH 7018
+D MATH 7244
+D MATH 7245
+D MATH 7251
+D MATH 7252
+D MATH 7337
+D MATH 7338
+D MATH 7339
+D MATH 7581
+D MATH 7999
+D MATH 8305
+D MATH 8306
+D MATH 8307
+D MATH 8801
+D MATH 8802
+D MATH 8803
+D MATH 8900
+D MATH 8997
+D MATH 8998
+D MATH 9000
+! MATH 1501 :: Calculus I under the old numbering; no longer in the catalog
+! MATH 1502 :: Calculus II under the old numbering; no longer in the catalog
+! MATH 2401 :: Calculus III under the old numbering; no longer in the catalog
+! MATH 2403 :: Differential Equations under the old numbering; no longer in the catalog
+! MATH 1555 :: not a catalog number

@@ -2,6 +2,7 @@
   "id": "nicknames",
   "category": "Rivals",
   "text": "Name the team nickname of a school that has shared a conference with Tech",
+  "retired": true,
   "answers": [
 {"name":"Tigers","tier":"common","note":"Clemson, Auburn, LSU and Memphis all answer to it."},
 {"name":"Bulldogs","tier":"common","aliases":["Dawgs"],"note":"Georgia and Mississippi State."},

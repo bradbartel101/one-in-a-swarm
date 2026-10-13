@@ -1,6 +1,7 @@
 {
   "id": "languages",
-  "category": "Academics",
+  "pool": "general",
+  "category": "TECH",
   "text": "Name a programming language",
   "answers": [
 {"name":"Python","tier":"common"},

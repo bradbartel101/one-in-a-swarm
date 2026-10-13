@@ -2,6 +2,7 @@
   "id": "qbs",
   "category": "Sports History",
   "text": "Name a quarterback who has started a game for Georgia Tech",
+  "retired": true,
   "answers": [
 {"name":"Haynes King","tier":"common"},
 {"name":"Joe Hamilton","tier":"common"},

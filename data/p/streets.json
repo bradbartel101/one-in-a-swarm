@@ -2,6 +2,7 @@
   "id": "streets",
   "category": "Campus",
   "text": "Name a street on or right beside Tech's campus",
+  "retired": true,
   "strip": ["street","st","avenue","ave","drive","dr","way","parkway","pkwy","road","rd","boulevard","blvd","nw","ne"],
   "answers": [
 {"name":"North Avenue","tier":"common"},

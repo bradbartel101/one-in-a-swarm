@@ -1,7 +1,8 @@
 {
   "id": "diamond",
-  "category": "Sports",
-  "text": "Name a Georgia Tech baseball player who reached the major leagues",
+  "pool": "gt",
+  "category": "SPORTS",
+  "text": "Name a Tech baseball player who reached the major leagues",
   "answers": [
 {"name":"Nomar Garciaparra","tier":"common","aliases":["Nomar","Garciaparra"]},
 {"name":"Mark Teixeira","tier":"common","aliases":["Teixeira"]},

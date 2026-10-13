@@ -2,6 +2,7 @@
   "id": "landmarks",
   "category": "Atlanta",
   "text": "Name an Atlanta landmark or attraction within a few miles of campus",
+  "retired": true,
   "answers": [
 {"name":"Georgia Aquarium","tier":"common","aliases":["Aquarium"]},
 {"name":"World of Coca-Cola","tier":"common","aliases":["World of Coke","Coke Museum"]},
