@@ -234,6 +234,7 @@ section[data-view="play"] > * { pointer-events: auto; }
 @keyframes pulse { 50% { background: var(--accent); } }
 
 .prompt-card { position: absolute; left: 6px; right: 6px; top: calc(max(6px, env(safe-area-inset-top)) + var(--hud-h, 66px) + 6px); max-width: 44rem; margin: 0 auto; padding: 0.7rem 0.9rem; }
+.clar { margin: 0.25rem 0 0; font-size: 0.8rem; font-style: italic; color: var(--muted); } /* the short rule under a prompt */
 .prompt-card.slide { animation: slide 0.35s steps(6, end); }
 @keyframes slide { from { transform: translateY(-140%); } to { transform: none; } }
 .eyebrow { margin: 0 0 0.25rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }

@@ -1,0 +1,32 @@
+{
+  "id": "dining",
+  "category": "Campus Life",
+  "text": "Name a spot to grab a bite or a coffee on or right around campus, past or present",
+  "answers": [
+{"name":"Brittain Dining Hall","tier":"common","aliases":["Brittain","Brit"]},
+{"name":"North Avenue Dining Hall","tier":"common","aliases":["North Ave Dining","Nave","North Avenue Dining","North Ave"]},
+{"name":"West Village","tier":"common","aliases":["Willage","West Village Dining Commons"]},
+{"name":"Junior's Grill","tier":"rare","aliases":["Juniors"],"note":"A campus institution from 1948 until it closed in 2011."},
+{"name":"The Varsity","tier":"clever"},
+{"name":"Waffle House","tier":"clever","aliases":["WaHo","Tech Square Waffle House"]},
+{"name":"Chick-fil-A","tier":"solid","aliases":["CFA"]},
+{"name":"Panda Express","tier":"solid","aliases":["Panda"]},
+{"name":"Starbucks","tier":"solid"},
+{"name":"Blue Donkey","tier":"solid","aliases":["Blue Donkey Coffee"]},
+{"name":"Kaldi's Coffee","tier":"solid","aliases":["Kaldis"]},
+{"name":"Moe's Southwest Grill","tier":"solid","aliases":["Moes"]},
+{"name":"Tin Drum","tier":"solid","aliases":["Tin Drum Asian Kitchen","Tin Drum Asiacafe"]},
+{"name":"Subway","tier":"solid"},
+{"name":"Ray's New York Pizza","tier":"rare","aliases":["Rays","Ray's Pizza","Rays NY Pizza"]},
+{"name":"Barrelhouse","tier":"rare"},
+{"name":"Rocky Mountain Pizza","tier":"rare","aliases":["Rocky Mountain","Rocky Mountain Pizza Company"]},
+{"name":"Woodruff Dining Hall","tier":"rare","aliases":["Woodruff","Woody's"]},
+{"name":"Cypress Street Pint & Plate","tier":"rare","aliases":["Cypress Street","Cypress"]},
+{"name":"Antico Pizza","tier":"rare","aliases":["Antico","Antico Pizza Napoletana"]},
+{"name":"Sublime Doughnuts","tier":"deep","aliases":["Sublime","Sublime Donuts"]},
+{"name":"Ferst Place","tier":"swarm","aliases":["Ferst Place Restaurant"]},
+{"name":"Twisted Taco","tier":"rare"},
+{"name":"Dunkin'","tier":"solid","aliases":["Dunkin Donuts"]},
+{"name":"Carnegie Kitchen","tier":"rare"}
+  ]
+}

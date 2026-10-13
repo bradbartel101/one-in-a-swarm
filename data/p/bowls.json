@@ -1,0 +1,33 @@
+{
+  "id": "bowls",
+  "category": "Sports History",
+  "text": "Name a bowl game Georgia Tech football has played in",
+  "strip": ["bowl","classic"],
+  "answers": [
+{"name":"Orange Bowl","tier":"common"},
+{"name":"Rose Bowl","tier":"common","note":"The 1929 game, famous for Roy \"Wrong Way\" Riegels."},
+{"name":"Peach Bowl","tier":"common","aliases":["Chick-fil-A Bowl","Chick-fil-A Peach Bowl"]},
+{"name":"Sugar Bowl","tier":"clever"},
+{"name":"Gator Bowl","tier":"clever","aliases":["TaxSlayer Bowl","TaxSlayer Gator Bowl"]},
+{"name":"Cotton Bowl","tier":"solid"},
+{"name":"Sun Bowl","tier":"solid","aliases":["Hyundai Sun Bowl"]},
+{"name":"Citrus Bowl","tier":"solid","aliases":["Florida Citrus Bowl"],"note":"New Year's Day 1991, capping the 1990 national title season."},
+{"name":"Music City Bowl","tier":"solid"},
+{"name":"Independence Bowl","tier":"solid"},
+{"name":"Liberty Bowl","tier":"solid"},
+{"name":"Gasparilla Bowl","tier":"rare"},
+{"name":"Birmingham Bowl","tier":"rare"},
+{"name":"Quick Lane Bowl","tier":"rare"},
+{"name":"Champs Sports Bowl","tier":"rare"},
+{"name":"Humanitarian Bowl","tier":"rare"},
+{"name":"Emerald Bowl","tier":"rare"},
+{"name":"Seattle Bowl","tier":"rare"},
+{"name":"Silicon Valley Bowl","tier":"rare","aliases":["Silicon Valley Football Classic"]},
+{"name":"Aloha Bowl","tier":"rare"},
+{"name":"Carquest Bowl","tier":"deep"},
+{"name":"Bluebonnet Bowl","tier":"deep"},
+{"name":"Hall of Fame Classic","tier":"deep","aliases":["All-American Bowl"],"note":"The 1985 win over Michigan State in Birmingham."},
+{"name":"Oil Bowl","tier":"swarm","note":"January 1947, a 41-19 win over Saint Mary's."},
+{"name":"Pop-Tarts Bowl","tier":"rare"}
+  ]
+}

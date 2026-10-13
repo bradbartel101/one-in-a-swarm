@@ -4,7 +4,7 @@ Resume from the first unchecked item. Branch `prompts-v2`. Commit after each bat
 Tiers are estimates until there is real player data.
 
 ## Checklist
-- [ ] A. Plumbing: `pool`, clarifier, type/count/source, held-out and rejected lists in the build tool; clarifier shown in the game; retired prompts stay playable on days already scheduled
+- [x] A. Plumbing: `pool`, clarifier, type/count/source, held-out and rejected lists in the build tool; clarifier shown in the game; retired prompts stay playable on days already scheduled
 - [ ] B. Daily mix: 4 gt + 3 general in the order general, gt, gt, general, gt, general, gt; easy general first; repeat rule; tests
 - [ ] C. Audit of the 44 existing prompts: keep, rewrite or drop, with reasons; pool tags
 - [ ] D1. Batch 1: closed GT lists verified against official sources

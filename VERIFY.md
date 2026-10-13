@@ -46,7 +46,7 @@ measures altitude from campus, while mountain heights are quoted above sea level
 
 ## Held out of the game until approved
 
-These answers are **not in the game**. Each was left out because I was not confident it is right. To approve one, change its leading `~` to nothing in the source file (`tools/prompts.src.txt` or `tools/themed/*.src.txt`) and run `npm run build:data`.
+These answers are **not in the game**. Each was left out because I was not confident it is right, or that it fits the prompt. To approve one, delete its leading `~` in the source file under `tools/` and run `npm run build:data`.
 
 ### Name a movie or TV series that was filmed largely in metro Atlanta (`films`)
 
@@ -61,3 +61,7 @@ These answers are **not in the game**. Each was left out because I was not confi
 ### John Heisman coached at Tech. Name a winner of the trophy that carries his name. (`heisman`)
 
 - [ ] **Fernando Mendoza** (would be Solid): I believe he won in 2025, but that is at the edge of what I know for certain.
+
+## Lists I could not check against a source
+
+None.
