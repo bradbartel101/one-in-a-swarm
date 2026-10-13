@@ -325,7 +325,18 @@ section[data-view="results"], section[data-view="infover"] { min-height: 100dvh;
 /* four numbers never share a row narrower than they are: two columns */
 [data-view="infover"] .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .numbers dd { font-size: clamp(0.8rem, 4.2vw, 1.4rem); overflow-wrap: anywhere; }
-.stats { grid-template-columns: repeat(4, 1fr); }
+.stats { grid-template-columns: repeat(5, 1fr); }
+@media (max-width: 520px) { .stats { grid-template-columns: repeat(3, 1fr); } }
+/* Your flights: one bar per flight, the last 30, on the same 0 to 700 scale */
+.hist { list-style: none; margin: 0.5rem 0 0; padding: 0; height: 96px; display: flex; align-items: flex-end; gap: 2px; border-bottom: 3px solid var(--edge); background: linear-gradient(to top, transparent 49.5%, var(--panel-2) 49.5%, var(--panel-2) 50.5%, transparent 50.5%); }
+.hist li { flex: 1 1 0; max-width: 22px; min-height: 3px; background: var(--accent); }
+.hist li.today { background: var(--ink); }
+.hist li.best { box-shadow: inset 0 3px 0 var(--good); }
+h3.sub { margin: 1rem 0 0.4rem; font-size: 0.6rem; color: var(--muted); }
+.tier-counts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 0.3rem 0.8rem; font-size: 0.85rem; }
+.tier-counts li { display: flex; align-items: center; gap: 0.45rem; }
+.tier-counts .pip-icon { width: 18px; height: 18px; flex: none; outline: 2px solid var(--tier-ink); }
+.tier-counts strong { margin-left: auto; font-variant-numeric: tabular-nums; }
 .stats dd { font-size: 0.85rem; }
 
 /* Flight log: one column per round. Each round's mark sits at the altitude the flight had reached,

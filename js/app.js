@@ -1251,6 +1251,34 @@
     } catch (e) { /* counting must never break the game */ }
   }
 
+  // "Your flights": a bar for each of the last 30 flights, and how many answers of each tier
+  // have been found. Everything comes from this device's own storage.
+  function renderFlights(stats) {
+    const bars = $('histBars');
+    bars.textContent = '';
+    const top = stats.history.reduce((m, h) => Math.max(m, h.s), 0);
+    stats.history.forEach((h) => {
+      const li = el('li', (h.d === daily.date ? 'today ' : '') + (h.s === top && top > 0 ? 'best' : ''));
+      li.style.height = Math.max(3, Math.round((h.s / C.TOP_SCORE) * 100)) + '%';
+      li.title = prettyDate(h.d) + ': ' + C.formatNumber(h.s) + ' pts';
+      li.setAttribute('aria-label', li.title);
+      bars.appendChild(li);
+    });
+    const n = stats.history.length;
+    $('histNote').textContent = n < stats.played
+      ? 'Your last ' + n + ' of ' + stats.played + ' flights, oldest first. Today is the pale bar.'
+      : n === 1 ? 'One flight so far. Come back tomorrow and this becomes a chart.' : 'Your last ' + n + ' flights, oldest first. Today is the pale bar.';
+    const counts = $('tierCounts');
+    counts.textContent = '';
+    C.TIER_ORDER.slice().reverse().concat('miss').forEach((t) => {
+      const li = el('li');
+      li.appendChild(pipIcon(t === 'miss' ? null : t));
+      li.appendChild(el('span', '', t === 'miss' ? 'Nothing landed' : C.TIERS[t].label));
+      li.appendChild(el('strong', '', C.formatNumber(stats.tiers[t])));
+      counts.appendChild(li);
+    });
+  }
+
   function showResults() {
     stopLoop();
     window.clearTimeout(introTimer);
@@ -1320,12 +1348,14 @@
     $('copyStatus').textContent = '';
 
     // Lifetime record. Recording the same date twice changes nothing.
-    const stats = C.recordFlight(C.reviveStats(store.get(K_STATS, null)), daily.date, score);
+    const stats = C.recordFlight(C.reviveStats(store.get(K_STATS, null)), daily.date, score, daily.results);
     store.set(K_STATS, stats);
     $('statStreak').textContent = String(C.currentStreak(stats, today()));
     $('statPlayed').textContent = String(stats.played);
     $('statAvg').textContent = String(Math.round(stats.total / stats.played));
     $('statBest').textContent = String(stats.best);
+    $('statLongest').textContent = String(stats.longest);
+    renderFlights(stats);
 
     // After finishing yesterday's run past midnight UTC, today's is already open.
     const todayOpen = daily.date !== today();
@@ -1390,6 +1420,22 @@
     };
   }
 
+  // The drawing code is only fetched when someone asks for a picture, to keep the first load small.
+  let cardScript = null;
+  function loadCardScript() {
+    if (window.SwarmCard) return Promise.resolve();
+    if (!cardScript) {
+      cardScript = new Promise((resolve, reject) => {
+        const tag = document.createElement('script');
+        tag.src = 'js/card.js';
+        tag.onload = resolve;
+        tag.onerror = () => { cardScript = null; reject(new Error('card script did not load')); };
+        document.head.appendChild(tag);
+      });
+    }
+    return cardScript;
+  }
+
   function buildCard() {
     const look = {
       zones: Scene.ZONES.map((z, i) => {
@@ -1404,8 +1450,8 @@
         return c;
       },
     };
-    const ready = document.fonts && document.fonts.load ? document.fonts.load('20px "Press Start 2P"').catch(() => {}) : Promise.resolve();
-    return ready.then(() => window.SwarmCard.draw(document.createElement('canvas'), cardData(), look));
+    const fonts = document.fonts && document.fonts.load ? document.fonts.load('20px "Press Start 2P"').catch(() => {}) : Promise.resolve();
+    return Promise.all([fonts, loadCardScript()]).then(() => window.SwarmCard.draw(document.createElement('canvas'), cardData(), look));
   }
 
   // Phones get the native share sheet when it can take a picture; everything else downloads.

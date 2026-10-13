@@ -638,25 +638,54 @@
   }
 
   // Adds a finished flight. Recording the same date twice changes nothing.
-  function recordFlight(stats, dateKey, score) {
+  const HISTORY_DAYS = 30;
+  const emptyTierCounts = () => ({ common: 0, clever: 0, solid: 0, rare: 0, deep: 0, swarm: 0, miss: 0 });
+
+  // Adds a finished flight to the lifetime record: totals, streaks, the last 30 scores and how
+  // many answers of each tier the player has found. `results` is the day's rounds (optional).
+  function recordFlight(stats, dateKey, score, results) {
     const s = stats || newStats();
     if (s.lastDate && dayNumber(dateKey) <= dayNumber(s.lastDate)) return s;
+    const streak = s.lastDate === previousDateKey(dateKey) ? s.streak + 1 : 1;
+    const tiers = Object.assign(emptyTierCounts(), s.tiers);
+    (results || []).forEach((r) => { tiers[r && TIERS[r.tier] ? r.tier : 'miss'] += 1; });
     return {
       v: SAVE_VERSION,
       played: s.played + 1,
       total: s.total + score,
       best: Math.max(s.best, score),
-      streak: s.lastDate === previousDateKey(dateKey) ? s.streak + 1 : 1,
+      streak,
       lastDate: dateKey,
+      longest: Math.max(s.longest || s.streak || 0, streak),
+      history: (s.history || []).concat([{ d: dateKey, s: score }]).slice(-HISTORY_DAYS),
+      tiers,
     };
   }
 
+  // Rebuilds the record from untrusted storage. The core numbers must be sound or the whole
+  // record is dropped. The newer parts (longest streak, history, tier counts) are each kept
+  // if they are sound and quietly reset if they are missing or damaged, so a save from before
+  // they existed keeps its streak and totals.
   function reviveStats(raw) {
     if (!raw || typeof raw !== 'object' || raw.v !== SAVE_VERSION) return null;
     if (!isCount(raw.played, 1e6) || !isCount(raw.total, 1e9) || !isCount(raw.best, TOP_SCORE) || !isCount(raw.streak, 1e6)) return null;
     if (typeof raw.lastDate !== 'string' || (raw.lastDate && isNaN(dayNumber(raw.lastDate)))) return null;
     if (raw.streak > raw.played || raw.total > raw.played * TOP_SCORE) return null;
-    return { v: SAVE_VERSION, played: raw.played, total: raw.total, best: raw.best, streak: raw.streak, lastDate: raw.lastDate };
+    const longest = isCount(raw.longest, 1e6) && raw.longest >= raw.streak && raw.longest <= raw.played ? raw.longest : raw.streak;
+    let history = [];
+    if (Array.isArray(raw.history)) {
+      history = raw.history.filter((h) => h && typeof h === 'object' && typeof h.d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(h.d) && !isNaN(dayNumber(h.d)) && isCount(h.s, TOP_SCORE)).map((h) => ({ d: h.d, s: h.s }));
+      const ordered = history.every((h, i) => i === 0 || dayNumber(h.d) > dayNumber(history[i - 1].d));
+      if (!ordered || history.length !== raw.history.length || history.length > raw.played) history = [];
+      history = history.slice(-HISTORY_DAYS);
+    }
+    const tiers = emptyTierCounts();
+    if (raw.tiers && typeof raw.tiers === 'object') {
+      const keys = Object.keys(tiers);
+      const sound = keys.every((k) => isCount(raw.tiers[k], 1e7)) && keys.reduce((n, k) => n + raw.tiers[k], 0) <= raw.played * ROUNDS;
+      if (sound) keys.forEach((k) => { tiers[k] = raw.tiers[k]; });
+    }
+    return { v: SAVE_VERSION, played: raw.played, total: raw.total, best: raw.best, streak: raw.streak, lastDate: raw.lastDate, longest, history, tiers };
   }
 
   // A streak only counts if the last flight was today or yesterday.

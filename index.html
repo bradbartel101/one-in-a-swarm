@@ -210,13 +210,18 @@
         <h2 class="pixel">SIGHTINGS <span id="resSightCount"></span></h2>
         <ul class="sight-grid" id="resSightGrid"></ul>
 
-        <h2 class="pixel">YOUR RECORD</h2>
+        <h2 class="pixel">YOUR FLIGHTS</h2>
+        <p class="small muted" id="histNote"></p>
+        <ol class="hist" id="histBars" aria-label="Your last 30 flights, oldest first"></ol>
         <dl class="stats" id="stats">
           <div><dt>Streak</dt><dd class="pixel" id="statStreak">0</dd></div>
+          <div><dt>Longest</dt><dd class="pixel" id="statLongest">0</dd></div>
           <div><dt>Flights</dt><dd class="pixel" id="statPlayed">0</dd></div>
           <div><dt>Average</dt><dd class="pixel" id="statAvg">0</dd></div>
           <div><dt>Best</dt><dd class="pixel" id="statBest">0</dd></div>
         </dl>
+        <h3 class="pixel sub">ANSWERS FOUND, ALL TIME</h3>
+        <ul class="tier-counts" id="tierCounts"></ul>
 
         <p class="muted" id="resNext">Next flight in <strong class="js-countdown">--:--:--</strong></p>
         <div class="row">
@@ -256,7 +261,6 @@
   <script src="js/facts.js"></script>
   <script src="js/sfx.js"></script>
   <script src="js/scene.js"></script>
-  <script src="js/card.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

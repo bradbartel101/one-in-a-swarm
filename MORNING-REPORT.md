@@ -17,6 +17,7 @@ Branch: `overnight`. Nothing was pushed to main and nothing was merged; the live
    - **Held out for your approval (not in the game):** 5 answers I was not sure of, listed in VERIFY.md under "Held out of the game until approved" (Road Trip, Jumanji: Welcome to the Jungle, Soulja Boy, Trinidad James, Fernando Mendoza). The build tool now has a `~` marker for this.
    - **Schedule:** every day up to and including today (2026-10-13 UTC) is byte-for-byte unchanged. The 363 later days were drawn again from the 44-prompt bank, and the file now runs to 2027-10-13. The CI check now protects days up to today and allows future days to be redrawn.
    - **Rivalry week:** `data/themed/rivalry.json` holds 7 prompts (400 answers): Georgia Bulldogs greats ("Know thy enemy"), Georgia cities ("Anywhere but Athens"), Georgia counties, dog breeds, insects, other rivalry games and trophies, and ACC-or-SEC schools. It is **not scheduled** and the game does not load it. Tell me the dates and I will wire it in.
+6. **Stats for players.** The results page has a "Your flights" section: a bar for each of your last 30 scores (today's bar is pale, your best has a green cap), streak, longest streak, flights, average and best, and how many answers of each tier you have found all-time, including rounds where nothing landed. It all lives in the same localStorage record as before. A record saved before tonight keeps its streak and totals and starts its chart and tier counts from the next flight; damaged parts are reset one at a time without losing the rest.
 
 ## Skipped
 
@@ -34,6 +35,8 @@ Branch: `overnight`. Nothing was pushed to main and nothing was merged; the live
 - **The share card uses the pixel font only**, so it looks the same on every device; it shows each round's tier mark at the altitude reached, like the flight log, and never an answer.
 - **Three of the new prompts are general knowledge with a Tech hook** (elements, programming languages, units) rather than Tech trivia, because those are lists I can get fully right. Drop any you think are off-theme: delete the block in `tools/prompts.src.txt`, run `npm run build:data` and `npm run build:schedule:redraw`.
 - **"C", "C++" and "C#" count as one answer** in the programming-languages prompt, because the game ignores punctuation and all three reduce to "C".
+- **History starts now.** There is no way to recover past scores or tiers for existing players, so their chart begins with their next flight. The longest streak starts from their current streak.
+- **First-load budget.** The bigger prompt bank pushed the slow-network test (title screen ready on a 400 kbps link, uncompressed) to 9.07 s against its 9 s limit. I did not loosen the test. Instead the share-card script now loads only when "Save image" is pressed and the generated `prompts.json` lost its indentation (137 KB to 121 KB), which brings the test to about 8.65 s. GitHub Pages compresses these files, so real loads are far faster than the test's worst case, but the next big batch of prompts will need the bank loaded in parts.
 
 ## For you to check or decide
 - **Set your two launch values in `config.js`**: the GoatCounter site code (you need to create the free account) and the feedback address. Both are empty, so neither feature is live yet.

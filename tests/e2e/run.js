@@ -1454,6 +1454,73 @@ async function main() {
     return 'card is ' + Math.round(Buffer.from(cards[0].split(',')[1], 'base64').length / 1024) + ' KB, identical at both sizes';
   });
 
+  await scenario('your flights: bar chart, tier counts and streaks from saved data, including old and damaged saves', async () => {
+    const today = C.utcDateKey(new Date());
+    const dayBack = (n) => C.utcDateKey(new Date((C.dayNumber(today) - n) * 86400000));
+    const tiers = ['rare', 'solid', 'swarm', null, 'deep', 'common', 'clever']; // 300 points
+    const finished = () => {
+      const ids = dayIds(today);
+      const st = C.newDaily(today, ids);
+      tiers.forEach((tier, i) => {
+        const a = tier ? data.prompts.find((p) => p.id === ids[i]).answers.find((x) => x.tier === tier) : null;
+        st.results.push({ tier, answer: a ? a.name : null, points: C.tierPoints(tier), promptId: ids[i], wrong: 0, fuzzy: false, note: '' });
+      });
+      st.finished = true;
+      return st;
+    };
+    // a record with 35 earlier flights: only 30 are kept, a 12-day streak is running, the longest was 20
+    let rec = null;
+    for (let n = 40; n >= 1; n--) if (n <= 12 || n >= 18) rec = C.recordFlight(rec, dayBack(n), 100 + (n * 37) % 500, [{ tier: 'solid' }, { tier: null }]);
+    rec.longest = 20;
+    const cases = [
+      { name: 'a full record', stats: rec, bars: 30, played: rec.played + 1, streak: 13, longest: 20, solid: rec.tiers.solid + 1, miss: rec.tiers.miss + 1 },
+      { name: 'a record from before these features', stats: { v: C.SAVE_VERSION, played: 9, total: 2700, best: 520, streak: 4, lastDate: dayBack(1) }, bars: 1, played: 10, streak: 5, longest: 5, solid: 1, miss: 1 },
+      { name: 'damaged extras', stats: Object.assign(JSON.parse(JSON.stringify(rec)), { history: 'oops', tiers: { common: -5 }, longest: 'many' }), bars: 1, played: rec.played + 1, streak: 13, longest: 13, solid: 1, miss: 1 },
+      { name: 'no record at all', stats: null, bars: 1, played: 1, streak: 1, longest: 1, solid: 1, miss: 1 },
+      { name: 'garbage', stats: 'not even an object', bars: 1, played: 1, streak: 1, longest: 1, solid: 1, miss: 1 },
+    ];
+    for (const size of [{ width: 375, height: 812, mobile: true }, { width: 1440, height: 900 }]) {
+      for (const c of cases) {
+        const page = await fresh(size);
+        await page.eval('localStorage.setItem("swarm.daily", ' + JSON.stringify(JSON.stringify(finished())) + ')');
+        if (c.stats === null) await page.eval('localStorage.removeItem("swarm.stats")');
+        else await page.eval('localStorage.setItem("swarm.stats", ' + JSON.stringify(JSON.stringify(c.stats)) + ')');
+        await page.reload();
+        await ready(page);
+        await click(page, 'dailyBtn');
+        await waitPhase(page, 'results');
+        const got = await page.eval(`({
+          bars: document.querySelectorAll('#histBars li').length,
+          today: document.querySelectorAll('#histBars li.today').length,
+          last: document.querySelector('#histBars li:last-child').getAttribute('aria-label'),
+          tallest: Math.max(...Array.from(document.querySelectorAll('#histBars li')).map((n) => n.getBoundingClientRect().height)),
+          box: document.getElementById('histBars').getBoundingClientRect().height,
+          played: document.getElementById('statPlayed').textContent, streak: document.getElementById('statStreak').textContent,
+          longest: document.getElementById('statLongest').textContent, best: Number(document.getElementById('statBest').textContent),
+          tiers: Array.from(document.querySelectorAll('#tierCounts li')).map((n) => n.querySelector('span').textContent + '=' + n.querySelector('strong').textContent),
+          fits: document.documentElement.scrollWidth <= window.innerWidth + 1,
+          inside: Array.from(document.querySelectorAll('#histBars, #tierCounts, #stats')).every((n) => { const r = n.getBoundingClientRect(); const p = n.closest('.panel').getBoundingClientRect(); return r.left >= p.left && r.right <= p.right + 1; }),
+        })`);
+        const where = c.name + ' at ' + size.width + 'px';
+        assert.equal(got.bars, c.bars, where + ': bars');
+        assert.equal(got.today, 1, where + ': today is marked');
+        assert.match(got.last, /: 300 pts$/, where);
+        assert.ok(got.tallest <= got.box + 1 && got.tallest > 2, where + ': bars stay inside the chart');
+        assert.equal(got.played, String(c.played), where + ': flights');
+        assert.equal(got.streak, String(c.streak), where + ': streak');
+        assert.equal(got.longest, String(c.longest), where + ': longest streak');
+        assert.ok(got.best >= 300, where + ': best');
+        assert.equal(got.tiers.length, 7, where);
+        assert.ok(got.tiers.includes('Solid=' + c.solid) && got.tiers.includes('Nothing landed=' + c.miss) && got.tiers.includes('One in a Swarm=1'), where + ': ' + got.tiers.join(', '));
+        assert.equal(got.fits && got.inside, true, where + ': nothing spills out of the panel or the page');
+        const kept = await page.eval('JSON.parse(localStorage.getItem("swarm.stats"))');
+        assert.deepEqual(C.reviveStats(kept), kept, where + ': what is saved back is a clean record');
+        noProblems(page);
+        await page.close();
+      }
+    }
+  });
+
   await scenario('captions: one at a time, about three seconds each', async () => {
     const page = await fresh({ width: 375, height: 812, mobile: true });
     await click(page, 'dailyBtn');

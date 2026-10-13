@@ -89,7 +89,7 @@ return (
         .filter((k) => p[k] !== undefined)
         .map((k) => '      ' + JSON.stringify(k) + ': ' + JSON.stringify(p[k]))
         .join(',\n');
-      const answers = p.answers.map((a) => '        ' + JSON.stringify(a)).join(',\n');
+      const answers = p.answers.map((a) => JSON.stringify(a)).join(',\n'); // one per line for readable diffs, unindented to save 17 KB on the wire
       return '    {\n' + head + ',\n      "answers": [\n' + answers + '\n      ]\n    }';
     })
     .join(',\n') +
