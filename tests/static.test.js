@@ -127,7 +127,7 @@ function pngSize(file) {
 
 test('visit counter: nothing is loaded unless a plain GoatCounter site code is set', () => {
   const config = read('config.js');
-  assert.match(config, /GOATCOUNTER_CODE: '',/, 'ships switched off');
+  assert.match(config, /GOATCOUNTER_CODE: '(|oneinaswarm)',/, 'switched off, or set to the site\'s own code');
   assert.match(config, /FEEDBACK_URL: '',/, 'ships switched off');
   for (const off of ['', '   ', null, undefined, 'my site', 'evil.com/x', 'a.b', '-abc', 'abc-', 'https://x', '"><script>']) assert.equal(C.goatCounter(off), null, JSON.stringify(off));
   assert.deepEqual(C.goatCounter('MySwarm '), { src: 'https://gc.zgo.at/count.js', endpoint: 'https://myswarm.goatcounter.com/count' });
