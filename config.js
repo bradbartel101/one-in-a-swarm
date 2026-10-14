@@ -10,6 +10,6 @@
                      page, or a mailto: address. The date and the day's prompt ids are added to
                      the link. When empty, the link is hidden. */
 window.SwarmConfig = {
-  GOATCOUNTER_CODE: '',
+  GOATCOUNTER_CODE: 'oneinaswarm',
   FEEDBACK_URL: '',
 };

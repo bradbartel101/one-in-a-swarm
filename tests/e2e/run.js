@@ -31,9 +31,9 @@ const httpServer = http.createServer((req, res) => {
   if (rel.endsWith('/')) rel += 'index.html';
   const file = path.join(ROOT, rel);
   if (!file.startsWith(ROOT) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return notFound();
-  if (rel === 'config.js' && server.config) { // the owner's settings, filled in
+  if (rel === 'config.js') { // tests never use the live settings, so they never count a visit on the real dashboard
     res.writeHead(200, { 'content-type': TYPES['.js'], 'cache-control': 'no-store' });
-    return res.end('window.SwarmConfig = ' + JSON.stringify(server.config) + ';');
+    return res.end('window.SwarmConfig = ' + JSON.stringify(server.config || { GOATCOUNTER_CODE: '', FEEDBACK_URL: '' }) + ';');
   }
   if (rel === 'data/index.json' && server.mode === 'badjson') {
     res.writeHead(200, { 'content-type': TYPES['.json'] });
@@ -749,6 +749,7 @@ async function main() {
   await scenario('infinite: a full run through every prompt, no repeats', async () => {
     const page = await fresh({ width: 390, height: 844, mobile: true });
     await click(page, 'infBtn');
+    await waitPhase(page, 'guess'); // the run has started before the loop checks for the play view
     const seen = new Set();
     while ((await view(page)) === 'play') {
       const prompt = await text(page, 'promptText');
