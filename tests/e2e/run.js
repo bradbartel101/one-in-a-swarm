@@ -749,6 +749,7 @@ async function main() {
   await scenario('infinite: a full run through every prompt, no repeats', async () => {
     const page = await fresh({ width: 390, height: 844, mobile: true });
     await click(page, 'infBtn');
+    await waitPhase(page, 'guess'); // the run has started before the loop checks for the play view
     const seen = new Set();
     while ((await view(page)) === 'play') {
       const prompt = await text(page, 'promptText');
